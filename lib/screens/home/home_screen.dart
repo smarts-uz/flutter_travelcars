@@ -159,8 +159,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 return GestureDetector(
                   onTap: () => _controller.animateToPage(entry.key),
                   child: Container(
-                    width: 12.0,
-                    height: 12.0,
+                    width: 8.0,
+                    height: 8.0,
                     margin: EdgeInsets.symmetric(horizontal: 4.0),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
@@ -182,17 +182,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CarsCard("assets/images/car.jpg", "Cars", 12),
-                    CarsCard("assets/images/microbus.jpg", "MicroBus", 28),
+                    CarsCard("assets/images/microbus.jpg", "Microbus", 28),
                   ],
                 ),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CarsCard("assets/images/midbus.jpg", "Midibus", 32),
                     CarsCard("assets/images/bus.jpg", "Bus", 8),
@@ -216,8 +216,52 @@ class CarsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SvgPicture.asset(image),
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      elevation: 4,
+      child: Stack(
+        children: [
+          Container(
+            height: 140,
+            width: MediaQuery.of(context).size.width * .43,
+            //padding: EdgeInsets.all(8),
+            child: Image.asset(image),
+          ),
+          Positioned(
+            top: 10,
+            right: 10,
+            child: Container(
+                height: 25,
+                width: 25,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Color.fromRGBO(239, 127, 26, 1),
+                ),
+                child: Center(
+                  child: Text(
+                    "$number",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17
+                    ),
+                  ),
+                )
+            ),
+          ),
+          Positioned(
+            bottom: 10,
+            left: 60,
+
+            child: Text(
+              name,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 17
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
