@@ -75,6 +75,17 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+              height: 150,
+              width: double.infinity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  /*Stack(),
+                  Stack(),*/
+                ],
+              ),
+            ),
+            Container(
               color: Color.fromRGBO(245, 245, 246, 1),
               padding: EdgeInsets.all(8),
               height: 60,
@@ -123,13 +134,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     child: Stack(
                         children: [
-                          Container(
-                              padding: EdgeInsets.all(8),
-                              child: Image.asset(item["image"], fit: BoxFit.cover, width: 1000)),
+                          Card(
+                            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 13),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                              elevation: 6,
+                              child: Image.asset(item["image"],
+                                fit: BoxFit.cover,
+                              )
+                          ),
                           Positioned(
-                            bottom: 17.0,
-                            left: 0.0,
-                            right: 0.0,
+                            bottom: 23.0,
                             child: Container(
                               padding: EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 20.0),
@@ -213,66 +227,63 @@ class _HomeScreenState extends State<HomeScreen> {
                     autoPlayInterval: Duration(seconds: 2),
                     disableCenter: true,
                 ),
-                items: newslist.map(
-                        (item) => InkWell(
-                          onTap: () {
+                items: newslist.map((item) =>
+                    InkWell(
+                      onTap: () {
 
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6),
-                            child: Card(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                              elevation: 4,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Container(
-                                          height: 150,
-                                          width: MediaQuery.of(context).size.width * 0.9,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10.0),
-                                          ),
-                                          child: Image.asset(
-                                            item["image"],
-                                            fit: BoxFit.cover,
-                                          )
-                                      ),
-                                      Text(
-                                        item["title"],
-                                        maxLines: 2,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold
-                                        ),
-                                      ),
-                                      Text(
-                                        item["text"],
-                                        maxLines: 5,
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            item["hour"]
-                                          ),
-                                          Text(
-                                              item["date"]
-                                          ),
-                                        ],
-                                      )
-                                    ],
+                        },
+                      child: Container(
+                        margin: EdgeInsets.all(6),
+                        child: Card(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                          elevation: 4,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Container(
+                                    height: 150,
+                                    width: MediaQuery.of(context).size.width * 0.9,
+                                    child: Image.asset(
+                                      item["image"],
+                                      fit: BoxFit.cover,
+                                    )
+                                ),
+                                Text(
+                                  item["title"],
+                                  maxLines: 2,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold
                                   ),
-                              ),
+                                ),
+                                Text(
+                                  item["text"],
+                                  maxLines: 5,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                        item["hour"]
+                                    ),
+                                    Text(
+                                        item["date"]
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
                           ),
-                        )
+                        ),
+                      ),
+                    )
                 ).toList(),
               ),
             )
@@ -300,7 +311,6 @@ class CarsCard extends StatelessWidget {
           Container(
             height: 140,
             width: MediaQuery.of(context).size.width * .43,
-            //padding: EdgeInsets.all(8),
             child: Image.asset(image),
           ),
           Positioned(
@@ -341,4 +351,61 @@ class CarsCard extends StatelessWidget {
     );
   }
 }
+
+class WeatherCard extends StatelessWidget {
+  const WeatherCard({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 150,
+      width: double.infinity * .45,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromRGBO(204, 243, 255, 1),
+              Color.fromRGBO(56, 163, 197, 1),
+            ]
+        ),
+      ),
+      child: Stack(
+        children: [
+          ListTile(
+            leading: Text("Tashkent"),
+            trailing: Icon(Icons.expand_more_rounded),
+          ),
+          Positioned(
+              top: 10,
+              left: 5,
+              child: SvgPicture.asset("assets/icons/weather.svg")
+          ),
+          Positioned(
+              top: 10,
+              right: 5,
+              child: Text("18 C")
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class CurrencyCard extends StatelessWidget {
+  const CurrencyCard({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      elevation: 4,
+      child: Stack(
+        
+      ),
+    );
+  }
+}
+
+
 
