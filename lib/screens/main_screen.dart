@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -23,14 +24,17 @@ class _MainScreenState extends State<MainScreen> {
     final _BottomNavBarItems = <BottomNavigationBarItem>[
       const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
       const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-      BottomNavigationBarItem(icon: Image.asset('assets/icons/transfer.svg'), label: 'Transfers'),
+      BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/transfer.svg'), label: 'Transfers'),
       const BottomNavigationBarItem(icon: Icon(Icons.map_outlined), label: 'Route'),
       const BottomNavigationBarItem(icon: Icon(Icons.person_outline_outlined), label: 'Profile'),
     ];
     assert(_kTabPages.length == _BottomNavBarItems.length);
     final bottomNavBar = BottomNavigationBar(
-      backgroundColor: Colors.orange,
+      backgroundColor: Color.fromRGBO(239, 127, 26, 1),
       selectedItemColor: Colors.white,
+      selectedFontSize: 17,
+      unselectedFontSize: 15,
+      iconSize: 25,
       unselectedItemColor: Colors.white70,
       items: _BottomNavBarItems,
       currentIndex: _currentTabIndex,

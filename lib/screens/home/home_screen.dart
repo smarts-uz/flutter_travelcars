@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,14 +16,21 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('TravelCars'),
         actions: [
           IconButton(
-              icon: Image.asset('assets/icons/globus.svg'),
+              icon: SvgPicture.asset(
+                'assets/icons/globus.svg',
+                color: Colors.white,
+              ),
               onPressed: () {},
           )
         ],
       ),
-      body: Container(
-        color: Colors.white,
-      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+
+          ],
+        ),
+      )
     );
   }
 }
