@@ -36,26 +36,20 @@ class _HomeScreenState extends State<HomeScreen> {
       'text': "Trip to Volley Fergana",
     },
   ];
-  List<Map<String, dynamic>> carslist = [
+  List<Map<String, dynamic>> newslist = [
     {
-      'image': "assets/images/malibu.svg",
-      'text': "Cars",
-      'number': "12",
+      'image': "assets/images/news_1.jpg",
+      'title': "Достоинства аренды автомобиля с водителем",
+      'text': "Собираясь в деловую поездку или на отдых, в незнакомый город или регион, в особенности если вас ждёт длительный перелёт, по дороге в аэропорт хочется, расслабиться, не думая об особенностях вождения. Всё что нужно для этого сделать, это – взять напрокат авто с водителем, который встретит вас прям у дома.",
+      'hour': "11:10",
+      'date': "05.10.2021"
     },
     {
-      'image': "assets/images/",
-      'text': "Microbus",
-      'number': "28",
-    },
-    {
-      'image': "assets/images/midibus.svg",
-      'text': "Midibus",
-      'number': "32",
-    },
-    {
-      'image': "assets/images/",
-      'text': "Bus",
-      'number': "8",
+      'image': "assets/images/news_2.jpeg",
+      'title': "Когда услуга аренды авто востребована",
+      'text': "В Узбекистане прокат автомобиля с водителем является востребованной услугой, в связи с ростом спроса на туристические услуги в стране.  Вам больше не придется сидеть за рулем при заказе услуги. Менеджеры фирмы Travelcars обеспечат, встречу знакомых, родных, коллег и прочие встречи в аэропорту либо на вокзале в самые короткие сроки.",
+      'hour': "06:00",
+      'date': "06.10.2021"
     },
   ];
   int _current = 0;
@@ -118,7 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   onPageChanged: (index, reason) {
                     setState(() {
                       _current = index;
-                    });
+                    }
+                    );
                   }
                   ),
               items: imglist.map((item) =>
@@ -199,6 +194,87 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 )
               ],
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 12, top: 12, bottom: 6),
+              child: Text(
+                "News and special offers",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                    fontSize: 24
+                ),
+              ),
+            ),
+            Container(
+              height: 330,
+              child: CarouselSlider(
+                options: CarouselOptions(
+                    autoPlay: true,
+                    autoPlayInterval: Duration(seconds: 2),
+                    disableCenter: true,
+                ),
+                items: newslist.map(
+                        (item) => InkWell(
+                          onTap: () {
+
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(6),
+                            child: Card(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                              elevation: 4,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Container(
+                                          height: 150,
+                                          width: MediaQuery.of(context).size.width * 0.9,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10.0),
+                                          ),
+                                          child: Image.asset(
+                                            item["image"],
+                                            fit: BoxFit.cover,
+                                          )
+                                      ),
+                                      Text(
+                                        item["title"],
+                                        maxLines: 2,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                      Text(
+                                        item["text"],
+                                        maxLines: 5,
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            item["hour"]
+                                          ),
+                                          Text(
+                                              item["date"]
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                              ),
+                            ),
+                          ),
+                        )
+                ).toList(),
+              ),
             )
           ],
         ),
