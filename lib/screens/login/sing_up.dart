@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travelcars/screens/main_screen.dart';
 import '../../app_theme.dart';
 
 class SignUp extends StatefulWidget {
@@ -234,7 +235,9 @@ class _SignUpState extends State<SignUp> {
                   ),
                   Spacer(),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_)=>MainScreen()));
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
