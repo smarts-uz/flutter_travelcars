@@ -220,7 +220,17 @@ class _SearchScreenState extends State<SearchScreen> {
                   },
                 ),
               ),
-            )
+            ),
+            Container(
+              width: double.infinity,
+              height: 55,
+              padding: EdgeInsets.only(left: 6),
+              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(5)
+              ),
+            ),
           ],
         ),
       ),
