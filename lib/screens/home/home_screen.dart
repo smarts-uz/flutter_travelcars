@@ -391,7 +391,6 @@ class WeatherCard extends StatelessWidget {
     );
   }
 }
-
 class CurrencyCard extends StatelessWidget {
   const CurrencyCard({Key? key}) : super(key: key);
 
