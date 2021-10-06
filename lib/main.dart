@@ -14,10 +14,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Travelcars',
       theme: ThemeData(
-        accentColor: Colors.white,
         primarySwatch: Colors.orange,
       ),
-      home: SplashScreen(),
+      home: MainScreen(),
     );
   }
 }
