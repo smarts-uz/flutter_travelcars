@@ -186,54 +186,76 @@ class _SearchScreenState extends State<SearchScreen> {
             Container(
               width: double.infinity,
               height: 55,
-              padding: EdgeInsets.only(left: 6, right: 6),
+              padding: EdgeInsets.symmetric(horizontal: 18),
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5)
               ),
-              child: ListTile(
-                title: Text(
-                  SelectedVal1 != null ? SelectedVal1! : "City",
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                trailing: DropdownButton(
-                  value: SelectedVal1,
-                  onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      setState(() => SelectedVal1 = newValue);
-                    }
+              child: DropdownButtonHideUnderline(
+                child: Container(
+                  child:DropdownButton<String>(
+                    hint: Text(
+                        "City",
+                        style: TextStyle(
+                            fontSize: 19,
+                            color: Colors.black
+                        )
+                    ),
+                    dropdownColor: Colors.grey[50],
+                    icon: Icon(Icons.keyboard_arrow_down),
+                    value: SelectedVal1,
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.black
+                    ),
+                    isExpanded: true,
+                    underline: SizedBox(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        SelectedVal1 = newValue!;
+                      });
                     },
-                  items: cities,
+                    items: cities,
+                  ),
                 ),
               ),
             ),
             Container(
               width: double.infinity,
               height: 55,
-              padding: EdgeInsets.only(left: 6, right: 6),
+              padding: EdgeInsets.symmetric(horizontal: 18),
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5)
               ),
-              child: ListTile(
-                title: Text(
-                  SelectedVal2 != null ? SelectedVal2! : "City",
-                  style: TextStyle(
-                    fontSize: 20,
+              child: DropdownButtonHideUnderline(
+                child: Container(
+                  child:DropdownButton<String>(
+                    hint: Text(
+                        "City",
+                        style: TextStyle(
+                            fontSize: 19,
+                            color: Colors.black
+                        )
+                    ),
+                    dropdownColor: Colors.grey[50],
+                    icon: Icon(Icons.keyboard_arrow_down),
+                    value: SelectedVal2,
+                    isExpanded: true,
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.black
+                    ),
+                    underline: SizedBox(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        SelectedVal2 = newValue!;
+                      });
+                    },
+                    items: cities,
                   ),
-                ),
-                trailing: DropdownButton(
-                  value: SelectedVal2,
-                  onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      setState(() => SelectedVal2 = newValue);
-                    }
-                  },
-                  items: cities,
                 ),
               ),
             ),
@@ -318,6 +340,18 @@ class _SearchScreenState extends State<SearchScreen> {
                 autovalidateMode: AutovalidateMode.always,
                 decoration: const InputDecoration(
                   hintText: "Quantity of passengers",
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                      width: 0,
+                    ),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                      width: 0,
+                    ),
+                  ),
                 ),
                 controller: number_controller,
                 keyboardType: TextInputType.text,
@@ -486,8 +520,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     number_controller = TextEditingController();
                     _selectedDate1 = DateTime.now();
                     _selectedDate2 = DateTime.now();
-                    SelectedVal1 = "City";
-                    SelectedVal2 = "City";
+                    SelectedVal1 = null;
+                    SelectedVal2 = null;
                     _currentRangeValues = RangeValues(10, 500);
                     _radioVal1 = null;
                     _radioVal2 = null;
@@ -564,7 +598,6 @@ class _ListBoxState extends State<ListBox> {
   Widget build(BuildContext context) {
     return ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
-        //padding: EdgeInsets.symmetric(vertical: 0),
         itemCount: widget.boxes.length,
         itemBuilder: (context, index) {
           return Row(

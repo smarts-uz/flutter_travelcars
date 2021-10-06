@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -52,6 +53,31 @@ class _HomeScreenState extends State<HomeScreen> {
       'date': "06.10.2021"
     },
   ];
+  static const city = <String>[
+    "Tashkent",
+    "Buxoro",
+    "Xiva",
+    "Samarkand"
+  ];
+  static const currency = <String>[
+    "USD = 10700",
+    "EUR = 11900",
+    "RUB = 110",
+  ];
+  final List<DropdownMenuItem<String>> cities = city.map(
+        (String value) => DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        ),
+  ).toList();
+  final List<DropdownMenuItem<String>> pullar = currency.map(
+        (String value) => DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+    ),
+  ).toList();
+  String? SelectedVal;
+  String? SelectedVal2;
   int _current = 0;
   final CarouselController _controller = CarouselController();
 
@@ -74,16 +100,142 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 150,
-              width: double.infinity,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  /*Stack(),
-                  Stack(),*/
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Stack(
+                  children: [
+                    Container(
+                      height: 120,
+                      width: MediaQuery.of(context).size.width * .45,
+                      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 14),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color.fromRGBO(204, 243, 255, 1),
+                                Color.fromRGBO(56, 163, 197, 1),
+                              ]
+                          )
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 15,
+                      left: 25,
+                      child: DropdownButton(
+                        hint: Text("City"),
+                        focusColor: Colors.white,
+                        dropdownColor: Colors.white,
+                        value: SelectedVal,
+                        onChanged: (String? newValue) {
+                          if (newValue != null) {
+                            setState(() => SelectedVal = newValue);
+                          }},
+                        items: cities,
+                      ),
+                    ),
+                    Positioned(
+                      left: 25,
+                      top: 30,
+                      child: Container(
+                          height: 45,
+                          width: 45,
+                          child: SvgPicture.asset("assets/icons/weather.svg", fit: BoxFit.contain,)
+                      ),
+                    ),
+                    Positioned(
+                        right: 25,
+                        top: 35,
+                        child: Text(
+                          "°C",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        )
+                    ),
+                    Positioned(
+                      right: 45,
+                      top: 30,
+                      child: Text(
+                        "18",
+                        style: TextStyle(
+                          fontSize: 45,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Container(
+                  height: 120,
+                  width: MediaQuery.of(context).size.width * .45,
+                  margin: EdgeInsets.symmetric(horizontal: 5, vertical: 14),
+                  child: Stack(
+                    children: [
+                      Container(
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(255, 250, 241, 1),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      ),
+                      Positioned(
+                        child: ListTile(
+                          title: Text(
+                            "Rate change",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15
+                            ),
+                          ),
+                          subtitle: Text(
+                            "${DateFormat('dd/MM/yyyy').format(DateTime.now())}",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        left: 20,
+                        child: DropdownButton(
+                          hint: Text("Currency"),
+                          focusColor: Colors.white,
+                          dropdownColor: Colors.white,
+                          value: SelectedVal2,
+                          onChanged: (String? newValue) {
+                            if (newValue != null) {
+                              setState(() => SelectedVal2 = newValue);
+                            }},
+                          items: pullar,
+                        ),
+                      ),
+                      Positioned(
+                        top: 20,
+                        right: 15,
+                        child: Column(
+                          children: [
+                            SvgPicture.asset('assets/icons/progress.svg'),
+                            SizedBox(height: 5),
+                            Text(
+                              "19%",
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ]
+                  ),
+                ),
+              ],
             ),
             Container(
               color: Color.fromRGBO(245, 245, 246, 1),
