@@ -22,7 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
   ];
   int? _radioVal1;
   int? _radioVal2;
-  RangeValues _currentRangeValues = const RangeValues(10, 500);
+  RangeValues _currentRangeValues = RangeValues(10, 500);
 
   String? SelectedVal1;
   String? SelectedVal2;
@@ -42,7 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
   DateTime? _selectedDate1 = DateTime.now();
   DateTime? _selectedDate2 = DateTime.now();
 
-  final number_controller = TextEditingController();
+  var number_controller = TextEditingController();
 
   List<Map<String, dynamic>> autoTypes = [
     {
@@ -439,7 +439,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Container(
               padding: EdgeInsets.only(left: 5, bottom: 5),
-              height: 150, //autoTypes.length * 10,
+              height: autoTypes.length * 48,
               width: double.infinity,
               child: ListBox(autoTypes)
             ),
@@ -456,7 +456,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Container(
                 padding: EdgeInsets.only(left: 5, bottom: 5),
-                height: 150, //autoTypes.length * 10,
+                height: autoOptions.length * 48,
                 width: double.infinity,
                 child: ListBox(autoOptions)
             ),
@@ -472,11 +472,77 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             Container(
-                padding: EdgeInsets.only(left: 5, bottom: 5),
-                height: 150, //autoTypes.length * 10,
+                padding: EdgeInsets.only(left: 5, bottom: 3),
+                height: tarif.length * 48,
                 width: double.infinity,
                 child: ListBox(tarif)
             ),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 12),
+              child: TextButton(
+                onPressed: () {
+                  setState(() {
+                    number_controller = TextEditingController();
+                    _selectedDate1 = DateTime.now();
+                    _selectedDate2 = DateTime.now();
+                    SelectedVal1 = "City";
+                    SelectedVal2 = "City";
+                    _currentRangeValues = RangeValues(10, 500);
+                    _radioVal1 = null;
+                    _radioVal2 = null;
+                    for(int i = 0; i < autoTypes.length; i++) {
+                      autoTypes[i]["check_box"] = false;
+                    }
+                    for(int i = 0; i < autoOptions.length; i++) {
+                      autoOptions[i]["check_box"] = false;
+                    }
+                    for(int i = 0; i < tarif.length; i++) {
+                      tarif[i]["check_box"] = false;
+                    }
+                  });
+                },
+                child: Text(
+                  "Clear data",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              height: 65,
+              width: double.infinity,
+              padding: EdgeInsets.only(top: 5, bottom: 15, left: 15, right: 15),
+              child: RaisedButton(
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  color: Color.fromRGBO(0, 116, 201, 1),
+                  padding: EdgeInsets.all(8),
+                  textColor: Colors.white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.search,
+                        size: 27,
+                      ),
+                      Text(
+                        "Search",
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  onPressed: () {
+
+                  }
+                  ),
+            )
           ],
         ),
       ),
@@ -497,10 +563,13 @@ class _ListBoxState extends State<ListBox> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        //padding: EdgeInsets.symmetric(vertical: 0),
         itemCount: widget.boxes.length,
         itemBuilder: (context, index) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Checkbox(
                 onChanged: (bool? value) {
