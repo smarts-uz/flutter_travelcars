@@ -125,9 +125,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       bottom: 15,
                       left: 25,
                       child: DropdownButton(
-                        hint: Text("City"),
+                        hint: Text(
+                            "City",
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white
+                            )
+                        ),
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: Colors.white,
+                        ),
                         focusColor: Colors.white,
-                        dropdownColor: Colors.white,
+                        dropdownColor: Colors.grey[300],
                         value: SelectedVal,
                         onChanged: (String? newValue) {
                           if (newValue != null) {
@@ -203,9 +213,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         bottom: 0,
                         left: 20,
                         child: DropdownButton(
-                          hint: Text("Currency"),
+                          hint: Text(
+                              "Currency",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black
+                              )
+                          ),
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
                           focusColor: Colors.white,
-                          dropdownColor: Colors.white,
+                          dropdownColor: Colors.grey[300],
                           value: SelectedVal2,
                           onChanged: (String? newValue) {
                             if (newValue != null) {
