@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
+import 'package:travelcars/screens/search/search.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final _kTabPages = [
       HomeScreen(),
-      const Center(child: Icon(Icons.search, size: 64.0, color: Colors.cyan)),
+      SearchScreen(),
       const Center(child: Icon(Icons.forum, size: 64.0, color: Colors.blue)),
       const Center(child: Icon(Icons.map_outlined, size: 64.0, color: Colors.blue)),
       const Center(child: Icon(Icons.person_outline_outlined, size: 64.0, color: Colors.blue)),
