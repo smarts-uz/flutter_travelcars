@@ -12,7 +12,7 @@ class TransfersAdd extends StatefulWidget {
 class _TransfersAddState extends State<TransfersAdd> {
   List<String> directions = [
     'A meeting',
-    'the wire'
+    'The wire'
   ];
   int? _radioVal1;
   int? _radioVal2;
@@ -72,7 +72,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [0, 1].map((int index) => Container(
                         height: 50,
-                        width: 180,
+                        width: MediaQuery.of(context).size.width*.4,
                         padding: EdgeInsets.all(12),
                         child: Row(
                           children: [
@@ -113,21 +113,32 @@ class _TransfersAddState extends State<TransfersAdd> {
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(5)
                       ),
-                      child: ListTile(
-                        title: Text(
-                          SelectedVal2 != null ? SelectedVal2! : "City",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                        trailing: DropdownButton(
-                          value: SelectedVal2,
-                          onChanged: (String? newValue) {
-                            if (newValue != null) {
-                              setState(() => SelectedVal2 = newValue);
-                            }
+                      child: DropdownButtonHideUnderline(
+                        child: Container(
+                          child:DropdownButton<String>(
+                            hint: Text(
+                                "City",
+                                style: TextStyle(
+                                    fontSize: 19,
+                                    color: Colors.black
+                                )
+                            ),
+                            dropdownColor: Colors.grey[50],
+                            icon: Icon(Icons.keyboard_arrow_down),
+                            value: SelectedVal2,
+                            isExpanded: true,
+                            style: TextStyle(
+                                fontSize: 19,
+                                color: Colors.black
+                            ),
+                            underline: SizedBox(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                SelectedVal2 = newValue!;
+                              });
                             },
-                          items: cities,
+                            items: cities,
+                          ),
                         ),
                       ),
                     ),
@@ -178,6 +189,18 @@ class _TransfersAddState extends State<TransfersAdd> {
                         autovalidateMode: AutovalidateMode.always,
                         decoration: const InputDecoration(
                           hintText: "Quantity of passengers",
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              width: 0,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              width: 0,
+                            ),
+                          ),
                         ),
                         controller: number_controller,
                         keyboardType: TextInputType.number,
@@ -202,6 +225,18 @@ class _TransfersAddState extends State<TransfersAdd> {
                         autovalidateMode: AutovalidateMode.always,
                         decoration: const InputDecoration(
                           hintText: "From",
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              width: 0,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              width: 0,
+                            ),
+                          ),
                         ),
                         controller: number_controller,
                         keyboardType: TextInputType.number,
@@ -226,6 +261,18 @@ class _TransfersAddState extends State<TransfersAdd> {
                         autovalidateMode: AutovalidateMode.always,
                         decoration: const InputDecoration(
                           hintText: "To",
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              width: 0,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              width: 0,
+                            ),
+                          ),
                         ),
                         controller: number_controller,
                         keyboardType: TextInputType.number,
@@ -251,7 +298,19 @@ class _TransfersAddState extends State<TransfersAdd> {
                         autovalidateMode: AutovalidateMode.always,
                         decoration: const InputDecoration(
                           hintText: "The address of the place to pick up from.",
-                          hintMaxLines: 3
+                          hintMaxLines: 3,
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              width: 0,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              width: 0,
+                            ),
+                          ),
                         ), controller: number_controller1,
                         keyboardType: TextInputType.text,
                         cursorColor: Colors.black,

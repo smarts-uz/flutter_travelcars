@@ -260,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               color: Color.fromRGBO(245, 245, 246, 1),
               padding: EdgeInsets.all(8),
-              height: 60,
+              height: 65,
               width: double.infinity,
               child: Text(
                 "Transport services among all cities of Uzbekistan: travel and business",
@@ -392,7 +392,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
-              height: 330,
+              height: 350,
               child: CarouselSlider(
                 options: CarouselOptions(
                     autoPlay: true,
@@ -439,6 +439,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 14,
                                   ),
                                 ),
+                                SizedBox(height: 10),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
