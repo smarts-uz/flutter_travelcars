@@ -34,81 +34,83 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height*0.9,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 50, bottom: 20),
-          child: Column(
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height*0.1,),
-              Container(
-                height: 182,
-                width: double.infinity,
-                child: SvgPicture.asset("assets/images/way.svg"),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Text(
-                "Войдите или зарегестрируйтесь чтобы\n продолжить",
-                style: TextStyle(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 15,
-                    fontFamily: "Poppins"),
-              ),
-              Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=>SignIn()));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: MyColor.orange),
-                  height: 40,
-                  width: 312,
-                  child: Center(
-                    child: Text(
-                      "Войти",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height*0.9,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 50, bottom: 20),
+            child: Column(
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height*0.1,),
+                Container(
+                  height: 182,
+                  width: double.infinity,
+                  child: SvgPicture.asset("assets/images/way.svg"),
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=>SignUp()));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.grey[50],
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.7),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Войдите или зарегестрируйтесь чтобы\n продолжить",
+                  style: TextStyle(
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                      fontFamily: "Poppins"),
+                ),
+                Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>SignIn()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: MyColor.orange),
+                    height: 40,
+                    width: 312,
+                    child: Center(
+                      child: Text(
+                        "Войти",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
-                      ]),
-                  height: 40,
-                  width: 312,
-                  child: Center(
-                    child: Text(
-                      "Зарегестрироваться",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: MyColor.orange,
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 15,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>SignUp()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.grey[50],
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.7),
+                          ),
+                        ]),
+                    height: 40,
+                    width: 312,
+                    child: Center(
+                      child: Text(
+                        "Зарегестрироваться",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: MyColor.orange,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

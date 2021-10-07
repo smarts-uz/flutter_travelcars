@@ -13,6 +13,7 @@ class SetPassword extends StatefulWidget {
 class _SetPasswordState extends State<SetPassword> {
   final TextEditingController _newPasswordController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool show = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,9 +70,18 @@ class _SetPasswordState extends State<SetPassword> {
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(5)),
                   child: TextFormField(
+                    obscureText: show,
                     autovalidateMode: AutovalidateMode.always,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: "Пароль",
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            show = !show;
+                          });
+                        },
+                        icon: show ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
+                      ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.white,
@@ -104,9 +114,18 @@ class _SetPasswordState extends State<SetPassword> {
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(5)),
                   child: TextFormField(
+                    obscureText: show,
                     autovalidateMode: AutovalidateMode.always,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       hintText: "Подтверждение пароля",
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            show = !show;
+                          });
+                        },
+                        icon: !show ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
+                      ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.white,

@@ -15,6 +15,7 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _verifyController = TextEditingController();
+  bool show = false;
 
   List<String> _items = ["Физ. лицо", "Юр. лицо"];
   String _currentItem = "Физ. лицо";
@@ -175,9 +176,18 @@ class _SignUpState extends State<SignUp> {
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(5)),
                     child: TextFormField(
+                      obscureText: show,
                       autovalidateMode: AutovalidateMode.always,
-                      decoration: const InputDecoration(
+                      decoration:  InputDecoration(
                         hintText: "Пароль",
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              show = !show;
+                            });
+                          },
+                          icon: !show ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
+                        ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.white,
@@ -209,9 +219,18 @@ class _SignUpState extends State<SignUp> {
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(5)),
                     child: TextFormField(
+                      obscureText: show,
                       autovalidateMode: AutovalidateMode.always,
-                      decoration: const InputDecoration(
+                      decoration:  InputDecoration(
                         hintText: "Подтверждение пароля",
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              show = !show;
+                            });
+                          },
+                          icon: !show ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
+                        ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.white,
@@ -240,7 +259,7 @@ class _SignUpState extends State<SignUp> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (_)=>Confirm()));
+                          Navigator.push(context, MaterialPageRoute(builder: (_)=>Confirm(true)));
                         },
                         child: Container(
                           decoration: BoxDecoration(

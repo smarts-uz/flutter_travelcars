@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:travelcars/screens/login/set_password.dart';
 import 'package:travelcars/screens/login/social_network.dart';
 import '../../app_theme.dart';
 
 class Confirm extends StatefulWidget {
-  const Confirm({Key? key}) : super(key: key);
+  final bool isSocial;
+
+  Confirm(@required this.isSocial);
 
   @override
   _ConfirmState createState() => _ConfirmState();
@@ -11,6 +14,7 @@ class Confirm extends StatefulWidget {
 
 class _ConfirmState extends State<Confirm> {
   final TextEditingController _emailController = TextEditingController();
+  bool show = false;
 
   @override
   Widget build(BuildContext context) {
@@ -76,9 +80,18 @@ class _ConfirmState extends State<Confirm> {
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(5)),
                   child: TextFormField(
+                    obscureText: show,
                     autovalidateMode: AutovalidateMode.always,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       hintText: "Код",
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            show = !show;
+                          });
+                        },
+                        icon: !show ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
+                      ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.white,
@@ -103,7 +116,8 @@ class _ConfirmState extends State<Confirm> {
                 Spacer(),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,MaterialPageRoute(builder: (_) => SocialScreen()));
+                    Navigator.push(context,MaterialPageRoute(builder: (_) =>
+                        widget.isSocial ? SocialScreen() : SetPassword()));
                   },
                   child: Container(
                     decoration: BoxDecoration(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
+import 'package:travelcars/screens/login/confirm.dart';
 import 'package:travelcars/screens/login/set_password.dart';
 
 import '../../app_theme.dart';
@@ -92,7 +93,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_)=>SetPassword()));
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=>Confirm(false)));
                       },
                       child: Container(
                         decoration: BoxDecoration(

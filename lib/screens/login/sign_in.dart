@@ -16,6 +16,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool show = false;
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +100,18 @@ class _SignInState extends State<SignIn> {
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(5)),
                   child: TextFormField(
+                    obscureText: show,
                     autovalidateMode: AutovalidateMode.always,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       hintText: "Пароль",
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            show = !show;
+                          });
+                        },
+                        icon: !show ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
+                      ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.white,

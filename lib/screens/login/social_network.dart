@@ -29,7 +29,6 @@ class _SocialScreenState extends State<SocialScreen> {
       "check_box": false
     },
   ];
-  bool checkBoxValue = false;
 
   @override
   Widget build(BuildContext context) {
