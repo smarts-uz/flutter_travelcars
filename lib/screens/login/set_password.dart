@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
-import 'package:travelcars/screens/login/reset_password.dart';
 import 'package:travelcars/screens/main_screen.dart';
 
 import '../../app_theme.dart';
-
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class SetPassword extends StatefulWidget {
+  const SetPassword({Key? key}) : super(key: key);
 
   @override
-  _SignInState createState() => _SignInState();
+  _SetPasswordState createState() => _SetPasswordState();
 }
 
-class _SignInState extends State<SignIn> {
-  final TextEditingController _emailController = TextEditingController();
+class _SetPasswordState extends State<SetPassword> {
+  final TextEditingController _newPasswordController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +27,7 @@ class _SignInState extends State<SignIn> {
           ),
         ),
         title: Text(
-          "Войти",
+          "Сброс пароля",
           style: TextStyle(
             color: Colors.white,
             fontSize: 19,
@@ -41,16 +37,25 @@ class _SignInState extends State<SignIn> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height*0.89,
+          height: MediaQuery.of(context).size.height*0.9,
           child: Padding(
-            padding: const EdgeInsets.only(left: 16,right: 16,bottom: 20,),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height*0.01,),
-                Container(
-                  height: 208,
-                  width: double.infinity,
-                  child: SvgPicture.asset("assets/images/mobile.svg"),
+                SizedBox(height: 24,),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Создайте новый пароль",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13,
+                          fontFamily: "Poppins"),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 30,
@@ -59,42 +64,7 @@ class _SignInState extends State<SignIn> {
                   width: double.infinity,
                   height: 55,
                   padding: EdgeInsets.only(left: 15),
-                 // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: TextFormField(
-                    autovalidateMode: AutovalidateMode.always,
-                    decoration: const InputDecoration(
-                      hintText: "E-mail",
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 0,
-                        ),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 0,
-                        ),
-                      ),
-                    ),
-                    controller: _emailController,
-                    keyboardType: TextInputType.text,
-                    cursorColor: Colors.black,
-                    style: TextStyle(fontSize: 20),
-                    expands: false,
-                    maxLines: 1,
-                    autofocus: false,
-                  ),
-                ),
-                SizedBox(height: 15,),
-                Container(
-                  width: double.infinity,
-                  height: 55,
-                  padding: EdgeInsets.only(left: 15),
-                 // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  //margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(5)),
@@ -121,13 +91,49 @@ class _SignInState extends State<SignIn> {
                     style: TextStyle(fontSize: 20),
                     expands: false,
                     maxLines: 1,
+                    autofocus: false,
+                  ),
+                ),
+                SizedBox(height: 15,),
+                Container(
+                  width: double.infinity,
+                  height: 55,
+                  padding: EdgeInsets.only(left: 15),
+                 // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(5)),
+                  child: TextFormField(
+                    autovalidateMode: AutovalidateMode.always,
+                    decoration: const InputDecoration(
+                      hintText: "Подтверждение пароля",
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                          width: 0,
+                        ),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                          width: 0,
+                        ),
+                      ),
+                    ),
+                    controller: _newPasswordController,
+                    keyboardType: TextInputType.text,
+                    cursorColor: Colors.black,
+                    style: TextStyle(fontSize: 20),
+                    expands: false,
+                    maxLines: 1,
+                    autofocus: false,
                   ),
                 ),
                 Spacer(),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(context,MaterialPageRoute(builder: (_)=>MainScreen()));
-                    },
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
@@ -135,38 +141,10 @@ class _SignInState extends State<SignIn> {
                     height: 40,
                     child: Center(
                       child: Text(
-                        "Войти",
+                        "Завершить",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,MaterialPageRoute(builder: (_)=>ResetPassword()));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.grey[50],
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.7),
-                          ),
-                        ]),
-                    height: 40,
-                    child: Center(
-                      child: Text(
-                        "Восстановить пароль",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: MyColor.orange,
                         ),
                       ),
                     ),

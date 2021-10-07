@@ -16,13 +16,15 @@ class _ChoicePageState extends State<ChoicePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding:
-            const EdgeInsets.only(top: 98, bottom: 10, left: 16, right: 16),
-        child: Center(
+      body: Container(
+        height: MediaQuery.of(context).size.height*0.95,
+        child: Padding(
+          padding:
+              const EdgeInsets.only( left: 16, right: 16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              SizedBox(height: MediaQuery.of(context).size.height*0.01,),
               Container(
                 height: 360,
                 child: SvgPicture.asset("assets/images/earth.svg"),

@@ -34,11 +34,13 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 191, bottom: 20),
-        child: Center(
+      body: Container(
+        height: MediaQuery.of(context).size.height*0.9,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 50, bottom: 20),
           child: Column(
             children: [
+              SizedBox(height: MediaQuery.of(context).size.height*0.1,),
               Container(
                 height: 182,
                 width: double.infinity,

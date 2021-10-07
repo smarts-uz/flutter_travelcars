@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travelcars/screens/login/confirm.dart';
 import 'package:travelcars/screens/main_screen.dart';
 import '../../app_theme.dart';
 
@@ -31,7 +32,7 @@ class _SignUpState extends State<SignUp> {
           ),
         ),
         title: Text(
-          "Войти",
+          "Регистрация",
           style: TextStyle(
             color: Colors.white,
             fontSize: 19,
@@ -99,7 +100,7 @@ class _SignUpState extends State<SignUp> {
                     width: double.infinity,
                     height: 55,
                     padding: EdgeInsets.only(left: 15),
-                    margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                   // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(5)),
@@ -129,12 +130,12 @@ class _SignUpState extends State<SignUp> {
                       autofocus: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 15,),
                   Container(
                     width: double.infinity,
                     height: 55,
                     padding: EdgeInsets.only(left: 15),
-                    margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  //  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(5)),
@@ -164,12 +165,12 @@ class _SignUpState extends State<SignUp> {
                       autofocus: false,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 15,),
                   Container(
                     width: double.infinity,
                     height: 55,
                     padding: EdgeInsets.only(left: 15),
-                    margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  //  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(5)),
@@ -198,12 +199,12 @@ class _SignUpState extends State<SignUp> {
                       maxLines: 1,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 15,),
                   Container(
                     width: double.infinity,
                     height: 55,
                     padding: EdgeInsets.only(left: 15),
-                    margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                   // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(5)),
@@ -234,31 +235,36 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=>MainScreen()));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: MyColor.orange),
-                      height: 40,
-                      width: 154,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Далее",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (_)=>Confirm()));
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              color: MyColor.orange),
+                          height: 40,
+                          width: 154,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Далее",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              Icon(Icons.arrow_forward_ios,color: Colors.white,)
+                            ],
                           ),
-                          SizedBox(width: 10,),
-                          Icon(Icons.arrow_forward_ios,color: Colors.white,)
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                   SizedBox(
                     height: 20,

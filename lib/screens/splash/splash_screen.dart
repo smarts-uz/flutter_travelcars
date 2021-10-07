@@ -26,31 +26,35 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top: 184, bottom: 30,),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 194,
-                width: 232,
-                child: Image.asset("assets/images/logo.png"),
-              ),
-              Container(
-                child: Text(
-                  "2018 - 2021 Travel Cars\n Все права защищены",
-                  style: TextStyle(
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      fontFamily: 'Poppins',
+      body: Container(
+       // height: MediaQuery.of(context).size.height*0.9,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 30,top: 192),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Center(
+                  child: Container(
+                    height: 194,
+                    child: Image.asset("assets/images/logo.png"),
                   ),
-                  textAlign: TextAlign.center,
                 ),
-              ),
-            ],
+                Container(
+                  child: Text(
+                    "2018 - 2021 Travel Cars\n Все права защищены",
+                    style: TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
