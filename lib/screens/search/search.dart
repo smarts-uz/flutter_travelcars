@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:travelcars/screens/search/search_result.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -22,7 +24,7 @@ class _SearchScreenState extends State<SearchScreen> {
   ];
   int? _radioVal1;
   int? _radioVal2;
-  RangeValues _currentRangeValues = RangeValues(10, 500);
+  RangeValues _currentRangeValues = RangeValues(50, 250);
 
   String? SelectedVal1;
   String? SelectedVal2;
@@ -123,7 +125,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TravelCars'),
+        title: Text('Search and Sort'),
         actions: [
           IconButton(
             icon: SvgPicture.asset(
@@ -337,6 +339,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   borderRadius: BorderRadius.circular(5)
               ),
               child: TextFormField(
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ],
                 autovalidateMode: AutovalidateMode.always,
                 decoration: const InputDecoration(
                   hintText: "Quantity of passengers",
@@ -354,7 +360,6 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
                 controller: number_controller,
-                keyboardType: TextInputType.text,
                 cursorColor: Colors.black,
                 style: TextStyle(
                   fontSize: 20
@@ -422,7 +427,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      "10",
+                      "50",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -430,11 +435,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                   Expanded(
-                    flex: 6,
+                    flex: 13,
                     child: RangeSlider(
                       values: _currentRangeValues,
-                      min: 10,
-                      max: 500,
+                      min: 50,
+                      max: 250,
                       divisions: 10,
                       labels: RangeLabels(
                         _currentRangeValues.start.round().toString(),
@@ -448,9 +453,9 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: Text(
-                      "500",
+                      "250",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -522,7 +527,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     _selectedDate2 = DateTime.now();
                     SelectedVal1 = null;
                     SelectedVal2 = null;
-                    _currentRangeValues = RangeValues(10, 500);
+                    _currentRangeValues = RangeValues(50, 250);
                     _radioVal1 = null;
                     _radioVal2 = null;
                     for(int i = 0; i < autoTypes.length; i++) {
@@ -573,7 +578,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     ],
                   ),
                   onPressed: () {
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SearchResult()
+                      )
+                    );
                   }
                   ),
             )
