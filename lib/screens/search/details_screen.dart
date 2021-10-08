@@ -31,7 +31,7 @@ class _DetailScreenState extends State<DetailScreen> {
               children: [
                 Container(
                   height: MediaQuery.of(context).size.height * 0.4,
-                  padding: const EdgeInsets.only(top: 30),
+                  //padding: const EdgeInsets.only(top: 30),
                   margin: EdgeInsets.only(bottom: 30),
                   width: double.infinity,
                   child: Image.asset(
@@ -49,7 +49,9 @@ class _DetailScreenState extends State<DetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                         icon: Icon(
                           Icons.arrow_back,
                           color: Colors.black,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travelcars/screens/search/details_screen.dart';
 
 class SearchResult extends StatefulWidget {
   const SearchResult({Key? key}) : super(key: key);
@@ -259,7 +260,10 @@ class _SearchResultState extends State<SearchResult> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print("aa");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DetailScreen())
+                    );
                   },
                   child: Container(
                     height: 50,
