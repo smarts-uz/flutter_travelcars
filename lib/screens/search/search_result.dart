@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SearchResult extends StatefulWidget {
@@ -11,10 +12,10 @@ class SearchResult extends StatefulWidget {
 class _SearchResultState extends State<SearchResult> {
 
   List<String> icons = [
-    "assets/icons/places.svg",
-   "assets/icons/big_bag.svg",
-    "assets/icons/small_bag.svg",
-    "assets/icons/doors.svg",
+    "assets/icons/places.jpg",
+    "assets/icons/big_bag.jpg",
+    "assets/icons/small_bag.jpg",
+    "assets/icons/doors.jpg",
   ];
 
   List<Map<String, dynamic>> results = [
@@ -37,8 +38,7 @@ class _SearchResultState extends State<SearchResult> {
        "Driver nutrition",
        "Parking payments",
       ],
-      "day": 1,
-      "total": 3210000,
+      "total": "3 210 000",
     },
     {
       "name": "Mercedes Bus",
@@ -55,12 +55,33 @@ class _SearchResultState extends State<SearchResult> {
       "doors": 6,
       "tarif": [
         "Car delivery to a convenient place",
-        "Fuel cost",
         "Parking payments",
       ],
-      "day": 2,
-      "total": 5410000,
-    }
+      "total": "5 410 000",
+    },
+    {
+      "name": "Mercedes Lux",
+      "year": "2021",
+      "id": "MS-702UFA",
+      "views": "3256",
+      "image": "assets/images/auto.jpg",
+      "icon_numbers": [
+        4, 2, 4, 2
+      ],
+      "places": 3,
+      "big_bag": 2,
+      "small_bag": 3,
+      "doors": 4,
+      "tarif": [
+        "Car delivery to a convenient place",
+        "Fuel cost",
+        "Driver nutrition",
+        "Parking payments",
+        "Parking payments",
+        "Parking payments",
+      ],
+      "total": "7 410 000",
+    },
   ];
 
 
@@ -93,13 +114,21 @@ class _SearchResultState extends State<SearchResult> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                ListTile(
-                  leading: Icon(Icons.info_outline, color: Colors.red),
-                  title: Text(
-                      "Confirmation requires",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
+                Container(
+                  padding: EdgeInsets.only(left: 15, bottom: 8, top: 15),
+                  alignment: Alignment.topLeft,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(Icons.info_outline, color: Colors.red),
+                      SizedBox(width: 13),
+                      Text(
+                        "Confirmation requires",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Container(
@@ -120,6 +149,7 @@ class _SearchResultState extends State<SearchResult> {
                     "Made year: ${results[index]["year"]}",
                     style: TextStyle(
                       fontSize: 16,
+                      color: Colors.grey,
                     ),
                   ),
                 ),
@@ -130,6 +160,7 @@ class _SearchResultState extends State<SearchResult> {
                     "ID number: ${results[index]["id"]}",
                     style: TextStyle(
                       fontSize: 16,
+                      color: Colors.grey,
                     ),
                   ),
                 ),
@@ -140,23 +171,115 @@ class _SearchResultState extends State<SearchResult> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-                  child: Image.asset(results[index]["image"], fit: BoxFit.cover,),
+                  child: Image.asset(results[index]["image"], fit: BoxFit.cover),
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  height: 30,
-                  padding: EdgeInsets.symmetric(vertical: 4),
+                  width: MediaQuery.of(context).size.width * 0.65,
+                  alignment: Alignment.centerLeft,
+                  height: 50,
+                  padding: EdgeInsets.symmetric(vertical: 3, horizontal: 6),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [0, 1, 2, 3].map(
-                            (e) => Container(
-                              width: 30,
-                              child: ListTile(
-                                leading: SvgPicture.asset(icons[e]),
-                                title: Text("${results[index]["icon_numbers"][e]}"),
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [0, 1, 2, 3].map((e) => Container(
+                      height: 40,
+                      width: 50,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Image.asset(icons[e], fit: BoxFit.cover,),
+                            Text("${results[index]["icon_numbers"][e]}"),
+                          ]
+                      ),
+                    )
+                    ).toList()
+                  )
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 15, top: 6, bottom: 5),
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "The tariff includes:",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+                Container(
+                  height: results[index]["tarif"].length * 35.0,
+                  width: double.infinity,
+                  padding: EdgeInsets.only(top: 5, bottom: 8, left: 15),
+                  child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                      itemCount: results[index]["tarif"].length,
+                      itemBuilder: (context, i) => Container(
+                        height: 30,
+                        child: Row(
+                          children: [
+                            Icon(Icons.check, color: Colors.green),
+                            Text(
+                              results[index]["tarif"][i],
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 17
                               ),
                             )
-                    ).toList(),
+                          ],
+                        ),
+                      )
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  child:  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.black,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: 'The cost of the trip '),
+                        TextSpan(text: 'for 1 day', style: TextStyle(color: Colors.orange)),
+                      ],
+                    ),
+                  )
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "${results[index]["total"]} UZS",
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    print("aa");
+                  },
+                  child: Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 1,
+                      ),
+                    ),
+                    child: Text(
+                      "Details",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.orange,
+                      ),
+                    )
                   ),
                 ),
               ],
