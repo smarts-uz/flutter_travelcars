@@ -307,7 +307,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Stack(
                         children: [
                           Card(
-                            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 13),
+                              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 13),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                               elevation: 6,
                               child: Image.asset(item["image"],
