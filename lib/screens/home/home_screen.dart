@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:travelcars/screens/details/details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -312,7 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               elevation: 6,
                               child: Image.asset(item["image"],
                                 fit: BoxFit.cover,
-                              )
+                              ),
                           ),
                           Positioned(
                             bottom: 23.0,
@@ -402,7 +403,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 items: newslist.map((item) =>
                     InkWell(
                       onTap: () {
-
+                       // Navigator.push(context,MaterialPageRoute(builder: (_)=>DetailScreen()));
                         },
                       child: Container(
                         margin: EdgeInsets.all(6),
