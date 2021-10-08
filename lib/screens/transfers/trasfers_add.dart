@@ -33,11 +33,12 @@ class _TransfersAddState extends State<TransfersAdd> {
     ),
   ).toList();
 
-  DateTime? _selectedDate1 = DateTime.now();
   DateTime? _selectedDate2 = DateTime.now();
 
   var number_controller = TextEditingController();
   var number_controller1 = TextEditingController();
+  TimeOfDay time = TimeOfDay.now() ;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +50,7 @@ class _TransfersAddState extends State<TransfersAdd> {
               'assets/icons/globus.svg',
               color: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () { },
           )
         ],
       ),
@@ -173,6 +174,37 @@ class _TransfersAddState extends State<TransfersAdd> {
                               });
                             });
                             },
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 55,
+                      padding: EdgeInsets.only(left: 6),
+                      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(5)
+                      ),
+                      child: ListTile(
+                        title: Text(
+                          "${time.format(context)}",
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(Icons.timer_rounded),
+                          onPressed: () {
+                           final DateTime now = DateTime.now();
+                           showTimePicker(
+                               context: context,
+                               initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
+                           ).then((TimeOfDay? value) {
+                             if (value != null) {
+                              setState(() {
+                                time = value;
+                              });
+                             }
+                           });
+                          },
                         ),
                       ),
                     ),

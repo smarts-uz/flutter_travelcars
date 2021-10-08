@@ -10,6 +10,54 @@ class RouteScreen extends StatefulWidget {
   @override
   _RouteScreenState createState() => _RouteScreenState();
 }
+void _startAddNewTransaction(BuildContext ctx)
+{
+  showModalBottomSheet(
+      context: ctx,
+      builder: (_)
+      {
+        return  Container(
+          margin: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Text('About Transfer',
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                    fontSize: 24
+                ),
+              ),
+              Divider(),
+              Text('Lorem ipsum dolor sit amet, consectetur adipiscing '
+                  'elit. Eu venenatis eu id pellentesque.',
+
+                maxLines: 2,
+                style: TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              Text('\nLorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                  ' A, risus, nec accumsan, ultrices vulputate phasellus. '
+                  'Sagittis sagittis, quis risus eget vel pulvinar potenti amet. '
+                  'Orci nec id maecenas enim rhoncus sodales.'
+                  ' Hendrerit cursus purus gravida ultricies. Imperdiet pharetra morbi gravida hac vitae'
+                  'ipsum dolor sit amet, consectetur adipiscing elit.'
+                  ' A, risus, nec accumsan, ultrices vulputate phasellus. '
+                  'Sagittis sagittis, quis risus eget vel pulvinar potenti amet. '
+                  'Orci nec id maecenas enim rhoncus sodales.'
+                  ' Hendrerit cursus purus gravida ultricies. Imperdiet pharetra morbi gravida hac vitae',
+                maxLines: 5,
+                style: TextStyle(
+                    fontSize: 19
+                ),
+              )
+            ],
+
+          ),
+        );
+      }
+  );
+}
 
 class _RouteScreenState extends State<RouteScreen> {
   @override
@@ -25,7 +73,9 @@ class _RouteScreenState extends State<RouteScreen> {
         actions: [
           IconButton(
             color: Colors.white,
-            onPressed: (){},
+            onPressed: (){
+              _startAddNewTransaction(context);
+            },
             icon: Icon(
                 Icons.info_outline_rounded
             ),
