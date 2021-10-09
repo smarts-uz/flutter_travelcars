@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/screens/main_screen.dart';
+import 'package:travelcars/screens/transfers/transfers_info.dart';
 import 'package:travelcars/screens/transfers/trasfers_add.dart';
 
 
@@ -65,15 +66,20 @@ class _TransfersScreenState extends State<TransfersScreen> {
       'id': '20',
       'confirmed': 'Approved',
       'districtFr1': 'Tashkent',
-      'districtTo1': 'Shahrisabz',
-      'date1': '21.09.2021',
-      'districtFr2': 'Tashkent',
-      'districtTo2': 'Tashkent',
-      'date2': '07.10.2021',
+      'districtTo1' :'Samarqand',
+      'date1': '01.10.2021',
+      'time1' : '02:49',
+      'districtFr2': 'Chorsu',
+      'districtTo2':'Yunusobot district',
+      'time2' : '02:49',
       'name': 'John Fedrik',
       'email': 'example@gmail.com',
       'phone': '+1234567',
-      'submit date' : '07.09.2021'
+      'submit date' : '07.09.2021',
+      'passengers':'8',
+      'type auto' :'Light Car',
+      'status' :'Approved',
+      'note' :'Curabitur senectus'
 
 
     },
@@ -81,35 +87,22 @@ class _TransfersScreenState extends State<TransfersScreen> {
       'id': '20',
       'confirmed': 'Approved',
       'districtFr1': 'Tashkent',
-      'districtTo1': 'Shahrisabz',
-      'date1': '21.09.2021',
-      'districtFr2': 'Tashkent',
-      'districtTo2': 'Tashkent',
-      'date2': '07.10.2021',
+      'districtTo1' :'Samarqand',
+      'date1': '01.10.2021',
+      'time1' : '02:49',
+      'districtFr2': 'Chorsu',
+      'districtTo2':'Yunusobot district',
+      'time2' : '02:49',
       'name': 'John Fedrik',
       'email': 'example@gmail.com',
       'phone': '+1234567',
-      'submit date' : '07.09.2021'
-
-
-    },
-    {
-      'id': '20',
-      'confirmed': 'Approved',
-      'districtFr1': 'Tashkent',
-      'districtTo1': 'Shahrisabz',
-      'date1': '21.09.2021',
-      'districtFr2': 'Tashkent',
-      'districtTo2': 'Tashkent',
-      'date2': '07.10.2021',
-      'name': 'John Fedrik',
-      'email': 'example@gmail.com',
-      'phone': '+1234567',
-      'submit date' : '07.09.2021'
+      'submit date' : '07.09.2021',
+      'passengers':'8',
+      'type auto' :'Light Car',
+      'status' :'Approved',
 
 
     }
-
   ];
   @override
   Widget build(BuildContext context) {
@@ -350,7 +343,10 @@ class _List_TState extends State<List_T> {
                             color: Colors.orange,
                           fontSize: 20
                         ),),
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => TransfersInfo(widget.info[index])));
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                       side: BorderSide(

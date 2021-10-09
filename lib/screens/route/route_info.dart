@@ -79,7 +79,6 @@ class _RouteInfoState extends State<RouteInfo> {
                 ),
               ),
             ),
-
             Padding(
               padding: EdgeInsets.only(left: 16,top: 24),
               child: RichText(
