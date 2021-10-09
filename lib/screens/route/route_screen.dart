@@ -216,7 +216,7 @@ class _List_TState extends State<List_T> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(left: 16,bottom: 12),
+                padding: EdgeInsets.only(left: 16,bottom: 20),
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Route',
@@ -226,7 +226,14 @@ class _List_TState extends State<List_T> {
               ),
 
               Container(
-                  padding: EdgeInsets.only(left: 16,bottom:4 ),
+                padding: EdgeInsets.only(left: 24,bottom:4 ),
+                alignment: Alignment.topLeft,
+                child: Text('A meeting',style: TextStyle(
+                  color: Colors.orange,
+                ),),
+              ),
+              Container(
+                  padding: EdgeInsets.only(left: 24,bottom:4 ),
                   alignment: Alignment.topLeft,
                   child:   RichText(
                     text: TextSpan(
@@ -235,7 +242,9 @@ class _List_TState extends State<List_T> {
                       ),
                       children: <TextSpan>[
                         TextSpan(text: '${widget.info[index]['districtFr1']}       '),
-                        TextSpan(text: '${widget.info[index]['date1']}   '),
+                        TextSpan(text: '${widget.info[index]['date1']}   ',style: TextStyle(
+                            fontWeight: FontWeight.bold
+                        )),
                         TextSpan(text: ' ${widget.info[index]['time1']} ',style: TextStyle(
                             fontWeight: FontWeight.bold
                         ))
@@ -244,7 +253,52 @@ class _List_TState extends State<List_T> {
                   )
               ),
               Container(
-                  padding: EdgeInsets.only(left: 16 ,bottom:4 ),
+                  padding: EdgeInsets.only(left: 24 ,bottom:6 ),
+                  alignment: Alignment.centerLeft,
+                  child:
+                  RichText(
+                    text: TextSpan(
+
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: '${widget.info[index]['districtFr2']} - '),
+                        TextSpan(text: '${widget.info[index]['districtTo2']}   '),
+                      ],
+                    ),
+                  )
+              ),
+
+              Container(
+                padding: EdgeInsets.only(left: 24,bottom:4 ),
+                alignment: Alignment.topLeft,
+                child: Text('Conduct',style: TextStyle(
+                  color: Colors.orange,
+                ),),
+              ),
+              Container(
+                  padding: EdgeInsets.only(left: 24,bottom:4 ),
+                  alignment: Alignment.topLeft,
+                  child:   RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: '${widget.info[index]['districtFr1']}       '),
+                        TextSpan(text: '${widget.info[index]['date1']}   ',style: TextStyle(
+                            fontWeight: FontWeight.bold
+                        )),
+                        TextSpan(text: ' ${widget.info[index]['time1']} ',style: TextStyle(
+                            fontWeight: FontWeight.bold
+                        ))
+                      ],
+                    ),
+                  )
+              ),
+              Container(
+                  padding: EdgeInsets.only(left: 24 ,bottom:4 ),
                   alignment: Alignment.centerLeft,
                   child:
                   RichText(
@@ -316,7 +370,9 @@ class _List_TState extends State<List_T> {
                         color: Colors.orange,
                         fontSize: 20
                     ),),
-                  onPressed: (){},
+                  onPressed: (){
+
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                       side: BorderSide(
