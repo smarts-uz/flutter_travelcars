@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/screens/main_screen.dart';
+import 'package:travelcars/screens/route/route_info.dart';
 import 'package:travelcars/screens/transfers/trasfers_add.dart';
 
 
@@ -65,6 +66,7 @@ class _RouteScreenState extends State<RouteScreen> {
       'id': '20',
       'confirmed': 'Approved',
       'districtFr1': 'Tashkent',
+      'districtTo1' :'Samarqand',
       'date1': '01.10.2021',
       'time1' : '02:49',
       'districtFr2': 'Chorsu',
@@ -73,10 +75,29 @@ class _RouteScreenState extends State<RouteScreen> {
       'name': 'John Fedrik',
       'email': 'example@gmail.com',
       'phone': '+1234567',
-      'submit date' : '07.09.2021'
+      'submit date' : '07.09.2021',
+      'passengers':'8',
+      'type auto' :'Light Car',
+      'status' :'Approved',
+    },
+    {
+      'id': '20',
+      'confirmed': 'Approved',
+      'districtFr1': 'Tashkent',
+      'date1': '01.10.2021',
+      'time1' : '02:49',
+      'districtFr2': 'Chorsu',
+      'districtTo2':'Yunusobot district',
+      'time2' : '02:49',
+      'name': 'John Fedrik',
+      'email': 'example@gmail.com',
+      'phone': '+1234567',
+      'submit date' : '07.09.2021',
+      'passengers':'8',
+      'type auto' :'Light Car',
+      'status' :'Approved',
+    },
 
-
-    }
 
   ];
   @override
@@ -371,7 +392,8 @@ class _List_TState extends State<List_T> {
                         fontSize: 20
                     ),),
                   onPressed: (){
-
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => RouteInfo(widget.info[index])));
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),

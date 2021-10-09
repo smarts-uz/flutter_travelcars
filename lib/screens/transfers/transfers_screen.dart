@@ -76,6 +76,38 @@ class _TransfersScreenState extends State<TransfersScreen> {
       'submit date' : '07.09.2021'
 
 
+    },
+    {
+      'id': '20',
+      'confirmed': 'Approved',
+      'districtFr1': 'Tashkent',
+      'districtTo1': 'Shahrisabz',
+      'date1': '21.09.2021',
+      'districtFr2': 'Tashkent',
+      'districtTo2': 'Tashkent',
+      'date2': '07.10.2021',
+      'name': 'John Fedrik',
+      'email': 'example@gmail.com',
+      'phone': '+1234567',
+      'submit date' : '07.09.2021'
+
+
+    },
+    {
+      'id': '20',
+      'confirmed': 'Approved',
+      'districtFr1': 'Tashkent',
+      'districtTo1': 'Shahrisabz',
+      'date1': '21.09.2021',
+      'districtFr2': 'Tashkent',
+      'districtTo2': 'Tashkent',
+      'date2': '07.10.2021',
+      'name': 'John Fedrik',
+      'email': 'example@gmail.com',
+      'phone': '+1234567',
+      'submit date' : '07.09.2021'
+
+
     }
 
   ];
