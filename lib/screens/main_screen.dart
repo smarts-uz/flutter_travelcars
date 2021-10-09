@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
+import 'package:travelcars/screens/profile/profile_screen.dart';
 import 'package:travelcars/screens/route/route_screen.dart';
 import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/transfers/transfers_screen.dart';
@@ -22,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
       SearchScreen(),
       TransfersScreen(),
       RouteScreen(),
-      const Center(child: Icon(Icons.person_outline_outlined, size: 64.0, color: Colors.blue)),
+      ProfileScreen(),
     ];
     final _BottomNavBarItems = <BottomNavigationBarItem>[
       const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
