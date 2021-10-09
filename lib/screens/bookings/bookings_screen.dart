@@ -102,19 +102,11 @@ class _BookingsScreenState extends State<BookingsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Results of searching",
+          "Bookings",
           style: TextStyle(
             color: Colors.white,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-
-            },
-            icon: SvgPicture.asset("assets/icons/list.svg"),
-          )
-        ],
       ),
       body: ListView.builder(
           itemCount: results.length,
