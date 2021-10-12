@@ -185,30 +185,30 @@ class _RouteAddState extends State<RouteAdd> {
                         ),
                       ),
 
-                      Container(
-                        width: double.infinity,
-                        height: 165,
-                        padding: EdgeInsets.only(left: 6),
-                        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5)
-                        ),
-                        child: TextFormField(
-                          autovalidateMode: AutovalidateMode.always,
-                          decoration: const InputDecoration(
-                              hintText: "The address of the place to pick up from.",
-                              hintMaxLines: 3
-                          ), controller: number_controller1,
-                          keyboardType: TextInputType.text,
-                          cursorColor: Colors.black,
-                          style: TextStyle(
-                              fontSize: 20
+                        Container(
+                          width: double.infinity,
+                          height: 165,
+                          padding: EdgeInsets.only(left: 6),
+                          margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5)
                           ),
-                          expands: false,
-                          maxLines: 7,
+                          child: TextFormField(
+                            autovalidateMode: AutovalidateMode.always,
+                            decoration: const InputDecoration(
+                                hintText: "The address of the place to pick up from.",
+                                hintMaxLines: 3
+                            ), controller: number_controller1,
+                            keyboardType: TextInputType.text,
+                            cursorColor: Colors.black,
+                            style: TextStyle(
+                                fontSize: 20
+                            ),
+                            expands: false,
+                            maxLines: 7,
+                          ),
                         ),
-                      ),
                     ]
                 ),
               ),

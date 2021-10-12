@@ -14,20 +14,10 @@ class _SocialScreenState extends State<SocialScreen> {
   final TextEditingController _phoneEmailController = TextEditingController();
 
   List<Map<String, dynamic>> data = [
-    {
-      "image": "assets/images/wechat.svg",
-      "check_box": false
-    },
-    {
-      "image": "assets/images/viber.svg",
-      "check_box": false
-    },{
-      "image": "assets/images/whatsapp.svg",
-      "check_box": false
-    },{
-      "image": "assets/images/telegram.svg",
-      "check_box": false
-    },
+    {"image": "assets/images/wechat.svg", "check_box": false},
+    {"image": "assets/images/viber.svg", "check_box": false},
+    {"image": "assets/images/whatsapp.svg", "check_box": false},
+    {"image": "assets/images/telegram.svg", "check_box": false},
   ];
 
   @override
@@ -78,30 +68,32 @@ class _SocialScreenState extends State<SocialScreen> {
                   height: 15,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: data.map((item) =>
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 64,
-                            child: SvgPicture.asset(item["image"]),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: data
+                        .map(
+                          (item) => Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 64,
+                                child: SvgPicture.asset(item["image"]),
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.02,
+                              ),
+                              Checkbox(
+                                  value: item["check_box"],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      if (value != null)
+                                        item["check_box"] = value;
+                                    });
+                                  }),
+                            ],
                           ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02,
-                          ),
-                          Checkbox(
-                              value: item["check_box"],
-                              onChanged: (value) {
-                                setState(() {
-                                  if (value != null)
-                                    item["check_box"] = value;
-                                });
-                              }),
-                        ],
-                      ),
-                  ).toList()
-                ),
+                        )
+                        .toList()),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.02,
                 ),
@@ -141,7 +133,8 @@ class _SocialScreenState extends State<SocialScreen> {
                 Spacer(),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,MaterialPageRoute(builder: (_) => MainScreen()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => MainScreen()));
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -169,8 +162,4 @@ class _SocialScreenState extends State<SocialScreen> {
       ),
     );
   }
-
-
-
-
 }
