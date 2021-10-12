@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travelcars/screens/bookings/bookings_screen.dart';
 import 'package:travelcars/screens/main_screen.dart';
+import 'package:travelcars/screens/profile/account/account_screen.dart';
+import 'package:travelcars/screens/profile/cashback.dart';
 import 'package:travelcars/screens/profile/reviews.dart';
 import 'package:travelcars/screens/route/route_screen.dart';
 import 'package:travelcars/screens/transfers/transfers_screen.dart';
@@ -19,7 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       "icon": SvgPicture.asset("assets/icons/profile_s.svg"),
       "text": "Account Settings",
       "trailing": true,
-      "route": MainScreen(),
+      "route": AccountScreen(),
     },
     {
       "icon": Icon(Icons.directions_car, color: Colors.black,),
@@ -43,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       "icon": SvgPicture.asset('assets/icons/cashback.svg'),
       "text": "Cashback",
       "trailing": true,
-      "route": MainScreen(),
+      "route": CashbackScreen(),
     },
     {
       "icon": Icon(Icons.work_outline, color: Colors.black,),
