@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:travelcars/screens/search/details_screen.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,6 +16,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  Map<String, String> weather = {
+    "Tashkent": "0",
+    "Buxoro": "0",
+    "Xiva": "0",
+    "Samarkand": "0",
+  };
+
   List<Map<String, dynamic>> imglist = [
     {
       'image': "assets/images/tashkent.jpg",
@@ -137,6 +148,23 @@ class _HomeScreenState extends State<HomeScreen> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getweather();
+  }
+
+
+  void getweather() async {
+    for(int i =0; i<city.length; i++) {
+      String url = "https://api.openweathermap.org/data/2.5/weather?q=${city[i]}&appid=4d8fb5b93d4af21d66a2948710284366&units=metric";
+      final response = await http.get(Uri.parse(url));
+      weather["${city[i]}"] = json.decode(response.body)["main"]["temp"];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -226,7 +254,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       right: 45,
                       top: 30,
                       child: Text(
-                        "18",
+                        "${weather["$SelectedVal"]}",
                         style: TextStyle(
                           fontSize: 45,
                           color: Colors.white,
