@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travelcars/screens/bookings/bookings_screen.dart';
 import 'package:travelcars/screens/main_screen.dart';
+import 'package:travelcars/screens/profile/reviews.dart';
 import 'package:travelcars/screens/route/route_screen.dart';
 import 'package:travelcars/screens/transfers/transfers_screen.dart';
 
@@ -54,7 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       "icon": Icon(Icons.message, color: Colors.black,),
       "text": "Reviews",
       "trailing": true,
-      "route": MainScreen(),
+      "route": Reviews(),
     },
     {
       "icon": SvgPicture.asset('assets/icons/contact.svg'),
