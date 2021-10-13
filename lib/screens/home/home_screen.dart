@@ -24,6 +24,14 @@ class _HomeScreenState extends State<HomeScreen> {
     "Samarkand": 0,
   };
 
+  List<dynamic> valyuta = [];
+  Map<String, dynamic> index_val = {
+    "USD" : 0,
+    "EUR": 1,
+    "RUB": 2,
+    "GBP": 3,
+  };
+
   List<Map<String, dynamic>> imglist = [
     {
       'image': "assets/images/tashkent.jpg",
@@ -127,9 +135,10 @@ class _HomeScreenState extends State<HomeScreen> {
     "Samarkand"
   ];
   static const currency = <String>[
-    "USD = 10700",
-    "EUR = 11900",
-    "RUB = 110",
+    "USD",
+    "EUR",
+    "RUB",
+    "GBP"
   ];
   final List<DropdownMenuItem<String>> cities = city.map(
         (String value) => DropdownMenuItem<String>(
@@ -154,6 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: implement initState
     super.initState();
     getweather();
+    getvalyuta();
   }
 
 
@@ -164,6 +174,14 @@ class _HomeScreenState extends State<HomeScreen> {
       weather["${city[i]}"] = json.decode(response.body)["main"]["temp"].round();
     }
     print(weather);
+  }
+  void getvalyuta() async {
+    String url = "https://cbu.uz/uz/arkhiv-kursov-valyut/json/";
+    final response = await http.get(Uri.parse(url));
+    setState(() {
+      valyuta = json.decode(response.body);
+    });
+    print(valyuta);
   }
 
   @override
@@ -181,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: SingleChildScrollView(
+      body: valyuta.isEmpty ? Center(child: CircularProgressIndicator()) : SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -191,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Stack(
                   children: [
                     Container(
-                      height: 120,
+                      height: 130,
                       width: MediaQuery.of(context).size.width * .45,
                       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 14),
                       decoration: BoxDecoration(
@@ -207,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Positioned(
-                      bottom: 15,
+                      bottom: 20,
                       left: 25,
                       child: DropdownButton(
                         hint: Text(
@@ -265,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 Container(
-                  height: 120,
+                  height: 130,
                   width: MediaQuery.of(context).size.width * .45,
                   margin: EdgeInsets.symmetric(horizontal: 5, vertical: 14),
                   child: Stack(
@@ -277,49 +295,75 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       ),
                       Positioned(
-                        child: ListTile(
-                          title: Text(
-                            "Rate change",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15
-                            ),
-                          ),
-                          subtitle: Text(
-                            "${DateFormat('dd/MM/yyyy').format(DateTime.now())}",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15
-                            ),
-                          ),
+                        top: 15,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * .45,
+                          alignment: Alignment.center,
+                          child: Column(
+                            children: [
+                              Text(
+                                "Rate change",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
+                              ),
+                              Text(
+                                "${DateFormat('dd/MM/yyyy').format(DateTime.now())}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
+                              ),
+                            ],
+                          )
                         ),
+                      ),
+                      Positioned(
+                          bottom: 35,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * .45,
+                            alignment: Alignment.center,
+                            child: Text(
+                              SelectedVal2 != null ?
+                              "${valyuta[index_val[SelectedVal2]]["Rate"]}"  //".substring(0, valyuta[index_val[SelectedVal2]]["Rate"].indexOf("."),)}"
+                                  : " ",
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                fontSize: 25
+                              ),
+                            ),
+                          )
                       ),
                       Positioned(
                         bottom: 0,
-                        left: 20,
-                        child: DropdownButton(
-                          hint: Text(
-                              "Currency",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black
-                              )
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * .45,
+                          alignment: Alignment.center,
+                          child: DropdownButton(
+                            hint: Text(
+                                "Currency",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black
+                                )
+                            ),
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.black,
+                            ),
+                            focusColor: Colors.white,
+                            dropdownColor: Colors.grey[300],
+                            value: SelectedVal2,
+                            onChanged: (String? newValue) {
+                              if (newValue != null) {
+                                setState(() => SelectedVal2 = newValue);
+                              }},
+                            items: pullar,
                           ),
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                          ),
-                          focusColor: Colors.white,
-                          dropdownColor: Colors.grey[300],
-                          value: SelectedVal2,
-                          onChanged: (String? newValue) {
-                            if (newValue != null) {
-                              setState(() => SelectedVal2 = newValue);
-                            }},
-                          items: pullar,
                         ),
                       ),
-                      Positioned(
+                      /*Positioned(
                         top: 20,
                         right: 15,
                         child: Column(
@@ -329,14 +373,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             Text(
                               "19%",
                               style: TextStyle(
-                                color: Colors.green,
+                                color: valyuta[index_val[SelectedVal2]]["Diff"].indexOf("-") != null ? Colors.red : Colors.green,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold
                               ),
                             )
                           ],
                         ),
-                      ),
+                      ),*/
                     ]
                   ),
                 ),
