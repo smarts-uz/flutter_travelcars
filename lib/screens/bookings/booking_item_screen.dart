@@ -24,7 +24,7 @@ class _BookingScreenState extends State<BookingScreen> {
     'vaqti': ' 07.09.2021',
     'status': 'Одобрено',
     'ekskursiya': 'Ташкент - Экскурсия по городу',
-    'booking':'Бронирование #299',
+    'bookings':'Бронирование #299',
     'click': '',
     'payme': '',
     'masterCard': '',
@@ -63,7 +63,7 @@ class _BookingScreenState extends State<BookingScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyColor.orange,
-        title: Text("${results["booking"]}",style: TextStyle(
+        title: Text("${results["bookings"]}",style: TextStyle(
           fontSize: 19,
           color: Colors.white,
           fontWeight: FontWeight.w500,

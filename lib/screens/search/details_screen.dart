@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:travelcars/app_theme.dart';
 import 'package:travelcars/map.dart';
-import 'package:travelcars/screens/booking/booking_screen.dart';
+import 'package:travelcars/screens/bookings/booking_item_screen.dart';
 import 'package:travelcars/screens/feedback/feedback.dart';
 import 'package:travelcars/screens/search/components/drop_button_cost.dart';
 

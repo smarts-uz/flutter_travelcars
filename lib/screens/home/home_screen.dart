@@ -17,11 +17,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  Map<String, String> weather = {
-    "Tashkent": "0",
-    "Buxoro": "0",
-    "Xiva": "0",
-    "Samarkand": "0",
+  Map<String, int> weather = {
+    "Tashkent": 0,
+    "Buxoro": 0,
+    "Xiva": 0,
+    "Samarkand": 0,
   };
 
   List<Map<String, dynamic>> imglist = [
@@ -161,8 +161,9 @@ class _HomeScreenState extends State<HomeScreen> {
     for(int i =0; i<city.length; i++) {
       String url = "https://api.openweathermap.org/data/2.5/weather?q=${city[i]}&appid=4d8fb5b93d4af21d66a2948710284366&units=metric";
       final response = await http.get(Uri.parse(url));
-      weather["${city[i]}"] = json.decode(response.body)["main"]["temp"];
+      weather["${city[i]}"] = json.decode(response.body)["main"]["temp"].round();
     }
+    print(weather);
   }
 
   @override
@@ -253,13 +254,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     Positioned(
                       right: 45,
                       top: 30,
-                      child: Text(
+                      child: weather["$SelectedVal"] != null ? Text(
                         "${weather["$SelectedVal"]}",
                         style: TextStyle(
                           fontSize: 45,
                           color: Colors.white,
                         ),
-                      ),
+                      ) : Text(" "),
                     )
                   ],
                 ),
