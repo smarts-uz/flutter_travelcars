@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:travelcars/screens/bookings/booking_item_screen.dart';
+import 'package:travelcars/screens/search/details_screen.dart';
 
 class BookingsScreen extends StatefulWidget {
   const BookingsScreen({Key? key}) : super(key: key);
@@ -285,7 +287,10 @@ class _BookingsScreenState extends State<BookingsScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => BookingScreen())
+                    );
                   },
                   child: Container(
                       height: 50,
