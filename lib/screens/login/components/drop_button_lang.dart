@@ -24,11 +24,8 @@ class _DropButtonState extends State<DropButton> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: Colors.grey[50],
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.7),
-            ),
-          ]),
+          border: Border.all(color: Colors.grey),
+          ),
       child: DropdownButtonHideUnderline(
         child: Container(
           child:DropdownButton<String>(

@@ -1,3 +1,4 @@
+import 'package:android_intent/android_intent.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,7 +9,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../app_theme.dart';
 
 class BookingScreen extends StatefulWidget {
-  const BookingScreen({Key? key}) : super(key: key);
+  final drp;
+  const BookingScreen({Key? key, this.drp}) : super(key: key);
 
   @override
   _BookingScreenState createState() => _BookingScreenState();
@@ -299,7 +301,12 @@ class _BookingScreenState extends State<BookingScreen> {
               ],
             ),
             _text(text: "Выберите способ оплаты:"),
-            _payment(icon: "assets/icons/Click1.png", name: "Click"),
+            GestureDetector(
+              onTap: (){
+                final intent = AndroidIntent(package: "", action: "action_view");
+                intent.launch();
+              },
+                child: _payment(icon: "assets/icons/Click1.png", name: "Click"),),
             _payment(icon: "assets/icons/online_payme.png", name: "Payme"),
             _payment(icon: "assets/icons/mastercard-2.png", name: "MasterCard"),
             _payment(icon: "assets/icons/visa 1.png", name: "Visa"),

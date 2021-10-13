@@ -4,6 +4,7 @@ import 'package:travelcars/screens/profile/account/third_screen.dart';
 
 import 'choice_language.dart';
 import 'first_screen.dart';
+
 class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -81,62 +82,53 @@ class AccountScreen extends StatelessWidget {
                 },
                 title: Text("Изменение профиля"),
                 trailing: Icon(Icons.arrow_forward_ios),
-                ),
               ),
             ),
+          ),
           Divider(),
           SizedBox(
             height: 47,
             child: ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SecondScreen(),
+                  ),
+                );
+              },
               title: Text("Изменение пароля"),
-              trailing: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SecondScreen(),
-                    ),
-                  );
-                },
-                icon: Icon(Icons.arrow_forward_ios),
-              ),
+              trailing: Icon(Icons.arrow_forward_ios),
             ),
           ),
           Divider(),
           SizedBox(
             height: 47,
             child: ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ThirdScreen(),
+                  ),
+                );
+              },
               title: Text("Социальные сети для связи"),
-              trailing: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ThirdScreen(),
-                    ),
-                  );
-                },
-                icon: Icon(Icons.arrow_forward_ios),
-              ),
+              trailing: Icon(Icons.arrow_forward_ios),
             ),
           ),
           Divider(),
           SizedBox(
             height: 47,
             child: ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ChoicePage()),
+                );
+              },
               title: Text("Настройка языка и курса"),
-              trailing: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ChoicePage()),
-                  );
-                },
-                icon: Icon(Icons.arrow_forward_ios),
-              ),
+              trailing: Icon(Icons.arrow_forward_ios),
             ),
           ),
           Divider(),
