@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../app_theme.dart';
 import 'drop_button_lang.dart';
 import 'drop_button_mny.dart';
 
@@ -24,26 +25,30 @@ class _ChoicePageState extends State<ChoicePage> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(),
+              SizedBox(height: MediaQuery.of(context).size.height*0.05,),
               DropButton(),
               DropButtonMny(),
-              Container(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * .36),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Container(
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: Text("Сохранить"),
-                        ),
+              Spacer(),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: MyColor.blue),
+                  height: 40,
+                  width: double.infinity,
+                  child: Center(
+                    child: Text(
+                      "Сохранить",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white,
+
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
+              SizedBox(height: 20,),
             ]),
       ),
     );

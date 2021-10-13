@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:travelcars/app_theme.dart';
 import 'package:travelcars/map.dart';
-import 'package:travelcars/screens/bookings/booking_item_screen.dart';
 import 'package:travelcars/screens/feedback/feedback.dart';
+import 'package:travelcars/screens/main_screen.dart';
 import 'package:travelcars/screens/search/components/drop_button_cost.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -33,13 +33,13 @@ void _otmen(BuildContext ctx) {
               Divider(),
               Text(
                 'Заказчик может отменить свою бронь БЕЗ\n ШТРАФА при след. условиях:\n'
-                '- при бронировании автомобиля за 2-3 месяцев\n и более до начала поездки - за 15 дней;'
-                '- при бронировании автомобиля за 30 дней до\n начала поездки - за 10 дней;'
-                '- при бронировании автомобиля за 14 дней до\n начала поездки - за 7 дней;'
-                '- при бронировании автомобиля за 7 дней до\n начала поездки - за 3 дня;'
-                '- при бронировании автомобиля за 3 дней до\n начала поездки - за 24 часа.',
+                '- при бронировании автомобиля за 2-3 месяцев\n и более до начала поездки - за 15 дней;\n'
+                '- при бронировании автомобиля за 30 дней до\n начала поездки - за 10 дней;\n'
+                '- при бронировании автомобиля за 14 дней до\n начала поездки - за 7 дней;\n'
+                '- при бронировании автомобиля за 7 дней до\n начала поездки - за 3 дня;\n'
+                '- при бронировании автомобиля за 3 дней до\n начала поездки - за 24 часа.\n',
                 maxLines: 12,
-                style: TextStyle(fontSize: 13, color: Colors.red),
+                style: TextStyle(fontSize: 14, color: Colors.red),
               )
             ],
           ),
@@ -67,7 +67,7 @@ void _inform(BuildContext ctx) {
                 'Овертайм за 1 час – 0 UZS\n'
                 ' Комиссия за банковский перевод - 5%',
                 maxLines: 5,
-                style: TextStyle(fontSize: 13, color: Colors.orangeAccent),
+                style: TextStyle(fontSize: 14, color: Colors.orangeAccent),
               )
             ],
           ),
@@ -325,7 +325,8 @@ class _DetailScreenState extends State<DetailScreen> {
                       child: Center(
                           child: TextButton(
                         onPressed: () {
-                          Navigator.push(context,MaterialPageRoute(builder: (_)=>MapScreen()));
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => MapScreen()));
                         },
                         child: Text(
                           "Посмотреть маршрут",
@@ -375,7 +376,10 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_)=>BookingScreen()));
+                Navigator.pop(context);
+                Navigator.pop(context);
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => MainScreen()));
               },
               child: Container(
                 margin: EdgeInsets.all(16),
@@ -423,36 +427,36 @@ class _DetailScreenState extends State<DetailScreen> {
 
   Widget _listWrap(List wrap) {
     return Container(
-        height: wrap.length * 30,
-        child: GridView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: wrap.length,
-          gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-            mainAxisExtent: 50,
-            crossAxisCount: 2,
-            childAspectRatio: 1,
-          ),
-          itemBuilder: (context, index) {
-            return Container(
-              alignment: Alignment.topLeft,
-              width: MediaQuery.of(context).size.width * 0.43,
-              child: Chip(
-                backgroundColor: Colors.transparent,
-                avatar: SvgPicture.asset("assets/icons/globus.svg"),
-                label: Text(
-                  wrap[index],
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'Poppins',
-                    fontStyle: FontStyle.normal,
-                  ),
+      height: wrap.length * 30,
+      child: GridView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: wrap.length,
+        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+          mainAxisExtent: 50,
+          crossAxisCount: 2,
+          childAspectRatio: 1,
+        ),
+        itemBuilder: (context, index) {
+          return Container(
+            alignment: Alignment.topLeft,
+            width: MediaQuery.of(context).size.width * 0.43,
+            child: Chip(
+              backgroundColor: Colors.transparent,
+              avatar: SvgPicture.asset("assets/icons/globus.svg"),
+              label: Text(
+                wrap[index],
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Poppins',
+                  fontStyle: FontStyle.normal,
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

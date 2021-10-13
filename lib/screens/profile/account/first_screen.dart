@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../app_theme.dart';
 
 class FirstSceen extends StatefulWidget {
   @override
@@ -7,8 +10,29 @@ class FirstSceen extends StatefulWidget {
 }
 
 class _FirstSceenState extends State<FirstSceen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+
   List<String> sort = ["Физическое лицо", "Юридическое лицо"];
   int? _radioVal2;
+  List<TextEditingController> controllers = [
+    for (int i = 0; i < 9; i++)
+      TextEditingController()
+  ];
+  List<String> hints =
+  ["Юридическое название",
+  "Юридический город",
+  "Юридический адрес",
+  "Почтовый индекс",
+  "Банк",
+  "Расчетный счет",
+  "ОКЭД",
+  "МФО",
+  "ИНН",
+  "ОКОНХ",
+  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +46,7 @@ class _FirstSceenState extends State<FirstSceen> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 3 / 4,
+              height: MediaQuery.of(context).size.height * .81,
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
@@ -50,249 +74,96 @@ class _FirstSceenState extends State<FirstSceen> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 40),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(3.5),
-                          ),
-                          width: 326,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextFld(
-                                  title: "Email", hint: "nimadir@gmail.com"),
-                              SizedBox(height: 33),
-                              TextFld(title: "ФИО", hint: "John Frederik"),
-                              SizedBox(height: 33),
-                              TextFld(
-                                  title: "Телефон", hint: "+998(__) ___ __ __"),
-                              SizedBox(height: 25),
-                              SizedBox(
-                                width: double.infinity,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [0, 1]
-                                      .map((int index) => Container(
-                                            alignment: Alignment.centerLeft,
-                                            height: 40,
-                                            width: double.infinity,
-                                            child: Row(
-                                              children: [
-                                                Radio<int>(
-                                                  value: index,
-                                                  groupValue: this._radioVal2,
-                                                  onChanged: (int? value) {
-                                                    if (value != null) {
-                                                      setState(() => this
-                                                          ._radioVal2 = value);
-                                                      print(value);
-                                                    }
-                                                  },
-                                                ),
-                                                Text(
-                                                  sort[index],
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    fontSize: 15,
-                                                  ),
-                                                ),
-                                              ],
+                    Container(
+                      padding: EdgeInsets.only(top: 40, right: 16, left: 16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3.5),
+                      ),
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextFld(
+                              title: "Email", hint: "nimadir@gmail.com",controller: _emailController),
+                          SizedBox(height: 33),
+                          TextFld(title: "ФИО", hint: "John Frederik",controller: _nameController),
+                          SizedBox(height: 33),
+                          TextFld(
+                              title: "Телефон", hint: "+998(__) ___ __ __",controller: _phoneController),
+                          SizedBox(height: 25),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Column(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceAround,
+                              children: [0, 1]
+                                  .map((int index) => Container(
+                                        alignment: Alignment.centerLeft,
+                                        height: 40,
+                                        width: double.infinity,
+                                        child: Row(
+                                          children: [
+                                            Radio<int>(
+                                              value: index,
+                                              groupValue: this._radioVal2,
+                                              onChanged: (int? value) {
+                                                if (value != null) {
+                                                  setState(() => this
+                                                      ._radioVal2 = value);
+                                                  print(value);
+                                                }
+                                              },
                                             ),
-                                          ))
-                                      .toList(),
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(top: 17),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3.5),
-                                ),
-                                child: Column(
-                                  children: <Widget>[
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        hintText: "Юридическое название",
-                                        errorText: null,
-                                        labelStyle: TextStyle(
-                                          color: Colors.white10,
+                                            Text(
+                                              sort[index],
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        border: OutlineInputBorder(),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(top: 17),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3.5),
-                                ),
-                                child: Column(
-                                  children: <Widget>[
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        hintText: "Юридический город",
-                                        errorText: null,
-                                        labelStyle: TextStyle(
-                                          color: Colors.white10,
-                                        ),
-                                        border: OutlineInputBorder(),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(top: 17),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3.5),
-                                ),
-                                child: Column(
-                                  children: <Widget>[
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        hintText: "Юридический адрес",
-                                        errorText: null,
-                                        labelStyle: TextStyle(
-                                          color: Colors.white10,
-                                        ),
-                                        border: OutlineInputBorder(),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(top: 17),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3.5),
-                                ),
-                                width: 326,
-                                child: Column(
-                                  children: <Widget>[
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        hintText: "Почтовый индекс",
-                                        errorText: null,
-                                        labelStyle: TextStyle(
-                                          color: Colors.white10,
-                                        ),
-                                        border: OutlineInputBorder(),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(top: 17),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3.5),
-                                ),
-                                child: Column(
-                                  children: <Widget>[
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        hintText: "Банк",
-                                        errorText: null,
-                                        labelStyle: TextStyle(
-                                          color: Colors.white10,
-                                        ),
-                                        border: OutlineInputBorder(),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(top: 17),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3.5),
-                                ),
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    hintText: "Расчетный счет",
-                                    errorText: null,
-                                    labelStyle: TextStyle(
-                                      color: Colors.white10,
-                                    ),
-                                    border: OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(top: 17),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3.5),
-                                ),
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    hintText: "ОКЭД",
-                                    errorText: null,
-                                    labelStyle: TextStyle(
-                                      color: Colors.white10,
-                                    ),
-                                    border: OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(top: 17),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3.5),
-                                ),
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    hintText: "МФО",
-                                    errorText: null,
-                                    labelStyle: TextStyle(
-                                      color: Colors.white10,
-                                    ),
-                                    border: OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(top: 17),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3.5),
-                                ),
-                                child: Column(
-                                  children: <Widget>[
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        hintText: "ИНН",
-                                        errorText: null,
-                                        labelStyle: TextStyle(
-                                          color: Colors.white10,
-                                        ),
-                                        border: OutlineInputBorder(),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(top: 17),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3.5),
-                                ),
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    hintText: "ОКОНХ",
-                                    errorText: null,
-                                    labelStyle: TextStyle(
-                                      color: Colors.white10,
-                                    ),
-                                    border: OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                            ],
+                                      ))
+                                  .toList(),
+                            ),
                           ),
-                        ),
+                          Column(
+                            children: [0, 1, 2, 3,4,5,6,7,8,].map((e) => Container(
+                              width: double.infinity,
+                              height:  50,
+                              padding: EdgeInsets.only(left: 15),
+                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(5)
+                              ),
+                              child: TextFormField(
+                                autovalidateMode: AutovalidateMode.always,
+                                decoration: InputDecoration(
+                                  hintText: hints[e],
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.white,
+                                      width: 0,
+                                    ),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.white,
+                                      width: 0,
+                                    ),
+                                  ),
+                                ),
+                                controller: controllers[e],
+                                cursorColor: Colors.black,
+                                style: TextStyle(
+                                    fontSize: 20
+                                ),
+                                expands: false,
+                              ),
+                            ),).toList(),
+                          )
+                        ],
                       ),
                     ),
                   ],
@@ -301,16 +172,24 @@ class _FirstSceenState extends State<FirstSceen> {
             ),
             Container(
               padding: EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Container(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text("Сохранить"),
+              child: GestureDetector(
+                onTap: () {},
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: MyColor.blue),
+                  height: 40,
+                  width: double.infinity,
+                  child: Center(
+                    child: Text(
+                      "Сохранить",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white,
+
+                      ),
                     ),
                   ),
-                ],
+                ),
               ),
             ),
           ],
@@ -319,8 +198,9 @@ class _FirstSceenState extends State<FirstSceen> {
     );
   }
 
-  Widget TextFld({title, hint}) {
+  Widget TextFld({title, hint,controller}) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         labelText: title,
         hintText: hint,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../app_theme.dart';
+
 class ThirdScreen extends StatefulWidget {
   @override
   _ThirdScreenState createState() => _ThirdScreenState();
@@ -98,20 +100,27 @@ class _ThirdScreenState extends State<ThirdScreen> {
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.only(top: 95),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Container(
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: Text("Сохранить"),
+                Spacer(),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: MyColor.blue),
+                    height: 40,
+                    width: double.infinity,
+                    child: Center(
+                      child: Text(
+                        "Сохранить",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white,
+
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
+                SizedBox(height: 20,),
               ],
             ),
           ),

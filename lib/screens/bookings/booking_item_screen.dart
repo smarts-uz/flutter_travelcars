@@ -17,6 +17,7 @@ class BookingScreen extends StatefulWidget {
 }
 
 class _BookingScreenState extends State<BookingScreen> {
+  final isLoading =true;
   Map<String, dynamic> results = {
     "id": 'MS-701AFA',
     "year": '2015г.',
@@ -300,83 +301,89 @@ class _BookingScreenState extends State<BookingScreen> {
                 ),
               ],
             ),
-            _text(text: "Выберите способ оплаты:"),
-            GestureDetector(
-              onTap: (){
-                final intent = AndroidIntent(package: "", action: "action_view");
-                intent.launch();
-              },
-                child: _payment(icon: "assets/icons/Click1.png", name: "Click"),),
-            _payment(icon: "assets/icons/online_payme.png", name: "Payme"),
-            _payment(icon: "assets/icons/mastercard-2.png", name: "MasterCard"),
-            _payment(icon: "assets/icons/visa 1.png", name: "Visa"),
-            Row(
+           isLoading? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Checkbox(
-                    value: results["check_box"],
-                    onChanged: (value) {
-                      setState(() {
-                          results["check_box"] = value;
-                      });
-                    }),
-                Container(
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Я ознакомлен и согласен с ',
-                          style: new TextStyle(color: Colors.black),
+                _text(text: "Выберите способ оплаты:"),
+                GestureDetector(
+                  onTap: (){
+                    final intent = AndroidIntent(package: "", action: "action_view");
+                    intent.launch();
+                  },
+                  child: _payment(icon: "assets/icons/Click1.png", name: "Click"),),
+                _payment(icon: "assets/icons/online_payme.png", name: "Payme"),
+                _payment(icon: "assets/icons/mastercard-2.png", name: "MasterCard"),
+                _payment(icon: "assets/icons/visa 1.png", name: "Visa"),
+                Row(
+                  children: [
+                    Checkbox(
+                        value: results["check_box"],
+                        onChanged: (value) {
+                          setState(() {
+                            results["check_box"] = value;
+                          });
+                        }),
+                    Container(
+                      child: RichText(
+                        text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Я ознакомлен и согласен с ',
+                                style: new TextStyle(color: Colors.black),
+                              ),
+                              TextSpan(
+                                text: 'Политикой\nконфиденциальности ',
+                                style: new TextStyle(color: Colors.blue),
+                                recognizer: new TapGestureRecognizer()
+                                  ..onTap = () {
+                                    launch("https://travelcars.uz/rules");
+                                  },
+                              ),
+                              TextSpan(
+                                text: 'и',
+                                style: new TextStyle(color: Colors.black),
+                              ),
+                              TextSpan(
+                                text: ' Публичной офертой',
+                                style: new TextStyle(color: Colors.blue),
+                                recognizer: new TapGestureRecognizer()
+                                  ..onTap = () {
+                                    launch("https://travelcars.uz/publicrules");
+                                  },
+                              ),
+                            ]
                         ),
-                        TextSpan(
-                          text: 'Политикой\nконфиденциальности ',
-                          style: new TextStyle(color: Colors.blue),
-                          recognizer: new TapGestureRecognizer()
-                            ..onTap = () {
-                            launch("https://travelcars.uz/rules");
-                            },
+                      ),
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    margin: EdgeInsets.all(16),
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.06,
+                    decoration: BoxDecoration(
+                      color: MyColor.blue,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Оплатить",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Poppins',
+                          fontStyle: FontStyle.normal,
                         ),
-                        TextSpan(
-                          text: 'и',
-                          style: new TextStyle(color: Colors.black),
-                        ),
-                        TextSpan(
-                          text: ' Публичной офертой',
-                          style: new TextStyle(color: Colors.blue),
-                          recognizer: new TapGestureRecognizer()
-                            ..onTap = () {
-                            launch("https://travelcars.uz/publicrules");
-                            },
-                        ),
-                      ]
+                      ),
                     ),
                   ),
                 ),
               ],
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                margin: EdgeInsets.all(16),
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.06,
-                decoration: BoxDecoration(
-                  color: MyColor.blue,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Center(
-                  child: Text(
-                    "Оплатить",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Poppins',
-                      fontStyle: FontStyle.normal,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            ):Container(),
+
           ],
         ),
       ),

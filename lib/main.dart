@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travelcars/screens/booking/booking_screen.dart';
-import 'package:travelcars/screens/main_screen.dart';
-import 'package:travelcars/screens/profile/account/account_screen.dart';
-import 'package:travelcars/screens/search/details_screen.dart';
-import 'package:travelcars/screens/search/search_result.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 
 void main() {
