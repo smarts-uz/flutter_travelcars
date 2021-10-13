@@ -127,6 +127,13 @@ class _TransfersScreenState extends State<TransfersScreen> {
         ],
       ),
       body: info.isEmpty ?  Empty() :  List_T(info),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => TransfersAdd()));
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
@@ -181,7 +188,8 @@ class _EmptyState extends State<Empty> {
                   ),
                   SizedBox(
                       width: 10),
-                  Text('Add',
+                  Text(
+                    'Add',
                     style: TextStyle(
                         color: Colors.orange
                     ),),

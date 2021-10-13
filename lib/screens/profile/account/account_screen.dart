@@ -13,7 +13,9 @@ class AccountScreen extends StatelessWidget {
         centerTitle: true,
         title: Text("Настройки профиля"),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: Icon(Icons.arrow_back),
         ),
       ),

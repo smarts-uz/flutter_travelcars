@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/screens/main_screen.dart';
+import 'package:travelcars/screens/route/route_add.dart';
 import 'package:travelcars/screens/route/route_info.dart';
 import 'package:travelcars/screens/transfers/trasfers_add.dart';
 
@@ -124,6 +125,13 @@ List<Map<String, dynamic>> info = [
         ],
       ),
       body: info.isEmpty ?  Empty() :  List_T(info),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => RouteAdd()));
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
@@ -186,7 +194,7 @@ class _EmptyState extends State<Empty> {
               ),
               onPressed: (){
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TransfersAdd()));
+                    MaterialPageRoute(builder: (context) => RouteAdd()));
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
