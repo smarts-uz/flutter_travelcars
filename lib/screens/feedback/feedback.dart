@@ -150,18 +150,12 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               ),
             ),
             _text(text: "Водитель:"),
-            _list(
-              rate['driver'],
-            ),
-            _text(text: "Водитель:"),
-            _list(
-              rate['car'],
-            ),
+            _list(rate['driver']),
             _text(text: "Автомобиль:"),
-            _list(
-              rate['all'],
-            ),
+            _list(rate['car']),
             _text(text: "Общая оценка:"),
+            _list(rate['all']),
+            _text(text: "Оставить отзыв"),
             Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height*0.3,
@@ -242,7 +236,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
   Widget _text({text}) {
     return Container(
-      padding: EdgeInsets.only(left: 16, bottom: 10, top: 20),
+      padding: EdgeInsets.only(left: 16,top: 20),
       child: Text(
         text,
         style: TextStyle(
@@ -257,7 +251,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   }
   Widget _list (List given){
     return Container(
-      height: given.length*100,
+      height: given.length*80,
       child: ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         itemCount: given.length,
@@ -273,21 +267,26 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
                 ),//rate['driver'][index]["title"]
               ),
-              RatingBar.builder(
-                maxRating: 10,
-                itemCount: 10,
-                itemBuilder: (context, _) => Icon(
-                  Icons.star_rate_outlined,
-                  color: Colors.amber,
-                ),
-                onRatingUpdate: (rating) => {
-                  setState(
-                        () {
-                          given[index]["rating"] = rating;
-                          //print(rating);
-                    },
+              Container(
+                width: double.infinity,
+                child: RatingBar.builder(
+                  maxRating: 10,
+                  itemCount: 10,
+                  //unratedColor: Colors.amber.withAlpha(50),
+                  itemSize: 35,
+                  itemBuilder: (context, _) => Icon(
+                    Icons.star_rate_outlined,
+                    color: Colors.amber,
                   ),
-                },
+                  onRatingUpdate: (rating) => {
+                    setState(
+                          () {
+                            given[index]["rating"] = rating;
+                            //print(rating);
+                      },
+                    ),
+                  },
+                ),
               ),
             ],
           ),

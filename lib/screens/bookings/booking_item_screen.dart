@@ -61,6 +61,23 @@ class _BookingScreenState extends State<BookingScreen> {
     "check_box": false
   };
 
+  String _launchUrl = '';
+
+  Future<void> _launchApp(String url) async{
+    if (await canLaunch(url)){
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: true,
+        headers: <String,String>{'header_key':'header_value'},
+      );
+    }else{
+      throw 'Could not launch $url';
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -307,13 +324,24 @@ class _BookingScreenState extends State<BookingScreen> {
                 _text(text: "Выберите способ оплаты:"),
                 GestureDetector(
                   onTap: (){
-                    final intent = AndroidIntent(package: "", action: "action_view");
-                    intent.launch();
+                    _launchApp('https://click.uz');
                   },
                   child: _payment(icon: "assets/icons/Click1.png", name: "Click"),),
-                _payment(icon: "assets/icons/online_payme.png", name: "Payme"),
-                _payment(icon: "assets/icons/mastercard-2.png", name: "MasterCard"),
-                _payment(icon: "assets/icons/visa 1.png", name: "Visa"),
+                GestureDetector(
+                  onTap:() {
+                    _launchApp('https://payme.uz/');
+                  },
+                    child: _payment(icon: "assets/icons/online_payme.png", name: "Payme")),
+                GestureDetector(
+                  onTap: (){
+                    _launchApp('https://www.mastercard.us/');
+                  },
+                    child: _payment(icon: "assets/icons/mastercard-2.png", name: "MasterCard")),
+                GestureDetector(
+                  onTap: (){
+                    _launchApp('https://cis.visa.com/ru_TJ/visa-in-uzbekistan.html');
+                  },
+                    child: _payment(icon: "assets/icons/visa 1.png", name: "Visa")),
                 Row(
                   children: [
                     Checkbox(

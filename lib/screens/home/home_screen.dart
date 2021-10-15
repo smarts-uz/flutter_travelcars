@@ -189,6 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('TravelCars'),
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
               icon: SvgPicture.asset(

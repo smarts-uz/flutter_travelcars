@@ -3,9 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:travelcars/app_theme.dart';
 import 'package:travelcars/map.dart';
+import 'package:travelcars/screens/bookings/booking_item_screen.dart';
 import 'package:travelcars/screens/feedback/feedback.dart';
 import 'package:travelcars/screens/main_screen.dart';
 import 'package:travelcars/screens/search/components/drop_button_cost.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -40,11 +42,12 @@ void _otmen(BuildContext ctx) {
                 '- при бронировании автомобиля за 3 дней до\n начала поездки - за 24 часа.\n',
                 maxLines: 12,
                 style: TextStyle(fontSize: 14, color: Colors.red),
-              )
+              ),
             ],
           ),
         );
-      });
+      },
+  );
 }
 
 void _inform(BuildContext ctx) {
@@ -72,7 +75,8 @@ void _inform(BuildContext ctx) {
             ],
           ),
         );
-      });
+      },
+  );
 }
 
 class _DetailScreenState extends State<DetailScreen> {
@@ -309,9 +313,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 ),
                 Positioned(
-                    left: 20,
-                    right: 20,
-                    bottom: 10,
+                  left: 20,
+                  right: 20,
+                  bottom: 10,
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => MapScreen()));
+                    },
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.06,
                       padding: EdgeInsets.only(
@@ -323,17 +332,14 @@ class _DetailScreenState extends State<DetailScreen> {
                         color: MyColor.orange,
                       ),
                       child: Center(
-                          child: TextButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => MapScreen()));
-                        },
                         child: Text(
                           "Посмотреть маршрут",
                           style: TextStyle(color: Colors.white),
                         ),
-                      )),
-                    )),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
             _text(text: "Стоимость поездки за"),
@@ -376,10 +382,8 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pop(context);
-                Navigator.pop(context);
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => MainScreen()));
+                    context, MaterialPageRoute(builder: (_) => BookingScreen()));
               },
               child: Container(
                 margin: EdgeInsets.all(16),
