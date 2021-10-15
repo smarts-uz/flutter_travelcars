@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelcars/screens/search/details_screen.dart';
+import 'package:travelcars/screens/main_screen.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: SplashScreen(),
+      home: MainScreen(),
     );
   }
 }

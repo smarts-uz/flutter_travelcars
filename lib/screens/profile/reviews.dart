@@ -194,9 +194,10 @@ class _ReviewsState extends State<Reviews> {
                     ],
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 30),
-                    height: MediaQuery.of(context).size.height*.7,
+                    padding: EdgeInsets.only(top: 50),
+                    height: 1100,//MediaQuery.of(context).size.height*.7,
                     child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
                         itemCount: reviews['rate'].length,
                         itemBuilder: (context,index) {
                           List<String> titles = [
@@ -205,7 +206,7 @@ class _ReviewsState extends State<Reviews> {
                             "Overall rating"
                           ];
                           String text_t = index == 0 ? titles[0] : index == 5 ? titles[1] : index == 7 ? titles[2] : " ";
-                          double h_cal = index == 0 || index == 4 || index == 6 ? 110 : 60;
+                          double h_cal =  index == 4 || index == 6 ? 110 : 62;
                           double rate = (reviews['rate'][index]["score"])/10;
                           return Container(
                             height: h_cal,
@@ -213,37 +214,37 @@ class _ReviewsState extends State<Reviews> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                text_t != " " ? Text(
-                                 text_t,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold
+                                text_t != " " ? Container(
+                                  padding: EdgeInsets.only(bottom: 3),
+                                  child: Text(
+                                   text_t,
+                                    style: TextStyle(
+                                      fontSize: 23,
+                                      fontWeight: FontWeight.bold
+                                    ),
                                   ),
-                                ) : Container(),
+                                ) : Text(''),
                                 Text("${reviews['rate'][index]["title"]}"),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                                   children: [
                                     Container(
+                                      alignment: Alignment.centerLeft,
                                       decoration: BoxDecoration(
                                         border: Border.all(color: Colors.grey, width: 1),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       height: 10,
                                       width: MediaQuery.of(context).size.width*.85,
-                                      child: Stack(
-                                          children: [
-                                            FractionallySizedBox(
-                                              widthFactor: rate,
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  color: Colors.orange,
-                                                  borderRadius: BorderRadius.circular(10),
-                                                ),
-                                              ),
-                                            ),
-                                          ]
+                                      child: FractionallySizedBox(
+                                        widthFactor: rate,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.orange,
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     Text("${reviews['rate'][index]["score"].toInt()}"),
@@ -253,13 +254,28 @@ class _ReviewsState extends State<Reviews> {
                               ],
                             ),
                           );
-            }
-        ),
+                        }
+                        ),
+
                   ),
-          ]
+                  Text('Guest reviews:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),),
+                  Divider(
+                    endIndent: 250,
+                    thickness: 2,
+                    color: Colors.orange,
+                  ),
+                  CircleAvatar(
+
+                  )
+
+                ]
+              )
+        )
       )
-    )
-    )
     );
   }
 }
