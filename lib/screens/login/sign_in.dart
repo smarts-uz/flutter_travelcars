@@ -136,7 +136,11 @@ class _SignInState extends State<SignIn> {
                 Spacer(),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,MaterialPageRoute(builder: (_)=>MainScreen()));
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_)=>MainScreen()),
+                      ModalRoute.withName('/'),
+                    );
                     },
                   child: Container(
                     decoration: BoxDecoration(
