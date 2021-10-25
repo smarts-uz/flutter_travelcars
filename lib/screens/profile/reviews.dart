@@ -75,6 +75,7 @@ class _ReviewsState extends State<Reviews> {
           'name': 'Nazira',
           'flag': '',
           'nationality': 'Uzbekistan',
+          'p_rate':10,
           'location': 'Family garden, Хумсон',
           'date': '31-08-2021',
           'reviewtime': '30 Aug 2021 15:08:52',
@@ -89,9 +90,9 @@ class _ReviewsState extends State<Reviews> {
         },
       {
           'avatar': '',
-          'name': 'Nazira',
+          'name': 'Salima',
           'flag': '',
-          'nationality': 'Uzbekistan',
+          'nationality': 'USA',
           'location': 'Family garden, Хумсон',
           'date': '31-08-2021',
           'reviewtime': '30 Aug 2021 15:08:52',
@@ -268,8 +269,30 @@ class _ReviewsState extends State<Reviews> {
                     thickness: 2,
                     color: Colors.orange,
                   ),
-                  CircleAvatar(
-
+                  Container(
+                    height: 150,
+                    child: ListView.builder(
+                      itemCount: 2,
+                      itemBuilder: (context,index) => Container(
+                        child: Column(
+                          children: [
+                            ListTile(
+                             leading:CircleAvatar(
+                                radius: 40,
+                                backgroundImage: AssetImage("assets/Image.png"),
+                              ),
+                              title: Text(' ${reviews["reviews"][index]["name"]},'),
+                              subtitle: Text('${reviews['reviews'][index]['nationality']}'),
+                              trailing: Container(
+                                child: Center(
+                                  child: Text('${reviews['']}'),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   )
 
                 ]
