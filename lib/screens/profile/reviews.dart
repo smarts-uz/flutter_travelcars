@@ -93,6 +93,7 @@ class _ReviewsState extends State<Reviews> {
           'name': 'Salima',
           'flag': '',
           'nationality': 'USA',
+          'p_rate':10,
           'location': 'Family garden, Хумсон',
           'date': '31-08-2021',
           'reviewtime': '30 Aug 2021 15:08:52',
@@ -104,7 +105,80 @@ class _ReviewsState extends State<Reviews> {
               'He orients himself perfectly in the area.\n'
               ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.\n'
               ' We will be contact again!'
-        }
+        },
+      {
+        'avatar': '',
+        'name': 'Salima',
+        'flag': '',
+        'nationality': 'USA',
+        'p_rate':10,
+        'location': 'Family garden, Хумсон',
+        'date': '31-08-2021',
+        'reviewtime': '30 Aug 2021 15:08:52',
+        'fine': 'I would like to note that we have already contacted you more than once.\ n'
+            ' The trip went well. The minibus is comfortable, \n'
+            'clean, without foreign odors (there was even a bakhur for aromatization). \n'
+            'The driver was extremely polite (he opened the doors, arrived at the agreed time,\n'
+            ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). \n'
+            'He orients himself perfectly in the area.\n'
+            ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.\n'
+            ' We will be contact again!'
+      },
+      {
+        'avatar': '',
+        'name': 'Salima',
+        'flag': '',
+        'nationality': 'USA',
+        'p_rate':10,
+        'location': 'Family garden, Хумсон',
+        'date': '31-08-2021',
+        'reviewtime': '30 Aug 2021 15:08:52',
+        'fine': 'I would like to note that we have already contacted you more than once.\ n'
+            ' The trip went well. The minibus is comfortable, \n'
+            'clean, without foreign odors (there was even a bakhur for aromatization). \n'
+            'The driver was extremely polite (he opened the doors, arrived at the agreed time,\n'
+            ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). \n'
+            'He orients himself perfectly in the area.\n'
+            ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.\n'
+            ' We will be contact again!'
+      },
+
+      {
+        'avatar': '',
+        'name': 'Salima',
+        'flag': '',
+        'nationality': 'USA',
+        'p_rate':10,
+        'location': 'Family garden, Хумсон',
+        'date': '31-08-2021',
+        'reviewtime': '30 Aug 2021 15:08:52',
+        'fine': 'I would like to note that we have already contacted you more than once.\ n'
+            ' The trip went well. The minibus is comfortable, \n'
+            'clean, without foreign odors (there was even a bakhur for aromatization). \n'
+            'The driver was extremely polite (he opened the doors, arrived at the agreed time,\n'
+            ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). \n'
+            'He orients himself perfectly in the area.\n'
+            ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.\n'
+            ' We will be contact again!'
+      },
+      {
+        'avatar': '',
+        'name': 'Salima',
+        'flag': '',
+        'nationality': 'USA',
+        'p_rate':10,
+        'location': 'Family garden, Хумсон',
+        'date': '31-08-2021',
+        'reviewtime': '30 Aug 2021 15:08:52',
+        'fine': 'I would like to note that we have already contacted you more than once.\ n'
+            ' The trip went well. The minibus is comfortable, \n'
+            'clean, without foreign odors (there was even a bakhur for aromatization). \n'
+            'The driver was extremely polite (he opened the doors, arrived at the agreed time,\n'
+            ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). \n'
+            'He orients himself perfectly in the area.\n'
+            ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.\n'
+            ' We will be contact again!'
+      }
 
   ]
   };
@@ -270,30 +344,63 @@ class _ReviewsState extends State<Reviews> {
                     color: Colors.orange,
                   ),
                   Container(
-                    height: 150,
+                    height: reviews["reviews"].length * 250.0,
                     child: ListView.builder(
-                      itemCount: 2,
-                      itemBuilder: (context,index) => Container(
-                        child: Column(
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount:reviews["reviews"].length,
+                      itemBuilder: (context,index1) => Container(
+                        height: 350,
+                        child:
+                        Column(
                           children: [
                             ListTile(
-                             leading:CircleAvatar(
+                              leading:CircleAvatar(
                                 radius: 40,
                                 backgroundImage: AssetImage("assets/Image.png"),
                               ),
-                              title: Text(' ${reviews["reviews"][index]["name"]},'),
-                              subtitle: Text('${reviews['reviews'][index]['nationality']}'),
-                              trailing: Container(
+                              title: Text(' ${reviews["reviews"][index1]["name"]},'),
+                              subtitle: Text('${reviews['reviews'][index1]['nationality']}'),
+                             trailing: Container(
+                               height: 24,
+                               width: 24,
+                               decoration: BoxDecoration(
+                                 color: Colors.orange,
+                                 borderRadius: BorderRadius.circular(4.0),
+                               ),
                                 child: Center(
-                                  child: Text('${reviews['']}'),
+                                  child: Text('${reviews['reviews'][index1]["p_rate"]}'),
                                 ),
                               ),
                             ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  color: Colors.orange,
+                                ),
+                                Text('${reviews['reviews'][index1]["location"]}'),
+                                Icon(
+                                    Icons.calendar_today_outlined,
+                                  color: Colors.orange,
+
+                                ),
+                                Text('${reviews['reviews'][index1]["date"]}')
+                              ],
+                            ),
+                            Text("${reviews["reviews"][index1]["reviewtime"]}",
+                            textAlign: TextAlign.start,),
+
+                            Text("${reviews["reviews"][index1]["fine"]}",
+                            style: TextStyle(fontWeight: FontWeight.bold),)
+
                           ],
                         ),
+
                       ),
-                    ),
-                  )
+                    )
+                  ),
+
 
                 ]
               )
