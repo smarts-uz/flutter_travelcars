@@ -11,15 +11,9 @@ class TransfersAdd extends StatefulWidget {
 
 class _TransfersAddState extends State<TransfersAdd> {
   List<String> directions = [
-    'A meeting',
+    'Meeting',
     'The wire'
   ];
-  int? _radioVal1;
-  int? _radioVal2;
-  RangeValues _currentRangeValues = RangeValues(10, 500);
-
-  String? SelectedVal1;
-  String? SelectedVal2;
   static const city = <String>[
     "Tashkent",
     "Buxoro",
@@ -28,17 +22,38 @@ class _TransfersAddState extends State<TransfersAdd> {
   ];
   final List<DropdownMenuItem<String>> cities = city.map(
         (String value) => DropdownMenuItem<String>(
-      value: value,
-      child: Text(value),
+          value: value,
+          child: Text(value),
     ),
   ).toList();
+  int i = 1;
 
-  DateTime? _selectedDate2 = DateTime.now();
+
+
 
   var number_controller = TextEditingController();
   var number_controller1 = TextEditingController();
-  TimeOfDay time = TimeOfDay.now() ;
-  int i = 1;
+
+
+  List<TextEditingController> controllers = [
+    for (int i = 0; i < 4; i++)
+      TextEditingController()
+  ];
+
+  List<Map<String, dynamic>> data = [
+    {
+      "direction": 0,
+      "city": city[0],
+      "day": DateTime.now(),
+      "time": TimeOfDay.now(),
+      "controllers4": [
+        for (int i = 0; i < 4; i++)
+          TextEditingController()
+      ],
+    },
+  ];
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +82,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                   elevation: 4,
                   margin: EdgeInsets.fromLTRB(16, 24, 16, 24),
-                  child:Container(
+                  child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20)
                     ),
@@ -75,9 +90,19 @@ class _TransfersAddState extends State<TransfersAdd> {
                     child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.lightBlue,
+                        child: Text(
+                          "${index + 1}",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [0, 1].map((int index) => Container(
+                        children: [0, 1].map((int indexr) => Container(
                           height: 50,
                           width: MediaQuery.of(context).size.width*.4,
                           padding: EdgeInsets.all(12),
@@ -86,11 +111,11 @@ class _TransfersAddState extends State<TransfersAdd> {
                               Expanded(
                                 flex: 1,
                                 child: Radio<int>(
-                                  value: index,
-                                  groupValue: this._radioVal1,
+                                  value: indexr,
+                                  groupValue: data[index]["direction"],
                                   onChanged: (int? value) {
                                     if (value != null) {
-                                      setState(() => this._radioVal1 = value);
+                                      setState(() => data[index]["direction"] = value);
                                       print(value);
                                     }
                                     },
@@ -99,7 +124,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                               Expanded(
                                 flex: 3,
                                 child: Text(
-                                  directions[index],
+                                  directions[indexr],
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 22,
@@ -132,7 +157,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                               ),
                               dropdownColor: Colors.grey[50],
                               icon: Icon(Icons.keyboard_arrow_down),
-                              value: SelectedVal2,
+                              value: data[index]["city"],
                               isExpanded: true,
                               style: TextStyle(
                                   fontSize: 19,
@@ -141,7 +166,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                               underline: SizedBox(),
                               onChanged: (String? newValue) {
                                 setState(() {
-                                  SelectedVal2 = newValue!;
+                                  data[index]["city"] = newValue!;
                                 });
                               },
                               items: cities,
@@ -160,7 +185,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                         ),
                         child: ListTile(
                           title: Text(
-                            "${DateFormat('dd/MM/yyyy').format(_selectedDate2!)}",
+                            "${DateFormat('dd/MM/yyyy').format(data[index]["day"])}",
                           ),
                           trailing: IconButton(
                             icon: Icon(Icons.calendar_today),
@@ -176,7 +201,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                                   return;
                                 }
                                 setState(() {
-                                  _selectedDate2 = pickedDate;
+                                  data[index]["day"] = pickedDate;
                                 });
                               });
                               },
@@ -194,7 +219,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                         ),
                         child: ListTile(
                           title: Text(
-                            "${time.format(context)}",
+                            "${data[index]["time"].format(context)}",
                           ),
                           trailing: IconButton(
                             icon: Icon(Icons.timer_rounded),
@@ -206,7 +231,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                              ).then((TimeOfDay? value) {
                                if (value != null) {
                                 setState(() {
-                                  time = value;
+                                  data[index]["time"] = value;
                                 });
                                }
                              });
@@ -240,7 +265,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                               ),
                             ),
                           ),
-                          controller: number_controller,
+                          controller: data[index]["controllers4"][0],
                           keyboardType: TextInputType.number,
                           cursorColor: Colors.black,
                           style: TextStyle(
@@ -276,8 +301,8 @@ class _TransfersAddState extends State<TransfersAdd> {
                               ),
                             ),
                           ),
-                          controller: number_controller,
-                          keyboardType: TextInputType.number,
+                          controller: data[index]["controllers4"][1],
+                          keyboardType: TextInputType.text,
                           cursorColor: Colors.black,
                           style: TextStyle(
                               fontSize: 20
@@ -312,8 +337,8 @@ class _TransfersAddState extends State<TransfersAdd> {
                               ),
                             ),
                           ),
-                          controller: number_controller,
-                          keyboardType: TextInputType.number,
+                          controller: data[index]["controllers4"][2],
+                          keyboardType: TextInputType.text,
                           cursorColor: Colors.black,
                           style: TextStyle(
                               fontSize: 20
@@ -349,7 +374,8 @@ class _TransfersAddState extends State<TransfersAdd> {
                                 width: 0,
                               ),
                             ),
-                          ), controller: number_controller1,
+                          ),
+                          controller: data[index]["controllers4"][3],
                           keyboardType: TextInputType.text,
                           cursorColor: Colors.black,
                           style: TextStyle(
@@ -387,8 +413,12 @@ class _TransfersAddState extends State<TransfersAdd> {
                   ),
                   onPressed: (){
                     setState(() {
-                      if(i>1) i--;
-                    });
+                        if(i>1) {
+                          data.removeAt(i-1);
+                          i--;
+                        }
+                      }
+                    );
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -422,7 +452,18 @@ class _TransfersAddState extends State<TransfersAdd> {
                   onPressed: (){
                     setState(() {
                       if(i<5) i++;
-                    });
+                      data.add({
+                        "direction": 0,
+                        "city": city[0],
+                        "day": DateTime.now(),
+                        "time": TimeOfDay.now(),
+                        "controllers4": [
+                          for (int i = 0; i < 4; i++)
+                            TextEditingController()
+                        ],
+                      },
+                      );}
+                    );
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -441,10 +482,10 @@ class _TransfersAddState extends State<TransfersAdd> {
           Container(
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(4)
+                borderRadius: BorderRadius.circular(20)
             ),
-            height: MediaQuery.of(context).size.height*.04,
-            width: MediaQuery.of(context).size.width*.80,
+            height: MediaQuery.of(context).size.height*.045,
+            width: MediaQuery.of(context).size.width*.70,
             child: RaisedButton(
               onPressed: (){},
               child: Text('Submit your application'),
