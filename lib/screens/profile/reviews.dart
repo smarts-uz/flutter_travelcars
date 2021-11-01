@@ -58,7 +58,7 @@ class _ReviewsState extends State<Reviews> {
       },
       {
         'title': 'Car driving',
-        "score": 5.0
+        "score": 9.0
       },
       {
         'title': 'Knowledge',
@@ -66,7 +66,7 @@ class _ReviewsState extends State<Reviews> {
       },
       {
         'title': 'Knowledge',
-        "score": 5.0
+        "score": 10.0
       },
     ],
     "reviews": [
@@ -352,10 +352,12 @@ class _ReviewsState extends State<Reviews> {
                         height: 350,
                         child:
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             ListTile(
                               leading:CircleAvatar(
-                                radius: 40,
+                                radius: 20,
                                 backgroundImage: AssetImage("assets/Image.png"),
                               ),
                               title: Text(' ${reviews["reviews"][index1]["name"]},'),
@@ -379,20 +381,44 @@ class _ReviewsState extends State<Reviews> {
                                   Icons.location_on,
                                   color: Colors.orange,
                                 ),
-                                Text('${reviews['reviews'][index1]["location"]}'),
+
+                                Text('${reviews['reviews'][index1]["location"]}',
+                                  style: TextStyle(fontWeight: FontWeight.bold),),
+
                                 Icon(
                                     Icons.calendar_today_outlined,
                                   color: Colors.orange,
 
                                 ),
-                                Text('${reviews['reviews'][index1]["date"]}')
+
+                                Text('${reviews['reviews'][index1]["date"]}',
+                                  style: TextStyle(fontWeight: FontWeight.bold),)
                               ],
                             ),
-                            Text("${reviews["reviews"][index1]["reviewtime"]}",
-                            textAlign: TextAlign.start,),
+                            SizedBox(
+                              height: 10,
+                            ),
 
-                            Text("${reviews["reviews"][index1]["fine"]}",
-                            style: TextStyle(fontWeight: FontWeight.bold),)
+                            Container(
+                              padding: EdgeInsets.only(left: 16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                      "${reviews["reviews"][index1]["reviewtime"]}",
+                                      textAlign: TextAlign.start
+                                  ),
+
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+
+                                  Text("${reviews["reviews"][index1]["fine"]}",
+                                    style: TextStyle(fontWeight: FontWeight.bold),)
+                                ],
+                              ),
+                            ),
+
 
                           ],
                         ),
