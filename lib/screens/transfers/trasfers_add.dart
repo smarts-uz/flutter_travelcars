@@ -28,18 +28,6 @@ class _TransfersAddState extends State<TransfersAdd> {
   ).toList();
   int i = 1;
 
-
-
-
-  var number_controller = TextEditingController();
-  var number_controller1 = TextEditingController();
-
-
-  List<TextEditingController> controllers = [
-    for (int i = 0; i < 4; i++)
-      TextEditingController()
-  ];
-
   List<Map<String, dynamic>> data = [
     {
       "direction": 0,
@@ -462,8 +450,8 @@ class _TransfersAddState extends State<TransfersAdd> {
                             TextEditingController()
                         ],
                       },
-                      );}
-                    );
+                      );
+                    });
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
