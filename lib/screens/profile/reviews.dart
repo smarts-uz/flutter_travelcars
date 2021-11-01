@@ -79,13 +79,13 @@ class _ReviewsState extends State<Reviews> {
           'location': 'Family garden, Хумсон',
           'date': '31-08-2021',
           'reviewtime': '30 Aug 2021 15:08:52',
-          'fine': 'I would like to note that we have already contacted you more than once.\ n'
-              ' The trip went well. The minibus is comfortable, \n'
-              'clean, without foreign odors (there was even a bakhur for aromatization). \n'
-              'The driver was extremely polite (he opened the doors, arrived at the agreed time,\n'
-              ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). \n'
-              'He orients himself perfectly in the area.\n'
-              ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.\n'
+          'fine': 'I would like to note that we have already contacted you more than once.'
+              ' The trip went well. The minibus is comfortable, '
+              'clean, without foreign odors (there was even a bakhur for aromatization). '
+              'The driver was extremely polite (he opened the doors, arrived at the agreed time,'
+              ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). '
+              'He orients himself perfectly in the area.'
+              ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.'
               ' We will be contact again!'
         },
       {
@@ -97,13 +97,13 @@ class _ReviewsState extends State<Reviews> {
           'location': 'Family garden, Хумсон',
           'date': '31-08-2021',
           'reviewtime': '30 Aug 2021 15:08:52',
-          'fine': 'I would like to note that we have already contacted you more than once.\ n'
-              ' The trip went well. The minibus is comfortable, \n'
-              'clean, without foreign odors (there was even a bakhur for aromatization). \n'
-              'The driver was extremely polite (he opened the doors, arrived at the agreed time,\n'
-              ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). \n'
-              'He orients himself perfectly in the area.\n'
-              ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.\n'
+          'fine': 'I would like to note that we have already contacted you more than once.'
+              ' The trip went well. The minibus is comfortable, '
+              'clean, without foreign odors (there was even a bakhur for aromatization). '
+              'The driver was extremely polite (he opened the doors, arrived at the agreed time,'
+              ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). '
+              'He orients himself perfectly in the area.'
+              ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.'
               ' We will be contact again!'
         },
       {
@@ -133,52 +133,18 @@ class _ReviewsState extends State<Reviews> {
         'location': 'Family garden, Хумсон',
         'date': '31-08-2021',
         'reviewtime': '30 Aug 2021 15:08:52',
-        'fine': 'I would like to note that we have already contacted you more than once.\ n'
-            ' The trip went well. The minibus is comfortable, \n'
-            'clean, without foreign odors (there was even a bakhur for aromatization). \n'
-            'The driver was extremely polite (he opened the doors, arrived at the agreed time,\n'
-            ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). \n'
-            'He orients himself perfectly in the area.\n'
-            ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.\n'
+        'fine': 'I would like to note that we have already contacted you more than once.'
+            ' The trip went well. The minibus is comfortable, '
+            'clean, without foreign odors (there was even a bakhur for aromatization). '
+            'The driver was extremely polite (he opened the doors, arrived at the agreed time,'
+            ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). '
+            'He orients himself perfectly in the area.'
+            ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.'
             ' We will be contact again!'
       },
 
-      {
-        'avatar': '',
-        'name': 'Salima',
-        'flag': '',
-        'nationality': 'USA',
-        'p_rate':10,
-        'location': 'Family garden, Хумсон',
-        'date': '31-08-2021',
-        'reviewtime': '30 Aug 2021 15:08:52',
-        'fine': 'I would like to note that we have already contacted you more than once.\ n'
-            ' The trip went well. The minibus is comfortable, \n'
-            'clean, without foreign odors (there was even a bakhur for aromatization). \n'
-            'The driver was extremely polite (he opened the doors, arrived at the agreed time,\n'
-            ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). \n'
-            'He orients himself perfectly in the area.\n'
-            ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.\n'
-            ' We will be contact again!'
-      },
-      {
-        'avatar': '',
-        'name': 'Salima',
-        'flag': '',
-        'nationality': 'USA',
-        'p_rate':10,
-        'location': 'Family garden, Хумсон',
-        'date': '31-08-2021',
-        'reviewtime': '30 Aug 2021 15:08:52',
-        'fine': 'I would like to note that we have already contacted you more than once.\ n'
-            ' The trip went well. The minibus is comfortable, \n'
-            'clean, without foreign odors (there was even a bakhur for aromatization). \n'
-            'The driver was extremely polite (he opened the doors, arrived at the agreed time,\n'
-            ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). \n'
-            'He orients himself perfectly in the area.\n'
-            ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.\n'
-            ' We will be contact again!'
-      }
+
+
 
   ]
   };
@@ -414,6 +380,7 @@ class _ReviewsState extends State<Reviews> {
                                   ),
 
                                   Text("${reviews["reviews"][index1]["fine"]}",
+                                    textAlign: TextAlign.justify,
                                     style: TextStyle(fontWeight: FontWeight.bold),)
                                 ],
                               ),
