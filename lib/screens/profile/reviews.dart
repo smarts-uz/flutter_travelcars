@@ -152,7 +152,10 @@ class _ReviewsState extends State<Reviews> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
+        title: Text('Reviews',
+        style: TextStyle(
+          fontSize: 22
+        ),),
       ),
       body: SingleChildScrollView(
         child: Container(
