@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:travelcars/screens/login/confirm.dart';
-import 'package:travelcars/screens/main_screen.dart';
 import '../../app_theme.dart';
+import 'components/toast.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -19,6 +20,15 @@ class _SignUpState extends State<SignUp> {
 
   List<String> _items = ["Физ. лицо", "Юр. лицо"];
   String _currentItem = "Физ. лицо";
+
+  late FToast fToast;
+
+  @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -259,6 +269,16 @@ class _SignUpState extends State<SignUp> {
                     children: [
                       GestureDetector(
                         onTap: () {
+                          if (_nameController.text.isEmpty || _emailController.text.isEmpty ||_passwordController.text.isEmpty){
+                            ToastComponent.showDialog("TextField is empty", );
+                            return;
+                          }
+
+                          if (_passwordController.text != _verifyController.text ) {
+                            ToastComponent.showDialog("Password doesn't match",);
+                            return;
+                          }
+
                           Navigator.push(context, MaterialPageRoute(builder: (_)=>Confirm(true)));
                         },
                         child: Container(

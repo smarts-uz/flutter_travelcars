@@ -29,7 +29,7 @@ class _DropButtonMnyState extends State<DropButtonMny> {
       child: DropdownButtonHideUnderline(
         child: Container(
           child: DropdownButton<String>(
-            hint: Text("UZS"),
+            hint: Text("Выберите валюту"),
             dropdownColor: Colors.grey[50],
             icon: Icon(Icons.keyboard_arrow_down),
             value: dropvalue,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../app_theme.dart';
+import '../../../mask.dart';
 
 class FirstSceen extends StatefulWidget {
   @override
@@ -21,7 +22,8 @@ class _FirstSceenState extends State<FirstSceen> {
       TextEditingController()
   ];
   List<String> hints =
-  ["Юридическое название",
+  [
+  "Юридическое название",
   "Юридический город",
   "Юридический адрес",
   "Почтовый индекс",
@@ -84,12 +86,25 @@ class _FirstSceenState extends State<FirstSceen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextFld(
-                              title: "Email", hint: "nimadir@gmail.com",controller: _emailController),
+                              title: "Email", hint: "nimadir@gmail.com",controller: _emailController,),
                           SizedBox(height: 33),
-                          TextFld(title: "ФИО", hint: "John Frederik",controller: _nameController),
+                          TextFld(title: "ФИО", hint: "John Frederik",controller: _nameController,),
                           SizedBox(height: 33),
-                          TextFld(
-                              title: "Телефон", hint: "+998(__) ___ __ __",controller: _phoneController),
+                          TextFormField(
+                            controller: _phoneController,
+                            keyboardType: TextInputType.phone,
+                            inputFormatters: [
+                              MaskedTextInputFormatter(mask: '### ## ### ## ##', separator: ' '),
+                            ],
+                            decoration: InputDecoration(
+                              labelText:"Телефон",
+                              hintText: '___ __ ___ __ __',
+                              prefixText:'+' ,
+                              floatingLabelBehavior: FloatingLabelBehavior.always,
+                              contentPadding: EdgeInsets.symmetric(horizontal: 45, vertical: 20),
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
                           SizedBox(height: 25),
                           SizedBox(
                             width: double.infinity,
@@ -198,7 +213,7 @@ class _FirstSceenState extends State<FirstSceen> {
     );
   }
 
-  Widget TextFld({title, hint,controller}) {
+  Widget TextFld({title, hint,controller,}) {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
