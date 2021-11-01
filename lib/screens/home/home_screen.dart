@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/search/details_screen.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:http/http.dart' as http;
@@ -192,10 +193,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void getCars() async {
-    String url = "http://travelcars-test.teampro.uz/api/getAllCarTypes?lang=ru";
+    String url = "${AppConfig.BASE_URL}/getAllCarTypes?lang=ru";
     final response  = await http.get(
         Uri.parse(url),
-
     );
     print(response.body);
     carslist = json.decode(response.body)["car_types"];
