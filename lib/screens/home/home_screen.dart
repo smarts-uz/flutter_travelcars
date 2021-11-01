@@ -128,6 +128,30 @@ class _HomeScreenState extends State<HomeScreen> {
       'date': "06.10.2021"
     },
   ];
+
+  List<dynamic> carslist = [
+    /*{
+      "image": "assets/images/car.jpg",
+      "name": "Cars",
+      "number": "12",
+    },
+    {
+      "image": "assets/images/microbus.jpg",
+      "name": "Microbus",
+      "number": "28",
+    },
+    {
+      "image": "assets/images/midbus.jpg",
+      "name": "Midibus",
+      "number": "32",
+    },
+    {
+      "image": "assets/images/bus.jpg",
+      "name": "Bus",
+      "number": "8",
+    },*/
+  ];
+
   static const city = <String>[
     "Tashkent",
     "Buxoro",
@@ -164,8 +188,18 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     getweather();
     getvalyuta();
+    getCars();
   }
 
+  void getCars() async {
+    String url = "http://travelcars-test.teampro.uz/api/getAllCarTypes?lang=ru";
+    final response  = await http.get(
+        Uri.parse(url),
+
+    );
+    print(response.body);
+    carslist = json.decode(response.body)["car_types"];
+  }
 
   void getweather() async {
     for(int i =0; i<city.length; i++) {
@@ -201,6 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: valyuta.isEmpty ? Center(child: CircularProgressIndicator()) : SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -364,24 +399,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      /*Positioned(
-                        top: 20,
-                        right: 15,
-                        child: Column(
-                          children: [
-                            SvgPicture.asset('assets/icons/progress.svg'),
-                            SizedBox(height: 5),
-                            Text(
-                              "19%",
-                              style: TextStyle(
-                                color: valyuta[index_val[SelectedVal2]]["Diff"].indexOf("-") != null ? Colors.red : Colors.green,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold
-                              ),
-                            )
-                          ],
-                        ),
-                      ),*/
                     ]
                   ),
                 ),
@@ -496,27 +513,72 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CarsCard("assets/images/car.jpg", "Cars", 12),
-                    CarsCard("assets/images/microbus.jpg", "Microbus", 28),
-                  ],
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CarsCard("assets/images/midbus.jpg", "Midibus", 32),
-                    CarsCard("assets/images/bus.jpg", "Bus", 8),
-                  ],
-                )
-              ],
+            Container(
+              height: ((carslist.length / 2).toInt() + 1) * 190,
+              margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+              child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 15.0,
+                      mainAxisSpacing: 15.0
+                  ),
+                  itemCount: carslist.length,
+                  itemBuilder: (BuildContext ctx, index) {
+                    return Card(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                      elevation: 4,
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 140,
+                            width: MediaQuery.of(context).size.width * .43,
+                            child: Image.network("https://travelcars.uz/uploads/car-types/${carslist[index]["image"]}"),
+                          ),
+                          Positioned(
+                            top: 10,
+                            right: 10,
+                            child: Container(
+                                height: 25,
+                                width: 25,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  color: Color.fromRGBO(239, 127, 26, 1),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "${carslist[index]["quantity"]}",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17
+                                    ),
+                                  ),
+                                )
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 20,
+                            left: 5,
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * .4,
+                              alignment: Alignment.center,
+                              child: Text(
+                                "${carslist[index]["name"]}",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 17
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  }
+              ),
             ),
             Container(
-              padding: EdgeInsets.only(left: 12, top: 12, bottom: 6),
+              padding: EdgeInsets.only(left: 12, bottom: 6),
               child: Text(
                 "News and special offers",
                 textAlign: TextAlign.start,
@@ -712,6 +774,3 @@ class CurrencyCard extends StatelessWidget {
     );
   }
 }
-
-
-
