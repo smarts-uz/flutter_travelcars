@@ -190,6 +190,16 @@ class _HomeScreenState extends State<HomeScreen> {
     getweather();
     getvalyuta();
     getCars();
+    gettrips();
+  }
+
+  void gettrips()async{
+    String url = "${AppConfig.BASE_URL}/getAllTours";
+    final response = await http.get(
+      Uri.parse(url)
+    );
+    print(response.body);
+    imglist = json.decode(response.body);
   }
 
   void getCars() async {
@@ -461,7 +471,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         margin: EdgeInsets.symmetric(horizontal: 10, vertical: 13),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                         elevation: 6,
-                        child: Image.asset(item["image"],
+                        child: Image.network("https://travelcars.uz/uploads/car-types/${item["image"]}",
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -471,7 +481,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 20.0),
                           child: Text(
-                            item["text"],
+                            "${item["name"]}",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 25.0,
