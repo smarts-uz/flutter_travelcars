@@ -426,11 +426,13 @@ class _SearchScreenState extends State<SearchScreen> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: Text(
-                      "50",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                    child: FittedBox(
+                      child: Text(
+                        "50",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),

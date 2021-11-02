@@ -31,8 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
     "GBP": 3,
   };
 
-  List<Map<String, dynamic>> imglist = [
-    {
+  List<dynamic> imglist = [
+    /*{
       'image': "assets/images/tashkent.jpg",
       'text': "Trip to Tashkent",
       "location": "Tashkent",
@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "details": "В 07:00/08:00 встреча в заранее обусловленном месте. Выезд из Ташкента по направлению к Чимганским горам (80 км, 2 ч.). Путь к горам Чимгана пролегает через живописные населенные пункты "
           "Ташкентской области. По приезду в урочище Чимган прогулка по горной местности.\n\nЕсли в ущелье Бельдерсай работает канатная дорога, протяженность которой более 3 км, то можно прокатиться до вершины "
           "горы Кумбель (2400 м), где находится одна из горнолыжных трасс в Узбекистане.",
-    },
+    },*/
   ];
   List<Map<String, dynamic>> newslist = [
     {
@@ -189,10 +189,10 @@ class _HomeScreenState extends State<HomeScreen> {
     getweather();
     getvalyuta();
     getCars();
-    gettrips();
+    getTrips();
   }
 
-  void gettrips()async{
+  void getTrips() async{
     String url = "${AppConfig.BASE_URL}/getAllTours";
     final response = await http.get(
       Uri.parse(url)
@@ -206,7 +206,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final response  = await http.get(
         Uri.parse(url),
     );
-    print(response.body);
     carslist = json.decode(response.body)["car_types"];
   }
 
@@ -224,7 +223,6 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       valyuta = json.decode(response.body);
     });
-    print(valyuta);
   }
 
   @override
@@ -466,16 +464,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 child: Stack(
                     children: [
-                      Card(
-                        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 13),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                        elevation: 6,
-                        child: Image.network("https://travelcars.uz/uploads/car-types/${item["image"]}",
-                          fit: BoxFit.cover,
+                      Container(
+                        height: 570,
+                        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              "https://travelcars.uz/uploads/tours/${item["image"]}",
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
                         ),
                       ),
                       Positioned(
-                        bottom: 23.0,
+                        bottom: 13.0,
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 20.0),
@@ -491,7 +495,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ]
                 ),
-                  )
+              )
              ).toList(),
             ),
             Row(
@@ -523,7 +527,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
-              height: ((carslist.length / 2).toInt() + 1) * 190,
+              height: (carslist.length / 2).round() * 190,
               margin: EdgeInsets.only(left: 15, right: 15, top: 15),
               child: GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
