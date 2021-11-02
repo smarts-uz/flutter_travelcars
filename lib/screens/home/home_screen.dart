@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:travelcars/app_config.dart';
-import 'package:travelcars/screens/search/details_screen.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:http/http.dart' as http;
 
@@ -180,6 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String? SelectedVal;
   String? SelectedVal2;
   int _current = 0;
+
   final CarouselController _controller = CarouselController();
 
 
@@ -283,7 +282,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         style: TextStyle(
                           fontSize: 17,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                         focusColor: Colors.white,
                         dropdownColor: Colors.grey[300],
