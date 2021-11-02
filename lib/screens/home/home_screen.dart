@@ -187,9 +187,9 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: implement initState
     super.initState();
     getweather();
-    getvalyuta();
     getCars();
     getTrips();
+    getvalyuta();
   }
 
   void getTrips() async{
@@ -197,8 +197,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final response = await http.get(
       Uri.parse(url)
     );
-    print(response.body);
-    imglist = json.decode(response.body);
+    setState(() {
+      imglist = json.decode(response.body);
+    });
   }
 
   void getCars() async {
@@ -206,7 +207,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final response  = await http.get(
         Uri.parse(url),
     );
-    carslist = json.decode(response.body)["car_types"];
+    setState(() {
+      carslist = json.decode(response.body)["car_types"];
+    });
   }
 
   void getweather() async {
@@ -215,7 +218,6 @@ class _HomeScreenState extends State<HomeScreen> {
       final response = await http.get(Uri.parse(url));
       weather["${city[i]}"] = json.decode(response.body)["main"]["temp"].round();
     }
-    print(weather);
   }
   void getvalyuta() async {
     String url = "https://cbu.uz/uz/arkhiv-kursov-valyut/json/";
@@ -241,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: valyuta.isEmpty ? Center(child: CircularProgressIndicator()) : SingleChildScrollView(
+      body: (imglist.isEmpty || carslist.isEmpty) ? Center(child: CircularProgressIndicator()) : SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -455,12 +457,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
               items: imglist.map((item) => GestureDetector(
                 onTap: () {
-                  Navigator.push(
+                  /*Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => TripItem(item)
                       )
-                  );
+                  );*/
                 },
                 child: Stack(
                     children: [
