@@ -469,18 +469,18 @@ class _TransfersAddState extends State<TransfersAdd> {
           ),
           Container(
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(20)
-            ),
-            height: MediaQuery.of(context).size.height*.045,
-            width: MediaQuery.of(context).size.width*.70,
-            child: RaisedButton(
-              onPressed: (){},
-              child: Text('Submit your application'),
-              color: Colors.blue,
 
+                borderRadius: BorderRadius.circular(40)
             ),
-          ),
+            height: MediaQuery.of(context).size.height*.050,
+            width: MediaQuery.of(context).size.width*.70,
+            child:  RaisedButton(
+                onPressed: (){},
+                child: Text('Submit your application'),
+                color: Colors.blue,
+
+              ),
+            ),
           SizedBox(
             height: 30,
           )
