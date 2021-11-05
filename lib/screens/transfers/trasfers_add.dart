@@ -181,7 +181,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                               showDatePicker(
                                 context: context,
                                 initialDate: DateTime.now(),
-                                firstDate: DateTime.now(),
+                                firstDate: DateTime(2018),
                                 lastDate: DateTime(2030),
                               ).then((pickedDate) {
                                 if(pickedDate==null)
