@@ -467,7 +467,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Stack(
                     children: [
                       Container(
-                        height: 570,
+                        height: 571,
                         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
