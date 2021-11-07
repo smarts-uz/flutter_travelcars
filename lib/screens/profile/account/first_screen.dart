@@ -185,23 +185,21 @@ class _FirstSceenState extends State<FirstSceen> {
                 ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(16),
-              child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: MyColor.blue),
-                  height: 40,
-                  width: double.infinity,
-                  child: Center(
-                    child: Text(
-                      "Сохранить",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white,
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                margin: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: MyColor.blue),
+                height: 40,
+                width: double.infinity,
+                child: Center(
+                  child: Text(
+                    "Сохранить",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white,
 
-                      ),
                     ),
                   ),
                 ),

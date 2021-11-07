@@ -5,9 +5,8 @@ import 'package:travelcars/app_theme.dart';
 import 'package:travelcars/map.dart';
 import 'package:travelcars/screens/bookings/booking_item_screen.dart';
 import 'package:travelcars/screens/feedback/feedback.dart';
-import 'package:travelcars/screens/main_screen.dart';
 import 'package:travelcars/screens/search/components/drop_button_cost.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({Key? key}) : super(key: key);
