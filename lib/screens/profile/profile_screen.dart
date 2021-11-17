@@ -6,6 +6,7 @@ import 'package:travelcars/screens/profile/account/account_screen.dart';
 import 'package:travelcars/screens/profile/cashback.dart';
 import 'package:travelcars/screens/profile/reviews.dart';
 import 'package:travelcars/screens/route/route_screen.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/screens/transfers/transfers_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -82,7 +83,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              print("logged_out");
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SplashScreen()));
             },
             icon: Icon(
               Icons.logout,

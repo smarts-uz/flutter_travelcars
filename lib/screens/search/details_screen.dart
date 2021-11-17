@@ -235,7 +235,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       color: Colors.grey,
                     ),
                     Container(
-                      padding: EdgeInsets.only(right: 16, left: 5),
+                      padding: EdgeInsets.only(right: 18 , left: 5),
                       child: Text(
                         "${results["eye"]}",
                         style: TextStyle(
