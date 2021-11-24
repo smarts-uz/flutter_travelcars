@@ -218,32 +218,30 @@ class _SearchScreenState extends State<SearchScreen> {
                   borderRadius: BorderRadius.circular(5)
               ),
               child: DropdownButtonHideUnderline(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * .3,
-                  child:DropdownButton<String>(
-                    hint: Text(
-                        "City",
-                        style: TextStyle(
-                            fontSize: 19,
-                            color: Colors.black
-                        )
-                    ),
-                    dropdownColor: Colors.grey[50],
-                    icon: Icon(Icons.keyboard_arrow_down),
-                    value: SelectedVal1,
-                    style: TextStyle(
-                        fontSize: 19,
-                        color: Colors.black
-                    ),
-                    isExpanded: true,
-                    underline: SizedBox(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        SelectedVal1 = newValue!;
-                      });
-                    },
-                    items: cities,
+                child: DropdownButton<String>(
+                  menuMaxHeight: MediaQuery.of(context).size.height * .5,
+                  hint: Text(
+                      "City",
+                      style: TextStyle(
+                          fontSize: 19,
+                          color: Colors.black
+                      )
                   ),
+                  dropdownColor: Colors.grey[50],
+                  icon: Icon(Icons.keyboard_arrow_down),
+                  value: SelectedVal1,
+                  style: TextStyle(
+                      fontSize: 19,
+                      color: Colors.black
+                  ),
+                  isExpanded: true,
+                  underline: SizedBox(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      SelectedVal1 = newValue!;
+                    });
+                  },
+                  items: cities,
                 ),
               ),
             ),
@@ -257,32 +255,30 @@ class _SearchScreenState extends State<SearchScreen> {
                   borderRadius: BorderRadius.circular(5)
               ),
               child: DropdownButtonHideUnderline(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * .5,
-                  child:DropdownButton<String>(
-                    hint: Text(
-                        "City",
-                        style: TextStyle(
-                            fontSize: 19,
-                            color: Colors.black
-                        )
-                    ),
-                    dropdownColor: Colors.grey[50],
-                    icon: Icon(Icons.keyboard_arrow_down),
-                    value: SelectedVal2,
-                    isExpanded: true,
-                    style: TextStyle(
-                        fontSize: 19,
-                        color: Colors.black
-                    ),
-                    underline: SizedBox(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        SelectedVal2 = newValue!;
-                      });
-                    },
-                    items: cities,
+                child: DropdownButton<String>(
+                  menuMaxHeight: MediaQuery.of(context).size.height * .5,
+                  hint: Text(
+                      "City",
+                      style: TextStyle(
+                          fontSize: 19,
+                          color: Colors.black
+                      )
                   ),
+                  dropdownColor: Colors.grey[50],
+                  icon: Icon(Icons.keyboard_arrow_down),
+                  value: SelectedVal2,
+                  isExpanded: true,
+                  style: TextStyle(
+                      fontSize: 19,
+                      color: Colors.black
+                  ),
+                  underline: SizedBox(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      SelectedVal2 = newValue!;
+                    });
+                  },
+                  items: cities,
                 ),
               ),
             ),

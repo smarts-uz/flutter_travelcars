@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'package:travelcars/app_config.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
+
+
 class TransfersAdd extends StatefulWidget {
   const TransfersAdd({Key? key}) : super(key: key);
 
@@ -39,7 +45,6 @@ class _TransfersAddState extends State<TransfersAdd> {
       city.add(element["name"]);
     });
     city = city.toSet().toList();
-    print(city);
     cities = city.map(
           (String value) => DropdownMenuItem<String>(
             value: value,
@@ -155,31 +160,30 @@ class _TransfersAddState extends State<TransfersAdd> {
                             borderRadius: BorderRadius.circular(5)
                         ),
                         child: DropdownButtonHideUnderline(
-                          child: Container(
-                            child:DropdownButton<String>(
-                              hint: Text(
-                                  "City",
-                                  style: TextStyle(
-                                      fontSize: 19,
-                                      color: Colors.black
-                                  )
-                              ),
-                              dropdownColor: Colors.grey[50],
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              value: data[index]["city"],
-                              isExpanded: true,
-                              style: TextStyle(
-                                  fontSize: 19,
-                                  color: Colors.black
-                              ),
-                              underline: SizedBox(),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  data[index]["city"] = newValue!;
-                                });
-                              },
-                              items: cities,
+                          child: DropdownButton<String>(
+                            menuMaxHeight: MediaQuery.of(context).size.height * .5,
+                            hint: Text(
+                                "City",
+                                style: TextStyle(
+                                    fontSize: 19,
+                                    color: Colors.black
+                                )
                             ),
+                            dropdownColor: Colors.grey[50],
+                            icon: Icon(Icons.keyboard_arrow_down),
+                            value: data[index]["city"],
+                            isExpanded: true,
+                            style: TextStyle(
+                                fontSize: 19,
+                                color: Colors.black
+                            ),
+                            underline: SizedBox(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                data[index]["city"] = newValue!;
+                              });
+                            },
+                            items: cities,
                           ),
                         ),
                       ),
@@ -496,19 +500,20 @@ class _TransfersAddState extends State<TransfersAdd> {
             height: MediaQuery.of(context).size.height*.050,
             width: MediaQuery.of(context).size.width*.70,
             child:  RaisedButton(
-                onPressed: (){
+                onPressed: () async {
                   List<Map<String, dynamic>> info = [];
                   data.forEach((element) {
+                    int cityID = 0;
                     api_cities.forEach((cityid) {
                       if(cityid["name"] == element["city"]) {
-                        element["city"] = cityid["city_id"];
+                        cityID = cityid["city_id"];
                       }
                     });
                     info.add({
                       "from": "${element["controllers4"][1].text}",
                       "to": "${element["controllers4"][2].text}",
                       "type": element["direction"] == 0 ? "meeting" : "cunduct",
-                      "city_id": "${element["city"]}",
+                      "city_id": "$cityID",
                       "date": "${DateFormat('dd.MM.yyyy').format(element["day"])}",
                       "time": "${element["time"].format(context).substring(0, 5)}",
                       "quantity": "${element["controllers4"][0].text}",
@@ -516,10 +521,17 @@ class _TransfersAddState extends State<TransfersAdd> {
                     });
                   });
                   print(info);
+                  String url = "${AppConfig.BASE_URL}/postTransfers";
+                  final result = await http.post(
+                    Uri.parse(url),
+                    body: {
+                      "transfers" : "${info.toString()}"
+                    }
+                  );
+                  print(json.decode(result.body)['message']);
                 },
                 child: Text('Submit your application'),
                 color: Colors.blue,
-
               ),
             ),
           SizedBox(
