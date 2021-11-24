@@ -269,12 +269,10 @@ class _TripItemState extends State<TripItem> {
                       "comment": "${controllers[3].text}",
                       "tour_id": "2"
                     };
-                    print(info);
                     info.forEach((key, value) {
                       if(value == null || value == "") {
                         print("Write $key");
                         isValid = false;
-                        print(isValid);
                       }
                     });
                     if(isValid) {
@@ -282,7 +280,6 @@ class _TripItemState extends State<TripItem> {
                           Uri.parse(url),
                           body: info
                       );
-                      print("if case");
                       print(json.decode(result.body)['message']);
                     }
                   }

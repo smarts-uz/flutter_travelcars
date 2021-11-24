@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/search/search_result.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -12,6 +13,8 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+
+  bool _isLoading = true;
 
   List<String> directions = [
     "One way",
@@ -28,18 +31,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
   String? SelectedVal1;
   String? SelectedVal2;
-  static const city = <String>[
-    "Tashkent",
-    "Buxoro",
-    "Xiva",
-    "Samarkand"
-  ];
-  final List<DropdownMenuItem<String>> cities = city.map(
-        (String value) => DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        ),
-  ).toList();
 
   DateTime? _selectedDate1 = DateTime.now();
   DateTime? _selectedDate2 = DateTime.now();
@@ -121,6 +112,36 @@ class _SearchScreenState extends State<SearchScreen> {
     },
   ];
 
+  List<String> city = [];
+  late final List<DropdownMenuItem<String>> cities;
+  late List api_cities;
+
+  @override
+  void initState() {
+    super.initState();
+    getcities();
+
+  }
+
+  void getcities() async {
+    print("start");
+    api_cities = await Cities.getcities();
+    api_cities.forEach((element) { 
+      city.add(element["name"]);
+    });
+    city = city.toSet().toList();
+    print(city);
+    cities = city.map(
+          (String value) => DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+      ),
+    ).toList();
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,7 +157,9 @@ class _SearchScreenState extends State<SearchScreen> {
           )
         ],
       ),
-      body: SingleChildScrollView(
+      body: _isLoading ? Center(
+        child: CircularProgressIndicator(),
+      ) : SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -196,6 +219,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               child: DropdownButtonHideUnderline(
                 child: Container(
+                  height: MediaQuery.of(context).size.height * .3,
                   child:DropdownButton<String>(
                     hint: Text(
                         "City",
@@ -234,6 +258,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               child: DropdownButtonHideUnderline(
                 child: Container(
+                  height: MediaQuery.of(context).size.height * .5,
                   child:DropdownButton<String>(
                     hint: Text(
                         "City",
