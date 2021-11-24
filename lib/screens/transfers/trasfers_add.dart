@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:travelcars/dummy_data/cities_list.dart';
 class TransfersAdd extends StatefulWidget {
   const TransfersAdd({Key? key}) : super(key: key);
 
@@ -14,22 +15,38 @@ class _TransfersAddState extends State<TransfersAdd> {
     'Meeting',
     'The wire'
   ];
-  static const city = <String>[
-    "Tashkent",
-    "Buxoro",
-    "Xiva",
-    "Samarkand"
-  ];
-  final List<DropdownMenuItem<String>> cities = city.map(
-        (String value) => DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-    ),
-  ).toList();
   int i = 1;
 
-  List<Map<String, dynamic>> data = [
-    {
+  List<String> city = [];
+  late final List<DropdownMenuItem<String>> cities;
+  late List api_cities;
+  List<Map<String, dynamic>> data = [];
+  bool _isLoading = true;
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    getcities();
+
+  }
+
+  void getcities() async {
+    print("start");
+    api_cities = await Cities.getcities();
+    api_cities.forEach((element) {
+      city.add(element["name"]);
+    });
+    city = city.toSet().toList();
+    print(city);
+    cities = city.map(
+          (String value) => DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+      ),
+    ).toList();
+    data.add({
       "direction": 0,
       "city": city[0],
       "day": DateTime.now(),
@@ -38,9 +55,11 @@ class _TransfersAddState extends State<TransfersAdd> {
         for (int i = 0; i < 4; i++)
           TextEditingController()
       ],
-    },
-  ];
-
+    },);
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
 
   @override
@@ -58,7 +77,9 @@ class _TransfersAddState extends State<TransfersAdd> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
+      body: _isLoading ? Center(
+        child: CircularProgressIndicator(),
+      ) : SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
         child: Column(
         children: [
@@ -181,7 +202,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                               showDatePicker(
                                 context: context,
                                 initialDate: DateTime.now(),
-                                firstDate: DateTime(2018),
+                                firstDate: DateTime.now(),
                                 lastDate: DateTime(2030),
                               ).then((pickedDate) {
                                 if(pickedDate==null)
@@ -475,7 +496,27 @@ class _TransfersAddState extends State<TransfersAdd> {
             height: MediaQuery.of(context).size.height*.050,
             width: MediaQuery.of(context).size.width*.70,
             child:  RaisedButton(
-                onPressed: (){},
+                onPressed: (){
+                  List<Map<String, dynamic>> info = [];
+                  data.forEach((element) {
+                    api_cities.forEach((cityid) {
+                      if(cityid["name"] == element["city"]) {
+                        element["city"] = cityid["city_id"];
+                      }
+                    });
+                    info.add({
+                      "from": "${element["controllers4"][1].text}",
+                      "to": "${element["controllers4"][2].text}",
+                      "type": element["direction"] == 0 ? "meeting" : "cunduct",
+                      "city_id": "${element["city"]}",
+                      "date": "${DateFormat('dd.MM.yyyy').format(element["day"])}",
+                      "time": "${element["time"].format(context).substring(0, 5)}",
+                      "quantity": "${element["controllers4"][0].text}",
+                      "additional": "${element["controllers4"][3].text}",
+                    });
+                  });
+                  print(info);
+                },
                 child: Text('Submit your application'),
                 color: Colors.blue,
 
@@ -490,3 +531,13 @@ class _TransfersAddState extends State<TransfersAdd> {
     );
   }
 }
+/*{
+"from":"Chilonzor",
+ "to":"Yunusobod",
+ "type":"meeting or cunduct",
+  "city_id":3,
+  "date":"25.07.2001",
+  "time":"12:20",
+   "quantity":4,
+    "additional":"Havo Sovuq"},
+    */
