@@ -32,9 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
   };
 
   List<dynamic> imglist = [
-    /*{
+    {
       'image': "assets/images/tashkent.jpg",
-      'text': "Trip to Tashkent",
+      'name': "Trip to Tashkent",
       "location": "Tashkent",
       "description": "Ташкент - столица Узбекистана, современный город, блещущий великолепием новостроек, но сумевший сохранить и старинную свою часть."
           " Экскурсии по Ташкенту всегда необычны, интересны и увлекательны.",
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       'image': "assets/images/mountain.jpg",
-      'text': "Trip to Mountain",
+      'name': "Trip to Mountain",
       "location": "Бельдерсай, Чимган, Чарвак",
       "description": "Таинственные и живописные горы Западного Тянь-Шаня - Большой и Малый Чимган, "
           "горные реки и водопады; урочище Бельдерсай покрытое можжевельником и яблонями, кустами шиповника и барбариса, Чарвакское водохранилище, которое очаровывает каждого путешественника своей красотой.",
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       'image': "assets/images/samarkand.jpg",
-      'text': "Trip to Samarkand",
+      'name': "Trip to Samarkand",
       "location": "Tashkent",
       "description": "Ташкент - столица Узбекистана, современный город, блещущий великолепием новостроек, но сумевший сохранить и старинную свою часть."
           " Экскурсии по Ташкенту всегда необычны, интересны и увлекательны.",
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       'image': "assets/images/buxoro.jpg",
-      'text': "Trip to Buxoro",
+      'name': "Trip to Buxoro",
       "location": "Бельдерсай, Чимган, Чарвак",
       "description": "Таинственные и живописные горы Западного Тянь-Шаня - Большой и Малый Чимган, "
           "горные реки и водопады; урочище Бельдерсай покрытое можжевельником и яблонями, кустами шиповника и барбариса, Чарвакское водохранилище, которое очаровывает каждого путешественника своей красотой.",
@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       'image': "assets/images/xiva.jpg",
-      'text': "Trip to Xiva",
+      'name': "Trip to Xiva",
       "location": "Tashkent",
       "description": "Ташкент - столица Узбекистана, современный город, блещущий великолепием новостроек, но сумевший сохранить и старинную свою часть."
           " Экскурсии по Ташкенту всегда необычны, интересны и увлекательны.",
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       'image': "assets/images/volley.jpg",
-      'text': "Trip to Volley Fergana",
+      'name': "Trip to Volley Fergana",
       "location": "Бельдерсай, Чимган, Чарвак",
       "description": "Таинственные и живописные горы Западного Тянь-Шаня - Большой и Малый Чимган, "
           "горные реки и водопады; урочище Бельдерсай покрытое можжевельником и яблонями, кустами шиповника и барбариса, Чарвакское водохранилище, которое очаровывает каждого путешественника своей красотой.",
@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "details": "В 07:00/08:00 встреча в заранее обусловленном месте. Выезд из Ташкента по направлению к Чимганским горам (80 км, 2 ч.). Путь к горам Чимгана пролегает через живописные населенные пункты "
           "Ташкентской области. По приезду в урочище Чимган прогулка по горной местности.\n\nЕсли в ущелье Бельдерсай работает канатная дорога, протяженность которой более 3 км, то можно прокатиться до вершины "
           "горы Кумбель (2400 м), где находится одна из горнолыжных трасс в Узбекистане.",
-    },*/
+    },
   ];
   List<Map<String, dynamic>> newslist = [
     {
@@ -188,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     getweather();
     getCars();
-    getTrips();
+    //getTrips();
     getvalyuta();
   }
 
@@ -457,12 +457,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
               items: imglist.map((item) => GestureDetector(
                 onTap: () {
-                  /*Navigator.push(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => TripItem(item)
                       )
-                  );*/
+                  );
                 },
                 child: Stack(
                     children: [
@@ -472,9 +472,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(
+                            image: AssetImage(
+                              '${item['image']}'
+                            ),/*NetworkImage(
                               "https://travelcars.uz/uploads/tours/${item["image"]}",
-                            ),
+                            ),*/
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(15)),

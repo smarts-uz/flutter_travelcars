@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:travelcars/app_config.dart';
 
 class TripItem extends StatefulWidget {
   final Map<String, dynamic> trip_item;
@@ -26,7 +30,7 @@ class _TripItemState extends State<TripItem> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.trip_item["text"],
+          widget.trip_item["name"],
           style: TextStyle(
             fontSize: 25,
             color: Colors.white,
@@ -57,7 +61,7 @@ class _TripItemState extends State<TripItem> {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(top: 3, left: 13),
               child: Text(
-                widget.trip_item["text"],
+                widget.trip_item["name"],
                 style: TextStyle(
                   fontSize: 27,
                   color: Colors.black,
@@ -209,6 +213,7 @@ class _TripItemState extends State<TripItem> {
                     borderRadius: BorderRadius.circular(5)
                 ),
                 child: TextFormField(
+                  key: ValueKey(hints[e]),
                   keyboardType: e == 2 ? TextInputType.number : TextInputType.text,
                   autovalidateMode: AutovalidateMode.always,
                   decoration: InputDecoration(
@@ -248,17 +253,38 @@ class _TripItemState extends State<TripItem> {
                   padding: EdgeInsets.all(8),
                   textColor: Colors.white,
                   child: Text(
-                    "Search",
+                    "Send",
                     style: TextStyle(
                       fontSize: 23,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  onPressed: () {
-                    print("Name: ${controllers[0].text}");
-                    print("E-mail: ${controllers[1].text}");
-                    print("Phone: ${controllers[2].text}");
-                    print("Comment: ${controllers[3].text}");
+                  onPressed: () async {
+                    bool isValid = true;
+                    String url = "${AppConfig.BASE_URL}/comment/create";
+                    Map<String, dynamic> info = {
+                      "name": "${controllers[0].text}",
+                      "email": "${controllers[1].text}",
+                      "phone": "${controllers[2].text}",
+                      "comment": "${controllers[3].text}",
+                      "tour_id": "2"
+                    };
+                    print(info);
+                    info.forEach((key, value) {
+                      if(value == null || value == "") {
+                        print("Write $key");
+                        isValid = false;
+                        print(isValid);
+                      }
+                    });
+                    if(isValid) {
+                      final result = await http.post(
+                          Uri.parse(url),
+                          body: info
+                      );
+                      print("if case");
+                      print(json.decode(result.body)['message']);
+                    }
                   }
               ),
             )
