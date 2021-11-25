@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/reset_password.dart';
 import 'package:travelcars/screens/main_screen.dart';
+import 'package:http/http.dart' as http;
 
 import '../../app_theme.dart';
 
@@ -135,12 +140,45 @@ class _SignInState extends State<SignIn> {
                 ),
                 Spacer(),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (_)=>MainScreen()),
-                      ModalRoute.withName('/'),
+                  onTap: () async {
+                    String url = "${AppConfig.BASE_URL}/login";
+                    final result = await http.post(
+                      Uri.parse(url),
+                      body: {
+                        'email': "${_emailController.text}",
+                        'password': "${_passwordController.text}",
+                      }
                     );
+                    final Map<String, dynamic> response = json.decode(result.body);
+                    if(response["accessToken"] != null) {
+                      print("if ichi");
+                      final prefs = await SharedPreferences.getInstance();
+                      final userData = json.encode({
+                        'token': response["accessToken"],
+                        'expiry_at': response["expires_at"],
+                        'user_id': response["user"]["id"],
+                        'email': response["user"]["email"],
+                        'name': response["user"]["name"],
+                        'phone': response["user"]["phone"],
+                        'socials': response["user"]["socials"],
+                        "shaxs": response["user"]["personality"],
+                        "cashback_summa": response["user"]["cashback_money"],
+                        "cashback_foiz": response["user"]["cashback_percent"],
+                      });
+                      print(userData);
+                      print("map done");
+                      await prefs.setString('userData', userData);
+                      print("set map");
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (_)=> MainScreen()
+                        ),
+                        ModalRoute.withName('/'),
+                      );
+                    } else {
+                      print("error");
+                      print(response["errors"]);
+                    }
                     },
                   child: Container(
                     decoration: BoxDecoration(

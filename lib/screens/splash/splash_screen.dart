@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/login/choice_language.dart';
+import 'package:travelcars/screens/main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -18,9 +20,14 @@ class _SplashScreenState extends State<SplashScreen> {
     _navigatorHome();
   }
   
-  _navigatorHome() async{
-    await Future.delayed(Duration(milliseconds: 1500),(){});
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>ChoicePage()));
+  _navigatorHome() async {
+    final prefs = await SharedPreferences.getInstance();
+    if(prefs.containsKey('userData'))
+    {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>MainScreen()));
+    } else {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>ChoicePage()));
+    }
   }
   
   @override

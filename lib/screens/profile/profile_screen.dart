@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/bookings/bookings_screen.dart';
 import 'package:travelcars/screens/main_screen.dart';
 import 'package:travelcars/screens/profile/account/account_screen.dart';
@@ -82,7 +83,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {
+            onPressed: () async {
+              final prefs = await SharedPreferences.getInstance();
+              prefs.clear();
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SplashScreen()));
             },
