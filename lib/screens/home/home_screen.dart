@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -111,8 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
           "горы Кумбель (2400 м), где находится одна из горнолыжных трасс в Узбекистане.",
     },
   ];
-  List<Map<String, dynamic>> newslist = [
-    {
+  List < dynamic> newslist = [
+  /*  {
       'image': "assets/images/news_1.jpg",
       'title': "Достоинства аренды автомобиля с водителем",
       'text': "Собираясь в деловую поездку или на отдых, в незнакомый город или регион, в особенности если вас ждёт длительный перелёт, по дороге в аэропорт хочется, расслабиться, не думая об особенностях вождения. Всё что нужно для этого сделать, это – взять напрокат авто с водителем, который встретит вас прям у дома.",
@@ -125,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'text': "В Узбекистане прокат автомобиля с водителем является востребованной услугой, в связи с ростом спроса на туристические услуги в стране.  Вам больше не придется сидеть за рулем при заказе услуги. Менеджеры фирмы Travelcars обеспечат, встречу знакомых, родных, коллег и прочие встречи в аэропорту либо на вокзале в самые короткие сроки.",
       'hour': "06:00",
       'date': "06.10.2021"
-    },
+    },*/
   ];
 
   List<dynamic> carslist = [
@@ -190,6 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
     getCars();
     //getTrips();
     getvalyuta();
+    getnews();
   }
 
   void getTrips() async{
@@ -209,6 +211,18 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     setState(() {
       carslist = json.decode(response.body)["car_types"];
+    });
+  }
+
+  void getnews () async {
+
+    String url = "${AppConfig.BASE_URL}/news?lang=ru";
+    final response = await http.get(
+      Uri.parse(url)
+    );
+    print(json.decode(response.body));
+    setState(() {
+      newslist = json.decode(response.body);
     });
   }
 
@@ -615,6 +629,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 items: newslist.map((item) =>
                     InkWell(
                       onTap: () {
+                        launch("https://travelcars.uz/news/${item["meta_url"]}");
                        // Navigator.push(context,MaterialPageRoute(builder: (_)=>DetailScreen()));
                         },
                       child: Container(
@@ -630,13 +645,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Container(
                                     height: 150,
                                     width: MediaQuery.of(context).size.width * 0.9,
-                                    child: Image.asset(
+                                    child:Image.network(
+                                      "https://travelcars.uz/uploads/pages/${item["thumb"]}",
+                                    ), /*Image.asset(
                                       item["image"],
                                       fit: BoxFit.cover,
-                                    )
+                                    )*/
                                 ),
+
                                 Text(
-                                  item["title"],
+                                  item["short"],
                                   maxLines: 2,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -645,7 +663,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 Text(
-                                  item["text"],
+                                  item["short"],
                                   maxLines: 5,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
@@ -657,10 +675,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                        item["hour"]
+                                        item["created_at"].substring(0,10)
                                     ),
                                     Text(
-                                        item["date"]
+                                        item["created_at"].substring(11,16)
                                     ),
                                   ],
                                 )
