@@ -214,6 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+
   void getnews () async {
 
     String url = "${AppConfig.BASE_URL}/news?lang=ru";
@@ -660,14 +661,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                                Text(
-                                  item["short"],
-                                  maxLines: 5,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 14,
                                   ),
                                 ),
                                 SizedBox(height: 10),
