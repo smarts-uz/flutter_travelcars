@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:travelcars/app_config.dart';
+import 'package:travelcars/screens/home/car_type.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
@@ -557,53 +558,59 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   itemCount: carslist.length,
                   itemBuilder: (BuildContext ctx, index) {
-                    return Card(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                      elevation: 4,
-                      child: Stack(
-                        children: [
-                          Container(
-                            height: 140,
-                            width: MediaQuery.of(context).size.width * .43,
-                            child: Image.network("https://travelcars.uz/uploads/car-types/${carslist[index]["image"]}"),
-                          ),
-                          Positioned(
-                            top: 10,
-                            right: 10,
-                            child: Container(
-                                height: 25,
-                                width: 25,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                  color: Color.fromRGBO(239, 127, 26, 1),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "${carslist[index]["quantity"]}",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 17
-                                    ),
-                                  ),
-                                )
+                    return GestureDetector(
+                      onTap: (){
+                        Navigator.push(context,MaterialPageRoute(
+                            builder: (_)=>CarType(carslist[index]["name"], carslist[index]["id"])));
+                      },
+                      child: Card(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                        elevation: 4,
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: 140,
+                              width: MediaQuery.of(context).size.width * .43,
+                              child: Image.network("https://travelcars.uz/uploads/car-types/${carslist[index]["image"]}"),
                             ),
-                          ),
-                          Positioned(
-                            bottom: 20,
-                            left: 5,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * .4,
-                              alignment: Alignment.center,
-                              child: Text(
-                                "${carslist[index]["name"]}",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 17
-                                ),
+                            Positioned(
+                              top: 10,
+                              right: 10,
+                              child: Container(
+                                  height: 25,
+                                  width: 25,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    color: Color.fromRGBO(239, 127, 26, 1),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "${carslist[index]["quantity"]}",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 17
+                                      ),
+                                    ),
+                                  )
                               ),
                             ),
-                          )
-                        ],
+                            Positioned(
+                              bottom: 20,
+                              left: 5,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * .4,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "${carslist[index]["name"]}",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 17
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     );
                   }
@@ -648,10 +655,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: MediaQuery.of(context).size.width * 0.9,
                                     child:Image.network(
                                       "https://travelcars.uz/uploads/pages/${item["thumb"]}",
-                                    ), /*Image.asset(
-                                      item["image"],
-                                      fit: BoxFit.cover,
-                                    )*/
+                                    ),
                                 ),
 
                                 Text(
@@ -663,7 +667,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                       fontWeight: FontWeight.bold
                                   ),
                                 ),
-                                SizedBox(height: 10),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
