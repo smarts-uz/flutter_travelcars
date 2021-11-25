@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../app_theme.dart';
 import '../../../mask.dart';
@@ -11,9 +14,9 @@ class FirstSceen extends StatefulWidget {
 }
 
 class _FirstSceenState extends State<FirstSceen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
 
   List<String> sort = ["Физическое лицо", "Юридическое лицо"];
   int? _radioVal2;
@@ -35,6 +38,24 @@ class _FirstSceenState extends State<FirstSceen> {
   "ОКОНХ",
   ];
 
+  Map<String, dynamic> userinfo = {};
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getuserdata();
+  }
+
+  void getuserdata() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userinfo = json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
+      _emailController = TextEditingController(text: userinfo["email"]);
+      _nameController = TextEditingController(text: userinfo["name"]);
+      _phoneController = TextEditingController(text: userinfo["phone"]);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +106,27 @@ class _FirstSceenState extends State<FirstSceen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TextFld(
-                              title: "Email", hint: "nimadir@gmail.com",controller: _emailController,),
+                          TextFormField(
+                            controller: _emailController,
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              labelText:"Mail",
+                              floatingLabelBehavior: FloatingLabelBehavior.always,
+                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
                           SizedBox(height: 33),
-                          TextFld(title: "ФИО", hint: "John Frederik",controller: _nameController,),
+                          TextFormField(
+                            controller: _nameController,
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              labelText:"ФИО",
+                              floatingLabelBehavior: FloatingLabelBehavior.always,
+                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
                           SizedBox(height: 33),
                           TextFormField(
                             controller: _phoneController,
@@ -98,10 +136,8 @@ class _FirstSceenState extends State<FirstSceen> {
                             ],
                             decoration: InputDecoration(
                               labelText:"Телефон",
-                              hintText: '___ __ ___ __ __',
-                              prefixText:'+' ,
                               floatingLabelBehavior: FloatingLabelBehavior.always,
-                              contentPadding: EdgeInsets.symmetric(horizontal: 45, vertical: 20),
+                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                               border: OutlineInputBorder(),
                             ),
                           ),
@@ -120,12 +156,12 @@ class _FirstSceenState extends State<FirstSceen> {
                                           children: [
                                             Radio<int>(
                                               value: index,
-                                              groupValue: this._radioVal2,
+                                              groupValue: userinfo["shaxs"] == "individual" ? 0 : 1,
                                               onChanged: (int? value) {
                                                 if (value != null) {
-                                                  setState(() => this
+                                                  /*setState(() => this
                                                       ._radioVal2 = value);
-                                                  print(value);
+                                                  print(value);*/
                                                 }
                                               },
                                             ),
@@ -207,19 +243,6 @@ class _FirstSceenState extends State<FirstSceen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget TextFld({title, hint,controller,}) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: title,
-        hintText: hint,
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        contentPadding: EdgeInsets.symmetric(horizontal: 45, vertical: 20),
-        border: OutlineInputBorder(),
       ),
     );
   }

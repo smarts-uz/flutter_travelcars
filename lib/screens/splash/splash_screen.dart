@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,7 +26,13 @@ class _SplashScreenState extends State<SplashScreen> {
     final prefs = await SharedPreferences.getInstance();
     if(prefs.containsKey('userData'))
     {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>MainScreen()));
+      final extractedUserData = json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
+      final expiryDate = DateTime.parse(extractedUserData['expiry_at'].substring(0, 10));
+      if(expiryDate.isAfter(DateTime.now())) {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>MainScreen()));
+      } else {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>ChoicePage()));
+      }
     } else {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>ChoicePage()));
     }

@@ -145,13 +145,12 @@ class _SignInState extends State<SignIn> {
                     final result = await http.post(
                       Uri.parse(url),
                       body: {
-                        'email': "${_emailController.text}",
+                        'username': "${_emailController.text}",
                         'password': "${_passwordController.text}",
                       }
                     );
                     final Map<String, dynamic> response = json.decode(result.body);
                     if(response["accessToken"] != null) {
-                      print("if ichi");
                       final prefs = await SharedPreferences.getInstance();
                       final userData = json.encode({
                         'token': response["accessToken"],
@@ -165,10 +164,7 @@ class _SignInState extends State<SignIn> {
                         "cashback_summa": response["user"]["cashback_money"],
                         "cashback_foiz": response["user"]["cashback_percent"],
                       });
-                      print(userData);
-                      print("map done");
                       await prefs.setString('userData', userData);
-                      print("set map");
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (_)=> MainScreen()

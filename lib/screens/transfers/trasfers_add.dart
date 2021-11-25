@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
 
@@ -522,10 +523,15 @@ class _TransfersAddState extends State<TransfersAdd> {
                   });
                   print(info);
                   String url = "${AppConfig.BASE_URL}/postTransfers";
+                  final prefs = await SharedPreferences.getInstance();
+                  String token = json.decode(prefs.getString('userData')!)["token"];
                   final result = await http.post(
                     Uri.parse(url),
+                    headers: {
+                      "Authorization": "Bearer $token",
+                    },
                     body: {
-                      "transfers" : "${info.toString()}"
+                      "transfers" : "${json.encode(info)}"
                     }
                   );
                   print(json.decode(result.body)['message']);
