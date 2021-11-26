@@ -129,74 +129,6 @@ class _TripItemState extends State<TripItem> {
                 },
               ),
             ),
-            /* Text(
-                widget.trip_item["content_en"],
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                  fontSize: 15
-                ),
-              ),
-            Container(
-              padding: EdgeInsets.only(top: 7, left: 10, right: 10),
-              margin: EdgeInsets.only(top: 15, left: 13, right: 13),
-              height: 60,
-              color: Color.fromRGBO(255, 250, 241, 1),
-              alignment: Alignment.centerLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.black
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(text: 'Duration of the trip: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: '${widget.trip_item["day"]} day'),
-                      ],
-                    ),
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      style: TextStyle(
-                        fontSize: 18.0,
-                          color: Colors.black
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(text: 'Time: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: '${widget.trip_item["time"]} hours'),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 13, top: 13, right: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Trip program: \n",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black
-                    ),
-                  ),
-                  Text(
-                    "${widget.trip_item["details"]}",
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(
-                        fontSize: 13.0,
-                        color: Colors.black
-                    ),
-                  ),
-                ],
-              )
-            ),*/
             Container(
               height: size_h,
               width: double.infinity,
@@ -305,7 +237,7 @@ class _TripItemState extends State<TripItem> {
                       "email": "${controllers[1].text}",
                       "phone": "${controllers[2].text}",
                       "comment": "${controllers[3].text}",
-                      "tour_id": "2"
+                      "tour_id": "${widget.trip_item["id"]}"
                     };
                     info.forEach((key, value) {
                       if(value == null || value == "") {
@@ -329,3 +261,71 @@ class _TripItemState extends State<TripItem> {
     );
   }
 }
+/* Text(
+                widget.trip_item["content_en"],
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                  fontSize: 15
+                ),
+              ),
+            Container(
+              padding: EdgeInsets.only(top: 7, left: 10, right: 10),
+              margin: EdgeInsets.only(top: 15, left: 13, right: 13),
+              height: 60,
+              color: Color.fromRGBO(255, 250, 241, 1),
+              alignment: Alignment.centerLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.black
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Duration of the trip: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: '${widget.trip_item["day"]} day'),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: 18.0,
+                          color: Colors.black
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Time: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(text: '${widget.trip_item["time"]} hours'),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 13, top: 13, right: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Trip program: \n",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black
+                    ),
+                  ),
+                  Text(
+                    "${widget.trip_item["details"]}",
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                        fontSize: 13.0,
+                        color: Colors.black
+                    ),
+                  ),
+                ],
+              )
+            ),*/
