@@ -86,8 +86,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onPressed: () async {
               final prefs = await SharedPreferences.getInstance();
               prefs.clear();
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SplashScreen()));
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => SplashScreen()),
+                ModalRoute.withName('/'),
+              );
             },
             icon: Icon(
               Icons.logout,

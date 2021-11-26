@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/profile/account/second_screen.dart';
 import 'package:travelcars/screens/profile/account/third_screen.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 
 import 'choice_language.dart';
 import 'first_screen.dart';
@@ -135,7 +137,15 @@ class AccountScreen extends StatelessWidget {
           SizedBox(
             height: 47,
             child: ListTile(
-              onTap: () {},
+              onTap: () async {
+                final prefs = await SharedPreferences.getInstance();
+                prefs.clear();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => SplashScreen()),
+                  ModalRoute.withName('/'),
+                );
+              },
               title: Text(
                 "Выход",
                 style: TextStyle(
