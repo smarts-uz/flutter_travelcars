@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class CashbackScreen extends StatefulWidget {
@@ -8,6 +11,27 @@ class CashbackScreen extends StatefulWidget {
 }
 
 class _CashbackScreenState extends State<CashbackScreen> {
+  Map<String , dynamic> info = {
+    "summa": 0,
+    "foiz": 0,
+  };
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getuserdata();
+  }
+
+  void getuserdata() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      Map<String, dynamic> userinfo = json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
+      info["summa"] = userinfo["cashback_summa"];
+      info["foiz"] = userinfo["cashback_foiz"];
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +80,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
               alignment: Alignment.center,
               color: Color.fromRGBO(255, 245, 228, 1),
               child: Text(
-                "5%",
+                "${info["foiz"]}%",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 46),
               ),
@@ -76,7 +100,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
               alignment: Alignment.center,
               color: Color.fromRGBO(255, 245, 228, 1),
               child: Text(
-                "50 000 UZS",
+                "${info["summa"]} UZS",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 46),
               ),
