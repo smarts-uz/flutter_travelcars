@@ -1,18 +1,37 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DropButtonMny extends StatefulWidget {
   const DropButtonMny({Key? key}) : super(key: key);
-
+  static String? dropdawnvalue;
   @override
   _DropButtonMnyState createState() => _DropButtonMnyState();
 }
 
 class _DropButtonMnyState extends State<DropButtonMny> {
-  String? dropdawnvalue;
 
   List<String> Items = <String>["UZS", "USD", "RUB"];
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    current_locale();
+  }
+
+  Future<void> current_locale() async {
+    final prefs = await SharedPreferences.getInstance();
+    if(!prefs.containsKey("settings")) {
+      return;
+    } else {
+      setState(() {
+        DropButtonMny.dropdawnvalue = jsonDecode(prefs.getString("settings")!)["currency"];
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,12 +52,12 @@ class _DropButtonMnyState extends State<DropButtonMny> {
             hint: Text("Выберите валюту"),
             dropdownColor: Colors.grey[50],
             icon: Icon(Icons.keyboard_arrow_down),
-            value: dropdawnvalue,
+            value: DropButtonMny.dropdawnvalue,
             isExpanded: true,
             underline: SizedBox(),
             onChanged: (String? newValue) {
               setState(() {
-                dropdawnvalue = newValue!;
+                DropButtonMny.dropdawnvalue = newValue!;
               });
             },
             items: Items.map<DropdownMenuItem<String>>((value) {

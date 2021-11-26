@@ -106,7 +106,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final response = await http.get(
       Uri.parse(url)
     );
-    print(json.decode(response.body));
     setState(() {
       newslist = json.decode(response.body);
     });

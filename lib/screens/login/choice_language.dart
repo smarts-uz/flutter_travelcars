@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_theme.dart';
 import 'package:travelcars/screens/login/components/drop_button_lang.dart';
 import 'package:travelcars/screens/login/components/drop_button_mny.dart';
@@ -33,7 +36,12 @@ class _ChoicePageState extends State<ChoicePage> {
               DropButtonMny(),
               Spacer(),
               GestureDetector(
-                onTap: () {
+                onTap: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.setString("settings", json.encode({
+                    "locale": "${DropButton.dropdawnvalue}",
+                    "currency": "${DropButtonMny.dropdawnvalue}",
+                  }));
                   Navigator.push(context,MaterialPageRoute(builder: (_)=>LoginScreen()));
                 },
                 child: Container(

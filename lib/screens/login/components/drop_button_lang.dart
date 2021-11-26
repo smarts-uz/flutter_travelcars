@@ -1,19 +1,41 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/screens/login/components/drop_button_mny.dart';
 class DropButton extends StatefulWidget {
   const DropButton({Key? key}) : super(key: key);
-
+  static String? dropdawnvalue;
   @override
   _DropButtonState createState() => _DropButtonState();
 }
 
 class _DropButtonState extends State<DropButton> {
-  String? dropdawnvalue ;
+
   List<String> Items = <String>[
     "UZB",
     "ENG",
     "RUS"
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    current_locale();
+  }
+
+  Future<void> current_locale() async {
+    final prefs = await SharedPreferences.getInstance();
+    if(!prefs.containsKey("settings")) {
+      return;
+    } else {
+      setState(() {
+        DropButton.dropdawnvalue = jsonDecode(prefs.getString("settings")!)["locale"];
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,12 +54,12 @@ class _DropButtonState extends State<DropButton> {
             hint: Text("Выберите язык"),
             dropdownColor: Colors.grey[50],
             icon: Icon(Icons.keyboard_arrow_down),
-            value: dropdawnvalue,
+            value: DropButton.dropdawnvalue,
             isExpanded: true,
             underline: SizedBox(),
             onChanged: (String? newValue) {
               setState(() {
-                dropdawnvalue = newValue!;
+                DropButton.dropdawnvalue = newValue!;
               });
             },
             items:
