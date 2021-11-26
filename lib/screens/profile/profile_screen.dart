@@ -9,6 +9,7 @@ import 'package:travelcars/screens/profile/reviews.dart';
 import 'package:travelcars/screens/route/route_screen.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/screens/transfers/transfers_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -50,22 +51,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
       "route": CashbackScreen(),
     },
     {
-      "icon": Icon(Icons.work_outline, color: Colors.black,),
-      "text": "About us",
-      "trailing": false,
-      "route": MainScreen(),
-    },
-    {
       "icon": Icon(Icons.message, color: Colors.black,),
       "text": "Reviews",
       "trailing": true,
       "route": Reviews(),
     },
     {
+      "icon": Icon(Icons.work_outline, color: Colors.black,),
+      "text": "About us",
+      "trailing": false,
+      "route": "https://travelcars.uz/about",
+    },
+    {
       "icon": SvgPicture.asset('assets/icons/contact.svg'),
       "text": "Contact",
       "trailing": false,
-      "route": MainScreen(),
+      "route": "https://travelcars.uz/page/2",
     },
   ];
 
@@ -126,12 +127,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: 10,
                     ),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => routes[index]["route"]
-                        )
-                      );
+                      if(index < 6) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => routes[index]["route"]
+                            )
+                        );
+                      } else {
+                        launch(routes[index]["route"]);
+                      }
                     },
                   ),
                   Divider(),
