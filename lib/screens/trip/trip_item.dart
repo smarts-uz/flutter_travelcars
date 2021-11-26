@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/app_config.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class TripItem extends StatefulWidget {
   final Map<String, dynamic> trip_item;
@@ -30,13 +31,13 @@ class _TripItemState extends State<TripItem> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.trip_item["name"],
+          widget.trip_item["name_en"],
           style: TextStyle(
             fontSize: 25,
             color: Colors.white,
           ),
         ),
-        actions: [
+        /*actions: [
           IconButton(
               onPressed: () {
                 print("pressed");},
@@ -46,22 +47,30 @@ class _TripItemState extends State<TripItem> {
                 color: Colors.white,
               )
           )
-        ],
+        ],*/
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-               height: MediaQuery.of(context).size.height * .35,
+               height: MediaQuery.of(context).size.height * .3,
                width: double.infinity,
                padding: EdgeInsets.only(top: 20, left: 13, right: 13, bottom: 5),
-               child: Image.asset(widget.trip_item["image"], fit: BoxFit.cover,)
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      "https://travelcars.uz/uploads/tours/${ widget.trip_item["image"]}",
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  //borderRadius: BorderRadius.all(Radius.circular(15)),
+                ),
             ),
             Container(
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(top: 3, left: 13),
               child: Text(
-                widget.trip_item["name"],
+                widget.trip_item["name_en"],
                 style: TextStyle(
                   fontSize: 27,
                   color: Colors.black,
@@ -80,7 +89,7 @@ class _TripItemState extends State<TripItem> {
                     size: 22,
                   ),
                   Text(
-                    widget.trip_item["location"],
+                    widget.trip_item["region_en"],
                     style: TextStyle(
                       fontSize: 13
                     )
@@ -89,15 +98,44 @@ class _TripItemState extends State<TripItem> {
               )
             ),
             Container(
-              padding: EdgeInsets.only(left: 13, top: 9, right: 10),
-              child: Text(
-                widget.trip_item["description"],
+              padding: EdgeInsets.only(left: 5, top: 9, right: 10),
+              child: Html(
+                data: widget.trip_item["content_en"],
+                style: {
+                  "table": Style(
+                    backgroundColor: Color.fromARGB(0x50, 0xee, 0xee, 0xee),
+                  ),
+                  "tr": Style(
+                    border: Border(bottom: BorderSide(color: Colors.grey)),
+                  ),
+                  "th": Style(
+                    padding: EdgeInsets.all(6),
+                    backgroundColor: Colors.grey,
+                  ),
+                  "td": Style(
+                    padding: EdgeInsets.all(6),
+                    alignment: Alignment.topLeft,
+                  ),
+                  'h5': Style(maxLines: 2, textOverflow: TextOverflow.ellipsis),
+                },
+                customRender: {
+                  "table": (context, child) {
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child:
+                      (context.tree as TableLayoutElement).toWidget(context),
+                    );
+                  },
+                },
+              ),
+            ),
+            /* Text(
+                widget.trip_item["content_en"],
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 15
                 ),
               ),
-            ),
             Container(
               padding: EdgeInsets.only(top: 7, left: 10, right: 10),
               margin: EdgeInsets.only(top: 15, left: 13, right: 13),
@@ -158,7 +196,7 @@ class _TripItemState extends State<TripItem> {
                   ),
                 ],
               )
-            ),
+            ),*/
             Container(
               height: size_h,
               width: double.infinity,
