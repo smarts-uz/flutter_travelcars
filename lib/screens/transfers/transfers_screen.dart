@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/screens/main_screen.dart';
 import 'package:travelcars/screens/transfers/transfers_info.dart';
 import 'package:travelcars/screens/transfers/trasfers_add.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../app_config.dart';
 
 
 class TransfersScreen extends StatefulWidget {
@@ -11,56 +17,9 @@ class TransfersScreen extends StatefulWidget {
   @override
   _TransfersScreenState createState() => _TransfersScreenState();
 }
-void _startAddNewTransaction(BuildContext ctx)
-{
-  showModalBottomSheet(
-      context: ctx,
-      builder: (_)
-      {
-        return  Container(
-          margin: EdgeInsets.all(16),
-          child: Column(
-              children: [
-                Text('About Transfer',
-                  textAlign: TextAlign.end,
-                  style: TextStyle(
-                      fontSize: 24
-                  ),
-                ),
-                Divider(),
-                Text('Lorem ipsum dolor sit amet, consectetur adipiscing '
-                    'elit. Eu venenatis eu id pellentesque.',
-
-                  maxLines: 2,
-                  style: TextStyle(
-                    fontSize: 19,
-                      fontWeight: FontWeight.bold
-                  ),
-                ),
-                Text('\nLorem ipsum dolor sit amet, consectetur adipiscing elit.'
-                    ' A, risus, nec accumsan, ultrices vulputate phasellus. '
-                    'Sagittis sagittis, quis risus eget vel pulvinar potenti amet. '
-                    'Orci nec id maecenas enim rhoncus sodales.'
-                    ' Hendrerit cursus purus gravida ultricies. Imperdiet pharetra morbi gravida hac vitae'
-                    'ipsum dolor sit amet, consectetur adipiscing elit.'
-                    ' A, risus, nec accumsan, ultrices vulputate phasellus. '
-                    'Sagittis sagittis, quis risus eget vel pulvinar potenti amet. '
-                    'Orci nec id maecenas enim rhoncus sodales.'
-                    ' Hendrerit cursus purus gravida ultricies. Imperdiet pharetra morbi gravida hac vitae',
-                  maxLines: 5,
-                  style: TextStyle(
-                      fontSize: 19
-                  ),
-                )
-              ],
-
-          ),
-        );
-      }
-  );
-}
 
 class _TransfersScreenState extends State<TransfersScreen> {
+  bool  _isLoading = true;
   List<Map<String, dynamic>> info = [
     {
       'id': '20',
@@ -104,15 +63,41 @@ class _TransfersScreenState extends State<TransfersScreen> {
 
     }
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getTransfers();
+  }
+
+  void getTransfers() async {
+    String url = "${AppConfig.BASE_URL}/transfers";
+    final prefs = await SharedPreferences.getInstance();
+    String token = json.decode(prefs.getString('userData')!)["token"];
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {
+        "Authorization": "Bearer $token",
+      }
+    );
+    print(json.decode(response.body)["data"]);
+    setState(() {
+      //info = json.decode(response.body)["data"];
+      _isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       title: Text('Transfers',
-       style:TextStyle(
-         fontSize: 20,
-         color: Colors.white
-       ),
+       title: Text(
+         'Transfers',
+         style:TextStyle(
+             fontSize: 20,
+             color: Colors.white
+         ),
        ),
         actions: [
           IconButton(
@@ -126,88 +111,15 @@ class _TransfersScreenState extends State<TransfersScreen> {
           )
         ],
       ),
-      body: info.isEmpty ?  Empty() :  List_T(info),
+      body: _isLoading ? Center(
+        child: CircularProgressIndicator(),
+      ) : info.isEmpty ?  Empty() :  List_T(info),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => TransfersAdd()));
         },
         child: Icon(Icons.add),
-      ),
-    );
-  }
-}
-
-class Empty extends StatefulWidget {
-  const Empty({Key? key}) : super(key: key);
-
-  @override
-  _EmptyState createState() => _EmptyState();
-}
-
-class _EmptyState extends State<Empty> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-
-        children: [
-          Container(
-              height: MediaQuery.of(context).size.height*.35,
-              width: MediaQuery.of(context).size.width*.65,
-
-              child: Image.asset(
-                  'assets/images/map_location.jpg')
-          ),
-          Container(
-              width: MediaQuery.of(context).size.width*.7,
-              child: Text(
-                'Вы можете оставить заявку\n нажимая кнопку ниже',
-                maxLines: 2,
-                style: TextStyle(
-                  fontSize: 13,
-                ),
-                textAlign: TextAlign.center,
-              )
-          ),
-          SizedBox(height: 20),
-          Container(
-            height: MediaQuery.of(context).size.height*.045,
-            width: MediaQuery.of(context).size.width*.45,
-            child: RaisedButton(
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.add,
-                    color: Colors.orange,
-                  ),
-                  SizedBox(
-                      width: 10),
-                  Text(
-                    'Add',
-                    style: TextStyle(
-                        color: Colors.orange
-                    ),),
-                ],
-              ),
-              onPressed: (){
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TransfersAdd()));
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  side: BorderSide(
-                      color: Colors.orange
-                  )
-              ),
-            ),
-          )
-        ],
       ),
     );
   }
@@ -368,4 +280,125 @@ class _List_TState extends State<List_T> {
 
         ));
   }
+}
+class Empty extends StatefulWidget {
+  const Empty({Key? key}) : super(key: key);
+
+  @override
+  _EmptyState createState() => _EmptyState();
+}
+
+class _EmptyState extends State<Empty> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+              height: MediaQuery.of(context).size.height*.35,
+              width: MediaQuery.of(context).size.width*.65,
+
+              child: Image.asset(
+                  'assets/images/map_location.jpg')
+          ),
+          Container(
+              width: MediaQuery.of(context).size.width*.7,
+              child: Text(
+                'Вы можете оставить заявку\n нажимая кнопку ниже',
+                maxLines: 2,
+                style: TextStyle(
+                  fontSize: 13,
+                ),
+                textAlign: TextAlign.center,
+              )
+          ),
+          SizedBox(height: 20),
+          Container(
+            height: MediaQuery.of(context).size.height*.045,
+            width: MediaQuery.of(context).size.width*.45,
+            child: RaisedButton(
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add,
+                    color: Colors.orange,
+                  ),
+                  SizedBox(
+                      width: 10),
+                  Text(
+                    'Add',
+                    style: TextStyle(
+                        color: Colors.orange
+                    ),),
+                ],
+              ),
+              onPressed: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TransfersAdd()));
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(
+                      color: Colors.orange
+                  )
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+void _startAddNewTransaction(BuildContext ctx)
+{
+  showModalBottomSheet(
+      context: ctx,
+      builder: (_)
+      {
+        return  Container(
+          margin: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Text('About Transfer',
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                    fontSize: 24
+                ),
+              ),
+              Divider(),
+              Text('Lorem ipsum dolor sit amet, consectetur adipiscing '
+                  'elit. Eu venenatis eu id pellentesque.',
+
+                maxLines: 2,
+                style: TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              Text('\nLorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                  ' A, risus, nec accumsan, ultrices vulputate phasellus. '
+                  'Sagittis sagittis, quis risus eget vel pulvinar potenti amet. '
+                  'Orci nec id maecenas enim rhoncus sodales.'
+                  ' Hendrerit cursus purus gravida ultricies. Imperdiet pharetra morbi gravida hac vitae'
+                  'ipsum dolor sit amet, consectetur adipiscing elit.'
+                  ' A, risus, nec accumsan, ultrices vulputate phasellus. '
+                  'Sagittis sagittis, quis risus eget vel pulvinar potenti amet. '
+                  'Orci nec id maecenas enim rhoncus sodales.'
+                  ' Hendrerit cursus purus gravida ultricies. Imperdiet pharetra morbi gravida hac vitae',
+                maxLines: 5,
+                style: TextStyle(
+                    fontSize: 19
+                ),
+              )
+            ],
+
+          ),
+        );
+      }
+  );
 }

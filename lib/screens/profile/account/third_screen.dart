@@ -18,10 +18,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
   final TextEditingController _phoneEmailController = TextEditingController();
 
   List<Map<String, dynamic>> data = [
-    {"image": "assets/viber.svg", "check_box": false},
-    {"image": "assets/wechat.svg", "check_box": false},
-    {"image": "assets/telegram.svg", "check_box": false},
-    {"image": "assets/whatsapp.svg", "check_box": false},
+
   ];
 
   @override
@@ -43,12 +40,14 @@ class _ThirdScreenState extends State<ThirdScreen> {
       },
     );
     Map<String, dynamic> socials = json.decode(json.decode(result.body)["socials"]);
-    setState(() {
-      socials.forEach((key, value) {
-        data[i]["check_box"] = value == 0 ? false : true;
-        i++;
+    if(socials != null) {
+      setState(() {
+        socials.forEach((key, value) {
+          data[i]["check_box"] = value == 0 ? false : true;
+          i++;
+        });
       });
-    });
+    }
   }
 
 

@@ -165,6 +165,22 @@ class _SignInState extends State<SignIn> {
                         "cashback_foiz": response["user"]["cashback_percent"],
                       });
                       await prefs.setString('userData', userData);
+                      if(response["company"] != null) {
+                        final api_data = response["company"]["requisites"][0];
+                        final companyData = json.encode({
+                          "name": api_data["company_name"],
+                          "city": api_data["company_city"],
+                          "address": api_data["company_address"],
+                          "post": api_data["post_index"],
+                          "bank": api_data["bank"],
+                          "bank_account": api_data["bank_account"],
+                          "oked": api_data["oked"],
+                          "mfo": api_data["mfo"],
+                          "inn": api_data["inn"],
+                          "okonh": api_data["okonh"],
+                        });
+                        await prefs.setString("companyData", companyData);
+                      }
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (_)=> MainScreen()

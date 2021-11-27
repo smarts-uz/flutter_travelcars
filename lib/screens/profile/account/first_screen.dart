@@ -39,12 +39,14 @@ class _FirstSceenState extends State<FirstSceen> {
   ];
 
   Map<String, dynamic> userinfo = {};
+  Map<String, dynamic> companyinfo = {};
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getuserdata();
+    getcompanydata();
   }
 
   void getuserdata() async {
@@ -56,6 +58,20 @@ class _FirstSceenState extends State<FirstSceen> {
       _phoneController = TextEditingController(text: userinfo["phone"]);
     });
   }
+  void getcompanydata() async {
+    final prefs = await SharedPreferences.getInstance();
+    if(prefs.containsKey("companyData")) {
+      int i = 0;
+      setState(() {
+        companyinfo = json.decode(prefs.getString('companyData')!) as Map<String, dynamic>;
+        print(companyinfo);
+        companyinfo.forEach((key, value) {
+          controllers[i] = TextEditingController(text: value);
+          i++;
+        });
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +82,7 @@ class _FirstSceenState extends State<FirstSceen> {
         title: Text("Изменение профиля"),
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             Container(
@@ -178,10 +195,10 @@ class _FirstSceenState extends State<FirstSceen> {
                                   .toList(),
                             ),
                           ),
-                          Column(
+                          if (companyinfo.isNotEmpty) Column(
                             children: [0, 1, 2, 3,4,5,6,7,8,].map((e) => Container(
                               width: double.infinity,
-                              height:  50,
+                              height:  65,
                               padding: EdgeInsets.only(left: 15),
                               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                               decoration: BoxDecoration(
@@ -191,7 +208,7 @@ class _FirstSceenState extends State<FirstSceen> {
                               child: TextFormField(
                                 autovalidateMode: AutovalidateMode.always,
                                 decoration: InputDecoration(
-                                  hintText: hints[e],
+                                  labelText: hints[e],
                                   focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.white,

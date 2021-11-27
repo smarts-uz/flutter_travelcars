@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/profile/account/second_screen.dart';
@@ -7,7 +9,30 @@ import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'choice_language.dart';
 import 'first_screen.dart';
 
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
+  @override
+  State<AccountScreen> createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
+  String name = "";
+  String email = "";
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getuserdata();
+  }
+
+  void getuserdata() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      final userinfo = json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
+      email = userinfo["email"];
+      name = userinfo["name"];
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,50 +51,42 @@ class AccountScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 16, top: 25),
-                child: CircleAvatar(
-                  radius: 40,
-                  backgroundImage: AssetImage("assets/Image.png"),
+          Padding(
+            padding: const EdgeInsets.only(top: 12.0),
+            child: ListTile(
+              leading: Container(
+                padding: EdgeInsets.only(top: 12, left: 15),
+                height: 90,
+                width: 90,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/Image.png"),
+                    fit: BoxFit.fill,
+                  ),
+                  shape: BoxShape.circle,
+                ),
+                alignment: Alignment.centerLeft,
+              ),
+              title: Text(
+                name,
+                maxLines: 2,
+                style: TextStyle(
+                  color: Color.fromRGBO(0, 0, 0, 0.87),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 19,
+                  letterSpacing: 0.15,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 48, top: 32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      "John",
-                      style: TextStyle(
-                        color: Color.fromRGBO(0, 0, 0, 0.87),
-                        fontWeight: FontWeight.w500,
-                        fontSize: 19,
-                        letterSpacing: 0.15,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 8),
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            "Friderik",
-                            style: TextStyle(
-                              color: Color.fromRGBO(0, 0, 0, 0.6),
-                              fontWeight: FontWeight.w500,
-                              fontSize: 13,
-                              letterSpacing: 0.1,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+              subtitle:  Text(
+                email,
+                style: TextStyle(
+                  color: Color.fromRGBO(0, 0, 0, 0.6),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                  letterSpacing: 0.1,
                 ),
               ),
-            ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20),
@@ -159,3 +176,45 @@ class AccountScreen extends StatelessWidget {
     );
   }
 }
+/*Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 16, top: 25),
+                child: CircleAvatar(
+                  radius: 40,
+                  backgroundImage: AssetImage("assets/Image.png"),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 20, top: 5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      name,
+                      maxLines: 2,
+                      style: TextStyle(
+                        color: Color.fromRGBO(0, 0, 0, 0.87),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 19,
+                        letterSpacing: 0.15,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 0),
+                      child: Text(
+                        email,
+                        style: TextStyle(
+                          color: Color.fromRGBO(0, 0, 0, 0.6),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          letterSpacing: 0.1,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),*/

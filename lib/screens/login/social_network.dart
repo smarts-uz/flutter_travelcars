@@ -14,10 +14,10 @@ class _SocialScreenState extends State<SocialScreen> {
   final TextEditingController _phoneEmailController = TextEditingController();
 
   List<Map<String, dynamic>> data = [
-    {"image": "assets/images/wechat.svg", "check_box": false},
     {"image": "assets/images/viber.svg", "check_box": false},
-    {"image": "assets/images/whatsapp.svg", "check_box": false},
+    {"image": "assets/images/wechat.svg", "check_box": false},
     {"image": "assets/images/telegram.svg", "check_box": false},
+    {"image": "assets/images/whatsapp.svg", "check_box": false},
   ];
 
   @override
