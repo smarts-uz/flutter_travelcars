@@ -1,5 +1,7 @@
 import 'dart:collection';
 
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -8,12 +10,13 @@ import 'package:travelcars/map.dart';
 import 'package:travelcars/screens/bookings/booking_item_screen.dart';
 import 'package:travelcars/screens/feedback/feedback.dart';
 import 'package:travelcars/screens/search/components/drop_button_cost.dart';
+import 'package:travelcars/screens/trip/trip_item.dart';
 
 
 class CarDetails extends StatefulWidget {
   final Map<String,dynamic> info;
   CarDetails(this.info);
-
+  final CarouselController _controller = CarouselController();
 
   @override
   _CarDetailsState createState() => _CarDetailsState();
@@ -89,50 +92,52 @@ class _CarDetailsState extends State<CarDetails> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.info);
     var results = widget.info;
+    List<dynamic> images = results["images"];
+    print(images);
 
-    List< dynamic> options = widget.info["options"];
-    options.forEach((element) {
-      List<String> images = [];
-      element["images"].forEach((element) {
-        images.add(element["original"]);
-        images.add(element["medium"]);
-        images.add(element["thumb"]);
-        images.add(element["main"]);
-      });
-      element.addAll({
-        "images": images,
-      });
-    });
-
-
-    List< dynamic> qulayliklar=[];
-    options.forEach( (element) {
-      qulayliklar.add(element["name"]);
-    }
-    );
-    print(qulayliklar);
-    results.addAll({"qulayliklar": qulayliklar});
-    print(widget.info);
-
-
+    int _current = 0;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+
           children: [
             Stack(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.35,
-                  margin: EdgeInsets.only(
-                    bottom: 30,
-                  ),
+                  padding: EdgeInsets.only(top: 24),
+                  height: 330,
                   width: double.infinity,
-                  child: Image.network(
-                    "${results["image"]}",
-                    fit: BoxFit.fill,
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                      viewportFraction: 1,
+                        autoPlay: true,
+                        //autoPlayInterval: Duration(seconds: 2),
+                        disableCenter: true,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _current = index;
+                          }
+                          );
+                        }
+                    ),
+                   items: results["images"].map<Widget>((item) {
+                     return Container(
+                      // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                       width: double.infinity,
+                       decoration: BoxDecoration(
+                         image: DecorationImage(
+                           image: NetworkImage(
+                             "https://travelcars.uz/uploads/cars/$item",
+                           ),
+                           fit: BoxFit.cover,
+                         ),
+                         borderRadius: BorderRadius.all(Radius.circular(15)),
+                       ),
+                     );
+                   }
+                   ).toList(),
                   ),
                 ),
                 Padding(
@@ -163,8 +168,28 @@ class _CarDetailsState extends State<CarDetails> {
                     ],
                   ),
                 ),
+               Positioned(
+                 bottom: 6,
+                 right: 160,
+                 child: Row(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: results["images"].asMap().entries.map<Widget>((entry) {
+                   return GestureDetector(
+                     //onTap: () => _controller.animateToPage(entry.key),
+                     child: Container(
+                         width: 8.0,
+                         height: 8.0,
+                         margin: EdgeInsets.symmetric(horizontal: 4.0),
+                         decoration: BoxDecoration(
+                             shape: BoxShape.circle,
+                             color: Colors.white.withOpacity(_current == entry.key ? 0.9 : 0.4)
+                         )
+                     ),
+                   );
+                 }).toList(),
+               ),),
                 Positioned(
-                    bottom: 1,
+                    bottom: 6,
                     right: 30,
                     child: Container(
                       height: 56,
@@ -201,7 +226,7 @@ class _CarDetailsState extends State<CarDetails> {
                       child: Text(
                         "Год выпуска: ${results["year"]}",
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 16,
                           color: Colors.grey,
                           fontWeight: FontWeight.w500,
                           fontFamily: 'Poppins',
@@ -216,7 +241,7 @@ class _CarDetailsState extends State<CarDetails> {
                       child: Text(
                         "ID номер: ${results["number"]}",
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 16,
                           color: Colors.grey,
                           fontWeight: FontWeight.w500,
                           fontFamily: 'Poppins',
@@ -237,7 +262,7 @@ class _CarDetailsState extends State<CarDetails> {
                       child: Text(
                         "${results["views"]}",
                         style: TextStyle(
-                          fontSize: 13,
+                          fontSize: 17,
                           color: Colors.grey,
                           fontWeight: FontWeight.w500,
                           fontFamily: 'Poppins',
@@ -249,8 +274,8 @@ class _CarDetailsState extends State<CarDetails> {
                 ),
               ],
             ),
-            _listWrap(results['qulayliklar']),
-           /* Container(
+           /* _listWrap(results['qulayliklar']),
+            Container(
               decoration: BoxDecoration(color: HexColor("#F5F5F6")),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -297,7 +322,7 @@ class _CarDetailsState extends State<CarDetails> {
                 ],
               ),
             ),*/
-            _text(text: "Карта поездки"),
+           /* _text(text: "Карта поездки"),
             Stack(
               children: [
                 Container(
@@ -376,11 +401,11 @@ class _CarDetailsState extends State<CarDetails> {
                   ),
                 ),
               ),
-            ),
+            ),*/
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => BookingScreen()));
+               /* Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => BookingScreen()));*/
               },
               child: Container(
                 margin: EdgeInsets.all(16),
@@ -394,7 +419,7 @@ class _CarDetailsState extends State<CarDetails> {
                   child: Text(
                     "Бронировать",
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 17,
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
                       fontFamily: 'Poppins',
@@ -416,7 +441,7 @@ class _CarDetailsState extends State<CarDetails> {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 19,
+          fontSize: 22,
           color: Colors.black,
           fontWeight: FontWeight.w500,
           fontFamily: 'Poppins',
