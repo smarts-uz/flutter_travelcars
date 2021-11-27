@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travelcars/app_config.dart';
+import 'package:travelcars/screens/home/car_details.dart';
 import 'package:travelcars/screens/search/details_screen.dart';
 import 'package:http/http.dart' as http;
 
@@ -101,7 +102,6 @@ class _CarTypeState extends State<CarType> {
   void getcars() async{
    String url = "${AppConfig.BASE_URL}/getCarTypeById/${widget.id}?lang=ru";
    final response = await http.get(Uri.parse(url));
-   print(json.decode(response.body)["data"]);
    setState(() {
      results = json.decode(response.body)["data"];
      results.forEach((element) {
@@ -239,7 +239,7 @@ class _CarTypeState extends State<CarType> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DetailScreen())
+                      MaterialPageRoute(builder: (context) => CarDetails(results[index] as Map<String, dynamic>))
                     );
                   },
                   child: Container(
