@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/main_screen.dart';
 import 'package:travelcars/screens/transfers/transfers_info.dart';
 import 'package:travelcars/screens/transfers/trasfers_add.dart';
@@ -20,7 +21,8 @@ class TransfersScreen extends StatefulWidget {
 
 class _TransfersScreenState extends State<TransfersScreen> {
   bool  _isLoading = true;
-  List<Map<String, dynamic>> info = [
+  List<dynamic> city = [];
+  List<dynamic> info = [/*
     {
       'id': '20',
       'confirmed': 'Approved',
@@ -61,13 +63,13 @@ class _TransfersScreenState extends State<TransfersScreen> {
       'status' :'Approved',
 
 
-    }
-  ];
+    }*/];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getcities();
     getTransfers();
   }
 
@@ -81,11 +83,16 @@ class _TransfersScreenState extends State<TransfersScreen> {
         "Authorization": "Bearer $token",
       }
     );
-    print(json.decode(response.body)["data"]);
     setState(() {
-      //info = json.decode(response.body)["data"];
+      info = json.decode(response.body)["data"];
       _isLoading = false;
     });
+  }
+
+  void getcities() async {
+    city = await Cities.getcities();
+    city = city.toSet().toList();
+    print(city);
   }
 
   @override
@@ -113,7 +120,7 @@ class _TransfersScreenState extends State<TransfersScreen> {
       ),
       body: _isLoading ? Center(
         child: CircularProgressIndicator(),
-      ) : info.isEmpty ?  Empty() :  List_T(info),
+      ) : info.isEmpty ?  Empty() :  List_T(info, city),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
@@ -127,8 +134,9 @@ class _TransfersScreenState extends State<TransfersScreen> {
 
 class List_T extends StatefulWidget {
   final List info;
+  final List city;
 
-  List_T(@required this.info);
+  List_T(@required this.info, @required this.city);
 
   @override
   _List_TState createState() => _List_TState();
@@ -138,6 +146,7 @@ class _List_TState extends State<List_T> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        physics: BouncingScrollPhysics(),
         itemCount: widget.info.length,
         itemBuilder: (context, index) => Card(
           margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
@@ -147,21 +156,22 @@ class _List_TState extends State<List_T> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               ListTile(
-                leading: Text("ID ${widget.info[index]['id']}",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold
-                ),),
+                leading: Text(
+                  "ID ${widget.info[index]['id']}",
+                  style: TextStyle(
+                      fontSize: 25,
+                  ),
+                ),
                 trailing: RaisedButton(
                   padding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                  onPressed: (){},
+                  onPressed: () {},
                   color: Colors.lightGreenAccent,
-                  child: Text('${widget.info[index]['confirmed']}'),
+                  child: Text('${widget.info[index]['status']}'),
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(left: 16,bottom: 12),
+                padding: EdgeInsets.only(left: 16, bottom: 8),
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Route',
@@ -170,48 +180,51 @@ class _List_TState extends State<List_T> {
                   ),),
               ),
               Container(
-                padding: EdgeInsets.only(left: 16,bottom:4 ),
-                alignment: Alignment.topLeft,
-                child:   RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(text: '${widget.info[index]['districtFr1']} - '),
-                      TextSpan(text: '${widget.info[index]['districtTo1']}   '),
-                      TextSpan(text: '( ${widget.info[index]['date1']} )',style: TextStyle(
-                          fontWeight: FontWeight.bold
-                      ))
-                    ],
-                  ),
-                )
+                padding: EdgeInsets.only(left: 10),
+                height: widget.info[index]["places"].length * 85.0,
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: widget.info[index]["places"].length,
+                  itemBuilder: (context, index_p) {
+                    String location = "";
+                    widget.city.forEach((element) {
+                      if(element["city_id"] == widget.info[index]["places"][index_p]['city_id']) {
+                        location = element["name"];
+                      }
+                    });
+                    return Container(
+                        padding: EdgeInsets.only(left: 16,bottom:4 ),
+                        alignment: Alignment.topLeft,
+                        child: RichText(
+                          maxLines: 3,
+                          text: TextSpan(
+                            style: TextStyle(
+                              height: 1.5,
+                              color: Colors.black,
+                              fontSize: 17,
+                            ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: '${widget.info[index]["places"][index_p]['type']}\n',
+                                  style: TextStyle(color: Colors.orange, fontSize: 20, fontWeight: FontWeight.bold,)
+                              ),
+                              TextSpan(text: "$location",),
+                              TextSpan(
+                                text:"  ${widget.info[index]["places"][index_p]['date'].substring(0, 10)} ${widget.info[index]["places"][index_p]['time']}\n",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )
+                              ),
+                              TextSpan(text: '${widget.info[index]["places"][index_p]['from']} - ${widget.info[index]["places"][index_p]['to']}',),
+                            ],
+                          ),
+                        )
+                    );
+                  }
+                ),
               ),
               Container(
-                padding: EdgeInsets.only(left: 16 ,bottom:4 ),
-                alignment: Alignment.centerLeft,
-                child:
-                RichText(
-                  text: TextSpan(
-
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(text: '${widget.info[index]['districtFr2']} - '),
-                      TextSpan(text: '${widget.info[index]['districtTo2']}   '),
-                      TextSpan(text: '( ${widget.info[index]['date2']} )',style: TextStyle(
-                        fontWeight: FontWeight.bold
-                      ))
-                    ],
-                  ),
-                )
-              ),
-
-
-
-              Container(
-                padding: EdgeInsets.only(left: 16,bottom: 12,top: 16),
+                padding: EdgeInsets.only(left: 16,bottom: 10,top: 10),
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Contact',
@@ -222,47 +235,41 @@ class _List_TState extends State<List_T> {
               Container(
                 padding: EdgeInsets.only(left: 16,bottom:4 ),
                 alignment: Alignment.topLeft,
-                child: Text('${widget.info[index]['name']} '),
+                child: Text(
+                  '${widget.info[index]['user_name']}\n${widget.info[index]['user_email']}\n${widget.info[index]['user_phone']}',
+                  style: TextStyle(
+                    height: 1.5,
+                    fontSize: 15
+                  ),
+                ),
               ),
-              Container(
-                padding: EdgeInsets.only(left: 16 ,bottom:4 ),
+              if(widget.info[index]['created_at'] != null) Container(
+                padding: EdgeInsets.only(left: 16,bottom: 12,top: 10),
                 alignment: Alignment.centerLeft,
-                child: Text('${widget.info[index]['email']} '),
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 16 ,bottom:4 ),
-                alignment: Alignment.centerLeft,
-                child: Text('${widget.info[index]['phone']} '),
-              ),
-
-
-
-              Container(
-                padding: EdgeInsets.only(left: 16,bottom: 12,top: 16),
-                alignment: Alignment.centerLeft,
-                child: Text('Day ',
+                child: Text(
+                  'Created at:',
                   style: TextStyle(
                       fontSize: 20
                   ),),
               ),
-              Container(
-                padding: EdgeInsets.only(left: 16 ,bottom:20 ),
+              if(widget.info[index]['created_at'] != null) Container(
+                padding: EdgeInsets.only(left: 16),
                 alignment: Alignment.centerLeft,
-                child: Text('${widget.info[index]['submit date']}'),
+                child: Text('${widget.info[index]['created_at'].substring(0, 10)}'),
               ),
-
-
               Container(
-               margin: EdgeInsets.only(bottom: 16),
-                height: MediaQuery.of(context).size.height*.045,
-                width: MediaQuery.of(context).size.width*.90,
+               margin: EdgeInsets.only(bottom: 16, top: 20),
+                height: MediaQuery.of(context).size.height*.05,
+                width: MediaQuery.of(context).size.width*.9,
                 child: RaisedButton(
                   color: Colors.white,
-                  child:  Text('Look',
-                        style: TextStyle(
-                            color: Colors.orange,
-                          fontSize: 20
-                        ),),
+                  child:  Text(
+                    'Look',
+                    style: TextStyle(
+                        color: Colors.orange,
+                        fontSize: 22
+                    ),
+                  ),
                   onPressed: (){
                     Navigator.push(context, MaterialPageRoute(
                         builder: (context) => TransfersInfo(widget.info[index])));
@@ -270,17 +277,18 @@ class _List_TState extends State<List_T> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                       side: BorderSide(
-                          color: Colors.orange
+                          color: Colors.grey
                       )
                   ),
                 ),
               ),
             ],
           ),
-
-        ));
+        )
+    );
   }
 }
+
 class Empty extends StatefulWidget {
   const Empty({Key? key}) : super(key: key);
 
