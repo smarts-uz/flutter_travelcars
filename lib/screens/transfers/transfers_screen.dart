@@ -22,6 +22,7 @@ class TransfersScreen extends StatefulWidget {
 class _TransfersScreenState extends State<TransfersScreen> {
   bool  _isLoading = true;
   List<dynamic> city = [];
+  List<dynamic> cars = [];
   List<dynamic> info = [/*
     {
       'id': '20',
@@ -70,6 +71,7 @@ class _TransfersScreenState extends State<TransfersScreen> {
     // TODO: implement initState
     super.initState();
     getcities();
+    getCars();
     getTransfers();
   }
 
@@ -92,7 +94,14 @@ class _TransfersScreenState extends State<TransfersScreen> {
   void getcities() async {
     city = await Cities.getcities();
     city = city.toSet().toList();
-    print(city);
+  }
+
+  void getCars() async {
+    String url = "${AppConfig.BASE_URL}/getAllCarTypes?lang=ru";
+    final response  = await http.get(
+      Uri.parse(url),
+    );
+    cars = json.decode(response.body)["car_types"];
   }
 
   @override
@@ -120,7 +129,7 @@ class _TransfersScreenState extends State<TransfersScreen> {
       ),
       body: _isLoading ? Center(
         child: CircularProgressIndicator(),
-      ) : info.isEmpty ?  Empty() :  List_T(info, city),
+      ) : info.isEmpty ?  Empty() :  List_T(info, city, cars),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
@@ -135,8 +144,9 @@ class _TransfersScreenState extends State<TransfersScreen> {
 class List_T extends StatefulWidget {
   final List info;
   final List city;
+  final List cars;
 
-  List_T(@required this.info, @required this.city);
+  List_T(@required this.info, @required this.city, @required this.cars);
 
   @override
   _List_TState createState() => _List_TState();
@@ -148,143 +158,161 @@ class _List_TState extends State<List_T> {
     return ListView.builder(
         physics: BouncingScrollPhysics(),
         itemCount: widget.info.length,
-        itemBuilder: (context, index) => Card(
-          margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          elevation: 6,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              ListTile(
-                leading: Text(
-                  "ID ${widget.info[index]['id']}",
-                  style: TextStyle(
-                      fontSize: 25,
-                  ),
-                ),
-                trailing: RaisedButton(
-                  padding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                  onPressed: () {},
-                  color: Colors.lightGreenAccent,
-                  child: Text('${widget.info[index]['status']}'),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 16, bottom: 8),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Route',
-                  style: TextStyle(
-                      fontSize: 20
-                  ),),
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 10),
-                height: widget.info[index]["places"].length * 85.0,
-                child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: widget.info[index]["places"].length,
-                  itemBuilder: (context, index_p) {
-                    String location = "";
-                    widget.city.forEach((element) {
-                      if(element["city_id"] == widget.info[index]["places"][index_p]['city_id']) {
-                        location = element["name"];
-                      }
-                    });
-                    return Container(
-                        padding: EdgeInsets.only(left: 16,bottom:4 ),
-                        alignment: Alignment.topLeft,
-                        child: RichText(
-                          maxLines: 3,
-                          text: TextSpan(
-                            style: TextStyle(
-                              height: 1.5,
-                              color: Colors.black,
-                              fontSize: 17,
-                            ),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: '${widget.info[index]["places"][index_p]['type']}\n',
-                                  style: TextStyle(color: Colors.orange, fontSize: 20, fontWeight: FontWeight.bold,)
-                              ),
-                              TextSpan(text: "$location",),
-                              TextSpan(
-                                text:"  ${widget.info[index]["places"][index_p]['date'].substring(0, 10)} ${widget.info[index]["places"][index_p]['time']}\n",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                )
-                              ),
-                              TextSpan(text: '${widget.info[index]["places"][index_p]['from']} - ${widget.info[index]["places"][index_p]['to']}',),
-                            ],
-                          ),
-                        )
-                    );
-                  }
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 16,bottom: 10,top: 10),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Contact',
-                  style: TextStyle(
-                      fontSize: 20
-                  ),),
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 16,bottom:4 ),
-                alignment: Alignment.topLeft,
-                child: Text(
-                  '${widget.info[index]['user_name']}\n${widget.info[index]['user_email']}\n${widget.info[index]['user_phone']}',
-                  style: TextStyle(
-                    height: 1.5,
-                    fontSize: 15
-                  ),
-                ),
-              ),
-              if(widget.info[index]['created_at'] != null) Container(
-                padding: EdgeInsets.only(left: 16,bottom: 12,top: 10),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Created at:',
-                  style: TextStyle(
-                      fontSize: 20
-                  ),),
-              ),
-              if(widget.info[index]['created_at'] != null) Container(
-                padding: EdgeInsets.only(left: 16),
-                alignment: Alignment.centerLeft,
-                child: Text('${widget.info[index]['created_at'].substring(0, 10)}'),
-              ),
-              Container(
-               margin: EdgeInsets.only(bottom: 16, top: 20),
-                height: MediaQuery.of(context).size.height*.05,
-                width: MediaQuery.of(context).size.width*.9,
-                child: RaisedButton(
-                  color: Colors.white,
-                  child:  Text(
-                    'Look',
+        itemBuilder: (context, index) {
+          if(widget.info[index]["car_type"] != null) {
+            widget.cars.forEach((element) {
+              if(element["id"] == widget.info[index]["car_type"]["id"]) {
+                widget.info[index].addAll({
+                  "car": "${element["name"]}"
+                });
+              }
+            });
+          } else {
+            widget.info[index].addAll({
+              "car": "null"
+            });
+          }
+          return Card(
+            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            elevation: 6,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ListTile(
+                  leading: Text(
+                    "ID ${widget.info[index]['id']}",
                     style: TextStyle(
-                        color: Colors.orange,
-                        fontSize: 22
+                      fontSize: 25,
                     ),
                   ),
-                  onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => TransfersInfo(widget.info[index])));
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(
-                          color: Colors.grey
-                      )
+                  trailing: RaisedButton(
+                    padding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                    onPressed: () {},
+                    color: Colors.lightGreenAccent,
+                    child: Text('${widget.info[index]['status']}'),
                   ),
                 ),
-              ),
-            ],
-          ),
-        )
+                Container(
+                  padding: EdgeInsets.only(left: 16, bottom: 8),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Route',
+                    style: TextStyle(
+                        fontSize: 20
+                    ),),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 10),
+                  height: widget.info[index]["places"].length * 85.0,
+                  child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: widget.info[index]["places"].length,
+                      itemBuilder: (context, index_p) {
+                        String location = "";
+                        widget.city.forEach((element) {
+                          if(element["city_id"] == widget.info[index]["places"][index_p]['city_id']) {
+                            location = element["name"];
+                            widget.info[index]["places"][index_p].addAll({
+                              "city": "${element["name"]}"
+                            });
+                          }
+                        });
+                        return Container(
+                            padding: EdgeInsets.only(left: 16,bottom:4 ),
+                            alignment: Alignment.topLeft,
+                            child: RichText(
+                              maxLines: 3,
+                              text: TextSpan(
+                                style: TextStyle(
+                                  height: 1.5,
+                                  color: Colors.black,
+                                  fontSize: 17,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                      text: '${widget.info[index]["places"][index_p]['type']}\n',
+                                      style: TextStyle(color: Colors.orange, fontSize: 20, fontWeight: FontWeight.bold,)
+                                  ),
+                                  TextSpan(text: "$location",),
+                                  TextSpan(
+                                      text:"  ${widget.info[index]["places"][index_p]['date'].substring(0, 10)} ${widget.info[index]["places"][index_p]['time']}\n",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      )
+                                  ),
+                                  TextSpan(text: '${widget.info[index]["places"][index_p]['from']} - ${widget.info[index]["places"][index_p]['to']}',),
+                                ],
+                              ),
+                            )
+                        );
+                      }
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 16,bottom: 10,top: 10),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Contact',
+                    style: TextStyle(
+                        fontSize: 20
+                    ),),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 16,bottom:4 ),
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    '${widget.info[index]['user_name']}\n${widget.info[index]['user_email']}\n${widget.info[index]['user_phone']}',
+                    style: TextStyle(
+                        height: 1.5,
+                        fontSize: 15
+                    ),
+                  ),
+                ),
+                if(widget.info[index]['created_at'] != null) Container(
+                  padding: EdgeInsets.only(left: 16,bottom: 12,top: 10),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Created at:',
+                    style: TextStyle(
+                        fontSize: 20
+                    ),),
+                ),
+                if(widget.info[index]['created_at'] != null) Container(
+                  padding: EdgeInsets.only(left: 16),
+                  alignment: Alignment.centerLeft,
+                  child: Text('${widget.info[index]['created_at'].substring(0, 10)}'),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 16, top: 20),
+                  height: MediaQuery.of(context).size.height*.05,
+                  width: MediaQuery.of(context).size.width*.9,
+                  child: RaisedButton(
+                    color: Colors.white,
+                    child:  Text(
+                      'Look',
+                      style: TextStyle(
+                          color: Colors.orange,
+                          fontSize: 22
+                      ),
+                    ),
+                    onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => TransfersInfo(widget.info[index])));
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(
+                            color: Colors.grey
+                        )
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
     );
   }
 }
