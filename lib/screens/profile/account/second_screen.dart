@@ -16,7 +16,18 @@ class _SecondScreenState extends State<SecondScreen> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         centerTitle: true,
-        title: Text("Изменение пароля"),
+        title: Text(
+          "Изменение пароля",
+          style: TextStyle(
+              color: Colors.white
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back, color: Colors.white,),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(

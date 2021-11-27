@@ -18,7 +18,10 @@ class _ThirdScreenState extends State<ThirdScreen> {
   final TextEditingController _phoneEmailController = TextEditingController();
 
   List<Map<String, dynamic>> data = [
-
+    {"image": "assets/images/viber.svg", "check_box": false},
+    {"image": "assets/images/wechat.svg", "check_box": false},
+    {"image": "assets/images/telegram.svg", "check_box": false},
+    {"image": "assets/images/whatsapp.svg", "check_box": false},
   ];
 
   @override
@@ -56,6 +59,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
+        centerTitle: true,
         title: Text(
           "Соц. сети для связи",
           style: TextStyle(
@@ -63,6 +67,12 @@ class _ThirdScreenState extends State<ThirdScreen> {
             fontSize: 19,
             fontStyle: FontStyle.normal,
           ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back, color: Colors.white,),
         ),
       ),
       body: SingleChildScrollView(

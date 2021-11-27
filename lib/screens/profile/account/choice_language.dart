@@ -21,7 +21,18 @@ class _ChoicePageState extends State<ChoicePage> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         centerTitle: true,
-        title: Text("Настройка языка и курса"),
+        title: Text(
+          "Настройка языка и курса",
+          style: TextStyle(
+              color: Colors.white
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back, color: Colors.white,),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 17, top: 2, right: 17),

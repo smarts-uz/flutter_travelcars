@@ -24,18 +24,17 @@ class _FirstSceenState extends State<FirstSceen> {
     for (int i = 0; i < 9; i++)
       TextEditingController()
   ];
-  List<String> hints =
-  [
-  "Юридическое название",
-  "Юридический город",
-  "Юридический адрес",
-  "Почтовый индекс",
-  "Банк",
-  "Расчетный счет",
-  "ОКЭД",
-  "МФО",
-  "ИНН",
-  "ОКОНХ",
+  List<String> hints = [
+    "Юридическое название",
+    "Юридический город",
+    "Юридический адрес",
+    "Почтовый индекс",
+    "Банк",
+    "Расчетный счет",
+    "ОКЭД",
+    "МФО",
+    "ИНН",
+    "ОКОНХ",
   ];
 
   Map<String, dynamic> userinfo = {};
@@ -79,7 +78,18 @@ class _FirstSceenState extends State<FirstSceen> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         centerTitle: true,
-        title: Text("Изменение профиля"),
+        title: Text(
+          "Изменение профиля",
+          style: TextStyle(
+            color: Colors.white
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back, color: Colors.white,),
+        ),
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -90,32 +100,15 @@ class _FirstSceenState extends State<FirstSceen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 25, left: 10),
-                      child: Stack(
-                        children: [
-                          CircleAvatar(
-                            radius: 50,
-                            backgroundImage: AssetImage("assets/Image.png"),
-                          ),
-                          Positioned(
-                            right: 10,
-                            left: 15,
-                            bottom: 40,
-                            child: SizedBox(
-                              height: 25,
-                              width: 25,
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: Image.asset("assets/Vector.png"),
-                              ),
-                            ),
-                          ),
-                        ],
+                    Container(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: AssetImage("assets/Image.png"),
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.only(top: 40, right: 16, left: 16),
+                      padding: EdgeInsets.only(top: 20, right: 16, left: 16),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3.5),
                       ),
@@ -127,7 +120,7 @@ class _FirstSceenState extends State<FirstSceen> {
                             controller: _emailController,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
-                              labelText:"Mail",
+                              labelText: "Mail",
                               floatingLabelBehavior: FloatingLabelBehavior.always,
                               contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                               border: OutlineInputBorder(),
@@ -138,7 +131,7 @@ class _FirstSceenState extends State<FirstSceen> {
                             controller: _nameController,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
-                              labelText:"ФИО",
+                              labelText: "ФИО",
                               floatingLabelBehavior: FloatingLabelBehavior.always,
                               contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                               border: OutlineInputBorder(),
@@ -148,11 +141,8 @@ class _FirstSceenState extends State<FirstSceen> {
                           TextFormField(
                             controller: _phoneController,
                             keyboardType: TextInputType.phone,
-                            inputFormatters: [
-                              MaskedTextInputFormatter(mask: '### ## ### ## ##', separator: ' '),
-                            ],
                             decoration: InputDecoration(
-                              labelText:"Телефон",
+                              labelText: "Телефон",
                               floatingLabelBehavior: FloatingLabelBehavior.always,
                               contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                               border: OutlineInputBorder(),

@@ -39,12 +39,17 @@ class _AccountScreenState extends State<AccountScreen> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         centerTitle: true,
-        title: Text("Настройки профиля"),
+        title: Text(
+          "Настройки профиля",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colors.white,),
         ),
       ),
       body: Column(
@@ -52,12 +57,11 @@ class _AccountScreenState extends State<AccountScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(top: 12.0),
+            padding: const EdgeInsets.only(top: 18.0),
             child: ListTile(
               leading: Container(
-                padding: EdgeInsets.only(top: 12, left: 15),
-                height: 90,
-                width: 90,
+                height: 100,
+                width: 70,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("assets/Image.png"),
@@ -89,7 +93,7 @@ class _AccountScreenState extends State<AccountScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 10),
             child: SizedBox(
               height: 47,
               child: ListTile(
