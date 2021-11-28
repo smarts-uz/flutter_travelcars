@@ -95,7 +95,7 @@ class TransfersInfo extends StatelessWidget {
                   )
               ),
             ),
-            Padding(
+            if(info['car_type'] != null) Padding(
               padding: EdgeInsets.only(left: 16,top: 16),
               child: RichText(
                 text: TextSpan(
@@ -109,6 +109,11 @@ class TransfersInfo extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
                       TextSpan(text: '${info['car']}\n'),
+                      TextSpan(
+                          text: 'Auto: ',
+                          style: TextStyle(fontWeight: FontWeight.w500)
+                      ),
+                      TextSpan(text: '${info['car_type']["name"]}\n'),
                       TextSpan(
                           text: 'Status: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
