@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:travelcars/screens/feedback/feedback.dart';
 class Reviews extends StatefulWidget {
   const Reviews({Key? key}) : super(key: key);
 
@@ -223,7 +224,12 @@ class _ReviewsState extends State<Reviews> {
                                   color: Colors.orange
                                 ),
                                 ),
-                                onPressed: (){},
+                                onPressed: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => FeedbackScreen()),
+                                  );
+                                },
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                     side: BorderSide(

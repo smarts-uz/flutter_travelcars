@@ -271,6 +271,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               },
               child: InkWell(
                 onTap: () async {
+                  FocusScope.of(context).unfocus();
                   bool isValid = true;
                   String url = "${AppConfig.BASE_URL}/comment/create";
                   Map<String, dynamic> comment = {
@@ -288,36 +289,34 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                      isValid = false;
                      print("write$key");
                    }
-
                  });
+                 if(_commentController.text == "") isValid = false;
+                 if(_nameController.text == "") isValid = false;
+                 if(_cityController.text == "") isValid = false;
                  if(isValid){
-                   FocusScope.of(context).unfocus();
-                   Dialogs.OtzivDialog(context);
-                   final prefs = await SharedPreferences.getInstance();
-                   String token = json.decode(prefs.getString('userData')!)["token"];
-                   final result = await http.post(
-                       Uri.parse(url),
-                       headers: {
-                         "Authorization": "Bearer $token",
-                       },
-                       body: {
-                         "text" : _commentController.text,
-                         "route_id" : '0',
-                         "route_name": _nameController.text,
-                         "country_code" : _cityController.text,
-                         "route_date" : "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
-                         "grade" : "${json.encode(comment)}"
-                       }
-                   );
-                   print(json.decode(result.body)['message']);
-                 }
-
-                 print(comment);
-
-
-                 print(comment);
+                   try {
+                     final prefs = await SharedPreferences.getInstance();
+                     String token = json.decode(prefs.getString('userData')!)["token"];
+                     final result = await http.post(
+                         Uri.parse(url),
+                         headers: {
+                           "Authorization": "Bearer $token",
+                         },
+                         body: {
+                           "text" : _commentController.text,
+                           "route_id" : '0',
+                           "route_name": _nameController.text,
+                           "country_code" : _cityController.text,
+                           "route_date" : "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
+                           "grade" : "${json.encode(comment)}"
+                         }
+                     );
+                     print(json.decode(result.body)['message']);
+                     Dialogs.OtzivDialog(context);
+                   } catch (error) {
+                     Dialogs.ErrorDialog(context);
+                   }}
                  },
-
                 child: Container(
                   margin: EdgeInsets.all(16),
                   width: double.infinity,
@@ -330,7 +329,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     child: Text(
                       "Отправить отзыв",
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 18,
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
                         fontFamily: 'Poppins',

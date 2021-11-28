@@ -68,7 +68,7 @@ class Dialogs {
               borderRadius: BorderRadius.circular(18),
             ),
             child: Container(
-              height: MediaQuery.of(ctx).size.height * .25,
+              height: MediaQuery.of(ctx).size.height * .3,
               width: MediaQuery.of(ctx).size.width * .85,
               child: Column(
                 children: [
