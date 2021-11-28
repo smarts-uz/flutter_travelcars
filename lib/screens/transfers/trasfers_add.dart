@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
+import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 
@@ -388,6 +389,7 @@ class _TransfersAddState extends State<TransfersAdd> {
             width: MediaQuery.of(context).size.width*.70,
             child:  RaisedButton(
                 onPressed: () async {
+                  FocusScope.of(context).unfocus();
                   bool isValid = true;
                   List<Map<String, dynamic>> info = [];
                   data.forEach((element) {
@@ -417,21 +419,24 @@ class _TransfersAddState extends State<TransfersAdd> {
                     });
                   });
                   if(isValid) {
-                    print("go");
-                    String url = "${AppConfig.BASE_URL}/postTransfers";
-                    final prefs = await SharedPreferences.getInstance();
-                    String token = json.decode(prefs.getString('userData')!)["token"];
-                    final result = await http.post(
-                        Uri.parse(url),
-                        headers: {
-                          "Authorization": "Bearer $token",
-                        },
-                        body: {
-                          "transfers" : "${json.encode(info)}"
-                        }
-                    );
-                    print(json.decode(result.body)['message']);
-                    Navigator.of(context).pop();
+                    try{
+                      String url = "${AppConfig.BASE_URL}/postTransfers";
+                      final prefs = await SharedPreferences.getInstance();
+                      String token = json.decode(prefs.getString('userData')!)["token"];
+                      final result = await http.post(
+                          Uri.parse(url),
+                          headers: {
+                            "Authorization": "Bearer $token",
+                          },
+                          body: {
+                            "transfers" : "${json.encode(info)}"
+                          }
+                      );
+                      print(json.decode(result.body)['message']);
+                      Dialogs.ZayavkaDialog(context);
+                    } catch (error) {
+                      Dialogs.ErrorDialog(context);
+                    }
                   }
                 },
                 child: Text('Submit your application'),

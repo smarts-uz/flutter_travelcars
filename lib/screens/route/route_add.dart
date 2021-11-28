@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:http/http.dart' as http;
 
@@ -288,6 +289,7 @@ class _RouteAddState extends State<RouteAdd> {
               width: MediaQuery.of(context).size.width*.70,
               child: RaisedButton(
                 onPressed: () async {
+                  FocusScope.of(context).unfocus();
                   bool isValid = true;
                   List<Map<String, dynamic>> info = [];
                   data.forEach((element) {
@@ -307,7 +309,6 @@ class _RouteAddState extends State<RouteAdd> {
                       "address": "${element["controllers2"][1].text}",
                     });
                   });
-
                   info.forEach((element) {
                     element.forEach((key, value) {
                       if(value == "") {
@@ -317,23 +318,39 @@ class _RouteAddState extends State<RouteAdd> {
                     });
                   });
                   if(isValid) {
-                    print(info);
-                    String url = "${AppConfig.BASE_URL}/custom/booking/create";
-                    final prefs = await SharedPreferences.getInstance();
-                    String token = json.decode(prefs.getString('userData')!)["token"];
-                    final result = await http.post(
-                        Uri.parse(url),
-                        headers: {
-                          "Authorization": "Bearer $token",
-                        },
-                        body: {
-                          "data" : "${json.encode(info)}"
-                        }
-                    );
-                    print(json.decode(result.body)['message']);
-                    Navigator.of(context).pop();
+                    int ind = 0;
+                    data.forEach((element_info) {
+                      api_cities.forEach((element_city) {
+                        setState(() {
+                          if(element_info["city1"] == element_city["city_id"]) {
+                            data[ind]["city1"] = element_city["name"];
+                          }
+                          if(element_info["city2"] == element_city["city_id"]) {
+                            data[ind]["city2"] = element_city["name"];
+                          }
+                        });
+                      });
+                      ind++;
+                    });
+                    try {
+                      String url = "${AppConfig.BASE_URL}/custom/booking/create";
+                      final prefs = await SharedPreferences.getInstance();
+                      String token = json.decode(prefs.getString('userData')!)["token"];
+                      final result = await http.post(
+                          Uri.parse(url),
+                          headers: {
+                            "Authorization": "Bearer $token",
+                          },
+                          body: {
+                            "data" : "${json.encode(info)}"
+                          }
+                      );
+                      print(json.decode(result.body)['message']);
+                      Dialogs.ZayavkaDialog(context);
+                    } catch (error) {
+                      Dialogs.ErrorDialog(context);
+                    }
                   } else {
-                    print("else case");
                     int ind = 0;
                     data.forEach((element_info) {
                       api_cities.forEach((element_city) {
@@ -349,7 +366,6 @@ class _RouteAddState extends State<RouteAdd> {
                       ind++;
                     });
                   }
-
                 },
                 child: Text('Submit your application'),
                 color: Colors.blue,
