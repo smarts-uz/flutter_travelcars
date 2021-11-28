@@ -8,7 +8,7 @@ class Dialogs {
       builder: (BuildContext dialogContext) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(18),
           ),
           content: Container(
             height: MediaQuery.of(ctx).size.height * .25,
@@ -65,7 +65,7 @@ class Dialogs {
         builder: (BuildContext dialogContext) {
           return Dialog(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(18),
             ),
             child: Container(
               height: MediaQuery.of(ctx).size.height * .25,
@@ -97,7 +97,7 @@ class Dialogs {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 12),
+                    padding: const EdgeInsets.only(top: 15),
                     child: TextButton(
                       onPressed: () {
                         Navigator.pop(ctx);
@@ -125,23 +125,18 @@ class Dialogs {
         context: ctx,
         builder: (BuildContext dialogContext) => Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(18),
           ),
           child: Container(
-            height: MediaQuery.of(ctx).size.height * .25,
+            height: MediaQuery.of(ctx).size.height * .30,
             width: MediaQuery.of(ctx).size.width * .85,
             child: Column(
               children: [
                 Container(
-                  height: 100,
-                  width: 100,
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/assets/error.svg.jpg"),
-                        fit: BoxFit.cover
-                    ),
-                  ),
+                  height: 80,
+                  width: 80,
+                  margin: EdgeInsets.symmetric(vertical: 15),
+                  child:  SvgPicture.asset("assets/error.svg", fit: BoxFit.cover),
                 ),
                 Column(
                   children: [
@@ -149,7 +144,7 @@ class Dialogs {
                       "Что - то не так! Проверьте\n соединение с интернетом",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 20,
                           fontWeight: FontWeight.normal,
                           color: Color.fromRGBO(0, 0, 0, 1),
                           letterSpacing: 0.15),
@@ -157,7 +152,7 @@ class Dialogs {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 22),
+                  padding: const EdgeInsets.only(top: 15),
                   child: TextButton(
                     onPressed: () {
                       Navigator.pop(ctx);

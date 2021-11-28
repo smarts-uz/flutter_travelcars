@@ -38,6 +38,12 @@ class _TripItemState extends State<TripItem> {
             color: Colors.white,
           ),
         ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back, color: Colors.white,),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
