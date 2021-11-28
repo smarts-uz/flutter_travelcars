@@ -285,7 +285,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                    "Price_quality": "${rate['all'][1]['rating']}",
                    "professionalism": "${rate['all'][0]['rating']}"};
                  comment.forEach((key, value) {
-                   if(value == null || value == ''){
+                   if(value == null || value == "0"){
                      isValid = false;
                      print("write$key");
                    }
