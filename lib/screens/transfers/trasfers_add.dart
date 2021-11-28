@@ -154,7 +154,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                       Container(
                         width: double.infinity,
                         height: 55,
-                        padding: EdgeInsets.only(left: 6, right: 6),
+                        padding: EdgeInsets.only(left: 12, right: 6),
                         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
@@ -191,7 +191,6 @@ class _TransfersAddState extends State<TransfersAdd> {
                       Container(
                         width: double.infinity,
                         height: 55,
-                        padding: EdgeInsets.only(left: 6),
                         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
@@ -225,7 +224,6 @@ class _TransfersAddState extends State<TransfersAdd> {
                       Container(
                         width: double.infinity,
                         height: 55,
-                        padding: EdgeInsets.only(left: 6),
                         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
@@ -256,7 +254,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                       Container(
                         width: double.infinity,
                         height: 55,
-                        padding: EdgeInsets.only(left: 6),
+                        padding: EdgeInsets.only(left: 12),
                         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
@@ -292,7 +290,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                       Container(
                         width: double.infinity,
                         height: 55,
-                        padding: EdgeInsets.only(left: 6),
+                        padding: EdgeInsets.only(left: 12),
                         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
@@ -328,7 +326,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                       Container(
                         width: double.infinity,
                         height: 55,
-                        padding: EdgeInsets.only(left: 6),
+                        padding: EdgeInsets.only(left: 12),
                         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
@@ -361,11 +359,10 @@ class _TransfersAddState extends State<TransfersAdd> {
                           maxLines: 2,
                         ),
                       ),
-
                       Container(
                         width: double.infinity,
                         height: 165,
-                        padding: EdgeInsets.only(left: 6),
+                        padding: EdgeInsets.only(left: 12),
                         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
@@ -535,6 +532,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                     }
                   );
                   print(json.decode(result.body)['message']);
+                  Navigator.of(context).pop();
                 },
                 child: Text('Submit your application'),
                 color: Colors.blue,
