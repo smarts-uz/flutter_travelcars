@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/app_config.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:travelcars/dialogs.dart';
 
 class TripItem extends StatefulWidget {
   final Map<String, dynamic> trip_item;
@@ -37,17 +38,6 @@ class _TripItemState extends State<TripItem> {
             color: Colors.white,
           ),
         ),
-        /*actions: [
-          IconButton(
-              onPressed: () {
-                print("pressed");},
-              icon: Icon(
-                Icons.list_alt_outlined,
-                size: 30,
-                color: Colors.white,
-              )
-          )
-        ],*/
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -246,6 +236,8 @@ class _TripItemState extends State<TripItem> {
                       }
                     });
                     if(isValid) {
+                      FocusScope.of(context).unfocus();
+                      Dialogs.ZayavkaDialog(context);
                       final result = await http.post(
                           Uri.parse(url),
                           body: info
