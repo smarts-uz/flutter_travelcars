@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
-class TransfersInfo extends StatefulWidget {
-
+class TransfersInfo extends StatelessWidget {
   Map<String, dynamic> info;
 
   TransfersInfo(@required this.info);
 
   @override
-  _TransfersInfoState createState() => _TransfersInfoState();
-}
-
-class _TransfersInfoState extends State<TransfersInfo> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Application #${widget.info['id']}",
+          "Application #${info['id']}",
           style: TextStyle(
             color: Colors.white,
             fontSize: 25
@@ -35,17 +29,17 @@ class _TransfersInfoState extends State<TransfersInfo> {
           children: [
             Container(
               padding: EdgeInsets.only(top: 12),
-              height: widget.info["places"].length * 157.0,
+              height: info["places"].length * 157.0,
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: widget.info["places"].length,
+                itemCount: info["places"].length,
                   itemBuilder: (context, index) => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 16, top: 8),
                         child: Text(
-                          '${widget.info["places"][index]["type"]}',
+                          '${info["places"][index]["type"]}',
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -64,34 +58,34 @@ class _TransfersInfoState extends State<TransfersInfo> {
                             ),
                             children: <TextSpan>[
                               TextSpan(
-                                  text: '${widget.info["places"][index]['city']} ',
+                                  text: '${info["places"][index]['city']} ',
                                   style: TextStyle(fontWeight: FontWeight.bold)
                               ),
-                              TextSpan(text: '( ${widget.info["places"][index]['date'].substring(0, 10)} '),
-                              TextSpan(text: '${widget.info["places"][index]['time']})\n'),
+                              TextSpan(text: '( ${info["places"][index]['date'].substring(0, 10)} '),
+                              TextSpan(text: '${info["places"][index]['time']})\n'),
                               TextSpan(
                                   text: 'Passengers: ',
                                   style: TextStyle(fontWeight: FontWeight.bold,)
                               ),
-                              TextSpan(text: '${widget.info["places"][index]['passengers']}\n'),
+                              TextSpan(text: '${info["places"][index]['passengers']}\n'),
                               TextSpan(
                                   text: 'Where to pick up: ',
                                   style: TextStyle(fontWeight: FontWeight.bold)
                               ),
-                              TextSpan(text: '${widget.info["places"][index]['from']}\n'),
+                              TextSpan(text: '${info["places"][index]['from']}\n'),
                               TextSpan(
                                   text: 'Where: ',
                                   style: TextStyle(fontWeight: FontWeight.bold)
                               ),
                               TextSpan(
-                                  text: '${widget.info["places"][index]['to']}\n'
+                                  text: '${info["places"][index]['to']}\n'
                               ),
                               TextSpan(
                                   text: 'Note: ',
                                   style: TextStyle(fontWeight: FontWeight.bold)
                               ),
                               TextSpan(
-                                  text: '${widget.info["places"][index]['additional']}'
+                                  text: '${info["places"][index]['additional']}'
                               )
                             ],
                           ),
@@ -114,12 +108,12 @@ class _TransfersInfoState extends State<TransfersInfo> {
                           text: 'Type auto: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
-                      TextSpan(text: '${widget.info['car']}\n'),
+                      TextSpan(text: '${info['car']}\n'),
                       TextSpan(
                           text: 'Status: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
-                      TextSpan(text: '${widget.info['status']}')
+                      TextSpan(text: '${info['status']}')
                     ]
                 ),
               ),
@@ -147,17 +141,17 @@ class _TransfersInfoState extends State<TransfersInfo> {
                           text: 'E-mail: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
-                      TextSpan(text: '${widget.info['user_email']}\n'),
+                      TextSpan(text: '${info['user_email']}\n'),
                       TextSpan(
                           text: 'Phone number: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
-                      TextSpan(text: '${widget.info['user_phone']}\n'),
+                      TextSpan(text: '${info['user_phone']}\n'),
                       TextSpan(
                           text: 'Name: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
-                      TextSpan(text: '${widget.info['user_name']}')
+                      TextSpan(text: '${info['user_name']}')
                     ]
                 ),
               ),
