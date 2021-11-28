@@ -12,6 +12,8 @@ import '../../app_config.dart';
 import '../../app_theme.dart';
 import 'package:http/http.dart' as http ;
 
+import '../../dialogs.dart';
+
 class FeedbackScreen extends StatefulWidget {
   const FeedbackScreen({Key? key}) : super(key: key);
 
@@ -269,7 +271,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               },
               child: InkWell(
                 onTap: () async {
-                 Map<String, dynamic> comment = {
+                  bool isValid = true;
+                  String url = "${AppConfig.BASE_URL}/comment/create";
+                  Map<String, dynamic> comment = {
                    "rules": "${rate['driver'][2]["rating"]}",
                    "salon": "${rate['car'][1]['rating']}",
                    "driving": "${rate['driver'][1]['rating']}",
@@ -279,25 +283,38 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                    "orientation": "${rate['driver'][3]['rating']}",
                    "Price_quality": "${rate['all'][1]['rating']}",
                    "professionalism": "${rate['all'][0]['rating']}"};
+                 comment.forEach((key, value) {
+                   if(value == null || value == ''){
+                     isValid = false;
+                     print("write$key");
+                   }
+
+                 });
+                 if(isValid){
+                   FocusScope.of(context).unfocus();
+                   Dialogs.OtzivDialog(context);
+                   final prefs = await SharedPreferences.getInstance();
+                   String token = json.decode(prefs.getString('userData')!)["token"];
+                   final result = await http.post(
+                       Uri.parse(url),
+                       headers: {
+                         "Authorization": "Bearer $token",
+                       },
+                       body: {
+                         "text" : _commentController.text,
+                         "route_id" : '0',
+                         "route_name": _nameController.text,
+                         "country_code" : _cityController.text,
+                         "route_date" : "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
+                         "grade" : "${json.encode(comment)}"
+                       }
+                   );
+                   print(json.decode(result.body)['message']);
+                 }
 
                  print(comment);
-                 String url = "${AppConfig.BASE_URL}/comment/create";
-                 final prefs = await SharedPreferences.getInstance();
-                 String token = json.decode(prefs.getString('userData')!)["token"];
-                 final result = await http.post(
-                     Uri.parse(url),
-                     headers: {
-                     "Authorization": "Bearer $token",
-                     },
-                     body: {
-                       "text" : _commentController.text,
-                       "route_id" : '0',
-                       "route_name": _nameController.text,
-                       "country_code" : _cityController.text,
-                       "route_date" : "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
-                       "grade" : "${json.encode(comment)}"
-                     }
-                     );
+
+
                  print(comment);
                  },
 
