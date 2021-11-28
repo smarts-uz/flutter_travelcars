@@ -58,7 +58,7 @@ class _TripItemState extends State<TripItem> {
             ),
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(top: 3, left: 13),
+              padding: EdgeInsets.only(top: 13, left: 13),
               child: Text(
                 widget.trip_item["name_en"],
                 style: TextStyle(
@@ -220,8 +220,8 @@ class _TripItemState extends State<TripItem> {
                     ),
                   ),
                   onPressed: () async {
+                    FocusScope.of(context).unfocus();
                     bool isValid = true;
-                    String url = "${AppConfig.BASE_URL}/comment/create";
                     Map<String, dynamic> info = {
                       "name": "${controllers[0].text}",
                       "email": "${controllers[1].text}",
@@ -236,13 +236,21 @@ class _TripItemState extends State<TripItem> {
                       }
                     });
                     if(isValid) {
-                      FocusScope.of(context).unfocus();
-                      Dialogs.ZayavkaDialog(context);
-                      final result = await http.post(
-                          Uri.parse(url),
-                          body: info
-                      );
-                      print(json.decode(result.body)['message']);
+                      String url = "${AppConfig.BASE_URL}/tours/creates";
+                      try {
+                        final result = await http.post(
+                            Uri.parse(url),
+                            body: info
+                        );
+                        if(json.decode(result.body)["message"] == "Not found.") {
+                          Dialogs.ErrorDialog(context);
+                        } else {
+                          Dialogs.ZayavkaDialog(context);
+                        }
+                      } catch (error) {
+                        print(error);
+                        Dialogs.ErrorDialog(context);
+                      }
                     }
                   }
               ),

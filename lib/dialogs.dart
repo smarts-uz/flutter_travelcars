@@ -68,14 +68,19 @@ class Dialogs {
               borderRadius: BorderRadius.circular(4),
             ),
             child: Container(
-              height: 170,
-              width: 280,
+              height: MediaQuery.of(ctx).size.height * .25,
+              width: MediaQuery.of(ctx).size.width * .85,
               child: Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-                    child: Image.asset(
-                      "assets/image.jpg",
+                    height: 80,
+                    width: 80,
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("assets/image.jpg"),
+                          fit: BoxFit.cover
+                      ),
                     ),
                   ),
                   Column(
@@ -84,7 +89,7 @@ class Dialogs {
                         "Ваш отзыв успешно отправлен!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 22,
                             fontWeight: FontWeight.w400,
                             color: Color.fromRGBO(0, 0, 0, 1),
                             letterSpacing: 0.15),
@@ -101,11 +106,13 @@ class Dialogs {
                       child: Text(
                         "Закрыть",
                         style: TextStyle(
+                          fontSize: 24,
                           color: Color.fromRGBO(239, 127, 26, 1),
                         ),
                       ),
                     ),
-                  ),],
+                  ),
+                ],
               ),
             ),
           );
@@ -121,14 +128,19 @@ class Dialogs {
             borderRadius: BorderRadius.circular(4),
           ),
           child: Container(
-            height: 193,
-            width: 280,
+            height: MediaQuery.of(ctx).size.height * .25,
+            width: MediaQuery.of(ctx).size.width * .85,
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-                  child: SvgPicture.asset(
-                    "assets/Vector (3).svg",
+                  height: 100,
+                  width: 100,
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/assets/error.svg.jpg"),
+                        fit: BoxFit.cover
+                    ),
                   ),
                 ),
                 Column(
@@ -137,7 +149,7 @@ class Dialogs {
                       "Что - то не так! Проверьте\n соединение с интернетом",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 30,
                           fontWeight: FontWeight.normal,
                           color: Color.fromRGBO(0, 0, 0, 1),
                           letterSpacing: 0.15),
@@ -153,6 +165,7 @@ class Dialogs {
                     child: Text(
                       "Повторить",
                       style: TextStyle(
+                        fontSize: 24,
                         color: Color.fromRGBO(239, 127, 26, 1),
                       ),
                     ),
