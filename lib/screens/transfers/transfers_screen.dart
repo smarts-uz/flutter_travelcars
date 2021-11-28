@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
+import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/main_screen.dart';
 import 'package:travelcars/screens/transfers/transfers_info.dart';
 import 'package:travelcars/screens/transfers/trasfers_add.dart';
@@ -23,55 +24,16 @@ class _TransfersScreenState extends State<TransfersScreen> {
   bool  _isLoading = true;
   List<dynamic> city = [];
   List<dynamic> cars = [];
-  List<dynamic> info = [/*
-    {
-      'id': '20',
-      'confirmed': 'Approved',
-      'districtFr1': 'Tashkent',
-      'districtTo1' :'Samarqand',
-      'date1': '01.10.2021',
-      'time1' : '02:49',
-      'districtFr2': 'Chorsu',
-      'districtTo2':'Yunusobot district',
-      'time2' : '02:49',
-      'name': 'John Fedrik',
-      'email': 'example@gmail.com',
-      'phone': '+1234567',
-      'submit date' : '07.09.2021',
-      'passengers':'8',
-      'type auto' :'Light Car',
-      'status' :'Approved',
-      'note' :'Curabitur senectus'
-
-
-    },
-    {
-      'id': '20',
-      'confirmed': 'Approved',
-      'districtFr1': 'Tashkent',
-      'districtTo1' :'Samarqand',
-      'date1': '01.10.2021',
-      'time1' : '02:49',
-      'districtFr2': 'Chorsu',
-      'districtTo2':'Yunusobot district',
-      'time2' : '02:49',
-      'name': 'John Fedrik',
-      'email': 'example@gmail.com',
-      'phone': '+1234567',
-      'submit date' : '07.09.2021',
-      'passengers':'8',
-      'type auto' :'Light Car',
-      'status' :'Approved',
-
-
-    }*/];
+  List<dynamic> info = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getcities();
-    getCars();
+    setState(() {
+      cars = HomeScreen.cars_list;
+      city = HomeScreen.city_list;
+    });
     getTransfers();
   }
 
@@ -89,19 +51,6 @@ class _TransfersScreenState extends State<TransfersScreen> {
       info = json.decode(response.body)["data"];
       _isLoading = false;
     });
-  }
-
-  void getcities() async {
-    city = await Cities.getcities();
-    city = city.toSet().toList();
-  }
-
-  void getCars() async {
-    String url = "${AppConfig.BASE_URL}/getAllCarTypes?lang=ru";
-    final response  = await http.get(
-      Uri.parse(url),
-    );
-    cars = json.decode(response.body)["car_types"];
   }
 
   @override
@@ -127,9 +76,9 @@ class _TransfersScreenState extends State<TransfersScreen> {
           )
         ],
       ),
-      body: _isLoading ? Center(
-        child: CircularProgressIndicator(),
-      ) : info.isEmpty ?  Empty() :  List_T(info, city, cars),
+      body: _isLoading ? Center(child: CircularProgressIndicator(),)
+          : info.isEmpty ?  Empty()
+          :  List_T(info, city, cars),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
@@ -141,34 +90,28 @@ class _TransfersScreenState extends State<TransfersScreen> {
   }
 }
 
-class List_T extends StatefulWidget {
+class List_T extends StatelessWidget {
   final List info;
   final List city;
   final List cars;
-
   List_T(@required this.info, @required this.city, @required this.cars);
 
-  @override
-  _List_TState createState() => _List_TState();
-}
-
-class _List_TState extends State<List_T> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         physics: BouncingScrollPhysics(),
-        itemCount: widget.info.length,
+        itemCount: info.length,
         itemBuilder: (context, index) {
-          if(widget.info[index]["car_type"] != null) {
-            widget.cars.forEach((element) {
-              if(element["id"] == widget.info[index]["car_type"]["id"]) {
-                widget.info[index].addAll({
+          if(info[index]["car_type"] != null) {
+            cars.forEach((element) {
+              if(element["id"] == info[index]["car_type"]["id"]) {
+                info[index].addAll({
                   "car": "${element["name"]}"
                 });
               }
             });
           } else {
-            widget.info[index].addAll({
+            info[index].addAll({
               "car": "null"
             });
           }
@@ -181,7 +124,7 @@ class _List_TState extends State<List_T> {
               children: [
                 ListTile(
                   leading: Text(
-                    "ID ${widget.info[index]['id']}",
+                    "ID ${info[index]['id']}",
                     style: TextStyle(
                       fontSize: 25,
                     ),
@@ -191,7 +134,7 @@ class _List_TState extends State<List_T> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                     onPressed: () {},
                     color: Colors.lightGreenAccent,
-                    child: Text('${widget.info[index]['status']}'),
+                    child: Text('${info[index]['status']}'),
                   ),
                 ),
                 Container(
@@ -205,16 +148,16 @@ class _List_TState extends State<List_T> {
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 10),
-                  height: widget.info[index]["places"].length * 85.0,
+                  height: info[index]["places"].length * 85.0,
                   child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: widget.info[index]["places"].length,
+                      itemCount: info[index]["places"].length,
                       itemBuilder: (context, index_p) {
                         String location = "";
-                        widget.city.forEach((element) {
-                          if(element["city_id"] == widget.info[index]["places"][index_p]['city_id']) {
+                        city.forEach((element) {
+                          if(element["city_id"] == info[index]["places"][index_p]['city_id']) {
                             location = element["name"];
-                            widget.info[index]["places"][index_p].addAll({
+                            info[index]["places"][index_p].addAll({
                               "city": "${element["name"]}"
                             });
                           }
@@ -232,17 +175,17 @@ class _List_TState extends State<List_T> {
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                      text: '${widget.info[index]["places"][index_p]['type']}\n',
+                                      text: '${info[index]["places"][index_p]['type']}\n',
                                       style: TextStyle(color: Colors.orange, fontSize: 20, fontWeight: FontWeight.bold,)
                                   ),
                                   TextSpan(text: "$location",),
                                   TextSpan(
-                                      text:"  ${widget.info[index]["places"][index_p]['date'].substring(0, 10)} ${widget.info[index]["places"][index_p]['time']}\n",
+                                      text:"  ${info[index]["places"][index_p]['date'].substring(0, 10)} ${info[index]["places"][index_p]['time']}\n",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       )
                                   ),
-                                  TextSpan(text: '${widget.info[index]["places"][index_p]['from']} - ${widget.info[index]["places"][index_p]['to']}',),
+                                  TextSpan(text: '${info[index]["places"][index_p]['from']} - ${info[index]["places"][index_p]['to']}',),
                                 ],
                               ),
                             )
@@ -263,14 +206,14 @@ class _List_TState extends State<List_T> {
                   padding: EdgeInsets.only(left: 16,bottom:4 ),
                   alignment: Alignment.topLeft,
                   child: Text(
-                    '${widget.info[index]['user_name']}\n${widget.info[index]['user_email']}\n${widget.info[index]['user_phone']}',
+                    '${info[index]['user_name']}\n${info[index]['user_email']}\n${info[index]['user_phone']}',
                     style: TextStyle(
                         height: 1.5,
                         fontSize: 15
                     ),
                   ),
                 ),
-                if(widget.info[index]['created_at'] != null) Container(
+                if(info[index]['created_at'] != null) Container(
                   padding: EdgeInsets.only(left: 16,bottom: 12,top: 10),
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -279,10 +222,10 @@ class _List_TState extends State<List_T> {
                         fontSize: 20
                     ),),
                 ),
-                if(widget.info[index]['created_at'] != null) Container(
+                if(info[index]['created_at'] != null) Container(
                   padding: EdgeInsets.only(left: 16),
                   alignment: Alignment.centerLeft,
-                  child: Text('${widget.info[index]['created_at'].substring(0, 10)}'),
+                  child: Text('${info[index]['created_at'].substring(0, 10)}'),
                 ),
                 Container(
                   margin: EdgeInsets.only(bottom: 16, top: 20),
@@ -299,7 +242,7 @@ class _List_TState extends State<List_T> {
                     ),
                     onPressed: (){
                       Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => TransfersInfo(widget.info[index])));
+                          builder: (context) => TransfersInfo(info[index])));
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -317,14 +260,9 @@ class _List_TState extends State<List_T> {
   }
 }
 
-class Empty extends StatefulWidget {
+class Empty extends StatelessWidget {
   const Empty({Key? key}) : super(key: key);
 
-  @override
-  _EmptyState createState() => _EmptyState();
-}
-
-class _EmptyState extends State<Empty> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -390,8 +328,8 @@ class _EmptyState extends State<Empty> {
     );
   }
 }
-void _startAddNewTransaction(BuildContext ctx)
-{
+
+void _startAddNewTransaction(BuildContext ctx) {
   showModalBottomSheet(
       context: ctx,
       builder: (_)

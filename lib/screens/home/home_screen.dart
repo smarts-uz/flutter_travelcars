@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:travelcars/app_config.dart';
+import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/home/car_type.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:http/http.dart' as http;
@@ -11,6 +12,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  static List<dynamic> cars_list = [];
+  static List<dynamic> city_list = [];
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -72,11 +76,18 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getweather();
-    getCars();
     getTrips();
+    getCars();
+    getcities();
+    getweather();
     getvalyuta();
     getnews();
+  }
+
+  void getcities() async {
+    HomeScreen.city_list = await Cities.getcities();
+    HomeScreen.city_list = HomeScreen.city_list.toSet().toList();
+    print(HomeScreen.city_list);
   }
 
   void getTrips() async{
@@ -95,13 +106,13 @@ class _HomeScreenState extends State<HomeScreen> {
         Uri.parse(url),
     );
     setState(() {
+      HomeScreen.cars_list = json.decode(response.body)["car_types"];
       carslist = json.decode(response.body)["car_types"];
     });
   }
 
 
   void getnews () async {
-
     String url = "${AppConfig.BASE_URL}/news?lang=ru";
     final response = await http.get(
       Uri.parse(url)
@@ -142,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: (imglist.isEmpty || carslist.isEmpty) ? Center(child: CircularProgressIndicator()) : SingleChildScrollView(
+      body: (newslist.isEmpty || newslist.isEmpty) ? Center(child: CircularProgressIndicator()) : SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

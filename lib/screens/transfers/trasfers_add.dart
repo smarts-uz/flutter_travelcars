@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
+import 'package:travelcars/screens/home/home_screen.dart';
 
 
 class TransfersAdd extends StatefulWidget {
@@ -39,13 +40,11 @@ class _TransfersAddState extends State<TransfersAdd> {
 
   }
 
-  void getcities() async {
-    print("start");
-    api_cities = await Cities.getcities();
+  void getcities() {
+    api_cities = HomeScreen.city_list;
     api_cities.forEach((element) {
       city.add(element["name"]);
     });
-    city = city.toSet().toList();
     cities = city.map(
           (String value) => DropdownMenuItem<String>(
             value: value,
@@ -60,8 +59,8 @@ class _TransfersAddState extends State<TransfersAdd> {
       "controllers4": [
         for (int i = 0; i < 4; i++)
           TextEditingController()
-      ],
-    },);
+      ],},
+    );
     setState(() {
       _isLoading = false;
     });
@@ -72,7 +71,18 @@ class _TransfersAddState extends State<TransfersAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TravelCars'),
+        title: Text(
+          'Transfer',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back, color: Colors.white,),
+        ),
         actions: [
           IconButton(
             icon: SvgPicture.asset(
@@ -454,7 +464,8 @@ class _TransfersAddState extends State<TransfersAdd> {
                       ),
                       SizedBox(
                           width: 10),
-                      Text('Add',
+                      Text(
+                        'Add',
                         style: TextStyle(
                             color: Colors.orange
                         ),),

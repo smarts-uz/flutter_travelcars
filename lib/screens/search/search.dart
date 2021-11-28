@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
+import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/search/search_result.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -123,14 +124,11 @@ class _SearchScreenState extends State<SearchScreen> {
 
   }
 
-  void getcities() async {
-    print("start");
-    api_cities = await Cities.getcities();
+  void getcities() {
+    api_cities = HomeScreen.city_list;
     api_cities.forEach((element) { 
       city.add(element["name"]);
     });
-    city = city.toSet().toList();
-    print(city);
     cities = city.map(
           (String value) => DropdownMenuItem<String>(
             value: value,
