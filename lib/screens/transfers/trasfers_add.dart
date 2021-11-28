@@ -29,15 +29,11 @@ class _TransfersAddState extends State<TransfersAdd> {
   late final List<DropdownMenuItem<String>> cities;
   late List api_cities;
   List<Map<String, dynamic>> data = [];
-  bool _isLoading = true;
-
-
 
   @override
   void initState() {
     super.initState();
     getcities();
-
   }
 
   void getcities() {
@@ -61,9 +57,6 @@ class _TransfersAddState extends State<TransfersAdd> {
           TextEditingController()
       ],},
     );
-    setState(() {
-      _isLoading = false;
-    });
   }
 
 
@@ -72,7 +65,7 @@ class _TransfersAddState extends State<TransfersAdd> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Transfer',
+          'Add transfer',
           style: TextStyle(
             color: Colors.white,
           ),
@@ -83,19 +76,8 @@ class _TransfersAddState extends State<TransfersAdd> {
           },
           icon: Icon(Icons.arrow_back, color: Colors.white,),
         ),
-        actions: [
-          IconButton(
-            icon: SvgPicture.asset(
-              'assets/icons/globus.svg',
-              color: Colors.white,
-            ),
-            onPressed: () { },
-          ),
-        ],
       ),
-      body: _isLoading ? Center(
-        child: CircularProgressIndicator(),
-      ) : SingleChildScrollView(
+      body: SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
         child: Column(
         children: [
@@ -103,313 +85,212 @@ class _TransfersAddState extends State<TransfersAdd> {
             height: MediaQuery.of(context).size.height * .75,
             child: ListView.builder(
                 itemCount: i,
-                itemBuilder: (context, index) => Card(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                  elevation: 4,
-                  margin: EdgeInsets.fromLTRB(16, 24, 16, 24),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20)
-                    ),
-                    margin:EdgeInsets.all(17),
-                    child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.lightBlue,
-                        child: Text(
-                          "${index + 1}",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
+                itemBuilder: (context, index) {
+                  Widget TFF(TextEditingController controller, String? hint, double height) {
+                    return Container(
+                      width: double.infinity,
+                      height: height,
+                      padding: EdgeInsets.only(left: 12),
+                      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(5)
+                      ),
+                      child: TextFormField(
+                        autovalidateMode: AutovalidateMode.always,
+                        decoration: InputDecoration(
+                          hintText: hint,
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              width: 0,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              width: 0,
+                            ),
                           ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [0, 1].map((int indexr) => Container(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width*.4,
-                          padding: EdgeInsets.all(12),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Radio<int>(
-                                  value: indexr,
-                                  groupValue: data[index]["direction"],
-                                  onChanged: (int? value) {
-                                    if (value != null) {
-                                      setState(() => data[index]["direction"] = value);
-                                      print(value);
-                                    }
-                                    },
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Text(
-                                  directions[indexr],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                        ).toList(),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 55,
-                        padding: EdgeInsets.only(left: 12, right: 6),
-                        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5)
+                        controller: controller,
+                        keyboardType: hint == "Quantity of passengers" ? TextInputType.number : TextInputType.text,
+                        cursorColor: Colors.black,
+                        style: TextStyle(
+                            fontSize: 20
                         ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            menuMaxHeight: MediaQuery.of(context).size.height * .5,
-                            hint: Text(
-                                "City",
+                        expands: false,
+                        maxLines: height == 165 ? 7 : 2,
+                      ),
+                    );
+                  }
+                  return Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    elevation: 4,
+                    margin: EdgeInsets.fromLTRB(16, 24, 16, 24),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20)
+                      ),
+                      margin:EdgeInsets.all(17),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.lightBlue,
+                              child: Text(
+                                "${index + 1}",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 19,
-                                    color: Colors.black
-                                )
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
-                            dropdownColor: Colors.grey[50],
-                            icon: Icon(Icons.keyboard_arrow_down),
-                            value: data[index]["city"],
-                            isExpanded: true,
-                            style: TextStyle(
-                                fontSize: 19,
-                                color: Colors.black
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [0, 1].map((int indexr) => Container(
+                                height: 50,
+                                width: MediaQuery.of(context).size.width*.4,
+                                padding: EdgeInsets.all(12),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Radio<int>(
+                                        value: indexr,
+                                        groupValue: data[index]["direction"],
+                                        onChanged: (int? value) {
+                                          if (value != null) {
+                                            setState(() => data[index]["direction"] = value);
+                                            print(value);
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 3,
+                                      child: Text(
+                                        directions[indexr],
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 22,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                              ).toList(),
                             ),
-                            underline: SizedBox(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                data[index]["city"] = newValue!;
-                              });
-                            },
-                            items: cities,
-                          ),
-                        ),
+                            Container(
+                              width: double.infinity,
+                              height: 55,
+                              padding: EdgeInsets.only(left: 12, right: 6),
+                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(5)
+                              ),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                  menuMaxHeight: MediaQuery.of(context).size.height * .5,
+                                  hint: Text(
+                                      "City",
+                                      style: TextStyle(
+                                          fontSize: 19,
+                                          color: Colors.black
+                                      )
+                                  ),
+                                  dropdownColor: Colors.grey[50],
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  value: data[index]["city"],
+                                  isExpanded: true,
+                                  style: TextStyle(
+                                      fontSize: 19,
+                                      color: Colors.black
+                                  ),
+                                  underline: SizedBox(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      data[index]["city"] = newValue!;
+                                    });
+                                  },
+                                  items: cities,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 55,
+                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(5)
+                              ),
+                              child: ListTile(
+                                title: Text(
+                                  "${DateFormat('dd/MM/yyyy').format(data[index]["day"])}",
+                                ),
+                                trailing: IconButton(
+                                  icon: Icon(Icons.calendar_today),
+                                  onPressed: () {
+                                    showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime.now(),
+                                      lastDate: DateTime(2030),
+                                    ).then((pickedDate) {
+                                      if(pickedDate==null)
+                                      {
+                                        return;
+                                      }
+                                      setState(() {
+                                        data[index]["day"] = pickedDate;
+                                      });
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 55,
+                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(5)
+                              ),
+                              child: ListTile(
+                                title: Text(
+                                  "${data[index]["time"].format(context)}",
+                                ),
+                                trailing: IconButton(
+                                  icon: Icon(Icons.timer_rounded),
+                                  onPressed: () {
+                                    final DateTime now = DateTime.now();
+                                    showTimePicker(
+                                      context: context,
+                                      initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
+                                    ).then((TimeOfDay? value) {
+                                      if (value != null) {
+                                        setState(() {
+                                          data[index]["time"] = value;
+                                        });
+                                      }
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            TFF(data[index]["controllers4"][0], "Quantity of passengers", 55),
+                            TFF(data[index]["controllers4"][1], "From", 55),
+                            TFF(data[index]["controllers4"][2], "To", 55),
+                            TFF(data[index]["controllers4"][3], "The address of the place to pick up from.", 165),
+                          ]
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 55,
-                        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5)
-                        ),
-                        child: ListTile(
-                          title: Text(
-                            "${DateFormat('dd/MM/yyyy').format(data[index]["day"])}",
-                          ),
-                          trailing: IconButton(
-                            icon: Icon(Icons.calendar_today),
-                            onPressed: () {
-                              showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime(2030),
-                              ).then((pickedDate) {
-                                if(pickedDate==null)
-                                {
-                                  return;
-                                }
-                                setState(() {
-                                  data[index]["day"] = pickedDate;
-                                });
-                              });
-                              },
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 55,
-                        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5)
-                        ),
-                        child: ListTile(
-                          title: Text(
-                            "${data[index]["time"].format(context)}",
-                          ),
-                          trailing: IconButton(
-                            icon: Icon(Icons.timer_rounded),
-                            onPressed: () {
-                             final DateTime now = DateTime.now();
-                             showTimePicker(
-                                 context: context,
-                                 initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
-                             ).then((TimeOfDay? value) {
-                               if (value != null) {
-                                setState(() {
-                                  data[index]["time"] = value;
-                                });
-                               }
-                             });
-                            },
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 55,
-                        padding: EdgeInsets.only(left: 12),
-                        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5)
-                        ),
-                        child: TextFormField(
-                          autovalidateMode: AutovalidateMode.always,
-                          decoration: const InputDecoration(
-                            hintText: "Quantity of passengers",
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 0,
-                              ),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 0,
-                              ),
-                            ),
-                          ),
-                          controller: data[index]["controllers4"][0],
-                          keyboardType: TextInputType.number,
-                          cursorColor: Colors.black,
-                          style: TextStyle(
-                              fontSize: 20
-                          ),
-                          expands: false,
-                          maxLines: 2,
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 55,
-                        padding: EdgeInsets.only(left: 12),
-                        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5)
-                        ),
-                        child: TextFormField(
-                          autovalidateMode: AutovalidateMode.always,
-                          decoration: const InputDecoration(
-                            hintText: "From",
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 0,
-                              ),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 0,
-                              ),
-                            ),
-                          ),
-                          controller: data[index]["controllers4"][1],
-                          keyboardType: TextInputType.text,
-                          cursorColor: Colors.black,
-                          style: TextStyle(
-                              fontSize: 20
-                          ),
-                          expands: false,
-                          maxLines: 2,
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 55,
-                        padding: EdgeInsets.only(left: 12),
-                        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5)
-                        ),
-                        child: TextFormField(
-                          autovalidateMode: AutovalidateMode.always,
-                          decoration: const InputDecoration(
-                            hintText: "To",
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 0,
-                              ),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 0,
-                              ),
-                            ),
-                          ),
-                          controller: data[index]["controllers4"][2],
-                          keyboardType: TextInputType.text,
-                          cursorColor: Colors.black,
-                          style: TextStyle(
-                              fontSize: 20
-                          ),
-                          expands: false,
-                          maxLines: 2,
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 165,
-                        padding: EdgeInsets.only(left: 12),
-                        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(5)
-                        ),
-                        child: TextFormField(
-                          autovalidateMode: AutovalidateMode.always,
-                          decoration: const InputDecoration(
-                            hintText: "The address of the place to pick up from.",
-                            hintMaxLines: 3,
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 0,
-                              ),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 0,
-                              ),
-                            ),
-                          ),
-                          controller: data[index]["controllers4"][3],
-                          keyboardType: TextInputType.text,
-                          cursorColor: Colors.black,
-                          style: TextStyle(
-                              fontSize: 20
-                          ),
-                          expands: false,
-                          maxLines: 7,
-                        ),
-                      ),
-                      ]
                     ),
-                  ),
-                ),
+                  );
+                },
             ),
           ),
           Row(
@@ -423,13 +304,14 @@ class _TransfersAddState extends State<TransfersAdd> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-
-                      SizedBox(
-                          width: 10),
-                      Text('---  Delete',
+                      SizedBox(width: 10),
+                      Text(
+                        '---  Delete',
                         style: TextStyle(
-                            color: Colors.orange
-                        ),),
+                          color: Colors.red,
+                          fontSize: 18,
+                        ),
+                      ),
                     ],
                   ),
                   onPressed: (){
@@ -449,7 +331,6 @@ class _TransfersAddState extends State<TransfersAdd> {
                   ),
                 ),
               ),
-
               Container(
                 height: MediaQuery.of(context).size.height*.045,
                 width: MediaQuery.of(context).size.width*.40,
@@ -462,13 +343,14 @@ class _TransfersAddState extends State<TransfersAdd> {
                         Icons.add,
                         color: Colors.orange,
                       ),
-                      SizedBox(
-                          width: 10),
+                      SizedBox(width: 10),
                       Text(
                         'Add',
                         style: TextStyle(
-                            color: Colors.orange
-                        ),),
+                            color: Colors.orange,
+                            fontSize: 18
+                        ),
+                      ),
                     ],
                   ),
                   onPressed: (){
@@ -495,21 +377,18 @@ class _TransfersAddState extends State<TransfersAdd> {
                   ),
                 ),
               ),
-
             ],
           ),
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20,),
           Container(
             decoration: BoxDecoration(
-
                 borderRadius: BorderRadius.circular(40)
             ),
             height: MediaQuery.of(context).size.height*.050,
             width: MediaQuery.of(context).size.width*.70,
             child:  RaisedButton(
                 onPressed: () async {
+                  bool isValid = true;
                   List<Map<String, dynamic>> info = [];
                   data.forEach((element) {
                     int cityID = 0;
@@ -529,21 +408,31 @@ class _TransfersAddState extends State<TransfersAdd> {
                       "additional": "${element["controllers4"][3].text}",
                     });
                   });
-                  print(info);
-                  String url = "${AppConfig.BASE_URL}/postTransfers";
-                  final prefs = await SharedPreferences.getInstance();
-                  String token = json.decode(prefs.getString('userData')!)["token"];
-                  final result = await http.post(
-                    Uri.parse(url),
-                    headers: {
-                      "Authorization": "Bearer $token",
-                    },
-                    body: {
-                      "transfers" : "${json.encode(info)}"
-                    }
-                  );
-                  print(json.decode(result.body)['message']);
-                  Navigator.of(context).pop();
+                  info.forEach((element) {
+                    element.forEach((key, value) {
+                      if(value == "") {
+                        print(key);
+                        isValid = false;
+                      }
+                    });
+                  });
+                  if(isValid) {
+                    print("go");
+                    String url = "${AppConfig.BASE_URL}/postTransfers";
+                    final prefs = await SharedPreferences.getInstance();
+                    String token = json.decode(prefs.getString('userData')!)["token"];
+                    final result = await http.post(
+                        Uri.parse(url),
+                        headers: {
+                          "Authorization": "Bearer $token",
+                        },
+                        body: {
+                          "transfers" : "${json.encode(info)}"
+                        }
+                    );
+                    print(json.decode(result.body)['message']);
+                    Navigator.of(context).pop();
+                  }
                 },
                 child: Text('Submit your application'),
                 color: Colors.blue,
@@ -558,13 +447,3 @@ class _TransfersAddState extends State<TransfersAdd> {
     );
   }
 }
-/*{
-"from":"Chilonzor",
- "to":"Yunusobod",
- "type":"meeting or cunduct",
-  "city_id":3,
-  "date":"25.07.2001",
-  "time":"12:20",
-   "quantity":4,
-    "additional":"Havo Sovuq"},
-    */

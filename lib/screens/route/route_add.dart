@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:travelcars/screens/transfers/trasfers_add.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/screens/home/home_screen.dart';
+import 'package:http/http.dart' as http;
+
+import '../../app_config.dart';
+
 class RouteAdd extends StatefulWidget {
   const RouteAdd({Key? key}) : super(key: key);
 
@@ -12,31 +18,31 @@ class RouteAdd extends StatefulWidget {
 }
 
 class _RouteAddState extends State<RouteAdd> {
+  List<String> city = [];
+  late final List<DropdownMenuItem<String>> cities;
+  late List api_cities;
+  int count = 1;
+  DateTime? _selectedDate = DateTime.now();
+  List<Map<String, dynamic>> data = [];
 
+  @override
+  void initState() {
+    super.initState();
+    getcities();
+  }
 
-  String? SelectedVal1;
-  String? SelectedVal2;
-  static const city = <String>[
-    "Tashkent",
-    "Buxoro",
-    "Xiva",
-    "Samarkand"
-  ];
-  final List<DropdownMenuItem<String>> cities = city.map(
-        (String value) => DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-    ),
-  ).toList();
-  int i = 1;
-
-  DateTime? _selectedDate2 = DateTime.now();
-
-  var number_controller = TextEditingController();
-  var number_controller1 = TextEditingController();
-
-  List<Map<String, dynamic>> data = [
-    {
+  void getcities() {
+    api_cities = HomeScreen.city_list;
+    api_cities.forEach((element) {
+      city.add(element["name"]);
+    });
+    cities = city.map(
+          (String value) => DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          ),
+    ).toList();
+    data.add({
       "city1": city[0],
       "city2": city[0],
       "day": DateTime.now(),
@@ -44,22 +50,25 @@ class _RouteAddState extends State<RouteAdd> {
         for (int i = 0; i < 2; i++)
           TextEditingController()
       ],
-    },
-  ];
+    },);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TravelCars'),
-        actions: [
-          IconButton(
-            icon: SvgPicture.asset(
-              'assets/icons/globus.svg',
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          )
-        ],
+        title: Text(
+          'Add route',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back, color: Colors.white,),
+        ),
       ),
       body: SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
@@ -68,216 +77,117 @@ class _RouteAddState extends State<RouteAdd> {
             Container(
               height: MediaQuery.of(context).size.height * .75,
               child: ListView.builder(
-                itemCount: i,
-                itemBuilder: (context, index) => Card(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                  elevation: 4,
-                  margin: EdgeInsets.fromLTRB(16, 24, 16, 24),
-                  child:Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20)
-                    ),
-                    margin:EdgeInsets.all(17),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Center(
-                            child: Text('Trip ${index + 1}',
-                              style: TextStyle(
-                                  fontSize: 25  ,
-                                  fontWeight: FontWeight.bold
-                              ),),
+                itemCount: count,
+                itemBuilder: (context, index) {
+                  Widget DDM (bool isCity1, String? hint) {
+                    return Container(
+                      width: double.infinity,
+                      height: 55,
+                      padding: EdgeInsets.only(left: 6, right: 6),
+                      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(5)
+                      ),
+                      child:DropdownButtonHideUnderline(
+                        child: Container(
+                          child: DropdownButton<String>(
+                            menuMaxHeight: MediaQuery.of(context).size.height * .5,
+                            hint: Text(
+                                hint!,
+                                style: TextStyle(
+                                    fontSize: 19,
+                                    color: Colors.black
+                                )
+                            ),
+                            dropdownColor: Colors.grey[50],
+                            icon: Icon(Icons.keyboard_arrow_down),
+                            value: isCity1 ? data[index]["city1"] : data[index]["city2"],
+                            isExpanded: true,
+                            style: TextStyle(
+                                fontSize: 19,
+                                color: Colors.black
+                            ),
+                            underline: SizedBox(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                isCity1 ? data[index]["city1"] = newValue! : data[index]["city2"] = newValue!;
+                              });
+                            },
+                            items: cities,
                           ),
-                          Container(
-                            width: double.infinity,
-                            height: 55,
-                            padding: EdgeInsets.only(left: 6, right: 6),
-                            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(5)
+                        ),
+                      ),
+                    );
+                  }
+                  return Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    elevation: 4,
+                    margin: EdgeInsets.fromLTRB(16, 24, 16, 24),
+                    child:Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20)
+                      ),
+                      margin:EdgeInsets.all(17),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: Text('Trip ${index + 1}',
+                                style: TextStyle(
+                                    fontSize: 25  ,
+                                    fontWeight: FontWeight.bold
+                                ),),
                             ),
-                            child:DropdownButtonHideUnderline(
-                              child: Container(
-                                child: DropdownButton<String>(
-                                  hint: Text(
-                                      "City",
-                                      style: TextStyle(
-                                          fontSize: 19,
-                                          color: Colors.black
-                                      )
-                                  ),
-                                  dropdownColor: Colors.grey[50],
-                                  icon: Icon(Icons.keyboard_arrow_down),
-                                  value: data[index]["city1"],
-                                  isExpanded: true,
-                                  style: TextStyle(
-                                      fontSize: 19,
-                                      color: Colors.black
-                                  ),
-                                  underline: SizedBox(),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      data[index]["city1"] = newValue!;
-                                    });
-                                  },
-                                  items: cities,
-                                ),
+                            DDM(true, "From"),
+                            DDM(false, "To"),
+                            Container(
+                              width: double.infinity,
+                              height: 55,
+                              padding: EdgeInsets.only(left: 8),
+                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(5)
                               ),
-                            ),
-                          ),
-                          Container(
-                            width: double.infinity,
-                            height: 55,
-                            padding: EdgeInsets.only(left: 6, right: 6),
-                            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(5)
-                            ),
-                            child: DropdownButton<String>(
-                              hint: Text(
-                                  "City",
-                                  style: TextStyle(
-                                      fontSize: 19,
-                                      color: Colors.black
-                                  )
-                              ),
-                              dropdownColor: Colors.grey[50],
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              value: data[index]["city2"],
-                              isExpanded: true,
-                              style: TextStyle(
-                                  fontSize: 19,
-                                  color: Colors.black
-                              ),
-                              underline: SizedBox(),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  data[index]["city2"] = newValue!;
-                                });
-                              },
-                              items: cities,
-                            ),
-                          ),
-                          Container(
-                            width: double.infinity,
-                            height: 55,
-                            padding: EdgeInsets.only(left: 8),
-                            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(5)
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "${DateFormat('dd/MM/yyyy').format(data[index]["day"])}",
-                                  style: TextStyle(
-                                    fontSize: 16
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "${DateFormat('dd/MM/yyyy').format(data[index]["day"])}",
+                                    style: TextStyle(
+                                        fontSize: 16
+                                    ),
                                   ),
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.calendar_today),
-                                  onPressed: () {
-                                    showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(2018),
-                                      lastDate: DateTime(2030),
-                                    ).then((pickedDate) {
-                                      if(pickedDate==null)
-                                      {
-                                        return;
-                                      }
-                                      setState(() {
-                                        data[index]["day"] = pickedDate;
+                                  IconButton(
+                                    icon: Icon(Icons.calendar_today),
+                                    onPressed: () {
+                                      showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime.now(),
+                                        lastDate: DateTime(2030),
+                                      ).then((pickedDate) {
+                                        if(pickedDate==null)
+                                        {
+                                          return;
+                                        }
+                                        setState(() {
+                                          data[index]["day"] = pickedDate;
+                                        });
                                       });
-                                    });
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: double.infinity,
-                            height: 55,
-                            padding: EdgeInsets.only(left: 6),
-                            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(5)
-                            ),
-                            child: TextFormField(
-                              autovalidateMode: AutovalidateMode.always,
-                              decoration: const InputDecoration(
-                                hintText: "Quantity of passengers",
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                    width: 0,
+                                    },
                                   ),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                    width: 0,
-                                  ),
-                                ),
+                                ],
                               ),
-                              controller: data[index]["controllers2"][0],
-                              keyboardType: TextInputType.number,
-                              cursorColor: Colors.black,
-                              style: TextStyle(
-                                  fontSize: 20
-                              ),
-                              expands: false,
-                              maxLines: 2,
                             ),
-                          ),
-                          Container(
-                            width: double.infinity,
-                            height: 165,
-                            padding: EdgeInsets.only(left: 6),
-                            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(5)
-                            ),
-                            child: TextFormField(
-                              autovalidateMode: AutovalidateMode.always,
-                              decoration: const InputDecoration(
-                                hintText: "The address of the place to pick up from.",
-                                hintMaxLines: 3,
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                    width: 0,
-                                  ),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                    width: 0,
-                                  ),
-                                ),
-
-                              ),
-                              controller: data[index]["controllers2"][1],
-                              keyboardType: TextInputType.text,
-                              cursorColor: Colors.black,
-                              style: TextStyle(
-                                  fontSize: 20
-                              ),
-                              expands: false,
-                              maxLines: 7,
-                            ),
-                          ),
-                        ]
+                            TFF("Quantity of passengers", data[index]["controllers2"][0], 55),
+                            TFF("The address of the place to pick up from.", data[index]["controllers2"][1], 165),
+                          ]
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ),
             Row(
@@ -293,17 +203,20 @@ class _RouteAddState extends State<RouteAdd> {
                       children: [
                         SizedBox(
                             width: 10),
-                        Text('---  Delete',
+                        Text(
+                          '--Delete',
                           style: TextStyle(
-                              color: Colors.orange
-                          ),),
+                              color: Colors.red,
+                              fontSize: 18
+                          ),
+                        ),
                       ],
                     ),
                     onPressed: (){
                       setState(() {
-                        if(i>1) {
-                          data.removeAt(i-1);
-                          i--;
+                        if(count>1) {
+                          data.removeAt(count-1);
+                          count--;
                         }
                       }
                       );
@@ -316,7 +229,6 @@ class _RouteAddState extends State<RouteAdd> {
                     ),
                   ),
                 ),
-
                 Container(
                   height: MediaQuery.of(context).size.height*.045,
                   width: MediaQuery.of(context).size.width*.40,
@@ -331,15 +243,18 @@ class _RouteAddState extends State<RouteAdd> {
                         ),
                         SizedBox(
                             width: 10),
-                        Text('Add',
+                        Text(
+                          'Add',
                           style: TextStyle(
-                              color: Colors.orange
-                          ),),
+                              color: Colors.orange,
+                            fontSize: 18
+                          ),
+                        ),
                       ],
                     ),
                     onPressed: (){
                       setState(() {
-                        if(i<5) i++;
+                        if(count<5) count++;
                         data.add({
                           "city1": city[0],
                           "city2": city[0],
@@ -359,7 +274,6 @@ class _RouteAddState extends State<RouteAdd> {
                     ),
                   ),
                 ),
-
               ],
             ),
             SizedBox(
@@ -370,13 +284,75 @@ class _RouteAddState extends State<RouteAdd> {
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(4)
               ),
-              height: MediaQuery.of(context).size.height*.04,
-              width: MediaQuery.of(context).size.width*.80,
+              height: MediaQuery.of(context).size.height*.050,
+              width: MediaQuery.of(context).size.width*.70,
               child: RaisedButton(
-                onPressed: (){},
+                onPressed: () async {
+                  bool isValid = true;
+                  List<Map<String, dynamic>> info = [];
+                  data.forEach((element) {
+                    api_cities.forEach((cityid) {
+                      if(cityid["name"] == element["city1"]) {
+                        element["city1"] = cityid["city_id"];
+                      }
+                      if(cityid["name"] == element["city2"]) {
+                        element["city2"] = cityid["city_id"];
+                      }
+                    });
+                    info.add({
+                      "from": "${element["city1"]}",
+                      "to": "${element["city2"]}",
+                      "date": "${DateFormat('dd-MM-yyyy').format(element["day"])}",
+                      "passengers": "${element["controllers2"][0].text}",
+                      "address": "${element["controllers2"][1].text}",
+                    });
+                  });
+
+                  info.forEach((element) {
+                    element.forEach((key, value) {
+                      if(value == "") {
+                        print(key);
+                        isValid = false;
+                      }
+                    });
+                  });
+                  if(isValid) {
+                    print(info);
+                    String url = "${AppConfig.BASE_URL}/custom/booking/create";
+                    final prefs = await SharedPreferences.getInstance();
+                    String token = json.decode(prefs.getString('userData')!)["token"];
+                    final result = await http.post(
+                        Uri.parse(url),
+                        headers: {
+                          "Authorization": "Bearer $token",
+                        },
+                        body: {
+                          "data" : "${json.encode(info)}"
+                        }
+                    );
+                    print(json.decode(result.body)['message']);
+                    Navigator.of(context).pop();
+                  } else {
+                    print("else case");
+                    int ind = 0;
+                    data.forEach((element_info) {
+                      api_cities.forEach((element_city) {
+                        setState(() {
+                          if(element_info["city1"] == element_city["city_id"]) {
+                            data[ind]["city1"] = element_city["name"];
+                          }
+                          if(element_info["city2"] == element_city["city_id"]) {
+                            data[ind]["city2"] = element_city["name"];
+                          }
+                        });
+                      });
+                      ind++;
+                    });
+                  }
+
+                },
                 child: Text('Submit your application'),
                 color: Colors.blue,
-
               ),
             )
           ],
@@ -384,4 +360,46 @@ class _RouteAddState extends State<RouteAdd> {
       ),
     );
   }
+  Widget TFF (String? hint_text, TextEditingController controller, double height) {
+    return Container(
+      width: double.infinity,
+      height: height,
+      padding: EdgeInsets.only(left: 6),
+      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(5)
+      ),
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.always,
+        decoration: InputDecoration(
+          hintText: hint_text,
+          hintMaxLines: 3,
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white,
+              width: 0,
+            ),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white,
+              width: 0,
+            ),
+          ),
+        ),
+        controller: controller,
+        keyboardType: TextInputType.text,
+        cursorColor: Colors.black,
+        style: TextStyle(
+            fontSize: 20
+        ),
+        expands: false,
+        maxLines: 7,
+      ),
+    );
+  }
 }
+
+
+
