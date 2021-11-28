@@ -143,7 +143,8 @@ class List_R extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold
-                  ),),
+                  ),
+                ),
                 trailing: RaisedButton(
                   padding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),

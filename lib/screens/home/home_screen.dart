@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:travelcars/app_config.dart';
+import 'package:travelcars/dummy_data/cars_list.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/home/car_type.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
@@ -100,13 +101,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void getCars() async {
-    String url = "${AppConfig.BASE_URL}/getAllCarTypes?lang=ru";
-    final response  = await http.get(
-        Uri.parse(url),
-    );
+    HomeScreen.cars_list = await Cars.getcars();
     setState(() {
-      HomeScreen.cars_list = json.decode(response.body)["car_types"];
-      carslist = json.decode(response.body)["car_types"];
+      carslist = HomeScreen.cars_list;
     });
   }
 
