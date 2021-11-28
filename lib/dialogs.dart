@@ -184,14 +184,19 @@ class Dialogs {
             borderRadius: BorderRadius.circular(18),
           ),
           child: Container(
-            height: MediaQuery.of(ctx).size.height * .30,
+            height: MediaQuery.of(ctx).size.height * .38,
             width: MediaQuery.of(ctx).size.width * .85,
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-                  child: Image.asset(
-                    "assets/image.jpg",
+                  height: 80,
+                  width: 80,
+                  margin: EdgeInsets.symmetric(vertical: 15),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/image.jpg",),
+                      fit: BoxFit.cover,
+                    )
                   ),
                 ),
                 Column(
@@ -200,46 +205,61 @@ class Dialogs {
                       "Ваш запрос успешно принят к рассмотрению",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 18,
                           fontWeight: FontWeight.normal,
                           color: Color.fromRGBO(0, 0, 0, 1),
                           letterSpacing: 0.15),
                     ),
                     Container(
-                      height: MediaQuery.of(ctx).size.height * .1,
+                      margin: EdgeInsets.only(top: 13),
+                      color: Color.fromRGBO(255, 250, 241, 1),
+                      height: MediaQuery.of(ctx).size.height * .08,
+                      padding: EdgeInsets.symmetric(vertical: 4),
                       child: ListView.builder(
                           itemCount: routes.length,
-                          itemBuilder: (context, index) =>  Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Ташкент - Экскурсия по городу",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 15,
+                          itemBuilder: (context, index) =>  Container(
+                            height: MediaQuery.of(ctx).size.height * .07,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${routes[index]["from"]} - ${routes[index]["to"]}",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 18,
                                     fontWeight: FontWeight.w400,
                                     color: Color.fromRGBO(0, 0, 0, 1),
-                                    letterSpacing: 0.15),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 94),
-                                child: Row(
+                                    letterSpacing: 0.15,
+                                    height: 1.3,
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SvgPicture.asset(
                                       "assets/clock.svg",
                                     ),
-                                    Text("07.09.2021"),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      "${routes[index]["date"]}",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        height: 1.3
+                                      ),
+                                    ),
                                   ],
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),),
                     ),
 
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 10),
                   child: TextButton(
                     onPressed: () {
                       Navigator.pop(ctx);
@@ -247,6 +267,7 @@ class Dialogs {
                     child: Text(
                       "Закрыть",
                       style: TextStyle(
+                        fontSize: 20,
                         color: Color.fromRGBO(239, 127, 26, 1),
                       ),
                     ),

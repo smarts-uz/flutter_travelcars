@@ -347,11 +347,11 @@ class _RouteAddState extends State<RouteAdd> {
                       );
                       print(json.decode(result.body)['message']);*/
                       List<Map<String, String>> routes = [];
-                      info.forEach((element) {
+                      data.forEach((element) {
                         routes.add({
-                          "from": element["from"],
-                          "to": element["to"],
-                          "date": element["date"],
+                          "from": element["city1"],
+                          "to": element["city2"],
+                          "date": "${DateFormat('dd-MM-yyyy').format(element["day"])}",
                         });
                       });
                       Dialogs.TripDialog(context, routes);
