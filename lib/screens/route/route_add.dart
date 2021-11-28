@@ -336,7 +336,7 @@ class _RouteAddState extends State<RouteAdd> {
                       String url = "${AppConfig.BASE_URL}/custom/booking/create";
                       final prefs = await SharedPreferences.getInstance();
                       String token = json.decode(prefs.getString('userData')!)["token"];
-                      final result = await http.post(
+                      /*final result = await http.post(
                           Uri.parse(url),
                           headers: {
                             "Authorization": "Bearer $token",
@@ -345,8 +345,16 @@ class _RouteAddState extends State<RouteAdd> {
                             "data" : "${json.encode(info)}"
                           }
                       );
-                      print(json.decode(result.body)['message']);
-                      Dialogs.ZayavkaDialog(context);
+                      print(json.decode(result.body)['message']);*/
+                      List<Map<String, String>> routes = [];
+                      info.forEach((element) {
+                        routes.add({
+                          "from": element["from"],
+                          "to": element["to"],
+                          "date": element["date"],
+                        });
+                      });
+                      Dialogs.TripDialog(context, routes);
                     } catch (error) {
                       Dialogs.ErrorDialog(context);
                     }

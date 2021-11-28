@@ -173,16 +173,19 @@ class Dialogs {
     );
   }
 
-  static Future<dynamic> TripDialog(BuildContext ctx) {
+  static Future<dynamic> TripDialog(
+      BuildContext ctx,
+      List routes,
+      ) {
     return showDialog(
         context: ctx,
         builder: (BuildContext dialogContext) => Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(18),
           ),
           child: Container(
-            height: 266,
-            width: 280,
+            height: MediaQuery.of(ctx).size.height * .30,
+            width: MediaQuery.of(ctx).size.width * .85,
             child: Column(
               children: [
                 Container(
@@ -203,37 +206,36 @@ class Dialogs {
                           letterSpacing: 0.15),
                     ),
                     Container(
-                      margin: EdgeInsetsDirectional.only(
-                        top: 13,
-                      ),
-                      height: 60,
-                      color: Color.fromRGBO(255, 250, 241, 1),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Ташкент - Экскурсия по городу",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                color: Color.fromRGBO(0, 0, 0, 1),
-                                letterSpacing: 0.15),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 94),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
-                                  "assets/Vector (5).svg",
+                      height: MediaQuery.of(ctx).size.height * .1,
+                      child: ListView.builder(
+                          itemCount: routes.length,
+                          itemBuilder: (context, index) =>  Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Ташкент - Экскурсия по городу",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color.fromRGBO(0, 0, 0, 1),
+                                    letterSpacing: 0.15),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 94),
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      "assets/clock.svg",
+                                    ),
+                                    Text("07.09.2021"),
+                                  ],
                                 ),
-                                Text("07.09.2021"),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                              ),
+                            ],
+                          ),),
                     ),
+
                   ],
                 ),
                 Padding(

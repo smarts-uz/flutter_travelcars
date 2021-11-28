@@ -420,7 +420,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                   });
                   if(isValid) {
                     try{
-                      String url = "${AppConfig.BASE_URL}/postTransfers";
+                      String url = "${AppConfig.BASE_URL}/postTransfers_";
                       final prefs = await SharedPreferences.getInstance();
                       String token = json.decode(prefs.getString('userData')!)["token"];
                       final result = await http.post(
