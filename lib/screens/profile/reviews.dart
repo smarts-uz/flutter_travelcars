@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:travelcars/screens/feedback/feedback.dart';
+import 'package:http/http.dart' as http;
+import '../../app_config.dart';
 class Reviews extends StatefulWidget {
   const Reviews({Key? key}) : super(key: key);
 
@@ -9,64 +12,54 @@ class Reviews extends StatefulWidget {
 }
 
 class _ReviewsState extends State<Reviews> {
+ bool isLoading = true;
   Map<String, dynamic> reviews = {
     'overallrate': '10',
     'rateN': '6',
     'rate': [
       {
         'title': 'Punctuality',
+        'name': 'Punctuality',
         "score": 8.0
       },
       {
         'title': 'Car driving',
+        'name': "driving",
         "score": 3.0
       },
       {
         'title': 'Knowledge',
+        "name": "rules",
         "score": 7.0
       },
       {
-        'title': 'Punctuality',
+        'title': 'Orientation',
+        "name": "orientation",
         "score": 6.0
       },
       {
-        'title': 'Car driving',
+        'title': 'Language',
+        "name": "language",
         "score": 9.0
       },
       {
-        'title': 'Knowledge',
+        'title': 'Chistota',
+        "name": "Cleanliness",
         "score": 9.0
       },
       {
-        'title': 'Knowledge',
+        'title': 'Qulalylik',
+        "name": "salon",
         "score": 5.0
       },
       {
-        'title': 'Punctuality',
-        "score": 8.0
-      },
-      {
-        'title': 'Car driving',
-        "score": 3.0
-      },
-      {
-        'title': 'Knowledge',
-        "score": 7.0
-      },
-      {
-        'title': 'Punctuality',
-        "score": 6.0
-      },
-      {
-        'title': 'Car driving',
-        "score": 9.0
-      },
-      {
-        'title': 'Knowledge',
+        'title': 'Profiessinal',
+        'name': "professionalism",
         "score": 5.0
       },
       {
-        'title': 'Knowledge',
+        'title': 'Sena kachestva',
+        'name': "Price_quality",
         "score": 10.0
       },
     ],
@@ -149,29 +142,61 @@ class _ReviewsState extends State<Reviews> {
 
   ]
   };
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getComment();
+  }
+
+  void getComment() async {
+    String url = "${AppConfig.BASE_URL}/comments";
+    final response = await http.get(
+        Uri.parse(url)
+    );
+    setState(() {
+      Map<String, dynamic> info = json.decode(response.body)["data"];
+      info['all_grade'].forEach((key, value) {
+        reviews["rate"].forEach((element) {
+          if(key == element["name"]) {
+            element["score"] = value;
+          }
+        }
+        );
+      }
+      );
+      reviews['reviews'] = info["comments"];
+      double summa = 0;
+      reviews["rate"].forEach((element) {
+       summa+=element["score"];
+      });
+      summa /= 9;
+      int average = summa.round();
+
+      reviews
+          .addAll({
+        "average": average.toString(),
+      });
+
+
+      isLoading = false;
+
+    }
+    );
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-            size: 28,
-          ),
-        ),
-        title: Text(
-          'Reviews',
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 25
-          ),
-        ),
+        title: Text('Reviews',
+        style: TextStyle(
+          fontSize: 22
+        ),),
       ),
-      body: SingleChildScrollView(
+      body: isLoading ? Center(child: CircularProgressIndicator(),) : SingleChildScrollView(
         child: Container(
               padding: EdgeInsets.only(left: 16,top: 24, right: 16),
               child: Column(
@@ -200,7 +225,7 @@ class _ReviewsState extends State<Reviews> {
                         ),
                         child: Center(
                           child: Text(
-                            reviews["overallrate"],
+                            reviews["average"],
                             style: TextStyle(
                               fontSize: 65,
                               color: Colors.white
@@ -221,7 +246,7 @@ class _ReviewsState extends State<Reviews> {
                               fontSize: 22
                             ),),
                             Spacer(),
-                            Text("${reviews['rateN']}  reviews",
+                            Text(" ${reviews["reviews"].length} comments",
                             style: TextStyle(
                               fontWeight: FontWeight.bold
                             ),),
@@ -237,12 +262,7 @@ class _ReviewsState extends State<Reviews> {
                                   color: Colors.orange
                                 ),
                                 ),
-                                onPressed: (){
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => FeedbackScreen()),
-                                  );
-                                },
+                                onPressed: (){},
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                     side: BorderSide(
@@ -261,7 +281,7 @@ class _ReviewsState extends State<Reviews> {
                     height: 1100,//MediaQuery.of(context).size.height*.7,
                     child: ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: reviews['rate'].length,
+                        itemCount: reviews['all_grade'].length,
                         itemBuilder: (context,index) {
                           List<String> titles = [
                             "Driver",
@@ -270,7 +290,7 @@ class _ReviewsState extends State<Reviews> {
                           ];
                           String text_t = index == 0 ? titles[0] : index == 5 ? titles[1] : index == 7 ? titles[2] : " ";
                           double h_cal =  index == 4 || index == 6 ? 110 : 62;
-                          double rate = (reviews['rate'][index]["score"])/10;
+                          double rate = (reviews['all_grade'][index]["score"])/10;
                           return Container(
                             height: h_cal,
                             child: Column(
@@ -287,7 +307,7 @@ class _ReviewsState extends State<Reviews> {
                                     ),
                                   ),
                                 ) : Text(''),
-                                Text("${reviews['rate'][index]["title"]}"),
+                                Text("${reviews['all_grade'][index]["title"]}"),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
@@ -310,7 +330,7 @@ class _ReviewsState extends State<Reviews> {
                                         ),
                                       ),
                                     ),
-                                    Text("${reviews['rate'][index]["score"].toInt()}"),
+                                    Text("${reviews['all_grade'][index]["score"].toInt()}"),
 
                                   ],
                                 ),
@@ -335,7 +355,7 @@ class _ReviewsState extends State<Reviews> {
                     height: reviews["reviews"].length * 250.0,
                     child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount:reviews["reviews"].length,
+                      itemCount:reviews["comments"].length,
                       itemBuilder: (context,index1) => Container(
                         height: 350,
                         child:
@@ -349,7 +369,7 @@ class _ReviewsState extends State<Reviews> {
                                 backgroundImage: AssetImage("assets/Image.png"),
                               ),
                               title: Text(' ${reviews["reviews"][index1]["name"]},'),
-                              subtitle: Text('${reviews['reviews'][index1]['nationality']}'),
+                              subtitle: Text('${reviews['reviews'][index1]['country_name']}'),
                              trailing: Container(
                                height: 24,
                                width: 24,
@@ -358,7 +378,7 @@ class _ReviewsState extends State<Reviews> {
                                  borderRadius: BorderRadius.circular(4.0),
                                ),
                                 child: Center(
-                                  child: Text('${reviews['reviews'][index1]["p_rate"]}'),
+                                  child: Text('${reviews['reviews'][index1]["average".substring(0,1)]}'),
                                 ),
                               ),
                             ),
@@ -370,7 +390,7 @@ class _ReviewsState extends State<Reviews> {
                                   color: Colors.orange,
                                 ),
 
-                                Text('${reviews['reviews'][index1]["location"]}',
+                                Text('${reviews['reviews'][index1]["route_name"]}',
                                   style: TextStyle(fontWeight: FontWeight.bold),),
 
                                 Icon(
@@ -379,7 +399,7 @@ class _ReviewsState extends State<Reviews> {
 
                                 ),
 
-                                Text('${reviews['reviews'][index1]["date"]}',
+                                Text('${reviews['reviews'][index1]["created_at"]}',
                                   style: TextStyle(fontWeight: FontWeight.bold),)
                               ],
                             ),
@@ -393,7 +413,7 @@ class _ReviewsState extends State<Reviews> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                      "${reviews["reviews"][index1]["reviewtime"]}",
+                                      "${reviews["reviews"][index1]["route_date"]}",
                                       textAlign: TextAlign.start
                                   ),
 
@@ -401,7 +421,7 @@ class _ReviewsState extends State<Reviews> {
                                     height: 10,
                                   ),
 
-                                  Text("${reviews["reviews"][index1]["fine"]}",
+                                  Text("${reviews["reviews"][index1]["text"]}",
                                     textAlign: TextAlign.justify,
                                     style: TextStyle(fontWeight: FontWeight.bold),)
                                 ],

@@ -7,6 +7,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/feedback/components/drop_button_city.dart';
+import 'package:travelcars/screens/login/components/toast.dart';
 
 import '../../app_config.dart';
 import '../../app_theme.dart';
@@ -284,6 +285,17 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               },
               child: InkWell(
                 onTap: () async {
+
+                  if (_nameController.text.isEmpty ||
+                      _commentController.text.isEmpty ||
+                      _cityController.text.isEmpty ||
+                  _routeController.text.isEmpty
+                  ){
+                    ToastComponent.showDialog("TextField is empty", );
+                    return;
+                  }
+
+
                   FocusScope.of(context).unfocus();
                   bool isValid = true;
                   String url = "${AppConfig.BASE_URL}/comment/create";
@@ -297,12 +309,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                    "orientation": "${rate['driver'][3]['rating']}",
                    "Price_quality": "${rate['all'][1]['rating']}",
                    "professionalism": "${rate['all'][0]['rating']}"};
-                 comment.forEach((key, value) {
-                   if(value == null || value == "0"){
-                     isValid = false;
-                     print("write$key");
-                   }
-                 });
+
                  if(_commentController.text == "") isValid = false;
                  if(_nameController.text == "") isValid = false;
                  if(_cityController.text == "") isValid = false;
