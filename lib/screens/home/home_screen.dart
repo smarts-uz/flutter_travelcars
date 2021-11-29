@@ -137,9 +137,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TravelCars'),
+        title: Text(
+          "TravelCars",
+          style: TextStyle(
+            fontSize: 25,
+            color: Colors.white,
+          ),
+        ),
         automaticallyImplyLeading: false,
-        actions: [
+        /*actions: [
           IconButton(
               icon: SvgPicture.asset(
                 'assets/icons/globus.svg',
@@ -147,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onPressed: () {},
           )
-        ],
+        ],*/
       ),
       body: (newslist.isEmpty || newslist.isEmpty) ? Center(child: CircularProgressIndicator()) : SingleChildScrollView(
         physics: BouncingScrollPhysics(),

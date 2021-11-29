@@ -24,7 +24,8 @@ class _ChoicePageState extends State<ChoicePage> {
         title: Text(
           "Настройка языка и курса",
           style: TextStyle(
-              color: Colors.white
+              color: Colors.white,
+              fontSize: 25
           ),
         ),
         leading: IconButton(

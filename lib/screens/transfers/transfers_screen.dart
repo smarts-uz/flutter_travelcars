@@ -60,7 +60,7 @@ class _TransfersScreenState extends State<TransfersScreen> {
        title: Text(
          'Transfers',
          style:TextStyle(
-             fontSize: 20,
+             fontSize: 25,
              color: Colors.white
          ),
        ),
@@ -71,7 +71,8 @@ class _TransfersScreenState extends State<TransfersScreen> {
                 _startAddNewTransaction(context);
               },
             icon: Icon(
-              Icons.info_outline_rounded
+              Icons.info_outline_rounded,
+              size: 30,
             ),
           )
         ],

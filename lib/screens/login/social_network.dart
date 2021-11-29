@@ -34,10 +34,10 @@ class _SocialScreenState extends State<SocialScreen> {
           ),
         ),
         title: Text(
-          "Регистрация",
+          "Выбор Соц. Сетей",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 19,
+            fontSize: 25,
             fontStyle: FontStyle.normal,
           ),
         ),

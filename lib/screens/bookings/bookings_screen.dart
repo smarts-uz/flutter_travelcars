@@ -107,6 +107,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
           "Bookings",
           style: TextStyle(
             color: Colors.white,
+            fontSize: 25
           ),
         ),
       ),

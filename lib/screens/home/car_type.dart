@@ -133,16 +133,17 @@ class _CarTypeState extends State<CarType> {
          widget.name,
           style: TextStyle(
             color: Colors.white,
+            fontSize: 25
           ),
         ),
-        actions: [
+        /*actions: [
           IconButton(
             onPressed: () {
 
             },
             icon: SvgPicture.asset("assets/icons/list.svg"),
           )
-        ],
+        ],*/
       ),
       body: ListView.builder(
           itemCount: results.length,

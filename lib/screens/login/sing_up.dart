@@ -46,7 +46,7 @@ class _SignUpState extends State<SignUp> {
           "Регистрация",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 19,
+            fontSize: 25,
             fontStyle: FontStyle.normal,
           ),
         ),

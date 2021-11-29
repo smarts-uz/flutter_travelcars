@@ -43,6 +43,7 @@ class _AccountScreenState extends State<AccountScreen> {
           "Настройки профиля",
           style: TextStyle(
             color: Colors.white,
+            fontSize: 25
           ),
         ),
         leading: IconButton(

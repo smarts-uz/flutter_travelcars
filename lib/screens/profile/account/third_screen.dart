@@ -64,7 +64,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
           "Соц. сети для связи",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 19,
+            fontSize: 25,
             fontStyle: FontStyle.normal,
           ),
         ),

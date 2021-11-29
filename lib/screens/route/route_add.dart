@@ -62,6 +62,7 @@ class _RouteAddState extends State<RouteAdd> {
           'Add route',
           style: TextStyle(
             color: Colors.white,
+            fontSize: 25
           ),
         ),
         leading: IconButton(

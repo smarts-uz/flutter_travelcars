@@ -81,7 +81,8 @@ class _FirstSceenState extends State<FirstSceen> {
         title: Text(
           "Изменение профиля",
           style: TextStyle(
-            color: Colors.white
+            color: Colors.white,
+            fontSize: 25
           ),
         ),
         leading: IconButton(

@@ -95,6 +95,7 @@ class _SearchResultState extends State<SearchResult> {
           "Results of searching",
           style: TextStyle(
             color: Colors.white,
+            fontSize: 25
           ),
         ),
         actions: [

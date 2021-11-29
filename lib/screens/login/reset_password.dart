@@ -30,7 +30,7 @@ class _ResetPasswordState extends State<ResetPassword> {
           "Восстановить пароль",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 19,
+            fontSize: 25,
             fontStyle: FontStyle.normal,
           ),
         ),

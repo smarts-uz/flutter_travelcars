@@ -40,7 +40,7 @@ class _SignInState extends State<SignIn> {
           "Войти",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 19,
+            fontSize: 25,
             fontStyle: FontStyle.normal,
           ),
         ),

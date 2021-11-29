@@ -28,7 +28,9 @@ class _MapScreenState extends State<MapScreen> {
           onPressed: (){
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back,),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,),
         ),
       ),
       body:  GoogleMap(

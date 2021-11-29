@@ -47,7 +47,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
           "Кешбэк",
           style: TextStyle(
             fontWeight: FontWeight.w500,
-            fontSize: 19,
+            fontSize: 25,
           ),
         ),
         actions: [

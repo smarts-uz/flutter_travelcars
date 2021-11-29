@@ -144,8 +144,14 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search and Sort'),
-        actions: [
+        title: Text(
+          "Search and sort",
+          style: TextStyle(
+            fontSize: 25,
+            color: Colors.white,
+          ),
+        ),
+        /*actions: [
           IconButton(
             icon: SvgPicture.asset(
               'assets/icons/globus.svg',
@@ -153,7 +159,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             onPressed: () {},
           )
-        ],
+        ],*/
       ),
       body: _isLoading ? Center(
         child: CircularProgressIndicator(),
@@ -167,7 +173,7 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Text(
                 'Search',
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 26,
                   fontWeight: FontWeight.bold,
                 ),
               ),

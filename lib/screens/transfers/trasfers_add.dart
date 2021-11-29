@@ -68,6 +68,7 @@ class _TransfersAddState extends State<TransfersAdd> {
         title: Text(
           'Add transfer',
           style: TextStyle(
+            fontSize: 25,
             color: Colors.white,
           ),
         ),

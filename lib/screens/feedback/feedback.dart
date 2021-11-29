@@ -83,13 +83,16 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyColor.orange,
-        title: Text("Написать отзыв",
-          style:TextStyle(
-        fontSize: 17,
-        fontFamily: "Poppins",
-        fontWeight: FontWeight.w400,
-        fontStyle: FontStyle.normal,
-        color: Colors.white,),),
+        title: Text(
+          "Написать отзыв",
+          style: TextStyle(
+            fontSize: 23,
+            fontFamily: "Poppins",
+            fontWeight: FontWeight.w400,
+            fontStyle: FontStyle.normal,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -83,15 +83,22 @@ class _BookingScreenState extends State<BookingScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyColor.orange,
-        title: Text("${results["bookings"]}",style: TextStyle(
-          fontSize: 19,
+        title: Text("${results["bookings"]}",
+          style: TextStyle(
+          fontSize: 25,
           color: Colors.white,
           fontWeight: FontWeight.w500,
           fontFamily: 'Poppins',
           fontStyle: FontStyle.normal,),),
-        leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-        },icon: Icon(Icons.arrow_back,color: Colors.white,),),
+        leading: IconButton(
+          onPressed: (){
+            Navigator.pop(context);
+            },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

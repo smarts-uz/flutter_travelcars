@@ -31,7 +31,7 @@ class _SetPasswordState extends State<SetPassword> {
           "Сброс пароля",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 19,
+            fontSize: 25,
             fontStyle: FontStyle.normal,
           ),
         ),
