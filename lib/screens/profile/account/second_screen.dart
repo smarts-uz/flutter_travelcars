@@ -19,14 +19,19 @@ class _SecondScreenState extends State<SecondScreen> {
         title: Text(
           "Изменение пароля",
           style: TextStyle(
-              color: Colors.white
+              color: Colors.white,
+              fontSize: 23
           ),
         ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back, color: Colors.white,),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 28,
+          ),
         ),
       ),
       body: SingleChildScrollView(

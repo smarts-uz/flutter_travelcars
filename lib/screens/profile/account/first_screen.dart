@@ -82,14 +82,18 @@ class _FirstSceenState extends State<FirstSceen> {
           "Изменение профиля",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 25
+            fontSize: 23
           ),
         ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back, color: Colors.white,),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 28,
+          ),
         ),
       ),
       body: SingleChildScrollView(

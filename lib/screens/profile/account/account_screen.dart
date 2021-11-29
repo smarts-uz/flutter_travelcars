@@ -50,7 +50,11 @@ class _AccountScreenState extends State<AccountScreen> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back, color: Colors.white,),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 30,
+          ),
         ),
       ),
       body: Column(
@@ -94,7 +98,7 @@ class _AccountScreenState extends State<AccountScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 15),
             child: SizedBox(
               height: 47,
               child: ListTile(
@@ -104,7 +108,12 @@ class _AccountScreenState extends State<AccountScreen> {
                     MaterialPageRoute(builder: (context) => FirstSceen()),
                   );
                 },
-                title: Text("Изменение профиля"),
+                title: Text(
+                  "Изменение профиля",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
             ),
@@ -121,7 +130,12 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                 );
               },
-              title: Text("Изменение пароля"),
+              title: Text(
+                "Изменение пароля",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
               trailing: Icon(Icons.arrow_forward_ios),
             ),
           ),
@@ -137,7 +151,12 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                 );
               },
-              title: Text("Социальные сети для связи"),
+              title: Text(
+                "Социальные сети для связи",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
               trailing: Icon(Icons.arrow_forward_ios),
             ),
           ),
@@ -151,7 +170,12 @@ class _AccountScreenState extends State<AccountScreen> {
                   MaterialPageRoute(builder: (context) => ChoicePage()),
                 );
               },
-              title: Text("Настройка языка и курса"),
+              title: Text(
+                "Настройка языка и курса",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
               trailing: Icon(Icons.arrow_forward_ios),
             ),
           ),
@@ -172,6 +196,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 "Выход",
                 style: TextStyle(
                   color: Color.fromRGBO(176, 0, 32, 1),
+                  fontSize: 20,
                 ),
               ),
             ),

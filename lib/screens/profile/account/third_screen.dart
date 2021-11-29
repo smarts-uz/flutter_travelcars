@@ -64,7 +64,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
           "Соц. сети для связи",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 25,
+            fontSize: 23,
             fontStyle: FontStyle.normal,
           ),
         ),
@@ -72,7 +72,11 @@ class _ThirdScreenState extends State<ThirdScreen> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back, color: Colors.white,),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 28,
+          ),
         ),
       ),
       body: SingleChildScrollView(
