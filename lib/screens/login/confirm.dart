@@ -27,13 +27,14 @@ class _ConfirmState extends State<Confirm> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
+            size: 28,
           ),
         ),
         title: Text(
           "Регистрация",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 25,
+            fontSize: 23,
             fontStyle: FontStyle.normal,
           ),
         ),

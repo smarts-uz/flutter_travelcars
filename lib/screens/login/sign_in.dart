@@ -34,13 +34,14 @@ class _SignInState extends State<SignIn> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
+            size: 28,
           ),
         ),
         title: Text(
           "Войти",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 25,
+            fontSize: 23,
             fontStyle: FontStyle.normal,
           ),
         ),

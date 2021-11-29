@@ -23,13 +23,14 @@ class _LoginScreenState extends State<LoginScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
+            size: 28,
           ),
         ),
         title: Text(
           "Авторизация",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 25,
+            fontSize: 23,
             fontStyle: FontStyle.normal,
           ),
         ),

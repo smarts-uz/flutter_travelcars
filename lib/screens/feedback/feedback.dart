@@ -82,11 +82,21 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 28,
+          ),
+        ),
         backgroundColor: MyColor.orange,
         title: Text(
           "Написать отзыв",
           style: TextStyle(
-            fontSize: 23,
+            fontSize: 25,
             fontFamily: "Poppins",
             fontWeight: FontWeight.w400,
             fontStyle: FontStyle.normal,

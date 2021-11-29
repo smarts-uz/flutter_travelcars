@@ -41,11 +41,16 @@ class _CashbackScreenState extends State<CashbackScreen> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 28,
+          ),
         ),
         title: Text(
           "Кешбэк",
           style: TextStyle(
+            color: Colors.white,
             fontWeight: FontWeight.w500,
             fontSize: 25,
           ),

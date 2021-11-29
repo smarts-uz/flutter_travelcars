@@ -24,13 +24,14 @@ class _ResetPasswordState extends State<ResetPassword> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
+            size: 28
           ),
         ),
         title: Text(
           "Восстановить пароль",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 25,
+            fontSize: 23,
             fontStyle: FontStyle.normal,
           ),
         ),

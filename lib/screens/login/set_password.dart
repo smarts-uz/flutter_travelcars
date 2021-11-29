@@ -25,13 +25,14 @@ class _SetPasswordState extends State<SetPassword> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
+            size: 28,
           ),
         ),
         title: Text(
           "Сброс пароля",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 25,
+            fontSize: 23,
             fontStyle: FontStyle.normal,
           ),
         ),

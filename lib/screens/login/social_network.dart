@@ -31,13 +31,14 @@ class _SocialScreenState extends State<SocialScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
+            size: 28,
           ),
         ),
         title: Text(
           "Выбор Соц. Сетей",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 25,
+            fontSize: 23,
             fontStyle: FontStyle.normal,
           ),
         ),

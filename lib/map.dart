@@ -30,7 +30,9 @@ class _MapScreenState extends State<MapScreen> {
           },
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.white,),
+            color: Colors.white,
+            size: 28,
+          ),
         ),
       ),
       body:  GoogleMap(
