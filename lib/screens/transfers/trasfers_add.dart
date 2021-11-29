@@ -68,7 +68,7 @@ class _TransfersAddState extends State<TransfersAdd> {
         title: Text(
           'Add transfer',
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 23,
             color: Colors.white,
           ),
         ),
@@ -76,7 +76,11 @@ class _TransfersAddState extends State<TransfersAdd> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back, color: Colors.white,),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 28,
+          ),
         ),
       ),
       body: SingleChildScrollView(
