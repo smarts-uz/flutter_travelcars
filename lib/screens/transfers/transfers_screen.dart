@@ -57,13 +57,13 @@ class _TransfersScreenState extends State<TransfersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       title: Text(
-         'Transfers',
-         style:TextStyle(
-             fontSize: 25,
-             color: Colors.white
-         ),
-       ),
+        title: Text(
+          'Transfers',
+          style:TextStyle(
+              fontSize: 25,
+              color: Colors.white
+          ),
+        ),
         actions: [
           IconButton(
             color: Colors.white,

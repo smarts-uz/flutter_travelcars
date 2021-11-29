@@ -98,14 +98,14 @@ class _SearchResultState extends State<SearchResult> {
             fontSize: 25
           ),
         ),
-        actions: [
+        /*actions: [
           IconButton(
             onPressed: () {
 
             },
             icon: SvgPicture.asset("assets/icons/list.svg"),
           )
-        ],
+        ],*/
       ),
       body: ListView.builder(
           itemCount: results.length,
