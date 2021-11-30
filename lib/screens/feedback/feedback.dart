@@ -243,7 +243,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   borderRadius: BorderRadius.circular(5)
               ),
               child: TextFormField(
-                maxLines: 7,
+                maxLines: 10,
                 autovalidateMode: AutovalidateMode.always,
                 decoration: const InputDecoration(
                     hintText: "Напишите отзыв...",
