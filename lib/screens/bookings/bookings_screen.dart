@@ -50,7 +50,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
       "year": "2015",
       "id": "MS-7085FB",
       "views": "6597",
-      "image": "assets/images/auto2.jpg",
+      "image": "assets/images/auto.jpg",
       "icon_numbers": [
         7, 4, 6, 6
       ],

@@ -114,11 +114,18 @@ class _CarTypeState extends State<CarType> {
          "icon_numbers": icon_numbers,
        });
        List<String> images = [];
-       element["images"].forEach((element) {
-         images.add(element["original"]);
+       element["images"].forEach((element_image) {
+         images.add(element_image["original"]);
        });
        element.addAll({
          "images": images,
+       });
+       List<dynamic> qulayliklar = [];
+       element["options"].forEach((element_list) {
+         qulayliklar.add(element_list["name"]);
+       });
+       element.addAll({
+         "qulayliklar": qulayliklar,
        });
      });
    });
