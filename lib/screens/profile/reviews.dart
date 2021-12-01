@@ -12,10 +12,9 @@ class Reviews extends StatefulWidget {
 }
 
 class _ReviewsState extends State<Reviews> {
- bool isLoading = true;
+  bool isLoading = true;
+  double list_height = 0;
   Map<String, dynamic> reviews = {
-    'overallrate': '10',
-    'rateN': '6',
     'rate': [
       {
         'title': 'Punctuality',
@@ -63,84 +62,7 @@ class _ReviewsState extends State<Reviews> {
         "score": 10.0
       },
     ],
-    "reviews": [
-      {
-        'avatar': '',
-          'name': 'Nazira',
-          'flag': '',
-          'nationality': 'Uzbekistan',
-          'p_rate':10,
-          'location': 'Family garden, Хумсон',
-          'date': '31-08-2021',
-          'reviewtime': '30 Aug 2021 15:08:52',
-          'fine': 'I would like to note that we have already contacted you more than once.'
-              ' The trip went well. The minibus is comfortable, '
-              'clean, without foreign odors (there was even a bakhur for aromatization). '
-              'The driver was extremely polite (he opened the doors, arrived at the agreed time,'
-              ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). '
-              'He orients himself perfectly in the area.'
-              ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.'
-              ' We will be contact again!'
-        },
-      {
-          'avatar': '',
-          'name': 'Salima',
-          'flag': '',
-          'nationality': 'USA',
-          'p_rate':10,
-          'location': 'Family garden, Хумсон',
-          'date': '31-08-2021',
-          'reviewtime': '30 Aug 2021 15:08:52',
-          'fine': 'I would like to note that we have already contacted you more than once.'
-              ' The trip went well. The minibus is comfortable, '
-              'clean, without foreign odors (there was even a bakhur for aromatization). '
-              'The driver was extremely polite (he opened the doors, arrived at the agreed time,'
-              ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). '
-              'He orients himself perfectly in the area.'
-              ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.'
-              ' We will be contact again!'
-        },
-      {
-        'avatar': '',
-        'name': 'Salima',
-        'flag': '',
-        'nationality': 'USA',
-        'p_rate':10,
-        'location': 'Family garden, Хумсон',
-        'date': '31-08-2021',
-        'reviewtime': '30 Aug 2021 15:08:52',
-        'fine': 'I would like to note that we have already contacted you more than once.\ n'
-            ' The trip went well. The minibus is comfortable, \n'
-            'clean, without foreign odors (there was even a bakhur for aromatization). \n'
-            'The driver was extremely polite (he opened the doors, arrived at the agreed time,\n'
-            ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). \n'
-            'He orients himself perfectly in the area.\n'
-            ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.\n'
-            ' We will be contact again!'
-      },
-      {
-        'avatar': '',
-        'name': 'Salima',
-        'flag': '',
-        'nationality': 'USA',
-        'p_rate':10,
-        'location': 'Family garden, Хумсон',
-        'date': '31-08-2021',
-        'reviewtime': '30 Aug 2021 15:08:52',
-        'fine': 'I would like to note that we have already contacted you more than once.'
-            ' The trip went well. The minibus is comfortable, '
-            'clean, without foreign odors (there was even a bakhur for aromatization). '
-            'The driver was extremely polite (he opened the doors, arrived at the agreed time,'
-            ' immediately offered to connect to bluetooth (if you need musical accompaniment on the road). '
-            'He orients himself perfectly in the area.'
-            ' We arrived comfortably, quickly and without any outside chatter from the driver. Thank you.'
-            ' We will be contact again!'
-      },
-
-
-
-
-  ]
+    "reviews": []
   };
 
   @override
@@ -179,7 +101,6 @@ class _ReviewsState extends State<Reviews> {
         "average": average.toString(),
       });
 
-
       isLoading = false;
 
     }
@@ -213,7 +134,8 @@ class _ReviewsState extends State<Reviews> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Customer Reviews',
+                  Text(
+                    'Customer Reviews',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     fontSize: 25,
@@ -223,76 +145,77 @@ class _ReviewsState extends State<Reviews> {
                     thickness: 2,
                     color: Colors.orange,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(top: 16,right: 30),
-                        height: MediaQuery.of(context).size.height*.15,
-                        width: MediaQuery.of(context).size.width*.45,
-                        decoration: BoxDecoration(
-                          color: Colors.orange,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: Center(
-                          child: Text(
-                          "  ${reviews['average']}",
-                            style: TextStyle(
-                              fontSize: 65,
-                              color: Colors.white
-                          ),),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 24,left: 14),
-                        height: MediaQuery.of(context).size.height*.15,
-                        width: MediaQuery.of(context).size.width*.35,
-                        child: Column(
-                        //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Fine',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(top: 11,right: 30),
+                          height: MediaQuery.of(context).size.height*.15,
+                          width: MediaQuery.of(context).size.width*.45,
+                          decoration: BoxDecoration(
+                            color: Colors.orange,
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Center(
+                            child: Text(
+                            "  ${reviews['average']}",
+                              style: TextStyle(
+                                fontSize: 65,
+                                color: Colors.white
                             ),),
-                            Spacer(),
-                            Text("${reviews['reviews'].length} comments",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold
-                            ),),
-                            Spacer(),
-                            Container(
-                              height: MediaQuery.of(context).size.height*.045,
-                              width: MediaQuery.of(context).size.width*.45,
-                              child: RaisedButton(
-                                color: Colors.white,
-                                child:Text('write a feedback',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.orange
-                                ),
-                                ),
-                                onPressed: (){},
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    side: BorderSide(
-                                        color: Colors.orange
-                                    )
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 27,left: 14),
+                          height: MediaQuery.of(context).size.height*.1,
+                          width: MediaQuery.of(context).size.width*.35,
+                          child: Column(
+                          //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                                Text(
+                                  "${reviews['reviews'].length} comments",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold
                                 ),
                               ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                              Container(
+                                height: MediaQuery.of(context).size.height*.055,
+                                width: MediaQuery.of(context).size.width*.45,
+                                child: RaisedButton(
+                                  color: Colors.white,
+                                  child:Text(
+                                    'Write a feedback',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.orange
+                                  ),
+                                  ),
+                                  onPressed: (){},
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      side: BorderSide(
+                                          color: Colors.orange
+                                      )
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 50),
-                    height: 1100,//MediaQuery.of(context).size.height*.7,
+                    padding: EdgeInsets.only(top: 10),
+                    height: MediaQuery.of(context).size.height * .95,
                     child: ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: reviews['reviews'].length,
+                        itemCount: reviews['rate'].length,
                         itemBuilder: (context,index) {
                           List<String> titles = [
                             "Driver",
@@ -300,12 +223,16 @@ class _ReviewsState extends State<Reviews> {
                             "Overall rating"
                           ];
                           String text_t = index == 0 ? titles[0] : index == 5 ? titles[1] : index == 7 ? titles[2] : " ";
-                          double h_cal =  index == 4 || index == 6 ? 110 : 62;
+                          double h_cal =  index == 5 || index == 7 || index == 0? 110 : 55;
                           double rate = (reviews['rate'][index]["score"])/10;
+
+
+
                           return Container(
+                            alignment: Alignment.bottomCenter,
                             height: h_cal,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 text_t != " " ? Container(
@@ -313,15 +240,19 @@ class _ReviewsState extends State<Reviews> {
                                   child: Text(
                                    text_t,
                                     style: TextStyle(
-                                      fontSize: 23,
+                                      fontSize: 24,
                                       fontWeight: FontWeight.bold
                                     ),
                                   ),
                                 ) : Text(''),
-                                Text("${reviews['rate'][index]["title"]}"),
+                                Text(
+                                  "${reviews['rate'][index]["title"]}",
+                                  style: TextStyle(
+                                    fontSize: 17
+                                  ),
+                                ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                                   children: [
                                     Container(
                                       alignment: Alignment.centerLeft,
@@ -342,7 +273,6 @@ class _ReviewsState extends State<Reviews> {
                                       ),
                                     ),
                                     Text("${reviews['rate'][index]["score"].toInt()}"),
-
                                   ],
                                 ),
                               ],
@@ -363,95 +293,117 @@ class _ReviewsState extends State<Reviews> {
                     color: Colors.orange,
                   ),
                   Container(
-                   height: reviews["reviews"].length * 250.0,
+                   height: reviews["reviews"].length * 330.0,
                    child: ListView.builder(
                      physics: NeverScrollableScrollPhysics(),
                      itemCount:reviews["reviews"].length,
-                     itemBuilder: (context,index1) => Container(
-                       height: 450,
-                       child:
-                       Column(
-                         crossAxisAlignment: CrossAxisAlignment.start,
-                         mainAxisAlignment: MainAxisAlignment.start,
-                         children: [
-                           ListTile(
-                             leading:CircleAvatar(
-                               radius: 20,
-                               backgroundImage: AssetImage("assets/Image.png"),
-                             ),
-                             title: Text(' ${reviews["reviews"][index1]["name"]},'),
-                             subtitle: Text('${reviews['reviews'][index1]['country_name']}'),
-                            trailing: Container(
-                              height: 24,
-                              width: 24,
-                              decoration: BoxDecoration(
-                                color: Colors.orange,
-                                borderRadius: BorderRadius.circular(4.0),
-                              ),
-                               child: Center(
-                                 child: Text('${reviews['reviews'][index1]["average".substring(0,1)]}'),
+                     itemBuilder: (context,index1) {
+                       double sumper = 0;
+                       reviews["reviews"][index1]["grade"].forEach((key, value){
+                         if(value is String) {
+                           sumper+=double.parse(value);
+                         } else {
+                           sumper += value;
+                         }
+                       });
+                       sumper /= 9;
+                       return Container(
+                         child:
+                         Column(
+                           crossAxisAlignment: CrossAxisAlignment.start,
+                           mainAxisAlignment: MainAxisAlignment.start,
+                           children: [
+                             ListTile(
+                               leading:CircleAvatar(
+                                 radius: 20,
+                                 backgroundImage: AssetImage("assets/Image.png"),
                                ),
-                             ),
-                           ),
-                           Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-                             children: [
-                               Icon(
-                                 Icons.location_on,
-                                 color: Colors.orange,
-                               ),
-
-                               Text('${reviews['reviews'][index1]["route_name"]}',
-                                 style: TextStyle(fontWeight: FontWeight.bold),),
-
-                               Icon(
-                                   Icons.calendar_today_outlined,
-                                 color: Colors.orange,
-
-                               ),
-
-                               Text('${reviews['reviews'][index1]["created_at"].substring(0,10)}',
-                                 style: TextStyle(fontWeight: FontWeight.bold),)
-                             ],
-                           ),
-                           SizedBox(
-                             height: 10,
-                           ),
-
-                           Container(
-                             padding: EdgeInsets.only(left: 16),
-                             child: Column(
-                               crossAxisAlignment: CrossAxisAlignment.start,
-                               children: [
-                                 Text(
-                                     " Order time : ${reviews["reviews"][index1]["route_date"].substring(0,10)}   "
-                                         " ${reviews["reviews"][index1]["route_date"].substring(11,19)}",
-                                     textAlign: TextAlign.start
+                               title: Text(' ${reviews["reviews"][index1]["name"]},'),
+                               subtitle: Text('${reviews['reviews'][index1]['country_name']}'),
+                               trailing: Container(
+                                 height: 24,
+                                 width: 24,
+                                 decoration: BoxDecoration(
+                                   color: Colors.orange,
+                                   borderRadius: BorderRadius.circular(4.0),
                                  ),
-
-                                 SizedBox(
-                                   height: 10,
+                                 child: Center(
+                                   child: Text(
+                                     sumper.round().toInt().toString(),
+                                   ),
                                  ),
-
-                                 Text("${reviews["reviews"][index1]["text"]}",
-                                   textAlign: TextAlign.justify,
-                                   style: TextStyle(fontWeight: FontWeight.bold),)
-                               ],
+                               ),
                              ),
-                           ),
+                             Padding(
+                               padding: const EdgeInsets.only(left: 8, top: 0),
+                               child: Row(
+                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                 children: [
+                                   Container(
+                                     width : MediaQuery.of(context).size.width*.55,
+                                     child: Row(
+                                       mainAxisAlignment: MainAxisAlignment.start,
+                                       children: [
+                                         Icon(
+                                           Icons.location_on,
+                                           color: Colors.orange,
+                                         ),
+                                         Expanded(
+                                           child: Text(
+                                             '${reviews['reviews'][index1]["route_name"]}',
+                                             overflow: TextOverflow.ellipsis,
+                                             //softWrap: false,
+                                             style: TextStyle(fontWeight: FontWeight.bold),),
+                                         ),
+                                       ],
 
 
-                         ],
-                       ),
+                                     ),
+                                   ),
+                                   FlatButton.icon(
+                                       onPressed: () {},
+                                       icon:  Icon(
+                                         Icons.calendar_today_outlined,
+                                         color: Colors.orange,
+                                       ),
+                                       label: Text('${reviews['reviews'][index1]["created_at"].substring(0,10)}',
+                                         style: TextStyle(fontWeight: FontWeight.bold),)
+                                   ),
+                                 ],
+                               ),
+                             ),
+                             Container(
+                               padding: EdgeInsets.only(left: 16, bottom: 40),
+                               child: Column(
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 children: [
+                                   Text(
+                                       " Order time : ${reviews["reviews"][index1]["route_date"].substring(0,10)}   "
+                                           " ${reviews["reviews"][index1]["route_date"].substring(11,19)}",
+                                       textAlign: TextAlign.start
+                                   ),
 
-                     ),
+                                   SizedBox(
+                                     height: 10,
+                                   ),
+
+                                   Text("${reviews["reviews"][index1]["text"]}",
+                                     maxLines: 12,
+                                     textAlign: TextAlign.justify,
+                                     style: TextStyle(fontWeight: FontWeight.bold),)
+                                 ],
+                               ),
+                             ),
+                           ],
+                         ),
+
+                       );
+                     },
                    )
-                    ),
-
-
+                  ),
                 ]
               )
-        )
+          )
       )
     );
   }
