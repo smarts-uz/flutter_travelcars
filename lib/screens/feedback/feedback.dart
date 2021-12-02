@@ -115,8 +115,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             Container(
               width: double.infinity,
               height: 55,
-              padding: EdgeInsets.only(left: 6),
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              //padding: EdgeInsets.only(left: 6, right: 6),
+              margin: EdgeInsets.only(left: 8, top: 8),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5)),
@@ -213,7 +213,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       context: context,
                       initialDate: DateTime.now(),
                       firstDate: DateTime(2018),
-                      lastDate: DateTime(2030),
+                      lastDate: DateTime.now(),
                     ).then((pickedDate) {
                       if (pickedDate == null) {
                         return;
@@ -294,8 +294,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     ToastComponent.showDialog("TextField is empty", );
                     return;
                   }
-
-
                   FocusScope.of(context).unfocus();
                   bool isValid = true;
                   String url = "${AppConfig.BASE_URL}/comment/create";
@@ -325,8 +323,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                          body: {
                            "text" : _commentController.text,
                            "route_id" : '0',
-                           "route_name": _nameController.text,
-                           "country_code" : _cityController.text,
+                           "route_name": _cityController.text,
                            "route_date" : "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
                            "grade" : "${json.encode(comment)}"
                          }

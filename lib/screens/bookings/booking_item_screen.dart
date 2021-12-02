@@ -22,7 +22,7 @@ class _BookingScreenState extends State<BookingScreen> {
     "id": 'MS-701AFA',
     "year": '2015г.',
     "name": 'Mercedes Sprinter',
-    "image": 'assets/images/busmini.jpg',
+    "image": 'assets/images/auto.jpg',
     'map': '',
     'vaqti': ' 07.09.2021',
     'status': 'Одобрено',

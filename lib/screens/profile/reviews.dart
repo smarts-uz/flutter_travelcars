@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/feedback/feedback.dart';
 import '../../app_config.dart';
 class Reviews extends StatefulWidget {
   const Reviews({Key? key}) : super(key: key);
@@ -195,7 +196,14 @@ class _ReviewsState extends State<Reviews> {
                                     color: Colors.orange
                                   ),
                                   ),
-                                  onPressed: (){},
+                                  onPressed: (){
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => FeedbackScreen()
+                                        )
+                                    );
+                                  },
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
                                       side: BorderSide(
@@ -225,8 +233,6 @@ class _ReviewsState extends State<Reviews> {
                           String text_t = index == 0 ? titles[0] : index == 5 ? titles[1] : index == 7 ? titles[2] : " ";
                           double h_cal =  index == 5 || index == 7 || index == 0? 110 : 55;
                           double rate = (reviews['rate'][index]["score"])/10;
-
-
 
                           return Container(
                             alignment: Alignment.bottomCenter,
@@ -282,7 +288,8 @@ class _ReviewsState extends State<Reviews> {
                         ),
 
                   ),
-                  Text('Guest reviews:',
+                  Text(
+                    'Guest reviews:',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
@@ -307,22 +314,24 @@ class _ReviewsState extends State<Reviews> {
                          }
                        });
                        sumper /= 9;
-                       return Container(
-                         child:
-                         Column(
+                       return Card(
+                         margin: EdgeInsets.symmetric(vertical: 8),
+                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                         elevation: 4,
+                         child: Column(
                            crossAxisAlignment: CrossAxisAlignment.start,
                            mainAxisAlignment: MainAxisAlignment.start,
                            children: [
                              ListTile(
-                               leading:CircleAvatar(
+                               leading: CircleAvatar(
                                  radius: 20,
                                  backgroundImage: AssetImage("assets/Image.png"),
                                ),
-                               title: Text(' ${reviews["reviews"][index1]["name"]},'),
+                               title: Text('${reviews["reviews"][index1]["name"]},'),
                                subtitle: Text('${reviews['reviews'][index1]['country_name']}'),
                                trailing: Container(
-                                 height: 24,
-                                 width: 24,
+                                 height: 27,
+                                 width: 27,
                                  decoration: BoxDecoration(
                                    color: Colors.orange,
                                    borderRadius: BorderRadius.circular(4.0),
@@ -330,6 +339,9 @@ class _ReviewsState extends State<Reviews> {
                                  child: Center(
                                    child: Text(
                                      sumper.round().toInt().toString(),
+                                     style: TextStyle(
+                                       color: Colors.white
+                                     ),
                                    ),
                                  ),
                                ),
@@ -340,7 +352,7 @@ class _ReviewsState extends State<Reviews> {
                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                  children: [
                                    Container(
-                                     width : MediaQuery.of(context).size.width*.55,
+                                     width : MediaQuery.of(context).size.width*.5,
                                      child: Row(
                                        mainAxisAlignment: MainAxisAlignment.start,
                                        children: [
@@ -353,11 +365,13 @@ class _ReviewsState extends State<Reviews> {
                                              '${reviews['reviews'][index1]["route_name"]}',
                                              overflow: TextOverflow.ellipsis,
                                              //softWrap: false,
-                                             style: TextStyle(fontWeight: FontWeight.bold),),
+                                             style: TextStyle(
+                                                 fontWeight: FontWeight.bold,
+                                                 fontStyle: FontStyle.italic
+                                             ),
+                                           ),
                                          ),
                                        ],
-
-
                                      ),
                                    ),
                                    FlatButton.icon(
@@ -366,31 +380,42 @@ class _ReviewsState extends State<Reviews> {
                                          Icons.calendar_today_outlined,
                                          color: Colors.orange,
                                        ),
-                                       label: Text('${reviews['reviews'][index1]["created_at"].substring(0,10)}',
-                                         style: TextStyle(fontWeight: FontWeight.bold),)
+                                       label: Text(
+                                         '${reviews['reviews'][index1]["created_at"].substring(0,10)}',
+                                         style: TextStyle(
+                                             fontWeight: FontWeight.bold,
+                                             fontStyle: FontStyle.italic
+                                         ),
+                                       )
                                    ),
                                  ],
                                ),
                              ),
                              Container(
-                               padding: EdgeInsets.only(left: 16, bottom: 40),
+                               padding: EdgeInsets.only(left: 16, bottom: 10, right: 16),
                                child: Column(
                                  crossAxisAlignment: CrossAxisAlignment.start,
                                  children: [
                                    Text(
-                                       " Order time : ${reviews["reviews"][index1]["route_date"].substring(0,10)}   "
-                                           " ${reviews["reviews"][index1]["route_date"].substring(11,19)}",
-                                       textAlign: TextAlign.start
+                                     "Order time : ${reviews["reviews"][index1]["route_date"].substring(0,10)}",
+                                     textAlign: TextAlign.start,
+                                     style: TextStyle(
+                                         fontSize: 15,
+                                         decoration: TextDecoration.underline,
+                                         fontStyle: FontStyle.italic
+                                     ),
                                    ),
-
                                    SizedBox(
                                      height: 10,
                                    ),
-
                                    Text("${reviews["reviews"][index1]["text"]}",
                                      maxLines: 12,
                                      textAlign: TextAlign.justify,
-                                     style: TextStyle(fontWeight: FontWeight.bold),)
+                                     style: TextStyle(
+                                       fontSize: 15,
+                                         fontStyle: FontStyle.italic
+                                     ),
+                                   )
                                  ],
                                ),
                              ),
