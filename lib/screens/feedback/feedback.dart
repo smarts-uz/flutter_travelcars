@@ -322,7 +322,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                          },
                          body: {
                            "text" : _commentController.text,
-                           "route_id" : '0',
                            "route_name": _cityController.text,
                            "route_date" : "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
                            "grade" : "${json.encode(comment)}"
