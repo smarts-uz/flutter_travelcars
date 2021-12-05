@@ -106,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         width: double.infinity,
         padding: EdgeInsets.symmetric(vertical: 7, horizontal: 6),
         child: ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             itemCount: routes.length,
             itemBuilder: (context, index) => Container(
               padding: EdgeInsets.symmetric(horizontal: 5),
@@ -114,13 +114,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   if(index == 5 )SizedBox(height: MediaQuery.of(context).size.height * .05),
                   ListTile(
-                    leading: routes[index]["icon"],
+                    leading: Container(
+                      height: 20,
+                      width: 20,
+                      color: Colors.transparent,
+                      child: routes[index]["icon"],
+                    ),
                     title: Text(
                       routes[index]["text"],
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
-                        fontSize: 19
+                        fontSize: 17
                       ),
                     ),
                     trailing: routes[index]["trailing"] ? Icon(Icons.arrow_forward_ios_outlined, size: 15,) : Container(

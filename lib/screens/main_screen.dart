@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/profile/profile_screen.dart';
-import 'package:travelcars/screens/route/route_screen.dart';
+import 'package:travelcars/screens/route/route.dart';
 import 'package:travelcars/screens/search/search.dart';
-import 'package:travelcars/screens/transfers/transfers_screen.dart';
+import 'package:travelcars/screens/transfers/transfer.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -21,8 +21,8 @@ class _MainScreenState extends State<MainScreen> {
     final _kTabPages = [
       HomeScreen(),
       SearchScreen(),
-      TransfersScreen(),
-      RouteScreen(),
+      Transfer(),
+      Routes(),
       ProfileScreen(),
     ];
     final _BottomNavBarItems = <BottomNavigationBarItem>[

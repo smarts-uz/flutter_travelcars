@@ -53,6 +53,16 @@ class _RouteScreenState extends State<RouteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+              size: 28
+          ),
+        ),
         title: Text(
           'Routes',
           style:TextStyle(
@@ -60,29 +70,18 @@ class _RouteScreenState extends State<RouteScreen> {
               color: Colors.white
           ),
         ),
-        actions: [
-          IconButton(
-            color: Colors.white,
-            onPressed: (){
-              _startAddNewTransaction(context);
-            },
-            icon: Icon(
-              Icons.info_outline_rounded,
-              size: 30,
-            ),
-          )
-        ],
+
       ),
       body: _isLoading ? Center(
         child: CircularProgressIndicator(),
       ) : info.isEmpty ? Empty() :  List_R(info, city, cars),
-      floatingActionButton: FloatingActionButton(
+      /*floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => RouteAdd()));
         },
         child: Icon(Icons.add),
-      ),
+      ),*/
     );
   }
 }
@@ -253,6 +252,7 @@ class List_R extends StatelessWidget {
     );
   }
 }
+
 class Empty extends StatelessWidget {
   const Empty({Key? key}) : super(key: key);
 
@@ -318,51 +318,4 @@ class Empty extends StatelessWidget {
       ),
     );
   }
-}
-void _startAddNewTransaction(BuildContext ctx) {
-  showModalBottomSheet(
-      context: ctx,
-      builder: (_)
-      {
-        return  Container(
-          margin: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Text('About Transfer',
-                textAlign: TextAlign.end,
-                style: TextStyle(
-                    fontSize: 24
-                ),
-              ),
-              Divider(),
-              Text('Lorem ipsum dolor sit amet, consectetur adipiscing '
-                  'elit. Eu venenatis eu id pellentesque.',
-
-                maxLines: 2,
-                style: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold
-                ),
-              ),
-              Text('\nLorem ipsum dolor sit amet, consectetur adipiscing elit.'
-                  ' A, risus, nec accumsan, ultrices vulputate phasellus. '
-                  'Sagittis sagittis, quis risus eget vel pulvinar potenti amet. '
-                  'Orci nec id maecenas enim rhoncus sodales.'
-                  ' Hendrerit cursus purus gravida ultricies. Imperdiet pharetra morbi gravida hac vitae'
-                  'ipsum dolor sit amet, consectetur adipiscing elit.'
-                  ' A, risus, nec accumsan, ultrices vulputate phasellus. '
-                  'Sagittis sagittis, quis risus eget vel pulvinar potenti amet. '
-                  'Orci nec id maecenas enim rhoncus sodales.'
-                  ' Hendrerit cursus purus gravida ultricies. Imperdiet pharetra morbi gravida hac vitae',
-                maxLines: 5,
-                style: TextStyle(
-                    fontSize: 19
-                ),
-              )
-            ],
-
-          ),
-        );
-      }
-  );
 }
