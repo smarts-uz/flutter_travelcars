@@ -22,56 +22,67 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<dynamic> imglist = [];
+  List<dynamic> newslist = [];
+  List<dynamic> carslist = [];
 
   Map<String, int> weather = {
     "Tashkent": 0,
     "Buxoro": 0,
     "Xiva": 0,
     "Samarkand": 0,
+    "Nukus": 0,
+    "Navoiy": 0,
+    "Qarshi": 0,
+    "Termiz": 0,
+    "Jizzax": 0,
+    "Guliston": 0,
+    "Andijon": 0,
+    "Farg'ona": 0,
+    "Namangan": 0,
   };
+  static const city = <String>[
+    "Tashkent",
+    "Buxoro",
+    "Xiva",
+    "Samarkand",
+    "Nukus",
+    "Navoiy",
+    "Qarshi",
+    "Termiz",
+    "Jizzax",
+    "Guliston",
+    "Andijon",
+    "Farg'ona",
+    "Namangan",
+  ];
+  final List<DropdownMenuItem<String>> cities = city.map(
+        (String value) => DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+      )).toList();
+  String? SelectedVal;
 
   List<dynamic> valyuta = [];
   Map<String, dynamic> index_val = {
     "USD" : 0,
     "EUR": 1,
     "RUB": 2,
-    "GBP": 3,
   };
-
-  List<dynamic> imglist = [];
-  List<dynamic> newslist = [];
-  List<dynamic> carslist = [];
-
-  static const city = <String>[
-    "Tashkent",
-    "Buxoro",
-    "Xiva",
-    "Samarkand"
-  ];
   static const currency = <String>[
     "USD",
     "EUR",
     "RUB",
-    "GBP"
   ];
-  final List<DropdownMenuItem<String>> cities = city.map(
-        (String value) => DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        ),
-  ).toList();
   final List<DropdownMenuItem<String>> pullar = currency.map(
         (String value) => DropdownMenuItem<String>(
           value: value,
           child: Text(value),
-    ),
-  ).toList();
-  String? SelectedVal;
+    ),).toList();
   String? SelectedVal2;
+
   int _current = 0;
-
   final CarouselController _controller = CarouselController();
-
 
   @override
   void initState() {
@@ -107,7 +118,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-
   void getnews () async {
     String url = "${AppConfig.BASE_URL}/news?lang=ru";
     final response = await http.get(
@@ -125,6 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
       weather["${city[i]}"] = json.decode(response.body)["main"]["temp"].round();
     }
   }
+
   void getvalyuta() async {
     String url = "https://cbu.uz/uz/arkhiv-kursov-valyut/json/";
     final response = await http.get(Uri.parse(url));
@@ -185,6 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       bottom: 20,
                       left: 25,
                       child: DropdownButton(
+                        menuMaxHeight: MediaQuery.of(context).size.height * .4,
                         hint: Text(
                             "City",
                             style: TextStyle(
@@ -298,6 +310,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: MediaQuery.of(context).size.width * .45,
                           alignment: Alignment.center,
                           child: DropdownButton(
+                            menuMaxHeight: MediaQuery.of(context).size.height * .4,
                             hint: Text(
                                 "Currency",
                                 style: TextStyle(
