@@ -22,20 +22,22 @@ class _SplashScreenState extends State<SplashScreen> {
     _navigatorHome();
   }
   
-  _navigatorHome() async {
-    final prefs = await SharedPreferences.getInstance();
-    if(prefs.containsKey('userData'))
-    {
-      final extractedUserData = json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
-      final expiryDate = DateTime.parse(extractedUserData['expiry_at'].substring(0, 10));
-      if(expiryDate.isAfter(DateTime.now())) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>MainScreen()));
+  _navigatorHome() {
+    Future.delayed(const Duration(milliseconds: 3000), () async {
+      final prefs = await SharedPreferences.getInstance();
+      if(prefs.containsKey('userData'))
+      {
+        final extractedUserData = json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
+        final expiryDate = DateTime.parse(extractedUserData['expiry_at'].substring(0, 10));
+        if(expiryDate.isAfter(DateTime.now())) {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>MainScreen()));
+        } else {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>ChoicePage()));
+        }
       } else {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>ChoicePage()));
       }
-    } else {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>ChoicePage()));
-    }
+    });
   }
   
   @override
@@ -52,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
               children: [
                 Center(
                   child: Container(
-                    height: 194,
+                    height: MediaQuery.of(context).size.height * .45,
                     child: Image.asset("assets/images/logo.png"),
                   ),
                 ),
@@ -62,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     style: TextStyle(
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w400,
-                        fontSize: 12,
+                        fontSize: 20,
                         fontFamily: 'Poppins',
                     ),
                     textAlign: TextAlign.center,

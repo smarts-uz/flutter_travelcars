@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/bookings/bookings_screen.dart';
-import 'package:travelcars/screens/main_screen.dart';
 import 'package:travelcars/screens/profile/account/account_screen.dart';
 import 'package:travelcars/screens/profile/cashback.dart';
 import 'package:travelcars/screens/profile/reviews.dart';
@@ -109,10 +108,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             physics: BouncingScrollPhysics(),
             itemCount: routes.length,
             itemBuilder: (context, index) => Container(
-              padding: EdgeInsets.symmetric(horizontal: 5),
+              padding: EdgeInsets.symmetric(horizontal: 3),
               child: Column(
                 children: [
-                  if(index == 5 )SizedBox(height: MediaQuery.of(context).size.height * .05),
+                  if(index == 5 )SizedBox(height: MediaQuery.of(context).size.height * .08),
                   ListTile(
                     leading: Container(
                       height: 20,

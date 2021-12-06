@@ -353,12 +353,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(8),
-              height: 150,
-              width: double.infinity,
-              child: Image.asset("assets/images/banner.jpg", fit: BoxFit.cover,),
-            ),
-            Container(
               padding: EdgeInsets.only(left: 12, top: 12, bottom: 6),
               child: Text(
                 "Most popular routes",
