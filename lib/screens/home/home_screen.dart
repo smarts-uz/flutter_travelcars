@@ -196,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       bottom: 20,
                       left: 25,
                       child: DropdownButton(
-                        menuMaxHeight: MediaQuery.of(context).size.height * .4,
+                        menuMaxHeight: MediaQuery.of(context).size.height * .35,
                         hint: Text(
                             "City",
                             style: TextStyle(

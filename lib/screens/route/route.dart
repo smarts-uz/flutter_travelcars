@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/route/route_add.dart';
+
+import '../../dialogs.dart';
 
 class Routes extends StatelessWidget {
   const Routes({Key? key}) : super(key: key);
@@ -72,9 +75,16 @@ class Routes extends StatelessWidget {
                     ),
                   ],
                 ),
-                onPressed: (){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => RouteAdd()));
+                onPressed: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  if(prefs.containsKey('userData')) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => RouteAdd()
+                        )
+                    );
+                  } else {
+                    Dialogs.LoginDialog(context);
+                  }
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),

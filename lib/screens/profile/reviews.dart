@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/feedback/feedback.dart';
 import '../../app_config.dart';
+import '../../dialogs.dart';
 class Reviews extends StatefulWidget {
   const Reviews({Key? key}) : super(key: key);
 
@@ -196,13 +198,19 @@ class _ReviewsState extends State<Reviews> {
                                     color: Colors.orange
                                   ),
                                   ),
-                                  onPressed: (){
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) => FeedbackScreen()
-                                        )
-                                    );
+                                  onPressed: () async {
+                                    final prefs = await SharedPreferences.getInstance();
+                                    if(prefs.containsKey('userData')) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) => FeedbackScreen()
+                                          )
+                                      );
+                                    } else {
+                                      Dialogs.LoginDialog(context);
+                                    }
+
                                   },
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),

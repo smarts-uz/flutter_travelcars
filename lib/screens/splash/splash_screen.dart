@@ -24,7 +24,8 @@ class _SplashScreenState extends State<SplashScreen> {
   
   _navigatorHome() {
     Future.delayed(const Duration(milliseconds: 3000), () async {
-      final prefs = await SharedPreferences.getInstance();
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => MainScreen()));
+      /*final prefs = await SharedPreferences.getInstance();
       if(prefs.containsKey('userData'))
       {
         final extractedUserData = json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
@@ -36,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
         }
       } else {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>ChoicePage()));
-      }
+      }*/
     });
   }
   

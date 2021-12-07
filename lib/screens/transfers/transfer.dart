@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/transfers/trasfers_add.dart';
+
+import '../../dialogs.dart';
 
 class Transfer extends StatelessWidget {
   const Transfer({Key? key}) : super(key: key);
@@ -37,9 +40,7 @@ class Transfer extends StatelessWidget {
             Container(
                 height: MediaQuery.of(context).size.height*.35,
                 width: MediaQuery.of(context).size.width*.65,
-
-                child: Image.asset(
-                    'assets/images/map_location.jpg')
+                child: Image.asset('assets/images/map_location.jpg')
             ),
             Container(
                 width: MediaQuery.of(context).size.width*.7,
@@ -71,12 +72,22 @@ class Transfer extends StatelessWidget {
                       'Add',
                       style: TextStyle(
                           color: Colors.orange
-                      ),),
+                      ),
+                    ),
                   ],
                 ),
-                onPressed: (){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => TransfersAdd()));
+                onPressed: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  if(prefs.containsKey('userData')) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TransfersAdd()
+                        )
+                    );
+                  } else {
+                    Dialogs.LoginDialog(context);
+                  }
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),

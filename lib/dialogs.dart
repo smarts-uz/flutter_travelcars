@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:travelcars/screens/login/login_srcreen.dart';
 
 class Dialogs {
   static Future<dynamic> ZayavkaDialog(BuildContext ctx) {
@@ -173,10 +174,7 @@ class Dialogs {
     );
   }
 
-  static Future<dynamic> TripDialog(
-      BuildContext ctx,
-      List routes,
-      ) {
+  static Future<dynamic> TripDialog(BuildContext ctx, List routes,)  {
     return showDialog(
         context: ctx,
         builder: (BuildContext dialogContext) => Dialog(
@@ -268,6 +266,66 @@ class Dialogs {
                       "Закрыть",
                       style: TextStyle(
                         fontSize: 20,
+                        color: Color.fromRGBO(239, 127, 26, 1),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+    );
+  }
+
+  static Future<dynamic> LoginDialog(BuildContext ctx) {
+    return showDialog(
+        context: ctx,
+        builder: (BuildContext dialogContext) => Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: Container(
+            height: MediaQuery.of(ctx).size.height * .25,
+            width: MediaQuery.of(ctx).size.width * .85,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  height: 60,
+                  width: 60,
+                  margin: EdgeInsets.symmetric(vertical: 15),
+                  child:  SvgPicture.asset("assets/error.svg", fit: BoxFit.cover),
+                ),
+                Column(
+                  children: [
+                    Text(
+                      "Please login to do this action",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.normal,
+                          color: Color.fromRGBO(0, 0, 0, 1),
+                          letterSpacing: 0.15),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                      Navigator.push(
+                          ctx,
+                          MaterialPageRoute(
+                              builder: (_) => LoginScreen()
+                          )
+                      );
+                    },
+                    child: Text(
+                      "Go to login page",
+                      style: TextStyle(
+                        fontSize: 22,
                         color: Color.fromRGBO(239, 127, 26, 1),
                       ),
                     ),

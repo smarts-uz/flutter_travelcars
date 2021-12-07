@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/bookings/bookings_screen.dart';
 import 'package:travelcars/screens/profile/account/account_screen.dart';
 import 'package:travelcars/screens/profile/cashback.dart';
@@ -130,14 +131,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     trailing: routes[index]["trailing"] ? Icon(Icons.arrow_forward_ios_outlined, size: 15,) : Container(
                       width: 10,
                     ),
-                    onTap: () {
-                      if(index < 6) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => routes[index]["route"]
-                            )
-                        );
+                    onTap: () async {
+                      if(index < 6)  {
+                        if(index == 5) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => routes[index]["route"]
+                              )
+                          );
+                          return;
+                        }
+                        final prefs = await SharedPreferences.getInstance();
+                        if(prefs.containsKey('userData')) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => routes[index]["route"]
+                              )
+                          );
+                        } else {
+                          Dialogs.LoginDialog(context);
+                        }
+
                       } else {
                         launch(routes[index]["route"]);
                       }
