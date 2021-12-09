@@ -14,9 +14,10 @@ class DropButton extends StatefulWidget {
 class _DropButtonState extends State<DropButton> {
 
   List<String> Items = <String>[
-    "UZB",
+
     "ENG",
-    "RUS"
+    "RUS",
+    "UZB",
   ];
 
   @override
@@ -57,7 +58,8 @@ class _DropButtonState extends State<DropButton> {
             value: DropButton.dropdawnvalue,
             isExpanded: true,
             underline: SizedBox(),
-            onChanged: (String? newValue) {
+            onChanged: (String? newValue)  {
+
               setState(() {
                 DropButton.dropdawnvalue = newValue!;
               });

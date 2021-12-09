@@ -9,6 +9,7 @@ import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/home/car_type.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/translations/locale_keys.g.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -344,7 +345,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 65,
               width: double.infinity,
               child: Text(
-                "Transport services among all cities of Uzbekistan: travel and business",
+                "LocaleKeys",
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 style: TextStyle(

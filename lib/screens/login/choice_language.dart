@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,8 +38,17 @@ class _ChoicePageState extends State<ChoicePage> {
               Spacer(),
               GestureDetector(
                 onTap: () async {
+                  switch(DropButton.dropdawnvalue ){
+                    case 'ENG' :  await context.setLocale(Locale('en'));
+                    break;
+                    case 'RUS' :  await context.setLocale(Locale('ru'));
+                    break;
+                    case 'UZB' :  await context.setLocale(Locale('uz'));
+                    break;
+                  }
                   final prefs = await SharedPreferences.getInstance();
-                  prefs.setString("settings", json.encode({
+                  prefs.setString(
+                      "settings", json.encode({
                     "locale": "${DropButton.dropdawnvalue}",
                     "currency": "${DropButtonMny.dropdawnvalue}",
                   }));
