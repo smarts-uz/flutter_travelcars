@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -199,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: DropdownButton(
                         menuMaxHeight: MediaQuery.of(context).size.height * .35,
                         hint: Text(
-                            "City",
+                            LocaleKeys.city.tr(),
                             style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.white
@@ -272,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             children: [
                               Text(
-                                "Rate change",
+                               LocaleKeys.Rate_change.tr(),
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15
@@ -313,7 +314,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: DropdownButton(
                             menuMaxHeight: MediaQuery.of(context).size.height * .4,
                             hint: Text(
-                                "Currency",
+                                LocaleKeys.Currency.tr(),
                                 style: TextStyle(
                                     fontSize: 18,
                                     color: Colors.black
@@ -342,11 +343,11 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               color: Color.fromRGBO(245, 245, 246, 1),
               padding: EdgeInsets.all(8),
-              height: 65,
+              height: 85,
               width: double.infinity,
               child: Text(
-                "LocaleKeys",
-                maxLines: 2,
+                LocaleKeys.home_screen_Transport_services.tr(),
+                maxLines: 3,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20
@@ -356,7 +357,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               padding: EdgeInsets.only(left: 12, top: 12, bottom: 6),
               child: Text(
-                "Most popular routes",
+                LocaleKeys.Most_popular_routes.tr(),
                 textAlign: TextAlign.start,
                 style: TextStyle(
                     fontSize: 24
@@ -440,7 +441,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               padding: EdgeInsets.only(left: 12, top: 12, bottom: 6),
               child: Text(
-                "Most popular cars to book",
+               LocaleKeys.Most_popular_cars_book.tr(),
                 textAlign: TextAlign.start,
                 maxLines: 2,
                 style: TextStyle(
@@ -521,7 +522,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               padding: EdgeInsets.only(left: 12, bottom: 6),
               child: Text(
-                "News and special offers",
+               LocaleKeys.News_and_special_offers.tr(),
                 textAlign: TextAlign.start,
                 style: TextStyle(
                     fontSize: 24

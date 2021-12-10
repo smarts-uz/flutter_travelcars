@@ -1,3 +1,9 @@
 {
-  "home_screen_Transport_services": "Transport services among all cities of Uzbekistan: travel and business"
+  "home_screen_Transport_services": "Transport services among all cities of Uzbekistan: travel and business",
+  "city": "City",
+  "Rate_change": "Rate change",
+  "Currency": "Currency",
+  "Most_popular_routes": "Most popular routes",
+  "Most_popular_cars_book": "Most popular cars to book",
+  "News_and_special_offers": "News and special offers"
 }

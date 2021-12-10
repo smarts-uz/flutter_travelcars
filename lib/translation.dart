@@ -15,7 +15,7 @@ class Translation extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              Text(LocaleKeys.hi_there.tr(),
+              Text(LocaleKeys.home_screen_Transport_services.tr(),
               style: TextStyle(
                 fontSize: 25
               ),),
