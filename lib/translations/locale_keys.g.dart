@@ -8,5 +8,34 @@ abstract class  LocaleKeys {
   static const Most_popular_routes = 'Most_popular_routes';
   static const Most_popular_cars_book = 'Most_popular_cars_book';
   static const News_and_special_offers = 'News_and_special_offers';
+  static const Search_and_sort = 'Search_and_sort';
+  static const Search = 'Search';
+  static const Quantity_of_passengers = 'Quantity_of_passengers';
+  static const Price = 'Price';
+  static const Options = 'Options';
+  static const Included_in_type = 'Included_in_type';
+  static const Clear_data = 'Clear_data';
+  static const One_way = 'One_way';
+  static const Round_trip  = 'Round_trip ';
+  static const By_price = 'By_price';
+  static const By_capacity = 'By_capacity';
+  static const Cars = 'Cars';
+  static const Microbus = 'Microbus';
+  static const Minibus = 'Minibus';
+  static const Bus = 'Bus';
+  static const VIP_auto = 'VIP_auto';
+  static const Air_Conditional = 'Air_Conditional';
+  static const Mikrofon = 'Mikrofon';
+  static const Fridge = 'Fridge';
+  static const First_aid_kit = 'First_aid_kit';
+  static const Airbags = 'Airbags';
+  static const Fire_extinguisher = 'Fire_extinguisher';
+  static const Plumbing_cabin = 'Plumbing_cabin';
+  static const Driver_nutrition = 'Driver_nutrition';
+  static const Parking_payments = 'Parking_payments';
+  static const Car_delivery_to_a_convenient_place = 'Car_delivery_to_a_convenient_place';
+  static const Auto_types = 'Auto_types';
+  static const Fuel_cost = 'Fuel_cost';
+  static const Sort_by_result = 'Sort_by_result';
 
 }

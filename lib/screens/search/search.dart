@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -5,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/search/search_result.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -18,13 +20,13 @@ class _SearchScreenState extends State<SearchScreen> {
   bool _isLoading = true;
 
   List<String> directions = [
-    "One way",
-    "Round trip",
+    LocaleKeys.One_way.tr(),
+    LocaleKeys.Round_trip.tr(),
   ];
 
   List<String> sort = [
-    "By price",
-    "By capacity"
+    LocaleKeys.By_price.tr(),
+    LocaleKeys.By_capacity.tr()
   ];
   int? _radioVal1;
   int? _radioVal2;
@@ -40,35 +42,35 @@ class _SearchScreenState extends State<SearchScreen> {
 
   List<Map<String, dynamic>> autoTypes = [
     {
-      "text": "Cars",
+      "text": LocaleKeys.Cars.tr(),
       "check_box": false
     },
     {
-      "text": "Microbus",
+      "text": LocaleKeys.Microbus.tr(),
       "check_box": false
     },{
-      "text": "Midibus",
+      "text": LocaleKeys.Minibus.tr(),
       "check_box": false
     },{
-      "text": "Bus",
+      "text": LocaleKeys.Bus.tr(),
       "check_box": false
     },
     {
-      "text": "VIP - auto",
+      "text": LocaleKeys.VIP_auto.tr(),
       "check_box": false
     },
   ];
 
   List<Map<String, dynamic>> autoOptions = [
     {
-      "text": "Air conditioning",
+      "text": LocaleKeys.Air_Conditional.tr(),
       "check_box": false
     },
     {
-      "text": "Mikrofon",
+      "text": LocaleKeys.Mikrofon.tr(),
       "check_box": false
     },{
-      "text": "Fridge",
+      "text": LocaleKeys.Fridge.tr(),
       "check_box": false
     },{
       "text": "Tv",
@@ -79,36 +81,36 @@ class _SearchScreenState extends State<SearchScreen> {
       "check_box": false
     },
     {
-      "text": "First aid kit",
+      "text": LocaleKeys.First_aid_kit.tr(),
       "check_box": false
     },
     {
-      "text": "Airbags",
+      "text": LocaleKeys.Airbags.tr(),
       "check_box": false
     },
     {
-      "text": "Fire extinguisher",
+      "text": LocaleKeys.Fire_extinguisher.tr(),
       "check_box": false
     },
     {
-      "text": "Plumbing cabin",
+      "text": LocaleKeys.Plumbing_cabin.tr(),
       "check_box": false
     },
   ];
 
   List<Map<String, dynamic>> tarif = [
     {
-      "text": "Car delivery to a convenient place",
+      "text": LocaleKeys.Car_delivery_to_a_convenient_place.tr(),
       "check_box": false
     },
     {
-      "text": "Fuel cost",
+      "text": LocaleKeys.Fuel_cost.tr(),
       "check_box": false
     },{
-      "text": "Driver nutrition",
+      "text": LocaleKeys.Driver_nutrition.tr(),
       "check_box": false
     },{
-      "text": "Parking payments",
+      "text": LocaleKeys.Parking_payments.tr(),
       "check_box": false
     },
   ];
@@ -145,7 +147,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Search and sort",
+          LocaleKeys.Search_and_sort.tr(),
           style: TextStyle(
             fontSize: 25,
             color: Colors.white,
@@ -171,7 +173,7 @@ class _SearchScreenState extends State<SearchScreen> {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 20, top: 15),
               child: Text(
-                'Search',
+                LocaleKeys.Search.tr(),
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
@@ -199,13 +201,14 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ),
                     Expanded(
-                      flex: 3,
+                      flex: 5,
                       child: Text(
                         directions[index],
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 22,
                         ),
+                        maxLines: 2,
                       ),
                     ),
                   ],
@@ -225,7 +228,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: DropdownButton<String>(
                   menuMaxHeight: MediaQuery.of(context).size.height * .5,
                   hint: Text(
-                      "City",
+                      LocaleKeys.city.tr(),
                       style: TextStyle(
                           fontSize: 19,
                           color: Colors.black
@@ -262,7 +265,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: DropdownButton<String>(
                   menuMaxHeight: MediaQuery.of(context).size.height * .5,
                   hint: Text(
-                      "City",
+                      LocaleKeys.city.tr(),
                       style: TextStyle(
                           fontSize: 19,
                           color: Colors.black
@@ -397,7 +400,7 @@ class _SearchScreenState extends State<SearchScreen> {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
               child: Text(
-                'Sort by result',
+                LocaleKeys.Sort_by_result.tr(),
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -437,7 +440,7 @@ class _SearchScreenState extends State<SearchScreen> {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
               child: Text(
-                'Price',
+                LocaleKeys.Price.tr(),
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -496,7 +499,7 @@ class _SearchScreenState extends State<SearchScreen> {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 15, top: 15, bottom: 5),
               child: Text(
-                'Auto types',
+                LocaleKeys.Auto_types.tr(),
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -513,7 +516,7 @@ class _SearchScreenState extends State<SearchScreen> {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 15, top: 15, bottom: 5),
               child: Text(
-                'Options',
+                LocaleKeys.Options.tr(),
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -530,7 +533,7 @@ class _SearchScreenState extends State<SearchScreen> {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 15, top: 15, bottom: 5),
               child: Text(
-                'Included in type',
+                LocaleKeys.Included_in_type.tr(),
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -569,7 +572,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   });
                 },
                 child: Text(
-                  "Clear data",
+                  LocaleKeys.Clear_data.tr(),
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -596,7 +599,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         size: 27,
                       ),
                       Text(
-                        "Search",
+                        LocaleKeys.Search.tr(),
                         style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
