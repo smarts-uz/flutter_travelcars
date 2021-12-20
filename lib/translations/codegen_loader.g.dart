@@ -50,7 +50,26 @@ class CodegenLoader extends AssetLoader{
   "Car_delivery_to_a_convenient_place": "Car delivery to a convenient place",
   "Auto_types": "Auto types",
   "Fuel_cost": "Fuel cost",
-  "Sort_by_result": "Sort by result"
+  "Sort_by_result": "Sort by result",
+  "year_of_issue": "Year of issue:",
+  "id_number": "ID number :",
+  "reserve": "Reserve",
+  "cancelation_terms": "Cancelation terms",
+  "the_customer_can_cancel_his_reservation_WITHOUT": "The customer can cancel his reservation WITHOUT",
+  "before_7days": "- when booking a car 7 days before",
+  "before_3days": "- when booking a car 3 days before",
+  "important_information ": "Important information",
+  "twenty_four_h": "the beginning of the trip - 24 hours in advance.",
+  "two_three_month": "- when booking a car 2-3 months in advance",
+  "tendays": "the beginning of the trip - 10 days in advance;",
+  "fourteendays": "- when booking a car 14 days before",
+  "fiveteendays": "and more before the start of the trip - 15 days;",
+  "thirtydays": "- when booking a car 30 days before",
+  "threedays": "the beginning of the trip - 3 days in advance;",
+  "sevendays": "the beginning of the trip - 7 days in advance;",
+  "Overtime_UZS": "Overtime for 1 hour - 0 UZS",
+  "five": "Bank transfer commission - 5% '",
+  "penalty_at_the_next_conditions": "PENALTY at the next. conditions:"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги между всеми городами Узбекистана: путешествия и бизнесs",
@@ -88,7 +107,26 @@ static const Map<String,dynamic> ru = {
   "Car_delivery_to_a_convenient_place": "Доставка авто в удобное место",
   "Auto_types": "типы авто",
   "Fuel_cost": "Стоимость топлива",
-  "Sort_by_result": "Сортировать по результату"
+  "Sort_by_result": "Сортировать по результату",
+  "year_of_issue": "Год выпуска:",
+  "id_number": "ID номер:",
+  "reserve": "Бронировать",
+  "cancelation_terms": "Условия отмены",
+  "the_customer_can_cancel_his_reservation_WITHOUT": "Заказчик может отменить свою бронь БЕЗ",
+  "before_7days": "- при бронировании автомобиля за 7 дней до",
+  "before_3days": "- при бронировании автомобиля за 3 дней до",
+  "important_information ": "Важная информация",
+  "twenty_four_h": "начала поездки - за 24 часа.",
+  "two_three_month": "- при бронировании автомобиля за 2-3 месяцев",
+  "tendays": "начала поездки - за 10 дней;",
+  "fourteendays": "- при бронировании автомобиля за 14 дней до",
+  "fiveteendays": "и более до начала поездки - за 15 дней;",
+  "thirtydays": "- при бронировании автомобиля за 30 дней до",
+  "threedays": "начала поездки - за 3 дня;",
+  "sevendays": "начала поездки - за 7 дней;",
+  "Overtime_UZS": "Сверхурочные за 1 час - 0 сум",
+  "five": "Комиссия за банковский перевод - 5%'",
+  "penalty_at_the_next_conditions": "ШТРАФА при след. условиях:"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Oʻzbekistonning barcha shaharlari oʻrtasida transport xizmatlari: sayohat va biznes",
@@ -126,7 +164,26 @@ static const Map<String,dynamic> uz = {
   "Car_delivery_to_a_convenient_place": "Avtomobilni qulay joyga yetkazib berish",
   "Auto_types": "Avtomatik turlari",
   "Fuel_cost": "Yoqilg'i narxi",
-  "Sort_by_result": "Natija bo'yicha saralash"
+  "Sort_by_result": "Natija bo'yicha saralash",
+  "year_of_issue": "Chiqarilgan yili:",
+  "id_number": "ID raqami:",
+  "reserve": "Avvaldan buyurtma berish",
+  "cancelation_terms": "Bekor qilish shartlari",
+  "the_customer_can_cancel_his_reservation_WITHOUT": "Mijoz o'z bandlovini bekor qilishi mumkin",
+  "before_7days": "- 7 kun oldin avtomashinani bron qilishda",
+  "before_3days": "- avtomobilni 3 kun oldin bron qilishda",
+  "important_information ": "Muhim ma'lumotlar",
+  "twenty_four_h": "sayohat boshlanishi - 24 soat oldin.",
+  "two_three_month": "- avtomobilni 2-3 oy oldin bron qilishda",
+  "tendays": "sayohat boshlanishi - 10 kun oldin;",
+  "fourteendays": "- 14 kun oldin avtomashinani bron qilishda",
+  "fiveteendays": "sayohat boshlanishidan oldin va undan ko'p - 15 kun;",
+  "thirtydays": "- avtomashinani 30 kun oldin bron qilishda",
+  "threedays": "sayohat boshlanishi - 3 kun oldin;",
+  "sevendays": "sayohat boshlanishi - 7 kun oldin;",
+  "Overtime_UZS": "1 soatlik qo'shimcha ish vaqti - 0 so'm",
+  "five": "Bank o'tkazmasi komissiyasi - 5%",
+  "penalty_at_the_next_conditions": "Keyingisida JARIMA. shartlar:"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

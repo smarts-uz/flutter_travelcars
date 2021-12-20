@@ -37,5 +37,24 @@ abstract class  LocaleKeys {
   static const Auto_types = 'Auto_types';
   static const Fuel_cost = 'Fuel_cost';
   static const Sort_by_result = 'Sort_by_result';
+  static const year_of_issue = 'year_of_issue';
+  static const id_number = 'id_number';
+  static const reserve = 'reserve';
+  static const cancelation_terms = 'cancelation_terms';
+  static const the_customer_can_cancel_his_reservation_WITHOUT = 'the_customer_can_cancel_his_reservation_WITHOUT';
+  static const before_7days = 'before_7days';
+  static const before_3days = 'before_3days';
+  static const important_information  = 'important_information ';
+  static const twenty_four_h = 'twenty_four_h';
+  static const two_three_month = 'two_three_month';
+  static const tendays = 'tendays';
+  static const fourteendays = 'fourteendays';
+  static const fiveteendays = 'fiveteendays';
+  static const thirtydays = 'thirtydays';
+  static const threedays = 'threedays';
+  static const sevendays = 'sevendays';
+  static const Overtime_UZS = 'Overtime_UZS';
+  static const five = 'five';
+  static const penalty_at_the_next_conditions = 'penalty_at_the_next_conditions';
 
 }

@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,6 +12,7 @@ import 'package:travelcars/screens/bookings/booking_item_screen.dart';
 import 'package:travelcars/screens/feedback/feedback.dart';
 import 'package:travelcars/screens/search/components/drop_button_cost.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 
 class CarDetails extends StatefulWidget {
@@ -162,7 +164,7 @@ class _CarDetailsState extends State<CarDetails> {
                           Container(
                             padding: EdgeInsets.only(left: 6, bottom: 3),
                             child: Text(
-                              "Год выпуска: ${results["year"]}",
+                              "${LocaleKeys.year_of_issue.tr()} ${results["year"]}",
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -177,7 +179,7 @@ class _CarDetailsState extends State<CarDetails> {
                               left: 16,
                             ),
                             child: Text(
-                              "ID номер: ${results["number"]}",
+                              "${LocaleKeys.id_number.tr()} ${results["number"]}",
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -232,7 +234,7 @@ class _CarDetailsState extends State<CarDetails> {
               ),
               child: Center(
                 child: Text(
-                  "Бронировать",
+                  LocaleKeys.reserve.tr(),
                   style: TextStyle(
                     fontSize: 17,
                     color: Colors.white,
@@ -312,18 +314,18 @@ void _otmen(BuildContext ctx) {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              'Условия отмены',
+              LocaleKeys.cancelation_terms.tr(),
               textAlign: TextAlign.start,
               style: TextStyle(fontSize: 15, color: Colors.red),
             ),
             Divider(),
             Text(
-              'Заказчик может отменить свою бронь БЕЗ\n ШТРАФА при след. условиях:\n'
-                  '- при бронировании автомобиля за 2-3 месяцев\n и более до начала поездки - за 15 дней;\n'
-                  '- при бронировании автомобиля за 30 дней до\n начала поездки - за 10 дней;\n'
-                  '- при бронировании автомобиля за 14 дней до\n начала поездки - за 7 дней;\n'
-                  '- при бронировании автомобиля за 7 дней до\n начала поездки - за 3 дня;\n'
-                  '- при бронировании автомобиля за 3 дней до\n начала поездки - за 24 часа.\n',
+              '${LocaleKeys.the_customer_can_cancel_his_reservation_WITHOUT}\n ${LocaleKeys.penalty_at_the_next_conditions.tr()}\n'
+                  '${LocaleKeys.two_three_month.tr()}\n${LocaleKeys.fiveteendays.tr()}\n'
+                  '${LocaleKeys.thirtydays.tr()}\n ${LocaleKeys.tendays.tr()}\n'
+                  '${LocaleKeys.fourteendays.tr()}\n ${LocaleKeys.sevendays.tr()}\n'
+                  '${LocaleKeys.before_7days.tr()}\n ${LocaleKeys.threedays.tr()}\n'
+                  '${LocaleKeys.before_3days.tr()}\n ${LocaleKeys.twenty_four_h.tr()}\n',
               maxLines: 12,
               style: TextStyle(fontSize: 14, color: Colors.red),
             ),
@@ -345,14 +347,14 @@ void _inform(BuildContext ctx) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Важная информация',
+             LocaleKeys.important_information.tr(),
               textAlign: TextAlign.end,
               style: TextStyle(fontSize: 15, color: Colors.orangeAccent),
             ),
             Divider(),
             Text(
-              'Овертайм за 1 час – 0 UZS\n'
-                  ' Комиссия за банковский перевод - 5%',
+              '${LocaleKeys.Overtime_UZS.tr()}\n'
+                  ' ${LocaleKeys.five.tr()}',
               maxLines: 5,
               style: TextStyle(fontSize: 14, color: Colors.orangeAccent),
             )
