@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/src/public_ext.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -10,6 +11,7 @@ import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/home/car_type.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/trip/trips.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 
   static List<dynamic> cars_list = [];
   static List<dynamic> city_list = [];
+  static List<dynamic> tour_list = [];
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -108,6 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final response = await http.get(
       Uri.parse(url)
     );
+    HomeScreen.tour_list = json.decode(response.body)["data"];
     setState(() {
       imglist = json.decode(response.body)["data"];
     });
@@ -165,7 +169,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.white,
               ),
               onPressed: () {
-
+               Navigator.push(
+                   context,
+                   CupertinoPageRoute(
+                       builder: (_) => TripsScreen(HomeScreen.tour_list)
+                   )
+               );
               },
           ),
           IconButton(
