@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,6 +8,7 @@ import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/home/car_details.dart';
 import 'package:travelcars/screens/search/details_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class CarType extends StatefulWidget {
  final String name;
@@ -180,7 +182,7 @@ class _CarTypeState extends State<CarType> {
                       Icon(Icons.info_outline, color: Colors.red),
                       SizedBox(width: 13),
                       Text(
-                        "Confirmation requires",
+                        LocaleKeys.confirmation_requires.tr(),
                         style: TextStyle(
                           fontSize: 20,
                         ),
@@ -203,7 +205,7 @@ class _CarTypeState extends State<CarType> {
                   padding: EdgeInsets.only(left: 15, bottom: 3),
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "Made year: ${results[index]["year"]}",
+                    "${LocaleKeys.year_of_issue.tr()}: ${results[index]["year"]}",
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey,
@@ -214,7 +216,7 @@ class _CarTypeState extends State<CarType> {
                   padding: EdgeInsets.only(left: 15, top: 3, bottom: 5),
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "ID number: ${results[index]["number"]}",
+                    "${LocaleKeys.id_number.tr()}: ${results[index]["number"]}",
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey,
@@ -273,7 +275,7 @@ class _CarTypeState extends State<CarType> {
                       ),
                     ),
                     child: Text(
-                      "Details",
+                      LocaleKeys.details.tr(),
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.orange,

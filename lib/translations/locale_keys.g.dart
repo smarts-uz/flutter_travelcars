@@ -56,5 +56,7 @@ abstract class  LocaleKeys {
   static const Overtime_UZS = 'Overtime_UZS';
   static const five = 'five';
   static const penalty_at_the_next_conditions = 'penalty_at_the_next_conditions';
+  static const confirmation_requires = 'confirmation_requires';
+  static const details = 'details';
 
 }
