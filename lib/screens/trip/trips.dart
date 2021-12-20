@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 
 class TripsScreen extends StatelessWidget {
-  List<dynamic> trips_list;
+  List<dynamic> trips_list = HomeScreen.tour_list;
 
-  TripsScreen(this.trips_list);
 
   @override
   Widget build(BuildContext context) {

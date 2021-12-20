@@ -1,4 +1,5 @@
 import 'package:easy_localization/src/public_ext.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,17 +7,18 @@ import 'package:intl/intl.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/search/search_result.dart';
+import 'package:travelcars/screens/trip/trips.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+  final bool isDrawer;
+  SearchScreen({this.isDrawer=false});
 
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-
   bool _isLoading = true;
 
   List<String> directions = [
@@ -28,19 +30,19 @@ class _SearchScreenState extends State<SearchScreen> {
     LocaleKeys.By_price.tr(),
     LocaleKeys.By_capacity.tr()
   ];
-  int? _radioVal1;
-  int? _radioVal2;
-  RangeValues _currentRangeValues = RangeValues(50, 250);
+  static int? _radioVal1;
+  static int? _radioVal2;
+  static RangeValues _currentRangeValues = RangeValues(50, 250);
 
-  String? SelectedVal1;
-  String? SelectedVal2;
+  static String? SelectedVal1;
+  static String? SelectedVal2;
 
-  DateTime? _selectedDate1 = DateTime.now();
-  DateTime? _selectedDate2 = DateTime.now();
+  static DateTime? _selectedDate1 = DateTime.now();
+  static DateTime? _selectedDate2 = DateTime.now();
 
-  var number_controller = TextEditingController();
+  static var number_controller = TextEditingController();
 
-  List<Map<String, dynamic>> autoTypes = [
+  static List<Map<String, dynamic>> autoTypes = [
     {
       "text": LocaleKeys.Cars.tr(),
       "check_box": false
@@ -61,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
     },
   ];
 
-  List<Map<String, dynamic>> autoOptions = [
+  static List<Map<String, dynamic>> autoOptions = [
     {
       "text": LocaleKeys.Air_Conditional.tr(),
       "check_box": false
@@ -98,7 +100,7 @@ class _SearchScreenState extends State<SearchScreen> {
     },
   ];
 
-  List<Map<String, dynamic>> tarif = [
+  static List<Map<String, dynamic>> tarif = [
     {
       "text": LocaleKeys.Car_delivery_to_a_convenient_place.tr(),
       "check_box": false
@@ -146,6 +148,16 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: widget.isDrawer ? IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.close,
+              size: 30,
+              color: Colors.white,
+            )
+        ) : null,
         title: Text(
           LocaleKeys.Search_and_sort.tr(),
           style: TextStyle(
@@ -153,20 +165,27 @@ class _SearchScreenState extends State<SearchScreen> {
             color: Colors.white,
           ),
         ),
-        /*actions: [
-          IconButton(
+        actions: [
+          if(!widget.isDrawer) IconButton(
             icon: SvgPicture.asset(
               'assets/icons/globus.svg',
               color: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (_) => TripsScreen()
+                  )
+              );
+            },
           )
-        ],*/
+        ],
       ),
       body: _isLoading ? Center(
         child: CircularProgressIndicator(),
       ) : SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
@@ -180,7 +199,42 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
             ),
-            Row(
+            widget.isDrawer ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [0, 1].map((int index) => Container(
+                height: 50,
+                width: 140,
+                padding: EdgeInsets.all(12),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Radio<int>(
+                        value: index,
+                        groupValue: _radioVal1,
+                        onChanged: (int? value) {
+                          if (value != null) {
+                            setState(() => _radioVal1 = value);
+                            print(value);
+                          }},
+                      ),
+                    ),
+                    Expanded(
+                      flex: 5,
+                      child: Text(
+                        directions[index],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 22,
+                        ),
+                        maxLines: 2,
+                      ),
+                    ),
+                  ],
+                ),
+              )).toList(),
+            ) : Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [0, 1].map((int index) => Container(
                 height: 50,
@@ -192,10 +246,10 @@ class _SearchScreenState extends State<SearchScreen> {
                       flex: 1,
                       child: Radio<int>(
                         value: index,
-                        groupValue: this._radioVal1,
+                        groupValue: _radioVal1,
                         onChanged: (int? value) {
                           if (value != null) {
-                            setState(() => this._radioVal1 = value);
+                            setState(() => _radioVal1 = value);
                             print(value);
                           }},
                       ),
@@ -418,10 +472,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   children: [
                     Radio<int>(
                       value: index,
-                      groupValue: this._radioVal2,
+                      groupValue: _radioVal2,
                       onChanged: (int? value) {
                         if (value != null) {
-                          setState(() => this._radioVal2 = value);
+                          setState(() => _radioVal2 = value);
                           print(value);
                         }},
                     ),
@@ -608,6 +662,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     ],
                   ),
                   onPressed: () {
+                    if(widget.isDrawer) Navigator.pop(context);
+                    if(widget.isDrawer) Navigator.pop(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => SearchResult()

@@ -172,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                Navigator.push(
                    context,
                    CupertinoPageRoute(
-                       builder: (_) => TripsScreen(HomeScreen.tour_list)
+                       builder: (_) => TripsScreen()
                    )
                );
               },

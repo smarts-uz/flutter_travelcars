@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travelcars/screens/search/details_screen.dart';
+import 'package:travelcars/screens/search/search.dart';
 
 class SearchResult extends StatefulWidget {
   const SearchResult({Key? key}) : super(key: key);
@@ -108,14 +109,21 @@ class _SearchResultState extends State<SearchResult> {
             fontSize: 25
           ),
         ),
-        /*actions: [
-          IconButton(
-            onPressed: () {
-
-            },
-            icon: SvgPicture.asset("assets/icons/list.svg"),
+        actions: [
+         Builder(
+            builder: (ctx) {
+              return IconButton(
+                onPressed: () {
+                  Scaffold.of(ctx).openEndDrawer();
+                },
+                icon: SvgPicture.asset("assets/icons/list.svg"),
+              );
+            }
           )
-        ],*/
+        ],
+      ),
+      endDrawer: Drawer(
+        child: SearchScreen(isDrawer: true,),
       ),
       body: ListView.builder(
           itemCount: results.length,
