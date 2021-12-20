@@ -158,15 +158,26 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         automaticallyImplyLeading: false,
-        /*actions: [
+        actions: [
           IconButton(
               icon: SvgPicture.asset(
                 'assets/icons/globus.svg',
                 color: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+
+              },
+          ),
+          IconButton(
+            icon: SvgPicture.asset(
+              'assets/icons/po_puti.svg',
+              color: Colors.white,
+            ),
+            onPressed: () {
+
+            },
           )
-        ],*/
+        ],
       ),
       body: (newslist.isEmpty || newslist.isEmpty) ? Center(child: CircularProgressIndicator()) : SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -366,8 +377,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CarouselSlider(
               options: CarouselOptions(
-                  autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 2),
+                  autoPlay: false,
+                  //autoPlayInterval: Duration(seconds: 2),
                   disableCenter: true,
                   onPageChanged: (index, reason) {
                     setState(() {
@@ -533,8 +544,8 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 350,
               child: CarouselSlider(
                 options: CarouselOptions(
-                    autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 2),
+                    autoPlay: false,
+                    //autoPlayInterval: Duration(seconds: 2),
                     disableCenter: true,
                 ),
                 items: newslist.map((item) =>
