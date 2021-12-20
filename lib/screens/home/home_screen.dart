@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void getTrips() async{
-    String url = "${AppConfig.BASE_URL}/getAllTours";
+    String url = "${AppConfig.BASE_URL}/getAllTours?lang=ru";
     final response = await http.get(
       Uri.parse(url)
     );
@@ -414,7 +414,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(
-                              "https://travelcars.uz/uploads/tours/${item["image"]}",
+                              "http://travelcars.teampro.uz/uploads/tours/${item["image"]}",
                             ),
                             fit: BoxFit.cover,
                           ),
@@ -427,7 +427,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 20.0),
                           child: Text(
-                            "${item["name_en"]}",
+                            "${item["name"]}",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 25.0,

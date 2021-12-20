@@ -50,7 +50,7 @@ class TripsScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: NetworkImage(
-                            "https://travelcars.uz/uploads/tours/${trips_list[index]["image"]}",
+                            "http://travelcars.teampro.uz/uploads/tours/${trips_list[index]["image"]}",
                           ),
                           fit: BoxFit.cover,
                         ),
@@ -63,7 +63,7 @@ class TripsScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 20.0),
                         child: Text(
-                          "${trips_list[index]["name_en"]}",
+                          "${trips_list[index]["name"]}",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 25.0,

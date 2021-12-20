@@ -32,7 +32,7 @@ class _TripItemState extends State<TripItem> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.trip_item["name_en"],
+          widget.trip_item["name"],
           style: TextStyle(
             fontSize: 25,
             color: Colors.white,
@@ -59,7 +59,7 @@ class _TripItemState extends State<TripItem> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(
-                      "https://travelcars.uz/uploads/tours/${ widget.trip_item["image"]}",
+                      "http://travelcars.teampro.uz/uploads/tours/${widget.trip_item["image"]}",
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -70,7 +70,7 @@ class _TripItemState extends State<TripItem> {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(top: 13, left: 13),
               child: Text(
-                widget.trip_item["name_en"],
+                widget.trip_item["name"],
                 style: TextStyle(
                   fontSize: 27,
                   color: Colors.black,
@@ -89,7 +89,7 @@ class _TripItemState extends State<TripItem> {
                     size: 22,
                   ),
                   Text(
-                    widget.trip_item["region_en"],
+                    widget.trip_item["content"],
                     style: TextStyle(
                       fontSize: 13
                     )
@@ -100,7 +100,7 @@ class _TripItemState extends State<TripItem> {
             Container(
               padding: EdgeInsets.only(left: 5, top: 9, right: 10),
               child: Html(
-                data: widget.trip_item["content_en"],
+                data: widget.trip_item["region"],
                 style: {
                   "table": Style(
                     backgroundColor: Color.fromARGB(0x50, 0xee, 0xee, 0xee),
