@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/screens/login/login_srcreen.dart';
 import 'package:travelcars/screens/main_screen.dart';
+import 'package:travelcars/screens/po_puti/add.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translation.dart';
 import 'package:travelcars/translations/codegen_loader.g.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home: MainScreen(),
+      home: AddScreen(),
     );
   }
 }
