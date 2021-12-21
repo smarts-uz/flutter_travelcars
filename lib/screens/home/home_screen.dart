@@ -9,6 +9,7 @@ import 'package:travelcars/app_config.dart';
 import 'package:travelcars/dummy_data/cars_list.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/home/car_type.dart';
+import 'package:travelcars/screens/po_puti/po_puti.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/trip/trips.dart';
@@ -183,7 +184,11 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.white,
             ),
             onPressed: () {
-
+              Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (_) => PoPutiScreen()
+                  )
+              );
             },
           )
         ],
@@ -378,7 +383,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.only(left: 12, top: 12, bottom: 6),
               child: Text(
                 LocaleKeys.Most_popular_routes.tr(),
-                textAlign: TextAlign.start,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 24
                 ),
