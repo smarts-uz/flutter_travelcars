@@ -33,15 +33,14 @@ class InfoScreen extends StatelessWidget {
             Container(
               height: MediaQuery.of(context).size.height * 0.4,
               width: MediaQuery.of(context).size.width * 0.95,
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(15),
               child: Image.asset("assets/images/lacetti.png", fit: BoxFit.cover,),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 12.0, right: 20),
+              padding: const EdgeInsets.only(left: 15.0, right: 20),
               child: RichText(
                   text: TextSpan(
                     style: TextStyle(
-
                       fontSize: 19,
                       height: 1.7,
                       color: Colors.black
@@ -72,7 +71,7 @@ class InfoScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 22, vertical: 5),
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
               child: Text(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mi maecenas etiam sed viverra elementum volutpat in. Mi vitae sem faucibus sagittis facilisis netus vel. Elementum quam dignissim ac, tortor felis iaculis posuere risus, tempus. Scelerisque cras tristique dignissim duis pellentesque. Nisl, nunc aliquet erat et, sit fermentum, luctus ac. Viverra senectus velit, nunc neque egestas varius amet diam. Ornare pellentesque in massa, amet. Cras fringilla pretium, sociis nullam lacus ultrices pulvinar vitae. Tristique pellentesque cursus ut sed amet.",
                 textAlign: TextAlign.justify,

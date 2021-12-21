@@ -337,4 +337,61 @@ class Dialogs {
         )
     );
   }
+
+  static Future<dynamic> PoPutiDialog(BuildContext ctx) {
+    return showDialog(
+      context: ctx,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
+          content: Container(
+            height: MediaQuery.of(ctx).size.height * .25,
+            width: MediaQuery.of(ctx).size.width * .85,
+            child: Column(
+              children: [
+                Container(
+                  height: 80,
+                  width: 80,
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/image.jpg"),
+                        fit: BoxFit.cover
+                    ),
+                  ),
+                ),
+                Text(
+                  "Ваша объявление опубликована!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w400,
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                      letterSpacing: 0.15),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                      Navigator.pop(ctx);
+                    },
+                    child: Text(
+                      "Закрыть",
+                      style: TextStyle(
+                          color: Color.fromRGBO(239, 127, 26, 1),
+                          fontSize: 24
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }

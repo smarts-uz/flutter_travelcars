@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+
 class TransfersInfo extends StatelessWidget {
   Map<String, dynamic> info;
 
