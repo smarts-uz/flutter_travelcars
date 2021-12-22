@@ -1,11 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travelcars/app_config.dart';
 import 'package:travelcars/dialogs.dart';
-import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 class AddScreen extends StatefulWidget {
   const AddScreen({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _AddScreenState extends State<AddScreen> {
   DateTime day = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
   List text_controllers =  [
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 8; i++)
       TextEditingController()
   ];
 
@@ -107,8 +108,8 @@ class _AddScreenState extends State<AddScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TFF("From", text_controllers[0], 55),
-                TFF("To", text_controllers[1], 55),
+                TFF("From", text_controllers[0], 55, false),
+                TFF("To", text_controllers[1], 55, false),
                 Container(
                   width: double.infinity,
                   height: 55,
@@ -172,9 +173,12 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                   ),
                 ),
-                TFF("Quantity without baggage", text_controllers[2], 55),
-                TFF("Quantity within baggage", text_controllers[3], 55),
-                TFF("Comment", text_controllers[4], 155),
+                TFF("Car model", text_controllers[2], 55, false),
+                TFF("Quantity without baggage", text_controllers[3], 55, true),
+                TFF("Quantity within baggage", text_controllers[4], 55, true),
+                TFF("Name", text_controllers[5], 55, false),
+                TFF("Phone", text_controllers[6], 55, true),
+                TFF("Comment", text_controllers[7], 155, false),
                 Row(
                   children: [
                     Container(
@@ -278,8 +282,40 @@ class _AddScreenState extends State<AddScreen> {
                   height: MediaQuery.of(context).size.height * .045,
                   width: MediaQuery.of(context).size.width * .8,
                   child:  RaisedButton(
-                    onPressed: ()  {
-                      Dialogs.PoPutiDialog(context);
+                    onPressed: () async {
+                      FocusScope.of(context).unfocus();
+                      for(int i = 0; i< text_controllers.length; i++) {
+                        if(text_controllers[i].text == null || text_controllers[i].text == "") {
+                          print(i);
+                          return;
+                        }
+                      }
+                      if(_pickedImage == null) {
+                        print("no_image");
+                        return;
+                      }
+                      Uri url = Uri.parse("${AppConfig.BASE_URL}/createWay");
+                      final response  = await http.post(
+                        url,
+                        body: json.encode(
+                          {
+                            "address1": "${text_controllers[0].text}",
+                            "address2": "${text_controllers[1].text}",
+                            "date": "${DateFormat('dd/MM/yyyy').format(day)}",
+                            "time": "${time.format(context)}",
+                            "model": "${text_controllers[2].text}",
+                            "place": "${text_controllers[3].text}",
+                            "place_bag": "${text_controllers[4].text}",
+                            "name": "${text_controllers[5].text}",
+                            "tel": "${text_controllers[6].text}",
+                            "comment_text": "${text_controllers[7].text}",
+                          }
+                        )
+                      );
+                      if(json.decode(response.body)["success"]) {
+                        Dialogs.PoPutiDialog(context);
+                      }
+                      print(json.decode(response.body)["message"]);
                     },
                     child: Text(
                       'Publish',
@@ -298,7 +334,7 @@ class _AddScreenState extends State<AddScreen> {
       ),
     );
   }
-  Widget TFF (String? hintText, TextEditingController controller, double height) {
+  Widget TFF (String? hintText, TextEditingController controller, double height, bool isNumber) {
     return Container(
       width: double.infinity,
       height: height,
@@ -327,7 +363,7 @@ class _AddScreenState extends State<AddScreen> {
           ),
         ),
         controller: controller,
-        keyboardType: TextInputType.text,
+        keyboardType: isNumber ? TextInputType.number : TextInputType.text,
         cursorColor: Colors.black,
         style: TextStyle(
             fontSize: 20
