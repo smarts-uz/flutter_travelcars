@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/po_puti/add.dart';
-import 'package:travelcars/screens/po_puti/endDrawer.dart';
 import 'package:travelcars/screens/po_puti/info.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,7 +34,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
   }
 
   void getways() async {
-    String url = "http://travelcars-test.teampro.uz/api/getWays";
+    String url = "${AppConfig.BASE_URL}/getWays";
     final result = await http.get(
       Uri.parse(url)
     );
