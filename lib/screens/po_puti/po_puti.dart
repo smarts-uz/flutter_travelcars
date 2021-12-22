@@ -18,19 +18,18 @@ class PoPutiScreen extends StatefulWidget {
 class _PoPutiScreenState extends State<PoPutiScreen> {
   bool isLoading = true;
   late List<dynamic> ways;
+  late List<dynamic> main_ways;
 
 
   final TextEditingController from = new TextEditingController();
   final TextEditingController to = new TextEditingController();
-  DateTime day = DateTime.now();
+  DateTime? day;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("start");
     getways();
-    print("finish");
   }
 
   void getways() async {
@@ -41,6 +40,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
     setState(() {
       isLoading = false;
       ways = json.decode(result.body)["data"];
+      main_ways = json.decode(result.body)["data"];
     });
   }
 
@@ -134,7 +134,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                   ),
                   child: ListTile(
                     title: Text(
-                      "${DateFormat('dd/MM/yyyy').format(day)}",
+                      day == null ? " " : "${DateFormat('yyyy-MM-dd').format(day!)}",
                     ),
                     trailing: IconButton(
                       icon: Icon(Icons.calendar_today),
@@ -142,7 +142,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                         showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
+                          firstDate: DateTime(2021),
                           lastDate: DateTime(2030),
                         ).then((pickedDate) {
                           if(pickedDate==null)
@@ -169,6 +169,24 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                   width: MediaQuery.of(context).size.width * .8,
                   child:  RaisedButton(
                     onPressed: ()  {
+                      List<dynamic> new_ways = [];
+                      main_ways.forEach((element) {
+                        print("Current $element");
+                        if(element["address1"] == from.text || from.text.isEmpty) {
+                          if(element["address2"] == to.text || to.text.isEmpty) {
+                            if(day == null) {
+                              new_ways.add(element);
+                            } else if(element["date"] == DateFormat('yyyy-MM-dd').format(day!))
+                              {
+                                new_ways.add(element);
+                              }
+                          }
+                        }
+                      });
+                      setState(() {
+                        ways = new_ways;
+                      });
+                      FocusScope.of(context).unfocus();
                       Navigator.pop(context);
                     },
                     child: Text(
@@ -187,7 +205,14 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
       ),
       body: isLoading ? Center(
         child: CircularProgressIndicator(),
-      ) : SizedBox(
+      ) : ways.isEmpty ? Center(
+        child: Text(
+          "Nothing found",
+          style: TextStyle(
+            fontSize: 25,
+          ),
+        ),
+      ):SizedBox(
         height: double.infinity,
         child: ListView.builder(
             physics: BouncingScrollPhysics(),

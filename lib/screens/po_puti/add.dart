@@ -301,7 +301,7 @@ class _AddScreenState extends State<AddScreen> {
                         body: {
                           "address1": "${text_controllers[0].text}",
                           "address2": "${text_controllers[1].text}",
-                          "date": "${DateFormat('dd/MM/yyyy').format(day)}",
+                          "date": "${DateFormat('yyyy-MM-dd').format(day)}",
                           "time": "${time.format(context)}",
                           "model": "${text_controllers[2].text}",
                           "place": "${text_controllers[3].text}",
