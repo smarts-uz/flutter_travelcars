@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:travelcars/screens/login/choice_language.dart';
 import 'package:travelcars/screens/login/login_srcreen.dart';
 
 class Dialogs {
@@ -318,7 +319,7 @@ class Dialogs {
                       Navigator.push(
                           ctx,
                           MaterialPageRoute(
-                              builder: (_) => LoginScreen()
+                              builder: (_) => ChoicePage()
                           )
                       );
                     },

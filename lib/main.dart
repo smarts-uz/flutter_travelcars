@@ -1,8 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:travelcars/screens/main_screen.dart';
-import 'package:travelcars/screens/po_puti/info.dart';
-import 'package:travelcars/screens/po_puti/po_puti.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/codegen_loader.g.dart';
 
