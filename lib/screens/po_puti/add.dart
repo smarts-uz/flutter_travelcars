@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -24,16 +25,51 @@ class _AddScreenState extends State<AddScreen> {
   File? _pickedImage;
   final ImagePicker _picker = ImagePicker();
 
-  void _pickImage() async {
-    final pickedImageFile = await _picker.pickImage(
-      source: ImageSource.camera,
-      imageQuality: 50,
-      maxWidth: 150,
+  void _showPicker(BuildContext cont) {
+    showModalBottomSheet(
+        context: cont,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Photo Library'),
+                      onTap: () async {
+                        final pickedImageFile = await _picker.pickImage(
+                          source: ImageSource.gallery,
+                          imageQuality: 50,
+                          maxWidth: 150,
+                        );
+                        File file = File(pickedImageFile!.path);
+                        setState(() {
+                          _pickedImage = file;
+                        });
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () async {
+                      final pickedImageFile = await _picker.pickImage(
+                        source: ImageSource.camera,
+                        imageQuality: 50,
+                        maxWidth: 150,
+                      );
+                      File file = File(pickedImageFile!.path);
+                      setState(() {
+                        _pickedImage = file;
+                      });
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
     );
-    File file = File(pickedImageFile!.path);
-    setState(() {
-      _pickedImage = file;
-    });
   }
 
   @override
@@ -161,7 +197,9 @@ class _AddScreenState extends State<AddScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GestureDetector(
-                            onTap: _pickImage,
+                            onTap: () {
+                              _showPicker(context);
+                            },
                             child: Container(
                               height: 40,
                               width: MediaQuery.of(context).size.width * .45,
@@ -241,6 +279,7 @@ class _AddScreenState extends State<AddScreen> {
                   width: MediaQuery.of(context).size.width * .8,
                   child:  RaisedButton(
                     onPressed: ()  {
+                      Dialogs.PoPutiDialog(context);
                     },
                     child: Text(
                       'Publish',

@@ -347,14 +347,14 @@ class Dialogs {
             borderRadius: BorderRadius.circular(18),
           ),
           content: Container(
-            height: MediaQuery.of(ctx).size.height * .25,
+            height: MediaQuery.of(ctx).size.height * .27,
             width: MediaQuery.of(ctx).size.width * .85,
             child: Column(
               children: [
                 Container(
                   height: 80,
                   width: 80,
-                  margin: EdgeInsets.symmetric(vertical: 10),
+                  margin: EdgeInsets.symmetric(vertical: 7),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("assets/image.jpg"),

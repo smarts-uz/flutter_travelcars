@@ -89,6 +89,7 @@ class _End_DrawerState extends State<End_Drawer> {
             width: MediaQuery.of(context).size.width * .8,
             child:  RaisedButton(
               onPressed: ()  {
+                Navigator.pop(context);
               },
               child: Text(
                 'Sort',

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:travelcars/screens/po_puti/add.dart';
 import 'package:travelcars/screens/po_puti/endDrawer.dart';
 import 'package:travelcars/screens/po_puti/info.dart';
@@ -91,29 +92,32 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                         margin: EdgeInsets.all(10),
                         child: Image.asset("assets/images/lacetti.png", fit: BoxFit.cover,),
                       ),
-                      RichText(
-                          text: TextSpan(
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              height: 1.8,
-                              color: Colors.black
-                            ),
-                            children: [
-                              TextSpan(text: "Tashkent - Shahrisabz\n", style: TextStyle(fontWeight: FontWeight.normal)),
-                              TextSpan(text: "21.09.2021 | 10:00\nChevrolet Lacetti"),
-                            ]
-                          )
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: RichText(
+                            text: TextSpan(
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                height: 1.8,
+                                color: Colors.black
+                              ),
+                              children: [
+                                TextSpan(text: "Tashkent - Shahrisabz\n", style: TextStyle(fontWeight: FontWeight.normal)),
+                                TextSpan(text: "21.09.2021 | 10:00\nChevrolet Lacetti"),
+                              ]
+                            )
+                        ),
                       )
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 10.0),
+                    padding: EdgeInsets.only(top: 10.0, left: 10.0, bottom: 5.0),
                     child: Row(
                       children: [
                         Icon(
                           Icons.people,
-                          size: 30,
+                          size: 28,
                           color: Colors.orange,
                         ),
                         SizedBox(
@@ -123,7 +127,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                             text: TextSpan(
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   color: Colors.black
                               ),
                               children: [
@@ -136,12 +140,12 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 10.0),
+                    padding: EdgeInsets.only(left: 10.0, bottom: 10.0),
                     child: Row(
                       children: [
                         Icon(
                           Icons.work_outlined,
-                          size: 30,
+                          size: 28,
                           color: Colors.orange,
                         ),
                         SizedBox(
@@ -151,7 +155,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                             text: TextSpan(
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     color: Colors.black
                                 ),
                                 children: [
@@ -164,12 +168,12 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
+                    padding: const EdgeInsets.only(left: 10.0, bottom: 5.0),
                     child: Row(
                       children: [
                         Icon(
                           Icons.person,
-                          size: 30,
+                          size: 28,
                           color: Colors.orange,
                         ),
                         SizedBox(
@@ -178,19 +182,19 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                         Text(
                           "Sobirov Ibrohim",
                           style: TextStyle(
-                              fontSize: 22
+                              fontSize: 18
                           ),
                         ),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
+                    padding: const EdgeInsets.only(left: 10.0, bottom: 10.0),
                     child: Row(
                       children: [
                         Icon(
                           Icons.call,
-                          size: 30,
+                          size: 28,
                           color: Colors.orange,
                         ),
                         SizedBox(
@@ -199,32 +203,39 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                         Text(
                           "+998 94 659 08 50",
                           style: TextStyle(
-                            fontSize: 22
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    height: MediaQuery.of(context).size.height * .045,
-                    width: MediaQuery.of(context).size.width * .8,
-                    child:  RaisedButton(
-                      onPressed: ()  {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => InfoScreen()
-                            )
-                        );
-                      },
-                      child: Text(
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => InfoScreen()
+                          )
+                      );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 1.5
+                        )
+                      ),
+                      height: MediaQuery.of(context).size.height * .05,
+                      width: MediaQuery.of(context).size.width * .9,
+                      child:  Text(
                         'Details',
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 22,
                             color: Colors.orange
                         ),
                       ),
