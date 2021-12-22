@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/po_puti/add.dart';
 import 'package:travelcars/screens/po_puti/endDrawer.dart';
 import 'package:travelcars/screens/po_puti/info.dart';
+import 'package:http/http.dart' as http;
 
 class PoPutiScreen extends StatefulWidget {
   const PoPutiScreen({Key? key}) : super(key: key);
@@ -13,6 +16,29 @@ class PoPutiScreen extends StatefulWidget {
 }
 
 class _PoPutiScreenState extends State<PoPutiScreen> {
+  late List<dynamic> ways;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("start");
+    getways();
+    print("finish");
+  }
+
+  void getways() async {
+    String url = "http://travelcars-test.teampro.uz/api/getWays";
+    final result = await http.get(
+      Uri.parse(url)
+    );
+    setState(() {
+      ways = json.decode(result.body)["data"];
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +96,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
         height: double.infinity,
         child: ListView.builder(
             physics: BouncingScrollPhysics(),
-            itemCount: 7,
+            itemCount: ways.length,
             itemBuilder: (context, index) => Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
@@ -98,13 +124,13 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                             text: TextSpan(
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: 17,
                                 height: 1.8,
                                 color: Colors.black
                               ),
                               children: [
-                                TextSpan(text: "Tashkent - Shahrisabz\n", style: TextStyle(fontWeight: FontWeight.normal)),
-                                TextSpan(text: "21.09.2021 | 10:00\nChevrolet Lacetti"),
+                                TextSpan(text: "${ways[index]["address1"]} - ${ways[index]["address2"]}\n", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 19)),
+                                TextSpan(text: "${ways[index]["date"]} | ${ways[index]["time"].substring(0, 5)} \n${ways[index]["model_car"]} "),
                               ]
                             )
                         ),
@@ -132,7 +158,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                               ),
                               children: [
                                 TextSpan(text: "Quantity (without cargo): "),
-                                TextSpan(text: "4", style: TextStyle(fontWeight: FontWeight.normal)),
+                                TextSpan(text: "${ways[index]["place"]}", style: TextStyle(fontWeight: FontWeight.normal)),
                               ]
                             )
                         )
@@ -160,7 +186,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                                 ),
                                 children: [
                                   TextSpan(text: "Quantity (without cargo): "),
-                                  TextSpan(text: "4", style: TextStyle(fontWeight: FontWeight.normal)),
+                                  TextSpan(text: "${ways[index]["place_bag"]}", style: TextStyle(fontWeight: FontWeight.normal)),
                                 ]
                             )
                         )
@@ -180,7 +206,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                           width: 5,
                         ),
                         Text(
-                          "Sobirov Ibrohim",
+                          "${ways[index]["name"]}",
                           style: TextStyle(
                               fontSize: 18
                           ),
@@ -201,7 +227,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                           width: 5,
                         ),
                         Text(
-                          "+998 94 659 08 50",
+                          "${ways[index]["tel"]}",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold
@@ -215,7 +241,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) => InfoScreen()
+                              builder: (_) => InfoScreen(ways[index])
                           )
                       );
                     },

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class InfoScreen extends StatelessWidget {
-  const InfoScreen({Key? key}) : super(key: key);
+  final Map<String, dynamic> way_item;
+
+  InfoScreen(this.way_item);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Announcement #10101",
+          "Announcement #${way_item["id"]}",
           style: TextStyle(
               color: Colors.white,
               fontSize: 25
@@ -47,33 +49,33 @@ class InfoScreen extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(text: "From: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: "Tashkent\n"),
+                      TextSpan(text: "${way_item["address1"]}\n"),
                       TextSpan(text: "To: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: "Samarkand\n"),
+                      TextSpan(text: "${way_item["address2"]}\n"),
                       TextSpan(text: "Date: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: "21.09.2021\n"),
+                      TextSpan(text: "${way_item["date"]}\n"),
                       TextSpan(text: "Time: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: "10:00\n"),
+                      TextSpan(text: "${way_item["time"].substring(0, 5)}\n"),
                       TextSpan(text: "Car type: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: "Chevrolet Lacetti\n"),
+                      TextSpan(text: "${way_item["model_car"]}\n"),
                       TextSpan(text: "Quantity (without cargo): ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: "4\n"),
+                      TextSpan(text: "${way_item["place"]}\n"),
                       TextSpan(text: "Quantity (with cargo): ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: "3\n"),
+                      TextSpan(text: "${way_item["place_bag"]}\n"),
                       TextSpan(text: "Contacts of driver\n", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "\t\tName: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: "Sobirov Ibrohim\n"),
+                      TextSpan(text: "${way_item["name"]}\n"),
                       TextSpan(text: "\t\tPhone: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: "+998 94 659 08 50\n"),
+                      TextSpan(text: "${way_item["tel"]}\n"),
                       TextSpan(text: "Comment:", style: TextStyle(fontWeight: FontWeight.bold)),
                     ]
                   )
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+              padding: EdgeInsets.only(left: 25, right: 25, top: 5, bottom: 15),
               child: Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mi maecenas etiam sed viverra elementum volutpat in. Mi vitae sem faucibus sagittis facilisis netus vel. Elementum quam dignissim ac, tortor felis iaculis posuere risus, tempus. Scelerisque cras tristique dignissim duis pellentesque. Nisl, nunc aliquet erat et, sit fermentum, luctus ac. Viverra senectus velit, nunc neque egestas varius amet diam. Ornare pellentesque in massa, amet. Cras fringilla pretium, sociis nullam lacus ultrices pulvinar vitae. Tristique pellentesque cursus ut sed amet.",
+                "${way_item["comment"]}",
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 17,
