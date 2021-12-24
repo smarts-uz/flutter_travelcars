@@ -114,16 +114,30 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
             Container(
               width: double.infinity,
-              height: 55,
-              //padding: EdgeInsets.only(left: 6, right: 6),
+              height: 50,
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 15),
               margin: EdgeInsets.only(left: 8, top: 8),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5)),
               child: TextFormField(
                 autovalidateMode: AutovalidateMode.always,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: "Имя",
+                  hintMaxLines: 3,
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                      width: 0,
+                    ),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                      width: 0,
+                    ),
+                  ),
                 ),
                 controller: _nameController,
                 keyboardType: TextInputType.name,
@@ -140,16 +154,30 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
             Container(
               width: double.infinity,
-              height: 55,
-              padding: EdgeInsets.only(left: 6),
+              height: 50,
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 15),
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5)),
               child: TextFormField(
                 autovalidateMode: AutovalidateMode.always,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: "City",
+                  hintMaxLines: 3,
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                      width: 0,
+                    ),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                      width: 0,
+                    ),
+                  ),
                 ),
                 controller: _cityController,
                 keyboardType: TextInputType.name,
@@ -164,11 +192,11 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 maxLines: 2,
               ),
             ),
-
             Container(
               width: double.infinity,
-              height: 55,
-              padding: EdgeInsets.only(left: 6),
+              height: 50,
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 15),
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
@@ -176,8 +204,21 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               child: Center(
                 child: TextFormField(
                   autovalidateMode: AutovalidateMode.always,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: "Название маршрута",
+                    hintMaxLines: 3,
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 0,
+                      ),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 0,
+                      ),
+                    ),
                   ),
                   controller: _routeController,
                   keyboardType: TextInputType.text,

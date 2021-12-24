@@ -74,13 +74,6 @@ class _RouteScreenState extends State<RouteScreen> {
       body: _isLoading ? Center(
         child: CircularProgressIndicator(),
       ) : info.isEmpty ? Empty() :  List_R(info, city, cars),
-      /*floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => RouteAdd()));
-        },
-        child: Icon(Icons.add),
-      ),*/
     );
   }
 }

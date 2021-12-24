@@ -152,9 +152,10 @@ class _CarDetailsState extends State<CarDetails> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            padding: EdgeInsets.only(left: 6, bottom: 3),
+                            padding: EdgeInsets.only(left: 16, bottom: 5),
                             child: Text(
                               "${LocaleKeys.year_of_issue.tr()} ${results["year"]}",
                               style: TextStyle(
@@ -261,7 +262,7 @@ class _CarDetailsState extends State<CarDetails> {
 
   Widget _listWrap(List wrap) {
     return Container(
-      height: wrap.length * 30,
+      height: wrap.length * 50,
       child: GridView.builder(
         physics: NeverScrollableScrollPhysics(),
         itemCount: wrap.length,

@@ -47,10 +47,11 @@ class _TransfersScreenState extends State<TransfersScreen> {
         "Authorization": "Bearer $token",
       }
     );
+    info = json.decode(response.body)["data"];
     setState(() {
-      info = json.decode(response.body)["data"];
       _isLoading = false;
     });
+    print(_isLoading);
   }
 
   @override
@@ -78,13 +79,6 @@ class _TransfersScreenState extends State<TransfersScreen> {
       body: _isLoading ? Center(child: CircularProgressIndicator(),)
           : info.isEmpty ?  Empty()
           :  List_T(info, city, cars),
-      /*floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => TransfersAdd()));
-        },
-        child: Icon(Icons.add),
-      ),*/
     );
   }
 }
