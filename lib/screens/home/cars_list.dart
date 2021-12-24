@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/home/car_details.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 class CarsList extends StatefulWidget {
@@ -152,14 +154,21 @@ class _CarsListState extends State<CarsList> {
             fontSize: 25
           ),
         ),
-        /*actions: [
-          IconButton(
-            onPressed: () {
-
-            },
-            icon: SvgPicture.asset("assets/icons/list.svg"),
+        actions: [
+          Builder(
+              builder: (ctx) {
+                return IconButton(
+                  onPressed: () {
+                    Scaffold.of(ctx).openEndDrawer();
+                  },
+                  icon: SvgPicture.asset("assets/icons/list.svg"),
+                );
+              }
           )
-        ],*/
+        ],
+      ),
+      endDrawer: Drawer(
+        child: SearchScreen(isDrawer: true,),
       ),
       body: ListView.builder(
           itemCount: results.length,

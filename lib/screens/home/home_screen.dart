@@ -195,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: (newslist.isEmpty || newslist.isEmpty) ? Center(child: CircularProgressIndicator()) : SingleChildScrollView(
+      body: (newslist.isEmpty || carslist.isEmpty) ? Center(child: CircularProgressIndicator()) : SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
