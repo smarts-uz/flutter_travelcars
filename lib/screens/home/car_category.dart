@@ -3,7 +3,24 @@ import 'package:travelcars/screens/home/cars_list.dart';
 
 class CarCategory extends StatelessWidget {
 
-  List<String> names = ["Class", "Places with luggage", "Places without luggage", "Air conditioning"];
+  List<Map<String, dynamic>> names = [
+    {
+      "name": "Class",
+      "icon": Icons.directions_car
+    },
+    {
+      "name": "Places with luggage",
+      "icon": Icons.people_outline
+    },
+    {
+      "name": "Places without luggage",
+      "icon": Icons.home_repair_service_outlined
+    },
+    {
+      "name": "Air conditioning",
+      "icon": Icons.ac_unit_outlined
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -107,12 +124,12 @@ class CarCategory extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.directions_car,
+                                      names[index]["icon"],
                                       color: Colors.orange,
                                       size: 27.0,
                                     ),
                                     Text(
-                                      names[index],
+                                      names[index]["name"],
                                       style: TextStyle(
                                         fontSize: 15.0
                                       ),

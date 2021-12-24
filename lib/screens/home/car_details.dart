@@ -1,17 +1,9 @@
-import 'dart:collection';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:travelcars/app_theme.dart';
-import 'package:travelcars/map.dart';
-import 'package:travelcars/screens/bookings/booking_item_screen.dart';
-import 'package:travelcars/screens/feedback/feedback.dart';
-import 'package:travelcars/screens/search/components/drop_button_cost.dart';
-import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 
