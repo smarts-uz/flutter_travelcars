@@ -491,7 +491,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return GestureDetector(
                       onTap: (){
                         Navigator.push(context,MaterialPageRoute(
-                            builder: (_) => CarCategory()));
+                            builder: (_) => CarCategory(carslist[index]["name"], carslist[index]["meta_url"])));
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

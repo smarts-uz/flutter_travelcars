@@ -1,8 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:travelcars/app_config.dart';
+import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/home/cars_list.dart';
 
-class CarCategory extends StatelessWidget {
+class CarCategory extends StatefulWidget {
+  final String name;
+  final String meta_url;
 
+  CarCategory(this.name, this.meta_url);
+
+  @override
+  State<CarCategory> createState() => _CarCategoryState();
+}
+
+class _CarCategoryState extends State<CarCategory> {
   List<Map<String, dynamic>> names = [
     {
       "name": "Class",
@@ -22,6 +35,25 @@ class CarCategory extends StatelessWidget {
     },
   ];
 
+  List<dynamic> categories = [];
+  
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCategory();
+  }
+  
+  void getCategory() async {
+    print(widget.meta_url);
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/carmodels/${widget.meta_url}/all?lang=uz");
+    final response = await http.get(url);
+    print(response.body);
+    setState(() {
+      categories = json.decode(response.body);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,27 +69,30 @@ class CarCategory extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Auto type',
+          widget.name,
           style:TextStyle(
               fontSize: 25,
               color: Colors.white
           ),
         ),
       ),
-      body: SizedBox(
+      body: categories.isEmpty ? Center(
+        child: CircularProgressIndicator(),
+      ) :
+      SizedBox(
         height: MediaQuery.of(context).size.height,
         child: ListView.builder(
             padding: EdgeInsets.only(top: 10.0),
             physics: BouncingScrollPhysics(),
-            itemCount: 4,
+            itemCount: categories.length,
             itemBuilder: (context, index) => GestureDetector(
               onTap: () {
-                /*Navigator.push(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (_) => CarsList("name", 2)
+                        builder: (_) => CarsList(categories[index]["name"], categories[index]["meta_url"])
                     )
-                );*/
+                );
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -76,7 +111,7 @@ class CarCategory extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Malibu Turbo",
+                            categories[index]["name"],
                             style: TextStyle(
                               fontSize: 20.0
                             ),

@@ -47,7 +47,7 @@ class CarTypes extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_)=>CarCategory()
+                          builder: (_)=>CarCategory(carslist[index]["name"], carslist[index]["meta_url"])
                       )
                   );
                 },

@@ -12,8 +12,8 @@ import 'package:travelcars/translations/locale_keys.g.dart';
 
 class CarsList extends StatefulWidget {
  final String name;
- final int id;
- CarsList(this.name, this.id);
+ final String meta_url;
+ CarsList(this.name, this.meta_url);
 
   @override
   _CarsListState createState() => _CarsListState();
@@ -29,7 +29,7 @@ class _CarsListState extends State<CarsList> {
   ];
 
   List< dynamic> results = [
-    {
+    /*{
       "name": "Mercedes Sprinter",
       "year": "2015",
       "id": "MS-701AFA",
@@ -91,17 +91,17 @@ class _CarsListState extends State<CarsList> {
         "Parking payments",
       ],
       "total": "7 410 000",
-    },
+    },*/
   ];
 
  @override
   void initState() {
     super.initState();
-    //getcars();
+    getcars();
   }
 
   void getcars() async{
-   String url = "${AppConfig.BASE_URL}/getCarTypeById/${widget.id}?lang=ru";
+   String url = "${AppConfig.BASE_URL}/getCarTypeById/${widget.meta_url}?lang=en";
    final response = await http.get(Uri.parse(url));
    setState(() {
      results = json.decode(response.body)["data"];
