@@ -133,28 +133,26 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                       borderRadius: BorderRadius.circular(5)
                   ),
                   child: ListTile(
+                    onTap: () {
+                      showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2021),
+                        lastDate: DateTime(2030),
+                      ).then((pickedDate) {
+                        if(pickedDate==null)
+                        {
+                          return;
+                        }
+                        setState(() {
+                          day = pickedDate;
+                        });
+                      });
+                    },
                     title: Text(
                       day == null ? " " : "${DateFormat('yyyy-MM-dd').format(day!)}",
                     ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.calendar_today),
-                      onPressed: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2021),
-                          lastDate: DateTime(2030),
-                        ).then((pickedDate) {
-                          if(pickedDate==null)
-                          {
-                            return;
-                          }
-                          setState(() {
-                            day = pickedDate;
-                          });
-                        });
-                      },
-                    ),
+                    trailing: Icon(Icons.calendar_today),
                   ),
                 ),
                 Expanded(
@@ -171,7 +169,6 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                     onPressed: ()  {
                       List<dynamic> new_ways = [];
                       main_ways.forEach((element) {
-                        print("Current $element");
                         if(element["address1"] == from.text || from.text.isEmpty) {
                           if(element["address2"] == to.text || to.text.isEmpty) {
                             if(day == null) {
@@ -186,6 +183,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                       setState(() {
                         ways = new_ways;
                       });
+                      day = null;
                       FocusScope.of(context).unfocus();
                       Navigator.pop(context);
                     },
@@ -212,7 +210,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
             fontSize: 25,
           ),
         ),
-      ):SizedBox(
+      ) : SizedBox(
         height: double.infinity,
         child: ListView.builder(
             physics: BouncingScrollPhysics(),
@@ -238,21 +236,23 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                         margin: EdgeInsets.all(10),
                         child: Image.asset("assets/images/lacetti.png", fit: BoxFit.cover,),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: RichText(
-                            text: TextSpan(
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
-                                height: 1.8,
-                                color: Colors.black
-                              ),
-                              children: [
-                                TextSpan(text: "${ways[index]["address1"]} - ${ways[index]["address2"]}\n", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 19)),
-                                TextSpan(text: "${ways[index]["date"]} | ${ways[index]["time"].substring(0, 5)} \n${ways[index]["model_car"]} "),
-                              ]
-                            )
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RichText(
+                              text: TextSpan(
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                  height: 1.8,
+                                  color: Colors.black
+                                ),
+                                children: [
+                                  TextSpan(text: "${ways[index]["address1"]} - ${ways[index]["address2"]}\n", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 19)),
+                                  TextSpan(text: "${ways[index]["date"]} | ${ways[index]["time"].substring(0, 5)} \n${ways[index]["model_car"]} "),
+                                ]
+                              )
+                          ),
                         ),
                       )
                     ],
@@ -269,18 +269,20 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                         SizedBox(
                           width: 5,
                         ),
-                        RichText(
-                            text: TextSpan(
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.black
-                              ),
-                              children: [
-                                TextSpan(text: "Quantity (without cargo): "),
-                                TextSpan(text: "${ways[index]["place"]}", style: TextStyle(fontWeight: FontWeight.normal)),
-                              ]
-                            )
+                        Expanded(
+                          child: RichText(
+                              text: TextSpan(
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Colors.black
+                                  ),
+                                  children: [
+                                    TextSpan(text: "Quantity (without cargo): "),
+                                    TextSpan(text: "${ways[index]["place"]}", style: TextStyle(fontWeight: FontWeight.normal)),
+                                  ]
+                              )
+                          ),
                         )
                       ],
                     ),
@@ -297,17 +299,19 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                         SizedBox(
                           width: 5,
                         ),
-                        RichText(
-                            text: TextSpan(
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.black
-                                ),
-                                children: [
-                                  TextSpan(text: "Quantity (without cargo): "),
-                                  TextSpan(text: "${ways[index]["place_bag"]}", style: TextStyle(fontWeight: FontWeight.normal)),
-                                ]
+                        Expanded(
+                            child: RichText(
+                                text: TextSpan(
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: Colors.black
+                                    ),
+                                    children: [
+                                      TextSpan(text: "Quantity (without cargo): "),
+                                      TextSpan(text: "${ways[index]["place_bag"]}", style: TextStyle(fontWeight: FontWeight.normal)),
+                                    ]
+                                )
                             )
                         )
                       ],
