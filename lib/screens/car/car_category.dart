@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:http/http.dart' as http;
-import 'package:travelcars/screens/home/cars_list.dart';
+import 'package:travelcars/screens/car/cars_list.dart';
 
 class CarCategory extends StatefulWidget {
   final String name;
@@ -19,19 +19,23 @@ class _CarCategoryState extends State<CarCategory> {
   List<Map<String, dynamic>> names = [
     {
       "name": "Class",
-      "icon": Icons.directions_car
+      "icon": Icons.directions_car,
+      "data": "class"
     },
     {
       "name": "Places with luggage",
-      "icon": Icons.people_outline
+      "icon": Icons.people_outline,
+      "data": "place"
     },
     {
       "name": "Places without luggage",
-      "icon": Icons.home_repair_service_outlined
+      "icon": Icons.home_repair_service_outlined,
+      "data": "place_bag"
     },
     {
       "name": "Air conditioning",
-      "icon": Icons.ac_unit_outlined
+      "icon": Icons.ac_unit_outlined,
+      "data": "cooler"
     },
   ];
 
@@ -154,17 +158,22 @@ class _CarCategoryState extends State<CarCategory> {
                           child: ListView.builder(
                               itemCount: 4,
                               physics: NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) => Padding(
+                              itemBuilder: (context, index_in) => Padding(
                                 padding: const EdgeInsets.only(bottom: 5.0),
                                 child: Row(
                                   children: [
                                     Icon(
-                                      names[index]["icon"],
+                                      names[index_in]["icon"],
                                       color: Colors.orange,
                                       size: 27.0,
                                     ),
                                     Text(
-                                      names[index]["name"],
+                                      "${names[index_in]["name"]}: ${
+                                          index_in == 3 ?
+                                            categories[index][names[index_in]["data"]] == 1 ?
+                                              "Yes" : "No" :
+                                                categories[index][names[index_in]["data"]]
+                                      }",
                                       style: TextStyle(
                                         fontSize: 15.0
                                       ),

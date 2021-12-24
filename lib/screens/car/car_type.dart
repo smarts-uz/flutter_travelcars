@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelcars/screens/home/car_category.dart';
-
-import 'cars_list.dart';
+import 'package:travelcars/screens/car/car_category.dart';
 
 class CarTypes extends StatelessWidget {
   final List carslist;

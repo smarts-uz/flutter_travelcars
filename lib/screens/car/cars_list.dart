@@ -1,11 +1,10 @@
 import 'dart:convert';
-
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travelcars/app_config.dart';
-import 'package:travelcars/screens/home/car_details.dart';
+import 'package:travelcars/screens/car/car_details.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
