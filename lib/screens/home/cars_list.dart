@@ -101,7 +101,7 @@ class _CarsListState extends State<CarsList> {
   }
 
   void getcars() async{
-   String url = "${AppConfig.BASE_URL}/getCarTypeById/${widget.meta_url}?lang=en";
+   String url = "${AppConfig.BASE_URL}/getCarModelById/${widget.meta_url}?lang=en";
    final response = await http.get(Uri.parse(url));
    setState(() {
      results = json.decode(response.body)["data"];
