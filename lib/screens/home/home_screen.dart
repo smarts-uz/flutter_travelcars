@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:travelcars/app_config.dart';
-import 'package:travelcars/dummy_data/cars_list.dart';
+import 'package:travelcars/dummy_data/cars.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
+import 'package:travelcars/screens/home/car_category.dart';
 import 'package:travelcars/screens/home/car_type.dart';
+import 'package:travelcars/screens/home/cars_list.dart';
 import 'package:travelcars/screens/po_puti/po_puti.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:http/http.dart' as http;
@@ -475,7 +477,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
-              height: (carslist.length / 2).round() * 190,
+              height: 370.0,
               margin: EdgeInsets.only(left: 15, right: 15, top: 15),
               child: GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
@@ -484,12 +486,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisSpacing: 15.0,
                       mainAxisSpacing: 15.0
                   ),
-                  itemCount: carslist.length,
+                  itemCount: 4,
                   itemBuilder: (BuildContext ctx, index) {
                     return GestureDetector(
                       onTap: (){
                         Navigator.push(context,MaterialPageRoute(
-                            builder: (_)=>CarType(carslist[index]["name"], carslist[index]["id"])));
+                            builder: (_) => CarCategory()));
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -542,6 +544,33 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   }
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => CarTypes(carslist)
+                    )
+                );
+              },
+              child: Container(
+                height: 40.0,
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(vertical: 7.0, horizontal: 17.0),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.circular(10.0)
+                ),
+                child: Text(
+                  "See all",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25.0
+                  ),
+                ),
               ),
             ),
             Container(

@@ -6,9 +6,9 @@ import 'package:travelcars/app_config.dart';
 class Cars {
   static Future<List> getcars() async {
     List<dynamic> cars = [];
-    String url = "${AppConfig.BASE_URL}/getAllCarTypes?lang=ru";
+    String url = "${AppConfig.BASE_URL}/getAllCarTypes?locale=ru";
     final response = await http.get(Uri.parse(url));
-    cars = json.decode(response.body)["car_types"];
+    cars = json.decode(response.body);
     return cars;
   }
 }

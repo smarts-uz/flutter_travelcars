@@ -70,7 +70,6 @@ class _RouteScreenState extends State<RouteScreen> {
               color: Colors.white
           ),
         ),
-
       ),
       body: _isLoading ? Center(
         child: CircularProgressIndicator(),
