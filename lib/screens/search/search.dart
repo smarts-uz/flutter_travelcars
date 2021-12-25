@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:travelcars/dummy_data/cars.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/search/search_result.dart';
@@ -42,15 +43,17 @@ class _SearchScreenState extends State<SearchScreen> {
 
   static var number_controller = TextEditingController();
 
-  static List<Map<String, dynamic>> autoTypes = [
-    {
+  static List<Map<String, dynamic>> autoTypes = [];
+  Map<String, dynamic> categories = {};
+  /*{
       "text": LocaleKeys.Cars.tr(),
       "check_box": false
     },
     {
       "text": LocaleKeys.Microbus.tr(),
       "check_box": false
-    },{
+    },
+    {
       "text": LocaleKeys.Minibus.tr(),
       "check_box": false
     },{
@@ -60,8 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
     {
       "text": LocaleKeys.VIP_auto.tr(),
       "check_box": false
-    },
-  ];
+    },*/
 
   static List<Map<String, dynamic>> autoOptions = [
     {
@@ -71,10 +73,12 @@ class _SearchScreenState extends State<SearchScreen> {
     {
       "text": LocaleKeys.Mikrofon.tr(),
       "check_box": false
-    },{
+    },
+    {
       "text": LocaleKeys.Fridge.tr(),
       "check_box": false
-    },{
+    },
+    {
       "text": "Tv",
       "check_box": false
     },
@@ -108,10 +112,12 @@ class _SearchScreenState extends State<SearchScreen> {
     {
       "text": LocaleKeys.Fuel_cost.tr(),
       "check_box": false
-    },{
+    },
+    {
       "text": LocaleKeys.Driver_nutrition.tr(),
       "check_box": false
-    },{
+    },
+    {
       "text": LocaleKeys.Parking_payments.tr(),
       "check_box": false
     },
@@ -124,8 +130,8 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
+    getCars_Categories();
     getcities();
-
   }
 
   void getcities() {
@@ -143,6 +149,23 @@ class _SearchScreenState extends State<SearchScreen> {
       _isLoading = false;
     });
   }
+
+  void getCars_Categories() async {
+    List apiCars = await Cars.getcars();
+    apiCars.forEach((element) {
+      autoTypes.add({
+        "text": "${element["name"]}",
+        "meta_url": "${element["meta_url"]}",
+        "check_box": false
+      });
+    });
+    print(1);
+    print(autoTypes);
+    categories = await Cars.getcategories(autoTypes);
+    print(2);
+    print(categories);
+  }
+
 
   @override
   Widget build(BuildContext context) {

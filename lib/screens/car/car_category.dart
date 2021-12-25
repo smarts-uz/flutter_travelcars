@@ -151,36 +151,38 @@ class _CarCategoryState extends State<CarCategory> {
                             fit: BoxFit.fill,
                           ),
                         ),
-                        Container(
-                          height: MediaQuery.of(context).size.height * .16,
-                          width: MediaQuery.of(context).size.width * .5,
-                          padding: EdgeInsets.only(right: 3.0),
-                          child: ListView.builder(
-                              itemCount: 4,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index_in) => Padding(
-                                padding: const EdgeInsets.only(bottom: 5.0),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      names[index_in]["icon"],
-                                      color: Colors.orange,
-                                      size: 27.0,
-                                    ),
-                                    Text(
-                                      "${names[index_in]["name"]}: ${
-                                          index_in == 3 ?
-                                            categories[index][names[index_in]["data"]] == 1 ?
-                                              "Yes" : "No" :
-                                                categories[index][names[index_in]["data"]]
-                                      }",
-                                      style: TextStyle(
-                                        fontSize: 15.0
+                        Expanded(
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * .16,
+                            width: MediaQuery.of(context).size.width * .5,
+                            padding: EdgeInsets.only(right: 3.0),
+                            child: ListView.builder(
+                                itemCount: 4,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index_in) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 5.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        names[index_in]["icon"],
+                                        color: Colors.orange,
+                                        size: 27.0,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              )
+                                      Text(
+                                        "${names[index_in]["name"]}: ${
+                                            index_in == 3 ?
+                                              categories[index][names[index_in]["data"]] == 1 ?
+                                                "Yes" : "No" :
+                                                  categories[index][names[index_in]["data"]]
+                                        }",
+                                        style: TextStyle(
+                                          fontSize: 15.0
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                            ),
                           ),
                         )
                       ],
