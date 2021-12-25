@@ -159,7 +159,6 @@ class _SearchScreenState extends State<SearchScreen> {
         catHeight += categories["${element["name"]}"].length * 33.0 + 30.0;
       }
     });
-    print("Chosens: $chosen_types");
     return Scaffold(
       appBar: AppBar(
         leading: widget.isDrawer ? IconButton(

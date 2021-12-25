@@ -1,9 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travelcars/screens/login/choice_language.dart';
 import 'package:travelcars/screens/main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,19 +21,6 @@ class _SplashScreenState extends State<SplashScreen> {
   _navigatorHome() {
     Future.delayed(const Duration(milliseconds: 3000), () async {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => MainScreen()));
-      /*final prefs = await SharedPreferences.getInstance();
-      if(prefs.containsKey('userData'))
-      {
-        final extractedUserData = json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
-        final expiryDate = DateTime.parse(extractedUserData['expiry_at'].substring(0, 10));
-        if(expiryDate.isAfter(DateTime.now())) {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>MainScreen()));
-        } else {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>ChoicePage()));
-        }
-      } else {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>ChoicePage()));
-      }*/
     });
   }
   

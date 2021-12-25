@@ -12,6 +12,7 @@ import 'package:travelcars/screens/car/car_category.dart';
 import 'package:travelcars/screens/car/car_type.dart';
 import 'package:travelcars/screens/car/cars_list.dart';
 import 'package:travelcars/screens/po_puti/po_puti.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/trip/trips.dart';
@@ -31,13 +32,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isLoading = true;
+  static bool isLoading = true;
 
-  List<dynamic> imglist = [];
-  List<dynamic> newslist = [];
-  List<dynamic> carslist = [];
+  static List<dynamic> imglist = [];
+  static List<dynamic> newslist = [];
+  static List<dynamic> carslist = [];
 
-  Map<String, int> weather = {
+  static Map<String, int> weather = {
     "Tashkent": 0,
     "Buxoro": 0,
     "Xiva": 0,
@@ -67,15 +68,15 @@ class _HomeScreenState extends State<HomeScreen> {
     "Farg'ona",
     "Namangan",
   ];
-  final List<DropdownMenuItem<String>> cities = city.map(
+  static final List<DropdownMenuItem<String>> cities = city.map(
         (String value) => DropdownMenuItem<String>(
           value: value,
           child: Text(value),
       )).toList();
-  String? SelectedVal;
+  static String? SelectedVal;
 
-  List<dynamic> valyuta = [];
-  Map<String, dynamic> index_val = {
+  static List<dynamic> valyuta = [];
+  static Map<String, dynamic> index_val = {
     "USD" : 0,
     "EUR": 1,
     "RUB": 2,
@@ -85,12 +86,12 @@ class _HomeScreenState extends State<HomeScreen> {
     "EUR",
     "RUB",
   ];
-  final List<DropdownMenuItem<String>> pullar = currency.map(
+  static final List<DropdownMenuItem<String>> pullar = currency.map(
         (String value) => DropdownMenuItem<String>(
           value: value,
           child: Text(value),
     ),).toList();
-  String? SelectedVal2;
+  static String? SelectedVal2;
 
   int _current = 0;
   final CarouselController _controller = CarouselController();
@@ -99,12 +100,14 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getTrips();
-    getnews();
-    getCars();
-    getcities();
-    getvalyuta();
-    getweather();
+    if(isLoading) {
+      getTrips();
+      getnews();
+      getCars();
+      getcities();
+      getvalyuta();
+      getweather();
+    }
   }
 
   void getTrips() async{
@@ -391,7 +394,6 @@ class _HomeScreenState extends State<HomeScreen> {
             CarouselSlider(
               options: CarouselOptions(
                   autoPlay: false,
-                  //autoPlayInterval: Duration(seconds: 2),
                   disableCenter: true,
                   onPageChanged: (index, reason) {
                     setState(() {

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -144,16 +146,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         }
                         final prefs = await SharedPreferences.getInstance();
                         if(prefs.containsKey('userData')) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => routes[index]["route"]
-                              )
-                          );
+                          final extractedUserData = json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
+                          final expiryDate = DateTime.parse(extractedUserData['expiry_at'].substring(0, 10));
+                          if(expiryDate.isAfter(DateTime.now())) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => routes[index]["route"]
+                                )
+                            );
+                          } else {
+                            Dialogs.LoginDialog(context);
+                          }
                         } else {
                           Dialogs.LoginDialog(context);
                         }
-
                       } else {
                         launch(routes[index]["route"]);
                       }
