@@ -4,7 +4,6 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travelcars/app_theme.dart';
 import 'package:travelcars/screens/login/components/drop_button_lang.dart';
 import 'package:travelcars/screens/login/components/drop_button_mny.dart';
 import 'package:travelcars/screens/login/login_srcreen.dart';
@@ -57,7 +56,8 @@ class _ChoicePageState extends State<ChoicePage> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
-                      color: MyColor.orange),
+                      color: Colors.orange
+                  ),
                   height: 40,
                   width: 312,
                   child: Center(

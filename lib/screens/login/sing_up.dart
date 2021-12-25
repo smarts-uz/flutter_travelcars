@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:travelcars/screens/login/confirm.dart';
-import '../../app_theme.dart';
 import 'components/toast.dart';
 
 class SignUp extends StatefulWidget {
@@ -285,7 +284,8 @@ class _SignUpState extends State<SignUp> {
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4),
-                              color: MyColor.orange),
+                              color: Colors.orange
+                          ),
                           height: 40,
                           width: 154,
                           child: Row(

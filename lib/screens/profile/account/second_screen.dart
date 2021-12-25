@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travelcars/app_theme.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -121,7 +120,8 @@ class _SecondScreenState extends State<SecondScreen> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
-                      color: MyColor.blue),
+                      color: Colors.blue
+                  ),
                   height: 40,
                   width: double.infinity,
                   child: Center(
@@ -135,7 +135,7 @@ class _SecondScreenState extends State<SecondScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 20),
             ],
           ),
         ),

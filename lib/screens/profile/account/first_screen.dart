@@ -2,11 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../app_theme.dart';
-import '../../../mask.dart';
 
 class FirstSceen extends StatefulWidget {
   @override
@@ -239,7 +236,8 @@ class _FirstSceenState extends State<FirstSceen> {
                 margin: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
-                    color: MyColor.blue),
+                    color: Colors.blue
+                ),
                 height: 40,
                 width: double.infinity,
                 child: Center(
@@ -247,7 +245,6 @@ class _FirstSceenState extends State<FirstSceen> {
                     "Сохранить",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white,
-
                     ),
                   ),
                 ),

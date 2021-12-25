@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travelcars/screens/main_screen.dart';
-import '../../app_theme.dart';
 
 class SocialScreen extends StatefulWidget {
   const SocialScreen({Key? key}) : super(key: key);
@@ -140,7 +139,8 @@ class _SocialScreenState extends State<SocialScreen> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: MyColor.orange),
+                        color: Colors.orange
+                    ),
                     height: 40,
                     child: Center(
                       child: Text(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travelcars/app_theme.dart';
 import 'package:travelcars/screens/login/sign_in.dart';
 import 'package:travelcars/screens/login/sing_up.dart';
 
@@ -67,7 +66,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: MyColor.orange),
+                        color: Colors.orange
+                    ),
                     height: 40,
                     width: 312,
                     child: Center(
@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Зарегестрироваться",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: MyColor.orange,
+                          color: Colors.orange,
                         ),
                       ),
                     ),

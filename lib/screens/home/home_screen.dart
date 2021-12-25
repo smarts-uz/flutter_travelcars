@@ -24,12 +24,15 @@ class HomeScreen extends StatefulWidget {
   static List<dynamic> cars_list = [];
   static List<dynamic> city_list = [];
   static List<dynamic> tour_list = [];
+  static Map<String, dynamic> category_list = {};
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isLoading = true;
+
   List<dynamic> imglist = [];
   List<dynamic> newslist = [];
   List<dynamic> carslist = [];
@@ -97,11 +100,27 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: implement initState
     super.initState();
     getTrips();
+    getnews();
     getCars();
     getcities();
-    getweather();
     getvalyuta();
-    getnews();
+    getweather();
+  }
+
+  void getTrips() async{
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/getAllTours?lang=ru");
+    final response = await http.get(url);
+    HomeScreen.tour_list = json.decode(response.body)["data"];
+    imglist = json.decode(response.body)["data"];
+  }
+
+  void getCars() async {
+    HomeScreen.cars_list = await Cars.getcars();
+    carslist = HomeScreen.cars_list;
+    setState(() {
+      isLoading = false;
+    });
+    HomeScreen.category_list = await Cars.getcategories(carslist);
   }
 
   void getcities() async {
@@ -109,48 +128,24 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeScreen.city_list = HomeScreen.city_list.toSet().toList();
   }
 
-  void getTrips() async{
-    String url = "${AppConfig.BASE_URL}/getAllTours?lang=ru";
-    final response = await http.get(
-      Uri.parse(url)
-    );
-    HomeScreen.tour_list = json.decode(response.body)["data"];
-    setState(() {
-      imglist = json.decode(response.body)["data"];
-    });
-  }
-
-  void getCars() async {
-    HomeScreen.cars_list = await Cars.getcars();
-    setState(() {
-      carslist = HomeScreen.cars_list;
-    });
-  }
-
   void getnews () async {
-    String url = "${AppConfig.BASE_URL}/news?lang=ru";
-    final response = await http.get(
-      Uri.parse(url)
-    );
-    setState(() {
-      newslist = json.decode(response.body);
-    });
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/news?lang=ru");
+    final response = await http.get(url);
+    newslist = json.decode(response.body);
+  }
+
+  void getvalyuta() async {
+    Uri url = Uri.parse("https://cbu.uz/uz/arkhiv-kursov-valyut/json/");
+    final response = await http.get(url);
+    valyuta = json.decode(response.body);
   }
 
   void getweather() async {
     for(int i =0; i<city.length; i++) {
-      String url = "https://api.openweathermap.org/data/2.5/weather?q=${city[i]}&appid=4d8fb5b93d4af21d66a2948710284366&units=metric";
-      final response = await http.get(Uri.parse(url));
+      Uri url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=${city[i]}&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
+      final response = await http.get(url);
       weather["${city[i]}"] = json.decode(response.body)["main"]["temp"].round();
     }
-  }
-
-  void getvalyuta() async {
-    String url = "https://cbu.uz/uz/arkhiv-kursov-valyut/json/";
-    final response = await http.get(Uri.parse(url));
-    setState(() {
-      valyuta = json.decode(response.body);
-    });
   }
 
   @override
@@ -195,7 +190,9 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: (newslist.isEmpty || carslist.isEmpty) ? Center(child: CircularProgressIndicator()) : SingleChildScrollView(
+      body: isLoading ? Center(
+          child: CircularProgressIndicator()
+      ) : SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -707,13 +704,7 @@ class CarsCard extends StatelessWidget {
       ),
     );
   }
-}
-
-class WeatherCard extends StatelessWidget {
-  const WeatherCard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget WeatherCard() {
     return Container(
       height: 150,
       width: double.infinity * .45,
@@ -748,129 +739,3 @@ class WeatherCard extends StatelessWidget {
     );
   }
 }
-class CurrencyCard extends StatelessWidget {
-  const CurrencyCard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      elevation: 4,
-      child: Stack(
-        
-      ),
-    );
-  }
-}
-/*{
-      "image": "assets/images/car.jpg",
-      "name": "Cars",
-      "number": "12",
-    },
-    {
-      "image": "assets/images/microbus.jpg",
-      "name": "Microbus",
-      "number": "28",
-    },
-    {
-      "image": "assets/images/midbus.jpg",
-      "name": "Midibus",
-      "number": "32",
-    },
-    {
-      "image": "assets/images/bus.jpg",
-      "name": "Bus",
-      "number": "8",
-    },*/
-/*  {
-      'image': "assets/images/news_1.jpg",
-      'title': "Достоинства аренды автомобиля с водителем",
-      'text': "Собираясь в деловую поездку или на отдых, в незнакомый город или регион, в особенности если вас ждёт длительный перелёт, по дороге в аэропорт хочется, расслабиться, не думая об особенностях вождения. Всё что нужно для этого сделать, это – взять напрокат авто с водителем, который встретит вас прям у дома.",
-      'hour': "11:10",
-      'date': "05.10.2021"
-    },
-    {
-      'image': "assets/images/news_2.jpeg",
-      'title': "Когда услуга аренды авто востребована",
-      'text': "В Узбекистане прокат автомобиля с водителем является востребованной услугой, в связи с ростом спроса на туристические услуги в стране.  Вам больше не придется сидеть за рулем при заказе услуги. Менеджеры фирмы Travelcars обеспечат, встречу знакомых, родных, коллег и прочие встречи в аэропорту либо на вокзале в самые короткие сроки.",
-      'hour': "06:00",
-      'date': "06.10.2021"
-    },*/
-/*{
-      'image': "assets/images/tashkent.jpg",
-      'name': "Trip to Tashkent",
-      "location": "Tashkent",
-      "description": "Ташкент - столица Узбекистана, современный город, блещущий великолепием новостроек, но сумевший сохранить и старинную свою часть."
-          " Экскурсии по Ташкенту всегда необычны, интересны и увлекательны.",
-      "day": 1,
-      "time": "5-6",
-      "details": "Вы посетите Старый город, где расположен религиозный центр Ташкента – комплекс Хаст-Имам. Именно здесь хранится"
-          " знаменитый Коран халифа Османа (VII в.). В Хаст-Имаме вы посетите медресе Барак-хана, мечеть Тилля-Шейха,"
-          " мавзолей Абу Бакр Каффаль Шаши и Исламский институт имени Имама аль-Бухари. \n\n Затем вы побываете на одном из старейших "
-          "базаров города – Чорсу. После осмотра достопримечательностей Старого города вас ждет поездка на ташкентском метро в центр,"
-          " где расположены площадь Амира Тимура, площадь Независимости и Музей прикладного искусства.",
-    },
-    {
-      'image': "assets/images/mountain.jpg",
-      'name': "Trip to Mountain",
-      "location": "Бельдерсай, Чимган, Чарвак",
-      "description": "Таинственные и живописные горы Западного Тянь-Шаня - Большой и Малый Чимган, "
-          "горные реки и водопады; урочище Бельдерсай покрытое можжевельником и яблонями, кустами шиповника и барбариса, Чарвакское водохранилище, которое очаровывает каждого путешественника своей красотой.",
-      "day": 3,
-      "time": "2-1",
-      "details": "В 07:00/08:00 встреча в заранее обусловленном месте. Выезд из Ташкента по направлению к Чимганским горам (80 км, 2 ч.). Путь к горам Чимгана пролегает через живописные населенные пункты "
-          "Ташкентской области. По приезду в урочище Чимган прогулка по горной местности.\n\nЕсли в ущелье Бельдерсай работает канатная дорога, протяженность которой более 3 км, то можно прокатиться до вершины "
-          "горы Кумбель (2400 м), где находится одна из горнолыжных трасс в Узбекистане.",
-    },
-    {
-      'image': "assets/images/samarkand.jpg",
-      'name': "Trip to Samarkand",
-      "location": "Tashkent",
-      "description": "Ташкент - столица Узбекистана, современный город, блещущий великолепием новостроек, но сумевший сохранить и старинную свою часть."
-          " Экскурсии по Ташкенту всегда необычны, интересны и увлекательны.",
-      "day": 1,
-      "time": "5-6",
-      "details": "Вы посетите Старый город, где расположен религиозный центр Ташкента – комплекс Хаст-Имам. Именно здесь хранится"
-          " знаменитый Коран халифа Османа (VII в.). В Хаст-Имаме вы посетите медресе Барак-хана, мечеть Тилля-Шейха,"
-          " мавзолей Абу Бакр Каффаль Шаши и Исламский институт имени Имама аль-Бухари. \n\n Затем вы побываете на одном из старейших "
-          "базаров города – Чорсу. После осмотра достопримечательностей Старого города вас ждет поездка на ташкентском метро в центр,"
-          " где расположены площадь Амира Тимура, площадь Независимости и Музей прикладного искусства.",
-    },
-    {
-      'image': "assets/images/buxoro.jpg",
-      'name': "Trip to Buxoro",
-      "location": "Бельдерсай, Чимган, Чарвак",
-      "description": "Таинственные и живописные горы Западного Тянь-Шаня - Большой и Малый Чимган, "
-          "горные реки и водопады; урочище Бельдерсай покрытое можжевельником и яблонями, кустами шиповника и барбариса, Чарвакское водохранилище, которое очаровывает каждого путешественника своей красотой.",
-      "day": 3,
-      "time": "2-1",
-      "details": "В 07:00/08:00 встреча в заранее обусловленном месте. Выезд из Ташкента по направлению к Чимганским горам (80 км, 2 ч.). Путь к горам Чимгана пролегает через живописные населенные пункты "
-          "Ташкентской области. По приезду в урочище Чимган прогулка по горной местности.\n\nЕсли в ущелье Бельдерсай работает канатная дорога, протяженность которой более 3 км, то можно прокатиться до вершины "
-          "горы Кумбель (2400 м), где находится одна из горнолыжных трасс в Узбекистане.",
-    },
-    {
-      'image': "assets/images/xiva.jpg",
-      'name': "Trip to Xiva",
-      "location": "Tashkent",
-      "description": "Ташкент - столица Узбекистана, современный город, блещущий великолепием новостроек, но сумевший сохранить и старинную свою часть."
-          " Экскурсии по Ташкенту всегда необычны, интересны и увлекательны.",
-      "day": 1,
-      "time": "5-6",
-      "details": "Вы посетите Старый город, где расположен религиозный центр Ташкента – комплекс Хаст-Имам. Именно здесь хранится"
-          " знаменитый Коран халифа Османа (VII в.). В Хаст-Имаме вы посетите медресе Барак-хана, мечеть Тилля-Шейха,"
-          " мавзолей Абу Бакр Каффаль Шаши и Исламский институт имени Имама аль-Бухари. \n\n Затем вы побываете на одном из старейших "
-          "базаров города – Чорсу. После осмотра достопримечательностей Старого города вас ждет поездка на ташкентском метро в центр,"
-          " где расположены площадь Амира Тимура, площадь Независимости и Музей прикладного искусства.",
-    },
-    {
-      'image': "assets/images/volley.jpg",
-      'name': "Trip to Volley Fergana",
-      "location": "Бельдерсай, Чимган, Чарвак",
-      "description": "Таинственные и живописные горы Западного Тянь-Шаня - Большой и Малый Чимган, "
-          "горные реки и водопады; урочище Бельдерсай покрытое можжевельником и яблонями, кустами шиповника и барбариса, Чарвакское водохранилище, которое очаровывает каждого путешественника своей красотой.",
-      "day": 3,
-      "time": "2-1",
-      "details": "В 07:00/08:00 встреча в заранее обусловленном месте. Выезд из Ташкента по направлению к Чимганским горам (80 км, 2 ч.). Путь к горам Чимгана пролегает через живописные населенные пункты "
-          "Ташкентской области. По приезду в урочище Чимган прогулка по горной местности.\n\nЕсли в ущелье Бельдерсай работает канатная дорога, протяженность которой более 3 км, то можно прокатиться до вершины "
-          "горы Кумбель (2400 м), где находится одна из горнолыжных трасс в Узбекистане.",
-    },*/

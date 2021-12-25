@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:travelcars/app_theme.dart';
 import 'package:travelcars/map.dart';
 import 'package:travelcars/screens/bookings/booking_item_screen.dart';
 import 'package:travelcars/screens/feedback/feedback.dart';
@@ -185,7 +184,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           },
                           icon: Icon(
                             Icons.message_rounded,
-                            color: MyColor.orange,
+                            color: Colors.orange,
                           ),
                         ),
                       ),
@@ -328,7 +327,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: MyColor.orange,
+                        color: Colors.orange,
                       ),
                       child: Center(
                         child: Text(
@@ -389,7 +388,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.06,
                 decoration: BoxDecoration(
-                  color: MyColor.blue,
+                  color: Colors.blue,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Center(

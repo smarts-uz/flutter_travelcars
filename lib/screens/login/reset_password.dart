@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/confirm.dart';
-import 'package:travelcars/screens/login/set_password.dart';
 
-import '../../app_theme.dart';
 class ResetPassword extends StatefulWidget {
   const ResetPassword({Key? key}) : super(key: key);
 
@@ -99,7 +96,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
-                            color: MyColor.orange),
+                            color: Colors.orange
+                        ),
                         height: 40,
                         width: 154,
                         child: Row(

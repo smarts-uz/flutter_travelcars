@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/main_screen.dart';
 
-import '../../app_theme.dart';
 class SetPassword extends StatefulWidget {
   const SetPassword({Key? key}) : super(key: key);
 
@@ -157,7 +155,8 @@ class _SetPasswordState extends State<SetPassword> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: MyColor.orange),
+                        color: Colors.orange
+                    ),
                     height: 40,
                     child: Center(
                       child: Text(

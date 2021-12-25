@@ -20,7 +20,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  bool _isLoading = true;
+  bool isLoading = true;
 
   List<String> directions = [
     LocaleKeys.One_way.tr(),
@@ -43,7 +43,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   static var number_controller = TextEditingController();
 
-  static List<Map<String, dynamic>> autoTypes = [];
+  static List<dynamic> autoTypes = [];
   Map<String, dynamic> categories = {};
   /*{
       "text": LocaleKeys.Cars.tr(),
@@ -67,59 +67,59 @@ class _SearchScreenState extends State<SearchScreen> {
 
   static List<Map<String, dynamic>> autoOptions = [
     {
-      "text": LocaleKeys.Air_Conditional.tr(),
-      "check_box": false
+      "name": LocaleKeys.Air_Conditional.tr(),
+      "chosen": false
     },
     {
-      "text": LocaleKeys.Mikrofon.tr(),
-      "check_box": false
+      "name": LocaleKeys.Mikrofon.tr(),
+      "chosen": false
     },
     {
-      "text": LocaleKeys.Fridge.tr(),
-      "check_box": false
+      "name": LocaleKeys.Fridge.tr(),
+      "chosen": false
     },
     {
-      "text": "Tv",
-      "check_box": false
+      "name": "Tv",
+      "chosen": false
     },
     {
-      "text": "4WD",
-      "check_box": false
+      "name": "4WD",
+      "chosen": false
     },
     {
-      "text": LocaleKeys.First_aid_kit.tr(),
-      "check_box": false
+      "name": LocaleKeys.First_aid_kit.tr(),
+      "chosen": false
     },
     {
-      "text": LocaleKeys.Airbags.tr(),
-      "check_box": false
+      "name": LocaleKeys.Airbags.tr(),
+      "chosen": false
     },
     {
-      "text": LocaleKeys.Fire_extinguisher.tr(),
-      "check_box": false
+      "name": LocaleKeys.Fire_extinguisher.tr(),
+      "chosen": false
     },
     {
-      "text": LocaleKeys.Plumbing_cabin.tr(),
-      "check_box": false
+      "name": LocaleKeys.Plumbing_cabin.tr(),
+      "chosen": false
     },
   ];
 
   static List<Map<String, dynamic>> tarif = [
     {
-      "text": LocaleKeys.Car_delivery_to_a_convenient_place.tr(),
-      "check_box": false
+      "name": LocaleKeys.Car_delivery_to_a_convenient_place.tr(),
+      "chosen": false
     },
     {
-      "text": LocaleKeys.Fuel_cost.tr(),
-      "check_box": false
+      "name": LocaleKeys.Fuel_cost.tr(),
+      "chosen": false
     },
     {
-      "text": LocaleKeys.Driver_nutrition.tr(),
-      "check_box": false
+      "name": LocaleKeys.Driver_nutrition.tr(),
+      "chosen": false
     },
     {
-      "text": LocaleKeys.Parking_payments.tr(),
-      "check_box": false
+      "name": LocaleKeys.Parking_payments.tr(),
+      "chosen": false
     },
   ];
 
@@ -130,8 +130,9 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    getCars_Categories();
     getcities();
+    autoTypes = HomeScreen.cars_list;
+    categories = HomeScreen.category_list;
   }
 
   void getcities() {
@@ -145,30 +146,20 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Text(value),
       ),
     ).toList();
-    setState(() {
-      _isLoading = false;
-    });
-  }
-
-  void getCars_Categories() async {
-    List apiCars = await Cars.getcars();
-    apiCars.forEach((element) {
-      autoTypes.add({
-        "text": "${element["name"]}",
-        "meta_url": "${element["meta_url"]}",
-        "check_box": false
-      });
-    });
-    print(1);
-    print(autoTypes);
-    categories = await Cars.getcategories(autoTypes);
-    print(2);
-    print(categories);
   }
 
 
   @override
   Widget build(BuildContext context) {
+    double catHeight = 0;
+    List<dynamic> chosen_types = [];
+    autoTypes.forEach((element) {
+      if(element["chosen"]) {
+        chosen_types.add(element);
+        catHeight += categories["${element["name"]}"].length * 33.0 + 30.0;
+      }
+    });
+    print("Chosens: $chosen_types");
     return Scaffold(
       appBar: AppBar(
         leading: widget.isDrawer ? IconButton(
@@ -204,9 +195,7 @@ class _SearchScreenState extends State<SearchScreen> {
           )
         ],
       ),
-      body: _isLoading ? Center(
-        child: CircularProgressIndicator(),
-      ) : SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -574,24 +563,53 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 15, top: 15, bottom: 5),
+              padding: EdgeInsets.only(left: 15, top: 5, bottom: 5),
               child: Text(
                 LocaleKeys.Auto_types.tr(),
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 23,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             Container(
               padding: EdgeInsets.only(left: 5, bottom: 5),
-              height: autoTypes.length * 48,
+              height: autoTypes.length * 33,
               width: double.infinity,
               child: ListBox(autoTypes)
             ),
             Container(
+                padding: EdgeInsets.only(left: 5),
+                height: catHeight,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: chosen_types.length,
+                  itemBuilder: (context, index) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, top: 7.0, bottom: 3.5),
+                        child: Text(
+                          chosen_types[index]["name"],
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            fontStyle: FontStyle.italic
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                          height: categories["${chosen_types[index]["name"]}"].length * 33.0,
+                          child: ListBox(categories["${chosen_types[index]["name"]}"])
+                      ),
+                    ],
+                  ),
+                )
+            ),
+            Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 15, top: 15, bottom: 5),
+              padding: EdgeInsets.only(left: 15, bottom: 5, top: 15.0),
               child: Text(
                 LocaleKeys.Options.tr(),
                 style: TextStyle(
@@ -601,14 +619,14 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             Container(
-                padding: EdgeInsets.only(left: 5, bottom: 5),
-                height: autoOptions.length * 48,
+                padding: EdgeInsets.only(left: 5),
+                height: autoOptions.length * 33,
                 width: double.infinity,
                 child: ListBox(autoOptions)
             ),
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 15, top: 15, bottom: 5),
+              padding: EdgeInsets.only(left: 15, top: 10, bottom: 5),
               child: Text(
                 LocaleKeys.Included_in_type.tr(),
                 style: TextStyle(
@@ -618,8 +636,8 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             Container(
-                padding: EdgeInsets.only(left: 5, bottom: 3),
-                height: tarif.length * 48,
+                padding: EdgeInsets.only(left: 5),
+                height: tarif.length * 33,
                 width: double.infinity,
                 child: ListBox(tarif)
             ),
@@ -700,23 +718,13 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
     );
   }
-}
 
-class ListBox extends StatefulWidget {
-
-  final List<Map<String, dynamic>> boxes;
-
-  ListBox(@required this.boxes);
-  @override
-  _ListBoxState createState() => _ListBoxState();
-}
-
-class _ListBoxState extends State<ListBox> {
-  @override
-  Widget build(BuildContext context) {
+  Widget ListBox(List<dynamic> boxes) {
     return ListView.builder(
+        padding: EdgeInsets.all(0),
+        itemExtent: 33.0,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: widget.boxes.length,
+        itemCount: boxes.length,
         itemBuilder: (context, index) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -725,20 +733,25 @@ class _ListBoxState extends State<ListBox> {
               Checkbox(
                 onChanged: (bool? value) {
                   if (value != null) {
-                    setState(() => widget.boxes[index]["check_box"] = value);
+                    setState(() => boxes[index]["chosen"] = value);
                   }
                 },
-                value: widget.boxes[index]["check_box"],
+                value: boxes[index]["chosen"],
               ),
-              Text(
-                "${widget.boxes[index]["text"]}",
-                style: TextStyle(
-                  fontSize: 16,
+              Expanded(
+                child: Text(
+                  "${boxes[index]["name"]}",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ],
           );
         }
-        );
+    );
   }
+
+
 }
+

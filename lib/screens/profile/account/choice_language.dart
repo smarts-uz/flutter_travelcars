@@ -6,7 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/login/components/drop_button_lang.dart';
 import 'package:travelcars/screens/login/components/drop_button_mny.dart';
 
-import '../../../app_theme.dart';
 
 class ChoicePage extends StatefulWidget {
   const ChoicePage({Key? key}) : super(key: key);
@@ -69,7 +68,7 @@ class _ChoicePageState extends State<ChoicePage> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
-                      color: MyColor.blue),
+                      color: Colors.blue),
                   height: 40,
                   width: double.infinity,
                   child: Center(

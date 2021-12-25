@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelcars/screens/login/set_password.dart';
 import 'package:travelcars/screens/login/social_network.dart';
-import '../../app_theme.dart';
 
 class Confirm extends StatefulWidget {
   final bool isSocial;
@@ -123,7 +122,8 @@ class _ConfirmState extends State<Confirm> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: MyColor.orange),
+                        color: Colors.orange
+                    ),
                     height: 40,
                     child: Center(
                       child: Text(

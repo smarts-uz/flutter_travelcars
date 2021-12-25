@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:travelcars/app_theme.dart';
 
 
 class MapScreen extends StatefulWidget {
@@ -23,7 +22,7 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyColor.orange,
+        backgroundColor: Colors.orange,
         leading: IconButton(
           onPressed: (){
             Navigator.pop(context);
@@ -43,7 +42,6 @@ class _MapScreenState extends State<MapScreen> {
           _controller.complete(controller);
         },
       ),
-
     );
   }
 }

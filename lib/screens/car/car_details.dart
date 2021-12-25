@@ -3,7 +3,6 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:travelcars/app_theme.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 
@@ -222,7 +221,7 @@ class _CarDetailsState extends State<CarDetails> {
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.06,
               decoration: BoxDecoration(
-                color: MyColor.blue,
+                color: Colors.blue,
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Center(

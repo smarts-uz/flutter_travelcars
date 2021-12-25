@@ -7,8 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../app_theme.dart';
-
 class ThirdScreen extends StatefulWidget {
   @override
   _ThirdScreenState createState() => _ThirdScreenState();
@@ -178,7 +176,8 @@ class _ThirdScreenState extends State<ThirdScreen> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: MyColor.blue),
+                        color: Colors.blue
+                    ),
                     height: 40,
                     width: double.infinity,
                     child: Center(
@@ -186,7 +185,6 @@ class _ThirdScreenState extends State<ThirdScreen> {
                         "Сохранить",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white,
-
                         ),
                       ),
                     ),

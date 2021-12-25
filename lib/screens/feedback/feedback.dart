@@ -10,7 +10,7 @@ import 'package:travelcars/screens/feedback/components/drop_button_city.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
 
 import '../../app_config.dart';
-import '../../app_theme.dart';
+
 import 'package:http/http.dart' as http ;
 
 import '../../dialogs.dart';
@@ -93,7 +93,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             size: 28,
           ),
         ),
-        backgroundColor: MyColor.orange,
+        backgroundColor: Colors.orange,
         title: Text(
           "Написать отзыв",
           style: TextStyle(
@@ -379,7 +379,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.06,
                   decoration: BoxDecoration(
-                    color: MyColor.blue,
+                    color: Colors.blue,
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Center(

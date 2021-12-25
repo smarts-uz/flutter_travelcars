@@ -1,4 +1,3 @@
-import 'package:android_intent/android_intent.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,7 +5,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:travelcars/screens/feedback/feedback.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../app_theme.dart';
 
 class BookingScreen extends StatefulWidget {
   final drp;
@@ -82,7 +80,7 @@ class _BookingScreenState extends State<BookingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyColor.orange,
+        backgroundColor: Colors.orange,
         title: Text("${results["bookings"]}",
           style: TextStyle(
           fontSize: 25,
@@ -138,7 +136,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           },
                           icon: Icon(
                             Icons.message_rounded,
-                            color: MyColor.orange,
+                            color: Colors.orange,
                           ),
                         ),
                       ),
@@ -400,7 +398,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * 0.06,
                     decoration: BoxDecoration(
-                      color: MyColor.blue,
+                      color: Colors.blue,
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Center(

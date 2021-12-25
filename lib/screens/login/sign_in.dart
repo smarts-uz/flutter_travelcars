@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
-import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/reset_password.dart';
 import 'package:travelcars/screens/main_screen.dart';
 import 'package:http/http.dart' as http;
 
-import '../../app_theme.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -196,7 +194,8 @@ class _SignInState extends State<SignIn> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: MyColor.orange),
+                        color: Colors.orange
+                    ),
                     height: 40,
                     child: Center(
                       child: Text(
@@ -231,7 +230,7 @@ class _SignInState extends State<SignIn> {
                         "Восстановить пароль",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: MyColor.orange,
+                          color: Colors.orange,
                         ),
                       ),
                     ),
