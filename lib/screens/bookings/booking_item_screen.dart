@@ -330,6 +330,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 _text(text: "Выберите способ оплаты:"),
                 GestureDetector(
                   onTap: (){
+                    // TODO: implement payment api
                     _launchApp('https://click.uz');
                   },
                   child: _payment(icon: "assets/icons/Click1.png", name: "Click"),),
@@ -392,7 +393,9 @@ class _BookingScreenState extends State<BookingScreen> {
                   ],
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    // TODO: implement payment press api
+                  },
                   child: Container(
                     margin: EdgeInsets.all(16),
                     width: double.infinity,

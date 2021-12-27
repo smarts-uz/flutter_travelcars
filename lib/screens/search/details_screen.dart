@@ -380,6 +380,7 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
             GestureDetector(
               onTap: () {
+                // TODO: implement book api
                 Navigator.push(
                     context, MaterialPageRoute(builder: (_) => BookingScreen()));
               },
