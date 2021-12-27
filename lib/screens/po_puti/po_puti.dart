@@ -27,7 +27,6 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getways();
   }

@@ -19,7 +19,6 @@ class _CashbackScreenState extends State<CashbackScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getuserdata();
   }

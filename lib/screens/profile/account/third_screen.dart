@@ -24,7 +24,6 @@ class _ThirdScreenState extends State<ThirdScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getsocials();
   }

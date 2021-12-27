@@ -19,7 +19,6 @@ class _AccountScreenState extends State<AccountScreen> {
   String email = "";
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getuserdata();
   }

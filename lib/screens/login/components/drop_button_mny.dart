@@ -17,7 +17,6 @@ class _DropButtonMnyState extends State<DropButtonMny> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     current_locale();
   }

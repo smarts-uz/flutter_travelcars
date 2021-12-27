@@ -43,7 +43,6 @@ class _CarCategoryState extends State<CarCategory> {
   
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getCategory();
   }

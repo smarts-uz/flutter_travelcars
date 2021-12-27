@@ -39,7 +39,6 @@ class _FirstSceenState extends State<FirstSceen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getuserdata();
     getcompanydata();

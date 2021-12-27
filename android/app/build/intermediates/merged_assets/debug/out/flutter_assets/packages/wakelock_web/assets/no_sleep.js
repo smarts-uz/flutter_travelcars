@@ -181,7 +181,7 @@ var NoSleep = (function () {
             }
           }
 
-          // todo: use WakeLockSentinel.released when that is available (https://developer.mozilla.org/en-US/docs/Web/API/WakeLockSentinel/released)
+
           if (_releasedNative != false) {
             return false
           }

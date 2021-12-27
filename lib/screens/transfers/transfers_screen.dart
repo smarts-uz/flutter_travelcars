@@ -28,7 +28,6 @@ class _TransfersScreenState extends State<TransfersScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       cars = HomeScreen.cars_list;

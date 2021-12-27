@@ -70,7 +70,6 @@ class _ReviewsState extends State<Reviews> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getComment();
   }
