@@ -25,6 +25,8 @@ class HomeScreen extends StatefulWidget {
   static List<dynamic> cars_list = [];
   static List<dynamic> city_list = [];
   static List<dynamic> tour_list = [];
+  static List<dynamic> options_list = [];
+  static List<dynamic> tariff_list = [];
   static Map<String, dynamic> category_list = {};
 
   @override
@@ -103,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
       getTrips();
       getnews();
       getCars();
+      getOptionsTariffs();
       getcities();
       getvalyuta();
       getweather();
@@ -123,6 +126,29 @@ class _HomeScreenState extends State<HomeScreen> {
       isLoading = false;
     });
     HomeScreen.category_list = await Cars.getcategories(carslist);
+  }
+  
+  void getOptionsTariffs() async {
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/caroption?locale=ru");
+    final response = await http.get(url);
+    List<dynamic> temp_data = json.decode(response.body)["data"];
+    temp_data.forEach((element) {
+      HomeScreen.options_list.add({
+        "id": element["id"],
+        "name": element["name"],
+        "chosen": false
+      });
+    });
+    url = Uri.parse("${AppConfig.BASE_URL}/routeoption?locale=ru");
+    final result = await http.get(url);
+    temp_data = json.decode(result.body)["data"];
+    temp_data.forEach((element) {
+      HomeScreen.tariff_list.add({
+        "id": element["id"],
+        "name": element["name"],
+        "chosen": false
+      });
+    });
   }
 
   void getcities() async {

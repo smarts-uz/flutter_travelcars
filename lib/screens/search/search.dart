@@ -65,8 +65,8 @@ class _SearchScreenState extends State<SearchScreen> {
       "check_box": false
     },*/
 
-  static List<Map<String, dynamic>> autoOptions = [
-    {
+  static List<dynamic> autoOptions = [];
+  /*{
       "name": LocaleKeys.Air_Conditional.tr(),
       "chosen": false
     },
@@ -101,11 +101,10 @@ class _SearchScreenState extends State<SearchScreen> {
     {
       "name": LocaleKeys.Plumbing_cabin.tr(),
       "chosen": false
-    },
-  ];
+    },*/
 
-  static List<Map<String, dynamic>> tarif = [
-    {
+  static List<dynamic> tarif = [];
+  /* {
       "name": LocaleKeys.Car_delivery_to_a_convenient_place.tr(),
       "chosen": false
     },
@@ -120,8 +119,7 @@ class _SearchScreenState extends State<SearchScreen> {
     {
       "name": LocaleKeys.Parking_payments.tr(),
       "chosen": false
-    },
-  ];
+    },*/
 
   List<String> city = [];
   late final List<DropdownMenuItem<String>> cities;
@@ -133,6 +131,8 @@ class _SearchScreenState extends State<SearchScreen> {
     getcities();
     autoTypes = HomeScreen.cars_list;
     categories = HomeScreen.category_list;
+    autoOptions = HomeScreen.options_list;
+    tarif = HomeScreen.tariff_list;
   }
 
   void getcities() {
