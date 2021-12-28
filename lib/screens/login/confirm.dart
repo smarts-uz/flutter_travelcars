@@ -4,8 +4,10 @@ import 'package:travelcars/screens/login/social_network.dart';
 
 class Confirm extends StatefulWidget {
   final bool isSocial;
+  int id;
+  int code;
 
-  Confirm(@required this.isSocial);
+  Confirm(this.isSocial, this.id,this.code);
 
   @override
   _ConfirmState createState() => _ConfirmState();
@@ -115,7 +117,15 @@ class _ConfirmState extends State<Confirm> {
                 ),
                 Spacer(),
                 GestureDetector(
+
                   onTap: () {
+                    if(_emailController == widget.code){
+                      Navigator.push(context,MaterialPageRoute(builder: (_) => SocialScreen() ));
+                    }
+                    else
+                      {
+                        print('error');
+                      }
                     Navigator.push(context,MaterialPageRoute(builder: (_) =>
                         widget.isSocial ? SocialScreen() : SetPassword()));
                   },

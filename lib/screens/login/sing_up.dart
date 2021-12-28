@@ -1,11 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:travelcars/screens/login/confirm.dart';
+import '../../app_config.dart';
 import 'components/toast.dart';
+import 'package:http/http.dart' as http;
 
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
-
   @override
   _SignUpState createState() => _SignUpState();
 }
@@ -20,6 +22,8 @@ class _SignUpState extends State<SignUp> {
   List<String> _items = ["Физ. лицо", "Юр. лицо"];
   String _currentItem = "Физ. лицо";
 
+
+
   late FToast fToast;
 
   @override
@@ -28,8 +32,20 @@ class _SignUpState extends State<SignUp> {
     fToast = FToast();
     fToast.init(context);
   }
+
+  Future<void> getid() async {
+    String url = '${AppConfig.BASE_URL}/signup';
+
+    final response = await http.get(
+      Uri.parse(url)
+    );
+    setState(() {
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
+    String type = _currentItem == 0 ?"individual" : "legal";
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -55,7 +71,7 @@ class _SignUpState extends State<SignUp> {
         child: Container(
           height: MediaQuery.of(context).size.height*0.9,
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             child: Center(
               child: Column(
                 children: [
@@ -279,7 +295,7 @@ class _SignUpState extends State<SignUp> {
                             return;
                           }
 
-                          Navigator.push(context, MaterialPageRoute(builder: (_)=>Confirm(true)));
+                       //   Navigator.push(context, MaterialPageRoute(builder: (_)=>Confirm(false,id)));
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -291,11 +307,33 @@ class _SignUpState extends State<SignUp> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                "Далее",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
+                              GestureDetector(
+                                onTap: () async {
+                                  String url = "${AppConfig.BASE_URL}/signup";
+                                  final result = await http.post(
+                                      Uri.parse(url),
+                                      body: {
+                                        'name':'${_nameController.text}',
+                                        'email': "${_emailController.text}",
+                                        'password': "${_passwordController.text}",
+                                        'password_confirmation' : '${_verifyController.text}',
+                                        'personality' : '${type}',
+
+                                      }
+                                  );
+                                  int id = json.decode(result.body)["user_id"];
+                                  int code = json.decode(result.body)['code'];
+                                  Navigator.push(
+                                      context, 
+                                      MaterialPageRoute(
+                                          builder: (_) =>Confirm(true,id,code)));
+                                },
+                                child: Text(
+                                  "Далее",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                               SizedBox(width: 10,),
