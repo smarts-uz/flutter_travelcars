@@ -419,7 +419,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(
-                              "http://travelcars.teampro.uz/uploads/tours/${item["image"]}",
+                              "${AppConfig.image_url}/tours/${item["image"]}",
                             ),
                             fit: BoxFit.cover,
                           ),
@@ -499,7 +499,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Container(
                               height: 140,
                               width: MediaQuery.of(context).size.width * .43,
-                              child: Image.network("https://travelcars.uz/uploads/car-types/${carslist[index]["image"]}"),
+                              child: Image.network("${AppConfig.image_url}/car-types/${carslist[index]["image"]}"),
                             ),
                             Positioned(
                               top: 10,
@@ -609,7 +609,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 150,
                                     width: MediaQuery.of(context).size.width * 0.9,
                                     child:Image.network(
-                                      "https://travelcars.uz/uploads/pages/${item["thumb"]}",
+                                      "${AppConfig.image_url}/pages/${item["thumb"]}",
                                     ),
                                 ),
 

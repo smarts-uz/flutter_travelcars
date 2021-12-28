@@ -235,8 +235,10 @@ class _CarsListState extends State<CarsList> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-                  child: Image.network("https://travelcars.uz/uploads/cars/${results[index]["images"][0]}",
-                  fit: BoxFit.cover,),
+                  child: Image.network(
+                    "${AppConfig.image_url}/cars/${results[index]["images"][0]}",
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.65,

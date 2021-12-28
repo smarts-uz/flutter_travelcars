@@ -48,10 +48,8 @@ class _CarCategoryState extends State<CarCategory> {
   }
   
   void getCategory() async {
-    print(widget.meta_url);
-    Uri url = Uri.parse("${AppConfig.BASE_URL}/carmodels/${widget.meta_url}/all?lang=uz");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/carmodels/${widget.meta_url}/all?lang=ru");
     final response = await http.get(url);
-    print(response.body);
     setState(() {
       categories = json.decode(response.body);
     });
@@ -145,8 +143,8 @@ class _CarCategoryState extends State<CarCategory> {
                           height: MediaQuery.of(context).size.height * .17,
                           width: MediaQuery.of(context).size.width * .32,
                           margin: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Image.asset(
-                            "assets/images/malibu.png",
+                          child: Image.network(
+                            "${AppConfig.image_url}/car-models/${categories[index]["image"]}",
                             fit: BoxFit.fill,
                           ),
                         ),

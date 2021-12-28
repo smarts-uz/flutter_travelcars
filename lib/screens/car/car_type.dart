@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/car/car_category.dart';
 
 class CarTypes extends StatelessWidget {
@@ -57,7 +58,7 @@ class CarTypes extends StatelessWidget {
                       Container(
                         height: 140,
                         width: MediaQuery.of(context).size.width * .43,
-                        child: Image.network("https://travelcars.uz/uploads/car-types/${carslist[index]["image"]}"),
+                        child: Image.network("${AppConfig.image_url}/car-types/${carslist[index]["image"]}"),
                       ),
                       Positioned(
                         top: 10,

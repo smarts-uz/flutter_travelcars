@@ -3,6 +3,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:travelcars/app_config.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 
@@ -56,7 +57,7 @@ class _CarDetailsState extends State<CarDetails> {
                              decoration: BoxDecoration(
                                image: DecorationImage(
                                  image: NetworkImage(
-                                   "https://travelcars.uz/uploads/cars/$item",
+                                   "${AppConfig.image_url}/cars/$item",
                                  ),
                                  fit: BoxFit.cover,
                                ),
