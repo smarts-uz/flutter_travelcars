@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:http_parser/http_parser.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -290,31 +291,35 @@ class _AddScreenState extends State<AddScreen> {
                           return;
                         }
                       }
-                      /*if(_pickedImage == null) {
+                      if(_pickedImage == null) {
                         print("no_image");
                         return;
-                      }*/
-                      print(text_controllers[0].text);
+                      }
                       Uri url = Uri.parse("${AppConfig.BASE_URL}/createWay");
-                      final response  = await http.post(
-                        url,
-                        body: {
-                          "address1": "${text_controllers[0].text}",
-                          "address2": "${text_controllers[1].text}",
-                          "date": "${DateFormat('yyyy-MM-dd').format(day)}",
-                          "time": "${time.format(context)}",
-                          "model": "${text_controllers[2].text}",
-                          "place": "${text_controllers[3].text}",
-                          "place_bag": "${text_controllers[4].text}",
-                          "name": "${text_controllers[5].text}",
-                          "tel": "${text_controllers[6].text}",
-                          "comment_text": "${text_controllers[7].text}",
-                        }
-                      );
-                      if(json.decode(response.body)["success"]) {
+                      var request = http.MultipartRequest('POST', url)
+                        ..fields['address1'] = '${text_controllers[0].text}'
+                        ..fields['address2'] = '${text_controllers[1].text}'
+                        ..fields['date'] = '${DateFormat('yyyy-MM-dd').format(day)}'
+                        ..fields['time'] = '${time.format(context)}'
+                        ..fields['model'] = '${text_controllers[2].text}'
+                        ..fields['place'] = '${text_controllers[3].text}'
+                        ..fields['place_bag'] = '${text_controllers[4].text}'
+                        ..fields['name'] = '${text_controllers[5].text}'
+                        ..fields['tel'] = '${text_controllers[6].text}'
+                        ..fields['comment_text'] = '${text_controllers[7].text}'
+                        ..files.add(
+                            await http.MultipartFile.fromPath(
+                                'image',
+                                '${_pickedImage?.path}',
+                                contentType: MediaType(
+                                    'image', 'jpg'
+                                )
+                            )
+                        );
+                      var response = await request.send();
+                      if (response.statusCode == 200) {
                         Dialogs.PoPutiDialog(context);
                       }
-                      print(json.decode(response.body)["message"]);
                     },
                     child: Text(
                       'Publish',

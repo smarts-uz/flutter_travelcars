@@ -17,11 +17,12 @@ class CarDetails extends StatefulWidget {
 }
 
 class _CarDetailsState extends State<CarDetails> {
+  final CarouselController _controller = CarouselController();
+  int _current = 0;
   @override
   Widget build(BuildContext context) {
-    var results = widget.info;
+    Map<String,dynamic> results = widget.info;
     List<dynamic> images = results["images"];
-    int _current = 0;
     return Scaffold(
       body: Column(
         children: [
@@ -40,8 +41,7 @@ class _CarDetailsState extends State<CarDetails> {
                         child: CarouselSlider(
                           options: CarouselOptions(
                             viewportFraction: 1,
-                              autoPlay: true,
-                              //autoPlayInterval: Duration(seconds: 2),
+                              autoPlay: false,
                               disableCenter: true,
                               onPageChanged: (index, reason) {
                                 setState(() {
@@ -50,9 +50,8 @@ class _CarDetailsState extends State<CarDetails> {
                                 );
                               }
                           ),
-                         items: results["images"].map<Widget>((item) {
+                         items: images.map<Widget>((item) {
                            return Container(
-                            // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                              width: double.infinity,
                              decoration: BoxDecoration(
                                image: DecorationImage(
@@ -87,15 +86,9 @@ class _CarDetailsState extends State<CarDetails> {
                               icon: Icon(
                                 Icons.arrow_back,
                                 color: Colors.black,
+                                size: 30,
                               ),
                             ),
-                            /*IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.share,
-                                color: Colors.black,
-                              ),
-                            ),*/
                           ],
                         ),
                       ),
@@ -104,9 +97,9 @@ class _CarDetailsState extends State<CarDetails> {
                         right: 160,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: results["images"].asMap().entries.map<Widget>((entry) {
+                          children: images.asMap().entries.map<Widget>((entry) {
                             return GestureDetector(
-                              //onTap: () => _controller.animateToPage(entry.key),
+                              onTap: () => _controller.animateToPage(entry.key),
                               child: Container(
                                   width: 8.0,
                                   height: 8.0,
@@ -120,31 +113,6 @@ class _CarDetailsState extends State<CarDetails> {
                           }).toList(),
                         ),
                       ),
-                      /*Positioned(
-                          bottom: 6,
-                          right: 30,
-                          child: Container(
-                            height: 56,
-                            width: 56,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.amberAccent,
-                            ),
-                            child: Center(
-                              child: IconButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => FeedbackScreen()));
-                                },
-                                icon: Icon(
-                                  Icons.message_rounded,
-                                  color: MyColor.orange,
-                                ),
-                              ),
-                            ),
-                          )),*/
                     ],
                   ),
                   _text(text: results["title"]),

@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void getnews () async {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/news?lang=ru");
     final response = await http.get(url);
-    newslist = json.decode(response.body)["user_id"];
+    newslist = json.decode(response.body);
   }
 
   void getvalyuta() async {

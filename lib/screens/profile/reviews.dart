@@ -404,7 +404,7 @@ class _ReviewsState extends State<Reviews> {
                                  crossAxisAlignment: CrossAxisAlignment.start,
                                  children: [
                                    Text(
-                                     "Order time : ${reviews["reviews"][index1]["route_date"].substring(0,10)}",
+                                     "Order time : ${reviews["reviews"][index1]["route_date"]}",
                                      textAlign: TextAlign.start,
                                      style: TextStyle(
                                          fontSize: 15,

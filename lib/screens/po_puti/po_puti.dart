@@ -233,7 +233,9 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                         height: MediaQuery.of(context).size.height * 0.15,
                         width: MediaQuery.of(context).size.width * 0.3,
                         margin: EdgeInsets.all(10),
-                        child: Image.asset("assets/images/lacetti.png", fit: BoxFit.cover,),
+                        child: Image.network(
+                          "${AppConfig.image_url}/onways/${ways[index]["image"]}",
+                          fit: BoxFit.cover,),
                       ),
                       Expanded(
                         child: Padding(

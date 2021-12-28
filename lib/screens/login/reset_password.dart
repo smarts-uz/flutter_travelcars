@@ -91,7 +91,12 @@ class _ResetPasswordState extends State<ResetPassword> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_)=>Confirm(false)));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_)=>Confirm(false, 001, 001)
+                            )
+                        );
                       },
                       child: Container(
                         decoration: BoxDecoration(

@@ -16,6 +16,7 @@ class CarCategory extends StatefulWidget {
 }
 
 class _CarCategoryState extends State<CarCategory> {
+  bool isLoading = true;
   List<Map<String, dynamic>> names = [
     {
       "name": "Class",
@@ -52,6 +53,7 @@ class _CarCategoryState extends State<CarCategory> {
     final response = await http.get(url);
     setState(() {
       categories = json.decode(response.body);
+      isLoading = false;
     });
   }
 
@@ -77,9 +79,13 @@ class _CarCategoryState extends State<CarCategory> {
           ),
         ),
       ),
-      body: categories.isEmpty ? Center(
+      body: isLoading ? Center(
         child: CircularProgressIndicator(),
-      ) :
+      ) : categories.isEmpty ? Center (
+        child: Text(
+          "No items found"
+        ),
+      ):
       SizedBox(
         height: MediaQuery.of(context).size.height,
         child: ListView.builder(
@@ -126,7 +132,7 @@ class _CarCategoryState extends State<CarCategory> {
                               ),
                               child: Center(
                                 child: Text(
-                                  "5",
+                                  "${categories[index]["quantity"]}",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20
@@ -142,10 +148,10 @@ class _CarCategoryState extends State<CarCategory> {
                         Container(
                           height: MediaQuery.of(context).size.height * .17,
                           width: MediaQuery.of(context).size.width * .32,
-                          margin: EdgeInsets.symmetric(horizontal: 10.0),
+                          margin: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 8.0),
                           child: Image.network(
                             "${AppConfig.image_url}/car-models/${categories[index]["image"]}",
-                            fit: BoxFit.fill,
+                            fit: BoxFit.contain,
                           ),
                         ),
                         Expanded(

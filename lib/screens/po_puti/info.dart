@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../app_config.dart';
+
 class InfoScreen extends StatelessWidget {
   final Map<String, dynamic> way_item;
 
@@ -36,7 +38,10 @@ class InfoScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.4,
               width: MediaQuery.of(context).size.width * 0.95,
               margin: EdgeInsets.all(15),
-              child: Image.asset("assets/images/lacetti.png", fit: BoxFit.cover,),
+              child: Image.network(
+                "${AppConfig.image_url}/onways/${way_item["image"]}",
+                fit: BoxFit.cover,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 15.0, right: 20),
