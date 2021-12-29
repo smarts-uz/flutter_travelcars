@@ -654,15 +654,20 @@ class _SearchScreenState extends State<SearchScreen> {
                     _currentRangeValues = RangeValues(50, 250);
                     _radioVal1 = null;
                     _radioVal2 = null;
-                    for(int i = 0; i < autoTypes.length; i++) {
-                      autoTypes[i]["check_box"] = false;
-                    }
-                    for(int i = 0; i < autoOptions.length; i++) {
-                      autoOptions[i]["check_box"] = false;
-                    }
-                    for(int i = 0; i < tarif.length; i++) {
-                      tarif[i]["check_box"] = false;
-                    }
+                    autoTypes.forEach((element) {
+                      element["chosen"] = false;
+                    });
+                    categories.forEach((key, value) {
+                      value.forEach((element1) {
+                        element1["chosen"] = false;
+                      });
+                    });
+                    autoOptions.forEach((element) {
+                      element["chosen"] = false;
+                    });
+                    tarif.forEach((element) {
+                      element["chosen"] = false;
+                    });
                   });
                 },
                 child: Text(

@@ -27,8 +27,8 @@ class _AccountScreenState extends State<AccountScreen> {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       final userinfo = json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
-      email = userinfo["email"];
-      name = userinfo["name"];
+      email = userinfo["email"] != null ? userinfo["email"] : "";
+      name = userinfo["name"] != null ? userinfo["name"] : "";
 
     });
   }
