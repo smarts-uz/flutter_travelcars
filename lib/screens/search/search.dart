@@ -1,15 +1,17 @@
+import 'dart:convert';
+
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:travelcars/dummy_data/cars.dart';
-import 'package:travelcars/dummy_data/cities_list.dart';
+import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/search/search_result.dart';
 import 'package:travelcars/screens/trip/trips.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
+import 'package:http/http.dart' as http;
 
 class SearchScreen extends StatefulWidget {
   final bool isDrawer;
@@ -365,7 +367,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               child: ListTile(
                 title: Text(
-                    "${DateFormat('dd/MM/yyyy').format(_selectedDate2!)}",
+                    "${DateFormat('dd/MM/yyyy').format(_selectedDate1!)}",
                 ),
                 trailing: IconButton(
                   icon: Icon(Icons.calendar_today),
@@ -381,7 +383,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         return;
                       }
                       setState(() {
-                        _selectedDate2 = pickedDate;
+                        _selectedDate1 = pickedDate;
                       });
                     });
                   },
@@ -399,7 +401,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               child: ListTile(
                 title: Text(
-                  "${DateFormat('dd/MM/yyyy').format(_selectedDate1!)}",
+                  "${DateFormat('dd/MM/yyyy').format(_selectedDate2!)}",
                 ),
                 trailing: IconButton(
                   icon: Icon(Icons.calendar_today),
@@ -415,7 +417,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         return;
                       }
                       setState(() {
-                        _selectedDate1 = pickedDate;
+                        _selectedDate2 = pickedDate;
                       });
                     });
                   },
@@ -706,13 +708,69 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ],
                   ),
-                  onPressed: () {
-                    // TODO: implement search api
+                  onPressed: () async {
+                    List<int> chosen_models = [];
+                    categories.forEach((key, value) {
+                      value.forEach((element) {
+                        if(element["chosen"]) {
+                          chosen_models.add(element["id"]);
+                        }
+                      });
+                    });
+
+                    List<int> chosen_options = [];
+                    autoOptions.forEach((element) {
+                      if(element["chosen"]) {
+                        chosen_options.add(element["id"]);
+                      }
+                    });
+
+                    List<int> chosen_tarif = [];
+                    tarif.forEach((element) {
+                      if(element["chosen"]) {
+                        chosen_tarif.add(element["id"]);
+                      }
+                    });
+
+                    int city_start = 0;
+                    int city_end = 0;
+                    api_cities.forEach((element) {
+                      if(element["name"] == SelectedVal1) {
+                        city_start = element["city_id"];
+                      }
+
+                      if(element["name"] == SelectedVal2) {
+                        city_end = element["city_id"];
+                      }
+                    });
+
+                    Map<String, dynamic> search_body = {
+                      "reverse": _radioVal1,
+                      "city_start": "$city_start",
+                      "cities": [city_end],
+                      "date_start": "${DateFormat('dd.MM.yyyy').format(_selectedDate1!)}",
+                      "date_end": "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
+                      "passengers": "${number_controller.text}",
+                      "s": _radioVal2 == 0 ? "price" : "places",
+                      //"price": "${_currentRangeValues.start.round()}+-+${_currentRangeValues.end.round()}",
+                      "price": "40+-+300",
+                      "car_models": chosen_models,
+                      "car_options": chosen_options,
+                      "route_options": chosen_tarif,
+                    };
+                    print(search_body);
+
+                    Uri url = Uri.parse("${AppConfig.BASE_URL}/sort");
+                    final response = await http.post(
+                      url,
+                      body: jsonEncode(search_body)
+                    );
+                    print(jsonDecode(response.body));
                     if(widget.isDrawer) Navigator.pop(context);
                     if(widget.isDrawer) Navigator.pop(context);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SearchResult()
+                      MaterialPageRoute(builder: (context) => SearchResult(jsonDecode(response.body)["routes"])
                       )
                     );
                   }

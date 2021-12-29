@@ -5,7 +5,9 @@ import 'package:travelcars/screens/search/details_screen.dart';
 import 'package:travelcars/screens/search/search.dart';
 
 class SearchResult extends StatefulWidget {
-  const SearchResult({Key? key}) : super(key: key);
+  final List<dynamic> routes;
+
+  SearchResult(this.routes);
 
   @override
   _SearchResultState createState() => _SearchResultState();
@@ -90,6 +92,7 @@ class _SearchResultState extends State<SearchResult> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.routes);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
