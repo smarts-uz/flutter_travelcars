@@ -709,29 +709,6 @@ class _SearchScreenState extends State<SearchScreen> {
                     ],
                   ),
                   onPressed: () async {
-                    List<int> chosen_models = [];
-                    categories.forEach((key, value) {
-                      value.forEach((element) {
-                        if(element["chosen"]) {
-                          chosen_models.add(element["id"]);
-                        }
-                      });
-                    });
-
-                    List<int> chosen_options = [];
-                    autoOptions.forEach((element) {
-                      if(element["chosen"]) {
-                        chosen_options.add(element["id"]);
-                      }
-                    });
-
-                    List<int> chosen_tarif = [];
-                    tarif.forEach((element) {
-                      if(element["chosen"]) {
-                        chosen_tarif.add(element["id"]);
-                      }
-                    });
-
                     int city_start = 0;
                     int city_end = 0;
                     api_cities.forEach((element) {
@@ -744,28 +721,56 @@ class _SearchScreenState extends State<SearchScreen> {
                       }
                     });
 
-                    Map<String, dynamic> search_body = {
-                      "reverse": _radioVal1,
+
+                    Map<String, String> search_body = {
+                      "reverse": "$_radioVal1",
                       "city_start": "$city_start",
-                      "cities": [city_end],
+                      "cities[]": "$city_end",
                       "date_start": "${DateFormat('dd.MM.yyyy').format(_selectedDate1!)}",
                       "date_end": "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
                       "passengers": "${number_controller.text}",
                       "s": _radioVal2 == 0 ? "price" : "places",
-                      //"price": "${_currentRangeValues.start.round()}+-+${_currentRangeValues.end.round()}",
-                      "price": "40+-+300",
-                      "car_models": chosen_models,
-                      "car_options": chosen_options,
-                      "route_options": chosen_tarif,
+                      "price": "${_currentRangeValues.start.round()}+-+${_currentRangeValues.end.round()}",
                     };
-                    print(search_body);
+
+                    int ind1 = 0;
+                    categories.forEach((key, value) {
+                      value.forEach((element) {
+                        if(element["chosen"]) {
+                          search_body.addAll({
+                             "car_models[$ind1]": "${element["id"]}",
+                            });
+                          ind1++;
+                        }
+                      });
+                    });
+
+                    ind1 = 0;
+                    autoOptions.forEach((element) {
+                      if(element["chosen"]) {
+                        search_body.addAll({
+                          "car_options[$ind1]": "${element["id"]}"
+                        });
+                        ind1++;
+                      }
+                    });
+
+                    ind1 = 0;
+                    tarif.forEach((element) {
+                      if(element["chosen"]) {
+                        search_body.addAll({
+                          "route_options[$ind1]": "${element["id"]}"
+                        });
+                        ind1++;
+                      }
+                    });
 
                     Uri url = Uri.parse("${AppConfig.BASE_URL}/sort");
                     final response = await http.post(
                       url,
-                      body: jsonEncode(search_body)
+                      body: search_body
                     );
-                    print(jsonDecode(response.body));
+
                     if(widget.isDrawer) Navigator.pop(context);
                     if(widget.isDrawer) Navigator.pop(context);
                     Navigator.push(
