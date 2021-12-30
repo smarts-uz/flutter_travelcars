@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/bookings/booking_item_screen.dart';
+import 'package:travelcars/screens/bookings/bookings_screen.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,7 +27,9 @@ class _DetailScreenState extends State<DetailScreen> {
 
   final CarouselController _controller = CarouselController();
   int _current = 0;
+  int narx_index = 0;
   late String dropdown;
+  List<dynamic> narxlar = [];
 
   void _otmen(BuildContext ctx) {
     showModalBottomSheet(
@@ -96,33 +99,27 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    Map<String, dynamic> results = widget.route_item;
-    List<dynamic> narxlar = [];
-    /*jsonDecode(results["price_data"]).forEach((key, value) {
-      String day;
-      switch(key) {
-        case "one":
-          day = "1";
-          break;
-        case "two":
-          day = "2";
-          break;
-        case "three":
-          day = "3";
-          break;
-        case "half":
-          day = "0.5";
-          break;
-        default:
-          day = "0";
+  void initState() {
+    super.initState();
+    jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
+      int cost;
+      if(value.runtimeType == String) {
+        cost = (double.parse(value) * HomeScreen.kurs_dollar).toInt();
+      } else {
+        cost = (value * HomeScreen.kurs_dollar).toInt();
       }
       narxlar.add({
-        "day": day,
-        "cost": "${value * HomeScreen.kurs_dollar} UZS"
+        "day": "$key day",
+        "cost": "$cost UZS"
       });
-    });*/
+    });
+    dropdown = narxlar[0]["day"];
+    print(narxlar);
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    Map<String, dynamic> results = widget.route_item;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -142,8 +139,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         onPageChanged: (index, reason) {
                           setState(() {
                             _current = index;
-                          }
-                          );
+                          });
                         }
                     ),
                     items: results["car"]["images"].map<Widget>((item) {
@@ -343,7 +339,7 @@ class _DetailScreenState extends State<DetailScreen> {
               ],
             ),*/
             _text(text: "Стоимость поездки за"),
-            /*Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
@@ -370,9 +366,17 @@ class _DetailScreenState extends State<DetailScreen> {
                           underline: SizedBox(),
                           value: dropdown,
                           onChanged: (newValue) {
-                            setState(() {
-                              dropdown = newValue!;
+                            int newIndex = 0;
+                            narxlar.forEach((element) {
+                              if(element["day"] == newValue) {
+                                setState(() {
+                                  dropdown = newValue!;
+                                  narx_index = newIndex;
+                                });
+                              }
+                              newIndex++;
                             });
+
                           },
                           items: narxlar.map<DropdownMenuItem<String>>((value) {
                             return DropdownMenuItem<String>(
@@ -410,20 +414,22 @@ class _DetailScreenState extends State<DetailScreen> {
                           ]),
                       child: Center(
                         child: Text(
-                          dropdown,
+                          narxlar[narx_index]["cost"],
                           style: TextStyle(
                             fontFamily: "Poppins",
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.normal,
                             fontSize: 15,
                             color: HexColor('#3C3C43'),
-                          ),),
-                      )),
+                          ),
+                        ),
+                      )
+                  ),
                 )
               ],
-            ),*/
+            ),
             Container(
-              padding: EdgeInsets.only(left: 16, top: 16),
+              padding: EdgeInsets.only(left: 16),
               child: TextButton(
                 onPressed: () {
                   _otmen(context);
@@ -441,7 +447,7 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(left: 16, bottom: 16),
+              padding: EdgeInsets.only(left: 16, bottom: 5),
               child: TextButton(
                 onPressed: () {
                   _inform(context);
@@ -463,28 +469,34 @@ class _DetailScreenState extends State<DetailScreen> {
                 final prefs = await SharedPreferences.getInstance();
                 String token = json.decode(prefs.getString('userData')!)["token"];
                 Uri url = Uri.parse("${AppConfig.BASE_URL}/book/create");
+                print(jsonEncode({
+                  "route_price_id": "${results["route_price_id"]}",
+                  "cost": "${results["cost"]}",
+                  "price": "${results["price"]}",
+                }));
                 final response = await http.post(
                   url,
                   headers: {
                     "Authorization": "Bearer $token"
                   },
-                  body: jsonEncode({
+                  body: {
                     "route_price_id": "${results["route_price_id"]}",
                     "cost": "${results["cost"]}",
                     "price": "${results["price"]}",
-                  })
+                  }
                 );
                 print(response.body);
                 Navigator.pop(context);
                 Navigator.push(
                     context, 
                     MaterialPageRoute(
-                        builder: (_) => BookingScreen()
+                        builder: (_) => BookingsScreen()
                     )
                 );
               },
               child: Container(
-                margin: EdgeInsets.all(16),
+                margin: EdgeInsets.only(bottom: 16, left: 16, right: 16),
+                alignment: Alignment.center,
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.06,
                 decoration: BoxDecoration(
