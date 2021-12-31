@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/bookings/booking_item_screen.dart';
 import 'package:travelcars/screens/bookings/bookings_screen.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
@@ -487,14 +488,19 @@ class _DetailScreenState extends State<DetailScreen> {
                     "price": "${results["price"]}",
                   }
                 );
-                print(response.body);
-                Navigator.pop(context);
-                Navigator.push(
-                    context, 
-                    MaterialPageRoute(
-                        builder: (_) => BookingsScreen()
-                    )
-                );
+                if(jsonDecode(response.body)["success"]) {
+                  Dialogs.ZayavkaDialog(context);
+                  /*Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => BookingsScreen()
+                      )
+                  );*/
+                } else {
+                  Dialogs.ErrorDialog(context);
+                }
+
               },
               child: Container(
                 margin: EdgeInsets.only(bottom: 16, left: 16, right: 16),
