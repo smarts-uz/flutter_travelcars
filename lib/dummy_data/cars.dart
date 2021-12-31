@@ -2,11 +2,12 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:travelcars/app_config.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 
 class Cars {
   static Future<List> getcars() async {
     List<dynamic> cars = [];
-    Uri url = Uri.parse("${AppConfig.BASE_URL}/getAllCarTypes?locale=ru");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/getAllCarTypes?locale=${SplashScreen.til}");
     final response = await http.get(url);
     List<dynamic> api_data = json.decode(response.body);
     api_data.forEach((element) {
@@ -26,7 +27,7 @@ class Cars {
     Map<String, dynamic> categories = {};
     await Future.wait(
       cars.map((element) async {
-        Uri url = Uri.parse("${AppConfig.BASE_URL}/carmodels/${element["meta_url"]}/all?lang=ru");
+        Uri url = Uri.parse("${AppConfig.BASE_URL}/carmodels/${element["meta_url"]}/all?lang=${SplashScreen.til}");
         final response = await http.get(url);
         List current_data = json.decode(response.body);
         List<dynamic> item_category = [];

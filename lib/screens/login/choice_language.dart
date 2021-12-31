@@ -47,10 +47,12 @@ class _ChoicePageState extends State<ChoicePage> {
                   }
                   final prefs = await SharedPreferences.getInstance();
                   prefs.setString(
-                      "settings", json.encode({
-                    "locale": "${DropButton.dropdawnvalue}",
-                    "currency": "${DropButtonMny.dropdawnvalue}",
-                  }));
+                      "settings",
+                      json.encode({
+                        "locale": "${DropButton.dropdawnvalue}",
+                        "currency": "${DropButtonMny.dropdawnvalue}",
+                      })
+                  );
                   Navigator.push(context,MaterialPageRoute(builder: (_)=>LoginScreen()));
                 },
                 child: Container(

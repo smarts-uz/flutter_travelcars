@@ -11,6 +11,7 @@ import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/car/car_category.dart';
 import 'package:travelcars/screens/car/car_type.dart';
 import 'package:travelcars/screens/po_puti/po_puti.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/trip/trips.dart';
@@ -20,6 +21,7 @@ import 'package:url_launcher/url_launcher.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  static bool isLoading = true;
   static List<dynamic> cars_list = [];
   static List<dynamic> city_list = [];
   static List<dynamic> tour_list = [];
@@ -33,8 +35,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static bool isLoading = true;
-
   static List<dynamic> imglist = [];
   static List<dynamic> newslist = [];
   static List<dynamic> carslist = [];
@@ -100,19 +100,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    if(isLoading) {
+    if(HomeScreen.isLoading) {
       getTrips();
-      getnews();
       getCars();
-      getOptionsTariffs();
-      getcities();
+      getnews();
       getvalyuta();
       getweather();
+      getcities();
+      getOptionsTariffs();
     }
   }
 
   void getTrips() async{
-    Uri url = Uri.parse("${AppConfig.BASE_URL}/getAllTours?lang=ru");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/getAllTours?lang=${SplashScreen.til}");
     final response = await http.get(url);
     HomeScreen.tour_list = json.decode(response.body)["data"];
     imglist = json.decode(response.body)["data"];
@@ -121,14 +121,14 @@ class _HomeScreenState extends State<HomeScreen> {
   void getCars() async {
     HomeScreen.cars_list = await Cars.getcars();
     carslist = HomeScreen.cars_list;
-    setState(() {
-      isLoading = false;
-    });
     HomeScreen.category_list = await Cars.getcategories(carslist);
+    setState(() {
+      HomeScreen.isLoading = false;
+    });
   }
   
   void getOptionsTariffs() async {
-    Uri url = Uri.parse("${AppConfig.BASE_URL}/caroption?locale=ru");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/caroption?locale=${SplashScreen.til}");
     final response = await http.get(url);
     List<dynamic> temp_data = json.decode(response.body)["data"];
     temp_data.forEach((element) {
@@ -138,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
         "chosen": false
       });
     });
-    url = Uri.parse("${AppConfig.BASE_URL}/routeoption?locale=ru");
+    url = Uri.parse("${AppConfig.BASE_URL}/routeoption?locale=${SplashScreen.til}");
     final result = await http.get(url);
     temp_data = json.decode(result.body)["data"];
     temp_data.forEach((element) {
@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void getnews () async {
-    Uri url = Uri.parse("${AppConfig.BASE_URL}/news?lang=ru");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/news?lang=${SplashScreen.til}");
     final response = await http.get(url);
     newslist = json.decode(response.body);
   }
@@ -218,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: isLoading ? Center(
+      body: HomeScreen.isLoading ? Center(
           child: CircularProgressIndicator()
       ) : SingleChildScrollView(
         physics: BouncingScrollPhysics(),

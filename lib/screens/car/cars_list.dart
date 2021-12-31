@@ -7,6 +7,7 @@ import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/car/car_details.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/search/search.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 class CarsList extends StatefulWidget {
@@ -100,7 +101,7 @@ class _CarsListState extends State<CarsList> {
   }
 
   void getcars() async{
-   String url = "${AppConfig.BASE_URL}/getCarModelById/${widget.meta_url}?lang=en";
+   String url = "${AppConfig.BASE_URL}/getCarModelById/${widget.meta_url}?lang=${SplashScreen.til}";
    final response = await http.get(Uri.parse(url));
    setState(() {
      results = json.decode(response.body)["data"];

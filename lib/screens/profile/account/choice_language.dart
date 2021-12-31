@@ -5,16 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/login/components/drop_button_lang.dart';
 import 'package:travelcars/screens/login/components/drop_button_mny.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 
 
-class ChoicePage extends StatefulWidget {
-  const ChoicePage({Key? key}) : super(key: key);
+class AccountChoicePage extends StatefulWidget {
+  const AccountChoicePage({Key? key}) : super(key: key);
 
   @override
-  _ChoicePageState createState() => _ChoicePageState();
+  _AccountChoicePageState createState() => _AccountChoicePageState();
 }
 
-class _ChoicePageState extends State<ChoicePage> {
+class _AccountChoicePageState extends State<AccountChoicePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,11 +60,19 @@ class _ChoicePageState extends State<ChoicePage> {
                     break;
                   }
                   final prefs = await SharedPreferences.getInstance();
-                  prefs.setString("settings", json.encode({
-                    "locale": "${DropButton.dropdawnvalue}",
-                    "currency": "${DropButtonMny.dropdawnvalue}",
-                  }));
-                  Navigator.of(context).pop();
+                  prefs.setString(
+                      "settings",
+                      json.encode({
+                        "locale": "${DropButton.dropdawnvalue}",
+                        "currency": "${DropButtonMny.dropdawnvalue}",
+                      })
+                  );
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (_)=> SplashScreen()
+                    ),
+                    ModalRoute.withName('/'),
+                  );
                 },
                 child: Container(
                   decoration: BoxDecoration(

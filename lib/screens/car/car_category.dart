@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/car/cars_list.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 
 class CarCategory extends StatefulWidget {
   final String name;
@@ -49,7 +50,7 @@ class _CarCategoryState extends State<CarCategory> {
   }
   
   void getCategory() async {
-    Uri url = Uri.parse("${AppConfig.BASE_URL}/carmodels/${widget.meta_url}/all?lang=ru");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/carmodels/${widget.meta_url}/all?lang=${SplashScreen.til}");
     final response = await http.get(url);
     setState(() {
       categories = json.decode(response.body);

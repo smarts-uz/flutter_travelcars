@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/screens/home/home_screen.dart';
+import 'package:travelcars/screens/login/choice_language.dart';
 import 'package:travelcars/screens/main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  static String? til;
+  static String? kurs;
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -17,10 +23,32 @@ class _SplashScreenState extends State<SplashScreen> {
     _navigatorHome();
   }
   
-  _navigatorHome() {
+  _navigatorHome() async {
     Future.delayed(const Duration(milliseconds: 3000), () async {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => MainScreen()));
+      final prefs = await SharedPreferences.getInstance();
+      if(prefs.containsKey("isFirst")) {
+        switch(jsonDecode(prefs.getString("settings")!)["locale"]) {
+          case "ENG":
+          SplashScreen.til = "en";
+            break;
+          case "RUS":
+            SplashScreen.til = "ru";
+            break;
+          case "UZB":
+            SplashScreen.til = "uz";
+            break;
+        }
+        SplashScreen.kurs = jsonDecode(prefs.getString("settings")!)["currency"];
+        HomeScreen.isLoading = true;
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => MainScreen()));
+        print(SplashScreen.til);
+        print(SplashScreen.kurs);
+      } else {
+        prefs.setBool("isFirst", true);
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => ChoicePage()));
+      }
     });
+
   }
   
   @override

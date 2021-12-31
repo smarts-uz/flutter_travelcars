@@ -166,7 +166,7 @@ class _AccountScreenState extends State<AccountScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ChoicePage()),
+                  MaterialPageRoute(builder: (context) => AccountChoicePage()),
                 );
               },
               title: Text(

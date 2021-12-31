@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/bookings/booking_item_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/splash/splash_screen.dart';
 
 class BookingsScreen extends StatefulWidget {
   const BookingsScreen({Key? key}) : super(key: key);
@@ -24,82 +25,6 @@ class _BookingsScreenState extends State<BookingsScreen> {
   ];
 
   List<dynamic> results = [];
-    /*{
-      "name": "Mercedes Sprinter",
-      "year": "2015",
-      "id": "MS-701AFA",
-      "views": "5324",
-      "image": "assets/images/auto.jpg",
-      "icon_numbers": [
-        3, 2, 3, 4
-      ],
-      "places": 3,
-      "big_bag": 2,
-      "small_bag": 3,
-      "doors": 4,
-      "tarif": [
-        "Car delivery to a convenient place",
-        "Fuel cost",
-        "Driver nutrition",
-        "Parking payments",
-      ],
-      "total": "3 210 000",
-      "status": "Approved",
-      "paid": true,
-      "date": "09.10.2021",
-      "text": "Trip to Tashkent"
-    },
-    {
-      "name": "Mercedes Bus",
-      "year": "2015",
-      "id": "MS-7085FB",
-      "views": "6597",
-      "image": "assets/images/auto.jpg",
-      "icon_numbers": [
-        7, 4, 6, 6
-      ],
-      "places": 7,
-      "big_bag": 4,
-      "small_bag": 6,
-      "doors": 6,
-      "tarif": [
-        "Car delivery to a convenient place",
-        "Parking payments",
-      ],
-      "total": "5 410 000",
-      "status": "Rejected",
-      "paid": false,
-      "date": "19.10.2021",
-      "text": "Trip to Samarkand"
-    },
-    {
-      "name": "Mercedes Lux",
-      "year": "2021",
-      "id": "MS-702UFA",
-      "views": "3256",
-      "image": "assets/images/auto.jpg",
-      "icon_numbers": [
-        4, 2, 4, 2
-      ],
-      "places": 3,
-      "big_bag": 2,
-      "small_bag": 3,
-      "doors": 4,
-      "tarif": [
-        "Car delivery to a convenient place",
-        "Fuel cost",
-        "Driver nutrition",
-        "Parking payments",
-        "Parking payments",
-        "Parking payments",
-      ],
-      "total": "7 410 000",
-      "status": "Pending",
-      "paid": true,
-      "date": "15.10.2021",
-      "text": "Trip to Xiva"
-    },*/
-
 
   @override
   void initState() {
@@ -111,7 +36,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
   void getAllBookings() async {
     final prefs = await SharedPreferences.getInstance();
     String token = json.decode(prefs.getString('userData')!)["token"];
-    Uri url = Uri.parse("${AppConfig.BASE_URL}/booking?lang=ru");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/booking?lang=${SplashScreen.til}");
     final response = await http.get(
         url,
         headers: {
