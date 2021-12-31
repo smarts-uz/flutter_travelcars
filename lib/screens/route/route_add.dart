@@ -295,89 +295,93 @@ class _RouteAddState extends State<RouteAdd> {
               child: RaisedButton(
                 onPressed: () async {
                   FocusScope.of(context).unfocus();
-                  bool isValid = true;
-                  List<Map<String, dynamic>> info = [];
-                  data.forEach((element) {
-                    api_cities.forEach((cityid) {
-                      if(cityid["name"] == element["city1"]) {
-                        element["city1"] = cityid["city_id"];
-                      }
-                      if(cityid["name"] == element["city2"]) {
-                        element["city2"] = cityid["city_id"];
-                      }
-                    });
-                    info.add({
-                      "from": "${element["city1"]}",
-                      "to": "${element["city2"]}",
-                      "date": "${DateFormat('dd-MM-yyyy').format(element["day"])}",
-                      "passengers": "${element["controllers2"][0].text}",
-                      "address": "${element["controllers2"][1].text}",
-                    });
-                  });
-                  info.forEach((element) {
-                    element.forEach((key, value) {
-                      if(value == "") {
-                        print(key);
-                        isValid = false;
-                      }
-                    });
-                  });
-                  if(isValid) {
-                    int ind = 0;
-                    data.forEach((element_info) {
-                      api_cities.forEach((element_city) {
-                        setState(() {
-                          if(element_info["city1"] == element_city["city_id"]) {
-                            data[ind]["city1"] = element_city["name"];
-                          }
-                          if(element_info["city2"] == element_city["city_id"]) {
-                            data[ind]["city2"] = element_city["name"];
-                          }
-                        });
+                  final prefs = await SharedPreferences.getInstance();
+                  if(prefs.containsKey("userData")) {
+                    bool isValid = true;
+                    List<Map<String, dynamic>> info = [];
+                    data.forEach((element) {
+                      api_cities.forEach((cityid) {
+                        if(cityid["name"] == element["city1"]) {
+                          element["city1"] = cityid["city_id"];
+                        }
+                        if(cityid["name"] == element["city2"]) {
+                          element["city2"] = cityid["city_id"];
+                        }
                       });
-                      ind++;
-                    });
-                    try {
-                      String url = "${AppConfig.BASE_URL}/custom/booking/create";
-                      final prefs = await SharedPreferences.getInstance();
-                      String token = json.decode(prefs.getString('userData')!)["token"];
-                      final result = await http.post(
-                          Uri.parse(url),
-                          headers: {
-                            "Authorization": "Bearer $token",
-                          },
-                          body: {
-                            "data" : "${json.encode(info)}"
-                          }
-                      );
-                      print(json.decode(result.body)['message']);
-                      List<Map<String, String>> routes = [];
-                      data.forEach((element) {
-                        routes.add({
-                          "from": element["city1"],
-                          "to": element["city2"],
-                          "date": "${DateFormat('dd-MM-yyyy').format(element["day"])}",
-                        });
+                      info.add({
+                        "from": "${element["city1"]}",
+                        "to": "${element["city2"]}",
+                        "date": "${DateFormat('dd-MM-yyyy').format(element["day"])}",
+                        "passengers": "${element["controllers2"][0].text}",
+                        "address": "${element["controllers2"][1].text}",
                       });
-                      Dialogs.TripDialog(context, routes);
-                    } catch (error) {
-                      Dialogs.ErrorDialog(context);
+                    });
+                    info.forEach((element) {
+                      element.forEach((key, value) {
+                        if(value == "") {
+                          print(key);
+                          isValid = false;
+                        }
+                      });
+                    });
+                    if(isValid) {
+                      int ind = 0;
+                      data.forEach((element_info) {
+                        api_cities.forEach((element_city) {
+                          setState(() {
+                            if(element_info["city1"] == element_city["city_id"]) {
+                              data[ind]["city1"] = element_city["name"];
+                            }
+                            if(element_info["city2"] == element_city["city_id"]) {
+                              data[ind]["city2"] = element_city["name"];
+                            }
+                          });
+                        });
+                        ind++;
+                      });
+                      try {
+                        String url = "${AppConfig.BASE_URL}/custom/booking/create";
+                        String token = json.decode(prefs.getString('userData')!)["token"];
+                        final result = await http.post(
+                            Uri.parse(url),
+                            headers: {
+                              "Authorization": "Bearer $token",
+                            },
+                            body: {
+                              "data" : "${json.encode(info)}"
+                            }
+                        );
+                        print(json.decode(result.body)['message']);
+                        List<Map<String, String>> routes = [];
+                        data.forEach((element) {
+                          routes.add({
+                            "from": element["city1"],
+                            "to": element["city2"],
+                            "date": "${DateFormat('dd-MM-yyyy').format(element["day"])}",
+                          });
+                        });
+                        Dialogs.TripDialog(context, routes);
+                      } catch (error) {
+                        Dialogs.ErrorDialog(context);
+                      }
+                    } else {
+                      int ind = 0;
+                      data.forEach((element_info) {
+                        api_cities.forEach((element_city) {
+                          setState(() {
+                            if(element_info["city1"] == element_city["city_id"]) {
+                              data[ind]["city1"] = element_city["name"];
+                            }
+                            if(element_info["city2"] == element_city["city_id"]) {
+                              data[ind]["city2"] = element_city["name"];
+                            }
+                          });
+                        });
+                        ind++;
+                      });
                     }
                   } else {
-                    int ind = 0;
-                    data.forEach((element_info) {
-                      api_cities.forEach((element_city) {
-                        setState(() {
-                          if(element_info["city1"] == element_city["city_id"]) {
-                            data[ind]["city1"] = element_city["name"];
-                          }
-                          if(element_info["city2"] == element_city["city_id"]) {
-                            data[ind]["city2"] = element_city["name"];
-                          }
-                        });
-                      });
-                      ind++;
-                    });
+                    Dialogs.LoginDialog(context);
                   }
                 },
                 child: Text('Submit your application'),

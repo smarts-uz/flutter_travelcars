@@ -2,13 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/dialogs.dart';
-import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 
 
@@ -395,53 +393,57 @@ class _TransfersAddState extends State<TransfersAdd> {
             child:  RaisedButton(
                 onPressed: () async {
                   FocusScope.of(context).unfocus();
-                  bool isValid = true;
-                  List<Map<String, dynamic>> info = [];
-                  data.forEach((element) {
-                    int cityID = 0;
-                    api_cities.forEach((cityid) {
-                      if(cityid["name"] == element["city"]) {
-                        cityID = cityid["city_id"];
+                  final prefs = await SharedPreferences.getInstance();
+                  if(prefs.containsKey("userData")) {
+                    bool isValid = true;
+                    List<Map<String, dynamic>> info = [];
+                    data.forEach((element) {
+                      int cityID = 0;
+                      api_cities.forEach((cityid) {
+                        if(cityid["name"] == element["city"]) {
+                          cityID = cityid["city_id"];
+                        }
+                      });
+                      info.add({
+                        "from": "${element["controllers4"][1].text}",
+                        "to": "${element["controllers4"][2].text}",
+                        "type": element["direction"] == 0 ? "meeting" : "cunduct",
+                        "city_id": "$cityID",
+                        "date": "${DateFormat('dd.MM.yyyy').format(element["day"])}",
+                        "time": "${element["time"].format(context).substring(0, 5)}",
+                        "quantity": "${element["controllers4"][0].text}",
+                        "additional": "${element["controllers4"][3].text}",
+                      });
+                    });
+                    info.forEach((element) {
+                      element.forEach((key, value) {
+                        if(value == "") {
+                          print(key);
+                          isValid = false;
+                        }
+                      });
+                    });
+                    if(isValid) {
+                      try{
+                        String url = "${AppConfig.BASE_URL}/postTransfers_";
+                        String token = json.decode(prefs.getString('userData')!)["token"];
+                        final result = await http.post(
+                            Uri.parse(url),
+                            headers: {
+                              "Authorization": "Bearer $token",
+                            },
+                            body: {
+                              "transfers" : "${json.encode(info)}"
+                            }
+                        );
+                        print(json.decode(result.body)['message']);
+                        Dialogs.ZayavkaDialog(context);
+                      } catch (error) {
+                        Dialogs.ErrorDialog(context);
                       }
-                    });
-                    info.add({
-                      "from": "${element["controllers4"][1].text}",
-                      "to": "${element["controllers4"][2].text}",
-                      "type": element["direction"] == 0 ? "meeting" : "cunduct",
-                      "city_id": "$cityID",
-                      "date": "${DateFormat('dd.MM.yyyy').format(element["day"])}",
-                      "time": "${element["time"].format(context).substring(0, 5)}",
-                      "quantity": "${element["controllers4"][0].text}",
-                      "additional": "${element["controllers4"][3].text}",
-                    });
-                  });
-                  info.forEach((element) {
-                    element.forEach((key, value) {
-                      if(value == "") {
-                        print(key);
-                        isValid = false;
-                      }
-                    });
-                  });
-                  if(isValid) {
-                    try{
-                      String url = "${AppConfig.BASE_URL}/postTransfers_";
-                      final prefs = await SharedPreferences.getInstance();
-                      String token = json.decode(prefs.getString('userData')!)["token"];
-                      final result = await http.post(
-                          Uri.parse(url),
-                          headers: {
-                            "Authorization": "Bearer $token",
-                          },
-                          body: {
-                            "transfers" : "${json.encode(info)}"
-                          }
-                      );
-                      print(json.decode(result.body)['message']);
-                      Dialogs.ZayavkaDialog(context);
-                    } catch (error) {
-                      Dialogs.ErrorDialog(context);
                     }
+                  } else {
+                    Dialogs.LoginDialog(context);
                   }
                 },
                 child: Text('Submit your application'),

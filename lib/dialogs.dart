@@ -319,7 +319,7 @@ class Dialogs {
                       Navigator.push(
                           ctx,
                           MaterialPageRoute(
-                              builder: (_) => ChoicePage()
+                              builder: (_) => LoginScreen()
                           )
                       );
                     },

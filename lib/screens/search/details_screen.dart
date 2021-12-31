@@ -470,37 +470,45 @@ class _DetailScreenState extends State<DetailScreen> {
             GestureDetector(
               onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
-                String token = json.decode(prefs.getString('userData')!)["token"];
-                Uri url = Uri.parse("${AppConfig.BASE_URL}/book/create");
-                print(jsonEncode({
-                  "route_price_id": "${results["route_price_id"]}",
-                  "cost": "${results["cost"]}",
-                  "price": "${results["price"]}",
-                }));
-                final response = await http.post(
-                  url,
-                  headers: {
-                    "Authorization": "Bearer $token"
-                  },
-                  body: {
+                if(prefs.containsKey("userData")) {
+                  String token = json.decode(prefs.getString('userData')!)["token"];
+                  Uri url = Uri.parse("${AppConfig.BASE_URL}/book/create");
+                  print(jsonEncode({
                     "route_price_id": "${results["route_price_id"]}",
                     "cost": "${results["cost"]}",
                     "price": "${results["price"]}",
-                  }
-                );
-                if(jsonDecode(response.body)["success"]) {
-                  Dialogs.ZayavkaDialog(context);
-                  /*Navigator.pop(context);
+                  }));
+                  final response = await http.post(
+                      url,
+                      headers: {
+                        "Authorization": "Bearer $token"
+                      },
+                      body: {
+                        "route_price_id": "${results["route_price_id"]}",
+                        "cost": "${results["cost"]}",
+                        "price": "${results["price"]}",
+                      }
+                  );
+                  try{
+                    if(jsonDecode(response.body)["success"]) {
+                      Dialogs.ZayavkaDialog(context);
+                      /*Navigator.pop(context);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (_) => BookingsScreen()
                       )
                   );*/
+                    } else {
+                      Dialogs.ErrorDialog(context);
+                    }
+                  } catch(error) {
+                    print(error);
+                    Dialogs.ErrorDialog(context);
+                  }
                 } else {
-                  Dialogs.ErrorDialog(context);
+                  Dialogs.LoginDialog(context);
                 }
-
               },
               child: Container(
                 margin: EdgeInsets.only(bottom: 16, left: 16, right: 16),
