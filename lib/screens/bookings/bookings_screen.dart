@@ -344,7 +344,8 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     onTap: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => BookingScreen())
+                          MaterialPageRoute(builder: (context) => BookingScreen(results[index])
+                          )
                       );
                     },
                     child: Container(

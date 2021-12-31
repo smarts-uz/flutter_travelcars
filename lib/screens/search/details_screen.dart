@@ -102,16 +102,18 @@ class _DetailScreenState extends State<DetailScreen> {
   void initState() {
     super.initState();
     jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
-      int cost;
-      if(value.runtimeType == String) {
-        cost = (double.parse(value) * HomeScreen.kurs_dollar).toInt();
-      } else {
-        cost = (value * HomeScreen.kurs_dollar).toInt();
+      if(value != null) {
+        int cost;
+        if(value.runtimeType == String) {
+          cost = (double.parse(value) * HomeScreen.kurs_dollar).toInt();
+        } else {
+          cost = (value * HomeScreen.kurs_dollar).toInt();
+        }
+        narxlar.add({
+          "day": "$key day",
+          "cost": "$cost UZS"
+        });
       }
-      narxlar.add({
-        "day": "$key day",
-        "cost": "$cost UZS"
-      });
     });
     dropdown = narxlar[0]["day"];
     print(narxlar);
