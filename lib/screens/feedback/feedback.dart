@@ -362,10 +362,12 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                            "Authorization": "Bearer $token",
                          },
                          body: {
-                           "text" : _commentController.text,
-                           "route_name": _cityController.text,
+                           //"name": _nameController.text,
+                           "country_code": _cityController.text,
+                           //"route_name": _routeController.text,
                            "route_date" : "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
-                           "grade" : "${json.encode(comment)}"
+                           "grade" : "${json.encode(comment)}",
+                           "text" : _commentController.text,
                          }
                      );
                      print(json.decode(result.body)['message']);
