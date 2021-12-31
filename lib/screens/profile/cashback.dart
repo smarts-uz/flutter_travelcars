@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/app_config.dart';
 
 
 class CashbackScreen extends StatefulWidget {
@@ -11,24 +13,29 @@ class CashbackScreen extends StatefulWidget {
 }
 
 class _CashbackScreenState extends State<CashbackScreen> {
-  Map<String , dynamic> info = {
-    "summa": 0,
-    "foiz": 0,
-  };
+  bool isLoading = true;
+  Map<String, dynamic> info = {};
 
 
   @override
   void initState() {
     super.initState();
-    getuserdata();
+    getUserData();
   }
 
-  void getuserdata() async {
+  void getUserData() async {
     final prefs = await SharedPreferences.getInstance();
+    String token = json.decode(prefs.getString('userData')!)["token"];
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/getCashback");
+    final result = await http.get(
+        url,
+        headers: {
+          "Authorization": "Bearer $token",
+        }
+    );
+    info = jsonDecode(result.body)["data"];
     setState(() {
-      Map<String, dynamic> userinfo = json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
-      info["summa"] = userinfo["cashback_summa"];
-      info["foiz"] = userinfo["cashback_foiz"];
+      isLoading = false;
     });
   }
   @override
@@ -63,7 +70,9 @@ class _CashbackScreenState extends State<CashbackScreen> {
           ),
         ],
       ),
-      body: Container(
+      body: isLoading ? Center(
+        child: CircularProgressIndicator(),
+      ) : Container(
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
@@ -84,7 +93,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
               alignment: Alignment.center,
               color: Color.fromRGBO(255, 245, 228, 1),
               child: Text(
-                "${info["foiz"]}%",
+                "${info["cashback_percent"]}%",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 46),
               ),
@@ -104,7 +113,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
               alignment: Alignment.center,
               color: Color.fromRGBO(255, 245, 228, 1),
               child: Text(
-                "${info["summa"]} UZS",
+                "${info["cashback_money"]} UZS",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 46),
               ),
