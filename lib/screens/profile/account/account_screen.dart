@@ -184,7 +184,8 @@ class _AccountScreenState extends State<AccountScreen> {
             child: ListTile(
               onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
-                prefs.clear();
+                prefs.remove("userData");
+                prefs.remove("companyData");
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => SplashScreen()),

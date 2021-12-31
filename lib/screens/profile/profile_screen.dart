@@ -88,7 +88,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           IconButton(
             onPressed: () async {
               final prefs = await SharedPreferences.getInstance();
-              prefs.clear();
+              prefs.remove("userData");
+              prefs.remove("companyData");
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => SplashScreen()),
