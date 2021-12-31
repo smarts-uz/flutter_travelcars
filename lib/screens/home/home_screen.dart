@@ -28,7 +28,7 @@ class HomeScreen extends StatefulWidget {
   static List<dynamic> options_list = [];
   static List<dynamic> tariff_list = [];
   static Map<String, dynamic> category_list = {};
-  static double kurs_dollar = 0;
+  static List<double> kurs = [];
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -165,7 +165,9 @@ class _HomeScreenState extends State<HomeScreen> {
     Uri url = Uri.parse("https://cbu.uz/uz/arkhiv-kursov-valyut/json/");
     final response = await http.get(url);
     valyuta = json.decode(response.body);
-    HomeScreen.kurs_dollar = double.parse(valyuta[0]["Rate"]);
+    HomeScreen.kurs.add(double.parse(valyuta[0]["Rate"]));
+    HomeScreen.kurs.add(double.parse(valyuta[1]["Rate"]));
+    HomeScreen.kurs.add(double.parse(valyuta[2]["Rate"]));
   }
 
   void getweather() async {

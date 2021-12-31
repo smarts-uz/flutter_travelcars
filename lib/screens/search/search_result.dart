@@ -6,6 +6,7 @@ import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/search/details_screen.dart';
 import 'package:travelcars/screens/search/search.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 
 class SearchResult extends StatefulWidget {
   final List<dynamic> routes;
@@ -27,6 +28,18 @@ class _SearchResultState extends State<SearchResult> {
 
   @override
   Widget build(BuildContext context) {
+    double app_kurs = 1;
+    switch(SplashScreen.kurs) {
+      case "UZS":
+        app_kurs = HomeScreen.kurs[0];
+        break;
+      case "EUR":
+        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[1];
+        break;
+      case "RUB":
+        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[2];
+        break;
+    }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -225,7 +238,7 @@ class _SearchResultState extends State<SearchResult> {
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     alignment: Alignment.center,
                     child: Text(
-                      "${(widget.routes[index]["price"] * HomeScreen.kurs_dollar).toStringAsFixed(0)} UZS",
+                      "${(widget.routes[index]["price"] * app_kurs).toStringAsFixed(0)} ${SplashScreen.kurs}",
                       style: TextStyle(
                           fontSize: 25,
                           color: Colors.black,

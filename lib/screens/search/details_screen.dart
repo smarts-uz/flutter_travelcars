@@ -10,6 +10,7 @@ import 'package:travelcars/screens/bookings/booking_item_screen.dart';
 import 'package:travelcars/screens/bookings/bookings_screen.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/splash/splash_screen.dart';
 
 import '../../app_config.dart';
 
@@ -102,17 +103,29 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
+    double app_kurs = 1;
+    switch(SplashScreen.kurs) {
+      case "UZS":
+        app_kurs = HomeScreen.kurs[0];
+        break;
+      case "EUR":
+        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[1];
+        break;
+      case "RUB":
+        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[2];
+        break;
+    }
     jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
       if(value != null) {
-        int cost;
+        double cost;
         if(value.runtimeType == String) {
-          cost = (double.parse(value) * HomeScreen.kurs_dollar).toInt();
+          cost = double.parse(value) * app_kurs;
         } else {
-          cost = (value * HomeScreen.kurs_dollar).toInt();
+          cost = value * app_kurs;
         }
         narxlar.add({
           "day": "$key day",
-          "cost": "$cost UZS"
+          "cost": "${cost.round()} ${SplashScreen.kurs}"
         });
       }
     });

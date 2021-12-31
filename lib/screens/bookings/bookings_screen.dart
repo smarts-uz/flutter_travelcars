@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/bookings/booking_item_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 
 class BookingsScreen extends StatefulWidget {
@@ -28,7 +29,6 @@ class _BookingsScreenState extends State<BookingsScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getAllBookings();
   }
@@ -52,6 +52,18 @@ class _BookingsScreenState extends State<BookingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double app_kurs = 1;
+    switch(SplashScreen.kurs) {
+      case "UZS":
+        app_kurs = HomeScreen.kurs[0];
+        break;
+      case "EUR":
+        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[1];
+        break;
+      case "RUB":
+        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[2];
+        break;
+    }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -257,7 +269,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     alignment: Alignment.center,
                     child: Text(
-                      "${results[index]["price"]} UZS",
+                      "${(double.parse(results[index]["price"]) * app_kurs).toStringAsFixed(0)} ${SplashScreen.kurs}",
                       style: TextStyle(
                           fontSize: 25,
                           color: Colors.black,

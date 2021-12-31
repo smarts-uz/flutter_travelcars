@@ -13,7 +13,7 @@ class DropButtonMny extends StatefulWidget {
 
 class _DropButtonMnyState extends State<DropButtonMny> {
 
-  List<String> Items = <String>["UZS", "USD", "RUB"];
+  List<String> Items = <String>["UZS", "USD", "RUB", "EUR"];
 
   @override
   void initState() {
