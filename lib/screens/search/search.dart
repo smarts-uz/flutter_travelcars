@@ -37,8 +37,8 @@ class _SearchScreenState extends State<SearchScreen> {
   static int? _radioVal2;
   static RangeValues _currentRangeValues = RangeValues(50, 250);
 
-  static String? SelectedVal1;
-  static String? SelectedVal2;
+  String? SelectedVal1;
+  String? SelectedVal2;
 
   static DateTime? _selectedDate1 = DateTime.now();
   static DateTime? _selectedDate2 = DateTime.now();
