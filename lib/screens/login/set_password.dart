@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:travelcars/screens/main_screen.dart';
 
 class SetPassword extends StatefulWidget {
-  const SetPassword({Key? key}) : super(key: key);
 
   @override
   _SetPasswordState createState() => _SetPasswordState();
@@ -150,6 +149,7 @@ class _SetPasswordState extends State<SetPassword> {
                 Spacer(),
                 GestureDetector(
                   onTap: () {
+
                     Navigator.push(context,MaterialPageRoute(builder: (_)=>MainScreen()));
                   },
                   child: Container(

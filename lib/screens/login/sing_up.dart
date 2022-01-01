@@ -33,16 +33,6 @@ class _SignUpState extends State<SignUp> {
     fToast.init(context);
   }
 
-  Future<void> getid() async {
-    String url = '${AppConfig.BASE_URL}/signup';
-
-    final response = await http.get(
-      Uri.parse(url)
-    );
-    setState(() {
-
-    });
-  }
   @override
   Widget build(BuildContext context) {
     String type = _currentItem == 0 ?"individual" : "legal";
@@ -321,6 +311,7 @@ class _SignUpState extends State<SignUp> {
 
                                       }
                                   );
+                                  print(result.body);
                                   int id = json.decode(result.body)["user_id"];
                                   int code = json.decode(result.body)['code'];
                                   Navigator.push(

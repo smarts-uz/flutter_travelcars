@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/screens/login/set_password.dart';
 import 'package:travelcars/screens/login/social_network.dart';
+import 'package:http/http.dart' as http;
+import '../../app_config.dart';
 
 class Confirm extends StatefulWidget {
   final bool isSocial;
@@ -117,17 +123,33 @@ class _ConfirmState extends State<Confirm> {
                 ),
                 Spacer(),
                 GestureDetector(
+                  onTap: () async {
+                    String url = "${AppConfig.BASE_URL}/verify";
+                    final result = await http.post(
+                        Uri.parse(url),
+                        body: {
+                        'user_id': widget.id.toString(),
+                          'code': widget.code.toString(),
+                        }
+                    );
 
-                  onTap: () {
-                    if(_emailController == widget.code){
-                      Navigator.push(context,MaterialPageRoute(builder: (_) => SocialScreen() ));
+                    final Map<String, dynamic> response = json.decode(result.body);
+                    if(response["success"]){
+
+                      final prefs = await SharedPreferences.getInstance();
+                      final userData = json.encode({
+                        'token': response["accessToken"],
+
+                      });
+                      await prefs.setString('userData', userData);
+                      Navigator.push(context,MaterialPageRoute(builder: (_) =>
+                      widget.isSocial ? SocialScreen() : SetPassword()));
                     }
                     else
                       {
-                        print('error');
+                        ToastComponent.showDialog('Code is wrong !');
                       }
-                    Navigator.push(context,MaterialPageRoute(builder: (_) =>
-                        widget.isSocial ? SocialScreen() : SetPassword()));
+
                   },
                   child: Container(
                     decoration: BoxDecoration(

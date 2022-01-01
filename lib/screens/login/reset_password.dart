@@ -1,14 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:travelcars/screens/login/confirm.dart';
+import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/login/set_password.dart';
+import '../../app_config.dart';
 
 class ResetPassword extends StatefulWidget {
-  const ResetPassword({Key? key}) : super(key: key);
+
 
   @override
   _ResetPasswordState createState() => _ResetPasswordState();
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+
   final TextEditingController _emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -91,12 +97,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_)=>Confirm(false, 001, 001)
-                            )
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=>Confirm(false,54,12)));
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -108,11 +109,29 @@ class _ResetPasswordState extends State<ResetPassword> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              "Далее",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
+                            GestureDetector(
+                              onTap: () async {
+                                String url = "${AppConfig.BASE_URL}/password/forgot";
+                                final result = await http.post(
+                                    Uri.parse(url),
+                                    body: {
+                                      'email':'${_emailController.text}'
+                                    }
+                                );
+                                print(result.body);
+                                int id = json.decode(result.body)["user_id"];
+                                int code = json.decode(result.body)['code'];
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>Confirm( false,id,code)));
+                              },
+                              child: Text(
+                                "Далее",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                             SizedBox(width: 10,),
