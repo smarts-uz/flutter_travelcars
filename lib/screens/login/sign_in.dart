@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
+import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/screens/login/reset_password.dart';
 import 'package:travelcars/screens/main_screen.dart';
 import 'package:http/http.dart' as http;
@@ -149,8 +151,11 @@ class _SignInState extends State<SignIn> {
                       }
                     );
                     final Map<String, dynamic> response = json.decode(result.body);
+
+                    final prefs = await SharedPreferences.getInstance();
+                    print(_passwordController.text);
+                    await prefs.setString("password", _passwordController.text);
                     if(response["accessToken"] != null) {
-                      final prefs = await SharedPreferences.getInstance();
                       final userData = json.encode({
                         'token': response["accessToken"],
                         'expiry_at': response["expires_at"],
@@ -187,8 +192,7 @@ class _SignInState extends State<SignIn> {
                         ModalRoute.withName('/'),
                       );
                     } else {
-                      print("error");
-                      print(response["errors"]);
+                      ToastComponent.showDialog("${response["errors"]}");
                     }
                     },
                   child: Container(

@@ -10,10 +10,11 @@ import '../../app_config.dart';
 
 class Confirm extends StatefulWidget {
   final bool isSocial;
+  final String password;
   int id;
   int code;
 
-  Confirm(this.isSocial, this.id,this.code);
+  Confirm(this.isSocial, this.id, this.code, {this.password = ""});
 
   @override
   _ConfirmState createState() => _ConfirmState();
@@ -136,6 +137,8 @@ class _ConfirmState extends State<Confirm> {
                     final response = json.decode(result.body)['data'];
                     if(json.decode(result.body)['success']){
                       final prefs = await SharedPreferences.getInstance();
+                      if(widget.isSocial) await prefs.setString("password", widget.password);
+
                       final userData = json.encode({
                         'token': response['token']["access_token"],
                         'expiry_at': response['token']["expires_at"],
@@ -148,10 +151,15 @@ class _ConfirmState extends State<Confirm> {
                         "cashback_summa": response["user"]["cashback_money"],
                         "cashback_foiz": response["user"]["cashback_percent"],
                       });
-                      print(userData);
+
                       await prefs.setString('userData', userData);
-                      Navigator.push(context,MaterialPageRoute(builder: (_) =>
-                      widget.isSocial ? SocialScreen() : SetPassword()));
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => widget.isSocial ? SocialScreen() : SetPassword()
+                          )
+                      );
                     }
                     else
                       {

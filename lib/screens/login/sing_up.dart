@@ -333,7 +333,9 @@ class _SignUpState extends State<SignUp> {
                                   Navigator.push(
                                       context, 
                                       MaterialPageRoute(
-                                          builder: (_) =>Confirm(true,id,code)));
+                                          builder: (_) => Confirm(true, id, code, password: _passwordController.text,)
+                                      )
+                                  );
                                 },
                                 child: Text(
                                   "Далее",

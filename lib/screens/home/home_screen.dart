@@ -184,7 +184,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/getCountries");
     final response = await http.get(url);
     HomeScreen.countries_list = jsonDecode(response.body)["data"];
-    print(HomeScreen.countries_list);
   }
 
   @override

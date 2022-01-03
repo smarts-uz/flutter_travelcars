@@ -171,6 +171,8 @@ class _SetPasswordState extends State<SetPassword> {
                             "Authorization": "Bearer $token",
                           },
                         );
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setString("password", _newPasswordController.text);
                       }
                       catch(error){
                         print(error);

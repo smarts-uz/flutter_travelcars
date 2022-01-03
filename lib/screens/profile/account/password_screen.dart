@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/app_config.dart';
+import 'package:travelcars/screens/login/components/toast.dart';
+import 'package:http/http.dart' as http;
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -9,6 +15,10 @@ class _SecondScreenState extends State<SecondScreen> {
   bool show = false;
   bool _obscureText = false;
   bool _obscureText1 = false;
+
+  TextEditingController current_p = new TextEditingController();
+  TextEditingController new_p = new TextEditingController();
+  TextEditingController new_p_c = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +74,7 @@ class _SecondScreenState extends State<SecondScreen> {
                     ),
                   ),
                   obscureText: show,
+                  controller: current_p,
                 ),
               ),
               Container(
@@ -88,6 +99,7 @@ class _SecondScreenState extends State<SecondScreen> {
                     ),
                   ),
                   obscureText: _obscureText,
+                  controller: new_p,
                 ),
               ),
               Container(
@@ -112,11 +124,39 @@ class _SecondScreenState extends State<SecondScreen> {
                     ),
                   ),
                   obscureText: _obscureText1,
+                  controller: new_p_c,
                 ),
               ),
               Spacer(),
               GestureDetector(
-                onTap: () {},
+                onTap: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  String? current = prefs.getString("password");
+
+                  if(current_p.text.compareTo(current!) != 0) {
+                    ToastComponent.showDialog("You entered your current password incorrectly");
+                    return;
+                  }
+
+                  if(new_p.text!.compareTo(new_p_c.text) != 0) {
+                    ToastComponent.showDialog("You entered confirmation password incorrectly");
+                    return;
+                  }
+                  Uri url = Uri.parse("${AppConfig.BASE_URL}/password/reset");
+                  String token = jsonDecode(prefs.getString('userData')!)["token"];
+                  final result = await http.post(
+                      url,
+                      headers: {
+                        "Authorization": "Bearer $token",
+                      },
+                      body: {
+                        "password" : new_p_c.text
+                      }
+                  );
+                  print(jsonDecode(result.body));
+                  prefs.setString("password", new_p_c.text);
+                  Navigator.pop(context);
+                },
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
@@ -128,8 +168,8 @@ class _SecondScreenState extends State<SecondScreen> {
                     child: Text(
                       "Сохранить",
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white,
-
+                      style: TextStyle(
+                        color: Colors.white,
                       ),
                     ),
                   ),
