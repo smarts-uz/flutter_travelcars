@@ -129,18 +129,27 @@ class _ConfirmState extends State<Confirm> {
                         Uri.parse(url),
                         body: {
                         'user_id': widget.id.toString(),
-                          'code': widget.code.toString(),
+                          'code': '${_emailController.text}',
                         }
                     );
 
-                    final Map<String, dynamic> response = json.decode(result.body);
+                    final response = json.decode(result.body)['data'];
                     if(response["success"]){
 
                       final prefs = await SharedPreferences.getInstance();
                       final userData = json.encode({
-                        'token': response["accessToken"],
-
+                        'token': response['token']["accessToken"],
+                        'expiry_at': response['token']["expires_at"],
+                        'user_id': response["user"]["id"],
+                        'email': response["user"]["email"],
+                        'name': response["user"]["name"],
+                        'phone': response["user"]["phone"],
+                        'socials': response["user"]["socials"],
+                        "shaxs": response["user"]["personality"],
+                        "cashback_summa": response["user"]["cashback_money"],
+                        "cashback_foiz": response["user"]["cashback_percent"],
                       });
+                      print(userData);
                       await prefs.setString('userData', userData);
                       Navigator.push(context,MaterialPageRoute(builder: (_) =>
                       widget.isSocial ? SocialScreen() : SetPassword()));

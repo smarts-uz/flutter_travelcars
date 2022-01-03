@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/login/confirm.dart';
 import '../../app_config.dart';
 import 'components/toast.dart';
@@ -311,6 +312,21 @@ class _SignUpState extends State<SignUp> {
 
                                       }
                                   );
+                                  final response = json.decode(result.body)['data'];
+                                  final prefs = await SharedPreferences.getInstance();
+                                  final userData = json.encode({
+                                    'token': response['token']["accessToken"],
+                                    'expiry_at': response['token']["expires_at"],
+                                    'user_id': response["user"]["id"],
+                                    'email': response["user"]["email"],
+                                    'name': response["user"]["name"],
+                                    'phone': response["user"]["phone"],
+                                    'socials': response["user"]["socials"],
+                                    "shaxs": response["user"]["personality"],
+                                    "cashback_summa": response["user"]["cashback_money"],
+                                    "cashback_foiz": response["user"]["cashback_percent"],
+                                  });
+                                  await prefs.setString('userData', userData);
                                   print(result.body);
                                   int id = json.decode(result.body)["user_id"];
                                   int code = json.decode(result.body)['code'];
