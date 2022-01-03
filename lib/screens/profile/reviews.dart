@@ -79,35 +79,29 @@ class _ReviewsState extends State<Reviews> {
     final response = await http.get(
         Uri.parse(url)
     );
-    setState(() {
-      Map<String, dynamic> info = json.decode(response.body)["data"];
-      info['all_grade'].forEach((key, value) {
-        reviews["rate"].forEach((element) {
-          if(key == element["name"]) {
-            element["score"] = value;
-          }
+    Map<String, dynamic> info = json.decode(response.body)["data"];
+    info['all_grade'].forEach((key, value) {
+      reviews["rate"].forEach((element) {
+        if(key == element["name"]) {
+          element["score"] = value;
         }
-        );
       }
       );
-      reviews['reviews'] = info["comments"];
-      double summa = 0;
-      reviews["rate"].forEach((element) {
-       summa+=element["score"];
-      });
-      summa /= 9;
-      int average = summa.round();
-
-      reviews
-          .addAll({
-        "average": average.toString(),
-      });
-
-      isLoading = false;
-
     }
     );
-
+    reviews['reviews'] = info["comments"];
+    double summa = 0;
+    reviews["rate"].forEach((element) {
+      summa+=element["score"];
+    });
+    summa /= 9;
+    int average = summa.round();
+    reviews.addAll({
+        "average": average.toString(),
+    });
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -388,7 +382,8 @@ class _ReviewsState extends State<Reviews> {
                                          color: Colors.orange,
                                        ),
                                        label: Text(
-                                         '${reviews['reviews'][index1]["created_at"].substring(0,10)}',
+                                         reviews['reviews'][index1]["route_date"] == null ? "" :
+                                         '${reviews['reviews'][index1]["route_date"].substring(0,10)}',
                                          style: TextStyle(
                                              fontWeight: FontWeight.bold,
                                              fontStyle: FontStyle.italic
@@ -404,7 +399,7 @@ class _ReviewsState extends State<Reviews> {
                                  crossAxisAlignment: CrossAxisAlignment.start,
                                  children: [
                                    Text(
-                                     "Order time : ${reviews["reviews"][index1]["route_date"]}",
+                                     "Время отзыва: ${reviews["reviews"][index1]["created_at"]}",
                                      textAlign: TextAlign.start,
                                      style: TextStyle(
                                          fontSize: 15,

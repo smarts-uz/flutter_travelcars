@@ -9,6 +9,7 @@ import 'package:travelcars/screens/profile/account/account_screen.dart';
 import 'package:travelcars/screens/profile/cashback.dart';
 import 'package:travelcars/screens/profile/reviews.dart';
 import 'package:travelcars/screens/route/route_screen.dart';
+import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/screens/transfers/transfers_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -90,6 +91,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               final prefs = await SharedPreferences.getInstance();
               prefs.remove("userData");
               prefs.remove("companyData");
+              SearchScreen.SelectedVal1 = null;
+              SearchScreen.SelectedVal2 = null;
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => SplashScreen()),

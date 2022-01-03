@@ -16,6 +16,8 @@ import 'package:http/http.dart' as http;
 class SearchScreen extends StatefulWidget {
   final bool isDrawer;
   SearchScreen({this.isDrawer=false});
+  static String? SelectedVal1;
+  static String? SelectedVal2;
 
   @override
   _SearchScreenState createState() => _SearchScreenState();
@@ -37,8 +39,7 @@ class _SearchScreenState extends State<SearchScreen> {
   static int? _radioVal2;
   static RangeValues _currentRangeValues = RangeValues(50, 250);
 
-  String? SelectedVal1;
-  String? SelectedVal2;
+
 
   static DateTime? _selectedDate1 = DateTime.now();
   static DateTime? _selectedDate2 = DateTime.now();
@@ -47,85 +48,13 @@ class _SearchScreenState extends State<SearchScreen> {
 
   static List<dynamic> autoTypes = [];
   Map<String, dynamic> categories = {};
-  /*{
-      "text": LocaleKeys.Cars.tr(),
-      "check_box": false
-    },
-    {
-      "text": LocaleKeys.Microbus.tr(),
-      "check_box": false
-    },
-    {
-      "text": LocaleKeys.Minibus.tr(),
-      "check_box": false
-    },{
-      "text": LocaleKeys.Bus.tr(),
-      "check_box": false
-    },
-    {
-      "text": LocaleKeys.VIP_auto.tr(),
-      "check_box": false
-    },*/
 
   static List<dynamic> autoOptions = [];
-  /*{
-      "name": LocaleKeys.Air_Conditional.tr(),
-      "chosen": false
-    },
-    {
-      "name": LocaleKeys.Mikrofon.tr(),
-      "chosen": false
-    },
-    {
-      "name": LocaleKeys.Fridge.tr(),
-      "chosen": false
-    },
-    {
-      "name": "Tv",
-      "chosen": false
-    },
-    {
-      "name": "4WD",
-      "chosen": false
-    },
-    {
-      "name": LocaleKeys.First_aid_kit.tr(),
-      "chosen": false
-    },
-    {
-      "name": LocaleKeys.Airbags.tr(),
-      "chosen": false
-    },
-    {
-      "name": LocaleKeys.Fire_extinguisher.tr(),
-      "chosen": false
-    },
-    {
-      "name": LocaleKeys.Plumbing_cabin.tr(),
-      "chosen": false
-    },*/
 
   static List<dynamic> tarif = [];
-  /* {
-      "name": LocaleKeys.Car_delivery_to_a_convenient_place.tr(),
-      "chosen": false
-    },
-    {
-      "name": LocaleKeys.Fuel_cost.tr(),
-      "chosen": false
-    },
-    {
-      "name": LocaleKeys.Driver_nutrition.tr(),
-      "chosen": false
-    },
-    {
-      "name": LocaleKeys.Parking_payments.tr(),
-      "chosen": false
-    },*/
 
   List<String> city = [];
   late final List<DropdownMenuItem<String>> cities;
-  late List api_cities;
 
   @override
   void initState() {
@@ -138,8 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void getcities() {
-    api_cities = HomeScreen.city_list;
-    api_cities.forEach((element) { 
+    HomeScreen.city_list.forEach((element) {
       city.add(element["name"]);
     });
     cities = city.map(
@@ -303,7 +231,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   dropdownColor: Colors.grey[50],
                   icon: Icon(Icons.keyboard_arrow_down),
-                  value: SelectedVal1,
+                  value: SearchScreen.SelectedVal1,
                   style: TextStyle(
                       fontSize: 19,
                       color: Colors.black
@@ -312,7 +240,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   underline: SizedBox(),
                   onChanged: (String? newValue) {
                     setState(() {
-                      SelectedVal1 = newValue!;
+                      SearchScreen.SelectedVal1 = newValue!;
                     });
                   },
                   items: cities,
@@ -340,7 +268,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   dropdownColor: Colors.grey[50],
                   icon: Icon(Icons.keyboard_arrow_down),
-                  value: SelectedVal2,
+                  value: SearchScreen.SelectedVal2,
                   isExpanded: true,
                   style: TextStyle(
                       fontSize: 19,
@@ -349,7 +277,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   underline: SizedBox(),
                   onChanged: (String? newValue) {
                     setState(() {
-                      SelectedVal2 = newValue!;
+                      SearchScreen.SelectedVal2 = newValue!;
                     });
                   },
                   items: cities,
@@ -651,8 +579,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     number_controller = TextEditingController();
                     _selectedDate1 = DateTime.now();
                     _selectedDate2 = DateTime.now();
-                    SelectedVal1 = null;
-                    SelectedVal2 = null;
+                    SearchScreen.SelectedVal1 = null;
+                    SearchScreen.SelectedVal2 = null;
                     _currentRangeValues = RangeValues(50, 250);
                     _radioVal1 = null;
                     _radioVal2 = null;
@@ -711,12 +639,12 @@ class _SearchScreenState extends State<SearchScreen> {
                   onPressed: () async {
                     int city_start = 0;
                     int city_end = 0;
-                    api_cities.forEach((element) {
-                      if(element["name"] == SelectedVal1) {
+                    HomeScreen.city_list.forEach((element) {
+                      if(element["name"] == SearchScreen.SelectedVal1) {
                         city_start = element["city_id"];
                       }
 
-                      if(element["name"] == SelectedVal2) {
+                      if(element["name"] == SearchScreen.SelectedVal2) {
                         city_end = element["city_id"];
                       }
                     });

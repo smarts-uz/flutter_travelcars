@@ -22,6 +22,7 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   static bool isLoading = true;
+  static List<dynamic> countries_list = [];
   static List<dynamic> cars_list = [];
   static List<dynamic> city_list = [];
   static List<dynamic> tour_list = [];
@@ -108,6 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
       getweather();
       getcities();
       getOptionsTariffs();
+      getCountries();
     }
   }
 
@@ -176,6 +178,13 @@ class _HomeScreenState extends State<HomeScreen> {
       final response = await http.get(url);
       weather["${city[i]}"] = json.decode(response.body)["main"]["temp"].round();
     }
+  }
+  
+  void getCountries() async {
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/getCountries");
+    final response = await http.get(url);
+    HomeScreen.countries_list = jsonDecode(response.body)["data"];
+    print(HomeScreen.countries_list);
   }
 
   @override

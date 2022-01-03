@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/login/components/drop_button_lang.dart';
 import 'package:travelcars/screens/login/components/drop_button_mny.dart';
 import 'package:travelcars/screens/login/login_srcreen.dart';
+import 'package:travelcars/screens/main_screen.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 
 class ChoicePage extends StatefulWidget {
   const ChoicePage({Key? key}) : super(key: key);
@@ -38,12 +40,18 @@ class _ChoicePageState extends State<ChoicePage> {
               GestureDetector(
                 onTap: () async {
                   switch(DropButton.dropdawnvalue ){
-                    case 'ENG' :  await context.setLocale(Locale('en'));
-                    break;
-                    case 'RUS' :  await context.setLocale(Locale('ru'));
-                    break;
-                    case 'UZB' :  await context.setLocale(Locale('uz'));
-                    break;
+                    case 'ENG' :
+                      await context.setLocale(Locale('en'));
+                      SplashScreen.til = "en";
+                      break;
+                    case 'RUS' :
+                      await context.setLocale(Locale('ru'));
+                      SplashScreen.til = "ru";
+                      break;
+                    case 'UZB' :
+                      await context.setLocale(Locale('uz'));
+                      SplashScreen.til = "uz";
+                      break;
                   }
                   final prefs = await SharedPreferences.getInstance();
                   prefs.setString(
@@ -53,7 +61,12 @@ class _ChoicePageState extends State<ChoicePage> {
                         "currency": "${DropButtonMny.dropdawnvalue}",
                       })
                   );
-                  Navigator.push(context,MaterialPageRoute(builder: (_)=>LoginScreen()));
+                  SplashScreen.kurs = DropButtonMny.dropdawnvalue;
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainScreen()),
+                    ModalRoute.withName('/'),
+                  );
                 },
                 child: Container(
                   decoration: BoxDecoration(

@@ -7,6 +7,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/feedback/components/drop_button_city.dart';
+import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
 
 import '../../app_config.dart';
@@ -28,7 +29,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _routeController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
-  final TextEditingController _cityController = TextEditingController();
+  String? country;
+  late final List<DropdownMenuItem<String>> countries;
+  List<String> api_countries = [];
 
   Map<String, dynamic> rate =
   {
@@ -78,6 +81,24 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     ]
   };
 
+  @override
+  void initState() {
+    super.initState();
+    print(HomeScreen.countries_list);
+    HomeScreen.countries_list.forEach((element){
+      api_countries.add(element["country_name"]);
+    });
+    print(api_countries);
+    countries = api_countries.map((String value) => DropdownMenuItem<String>(
+        value: value,
+        child: Text(value),
+      ),
+    ).toList();
+
+    setState(() {
+
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -154,6 +175,43 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
             Container(
               width: double.infinity,
+              height: 55,
+              padding: EdgeInsets.symmetric(horizontal: 18),
+              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(5)
+              ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  menuMaxHeight: MediaQuery.of(context).size.height * .5,
+                  hint: Text(
+                      "Country",
+                      style: TextStyle(
+                          fontSize: 19,
+                          color: Colors.black
+                      )
+                  ),
+                  dropdownColor: Colors.grey[50],
+                  icon: Icon(Icons.keyboard_arrow_down),
+                  value: country,
+                  style: TextStyle(
+                      fontSize: 19,
+                      color: Colors.black
+                  ),
+                  isExpanded: true,
+                  underline: SizedBox(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      country = newValue!;
+                    });
+                  },
+                  items: countries,
+                ),
+              ),
+            ),
+            /*Container(
+              width: double.infinity,
               height: 50,
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 15),
@@ -191,7 +249,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 expands: false,
                 maxLines: 2,
               ),
-            ),
+            ),*/
             Container(
               width: double.infinity,
               height: 50,
@@ -326,10 +384,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               },
               child: InkWell(
                 onTap: () async {
-
                   if (_nameController.text.isEmpty ||
                       _commentController.text.isEmpty ||
-                      _cityController.text.isEmpty ||
+                      country == null ||
                   _routeController.text.isEmpty
                   ){
                     ToastComponent.showDialog("TextField is empty", );
@@ -351,11 +408,19 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
                  if(_commentController.text == "") isValid = false;
                  if(_nameController.text == "") isValid = false;
-                 if(_cityController.text == "") isValid = false;
+                 if(country == "") isValid = false;
                  if(isValid){
+                   String country_code = "UZ";
+                   HomeScreen.countries_list.forEach((element) {
+                     if(element["country_name"] == country) {
+                       country_code = element["country_code"];
+                     }
+                   });
                    try {
+                     print("start");
                      final prefs = await SharedPreferences.getInstance();
                      String token = json.decode(prefs.getString('userData')!)["token"];
+                     print(token);
                      final result = await http.post(
                          Uri.parse(url),
                          headers: {
@@ -363,8 +428,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                          },
                          body: {
                            //"name": _nameController.text,
-                           "country_code": _cityController.text,
-                           //"route_name": _routeController.text,
+                           "country_code": country_code,
+                           "route_name": _routeController.text,
                            "route_date" : "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
                            "grade" : "${json.encode(comment)}",
                            "text" : _commentController.text,
@@ -373,6 +438,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                      print(json.decode(result.body)['message']);
                      Dialogs.OtzivDialog(context);
                    } catch (error) {
+                     print("fail");
                      Dialogs.ErrorDialog(context);
                    }}
                  },
