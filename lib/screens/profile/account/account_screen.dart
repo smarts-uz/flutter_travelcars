@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travelcars/screens/profile/account/second_screen.dart';
-import 'package:travelcars/screens/profile/account/third_screen.dart';
+import 'package:travelcars/screens/profile/account/password_screen.dart';
+import 'package:travelcars/screens/profile/account/social_screen.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 
 import 'choice_language.dart';
-import 'first_screen.dart';
+import 'user_screen.dart';
 
 class AccountScreen extends StatefulWidget {
   @override

@@ -399,7 +399,7 @@ class _ReviewsState extends State<Reviews> {
                                  crossAxisAlignment: CrossAxisAlignment.start,
                                  children: [
                                    Text(
-                                     "Время отзыва: ${reviews["reviews"][index1]["created_at"]}",
+                                     "Время отзыва: ${reviews["reviews"][index1]["created_at"].substring(0,10)}",
                                      textAlign: TextAlign.start,
                                      style: TextStyle(
                                          fontSize: 15,

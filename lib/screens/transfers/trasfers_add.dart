@@ -425,7 +425,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                     });
                     if(isValid) {
                       try{
-                        String url = "${AppConfig.BASE_URL}/postTransfers_";
+                        String url = "${AppConfig.BASE_URL}/postTransfers";
                         String token = json.decode(prefs.getString('userData')!)["token"];
                         final result = await http.post(
                             Uri.parse(url),
