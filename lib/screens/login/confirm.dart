@@ -134,11 +134,10 @@ class _ConfirmState extends State<Confirm> {
                     );
 
                     final response = json.decode(result.body)['data'];
-                    if(response["success"]){
-
+                    if(json.decode(result.body)['success']){
                       final prefs = await SharedPreferences.getInstance();
                       final userData = json.encode({
-                        'token': response['token']["accessToken"],
+                        'token': response['token']["access_token"],
                         'expiry_at': response['token']["expires_at"],
                         'user_id': response["user"]["id"],
                         'email': response["user"]["email"],

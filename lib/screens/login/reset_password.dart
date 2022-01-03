@@ -92,55 +92,47 @@ class _ResetPasswordState extends State<ResetPassword> {
                   ),
                 ),
                 Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_)=>Confirm(false,54,12)));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: Colors.orange
-                        ),
-                        height: 40,
-                        width: 154,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () async {
-                                String url = "${AppConfig.BASE_URL}/password/forgot";
-                                final result = await http.post(
-                                    Uri.parse(url),
-                                    body: {
-                                      'email':'${_emailController.text}'
-                                    }
-                                );
-                                print(result.body);
-                                int id = json.decode(result.body)["user_id"];
-                                int code = json.decode(result.body)['code'];
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) =>Confirm( false,id,code)));
-                              },
-                              child: Text(
-                                "Далее",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 10,),
-                            Icon(Icons.arrow_forward_ios,color: Colors.white,)
-                          ],
-                        ),
-                      ),
+                GestureDetector(
+                  onTap: () async {
+                    print("start ");
+                    print(_emailController.text);
+                    String url = "${AppConfig.BASE_URL}/password/forgot";
+                    final result = await http.post(
+                        Uri.parse(url),
+                        body: {
+                          'email':'${_emailController.text}'
+                        }
+                    );
+                    print(result.body);
+                    int id = json.decode(result.body)["user_id"];
+                    int code = json.decode(result.body)['code'];
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) =>Confirm( false,id,code)));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: Colors.orange
                     ),
-                  ],
+                    height: 40,
+                    width: 154,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SizedBox(width: 10,),
+                        Text(
+                          "Далее",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        Icon(Icons.arrow_forward_ios,color: Colors.white,)
+                      ],
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 20,

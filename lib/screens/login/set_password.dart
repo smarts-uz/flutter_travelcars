@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/main_screen.dart';
 import 'package:http/http.dart' as http;
 import '../../app_config.dart';
@@ -158,16 +159,23 @@ class _SetPasswordState extends State<SetPassword> {
                     final prefs = await SharedPreferences.getInstance();
                     String url = "${AppConfig.BASE_URL}/password/reset";
                     String token = json.decode(prefs.getString('userData')!)["token"];
-                    final result = await http.post(
-                        Uri.parse(url),
-                        body: {
-                          'password': _newPasswordController.text
-                        },
-                      headers: {
-                        "Authorization": "Bearer $token",
-                      },
-                    );
-                    if(_newPasswordController == _passwordController){
+
+                    if(_newPasswordController.text == _passwordController.text){
+                      try{
+                        final result = await http.post(
+                          Uri.parse(url),
+                          body: {
+                            'password': _newPasswordController.text
+                          },
+                          headers: {
+                            "Authorization": "Bearer $token",
+                          },
+                        );
+                      }
+                      catch(error){
+                        print(error);
+                        Dialogs.ErrorDialog(context);
+                      }
                       Navigator.push(context,MaterialPageRoute(builder: (_)=>MainScreen()));
                     }
                     else
