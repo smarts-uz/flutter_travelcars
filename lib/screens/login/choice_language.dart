@@ -28,6 +28,7 @@ class _ChoicePageState extends State<ChoicePage> {
               const EdgeInsets.only( left: 16, right: 16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: MediaQuery.of(context).size.height*0.01,),
               Container(
@@ -81,6 +82,7 @@ class _ChoicePageState extends State<ChoicePage> {
                   );
                 },
                 child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 30.0),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
                       color: Colors.orange

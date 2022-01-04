@@ -40,7 +40,6 @@ class _ThirdScreenState extends State<ThirdScreen> {
       },
     );
     Map<String, dynamic> socials = json.decode(result.body)["socials"];
-    print(socials);
     if(socials != null) {
       setState(() {
         socials.forEach((key, value) {
@@ -135,7 +134,6 @@ class _ThirdScreenState extends State<ThirdScreen> {
                 Spacer(),
                 GestureDetector(
                   onTap: () async {
-                    int i = 0;
                     final prefs = await SharedPreferences.getInstance();
                     String token = json.decode(prefs.getString('userData')!)["token"];
                     String url = "${AppConfig.BASE_URL}/social/update";

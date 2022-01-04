@@ -178,7 +178,12 @@ class _SetPasswordState extends State<SetPassword> {
                         print(error);
                         Dialogs.ErrorDialog(context);
                       }
-                      Navigator.push(context,MaterialPageRoute(builder: (_)=>MainScreen()));
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (_)=> MainScreen()
+                        ),
+                        ModalRoute.withName('/'),
+                      );
                     }
                     else
                       {

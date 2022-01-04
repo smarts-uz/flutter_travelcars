@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/main_screen.dart';
+import 'package:http/http.dart' as http;
+
+import '../../app_config.dart';
 
 class SocialScreen extends StatefulWidget {
   const SocialScreen({Key? key}) : super(key: key);
@@ -105,9 +111,37 @@ class _SocialScreenState extends State<SocialScreen> {
                 ),
                 Spacer(),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => MainScreen()));
+                  onTap: () async {
+                    final prefs = await SharedPreferences.getInstance();
+                    String token = jsonDecode(prefs.getString('userData')!)["token"];
+                    Uri url = Uri.parse("${AppConfig.BASE_URL}/social/update");
+                    Map<String, dynamic> socials = {
+                      "telegram": 0,
+                      "whatsapp": 0,
+                      "viber": 0,
+                      "wechat": 0
+                    };
+                    socials["viber"] = data[0]["check_box"] ? 1 : 0;
+                    socials["wechat"] = data[1]["check_box"] ? 1 : 0;
+                    socials["telegram"] = data[2]["check_box"] ? 1 : 0;
+                    socials["whatsapp"] = data[3]["check_box"] ? 1 : 0;
+
+                    final result = await http.post(
+                        url,
+                        headers: {
+                          "Authorization": "Bearer $token",
+                        },
+                        body: {
+                          "socials" : json.encode(socials)
+                        }
+                    );
+
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_)=> MainScreen()
+                      ),
+                      ModalRoute.withName('/'),
+                    );
                   },
                   child: Container(
                     decoration: BoxDecoration(
