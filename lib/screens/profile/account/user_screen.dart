@@ -105,16 +105,9 @@ class _FirstSceenState extends State<FirstSceen> {
               height: MediaQuery.of(context).size.height * .81,
               child: SingleChildScrollView(
                 child: Column(
-                  children: <Widget>[
+                  children: <Widget> [
                     Container(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: AssetImage("assets/Image.png"),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 20, right: 16, left: 16),
+                      padding: EdgeInsets.only(top: 50, right: 16, left: 16),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3.5),
                       ),

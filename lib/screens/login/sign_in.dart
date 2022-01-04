@@ -169,8 +169,8 @@ class _SignInState extends State<SignIn> {
                         "cashback_foiz": response["user"]["cashback_percent"],
                       });
                       await prefs.setString('userData', userData);
-                      if(response["company"] != null) {
-                        final api_data = response["company"]["requisites"][0];
+                      if(response["company"] != null && response["company"].isNotEmpty) {
+                        final api_data = response["company"][0];
                         final companyData = json.encode({
                           "name": api_data["company_name"],
                           "city": api_data["company_city"],

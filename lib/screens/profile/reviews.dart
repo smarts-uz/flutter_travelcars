@@ -323,30 +323,49 @@ class _ReviewsState extends State<Reviews> {
                            crossAxisAlignment: CrossAxisAlignment.start,
                            mainAxisAlignment: MainAxisAlignment.start,
                            children: [
-                             ListTile(
-                               leading: CircleAvatar(
-                                 radius: 20,
-                                 backgroundImage: AssetImage("assets/Image.png"),
-                               ),
-                               title: Text('${reviews["reviews"][index1]["name"]},'),
-                               subtitle: Text('${reviews['reviews'][index1]['country_name']}'),
-                               trailing: Container(
-                                 height: 27,
-                                 width: 27,
-                                 decoration: BoxDecoration(
-                                   color: Colors.orange,
-                                   borderRadius: BorderRadius.circular(4.0),
-                                 ),
-                                 child: Center(
-                                   child: Text(
-                                     sumper.round().toInt().toString(),
-                                     style: TextStyle(
-                                       color: Colors.white
+                             Padding(
+                               padding: const EdgeInsets.only(top: 10.0, right: 12.0, left: 12.0),
+                               child: Row(
+                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                 children: [
+                                   Column(
+                                     crossAxisAlignment: CrossAxisAlignment.start,
+                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                     children: [
+                                       Text(
+                                         "${reviews["reviews"][index1]["name"]}",
+                                         style: TextStyle(
+                                             fontSize: 20
+                                         ),
+                                       ),
+                                       Text(
+                                         "${reviews['reviews'][index1]['country_name']}",
+                                         style: TextStyle(
+                                             fontSize: 15
+                                         ),
+                                       ),
+                                     ],
+                                   ),
+                                   Container(
+                                     height: 27,
+                                     width: 27,
+                                     decoration: BoxDecoration(
+                                       color: Colors.orange,
+                                       borderRadius: BorderRadius.circular(4.0),
+                                     ),
+                                     child: Center(
+                                       child: Text(
+                                         sumper.round().toInt().toString(),
+                                         style: TextStyle(
+                                             color: Colors.white
+                                         ),
+                                       ),
                                      ),
                                    ),
-                                 ),
+                                 ],
                                ),
                              ),
+
                              Padding(
                                padding: const EdgeInsets.only(left: 8, top: 0),
                                child: Row(

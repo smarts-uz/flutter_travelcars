@@ -43,10 +43,24 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
       body: Padding(
         padding: const EdgeInsets.only(left: 17, top: 2, right: 17),
         child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(height: MediaQuery.of(context).size.height*0.05,),
+              Text(
+                "Language:",
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
               DropButton(),
+              SizedBox(height: 20),
+              Text(
+                "Currency:",
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
               DropButtonMny(),
               Spacer(),
               GestureDetector(

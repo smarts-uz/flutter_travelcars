@@ -16,10 +16,10 @@ class _ThirdScreenState extends State<ThirdScreen> {
   final TextEditingController _phoneEmailController = TextEditingController();
 
   List<Map<String, dynamic>> data = [
-    {"image": "assets/images/viber.svg", "check_box": false},
-    {"image": "assets/images/wechat.svg", "check_box": false},
-    {"image": "assets/images/telegram.svg", "check_box": false},
-    {"image": "assets/images/whatsapp.svg", "check_box": false},
+    {"image": "viber", "check_box": false},
+    {"image": "wechat", "check_box": false},
+    {"image": "telegram", "check_box": false},
+    {"image": "whatsapp", "check_box": false},
   ];
 
   @override
@@ -39,7 +39,8 @@ class _ThirdScreenState extends State<ThirdScreen> {
         "Authorization": "Bearer $token",
       },
     );
-    Map<String, dynamic> socials = json.decode(json.decode(result.body)["socials"]);
+    Map<String, dynamic> socials = json.decode(result.body)["socials"];
+    print(socials);
     if(socials != null) {
       setState(() {
         socials.forEach((key, value) {
@@ -103,46 +104,34 @@ class _ThirdScreenState extends State<ThirdScreen> {
                 ),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: data
-                        .map(
-                          (item) => Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 64,
-                                child: SvgPicture.asset(item["image"]),
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.015,
-                              ),
-                              Checkbox(
-                                  value: item["check_box"],
-                                  onChanged: (value) {
-                                    setState(() {
-                                      if (value != null)
-                                        item["check_box"] = value;
-                                    });
-                                  }),
-                            ],
+                    children: data.map((item) => Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 64,
+                          child: SvgPicture.asset("assets/images/${item["image"]}.svg"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Text(
+                            item["image"],
                           ),
-                        )
-                        .toList()),
-                Container(
-                  padding: EdgeInsets.only(top: 40),
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(5)),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "Введите номер телефона",
-                      hintText: "+998(__) ___ __ __",
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-                      border: OutlineInputBorder(),
+                        ),
+                        SizedBox(
+                          height:
+                          MediaQuery.of(context).size.height * 0.015,
+                        ),
+                        Checkbox(
+                            value: item["check_box"],
+                            onChanged: (value) {
+                              setState(() {
+                                if (value != null)
+                                  item["check_box"] = value;
+                              });
+                            }),
+                      ],
                     ),
-                  ),
-                ),
+                    ).toList()),
                 Spacer(),
                 GestureDetector(
                   onTap: () async {

@@ -72,7 +72,14 @@ class _RouteScreenState extends State<RouteScreen> {
       ),
       body: _isLoading ? Center(
         child: CircularProgressIndicator(),
-      ) : info.isEmpty ? Empty() :  List_R(info, city, cars),
+      ) : info.isEmpty ? Center(
+        child: Text(
+          "No routes are found",
+          style: TextStyle(
+            fontSize: 20
+          ),
+        ),
+      ) :  List_R(info, city, cars),
     );
   }
 }
@@ -244,69 +251,3 @@ class List_R extends StatelessWidget {
   }
 }
 
-class Empty extends StatelessWidget {
-  const Empty({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-              height: MediaQuery.of(context).size.height*.35,
-              width: MediaQuery.of(context).size.width*.65,
-              child: Image.asset('assets/images/route_globus.jpg')
-          ),
-          Container(
-              width: MediaQuery.of(context).size.width*.7,
-              child: Text(
-                'Вы можете оставить заявку\n нажимая кнопку ниже',
-                maxLines: 2,
-                style: TextStyle(
-                  fontSize: 13,
-                ),
-                textAlign: TextAlign.center,
-              )
-          ),
-          SizedBox(height: 20),
-          Container(
-            height: MediaQuery.of(context).size.height*.045,
-            width: MediaQuery.of(context).size.width*.45,
-            child: RaisedButton(
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.add,
-                    color: Colors.orange,
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    'Add',
-                    style: TextStyle(
-                        color: Colors.orange
-                    ),
-                  ),
-                ],
-              ),
-              onPressed: (){
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RouteAdd()));
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  side: BorderSide(
-                      color: Colors.orange
-                  )
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}

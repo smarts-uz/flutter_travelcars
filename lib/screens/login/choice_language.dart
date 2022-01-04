@@ -34,7 +34,19 @@ class _ChoicePageState extends State<ChoicePage> {
                 height: 360,
                 child: SvgPicture.asset("assets/images/earth.svg"),
               ),
+              Text(
+                "Language:",
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
               DropButton(),
+              Text(
+                "Currency:",
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
               DropButtonMny(),
               Spacer(),
               GestureDetector(

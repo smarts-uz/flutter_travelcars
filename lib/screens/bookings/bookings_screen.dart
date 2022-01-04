@@ -87,8 +87,13 @@ class _BookingsScreenState extends State<BookingsScreen> {
       body: isLoading ? Center(
         child: CircularProgressIndicator(),
       ) : results.isEmpty ? Center(
-        child: Text("No items found"),
-      ): ListView.builder(
+        child: Text(
+          "No bookings found",
+          style: TextStyle(
+            fontSize: 20
+          ),
+        ),
+      ) : ListView.builder(
           itemCount: results.length,
           itemBuilder: (context, index) {
             List<int> icon_numbers = [];

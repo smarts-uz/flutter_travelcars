@@ -13,10 +13,10 @@ class _SocialScreenState extends State<SocialScreen> {
   final TextEditingController _phoneEmailController = TextEditingController();
 
   List<Map<String, dynamic>> data = [
-    {"image": "assets/images/viber.svg", "check_box": false},
-    {"image": "assets/images/wechat.svg", "check_box": false},
-    {"image": "assets/images/telegram.svg", "check_box": false},
-    {"image": "assets/images/whatsapp.svg", "check_box": false},
+    {"image": "viber.svg", "check_box": false},
+    {"image": "wechat", "check_box": false},
+    {"image": "telegram", "check_box": false},
+    {"image": "whatsapp", "check_box": false},
   ];
 
   @override
@@ -76,7 +76,13 @@ class _SocialScreenState extends State<SocialScreen> {
                             children: [
                               Container(
                                 height: 64,
-                                child: SvgPicture.asset(item["image"]),
+                                child: SvgPicture.asset("assets/images/${item["image"]}.svg"),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  item["image"],
+                                ),
                               ),
                               SizedBox(
                                 height:
@@ -96,39 +102,6 @@ class _SocialScreenState extends State<SocialScreen> {
                         .toList()),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.02,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 55,
-                  padding: EdgeInsets.only(left: 15),
-                  // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: TextFormField(
-                    autovalidateMode: AutovalidateMode.always,
-                    decoration: const InputDecoration(
-                      hintText: "Введите номер телефона",
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 0,
-                        ),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 0,
-                        ),
-                      ),
-                    ),
-                    controller: _phoneEmailController,
-                    keyboardType: TextInputType.text,
-                    cursorColor: Colors.black,
-                    style: TextStyle(fontSize: 20),
-                    expands: false,
-                    maxLines: 1,
-                  ),
                 ),
                 Spacer(),
                 GestureDetector(

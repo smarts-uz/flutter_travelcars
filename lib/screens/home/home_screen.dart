@@ -11,6 +11,7 @@ import 'package:travelcars/dummy_data/cities_list.dart';
 import 'package:travelcars/screens/car/car_category.dart';
 import 'package:travelcars/screens/car/car_type.dart';
 import 'package:travelcars/screens/po_puti/po_puti.dart';
+import 'package:travelcars/screens/profile/account/choice_language.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:http/http.dart' as http;
@@ -200,15 +201,15 @@ class _HomeScreenState extends State<HomeScreen> {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-              icon: SvgPicture.asset(
-                'assets/icons/globus.svg',
+              icon: Icon(
+                Icons.settings,
                 color: Colors.white,
               ),
               onPressed: () {
                Navigator.push(
                    context,
-                   CupertinoPageRoute(
-                       builder: (_) => TripsScreen()
+                   MaterialPageRoute(
+                       builder: (_) => AccountChoicePage()
                    )
                );
               },

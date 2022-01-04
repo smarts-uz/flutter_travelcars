@@ -63,18 +63,6 @@ class _AccountScreenState extends State<AccountScreen> {
           Padding(
             padding: const EdgeInsets.only(top: 18.0),
             child: ListTile(
-              leading: Container(
-                height: 100,
-                width: 70,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/Image.png"),
-                    fit: BoxFit.fill,
-                  ),
-                  shape: BoxShape.circle,
-                ),
-                alignment: Alignment.centerLeft,
-              ),
               title: Text(
                 name,
                 maxLines: 2,
@@ -152,25 +140,6 @@ class _AccountScreenState extends State<AccountScreen> {
               },
               title: Text(
                 "Социальные сети для связи",
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-              trailing: Icon(Icons.arrow_forward_ios),
-            ),
-          ),
-          Divider(),
-          SizedBox(
-            height: 47,
-            child: ListTile(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AccountChoicePage()),
-                );
-              },
-              title: Text(
-                "Настройка языка и курса",
                 style: TextStyle(
                   fontSize: 20,
                 ),

@@ -75,9 +75,16 @@ class _TransfersScreenState extends State<TransfersScreen> {
           ),
         ),
       ),
-      body: _isLoading ? Center(child: CircularProgressIndicator(),)
-          : info.isEmpty ?  Empty()
-          :  List_T(info, city, cars),
+      body: _isLoading ? Center(
+        child: CircularProgressIndicator(),
+      ) : info.isEmpty ?  Center(
+        child: Text(
+          "No transfers are found",
+          style: TextStyle(
+              fontSize: 20
+          ),
+        ),
+      ) :  List_T(info, city, cars),
     );
   }
 }
