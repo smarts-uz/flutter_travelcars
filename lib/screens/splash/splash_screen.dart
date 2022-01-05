@@ -75,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     style: TextStyle(
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w400,
-                        fontSize: 20,
+                        fontSize: 14,
                         fontFamily: 'Poppins',
                     ),
                     textAlign: TextAlign.center,

@@ -425,7 +425,7 @@ class _RouteAddState extends State<RouteAdd> {
         keyboardType: TextInputType.text,
         cursorColor: Colors.black,
         style: TextStyle(
-            fontSize: 20
+            fontSize: 24
         ),
         expands: false,
         maxLines: 7,
