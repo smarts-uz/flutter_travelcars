@@ -28,71 +28,7 @@ class _CarsListState extends State<CarsList> {
     "assets/icons/doors.jpg",
   ];
 
-  List< dynamic> results = [
-    /*{
-      "name": "Mercedes Sprinter",
-      "year": "2015",
-      "id": "MS-701AFA",
-      "views": "5324",
-      "image": "assets/images/auto.jpg",
-      "icon_numbers": [
-        3, 2, 3, 4
-      ],
-      "places": 3,
-      "big_bag": 2,
-      "small_bag": 3,
-      "doors": 4,
-      "tarif": [
-       "Car delivery to a convenient place",
-       "Fuel cost",
-       "Driver nutrition",
-       "Parking payments",
-      ],
-      "total": "3 210 000",
-    },
-    {
-      "name": "Mercedes Bus",
-      "year": "2015",
-      "id": "MS-7085FB",
-      "views": "6597",
-      "image": "assets/images/auto2.jpg",
-      "icon_numbers": [
-        7, 4, 6, 6
-      ],
-      "places": 7,
-      "big_bag": 4,
-      "small_bag": 6,
-      "doors": 6,
-      "tarif": [
-        "Car delivery to a convenient place",
-        "Parking payments",
-      ],
-      "total": "5 410 000",
-    },
-    {
-      "name": "Mercedes Lux",
-      "year": "2021",
-      "id": "MS-702UFA",
-      "views": "3256",
-      "image": "assets/images/auto.jpg",
-      "icon_numbers": [
-        4, 2, 4, 2
-      ],
-      "places": 3,
-      "big_bag": 2,
-      "small_bag": 3,
-      "doors": 4,
-      "tarif": [
-        "Car delivery to a convenient place",
-        "Fuel cost",
-        "Driver nutrition",
-        "Parking payments",
-        "Parking payments",
-        "Parking payments",
-      ],
-      "total": "7 410 000",
-    },*/
-  ];
+  List< dynamic> results = [];
 
  @override
   void initState() {

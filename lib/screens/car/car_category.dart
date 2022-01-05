@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/car/cars_list.dart';
+import 'package:travelcars/screens/search/search_result.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 
 class CarCategory extends StatefulWidget {
@@ -84,7 +85,7 @@ class _CarCategoryState extends State<CarCategory> {
         child: CircularProgressIndicator(),
       ) : categories.isEmpty ? Center (
         child: Text(
-          "No items found"
+          "No car categories are found"
         ),
       ):
       SizedBox(
@@ -94,11 +95,17 @@ class _CarCategoryState extends State<CarCategory> {
             physics: BouncingScrollPhysics(),
             itemCount: categories.length,
             itemBuilder: (context, index) => GestureDetector(
-              onTap: () {
+              onTap: () async {
+                Uri url = Uri.parse("${AppConfig.BASE_URL}/sort");
+                final response = await http.post(
+                    url,
+                    body: {
+                      "car_models[0]": "${categories[index]["id"]}",
+                    }
+                );
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (_) => CarsList(categories[index]["name"], categories[index]["meta_url"])
+                    MaterialPageRoute(builder: (context) => SearchResult(jsonDecode(response.body)["routes"])
                     )
                 );
               },
