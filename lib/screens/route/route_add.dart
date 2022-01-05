@@ -88,7 +88,7 @@ class _RouteAddState extends State<RouteAdd> {
                   Widget DDM (bool isCity1, String? hint) {
                     return Container(
                       width: double.infinity,
-                      height: 55,
+                      height: 44,
                       padding: EdgeInsets.only(left: 6, right: 6),
                       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                       decoration: BoxDecoration(
@@ -187,8 +187,8 @@ class _RouteAddState extends State<RouteAdd> {
                                 ],
                               ),
                             ),
-                            TFF("Quantity of passengers", data[index]["controllers2"][0], 55),
-                            TFF("The address of the place to pick up from.", data[index]["controllers2"][1], 165),
+                            TFF("Quantity of passengers", data[index]["controllers2"][0], 44),
+                            TFF("The address of the place to pick up from.", data[index]["controllers2"][1], 140),
                           ]
                       ),
                     ),

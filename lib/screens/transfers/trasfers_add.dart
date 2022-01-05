@@ -188,7 +188,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                             ),
                             Container(
                               width: double.infinity,
-                              height: 55,
+                              height: 44,
                               padding: EdgeInsets.only(left: 12, right: 6),
                               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                               decoration: BoxDecoration(
@@ -286,10 +286,10 @@ class _TransfersAddState extends State<TransfersAdd> {
                                 ),
                               ),
                             ),
-                            TFF(data[index]["controllers4"][0], "Quantity of passengers", 55),
-                            TFF(data[index]["controllers4"][1], "From", 55),
-                            TFF(data[index]["controllers4"][2], "To", 55),
-                            TFF(data[index]["controllers4"][3], "The address of the place to pick up from.", 165),
+                            TFF(data[index]["controllers4"][0], "Quantity of passengers", 44),
+                            TFF(data[index]["controllers4"][1], "From", 44),
+                            TFF(data[index]["controllers4"][2], "To", 44),
+                            TFF(data[index]["controllers4"][3], "The address of the place to pick up from.", 140),
                           ]
                       ),
                     ),
