@@ -6,10 +6,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/dialogs.dart';
-import 'package:travelcars/screens/bookings/booking_item_screen.dart';
-import 'package:travelcars/screens/bookings/bookings_screen.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/profile/reviews.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 
 import '../../app_config.dart';
@@ -142,6 +141,7 @@ class _DetailScreenState extends State<DetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
+              overflow: Overflow.visible,
               children: [
                 Container(
                   padding: EdgeInsets.only(top: 24),
@@ -184,20 +184,38 @@ class _DetailScreenState extends State<DetailScreen> {
                     right: 8,
                     top: 30,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.black,
-                          size: 30,
-                        ),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                      size: 30,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: 25,
+                  bottom: -25,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Reviews(route_price_id: results["route_price_id"],)
+                          )
+                      );
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.orange,
+                      radius: 30,
+                      child: Icon(
+                        Icons.message,
+                        color: Colors.white,
+                        size: 30,
                       ),
-                    ],
+                    ),
                   ),
                 ),
                 Positioned(
@@ -265,7 +283,7 @@ class _DetailScreenState extends State<DetailScreen> {
               ],
             ),
             _listWrap(results["car"]['car_options']),
-            Container(
+            if(results["route_options"].isNotEmpty) Container(
               decoration: BoxDecoration(color: HexColor("#F5F5F6")),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -505,13 +523,6 @@ class _DetailScreenState extends State<DetailScreen> {
                   try{
                     if(jsonDecode(response.body)["success"]) {
                       Dialogs.ZayavkaDialog(context);
-                      /*Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => BookingsScreen()
-                      )
-                  );*/
                     } else {
                       Dialogs.ErrorDialog(context);
                     }

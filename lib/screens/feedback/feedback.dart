@@ -6,7 +6,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travelcars/screens/feedback/components/drop_button_city.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
 
@@ -17,7 +16,8 @@ import 'package:http/http.dart' as http ;
 import '../../dialogs.dart';
 
 class FeedbackScreen extends StatefulWidget {
-  const FeedbackScreen({Key? key}) : super(key: key);
+  final int route_price_id;
+  FeedbackScreen(this.route_price_id);
 
 
   @override
@@ -32,6 +32,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   String? country;
   late final List<DropdownMenuItem<String>> countries;
   List<String> api_countries = [];
+
+  String token = "";
+  int user_id = 0;
 
   Map<String, dynamic> rate =
   {
@@ -84,17 +87,21 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   @override
   void initState() {
     super.initState();
-    print(HomeScreen.countries_list);
     HomeScreen.countries_list.forEach((element){
       api_countries.add(element["country_name"]);
     });
-    print(api_countries);
     countries = api_countries.map((String value) => DropdownMenuItem<String>(
         value: value,
         child: Text(value),
       ),
     ).toList();
+    getToken();
+  }
 
+  Future<void> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    token = json.decode(prefs.getString('userData')!)["token"] != null ? json.decode(prefs.getString('userData')!)["token"] : "";
+    user_id = json.decode(prefs.getString('userData')!)["user_id"] != null ? json.decode(prefs.getString('userData')!)["user_id"] : "";
     setState(() {
 
     });
@@ -133,7 +140,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             SizedBox(
               height: 10,
             ),
-            Container(
+            if(token.isEmpty) Container(
               width: double.infinity,
               height: 50,
               alignment: Alignment.centerLeft,
@@ -210,47 +217,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 ),
               ),
             ),
-            /*Container(
-              width: double.infinity,
-              height: 50,
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 15),
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(5)),
-              child: TextFormField(
-                autovalidateMode: AutovalidateMode.always,
-                decoration: InputDecoration(
-                  hintText: "City",
-                  hintMaxLines: 3,
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.white,
-                      width: 0,
-                    ),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.white,
-                      width: 0,
-                    ),
-                  ),
-                ),
-                controller: _cityController,
-                keyboardType: TextInputType.name,
-                cursorColor: Colors.black,
-                style: TextStyle(
-                    fontSize: 17,
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.w400,
-                    fontStyle: FontStyle.normal,
-                    color: HexColor('#3C3C43')),
-                expands: false,
-                maxLines: 2,
-              ),
-            ),*/
-            Container(
+            if(widget.route_price_id < 0) Container(
               width: double.infinity,
               height: 50,
               alignment: Alignment.centerLeft,
@@ -368,98 +335,93 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 expands: false,
               ),
             ),
-            GestureDetector(
-              onTap: () {
+            InkWell(
+              onTap: () async {
+                FocusScope.of(context).unfocus();
+                if ((token.isEmpty && _nameController.text.isEmpty)
+                      || _commentController.text.isEmpty
+                        || country == null
+                          || (widget.route_price_id < 0 && _routeController.text.isEmpty)
+                ) {
+                  ToastComponent.showDialog("TextField is empty", );
+                  return;
+                }
 
-                for(int j = 0; j<rate["driver"].length;  j++){
-                  print("Driver item rate ${rate["driver"][j]["rating"]}");
-                }
-                for(int j = 0; j<rate["car"].length;  j++){
-                  print("Car item rate ${rate["car"][j]["rating"]}");
-                }
-                for(int j = 0; j<rate["all"].length;  j++){
-                  print("All item rate ${rate["all"][j]["rating"]}");
+                bool noStar = false;
+                rate.forEach((key, value) {
+                  value.forEach((element) {
+                    if(element["rating"] == 0) {
+                      print(element);
+                      noStar = true;
+                    }
+                  });
+                });
+                if(noStar) {
+                  ToastComponent.showDialog("TextField is empty");
+                  return;
                 }
 
-              },
-              child: InkWell(
-                onTap: () async {
-                  if (_nameController.text.isEmpty ||
-                      _commentController.text.isEmpty ||
-                      country == null ||
-                  _routeController.text.isEmpty
-                  ){
-                    ToastComponent.showDialog("TextField is empty", );
-                    return;
+                Uri url = Uri.parse("${AppConfig.BASE_URL}/comment/create");
+                Map<String, dynamic> comment = {
+                 "rules": "${rate['driver'][2]["rating"]}",
+                 "salon": "${rate['car'][1]['rating']}",
+                 "driving": "${rate['driver'][1]['rating']}",
+                 "language": "${rate['driver'][4]['rating']}",
+                 "Cleanliness": "${rate['car'][0]['rating']}",
+                 "Punctuality": "${rate['driver'][0]['rating']}",
+                 "orientation": "${rate['driver'][3]['rating']}",
+                 "Price_quality": "${rate['all'][1]['rating']}",
+                 "professionalism": "${rate['all'][0]['rating']}"
+                };
+
+                String countryCode = "UZ";
+                HomeScreen.countries_list.forEach((element) {
+                  if(element["country_name"] == country) {
+                    countryCode = element["country_code"];
                   }
-                  FocusScope.of(context).unfocus();
-                  bool isValid = true;
-                  String url = "${AppConfig.BASE_URL}/comment/create";
-                  Map<String, dynamic> comment = {
-                   "rules": "${rate['driver'][2]["rating"]}",
-                   "salon": "${rate['car'][1]['rating']}",
-                   "driving": "${rate['driver'][1]['rating']}",
-                   "language": "${rate['driver'][4]['rating']}",
-                   "Cleanliness": "${rate['car'][0]['rating']}",
-                   "Punctuality": "${rate['driver'][0]['rating']}",
-                   "orientation": "${rate['driver'][3]['rating']}",
-                   "Price_quality": "${rate['all'][1]['rating']}",
-                   "professionalism": "${rate['all'][0]['rating']}"};
-
-                 if(_commentController.text == "") isValid = false;
-                 if(_nameController.text == "") isValid = false;
-                 if(country == "") isValid = false;
-                 if(isValid){
-                   String country_code = "UZ";
-                   HomeScreen.countries_list.forEach((element) {
-                     if(element["country_name"] == country) {
-                       country_code = element["country_code"];
-                     }
-                   });
-                   try {
-                     print("start");
-                     final prefs = await SharedPreferences.getInstance();
-                     String token = json.decode(prefs.getString('userData')!)["token"];
-                     print(token);
-                     final result = await http.post(
-                         Uri.parse(url),
-                         headers: {
-                           "Authorization": "Bearer $token",
-                         },
-                         body: {
-                           //"name": _nameController.text,
-                           "country_code": country_code,
-                           "route_name": _routeController.text,
-                           "route_date" : "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
-                           "grade" : "${json.encode(comment)}",
-                           "text" : _commentController.text,
-                         }
-                     );
-                     print(json.decode(result.body)['message']);
-                     Dialogs.OtzivDialog(context);
-                   } catch (error) {
-                     print("fail");
-                     Dialogs.ErrorDialog(context);
-                   }}
-                 },
-                child: Container(
-                  margin: EdgeInsets.all(16),
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.06,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Отправить отзыв",
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Poppins',
-                        fontStyle: FontStyle.normal,
-                      ),
+                });
+                print("user id: " + user_id.toString());
+                try {
+                  final result = await http.post(
+                      url,
+                      headers: {
+                        "Authorization": "Bearer $token",
+                      },
+                      body: {
+                        if(token.isEmpty) "name": _nameController.text,
+                        if(token.isNotEmpty) "user_id": "${user_id}",
+                        "country_code": countryCode,
+                        if(widget.route_price_id < 0) "route_name": _routeController.text,
+                        if(widget.route_price_id >= 0) "route_price_id": "${widget.route_price_id}",
+                        "route_date" : "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
+                        "grade" : "${json.encode(comment)}",
+                        "text" : _commentController.text,
+                      });
+                  print(widget.route_price_id);
+                  print(result.body);
+                  Dialogs.OtzivDialog(context);
+                } catch (error) {
+                  print(error);
+                  Dialogs.ErrorDialog(context);
+                }
+              },
+              child: Container(
+                margin: EdgeInsets.all(16),
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.06,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Center(
+                  child: Text(
+                    "Отправить отзыв",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Poppins',
+                      fontStyle: FontStyle.normal,
                     ),
                   ),
                 ),

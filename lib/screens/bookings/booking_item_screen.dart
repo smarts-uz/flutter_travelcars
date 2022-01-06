@@ -228,7 +228,7 @@ class _BookingScreenState extends State<BookingScreen> {
               ],
             ),
             _listWrap(results['carOption']),
-            Container(
+            if(results["routeOption"].isNotEmpty) Container(
               decoration: BoxDecoration(color: HexColor("#F5F5F6")),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

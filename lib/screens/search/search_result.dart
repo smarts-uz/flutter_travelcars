@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -183,7 +185,7 @@ class _SearchResultState extends State<SearchResult> {
                           ).toList()
                       )
                   ),
-                  Container(
+                  if(options.isNotEmpty) Container(
                     padding: EdgeInsets.only(left: 15),
                     alignment: Alignment.topLeft,
                     child: Text(
@@ -195,7 +197,7 @@ class _SearchResultState extends State<SearchResult> {
                       ),
                     ),
                   ),
-                  Container(
+                  if(options.isNotEmpty) Container(
                     height: options.length * 35.0,
                     width: double.infinity,
                     padding: EdgeInsets.only(top: 5, bottom: 8, left: 15),

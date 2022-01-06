@@ -8,7 +8,8 @@ import 'package:travelcars/screens/feedback/feedback.dart';
 import '../../app_config.dart';
 import '../../dialogs.dart';
 class Reviews extends StatefulWidget {
-  const Reviews({Key? key}) : super(key: key);
+  final int route_price_id;
+  Reviews({this.route_price_id = -1});
 
   @override
   _ReviewsState createState() => _ReviewsState();
@@ -75,10 +76,11 @@ class _ReviewsState extends State<Reviews> {
   }
 
   void getComment() async {
-    String url = "${AppConfig.BASE_URL}/comments";
-    final response = await http.get(
-        Uri.parse(url)
-    );
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/comments");
+    if(widget.route_price_id >= 0) {
+      url = Uri.parse("${AppConfig.BASE_URL}/comments?route_price_id=${widget.route_price_id}");
+    }
+    final response = await http.get(url);
     Map<String, dynamic> info = json.decode(response.body)["data"];
     info['all_grade'].forEach((key, value) {
       reviews["rate"].forEach((element) {
@@ -197,7 +199,7 @@ class _ReviewsState extends State<Reviews> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (_) => FeedbackScreen()
+                                              builder: (_) => FeedbackScreen(widget.route_price_id)
                                           )
                                       );
                                     } else {

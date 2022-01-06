@@ -188,7 +188,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                           ).toList()
                       )
                   ),
-                  Container(
+                  if(results[index]["routeOption"].isNotEmpty) Container(
                     padding: EdgeInsets.only(left: 15, top: 6, bottom: 5),
                     alignment: Alignment.topLeft,
                     child: Text(
@@ -200,7 +200,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                       ),
                     ),
                   ),
-                  Container(
+                  if(results[index]["routeOption"].isNotEmpty) Container(
                     height: results[index]["routeOption"].length * 32.0,
                     width: double.infinity,
                     padding: EdgeInsets.only(top: 5, left: 15),
