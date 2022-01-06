@@ -126,7 +126,51 @@ class _ReviewsState extends State<Reviews> {
           color: Colors.white
         ),),
       ),
-      body: isLoading ? Center(child: CircularProgressIndicator(),) : SingleChildScrollView(
+      body: isLoading ? Center(
+        child: CircularProgressIndicator(),
+      ) : reviews['reviews'].isEmpty ? Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "No comments are found\n\n",
+              style: TextStyle(
+                fontSize: 17
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height *.055,
+              width: MediaQuery.of(context).size.width *.45,
+              child: RaisedButton(
+                color: Colors.white,
+                child:Text(
+                  'Write a feedback',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.orange
+                  ),
+                ),
+                onPressed: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => FeedbackScreen(widget.route_price_id)
+                      )
+                  );
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: BorderSide(
+                        color: Colors.orange
+                    )
+                ),
+              ),
+            ),
+          ],
+        ),
+      ) : SingleChildScrollView(
         child: Container(
               padding: EdgeInsets.only(left: 16,top: 24, right: 16),
               child: Column(
@@ -195,17 +239,12 @@ class _ReviewsState extends State<Reviews> {
                                   ),
                                   onPressed: () async {
                                     final prefs = await SharedPreferences.getInstance();
-                                    if(prefs.containsKey('userData')) {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) => FeedbackScreen(widget.route_price_id)
-                                          )
-                                      );
-                                    } else {
-                                      Dialogs.LoginDialog(context);
-                                    }
-
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => FeedbackScreen(widget.route_price_id)
+                                        )
+                                    );
                                   },
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),

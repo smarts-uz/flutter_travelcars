@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
+import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,6 +22,30 @@ class BookingScreen extends StatefulWidget {
 }
 
 class _BookingScreenState extends State<BookingScreen> {
+  List<Map<String, dynamic>> payments = [
+    {
+      "icon": "click",
+      "name": "Click",
+      "chosen": true,
+    },
+    {
+      "icon": "payme",
+      "name": "Payme",
+      "chosen": false,
+    },
+    {
+      "icon": "mastercard",
+      "name": "MasterCard",
+      "chosen": false,
+    },
+    {
+      "icon": "visa",
+      "name": "Visa",
+      "chosen": false,
+    },
+  ];
+
+
   final CarouselController _controller = CarouselController();
   int current = 0;
   int narx_index = 0;
@@ -44,6 +69,7 @@ class _BookingScreenState extends State<BookingScreen> {
         app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[2];
         break;
     }
+
     jsonDecode(widget.book_item["route"]["cost_data"]).forEach((key, value) {
       if(value != null) {
         int cost;
@@ -365,31 +391,66 @@ class _BookingScreenState extends State<BookingScreen> {
                 )
               ],
             ),
-            results["status"] == "accepted" ? Column(
+            results["status"] == "accepted" && results["paid"] == null ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _text(text: "Выберите способ оплаты:"),
-                GestureDetector(
-                  onTap: (){
-                    // TODO: implement payment api
-                    //_launchApp('https://click.uz');
-                  },
-                  child: _payment(icon: "assets/icons/Click1.png", name: "Click"),),
-                GestureDetector(
-                  onTap:() {
-                    //_launchApp('https://payme.uz/');
-                  },
-                    child: _payment(icon: "assets/icons/online_payme.png", name: "Payme")),
-                GestureDetector(
-                  onTap: (){
-                    //_launchApp('https://www.mastercard.us/');
-                  },
-                    child: _payment(icon: "assets/icons/mastercard-2.png", name: "MasterCard")),
-                GestureDetector(
-                  onTap: (){
-                    //_launchApp('https://cis.visa.com/ru_TJ/visa-in-uzbekistan.html');
-                  },
-                    child: _payment(icon: "assets/icons/visa 1.png", name: "Visa")),
+                SizedBox(
+                  height: 270,
+                  child: ListView.builder(
+                    itemCount: payments.length,
+                    itemExtent: 65,
+                    itemBuilder: (context, index) => GestureDetector(
+                        onTap:() {
+                          payments.forEach((element) {
+                            element["chosen"] = false;
+                          });
+                          payments[index]["chosen"] = true;
+                          setState(() {
+
+                          });
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(left: 16, right: 16),
+                          margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                          height: 55,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: payments[index]["chosen"] ? Colors.green : Colors.grey[100],
+                              border: Border.all(color: Colors.grey),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.7),
+                                ),
+                              ]),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 35,
+                                width: 45,
+                                child: Image.asset("assets/icons/${payments[index]["icon"]}.png"),
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Center(
+                                child: Text(
+                                  payments[index]["name"],
+                                  style: TextStyle(
+                                    fontFamily: "Poppins",
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 17,
+                                    color: HexColor('#3C3C43'),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                    ),
+                  ),
+                ),
                 Row(
                   children: [
                     Checkbox(
@@ -435,7 +496,36 @@ class _BookingScreenState extends State<BookingScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // TODO: implement payment press api
+                    if(!agree) {
+                      ToastComponent.showDialog("Please agree");
+                      return;
+                    }
+                    String type = "click";
+                    payments.forEach((element) {
+                      if(element["chosen"]) {
+                        type = element["icon"];
+                      }
+                    });
+
+                    int id = results["id"];
+                    int amount = int.parse(results["price"]) * (HomeScreen.kurs[0] * 100).toInt();
+                    switch(type) {
+                      case "click":
+                        launch("https://my.click.uz/services/pay?service_id=13729&merchant_id=9367&amount=$amount&transaction_param=$id&return_url=https://travelcars.uz/bookings/show/299&card_type=uzcard");
+                        break;
+                      case "payme":
+                        String data = "m=5cd1820b1722d50474387f3a;ac.booking_id=$id;a=$amount";
+                        var bytes = utf8.encode(data);
+                        var base64 = base64Encode(bytes);
+                        launch("https://checkout.paycom.uz/$base64");
+                        break;
+                      case "mastercard":
+                        launch("https://travelcars.uz/octo/$id/mCard");
+                        break;
+                      case "visa":
+                        launch("https://travelcars.uz/octo/$id/Visa");
+                        break;
+                    }
                   },
                   child: Container(
                     margin: EdgeInsets.all(16),
@@ -518,44 +608,4 @@ class _BookingScreenState extends State<BookingScreen> {
     );
   }
 
-  Widget _payment({icon, name}) {
-    return Container(
-      padding: EdgeInsets.only(left: 16, right: 16),
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      height: 55,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Colors.grey[50],
-          border: Border.all(color: Colors.grey),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.7),
-            ),
-          ]),
-      child: Row(
-        children: [
-          Container(
-            height: 24,
-            width: 40,
-            child: Image.asset(icon),
-          ),
-          SizedBox(
-            width: 15,
-          ),
-          Center(
-            child: Text(
-              name,
-              style: TextStyle(
-                fontFamily: "Poppins",
-                fontWeight: FontWeight.w500,
-                fontStyle: FontStyle.normal,
-                fontSize: 15,
-                color: HexColor('#3C3C43'),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
