@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:travelcars/dialogs.dart';
+import 'package:travelcars/screens/login/components/toast.dart';
 
 class TripItem extends StatefulWidget {
   final Map<String, dynamic> trip_item;
@@ -16,14 +18,39 @@ class TripItem extends StatefulWidget {
 }
 
 class _TripItemState extends State<TripItem> {
+  String token = "";
+  String name = "";
+  String phone = "";
+  String email = "";
+  TextEditingController comment_controller = new TextEditingController();
+
+
 
   List<TextEditingController> controllers = [
     for (int i = 0; i < 4; i++)
       TextEditingController()
   ];
-  List<String> hints = ["Name", "E-mail", "Phone", "Write a comment"];
+  List<String> hints = ["Name", "E-mail", "Phone", "Write a comment for order"];
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUserInfo();
+  }
 
+  void getUserInfo() async {
+    final prefs = await SharedPreferences.getInstance();
+    token = json.decode(prefs.getString('userData')!)["token"] != null ? json.decode(prefs.getString('userData')!)["token"] : "";
+    if(token.isNotEmpty) {
+      name = json.decode(prefs.getString('userData')!)["name"] != null ? json.decode(prefs.getString('userData')!)["name"] : "";
+      phone = json.decode(prefs.getString('userData')!)["phone"] != null ? json.decode(prefs.getString('userData')!)["phone"] : "";
+      email = json.decode(prefs.getString('userData')!)["email"] != null ? json.decode(prefs.getString('userData')!)["email"] : "";
+    }
+    setState(() {
+
+    });
+  }
 
 
   @override
@@ -172,7 +199,43 @@ class _TripItemState extends State<TripItem> {
                 ],
               ),
             ),
-            Column(
+            if(token.isNotEmpty) Container(
+              width: double.infinity,
+              height: 150,
+              padding: EdgeInsets.only(left: 15),
+              margin: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(5)
+              ),
+              child: TextFormField(
+                keyboardType: TextInputType.text,
+                autovalidateMode: AutovalidateMode.always,
+                decoration: InputDecoration(
+                  hintText: "Write a comment for order",
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                      width: 0,
+                    ),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.white,
+                      width: 0,
+                    ),
+                  ),
+                ),
+                controller: comment_controller,
+                cursorColor: Colors.black,
+                style: TextStyle(
+                    fontSize: 20
+                ),
+                expands: false,
+                maxLines: 3,
+              ),
+            ),
+            if(token.isEmpty) Column(
               children: [0, 1, 2, 3].map((e) => Container(
                 width: double.infinity,
                 height: e == 3 ? 150 : 50,
@@ -232,19 +295,32 @@ class _TripItemState extends State<TripItem> {
                   onPressed: () async {
                     FocusScope.of(context).unfocus();
                     bool isValid = true;
-                    Map<String, dynamic> info = {
-                      "name": "${controllers[0].text}",
-                      "email": "${controllers[1].text}",
-                      "phone": "${controllers[2].text}",
-                      "comment": "${controllers[3].text}",
-                      "tour_id": "${widget.trip_item["id"]}"
-                    };
+                    Map<String, dynamic> info = {};
+                    if(token.isEmpty) {
+                      info = {
+                        "name": "${controllers[0].text}",
+                        "email": "${controllers[1].text}",
+                        "phone": "${controllers[2].text}",
+                        "comment": "${controllers[3].text}",
+                        "tour_id": "${widget.trip_item["id"]}"
+                      };
+                    } else {
+                      info = {
+                        "name": name,
+                        "email": email,
+                        "phone": phone,
+                        "comment": comment_controller.text,
+                        "tour_id": "${widget.trip_item["id"]}"
+                      };
+                    }
+
                     info.forEach((key, value) {
                       if(value == null || value == "") {
-                        print("Write $key");
                         isValid = false;
+                        ToastComponent.showDialog("Write $key");
                       }
                     });
+                    print(info);
                     if(isValid) {
                       String url = "${AppConfig.BASE_URL}/tours/creates";
                       try {
