@@ -637,6 +637,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     ],
                   ),
                   onPressed: () async {
+                    FocusScope.of(context).unfocus();
                     int city_start = 0;
                     int city_end = 0;
                     HomeScreen.city_list.forEach((element) {
@@ -700,7 +701,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       url,
                       body: search_body
                     );
-
                     if(widget.isDrawer) Navigator.pop(context);
                     if(widget.isDrawer) Navigator.pop(context);
                     Navigator.push(

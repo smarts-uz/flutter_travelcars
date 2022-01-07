@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
+import 'package:travelcars/screens/profile/reviews.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -118,6 +119,7 @@ class _BookingScreenState extends State<BookingScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
+              overflow: Overflow.visible,
               children: [
                 Container(
                   height: 270,
@@ -151,6 +153,29 @@ class _BookingScreenState extends State<BookingScreen> {
                       );
                     }
                     ).toList(),
+                  ),
+                ),
+                Positioned(
+                  right: 25,
+                  bottom: -25,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => Reviews(route_price_id: results["route_price_id"],)
+                          )
+                      );
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.orange,
+                      radius: 30,
+                      child: Icon(
+                        Icons.message,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ),
                   ),
                 ),
                 Positioned(

@@ -44,7 +44,6 @@ class _BookingsScreenState extends State<BookingsScreen> {
         }
     );
     results = json.decode(response.body)["data"];
-    print(results);
     setState(() {
       isLoading = false;
     });

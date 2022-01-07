@@ -203,7 +203,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => Reviews(route_price_id: results["route_price_id"],)
+                              builder: (_) => Reviews(route_price_id: results["route_price_id"],)
                           )
                       );
                     },

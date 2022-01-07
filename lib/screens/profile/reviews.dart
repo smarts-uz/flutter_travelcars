@@ -78,6 +78,7 @@ class _ReviewsState extends State<Reviews> {
   void getComment() async {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/comments");
     if(widget.route_price_id >= 0) {
+      print(widget.route_price_id);
       url = Uri.parse("${AppConfig.BASE_URL}/comments?route_price_id=${widget.route_price_id}");
     }
     final response = await http.get(url);

@@ -198,7 +198,7 @@ class _SearchResultState extends State<SearchResult> {
                     ),
                   ),
                   if(options.isNotEmpty) Container(
-                    height: options.length * 35.0,
+                    height: options.length * 31.0,
                     width: double.infinity,
                     padding: EdgeInsets.only(top: 5, bottom: 8, left: 15),
                     child: ListView.builder(
@@ -219,6 +219,37 @@ class _SearchResultState extends State<SearchResult> {
                             ],
                           ),
                         )
+                    ),
+                  ),
+                  Container(
+                    height: 80,
+                    width: double.infinity,
+                    margin: EdgeInsets.all(5),
+                    child: ListTile(
+                      title: Text(
+                        "${widget.routes[index]["title"]}",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 19,
+                            fontWeight: FontWeight.w600
+                        ),
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.only(top: 4.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.watch_later_outlined, color: Colors.orange,),
+                            SizedBox(width: 8),
+                            Text(
+                              "${widget.routes[index]["date"]}",
+                              style: TextStyle(
+                                fontSize: 17,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                   Container(
