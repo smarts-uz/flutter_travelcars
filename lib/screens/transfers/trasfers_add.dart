@@ -359,7 +359,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                   ),
                   onPressed: (){
                     setState(() {
-                      if(i<5) i++;
+                      if(i <= 10) i++;
                       data.add({
                         "direction": 0,
                         "city": city[0],

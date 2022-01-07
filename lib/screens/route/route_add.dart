@@ -19,11 +19,13 @@ class RouteAdd extends StatefulWidget {
 }
 
 class _RouteAddState extends State<RouteAdd> {
+  final ScrollController _controller = ScrollController();
+
   List<String> city = [];
   late final List<DropdownMenuItem<String>> cities;
   late List api_cities;
+
   int count = 1;
-  DateTime? _selectedDate = DateTime.now();
   List<Map<String, dynamic>> data = [];
 
   @override
@@ -54,6 +56,15 @@ class _RouteAddState extends State<RouteAdd> {
     },);
   }
 
+  void _scrollDown() {
+    _controller.animateTo(
+      _controller.position.maxScrollExtent,
+      duration: Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,8 +92,9 @@ class _RouteAddState extends State<RouteAdd> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * .75,
+              height: MediaQuery.of(context).size.height * .73,
               child: ListView.builder(
+                controller: _controller,
                 itemCount: count,
                 itemBuilder: (context, index) {
                   Widget DDM (bool isCity1, String? hint) {
@@ -102,7 +114,7 @@ class _RouteAddState extends State<RouteAdd> {
                             hint: Text(
                                 hint!,
                                 style: TextStyle(
-                                    fontSize: 19,
+                                    fontSize: 18,
                                     color: Colors.black
                                 )
                             ),
@@ -111,7 +123,7 @@ class _RouteAddState extends State<RouteAdd> {
                             value: isCity1 ? data[index]["city1"] : data[index]["city2"],
                             isExpanded: true,
                             style: TextStyle(
-                                fontSize: 19,
+                                fontSize: 18,
                                 color: Colors.black
                             ),
                             underline: SizedBox(),
@@ -129,12 +141,12 @@ class _RouteAddState extends State<RouteAdd> {
                   return Card(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                     elevation: 4,
-                    margin: EdgeInsets.fromLTRB(16, 24, 16, 24),
+                    margin: EdgeInsets.fromLTRB(24, 24, 24, 5),
                     child:Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20)
                       ),
-                      margin:EdgeInsets.all(17),
+                      margin:EdgeInsets.all(13),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -162,7 +174,7 @@ class _RouteAddState extends State<RouteAdd> {
                                   Text(
                                     "${DateFormat('dd/MM/yyyy').format(data[index]["day"])}",
                                     style: TextStyle(
-                                        fontSize: 16
+                                        fontSize: 18
                                     ),
                                   ),
                                   IconButton(
@@ -188,7 +200,7 @@ class _RouteAddState extends State<RouteAdd> {
                               ),
                             ),
                             TFF("Quantity of passengers", data[index]["controllers2"][0], 44),
-                            TFF("The address of the place to pick up from.", data[index]["controllers2"][1], 140),
+                            TFF("The address of the place to pick up from.", data[index]["controllers2"][1], 110),
                           ]
                       ),
                     ),
@@ -196,11 +208,14 @@ class _RouteAddState extends State<RouteAdd> {
                 },
               ),
             ),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height*.045,
+                  height: MediaQuery.of(context).size.height*.05,
                   width: MediaQuery.of(context).size.width*.40,
                   child: RaisedButton(
                     color: Colors.white,
@@ -218,14 +233,16 @@ class _RouteAddState extends State<RouteAdd> {
                         ),
                       ],
                     ),
-                    onPressed: (){
-                      setState(() {
-                        if(count>1) {
-                          data.removeAt(count-1);
-                          count--;
-                        }
+                    onPressed: () {
+                      if(count > 1) {
+                        data.removeAt(count-1);
+                        count--;
                       }
-                      );
+                      setState(() {
+                        Future.delayed(const Duration(milliseconds: 500), () async {
+                          _scrollDown();
+                        });
+                      });
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -236,7 +253,7 @@ class _RouteAddState extends State<RouteAdd> {
                   ),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height*.045,
+                  height: MediaQuery.of(context).size.height*.05,
                   width: MediaQuery.of(context).size.width*.40,
                   child: RaisedButton(
                     color: Colors.white,
@@ -258,18 +275,21 @@ class _RouteAddState extends State<RouteAdd> {
                         ),
                       ],
                     ),
-                    onPressed: (){
+                    onPressed: () {
+                      if(count <= 10) count++;
+                      data.add({
+                        "city1": city[0],
+                        "city2": city[0],
+                        "day": DateTime.now(),
+                        "controllers2": [
+                          for (int i = 0; i < 2; i++)
+                            TextEditingController()
+                        ],
+                      });
                       setState(() {
-                        if(count<5) count++;
-                        data.add({
-                          "city1": city[0],
-                          "city2": city[0],
-                          "day": DateTime.now(),
-                          "controllers2": [
-                            for (int i = 0; i < 2; i++)
-                              TextEditingController()
-                          ],
-                        },);
+                        Future.delayed(const Duration(milliseconds: 500), () async {
+                          _scrollDown();
+                        });
                       });
                     },
                     shape: RoundedRectangleBorder(
@@ -384,7 +404,13 @@ class _RouteAddState extends State<RouteAdd> {
                     Dialogs.LoginDialog(context);
                   }
                 },
-                child: Text('Submit your application'),
+                child: Text(
+                  'Submit your application',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white
+                  ),
+                ),
                 color: Colors.blue,
               ),
             )
@@ -393,6 +419,7 @@ class _RouteAddState extends State<RouteAdd> {
       ),
     );
   }
+
   Widget TFF (String? hint_text, TextEditingController controller, double height) {
     return Container(
       width: double.infinity,
@@ -425,7 +452,7 @@ class _RouteAddState extends State<RouteAdd> {
         keyboardType: TextInputType.text,
         cursorColor: Colors.black,
         style: TextStyle(
-            fontSize: 24
+            fontSize: 18
         ),
         expands: false,
         maxLines: 7,
