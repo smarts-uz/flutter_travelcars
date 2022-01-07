@@ -79,7 +79,10 @@ class _SearchResultState extends State<SearchResult> {
       ),
       body: widget.routes.isEmpty ? Center(
         child: Text(
-          "No items found"
+          "No matching results are found",
+          style: TextStyle(
+            fontSize: 20
+          ),
         ),
       ) : ListView.builder(
           itemCount: widget.routes.length,

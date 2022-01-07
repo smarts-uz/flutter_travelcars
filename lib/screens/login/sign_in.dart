@@ -73,7 +73,7 @@ class _SignInState extends State<SignIn> {
                   child: TextFormField(
                     autovalidateMode: AutovalidateMode.always,
                     decoration: const InputDecoration(
-                      hintText: "E-mail",
+                      hintText: "Phone(998) or e-mail",
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.white,

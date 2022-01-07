@@ -85,7 +85,10 @@ class _CarCategoryState extends State<CarCategory> {
         child: CircularProgressIndicator(),
       ) : categories.isEmpty ? Center (
         child: Text(
-          "No car categories are found"
+          "No car categories are found",
+          style: TextStyle(
+            fontSize: 20
+          ),
         ),
       ):
       SizedBox(
