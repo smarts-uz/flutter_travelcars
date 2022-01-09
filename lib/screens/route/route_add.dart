@@ -88,7 +88,6 @@ class _RouteAddState extends State<RouteAdd> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
         child: Column(
           children: [
             Container(
@@ -100,40 +99,38 @@ class _RouteAddState extends State<RouteAdd> {
                   Widget DDM (bool isCity1, String? hint) {
                     return Container(
                       width: double.infinity,
-                      height: 44,
+                      height: 45,
                       padding: EdgeInsets.only(left: 6, right: 6),
-                      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(5)
                       ),
                       child:DropdownButtonHideUnderline(
-                        child: Container(
-                          child: DropdownButton<String>(
-                            menuMaxHeight: MediaQuery.of(context).size.height * .5,
-                            hint: Text(
-                                hint!,
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black
-                                )
-                            ),
-                            dropdownColor: Colors.grey[50],
-                            icon: Icon(Icons.keyboard_arrow_down),
-                            value: isCity1 ? data[index]["city1"] : data[index]["city2"],
-                            isExpanded: true,
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.black
-                            ),
-                            underline: SizedBox(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                isCity1 ? data[index]["city1"] = newValue! : data[index]["city2"] = newValue!;
-                              });
-                            },
-                            items: cities,
+                        child: DropdownButton<String>(
+                          menuMaxHeight: MediaQuery.of(context).size.height * .5,
+                          hint: Text(
+                              hint!,
+                              style: TextStyle(
+                                  fontSize: 19,
+                                  color: Colors.black
+                              )
                           ),
+                          dropdownColor: Colors.grey[50],
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          value: isCity1 ? data[index]["city1"] : data[index]["city2"],
+                          isExpanded: true,
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black
+                          ),
+                          underline: SizedBox(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              isCity1 ? data[index]["city1"] = newValue! : data[index]["city2"] = newValue!;
+                            });
+                          },
+                          items: cities,
                         ),
                       ),
                     );
@@ -159,47 +156,47 @@ class _RouteAddState extends State<RouteAdd> {
                             ),
                             DDM(true, "From"),
                             DDM(false, "To"),
-                            Container(
-                              width: double.infinity,
-                              height: 55,
-                              padding: EdgeInsets.only(left: 8),
-                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(5)
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "${DateFormat('dd/MM/yyyy').format(data[index]["day"])}",
-                                    style: TextStyle(
-                                        fontSize: 18
+                            GestureDetector(
+                              onTap: () {
+                                showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.now(),
+                                  lastDate: DateTime(2030),
+                                ).then((pickedDate) {
+                                  if(pickedDate==null)
+                                  {
+                                    return;
+                                  }
+                                  setState(() {
+                                    data[index]["day"] = pickedDate;
+                                  });
+                                });
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                height: 45,
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(5)
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "${DateFormat('dd/MM/yyyy').format(data[index]["day"])}",
+                                      style: TextStyle(
+                                          fontSize: 19
+                                      ),
                                     ),
-                                  ),
-                                  IconButton(
-                                    icon: Icon(Icons.calendar_today),
-                                    onPressed: () {
-                                      showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime.now(),
-                                        lastDate: DateTime(2030),
-                                      ).then((pickedDate) {
-                                        if(pickedDate==null)
-                                        {
-                                          return;
-                                        }
-                                        setState(() {
-                                          data[index]["day"] = pickedDate;
-                                        });
-                                      });
-                                    },
-                                  ),
-                                ],
+                                    Icon(Icons.calendar_today),
+                                  ],
+                                ),
                               ),
                             ),
-                            TFF("Quantity of passengers", data[index]["controllers2"][0], 44),
+                            TFF("Quantity of passengers", data[index]["controllers2"][0], 45),
                             TFF("The address of the place to pick up from.", data[index]["controllers2"][1], 110),
                           ]
                       ),
@@ -239,9 +236,11 @@ class _RouteAddState extends State<RouteAdd> {
                         count--;
                       }
                       setState(() {
-                        Future.delayed(const Duration(milliseconds: 500), () async {
-                          _scrollDown();
-                        });
+
+                      });
+
+                      Future.delayed(const Duration(milliseconds: 500), () async {
+                        _scrollDown();
                       });
                     },
                     shape: RoundedRectangleBorder(
@@ -287,9 +286,11 @@ class _RouteAddState extends State<RouteAdd> {
                         ],
                       });
                       setState(() {
-                        Future.delayed(const Duration(milliseconds: 500), () async {
-                          _scrollDown();
-                        });
+
+                      });
+
+                      Future.delayed(const Duration(milliseconds: 500), () async {
+                        _scrollDown();
                       });
                     },
                     shape: RoundedRectangleBorder(
@@ -424,8 +425,8 @@ class _RouteAddState extends State<RouteAdd> {
     return Container(
       width: double.infinity,
       height: height,
-      padding: EdgeInsets.only(left: 6),
-      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      padding: EdgeInsets.only(left: 8),
+      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(5)
@@ -452,7 +453,7 @@ class _RouteAddState extends State<RouteAdd> {
         keyboardType: TextInputType.text,
         cursorColor: Colors.black,
         style: TextStyle(
-            fontSize: 18
+            fontSize: 19
         ),
         expands: false,
         maxLines: 7,

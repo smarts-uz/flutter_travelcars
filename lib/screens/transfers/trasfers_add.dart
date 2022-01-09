@@ -18,6 +18,8 @@ class TransfersAdd extends StatefulWidget {
 }
 
 class _TransfersAddState extends State<TransfersAdd> {
+  final ScrollController _controller = ScrollController();
+
   List<String> directions = [
     'Meeting',
     'The wire'
@@ -58,6 +60,13 @@ class _TransfersAddState extends State<TransfersAdd> {
     );
   }
 
+  void _scrollDown() {
+    _controller.animateTo(
+      _controller.position.maxScrollExtent,
+      duration: Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,20 +91,21 @@ class _TransfersAddState extends State<TransfersAdd> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
         child: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * .75,
+            height: MediaQuery.of(context).size.height * .77,
             child: ListView.builder(
+              controller: _controller,
                 itemCount: i,
                 itemBuilder: (context, index) {
                   Widget TFF(TextEditingController controller, String? hint, double height) {
                     return Container(
                       width: double.infinity,
                       height: height,
+                      alignment: Alignment.topCenter,
                       padding: EdgeInsets.only(left: 12),
-                      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(5)
@@ -121,7 +131,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                         keyboardType: hint == "Quantity of passengers" ? TextInputType.number : TextInputType.text,
                         cursorColor: Colors.black,
                         style: TextStyle(
-                            fontSize: 20
+                            fontSize: 19
                         ),
                         expands: false,
                         maxLines: height == 165 ? 7 : 2,
@@ -131,32 +141,35 @@ class _TransfersAddState extends State<TransfersAdd> {
                   return Card(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                     elevation: 4,
-                    margin: EdgeInsets.fromLTRB(16, 24, 16, 24),
+                    margin: EdgeInsets.fromLTRB(20, 20, 20, 10),
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20)
                       ),
-                      margin:EdgeInsets.all(17),
+                      margin:EdgeInsets.all(12),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.lightBlue,
+                              maxRadius: 18,
                               child: Text(
                                 "${index + 1}",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: Colors.white,
+                                  fontSize: 23
                                 ),
                               ),
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [0, 1].map((int indexr) => Container(
-                                height: 50,
+                                height: 40,
                                 width: MediaQuery.of(context).size.width*.4,
-                                padding: EdgeInsets.all(12),
+                                padding: EdgeInsets.symmetric(vertical: 5),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Expanded(
                                       flex: 1,
@@ -175,9 +188,9 @@ class _TransfersAddState extends State<TransfersAdd> {
                                       flex: 3,
                                       child: Text(
                                         directions[indexr],
-                                        textAlign: TextAlign.center,
+                                        textAlign: TextAlign.start,
                                         style: TextStyle(
-                                          fontSize: 22,
+                                          fontSize: 20,
                                         ),
                                       ),
                                     ),
@@ -188,9 +201,9 @@ class _TransfersAddState extends State<TransfersAdd> {
                             ),
                             Container(
                               width: double.infinity,
-                              height: 44,
-                              padding: EdgeInsets.only(left: 12, right: 6),
-                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                              height: 45,
+                              padding: EdgeInsets.symmetric(horizontal: 12),
+                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                               decoration: BoxDecoration(
                                   border: Border.all(color: Colors.grey),
                                   borderRadius: BorderRadius.circular(5)
@@ -223,73 +236,87 @@ class _TransfersAddState extends State<TransfersAdd> {
                                 ),
                               ),
                             ),
-                            Container(
-                              width: double.infinity,
-                              height: 55,
-                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(5)
-                              ),
-                              child: ListTile(
-                                title: Text(
-                                  "${DateFormat('dd/MM/yyyy').format(data[index]["day"])}",
+                            GestureDetector(
+                              onTap: () {
+                                showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.now(),
+                                  lastDate: DateTime(2030),
+                                ).then((pickedDate) {
+                                  if(pickedDate==null)
+                                  {
+                                    return;
+                                  }
+                                  setState(() {
+                                    data[index]["day"] = pickedDate;
+                                  });
+                                });
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                height: 45,
+                                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                                padding: EdgeInsets.symmetric(horizontal: 12),
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(5)
                                 ),
-                                trailing: IconButton(
-                                  icon: Icon(Icons.calendar_today),
-                                  onPressed: () {
-                                    showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime.now(),
-                                      lastDate: DateTime(2030),
-                                    ).then((pickedDate) {
-                                      if(pickedDate==null)
-                                      {
-                                        return;
-                                      }
-                                      setState(() {
-                                        data[index]["day"] = pickedDate;
-                                      });
-                                    });
-                                  },
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: double.infinity,
-                              height: 55,
-                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(5)
-                              ),
-                              child: ListTile(
-                                title: Text(
-                                  "${data[index]["time"].format(context)}",
-                                ),
-                                trailing: IconButton(
-                                  icon: Icon(Icons.timer_rounded),
-                                  onPressed: () {
-                                    final DateTime now = DateTime.now();
-                                    showTimePicker(
-                                      context: context,
-                                      initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
-                                    ).then((TimeOfDay? value) {
-                                      if (value != null) {
-                                        setState(() {
-                                          data[index]["time"] = value;
-                                        });
-                                      }
-                                    });
-                                  },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "${DateFormat('dd/MM/yyyy').format(data[index]["day"])}",
+                                      style: TextStyle(
+                                        fontSize: 18
+                                      ),
+                                    ),
+                                    Icon(Icons.calendar_today),
+                                  ],
                                 ),
                               ),
                             ),
-                            TFF(data[index]["controllers4"][0], "Quantity of passengers", 44),
-                            TFF(data[index]["controllers4"][1], "From", 44),
-                            TFF(data[index]["controllers4"][2], "To", 44),
-                            TFF(data[index]["controllers4"][3], "The address of the place to pick up from.", 140),
+                            GestureDetector(
+                              onTap: () {
+                                final DateTime now = DateTime.now();
+                                showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
+                                ).then((TimeOfDay? value) {
+                                  if (value != null) {
+                                    setState(() {
+                                      data[index]["time"] = value;
+                                    });
+                                  }
+                                });
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                height: 45,
+                                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                                padding: EdgeInsets.symmetric(horizontal: 12),
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(5)
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "${data[index]["time"].format(context)}",
+                                      style: TextStyle(
+                                        fontSize: 19
+                                      ),
+                                    ),
+                                    Icon(Icons.timer_rounded),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            TFF(data[index]["controllers4"][0], "Quantity of passengers", 45),
+                            TFF(data[index]["controllers4"][1], "From", 45),
+                            TFF(data[index]["controllers4"][2], "To", 45),
+                            TFF(data[index]["controllers4"][3], "The address of the place to pick up from.", 110),
                           ]
                       ),
                     ),
@@ -319,13 +346,18 @@ class _TransfersAddState extends State<TransfersAdd> {
                     ],
                   ),
                   onPressed: (){
+                    if(i > 1) {
+                      data.removeAt(i-1);
+                      i--;
+                    }
                     setState(() {
-                        if(i>1) {
-                          data.removeAt(i-1);
-                          i--;
-                        }
+
                       }
                     );
+
+                    Future.delayed(const Duration(milliseconds: 500), () async {
+                      _scrollDown();
+                    });
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -357,20 +389,24 @@ class _TransfersAddState extends State<TransfersAdd> {
                       ),
                     ],
                   ),
-                  onPressed: (){
+                  onPressed: () {
+                    if(i <= 10) i++;
+                    data.add({
+                      "direction": 0,
+                      "city": city[0],
+                      "day": DateTime.now(),
+                      "time": TimeOfDay.now(),
+                      "controllers4": [
+                        for (int i = 0; i < 4; i++)
+                          TextEditingController()
+                      ],
+                    });
                     setState(() {
-                      if(i <= 10) i++;
-                      data.add({
-                        "direction": 0,
-                        "city": city[0],
-                        "day": DateTime.now(),
-                        "time": TimeOfDay.now(),
-                        "controllers4": [
-                          for (int i = 0; i < 4; i++)
-                            TextEditingController()
-                        ],
-                      },
-                      );
+
+                    });
+
+                    Future.delayed(const Duration(milliseconds: 500), () async {
+                      _scrollDown();
                     });
                   },
                   shape: RoundedRectangleBorder(
@@ -383,7 +419,7 @@ class _TransfersAddState extends State<TransfersAdd> {
               ),
             ],
           ),
-          SizedBox(height: 20,),
+          SizedBox(height: 10),
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40)
@@ -446,15 +482,18 @@ class _TransfersAddState extends State<TransfersAdd> {
                     Dialogs.LoginDialog(context);
                   }
                 },
-                child: Text('Submit your application'),
+                child: Text(
+                  'Submit your application',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white
+                  ),
+                ),
                 color: Colors.blue,
               ),
-            ),
-          SizedBox(
-            height: 30,
-          )
+          ),
         ],
-      ),
+        ),
       ),
     );
   }
