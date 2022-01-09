@@ -86,7 +86,7 @@ class _TripItemState extends State<TripItem> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(
-                      "http://travelcars.teampro.uz/uploads/tours/${widget.trip_item["image"]}",
+                      "${AppConfig.image_url}/tours/${widget.trip_item["image"]}",
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -278,7 +278,7 @@ class _TripItemState extends State<TripItem> {
               height: 50,
               width: double.infinity,
               padding: EdgeInsets.only(top: 5, bottom: 5, left: 15, right: 15),
-              margin: EdgeInsets.only(top: 15),
+              margin: EdgeInsets.symmetric(vertical: 10),
               child: RaisedButton(
                   elevation: 3,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -329,6 +329,7 @@ class _TripItemState extends State<TripItem> {
                             body: info
                         );
                         if(json.decode(result.body)["message"] == "Not found.") {
+                          print(result.body);
                           Dialogs.ErrorDialog(context);
                         } else {
                           Dialogs.ZayavkaDialog(context);

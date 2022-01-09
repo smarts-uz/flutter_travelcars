@@ -100,86 +100,100 @@ class _AddScreenState extends State<AddScreen> {
         child: Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           elevation: 4,
-          margin: EdgeInsets.fromLTRB(16, 24, 16, 24),
+          margin: EdgeInsets.fromLTRB(24, 20, 24, 24),
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20)
             ),
-            margin:EdgeInsets.all(15),
+            margin:EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TFF("From", text_controllers[0], 55, false),
-                TFF("To", text_controllers[1], 55, false),
-                Container(
-                  width: double.infinity,
-                  height: 55,
-                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5)
-                  ),
-                  child: ListTile(
-                    title: Text(
-                      "${DateFormat('dd/MM/yyyy').format(day)}",
+                TFF("From", text_controllers[0], 45, false),
+                TFF("To", text_controllers[1], 45, false),
+                GestureDetector(
+                  onTap: () {
+                    showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(2030),
+                    ).then((pickedDate) {
+                      if(pickedDate==null)
+                      {
+                        return;
+                      }
+                      setState(() {
+                        day = pickedDate;
+                      });
+                    });
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 45,
+                    margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(5)
                     ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.calendar_today),
-                      onPressed: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(2030),
-                        ).then((pickedDate) {
-                          if(pickedDate==null)
-                          {
-                            return;
-                          }
-                          setState(() {
-                            day = pickedDate;
-                          });
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 55,
-                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5)
-                  ),
-                  child: ListTile(
-                    title: Text(
-                      "${time.format(context)}",
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.timer_rounded),
-                      onPressed: () {
-                        final DateTime now = DateTime.now();
-                        showTimePicker(
-                          context: context,
-                          initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
-                        ).then((TimeOfDay? value) {
-                          if (value != null) {
-                            setState(() {
-                              time = value;
-                            });
-                          }
-                        });
-                      },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "${DateFormat('dd/MM/yyyy').format(day)}",
+                          style: TextStyle(
+                              fontSize: 19
+                          ),
+                        ),
+                        Icon(Icons.calendar_today),
+                      ],
                     ),
                   ),
                 ),
-                TFF("Car model", text_controllers[2], 55, false),
-                TFF("Quantity without baggage", text_controllers[3], 55, true),
-                TFF("Quantity within baggage", text_controllers[4], 55, true),
-                TFF("Name", text_controllers[5], 55, false),
-                TFF("Phone", text_controllers[6], 55, true),
-                TFF("Comment", text_controllers[7], 155, false),
+                GestureDetector(
+                  onTap: () {
+                    final DateTime now = DateTime.now();
+                    showTimePicker(
+                      context: context,
+                      initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
+                    ).then((TimeOfDay? value) {
+                      if (value != null) {
+                        setState(() {
+                          time = value;
+                        });
+                      }
+                    });
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 45,
+                    margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(5)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "${time.format(context)}",
+                          style: TextStyle(
+                            fontSize: 19
+                          ),
+                        ),
+                        Icon(Icons.timer_rounded),
+                      ],
+                    ),
+                  ),
+                ),
+                TFF("Car model", text_controllers[2], 45, false),
+                TFF("Quantity without baggage", text_controllers[3], 45, true),
+                TFF("Quantity within baggage", text_controllers[4], 45, true),
+                TFF("Name", text_controllers[5], 45, false),
+                TFF("Phone", text_controllers[6], 45, true),
+                TFF("Comment", text_controllers[7], 110, false),
                 Row(
                   children: [
                     Container(
@@ -317,6 +331,7 @@ class _AddScreenState extends State<AddScreen> {
                             )
                         );
                       var response = await request.send();
+                      print(response.reasonPhrase);
                       if (response.statusCode == 200) {
                         Dialogs.PoPutiDialog(context);
                       }
@@ -342,8 +357,8 @@ class _AddScreenState extends State<AddScreen> {
     return Container(
       width: double.infinity,
       height: height,
-      padding: EdgeInsets.only(left: 6),
-      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      padding: EdgeInsets.only(left: 12),
+      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(5)
@@ -370,7 +385,7 @@ class _AddScreenState extends State<AddScreen> {
         keyboardType: isNumber ? TextInputType.number : TextInputType.text,
         cursorColor: Colors.black,
         style: TextStyle(
-            fontSize: 20
+            fontSize: 19
         ),
         expands: false,
         maxLines: 7,

@@ -142,10 +142,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
             if(token.isEmpty) Container(
               width: double.infinity,
-              height: 50,
+              height: 45,
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 15),
-              margin: EdgeInsets.only(left: 8, top: 8),
+              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5)),
@@ -171,7 +171,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 keyboardType: TextInputType.name,
                 cursorColor: Colors.black,
                 style: TextStyle(
-                    fontSize: 17,
+                    fontSize: 19,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w400,
                     fontStyle: FontStyle.normal,
@@ -182,7 +182,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
             Container(
               width: double.infinity,
-              height: 55,
+              height: 45,
               padding: EdgeInsets.symmetric(horizontal: 18),
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               decoration: BoxDecoration(
@@ -219,7 +219,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
             if(widget.route_price_id < 0) Container(
               width: double.infinity,
-              height: 50,
+              height: 45,
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 15),
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -249,7 +249,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   keyboardType: TextInputType.text,
                   cursorColor: Colors.black,
                   style: TextStyle(
-                    fontSize: 17,
+                    fontSize: 19,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w400,
                     fontStyle: FontStyle.normal,
@@ -260,35 +260,41 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 ),
               ),
             ),
-            Container(
-              width: double.infinity,
-              height: 55,
-              padding: EdgeInsets.only(left: 6),
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(5)),
-              child: ListTile(
-                title: Text(
-                  "${DateFormat('dd/MM/yyyy').format(_selectedDate2!)}",
-                ),
-                trailing: IconButton(
-                  icon: Icon(Icons.calendar_today),
-                  onPressed: () {
-                    showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2018),
-                      lastDate: DateTime.now(),
-                    ).then((pickedDate) {
-                      if (pickedDate == null) {
-                        return;
-                      }
-                      setState(() {
-                        _selectedDate2 = pickedDate;
-                      });
-                    });
-                  },
+            GestureDetector(
+              onTap: () {
+                showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2018),
+                  lastDate: DateTime.now(),
+                ).then((pickedDate) {
+                  if (pickedDate == null) {
+                    return;
+                  }
+                  setState(() {
+                    _selectedDate2 = pickedDate;
+                  });
+                });
+              },
+              child: Container(
+                width: double.infinity,
+                height: 45,
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(5)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "${DateFormat('dd/MM/yyyy').format(_selectedDate2!)}",
+                      style: TextStyle(
+                          fontSize: 19
+                      ),
+                    ),
+                    Icon(Icons.calendar_today),
+                  ],
                 ),
               ),
             ),
