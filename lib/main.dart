@@ -18,6 +18,7 @@ Future<void> main() async {
           assetLoader: CodegenLoader(),
           child: MyApp())
   );
+
 }
 
 class MyApp extends StatelessWidget {

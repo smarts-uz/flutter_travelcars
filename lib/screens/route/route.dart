@@ -1,6 +1,8 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/route/route_add.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 import '../../dialogs.dart';
 
@@ -107,39 +109,21 @@ void _startAddNewTransaction(BuildContext ctx) {
           margin: EdgeInsets.all(16),
           child: Column(
             children: [
-              Text('About Transfer',
+              Text('about ',
                 textAlign: TextAlign.end,
                 style: TextStyle(
                     fontSize: 24
                 ),
               ),
               Divider(),
-              Text('Lorem ipsum dolor sit amet, consectetur adipiscing '
-                  'elit. Eu venenatis eu id pellentesque.',
-
-                maxLines: 2,
+              Text(LocaleKeys.about_route.tr(),
+                maxLines: 3,
                 style: TextStyle(
                     fontSize: 19,
                     fontWeight: FontWeight.bold
                 ),
               ),
-              Text('\nLorem ipsum dolor sit amet, consectetur adipiscing elit.'
-                  ' A, risus, nec accumsan, ultrices vulputate phasellus. '
-                  'Sagittis sagittis, quis risus eget vel pulvinar potenti amet. '
-                  'Orci nec id maecenas enim rhoncus sodales.'
-                  ' Hendrerit cursus purus gravida ultricies. Imperdiet pharetra morbi gravida hac vitae'
-                  'ipsum dolor sit amet, consectetur adipiscing elit.'
-                  ' A, risus, nec accumsan, ultrices vulputate phasellus. '
-                  'Sagittis sagittis, quis risus eget vel pulvinar potenti amet. '
-                  'Orci nec id maecenas enim rhoncus sodales.'
-                  ' Hendrerit cursus purus gravida ultricies. Imperdiet pharetra morbi gravida hac vitae',
-                maxLines: 5,
-                style: TextStyle(
-                    fontSize: 19
-                ),
-              )
             ],
-
           ),
         );
       }
