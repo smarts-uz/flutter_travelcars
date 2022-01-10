@@ -77,17 +77,12 @@ class Transfer extends StatelessWidget {
                   ],
                 ),
                 onPressed: () async {
-                  final prefs = await SharedPreferences.getInstance();
-                  if(prefs.containsKey('userData')) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TransfersAdd()
-                        )
-                    );
-                  } else {
-                    Dialogs.LoginDialog(context);
-                  }
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TransfersAdd()
+                      )
+                  );
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
