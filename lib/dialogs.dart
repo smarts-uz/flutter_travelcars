@@ -262,6 +262,7 @@ class Dialogs {
                   child: TextButton(
                     onPressed: () {
                       Navigator.pop(ctx);
+                      Navigator.pop(ctx);
                     },
                     child: Text(
                       "Закрыть",

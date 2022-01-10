@@ -264,7 +264,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     Container(
                       padding: EdgeInsets.only(left: 5, bottom: 3),
                       child: Text(
-                        "${results["route"]["created_at"].substring(0,10)}",
+                        "${results["date"].substring(0,10)}",
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.black,
@@ -533,7 +533,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     });
 
                     int id = results["id"];
-                    int amount = int.parse(results["price"]) * (HomeScreen.kurs[0] * 100).toInt();
+                    int amount = int.parse(results["price"]) * (HomeScreen.kurs[0]).toInt();
                     switch(type) {
                       case "click":
                         launch("https://my.click.uz/services/pay?service_id=13729&merchant_id=9367&amount=$amount&transaction_param=$id&return_url=https://travelcars.uz/bookings/show/299&card_type=uzcard");

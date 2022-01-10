@@ -244,7 +244,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                             Icon(Icons.watch_later_outlined, color: Colors.orange,),
                             SizedBox(width: 8),
                             Text(
-                              "${results[index]["route"]["created_at"].substring(0, 10)}",
+                              "${results[index]["date"].substring(0, 10)}",
                               style: TextStyle(
                                 fontSize: 17,
                               ),
