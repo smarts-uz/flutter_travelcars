@@ -179,9 +179,10 @@ class _SearchScreenState extends State<SearchScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [0, 1].map((int index) => Container(
                 height: 50,
-                width: 180,
+                width: MediaQuery.of(context).size.width * .4,
                 padding: EdgeInsets.all(12),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
                       flex: 1,
@@ -195,11 +196,14 @@ class _SearchScreenState extends State<SearchScreen> {
                           }},
                       ),
                     ),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Expanded(
                       flex: 5,
                       child: Text(
                         directions[index],
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 22,
                         ),
@@ -212,9 +216,9 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Container(
               width: double.infinity,
-              height: 55,
-              padding: EdgeInsets.symmetric(horizontal: 18),
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              height: 45,
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5)
@@ -249,9 +253,9 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Container(
               width: double.infinity,
-              height: 55,
-              padding: EdgeInsets.symmetric(horizontal: 18),
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              height: 45,
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5)
@@ -284,77 +288,89 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
             ),
-            Container(
-              width: double.infinity,
-              height: 55,
-              padding: EdgeInsets.only(left: 6),
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(5)
-              ),
-              child: ListTile(
-                title: Text(
-                    "${DateFormat('dd/MM/yyyy').format(_selectedDate1!)}",
+            GestureDetector(
+              onTap: () {
+                showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2018),
+                  lastDate: DateTime(2030),
+                ).then((pickedDate) {
+                  if(pickedDate==null)
+                  {
+                    return;
+                  }
+                  setState(() {
+                    _selectedDate1 = pickedDate;
+                  });
+                });
+              },
+              child: Container(
+                width: double.infinity,
+                height: 45,
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(5)
                 ),
-                trailing: IconButton(
-                  icon: Icon(Icons.calendar_today),
-                  onPressed: () {
-                    showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2018),
-                      lastDate: DateTime(2030),
-                    ).then((pickedDate) {
-                      if(pickedDate==null)
-                      {
-                        return;
-                      }
-                      setState(() {
-                        _selectedDate1 = pickedDate;
-                      });
-                    });
-                  },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "${DateFormat('dd/MM/yyyy').format(_selectedDate1!)}",
+                      style: TextStyle(
+                        fontSize: 19
+                      ),
+                    ),
+                    Icon(Icons.calendar_today),
+                  ],
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2018),
+                  lastDate: DateTime(2030),
+                ).then((pickedDate) {
+                  if(pickedDate==null)
+                  {
+                    return;
+                  }
+                  setState(() {
+                    _selectedDate2 = pickedDate;
+                  });
+                });
+              },
+              child: Container(
+                width: double.infinity,
+                height: 45,
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(5)
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "${DateFormat('dd/MM/yyyy').format(_selectedDate2!)}",
+                      style: TextStyle(
+                        fontSize: 19
+                      ),
+                    ),
+                    Icon(Icons.calendar_today),
+                  ],
                 ),
               ),
             ),
             Container(
               width: double.infinity,
-              height: 55,
-              padding: EdgeInsets.only(left: 6),
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(5)
-              ),
-              child: ListTile(
-                title: Text(
-                  "${DateFormat('dd/MM/yyyy').format(_selectedDate2!)}",
-                ),
-                trailing: IconButton(
-                  icon: Icon(Icons.calendar_today),
-                  onPressed: () {
-                    showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2018),
-                      lastDate: DateTime(2030),
-                    ).then((pickedDate) {
-                      if(pickedDate==null)
-                      {
-                        return;
-                      }
-                      setState(() {
-                        _selectedDate2 = pickedDate;
-                      });
-                    });
-                  },
-                ),
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              height: 55,
+              height: 45,
               padding: EdgeInsets.only(left: 15),
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               decoration: BoxDecoration(
@@ -385,7 +401,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 controller: number_controller,
                 cursorColor: Colors.black,
                 style: TextStyle(
-                  fontSize: 20
+                  fontSize: 19
                 ),
                 expands: false,
                 maxLines: 1,

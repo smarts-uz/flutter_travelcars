@@ -322,16 +322,16 @@ class _TripItemState extends State<TripItem> {
                     });
                     print(info);
                     if(isValid) {
-                      String url = "${AppConfig.BASE_URL}/tours/creates";
+                      String url = "${AppConfig.BASE_URL}/tours/create";
                       try {
                         final result = await http.post(
                             Uri.parse(url),
                             body: info
                         );
                         if(json.decode(result.body)["message"] == "Not found.") {
-                          print(result.body);
                           Dialogs.ErrorDialog(context);
                         } else {
+                          print(result.body);
                           Dialogs.ZayavkaDialog(context);
                         }
                       } catch (error) {

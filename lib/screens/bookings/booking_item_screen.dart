@@ -541,7 +541,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         launch("https://my.click.uz/services/pay?service_id=13729&merchant_id=9367&amount=$amount&transaction_param=$id&return_url=https://travelcars.uz/bookings/show/299&card_type=uzcard");
                         break;
                       case "payme":
-                        String data = "m=5cd1820b1722d50474387f3a;ac.booking_id=$id;a=$amount";
+                        String data = "m=5cd1820b1722d50474387f3a;ac.booking_id=$id;a=${amount * 100}";
                         var bytes = utf8.encode(data);
                         var base64 = base64Encode(bytes);
                         launch("https://checkout.paycom.uz/$base64");
