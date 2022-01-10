@@ -53,6 +53,7 @@ class _BookingScreenState extends State<BookingScreen> {
   int current = 0;
   int narx_index = 0;
   late String dropdown;
+  late String day;
   List<dynamic> narxlar = [];
 
   bool agree = false;
@@ -61,20 +62,27 @@ class _BookingScreenState extends State<BookingScreen> {
   void initState() {
     super.initState();
     double app_kurs = 1;
-    switch(SplashScreen.kurs) {
-      case "UZS":
-        app_kurs = HomeScreen.kurs[0];
-        break;
-      case "EUR":
-        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[1];
-        break;
-      case "RUB":
-        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[2];
-        break;
-    }
+    HomeScreen.kurs.forEach((element) {
+      if(SplashScreen.kurs == element["code"]) {
+        app_kurs = element["rate"];
+      }
+    });
 
-    jsonDecode(widget.book_item["route"]["cost_data"]).forEach((key, value) {
+    jsonDecode(widget.book_item["price_data"]).forEach((key, value) {
       if(value != null) {
+        if(value is String) {
+          if(value == widget.book_item["price"]) {
+            dropdown = value;
+            day = "$key day";
+          }
+        } else {
+          if(value == widget.book_item["price"].toString()) {
+            dropdown = value;
+            day = "$key day";
+          }
+        }
+      }
+      /*if(value != null) {
         double cost;
         if(value.runtimeType == String) {
           cost = double.parse(value) * app_kurs;
@@ -85,9 +93,8 @@ class _BookingScreenState extends State<BookingScreen> {
           "day": "$key day",
           "cost": "${cost.toStringAsFixed(2)} ${SplashScreen.kurs}"
         });
-      }
+      }*/
     });
-    dropdown = narxlar[0]["day"];
   }
 
   @override
@@ -346,7 +353,13 @@ class _BookingScreenState extends State<BookingScreen> {
                             color: Colors.grey.withOpacity(0.7),
                           ),
                         ]),
-                    child: DropdownButtonHideUnderline(
+                    child: Text(
+                      day,
+                      style: TextStyle(
+                        fontSize: 19
+                      ),
+                    )
+                    /*DropdownButtonHideUnderline(
                       child: Container(
                         child: DropdownButton<String>(
                           hint: Text("Страна"),
@@ -385,7 +398,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           }).toList(),
                         ),
                       ),
-                    ),
+                    ),*/
                   ),
                 ),
                 Flexible(
@@ -404,7 +417,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           ]),
                       child: Center(
                         child: Text(
-                          narxlar[narx_index]["cost"],
+                          dropdown,
                           style: TextStyle(
                             fontFamily: "Poppins",
                             fontWeight: FontWeight.w500,
@@ -535,7 +548,12 @@ class _BookingScreenState extends State<BookingScreen> {
                     });
 
                     int id = results["id"];
-                    int amount = int.parse(results["price"]) * (HomeScreen.kurs[0]).toInt();
+                    int amount = 0;
+                    HomeScreen.kurs.forEach((element) {
+                      if(element["code"] == "UZS") {
+                        amount = results["price"] * element["rate"];
+                      }
+                    });
                     switch(type) {
                       case "click":
                         launch("https://my.click.uz/services/pay?service_id=13729&merchant_id=9367&amount=$amount&transaction_param=$id&return_url=https://travelcars.uz/bookings/show/299&card_type=uzcard");

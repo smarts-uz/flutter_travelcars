@@ -710,8 +710,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       }
                     });
 
-                    print(search_body);
-
                     Uri url = Uri.parse("${AppConfig.BASE_URL}/sort");
                     final response = await http.post(
                       url,

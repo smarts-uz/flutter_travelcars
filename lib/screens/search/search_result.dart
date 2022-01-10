@@ -31,17 +31,11 @@ class _SearchResultState extends State<SearchResult> {
   @override
   Widget build(BuildContext context) {
     double app_kurs = 1;
-    switch(SplashScreen.kurs) {
-      case "UZS":
-        app_kurs = HomeScreen.kurs[0];
-        break;
-      case "EUR":
-        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[1];
-        break;
-      case "RUB":
-        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[2];
-        break;
-    }
+    HomeScreen.kurs.forEach((element) {
+      if(SplashScreen.kurs == element["code"]) {
+        app_kurs = element["rate"].toDouble();
+      }
+    });
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

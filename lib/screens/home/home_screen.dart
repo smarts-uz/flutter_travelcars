@@ -30,7 +30,7 @@ class HomeScreen extends StatefulWidget {
   static List<dynamic> options_list = [];
   static List<dynamic> tariff_list = [];
   static Map<String, dynamic> category_list = {};
-  static List<double> kurs = [];
+  static List<dynamic> kurs = [];
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -79,15 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
   static String? SelectedVal;
 
   static List<dynamic> valyuta = [];
-  static Map<String, dynamic> index_val = {
-    "USD" : 0,
-    "EUR": 1,
-    "RUB": 2,
-  };
   static const currency = <String>[
-    "USD",
-    "EUR",
     "RUB",
+    "UZS",
+    "EUR",
   ];
   static final List<DropdownMenuItem<String>> pullar = currency.map(
         (String value) => DropdownMenuItem<String>(
@@ -97,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static String? SelectedVal2;
 
   int _current = 0;
+  double pul = 0.0;
   final CarouselController _controller = CarouselController();
 
   @override
@@ -165,12 +161,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void getvalyuta() async {
-    Uri url = Uri.parse("https://cbu.uz/uz/arkhiv-kursov-valyut/json/");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/getCurrency");
     final response = await http.get(url);
     valyuta = json.decode(response.body);
-    HomeScreen.kurs.add(double.parse(valyuta[0]["Rate"]));
-    HomeScreen.kurs.add(double.parse(valyuta[1]["Rate"]));
-    HomeScreen.kurs.add(double.parse(valyuta[2]["Rate"]));
+    HomeScreen.kurs = valyuta;
   }
 
   void getweather() async {
@@ -343,7 +337,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               Text(
-                                "${DateFormat('dd/MM/yyyy').format(DateTime.now())}",
+                                "${valyuta[0]["date"]}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15
@@ -359,9 +353,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: MediaQuery.of(context).size.width * .45,
                             alignment: Alignment.center,
                             child: Text(
-                              SelectedVal2 != null ?
-                              "${valyuta[index_val[SelectedVal2]]["Rate"]}"  //".substring(0, valyuta[index_val[SelectedVal2]]["Rate"].indexOf("."),)}"
-                                  : " ",
+                              "$pul",
                               textAlign: TextAlign.justify,
                               style: TextStyle(
                                 fontSize: 25
@@ -392,7 +384,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             value: SelectedVal2,
                             onChanged: (String? newValue) {
                               if (newValue != null) {
-                                setState(() => SelectedVal2 = newValue);
+                                setState(() {
+                                  SelectedVal2 = newValue;
+                                  valyuta.forEach((element) {
+                                    if(element["code"] == newValue) {
+                                      pul = element["rate"].toDouble();
+                                    }
+                                  });
+                                });
                               }},
                             items: pullar,
                           ),

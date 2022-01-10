@@ -52,17 +52,11 @@ class _BookingsScreenState extends State<BookingsScreen> {
   @override
   Widget build(BuildContext context) {
     double app_kurs = 1;
-    switch(SplashScreen.kurs) {
-      case "UZS":
-        app_kurs = HomeScreen.kurs[0];
-        break;
-      case "EUR":
-        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[1];
-        break;
-      case "RUB":
-        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[2];
-        break;
-    }
+    HomeScreen.kurs.forEach((element) {
+      if(SplashScreen.kurs == element["code"]) {
+        app_kurs = element["rate"];
+      }
+    });
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -93,6 +87,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
           ),
         ),
       ) : ListView.builder(
+          reverse: true,
           itemCount: results.length,
           itemBuilder: (context, index) {
             List<int> icon_numbers = [];

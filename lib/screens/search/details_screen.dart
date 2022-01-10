@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/screens/profile/reviews.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 
@@ -31,6 +32,20 @@ class _DetailScreenState extends State<DetailScreen> {
   int narx_index = 0;
   late String dropdown;
   List<dynamic> narxlar = [];
+  List<dynamic> costlar = [];
+  static List<String> payment_title = [
+    "Online payment",
+    "Cashless payments",
+    "Cash company",
+    "Cash driver",
+  ];
+  String? selectedVal;
+  final List<DropdownMenuItem<String>> payments = payment_title.map(
+        (String value) => DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        ),
+  ).toList();
 
   void _otmen(BuildContext ctx) {
     showModalBottomSheet(
@@ -103,17 +118,11 @@ class _DetailScreenState extends State<DetailScreen> {
   void initState() {
     super.initState();
     double app_kurs = 1;
-    switch(SplashScreen.kurs) {
-      case "UZS":
-        app_kurs = HomeScreen.kurs[0];
-        break;
-      case "EUR":
-        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[1];
-        break;
-      case "RUB":
-        app_kurs = HomeScreen.kurs[0]/HomeScreen.kurs[2];
-        break;
-    }
+    HomeScreen.kurs.forEach((element) {
+      if(SplashScreen.kurs == element["code"]) {
+        app_kurs = element["rate"].toDouble();
+      }
+    });
     jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
       if(value != null) {
         double cost;
@@ -124,12 +133,26 @@ class _DetailScreenState extends State<DetailScreen> {
         }
         narxlar.add({
           "day": "$key day",
-          "cost": "${cost.toStringAsFixed(2)} ${SplashScreen.kurs}"
+          "cost": cost
         });
       }
     });
     dropdown = narxlar[0]["day"];
-    print(narxlar);
+
+    jsonDecode(widget.route_item["cost_data"]).forEach((key, value) {
+      if(value != null) {
+        double cost;
+        if(value.runtimeType == String) {
+          cost = double.parse(value) * app_kurs;
+        } else {
+          cost = value * app_kurs;
+        }
+        costlar.add({
+          "day": "$key day",
+          "cost": cost
+        });
+      }
+    });
   }
 
   @override
@@ -410,7 +433,6 @@ class _DetailScreenState extends State<DetailScreen> {
                               }
                               newIndex++;
                             });
-
                           },
                           items: narxlar.map<DropdownMenuItem<String>>((value) {
                             return DropdownMenuItem<String>(
@@ -448,7 +470,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           ]),
                       child: Center(
                         child: Text(
-                          narxlar[narx_index]["cost"],
+                          "${narxlar[narx_index]["cost"].toStringAsFixed(2)} ${SplashScreen.kurs}",
                           style: TextStyle(
                             fontFamily: "Poppins",
                             fontWeight: FontWeight.w500,
@@ -461,6 +483,44 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 )
               ],
+            ),
+            _text(text: "Choose the payment type"),
+            Container(
+              width: double.infinity,
+              height: 45,
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(5)
+              ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  menuMaxHeight: MediaQuery.of(context).size.height * .5,
+                  hint: Text(
+                      "Payment",
+                      style: TextStyle(
+                          fontSize: 19,
+                          color: Colors.black
+                      )
+                  ),
+                  dropdownColor: Colors.grey[50],
+                  icon: Icon(Icons.keyboard_arrow_down),
+                  value: selectedVal,
+                  style: TextStyle(
+                      fontSize: 19,
+                      color: Colors.black
+                  ),
+                  isExpanded: true,
+                  underline: SizedBox(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedVal = newValue!;
+                    });
+                  },
+                  items: payments,
+                ),
+              ),
             ),
             Container(
               padding: EdgeInsets.only(left: 16),
@@ -502,25 +562,47 @@ class _DetailScreenState extends State<DetailScreen> {
               onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
                 if(prefs.containsKey("userData")) {
+                  String pay_key = "";
+                  switch(selectedVal) {
+                    case "Online payment":
+                      pay_key = "online";
+                      break;
+                    case "Cashless payments":
+                      pay_key = "pay_bank";
+                      break;
+                    case "Cash company":
+                      pay_key = "pay_cash_company";
+                      break;
+                    case "Cash driver":
+                      pay_key = "pay_cash_driver";
+                      break;
+                  }
+                  if(pay_key.isEmpty) {
+                    ToastComponent.showDialog("Choose payment type");
+                    return;
+                  }
                   String token = json.decode(prefs.getString('userData')!)["token"];
                   Uri url = Uri.parse("${AppConfig.BASE_URL}/book/create");
-                  print(jsonEncode({
+                  print({
                     "route_price_id": "${results["route_price_id"]}",
-                    "cost": "${results["cost"]}",
-                    "price": "${results["price"]}",
-                  }));
-                  final response = await http.post(
-                      url,
-                      headers: {
-                        "Authorization": "Bearer $token"
-                      },
-                      body: {
-                        "route_price_id": "${results["route_price_id"]}",
-                        "cost": "${results["cost"]}",
-                        "price": "${results["price"]}",
-                      }
-                  );
+                    "cost": "${costlar[narx_index]["cost"]}",
+                    "price": "${narxlar[narx_index]["cost"]}",
+                    "pay_key": "$pay_key",
+                  });
                   try{
+                    final response = await http.post(
+                        url,
+                        headers: {
+                          "Authorization": "Bearer $token"
+                        },
+                        body: {
+                          "route_price_id": "${results["route_price_id"]}",
+                          "cost": "${costlar[narx_index]["cost"]}",
+                          "price": "${narxlar[narx_index]["cost"]}",
+                          "pay_key": "$pay_key",
+                        },
+                    );
+                    print(response.body);
                     if(jsonDecode(response.body)["success"]) {
                       Dialogs.ZayavkaDialog(context);
                     } else {
