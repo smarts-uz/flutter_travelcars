@@ -75,15 +75,15 @@ class _BookingScreenState extends State<BookingScreen> {
 
     jsonDecode(widget.book_item["route"]["cost_data"]).forEach((key, value) {
       if(value != null) {
-        int cost;
+        double cost;
         if(value.runtimeType == String) {
-          cost = (double.parse(value) * app_kurs).toInt();
+          cost = double.parse(value) * app_kurs;
         } else {
-          cost = (value * app_kurs).toInt();
+          cost = value * app_kurs;
         }
         narxlar.add({
           "day": "$key day",
-          "cost": "${cost.round()} ${SplashScreen.kurs}"
+          "cost": "${cost.toStringAsFixed(2)} ${SplashScreen.kurs}"
         });
       }
     });

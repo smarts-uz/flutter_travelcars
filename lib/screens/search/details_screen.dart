@@ -124,7 +124,7 @@ class _DetailScreenState extends State<DetailScreen> {
         }
         narxlar.add({
           "day": "$key day",
-          "cost": "${cost.round()} ${SplashScreen.kurs}"
+          "cost": "${cost.toStringAsFixed(2)} ${SplashScreen.kurs}"
         });
       }
     });

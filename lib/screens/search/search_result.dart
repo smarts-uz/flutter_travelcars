@@ -274,7 +274,7 @@ class _SearchResultState extends State<SearchResult> {
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     alignment: Alignment.center,
                     child: Text(
-                      "${(widget.routes[index]["price"] * app_kurs).toStringAsFixed(0)} ${SplashScreen.kurs}",
+                      "${(widget.routes[index]["price"] * app_kurs).toStringAsFixed(2)} ${SplashScreen.kurs}",
                       style: TextStyle(
                           fontSize: 25,
                           color: Colors.black,

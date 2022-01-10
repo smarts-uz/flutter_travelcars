@@ -273,7 +273,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     alignment: Alignment.center,
                     child: Text(
-                      "${(double.parse(results[index]["price"]) * app_kurs).toStringAsFixed(0)} ${SplashScreen.kurs}",
+                      "${(double.parse(results[index]["price"]) * app_kurs).toStringAsFixed(2)} ${SplashScreen.kurs}",
                       style: TextStyle(
                           fontSize: 25,
                           color: Colors.black,
