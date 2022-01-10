@@ -65,7 +65,8 @@
   "Please_agree": "Пожалуйста, согласитесь",
   "Code_is_wrong": "Код неверный",
   "Password_doesn_match": "Пароль не подходит",
-  "You_entered": "Вы неправильно ввели текущий пароль",
+  "You_entered": "вы вошли",
   "You_entered_confirma": "Вы неправильно ввели пароль для подтверждения",
-  "Fill_all_fields": "Заполните все поля"
+  "Fill_all_fields": "Заполните все поля",
+  "add_transfer": "Добавить трансфер"
 }

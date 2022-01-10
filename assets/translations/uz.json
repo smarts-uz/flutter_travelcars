@@ -55,5 +55,18 @@
   "five": "Bank o'tkazmasi komissiyasi - 5%",
   "penalty_at_the_next_conditions": "Keyingisida JARIMA. shartlar:",
   "confirmation_requires": "Tasdiqlash talab qilinadi",
-  "details": "Tafsilotlar"
+  "details": "Tafsilotlar",
+  "Code_is_wrong": "Kod noto'g'ri",
+  "Fill_all_fields": "Barcha maydonlarni to'ldiring",
+  "Password_doesn_match": "Parol mos emas",
+  "Passwords_should_be_same": "Parol bir xil bo'lishi kerak",
+  "Please_agree": "Iltimos, rozi bo'ling",
+  "TextField_is_empty": "maydon bo'sh",
+  "You_entered": "Siz joriy parolni noto'g'ri kiritdingiz",
+  "You_entered_confirma": "Tasdiqlash uchun noto'g'ri parol kiritdingiz",
+  "snackbar": "Oʻzgartirish muvaffaqiyatli saqlandi",
+  "about_route": "Yo‘nalish – sayyohat davomida mahalliy joylarga tashrif buyurish, geografik punktlar va joylarga tashrif buyurishni o‘z ichiga oladi.",
+  "about_transfer": "Transfer – bukzallarga qulayligi uchun xizmat qilinadi, ya'ni aeroport yoki vokzalda kutib olib qo'yiladi.",
+  "add_route": "Marshrut qo'shing",
+  "add_transfer": "Transfer qo'shish"
 }

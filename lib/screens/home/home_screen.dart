@@ -152,6 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void getcities() async {
     HomeScreen.city_list = await Cities.getcities();
     HomeScreen.city_list = HomeScreen.city_list.toSet().toList();
+    print(HomeScreen.city_list);
   }
 
   void getnews () async {

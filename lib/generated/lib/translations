@@ -70,20 +70,21 @@ class CodegenLoader extends AssetLoader{
   "Overtime_UZS": "Overtime for 1 hour - 0 UZS",
   "five": "Bank transfer commission - 5% '",
   "penalty_at_the_next_conditions": "PENALTY at the next. conditions:",
-  "confirmation_requires": "Confirmation required",
+  "Code_is_wrong": "Code is wrong",
+  "Fill_all_fields": "Fill all fields",
+  "Password_doesn_match": "Password does not match",
+  "Passwords_should_be_same": "Password should be same",
+  "Please_agree": "Please agree",
+  "TextField_is_empty": "TextField is empty",
+  "You_entered": "You entered the wrong password",
+  "You_entered_confirma": "You entered the wrong password for confirmation",
+  "snackbar": "Change saved successfully",
   "details": "Details",
-  "add_route": "Add route",
+  "confirmation_requires": "Confirmation required",
   "about_route": "Route – a journey of a tourist, including visiting objects, geographical points and places when making a trip.",
   "about_transfer": "Transfer is a service that is provided for the convenience of guests, that is, picking up at the airport or train station and delivering them to the hotel and back to the airport or train station.",
-  "snackbar": "Change saved successfully",
-  "Passwords_should_be_same": "Passwords should be same",
-  "TextField_is_empty": "TextField is empty",
-  "Please_agree": "Please agree",
-  "Code_is_wrong": "Code is wrong",
-  "Password_doesn_match": "Password doesn't match",
-  "You_entered": "You entered your current password incorrectly",
-  "You_entered_confirma": "You entered confirmation password incorrectly",
-  "Fill_all_fields": "Fill all fields"
+  "add_route": "Add route",
+  "add_transfer": "Add Transfer"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги между всеми городами Узбекистана: путешествия и бизнесs",
@@ -152,9 +153,10 @@ static const Map<String,dynamic> ru = {
   "Please_agree": "Пожалуйста, согласитесь",
   "Code_is_wrong": "Код неверный",
   "Password_doesn_match": "Пароль не подходит",
-  "You_entered": "Вы неправильно ввели текущий пароль",
+  "You_entered": "вы вошли",
   "You_entered_confirma": "Вы неправильно ввели пароль для подтверждения",
-  "Fill_all_fields": "Заполните все поля"
+  "Fill_all_fields": "Заполните все поля",
+  "add_transfer": "Добавить трансфер"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Oʻzbekistonning barcha shaharlari oʻrtasida transport xizmatlari: sayohat va biznes",
@@ -214,18 +216,19 @@ static const Map<String,dynamic> uz = {
   "penalty_at_the_next_conditions": "Keyingisida JARIMA. shartlar:",
   "confirmation_requires": "Tasdiqlash talab qilinadi",
   "details": "Tafsilotlar",
-  "add_route": "Marshrut qo'shing",
-  "about_route": "Yo'nalish – sayyohat davomida joylashish uchun joylar, geografik punktlar va joylarga tashrif buyurishni o'z ichiga oladi.",
-  "about_transfer": "Transfer – bukzallarga qulayligi uchun xizmat qiladi, ya'ni aeroport yoki vokzalda kutib olib qo'yishga olib kelish, qo'shimcha havoga qo'yib yuboriladi.",
-  "snackbar": "Oʻzgartirish muvaffaqiyatli saqlandi",
-  "Passwords_should_be_same": "Parollar bir xil bo'lishi kerak",
-  "TextField_is_empty": "Matn maydoni bo'sh",
-  "Please_agree": "Iltimos, rozi bo'ling",
   "Code_is_wrong": "Kod noto'g'ri",
+  "Fill_all_fields": "Barcha maydonlarni to'ldiring",
   "Password_doesn_match": "Parol mos emas",
+  "Passwords_should_be_same": "Parol bir xil bo'lishi kerak",
+  "Please_agree": "Iltimos, rozi bo'ling",
+  "TextField_is_empty": "maydon bo'sh",
   "You_entered": "Siz joriy parolni noto'g'ri kiritdingiz",
-  "You_entered_confirma": "Siz tasdiqlash parolini noto'g'ri kiritdingiz",
-  "Fill_all_fields": "Barcha maydonlarni to'ldiring"
+  "You_entered_confirma": "Tasdiqlash uchun noto'g'ri parol kiritdingiz",
+  "snackbar": "Oʻzgartirish muvaffaqiyatli saqlandi",
+  "about_route": "Yo‘nalish – sayyohat davomida mahalliy joylarga tashrif buyurish, geografik punktlar va joylarga tashrif buyurishni o‘z ichiga oladi.",
+  "about_transfer": "Transfer – bukzallarga qulayligi uchun xizmat qilinadi, ya'ni aeroport yoki vokzalda kutib olib qo'yiladi.",
+  "add_route": "Marshrut qo'shing",
+  "add_transfer": "Transfer qo'shish"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

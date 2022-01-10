@@ -53,5 +53,20 @@
   "sevendays": "the beginning of the trip - 7 days in advance;",
   "Overtime_UZS": "Overtime for 1 hour - 0 UZS",
   "five": "Bank transfer commission - 5% '",
-  "penalty_at_the_next_conditions": "PENALTY at the next. conditions:"
+  "penalty_at_the_next_conditions": "PENALTY at the next. conditions:",
+  "Code_is_wrong": "Code is wrong",
+  "Fill_all_fields": "Fill all fields",
+  "Password_doesn_match": "Password does not match",
+  "Passwords_should_be_same": "Password should be same",
+  "Please_agree": "Please agree",
+  "TextField_is_empty": "TextField is empty",
+  "You_entered": "You entered the wrong password",
+  "You_entered_confirma": "You entered the wrong password for confirmation",
+  "snackbar": "Change saved successfully",
+  "details": "Details",
+  "confirmation_requires": "Confirmation required",
+  "about_route": "Route – a journey of a tourist, including visiting objects, geographical points and places when making a trip.",
+  "about_transfer": "Transfer is a service that is provided for the convenience of guests, that is, picking up at the airport or train station and delivering them to the hotel and back to the airport or train station.",
+  "add_route": "Add route",
+  "add_transfer": "Add Transfer"
 }
