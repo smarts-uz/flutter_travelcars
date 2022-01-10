@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/login/confirm.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 import '../../app_config.dart';
 import 'components/toast.dart';
 import 'package:http/http.dart' as http;
@@ -19,6 +21,8 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _verifyController = TextEditingController();
   bool show = false;
+  bool show1 = false;
+
 
   List<String> _items = ["Физ. лицо", "Юр. лицо"];
   String _currentItem = "Физ. лицо";
@@ -236,17 +240,17 @@ class _SignUpState extends State<SignUp> {
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(5)),
                     child: TextFormField(
-                      obscureText: show,
+                      obscureText: show1,
                       autovalidateMode: AutovalidateMode.always,
                       decoration:  InputDecoration(
                         hintText: "Подтверждение пароля",
                         suffixIcon: IconButton(
                           onPressed: () {
                             setState(() {
-                              show = !show;
+                              show1 = !show1;
                             });
                           },
-                          icon: !show ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
+                          icon: !show1 ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -277,12 +281,12 @@ class _SignUpState extends State<SignUp> {
                       GestureDetector(
                         onTap: () {
                           if (_nameController.text.isEmpty || _emailController.text.isEmpty ||_passwordController.text.isEmpty){
-                            ToastComponent.showDialog("TextField is empty", );
+                            ToastComponent.showDialog(LocaleKeys.TextField_is_empty.tr());
                             return;
                           }
 
                           if (_passwordController.text != _verifyController.text ) {
-                            ToastComponent.showDialog("Password doesn't match",);
+                            ToastComponent.showDialog(LocaleKeys.Password_doesn_match.tr());
                             return;
                           }
 

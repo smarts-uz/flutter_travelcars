@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -134,12 +136,12 @@ class _SecondScreenState extends State<SecondScreen> {
                   String? current = prefs.getString("password");
 
                   if(current_p.text.compareTo(current!) != 0) {
-                    ToastComponent.showDialog("You entered your current password incorrectly");
+                    ToastComponent.showDialog(LocaleKeys.You_entered.tr());
                     return;
                   }
 
                   if(new_p.text!.compareTo(new_p_c.text) != 0) {
-                    ToastComponent.showDialog("You entered confirmation password incorrectly");
+                    ToastComponent.showDialog(LocaleKeys.You_entered_confirma.tr());
                     return;
                   }
                   Uri url = Uri.parse("${AppConfig.BASE_URL}/password/reset");

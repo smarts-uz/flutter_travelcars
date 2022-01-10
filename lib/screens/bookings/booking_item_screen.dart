@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,6 +10,7 @@ import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/screens/profile/reviews.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../app_config.dart';
@@ -522,7 +524,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 GestureDetector(
                   onTap: () {
                     if(!agree) {
-                      ToastComponent.showDialog("Please agree");
+                      ToastComponent.showDialog(LocaleKeys.Please_agree.tr());
                       return;
                     }
                     String type = "click";

@@ -58,5 +58,17 @@ abstract class  LocaleKeys {
   static const penalty_at_the_next_conditions = 'penalty_at_the_next_conditions';
   static const confirmation_requires = 'confirmation_requires';
   static const details = 'details';
+  static const add_route = 'add_route';
+  static const about_route = 'about_route';
+  static const about_transfer = 'about_transfer';
+  static const snackbar = 'snackbar';
+  static const Passwords_should_be_same = 'Passwords_should_be_same';
+  static const TextField_is_empty = 'TextField_is_empty';
+  static const Please_agree = 'Please_agree';
+  static const Code_is_wrong = 'Code_is_wrong';
+  static const Password_doesn_match = 'Password_doesn_match';
+  static const You_entered = 'You_entered';
+  static const You_entered_confirma = 'You_entered_confirma';
+  static const Fill_all_fields = 'Fill_all_fields';
 
 }

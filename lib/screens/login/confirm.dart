@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/screens/login/set_password.dart';
 import 'package:travelcars/screens/login/social_network.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/translations/locale_keys.g.dart';
 import '../../app_config.dart';
 
 class Confirm extends StatefulWidget {
@@ -163,7 +165,7 @@ class _ConfirmState extends State<Confirm> {
                     }
                     else
                       {
-                        ToastComponent.showDialog('Code is wrong !');
+                        ToastComponent.showDialog(LocaleKeys.Code_is_wrong.tr());
                       }
 
                   },

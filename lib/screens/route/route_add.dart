@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:http/http.dart' as http;
-
 import '../../app_config.dart';
 
 class RouteAdd extends StatefulWidget {
@@ -24,16 +23,13 @@ class _RouteAddState extends State<RouteAdd> {
   List<String> city = [];
   late final List<DropdownMenuItem<String>> cities;
   late List api_cities;
-
   int count = 1;
   List<Map<String, dynamic>> data = [];
-
   @override
   void initState() {
     super.initState();
     getcities();
   }
-
   void getcities() {
     api_cities = HomeScreen.city_list;
     api_cities.forEach((element) {
@@ -150,9 +146,10 @@ class _RouteAddState extends State<RouteAdd> {
                             Center(
                               child: Text('Trip ${index + 1}',
                                 style: TextStyle(
-                                    fontSize: 25  ,
+                                    fontSize: 25,
                                     fontWeight: FontWeight.bold
-                                ),),
+                                ),
+                              ),
                             ),
                             DDM(true, "From"),
                             DDM(false, "To"),

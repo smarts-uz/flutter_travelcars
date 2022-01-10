@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 import '../../../app_config.dart';
 
@@ -282,15 +284,14 @@ class _FirstSceenState extends State<FirstSceen> {
                             SnackBar(
                                 backgroundColor: Colors.green,
                                 content: Text(
-                                  "Изменение успешно сохранены",
+                                  LocaleKeys.snackbar.tr(),
                                   style: TextStyle(
                                       color: Colors.white
                                   ),
-                                )
-                            )
+                                ),
+                            ),
                         );
                         Navigator.pop(context);
-
                         final prefs = await SharedPreferences.getInstance();
                         if(_radioVal2 == 0) {
                           userinfo["name"] = _nameController.text;
@@ -320,7 +321,7 @@ class _FirstSceenState extends State<FirstSceen> {
                         Dialogs.ErrorDialog(context);
                       }
                     } else {
-                      ToastComponent.showDialog("Fill all fields");
+                      ToastComponent.showDialog(LocaleKeys.Fill_all_fields.tr());
                     }
                   },
                   child: Container(
