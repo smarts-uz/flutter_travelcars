@@ -34,12 +34,9 @@ class _DropButtonMnyState extends State<DropButtonMny> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(
-        left: 18,
-        right: 18,
-      ),
+      padding: EdgeInsets.only(left: 18, right: 18,),
       margin: EdgeInsets.all(16),
-      height: 54,
+      height: 50,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: Colors.grey[50],
@@ -68,7 +65,7 @@ class _DropButtonMnyState extends State<DropButtonMny> {
                       fontFamily: "Poppins",
                       fontWeight: FontWeight.w500,
                       fontStyle: FontStyle.normal,
-                      fontSize: 15,
+                      fontSize: 19,
                       color: HexColor('#3C3C43'),
                     ),
                   ));

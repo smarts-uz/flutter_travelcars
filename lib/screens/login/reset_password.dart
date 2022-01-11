@@ -42,103 +42,102 @@ class _ResetPasswordState extends State<ResetPassword> {
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height*0.9,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                SizedBox(height: 24,),
-                Text(
-                  "Введите электронную почту или номер\n телефона, и мы отправим код для сброса пароля ",
-                  style: TextStyle(
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13,
-                      fontFamily: "Poppins"),
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              SizedBox(height: 20),
+              Text(
+                "Введите электронную почту или номер\n телефона, и мы отправим код для сброса пароля ",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 19,
+                    fontFamily: "Poppins"),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                width: double.infinity,
+                height: 50,
+                padding: EdgeInsets.only(left: 15),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(5)),
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.always,
+                  decoration: const InputDecoration(
+                    hintText: "Phone(998) or e-mail",
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 0,
+                      ),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 0,
+                      ),
+                    ),
+                  ),
+                  controller: _emailController,
+                  keyboardType: TextInputType.text,
+                  cursorColor: Colors.black,
+                  style: TextStyle(fontSize: 19),
+                  expands: false,
+                  maxLines: 1,
+                  autofocus: false,
                 ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 55,
-                  padding: EdgeInsets.only(left: 15),
+              ),
+              Spacer(),
+              GestureDetector(
+                onTap: () async {
+                  String url = "${AppConfig.BASE_URL}/password/forgot";
+                  final result = await http.post(
+                      Uri.parse(url),
+                      body: {
+                        'email':'${_emailController.text}'
+                      }
+                  );
+                  print(result.body);
+                  int id = json.decode(result.body)["user_id"];
+                  int code = json.decode(result.body)['code'];
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) =>Confirm( false,id,code)));
+                },
+                child: Container(
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: TextFormField(
-                    autovalidateMode: AutovalidateMode.always,
-                    decoration: const InputDecoration(
-                      hintText: "Phone(998) or e-mail",
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
+                      borderRadius: BorderRadius.circular(4),
+                      color: Colors.orange
+                  ),
+                  height: 40,
+                  width: MediaQuery.of(context).size.width * .35,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Далее",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
                           color: Colors.white,
-                          width: 0,
+                          fontSize: 19
                         ),
                       ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 0,
-                        ),
-                      ),
-                    ),
-                    controller: _emailController,
-                    keyboardType: TextInputType.text,
-                    cursorColor: Colors.black,
-                    style: TextStyle(fontSize: 20),
-                    expands: false,
-                    maxLines: 1,
-                    autofocus: false,
+                      SizedBox(width: 10),
+                      Icon(Icons.arrow_forward_ios,color: Colors.white,)
+                    ],
                   ),
                 ),
-                Spacer(),
-                GestureDetector(
-                  onTap: () async {
-                    print("start ");
-                    print(_emailController.text);
-                    String url = "${AppConfig.BASE_URL}/password/forgot";
-                    final result = await http.post(
-                        Uri.parse(url),
-                        body: {
-                          'email':'${_emailController.text}'
-                        }
-                    );
-                    print(result.body);
-                    int id = json.decode(result.body)["user_id"];
-                    int code = json.decode(result.body)['code'];
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) =>Confirm( false,id,code)));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: Colors.orange
-                    ),
-                    height: 40,
-                    width: 154,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SizedBox(width: 10,),
-                        Text(
-                          "Далее",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        Icon(Icons.arrow_forward_ios,color: Colors.white,)
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+            ],
           ),
         ),
       ),

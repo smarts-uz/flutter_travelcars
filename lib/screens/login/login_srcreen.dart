@@ -38,24 +38,22 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Container(
           height: MediaQuery.of(context).size.height*0.9,
           child: Padding(
-            padding: const EdgeInsets.only(top: 50, bottom: 20),
+            padding: const EdgeInsets.only(top: 10, bottom: 10),
             child: Column(
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height*0.1,),
                 Container(
-                  height: 182,
+                  alignment: Alignment.center,
+                  height: MediaQuery.of(context).size.height * .5,
                   width: double.infinity,
                   child: SvgPicture.asset("assets/images/way.svg"),
                 ),
-                SizedBox(
-                  height: 30,
-                ),
                 Text(
-                  "Войдите или зарегестрируйтесь чтобы\n продолжить",
+                  "Войдите или зарегестрируйтесь чтобы продолжить",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w400,
-                      fontSize: 15,
+                      fontSize: 19,
                       fontFamily: "Poppins"),
                 ),
                 Spacer(),
@@ -64,18 +62,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.push(context, MaterialPageRoute(builder: (_)=>SignIn()));
                   },
                   child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .1),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: Colors.orange
                     ),
                     height: 40,
-                    width: 312,
+                    width: double.infinity,
                     child: Center(
                       child: Text(
                         "Войти",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
+                          fontSize: 18
                         ),
                       ),
                     ),
@@ -89,26 +89,36 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.push(context, MaterialPageRoute(builder: (_)=>SignUp()));
                   },
                   child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .1),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Colors.grey[50],
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 1.5
+                        ),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.7),
                           ),
-                        ]),
+                        ],
+                    ),
                     height: 40,
-                    width: 312,
+                    width: double.infinity,
                     child: Center(
                       child: Text(
                         "Зарегестрироваться",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.orange,
+                          fontSize: 18
                         ),
                       ),
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 20,
                 ),
               ],
             ),

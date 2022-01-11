@@ -45,176 +45,169 @@ class _SetPasswordState extends State<SetPassword> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height*0.9,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                SizedBox(height: 24,),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Создайте новый пароль",
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 13,
-                          fontFamily: "Poppins"),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 55,
-                  padding: EdgeInsets.only(left: 15),
-                  //margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: TextFormField(
-                    obscureText: show,
-                    autovalidateMode: AutovalidateMode.always,
-                    decoration: InputDecoration(
-                      hintText: "Пароль",
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            show = !show;
-                          });
-                        },
-                        icon: show ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 0,
-                        ),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 0,
-                        ),
-                      ),
-                    ),
-                    controller: _passwordController,
-                    keyboardType: TextInputType.text,
-                    cursorColor: Colors.black,
-                    style: TextStyle(fontSize: 20),
-                    expands: false,
-                    maxLines: 1,
-                    autofocus: false,
+          height: MediaQuery.of(context).size.height * 0.9,
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              SizedBox(height: 15),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Создайте новый пароль",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                        fontFamily: "Poppins"),
                   ),
-                ),
-                SizedBox(height: 15,),
-                Container(
-                  width: double.infinity,
-                  height: 55,
-                  padding: EdgeInsets.only(left: 15),
-                 // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: TextFormField(
-                    obscureText: show,
-                    autovalidateMode: AutovalidateMode.always,
-                    decoration:  InputDecoration(
-                      hintText: "Подтверждение пароля",
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            show = !show;
-                          });
-                        },
-                        icon: !show ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 0,
-                        ),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 0,
-                        ),
+                ],
+              ),
+              SizedBox(height: 25),
+              Container(
+                width: double.infinity,
+                height: 45,
+                padding: EdgeInsets.only(left: 15),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(5)),
+                child: TextFormField(
+                  obscureText: show,
+                  autovalidateMode: AutovalidateMode.always,
+                  decoration: InputDecoration(
+                    hintText: "Пароль",
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          show = !show;
+                        });
+                      },
+                      icon: show ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 0,
                       ),
                     ),
-                    controller: _newPasswordController,
-                    keyboardType: TextInputType.text,
-                    cursorColor: Colors.black,
-                    style: TextStyle(fontSize: 20),
-                    expands: false,
-                    maxLines: 1,
-                    autofocus: false,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 0,
+                      ),
+                    ),
                   ),
+                  controller: _passwordController,
+                  keyboardType: TextInputType.text,
+                  cursorColor: Colors.black,
+                  style: TextStyle(fontSize: 19),
+                  expands: false,
+                  maxLines: 1,
+                  autofocus: false,
                 ),
-                Spacer(),
-                GestureDetector(
-                  onTap: () async {
-                    final prefs = await SharedPreferences.getInstance();
-                    String url = "${AppConfig.BASE_URL}/password/reset";
-                    String token = json.decode(prefs.getString('userData')!)["token"];
+              ),
+              SizedBox(height: 15),
+              Container(
+                width: double.infinity,
+                height: 50,
+                padding: EdgeInsets.only(left: 15),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(5)),
+                child: TextFormField(
+                  obscureText: show,
+                  autovalidateMode: AutovalidateMode.always,
+                  decoration:  InputDecoration(
+                    hintText: "Подтверждение пароля",
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          show = !show;
+                        });
+                      },
+                      icon: !show ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 0,
+                      ),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 0,
+                      ),
+                    ),
+                  ),
+                  controller: _newPasswordController,
+                  keyboardType: TextInputType.text,
+                  cursorColor: Colors.black,
+                  style: TextStyle(fontSize: 19),
+                  expands: false,
+                  maxLines: 1,
+                  autofocus: false,
+                ),
+              ),
+              Spacer(),
+              GestureDetector(
+                onTap: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  String url = "${AppConfig.BASE_URL}/password/reset";
+                  String token = json.decode(prefs.getString('userData')!)["token"];
 
-                    if(_newPasswordController.text == _passwordController.text){
-                      try{
-                        final result = await http.post(
-                          Uri.parse(url),
-                          body: {
-                            'password': _newPasswordController.text
-                          },
-                          headers: {
-                            "Authorization": "Bearer $token",
-                          },
-                        );
-                        final prefs = await SharedPreferences.getInstance();
-                        prefs.setString("password", _newPasswordController.text);
-                      }
-                      catch(error){
-                        print(error);
-                        Dialogs.ErrorDialog(context);
-                      }
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (_)=> MainScreen()
-                        ),
-                        ModalRoute.withName('/'),
+                  if(_newPasswordController.text == _passwordController.text){
+                    try{
+                      final result = await http.post(
+                        Uri.parse(url),
+                        body: {
+                          'password': _newPasswordController.text
+                        },
+                        headers: {
+                          "Authorization": "Bearer $token",
+                        },
                       );
+                      final prefs = await SharedPreferences.getInstance();
+                      prefs.setString("password", _newPasswordController.text);
                     }
-                    else
-                      {
-                        ToastComponent.showDialog(LocaleKeys.Passwords_should_be_same.tr());
-                      }
-
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: Colors.orange
-                    ),
-                    height: 40,
-                    child: Center(
-                      child: Text(
-                        "Завершить",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                    catch(error){
+                      print(error);
+                      Dialogs.ErrorDialog(context);
+                    }
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_)=> MainScreen()
+                      ),
+                      ModalRoute.withName('/'),
+                    );
+                  }
+                  else
+                    {
+                      ToastComponent.showDialog(LocaleKeys.Passwords_should_be_same.tr());
+                    }
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: Colors.orange
+                  ),
+                  height: 40,
+                  width: MediaQuery.of(context).size.width * .75,
+                  child: Center(
+                    child: Text(
+                      "Завершить",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
+              ),
+              SizedBox(height: 10),
+            ],
           ),
         ),
       ),

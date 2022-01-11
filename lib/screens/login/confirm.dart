@@ -51,146 +51,137 @@ class _ConfirmState extends State<Confirm> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.89,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-              bottom: 20,
-            ),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.03,
-                ),
-                Container(
-                  height: 192,
-                  child: Image.asset("assets/images/Mail1.png"),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  "Введите код подтверждения, которую мы\nотправили вам на электронную почту или на\nтелефон",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 15,
-                      fontFamily: "Poppins"),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 55,
-                  padding: EdgeInsets.only(left: 15),
-                  // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: TextFormField(
-                    obscureText: show,
-                    autovalidateMode: AutovalidateMode.always,
-                    decoration:  InputDecoration(
-                      hintText: "Код",
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            show = !show;
-                          });
-                        },
-                        icon: !show ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 0,
-                        ),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 0,
-                        ),
+          height: MediaQuery.of(context).size.height * 0.9,
+          padding: const EdgeInsets.only(
+            left: 16,
+            right: 16,
+            bottom: 20,
+          ),
+          child: Column(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.35,
+                child: Image.asset("assets/images/Mail1.png"),
+              ),
+              SizedBox(height: 15),
+              Text(
+                "Введите код подтверждения, которую мы отправили вам на электронную почту или на телефон",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 19,
+                    fontFamily: "Poppins"),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Container(
+                width: double.infinity,
+                height: 50,
+                padding: EdgeInsets.only(left: 15),
+                // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(5)),
+                child: TextFormField(
+                  obscureText: show,
+                  autovalidateMode: AutovalidateMode.always,
+                  decoration:  InputDecoration(
+                    hintText: "Код",
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          show = !show;
+                        });
+                      },
+                      icon: !show ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 0,
                       ),
                     ),
-                    controller: _emailController,
-                    keyboardType: TextInputType.text,
-                    cursorColor: Colors.black,
-                    style: TextStyle(fontSize: 20),
-                    expands: false,
-                    maxLines: 1,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 0,
+                      ),
+                    ),
                   ),
+                  controller: _emailController,
+                  keyboardType: TextInputType.text,
+                  cursorColor: Colors.black,
+                  style: TextStyle(fontSize: 19),
+                  expands: false,
+                  maxLines: 1,
                 ),
-                Spacer(),
-                GestureDetector(
-                  onTap: () async {
-                    String url = "${AppConfig.BASE_URL}/verify";
-                    final result = await http.post(
-                        Uri.parse(url),
-                        body: {
-                        'user_id': widget.id.toString(),
-                          'code': '${_emailController.text}',
-                        }
-                    );
-
-                    final response = json.decode(result.body)['data'];
-                    if(json.decode(result.body)['success']){
-                      final prefs = await SharedPreferences.getInstance();
-                      if(widget.isSocial) await prefs.setString("password", widget.password);
-
-                      final userData = json.encode({
-                        'token': response['token']["access_token"],
-                        'expiry_at': response['token']["expires_at"],
-                        'user_id': response["user"]["id"],
-                        'email': response["user"]["email"],
-                        'name': response["user"]["name"],
-                        'phone': response["user"]["phone"],
-                        'socials': response["user"]["socials"],
-                        "shaxs": response["user"]["personality"],
-                        "cashback_summa": response["user"]["cashback_money"],
-                        "cashback_foiz": response["user"]["cashback_percent"],
-                      });
-
-                      await prefs.setString('userData', userData);
-
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => widget.isSocial ? SocialScreen() : SetPassword()
-                          )
-                      );
-                    }
-                    else
-                      {
-                        ToastComponent.showDialog(LocaleKeys.Code_is_wrong.tr());
+              ),
+              Spacer(),
+              GestureDetector(
+                onTap: () async {
+                  String url = "${AppConfig.BASE_URL}/verify";
+                  final result = await http.post(
+                      Uri.parse(url),
+                      body: {
+                      'user_id': widget.id.toString(),
+                        'code': '${_emailController.text}',
                       }
+                  );
 
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: Colors.orange
-                    ),
-                    height: 40,
-                    child: Center(
-                      child: Text(
-                        "Подтвердить",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                  final response = json.decode(result.body)['data'];
+                  if(json.decode(result.body)['success']){
+                    final prefs = await SharedPreferences.getInstance();
+                    if(widget.isSocial) await prefs.setString("password", widget.password);
+                    final userData = json.encode({
+                      'token': response['token']["access_token"],
+                      'expiry_at': response['token']["expires_at"],
+                      'user_id': response["user"]["id"],
+                      'email': response["user"]["email"],
+                      'name': response["user"]["name"],
+                      'phone': response["user"]["phone"],
+                      'socials': response["user"]["socials"],
+                      "shaxs": response["user"]["personality"],
+                      "cashback_summa": response["user"]["cashback_money"],
+                      "cashback_foiz": response["user"]["cashback_percent"],
+                    });
+                    await prefs.setString('userData', userData);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => widget.isSocial ? SocialScreen() : SetPassword()
+                        )
+                    );
+                  }
+                  else
+                    {
+                      ToastComponent.showDialog(LocaleKeys.Code_is_wrong.tr());
+                    }
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: Colors.orange
+                  ),
+                  height: 40,
+                  width: MediaQuery.of(context).size.width * .75,
+                  child: Center(
+                    child: Text(
+                      "Подтвердить",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 19
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+            ],
           ),
         ),
       ),

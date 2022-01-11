@@ -69,6 +69,7 @@ class _SignUpState extends State<SignUp> {
             padding: const EdgeInsets.all(16),
             child: Center(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Row(
                     children: [
@@ -86,7 +87,7 @@ class _SignUpState extends State<SignUp> {
                       Text(
                         _items[0],
                         style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 19,
                             fontWeight: FontWeight.normal,
                             fontStyle: FontStyle.normal,
                             fontFamily: 'Montserrat'),
@@ -108,7 +109,7 @@ class _SignUpState extends State<SignUp> {
                       Text(
                         _items[1],
                         style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 19,
                             fontWeight: FontWeight.normal,
                             fontStyle: FontStyle.normal,
                             fontFamily: 'Montserrat'),
@@ -116,13 +117,12 @@ class _SignUpState extends State<SignUp> {
                     ],
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 15,
                   ),
                   Container(
                     width: double.infinity,
-                    height: 55,
+                    height: 50,
                     padding: EdgeInsets.only(left: 15),
-                   // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(5)),
@@ -146,18 +146,17 @@ class _SignUpState extends State<SignUp> {
                       controller: _nameController,
                       keyboardType: TextInputType.text,
                       cursorColor: Colors.black,
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 19),
                       expands: false,
                       maxLines: 1,
                       autofocus: false,
                     ),
                   ),
-                  SizedBox(height: 15,),
+                  SizedBox(height: 15),
                   Container(
                     width: double.infinity,
-                    height: 55,
+                    height: 50,
                     padding: EdgeInsets.only(left: 15),
-                  //  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(5)),
@@ -181,18 +180,17 @@ class _SignUpState extends State<SignUp> {
                       controller: _emailController,
                       keyboardType: TextInputType.text,
                       cursorColor: Colors.black,
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 19),
                       expands: false,
                       maxLines: 1,
                       autofocus: false,
                     ),
                   ),
-                  SizedBox(height: 15,),
+                  SizedBox(height: 15),
                   Container(
                     width: double.infinity,
-                    height: 55,
+                    height: 50,
                     padding: EdgeInsets.only(left: 15),
-                  //  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(5)),
@@ -225,17 +223,16 @@ class _SignUpState extends State<SignUp> {
                       controller: _passwordController,
                       keyboardType: TextInputType.text,
                       cursorColor: Colors.black,
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 19),
                       expands: false,
                       maxLines: 1,
                     ),
                   ),
-                  SizedBox(height: 15,),
+                  SizedBox(height: 15),
                   Container(
                     width: double.infinity,
-                    height: 55,
+                    height: 50,
                     padding: EdgeInsets.only(left: 15),
-                   // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(5)),
@@ -268,82 +265,74 @@ class _SignUpState extends State<SignUp> {
                       controller: _verifyController,
                       keyboardType: TextInputType.text,
                       cursorColor: Colors.black,
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 19),
                       expands: false,
                       maxLines: 1,
                       autofocus: false,
                     ),
                   ),
                   Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          if (_nameController.text.isEmpty || _emailController.text.isEmpty ||_passwordController.text.isEmpty){
-                            ToastComponent.showDialog(LocaleKeys.TextField_is_empty.tr());
-                            return;
+                  GestureDetector(
+                    onTap: () async {
+                      if (_nameController.text.isEmpty || _emailController.text.isEmpty ||_passwordController.text.isEmpty){
+                        ToastComponent.showDialog(LocaleKeys.TextField_is_empty.tr());
+                        return;
+                      }
+
+                      if (_passwordController.text != _verifyController.text ) {
+                        ToastComponent.showDialog(LocaleKeys.Password_doesn_match.tr());
+                        return;
+                      }
+
+                      String url = "${AppConfig.BASE_URL}/signup";
+                      final result = await http.post(
+                          Uri.parse(url),
+                          body: {
+                            'name':'${_nameController.text}',
+                            'email': "${_emailController.text}",
+                            'password': "${_passwordController.text}",
+                            'password_confirmation' : '${_verifyController.text}',
+                            'personality' : '${type}',
+
                           }
-
-                          if (_passwordController.text != _verifyController.text ) {
-                            ToastComponent.showDialog(LocaleKeys.Password_doesn_match.tr());
-                            return;
-                          }
-
-                       //   Navigator.push(context, MaterialPageRoute(builder: (_)=>Confirm(false,id)));
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: Colors.orange
-                          ),
-                          height: 40,
-                          width: 154,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: () async {
-                                  String url = "${AppConfig.BASE_URL}/signup";
-                                  final result = await http.post(
-                                      Uri.parse(url),
-                                      body: {
-                                        'name':'${_nameController.text}',
-                                        'email': "${_emailController.text}",
-                                        'password': "${_passwordController.text}",
-                                        'password_confirmation' : '${_verifyController.text}',
-                                        'personality' : '${type}',
-
-                                      }
-                                  );
-                                  print(result.body);
-                                  int id = json.decode(result.body)["user_id"];
-                                  int code = json.decode(result.body)['code'];
-                                  Navigator.push(
-                                      context, 
-                                      MaterialPageRoute(
-                                          builder: (_) => Confirm(true, id, code, password: _passwordController.text,)
-                                      )
-                                  );
-                                },
-                                child: Text(
-                                  "Далее",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 10,),
-                              Icon(Icons.arrow_forward_ios,color: Colors.white,)
-                            ],
-                          ),
-                        ),
+                      );
+                      print(result.body);
+                      int id = json.decode(result.body)["user_id"];
+                      int code = json.decode(result.body)['code'];
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => Confirm(true, id, code, password: _passwordController.text,)
+                          )
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: Colors.orange
                       ),
-                    ],
+                      height: 40,
+                      width: MediaQuery.of(context).size.width * .35,
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Далее",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 19
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Icon(Icons.arrow_forward_ios,color: Colors.white,)
+                        ],
+                      ),
+                    ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                 ],
               ),
