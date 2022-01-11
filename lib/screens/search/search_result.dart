@@ -1,6 +1,6 @@
-import 'dart:convert';
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,87 +9,23 @@ import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/search/details_screen.dart';
 import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
-import 'package:http/http.dart' as http;
 
 class SearchResult extends StatefulWidget {
-  final Map<dynamic, dynamic> search_body;
-  final bool isCarCategory;
-  final int carCategory;
+  final List<dynamic> routes;
 
-  SearchResult({
-    this.isCarCategory = false,
-    this.search_body = const {},
-    this.carCategory = 0,
-  });
+  SearchResult(this.routes);
 
   @override
   _SearchResultState createState() => _SearchResultState();
 }
 
 class _SearchResultState extends State<SearchResult> {
-  bool isLoading = true;
-  List<dynamic> routes = [];
   List<String> icons = [
     "assets/icons/places.jpg",
     "assets/icons/big_bag.jpg",
     "assets/icons/small_bag.jpg",
     "assets/icons/doors.jpg",
   ];
-
-
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getSearchResult();
-  }
-
-  void getSearchResult() async {
-    Uri url = Uri.parse("${AppConfig.BASE_URL}/sort");
-    if(widget.isCarCategory) {
-      DateTime current =  DateTime.now();
-      String time = "31.12.${current.year}";
-      final result_reverse = await http.post(
-          url,
-          body: {
-            "reverse": "1",
-            "car_models[0]": "${widget.carCategory}",
-            "date_end": time,
-          }
-      );
-      final result_nonreverse = await http.post(
-          url,
-          body: {
-            "reverse": "0",
-            "car_models[0]": "${widget.carCategory}",
-            "date_end": time,
-          }
-      );
-
-      print("Non-reverse: ${jsonDecode(result_nonreverse.body)["routes"].toString()}");
-      print("Reverese: ${jsonDecode(result_reverse.body)["routes"].toString()}");
-
-      if(jsonDecode(result_nonreverse.body)["routes"].isNotEmpty) {
-        routes.addAll(jsonDecode(result_nonreverse.body)["routes"]);
-      }
-
-      if(jsonDecode(result_reverse.body)["routes"].isNotEmpty) {
-        routes.addAll(jsonDecode(result_reverse.body)["routes"]);
-      }
-    } else {
-      final response = await http.post(
-          url,
-          body: widget.search_body
-      );
-      routes = jsonDecode(response.body)["routes"];
-    }
-    print("All: ${routes.toString()}");
-
-    setState(() {
-      isLoading = false;
-    });
-  }
 
 
   @override
@@ -135,9 +71,7 @@ class _SearchResultState extends State<SearchResult> {
       endDrawer: Drawer(
         child: SearchScreen(isDrawer: true,),
       ),
-      body: isLoading ? Center(
-        child: CircularProgressIndicator(),
-      ) : routes.isEmpty ? Center(
+      body: widget.routes.isEmpty ? Center(
         child: Text(
           "No matching results are found",
           style: TextStyle(
@@ -145,17 +79,15 @@ class _SearchResultState extends State<SearchResult> {
           ),
         ),
       ) : ListView.builder(
-          itemCount: routes.length,
+          itemCount: widget.routes.length,
           itemBuilder: (context, index) {
-            Map<String, dynamic> car = routes[index]["car"];
-            List<dynamic> options = routes[index]["route_options"];
+            Map<String, dynamic> car = widget.routes[index]["car"];
+            List<dynamic> options = widget.routes[index]["route_options"];
             List<int> icon_numbers = [];
             icon_numbers.add(car["places"]);
             icon_numbers.add(car["big_bags"]);
             icon_numbers.add(car["small_bags"]);
             icon_numbers.add(car["doors"]);
-            print(routes[index] == 1);
-            print(routes[index]);
             return Card(
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -169,16 +101,12 @@ class _SearchResultState extends State<SearchResult> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(
-                          Icons.info_outline,
-                          color: routes[index]["status"] == 1 ? Colors.red : Colors.green,
-                        ),
+                        Icon(Icons.info_outline, color: Colors.red),
                         SizedBox(width: 13),
                         Text(
-                          routes[index]["status"] == 1 ? "Confirmation requires" : "Instant confirmation",
+                          "Confirmation requires",
                           style: TextStyle(
                             fontSize: 20,
-                            color: routes[index]["status"] == 1 ? Colors.red : Colors.green,
                           ),
                         ),
                       ],
@@ -296,7 +224,7 @@ class _SearchResultState extends State<SearchResult> {
                     margin: EdgeInsets.all(5),
                     child: ListTile(
                       title: Text(
-                        "${routes[index]["title"]}",
+                        "${widget.routes[index]["title"]}",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 19,
@@ -311,7 +239,7 @@ class _SearchResultState extends State<SearchResult> {
                             Icon(Icons.watch_later_outlined, color: Colors.orange,),
                             SizedBox(width: 8),
                             Text(
-                              "${routes[index]["date"]}",
+                              "${widget.routes[index]["date"]}",
                               style: TextStyle(
                                 fontSize: 17,
                               ),
@@ -340,7 +268,7 @@ class _SearchResultState extends State<SearchResult> {
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     alignment: Alignment.center,
                     child: Text(
-                      "${(routes[index]["price"] * app_kurs).toStringAsFixed(2)} ${SplashScreen.kurs}",
+                      "${(widget.routes[index]["price"] * app_kurs).toStringAsFixed(2)} ${SplashScreen.kurs}",
                       style: TextStyle(
                           fontSize: 25,
                           color: Colors.black,
@@ -352,7 +280,7 @@ class _SearchResultState extends State<SearchResult> {
                     onTap: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => DetailScreen(routes[index]))
+                          MaterialPageRoute(builder: (context) => DetailScreen(widget.routes[index]))
                       );
                     },
                     child: Container(

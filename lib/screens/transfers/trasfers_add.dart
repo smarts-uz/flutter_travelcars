@@ -25,18 +25,15 @@ class _TransfersAddState extends State<TransfersAdd> {
     'The wire'
   ];
   int i = 1;
-
   List<String> city = [];
   late final List<DropdownMenuItem<String>> cities;
   late List api_cities;
   List<Map<String, dynamic>> data = [];
-
   @override
   void initState() {
     super.initState();
     getcities();
   }
-
   void getcities() {
     api_cities = HomeScreen.city_list;
     api_cities.forEach((element) {
