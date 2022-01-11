@@ -154,6 +154,8 @@ class _SearchResultState extends State<SearchResult> {
             icon_numbers.add(car["big_bags"]);
             icon_numbers.add(car["small_bags"]);
             icon_numbers.add(car["doors"]);
+            print(routes[index] == 1);
+            print(routes[index]);
             return Card(
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -167,12 +169,16 @@ class _SearchResultState extends State<SearchResult> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(Icons.info_outline, color: Colors.red),
+                        Icon(
+                          Icons.info_outline,
+                          color: routes[index]["status"] == 1 ? Colors.red : Colors.green,
+                        ),
                         SizedBox(width: 13),
                         Text(
-                          "Confirmation requires",
+                          routes[index]["status"] == 1 ? "Confirmation requires" : "Instant confirmation",
                           style: TextStyle(
                             fontSize: 20,
+                            color: routes[index]["status"] == 1 ? Colors.red : Colors.green,
                           ),
                         ),
                       ],

@@ -112,6 +112,21 @@ class _BookingsScreenState extends State<BookingsScreen> {
                 }
               }
             });
+            String status = "Unknown";
+            switch(results[index]['status']) {
+              case "moderating":
+                status = "На рассмотрения";
+                break;
+              case "proceed":
+                status = "В ожидании";
+                break;
+              case "rejected":
+                status = "Отклонен";
+                break;
+              case "accepted":
+                status = "Одобрен";
+                break;
+            }
             return Card(
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -137,7 +152,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Status: ${results[index]["status"]}",
+                          "Status: $status",
                           style: TextStyle(
                             fontSize: 20,
                           ),

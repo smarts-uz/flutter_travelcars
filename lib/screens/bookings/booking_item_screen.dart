@@ -88,6 +88,22 @@ class _BookingScreenState extends State<BookingScreen> {
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> results = widget.book_item;
+    String status = "Unknown";
+    Color color = Colors.grey;
+    switch(results['status']) {
+      case "moderating":
+        status = "На рассмотрения";
+        break;
+      case "proceed":
+        status = "В ожидании";
+        break;
+      case "rejected":
+        color = Colors.red;
+        break;
+      case "accepted":
+        status = "Одобрен";
+        break;
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
@@ -209,25 +225,10 @@ class _BookingScreenState extends State<BookingScreen> {
                         left: 16,
                       ),
                       child: Text(
-                        "Статус:",
+                        "Статус: $status",
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Poppins',
-                          fontStyle: FontStyle.normal,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(
-                        left: 16,
-                      ),
-                      child: Text(
-                        "${results["status"]}",
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.grey,
                           fontWeight: FontWeight.w500,
                           fontFamily: 'Poppins',
                           fontStyle: FontStyle.normal,

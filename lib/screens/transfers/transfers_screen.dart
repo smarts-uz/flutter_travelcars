@@ -114,6 +114,26 @@ class List_T extends StatelessWidget {
               "car": "null"
             });
           }
+          String status = "Unknown";
+          Color color = Colors.grey;
+          switch(info[index]['status']) {
+            case "moderating":
+              status = "На рассмотрения";
+              color = Colors.amber;
+              break;
+            case "proceed":
+              status = "В ожидании";
+              color =Colors.blue;
+              break;
+            case "rejected":
+              color = Colors.red;
+              status = "Отклонен";
+              break;
+            case "accepted":
+              status = "Одобрен";
+              color = Colors.green;
+              break;
+          }
           return Card(
             margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -132,8 +152,13 @@ class List_T extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                     onPressed: () {},
-                    color: Colors.lightGreenAccent,
-                    child: Text('${info[index]['status']}'),
+                    color: color,
+                    child: Text(
+                      status,
+                      style: TextStyle(
+                        color: Colors.white
+                      ),
+                    ),
                   ),
                 ),
                 Container(
