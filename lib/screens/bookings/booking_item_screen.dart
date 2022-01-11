@@ -62,13 +62,13 @@ class _BookingScreenState extends State<BookingScreen> {
   void initState() {
     super.initState();
     double app_kurs = 1;
-    HomeScreen.kurs.forEach((element) {
+    /*HomeScreen.kurs.forEach((element) {
       if(SplashScreen.kurs == element["code"]) {
-        app_kurs = element["rate"];
+        app_kurs = element["rate"].toDouble();
       }
     });
 
-    jsonDecode(widget.book_item["price_data"]).forEach((key, value) {
+    widget.book_item["price_data"].forEach((key, value) {
       if(value != null) {
         if(value is String) {
           if(value == widget.book_item["price"]) {
@@ -82,19 +82,7 @@ class _BookingScreenState extends State<BookingScreen> {
           }
         }
       }
-      /*if(value != null) {
-        double cost;
-        if(value.runtimeType == String) {
-          cost = double.parse(value) * app_kurs;
-        } else {
-          cost = value * app_kurs;
-        }
-        narxlar.add({
-          "day": "$key day",
-          "cost": "${cost.toStringAsFixed(2)} ${SplashScreen.kurs}"
-        });
-      }*/
-    });
+    });*/
   }
 
   @override
@@ -335,7 +323,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 ],
               ),
             ),
-            _text(text: "Стоимость поездки за"),
+            /*_text(text: "Стоимость поездки за"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -430,7 +418,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   ),
                 )
               ],
-            ),
+            ),*/
             results["status"] == "accepted" && results["paid"] == null ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -548,10 +536,10 @@ class _BookingScreenState extends State<BookingScreen> {
                     });
 
                     int id = results["id"];
-                    int amount = 0;
+                    double amount = 0;
                     HomeScreen.kurs.forEach((element) {
                       if(element["code"] == "UZS") {
-                        amount = results["price"] * element["rate"];
+                        amount = double.parse(results["price"]) * element["rate"];
                       }
                     });
                     switch(type) {

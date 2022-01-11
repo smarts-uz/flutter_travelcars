@@ -709,17 +709,11 @@ class _SearchScreenState extends State<SearchScreen> {
                         ind1++;
                       }
                     });
-
-                    Uri url = Uri.parse("${AppConfig.BASE_URL}/sort");
-                    final response = await http.post(
-                      url,
-                      body: search_body
-                    );
                     if(widget.isDrawer) Navigator.pop(context);
                     if(widget.isDrawer) Navigator.pop(context);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SearchResult(jsonDecode(response.body)["routes"])
+                      MaterialPageRoute(builder: (context) => SearchResult(search_body: search_body)
                       )
                     );
                   }

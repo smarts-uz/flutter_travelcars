@@ -33,6 +33,7 @@ class _DetailScreenState extends State<DetailScreen> {
   late String dropdown;
   List<dynamic> narxlar = [];
   List<dynamic> costlar = [];
+  List<dynamic> pricelar = [];
   static List<String> payment_title = [
     "Online payment",
     "Cashless payments",
@@ -139,20 +140,21 @@ class _DetailScreenState extends State<DetailScreen> {
     });
     dropdown = narxlar[0]["day"];
 
+
     jsonDecode(widget.route_item["cost_data"]).forEach((key, value) {
-      if(value != null) {
-        double cost;
-        if(value.runtimeType == String) {
-          cost = double.parse(value) * app_kurs;
-        } else {
-          cost = value * app_kurs;
-        }
-        costlar.add({
-          "day": "$key day",
-          "cost": cost
-        });
-      }
+      costlar.add({
+        "day": key,
+        "cost": value != null ? value : 0
+      });
     });
+
+    jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
+      pricelar.add({
+        "day": key,
+        "cost": value != null ? value : 0
+      });
+    });
+
   }
 
   @override
@@ -416,7 +418,6 @@ class _DetailScreenState extends State<DetailScreen> {
                     child: DropdownButtonHideUnderline(
                       child: Container(
                         child: DropdownButton<String>(
-                          hint: Text("Страна"),
                           dropdownColor: Colors.grey[50],
                           icon: Icon(Icons.keyboard_arrow_down),
                           isExpanded: true,
@@ -583,10 +584,28 @@ class _DetailScreenState extends State<DetailScreen> {
                   }
                   String token = json.decode(prefs.getString('userData')!)["token"];
                   Uri url = Uri.parse("${AppConfig.BASE_URL}/book/create");
+                  String price = "0";
+                  String cost = "0";
+                  pricelar.forEach((element) {
+                    if(element["day"] + " day" == dropdown) {
+                      price = element["cost"];
+                    }
+                  });
+
+                  costlar.forEach((element) {
+                    if(element["day"] + " day" == dropdown) {
+                      if(element["cost"] is String) {
+                        cost = element["cost"];
+                      } else {
+                        cost = element["cost"].toString();
+                      }
+
+                    }
+                  });
                   print({
                     "route_price_id": "${results["route_price_id"]}",
-                    "cost": "${costlar[narx_index]["cost"]}",
-                    "price": "${narxlar[narx_index]["cost"]}",
+                    "cost": "$cost",
+                    "price": "$price",
                     "pay_key": "$pay_key",
                   });
                   try{
@@ -597,8 +616,8 @@ class _DetailScreenState extends State<DetailScreen> {
                         },
                         body: {
                           "route_price_id": "${results["route_price_id"]}",
-                          "cost": "${costlar[narx_index]["cost"]}",
-                          "price": "${narxlar[narx_index]["cost"]}",
+                          "cost": "$cost",
+                          "price": "$price",
                           "pay_key": "$pay_key",
                         },
                     );

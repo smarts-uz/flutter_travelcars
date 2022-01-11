@@ -54,7 +54,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
     double app_kurs = 1;
     HomeScreen.kurs.forEach((element) {
       if(SplashScreen.kurs == element["code"]) {
-        app_kurs = element["rate"];
+        app_kurs = element["rate"].toDouble();
       }
     });
     return Scaffold(
@@ -87,7 +87,6 @@ class _BookingsScreenState extends State<BookingsScreen> {
           ),
         ),
       ) : ListView.builder(
-          reverse: true,
           itemCount: results.length,
           itemBuilder: (context, index) {
             List<int> icon_numbers = [];
@@ -95,6 +94,24 @@ class _BookingsScreenState extends State<BookingsScreen> {
             icon_numbers.add(results[index]["car"]["big_bags"]);
             icon_numbers.add(results[index]["car"]["small_bags"]);
             icon_numbers.add(results[index]["car"]["doors"]);
+            double day = 1.0;
+            results[index]["price_data"].forEach((key, value) {
+              if(value == results[index]["price"]) {
+                switch(key) {
+                  case "one":
+                    day = 1;
+                    break;
+                  case "two":
+                    day = 2;
+                    break;
+                  case "three":
+                    day = 3;
+                    break;
+                  case "half":
+                    day = 0.5;
+                }
+              }
+            });
             return Card(
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -259,7 +276,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                           ),
                           children: <TextSpan>[
                             TextSpan(text: 'The cost of the trip '),
-                            TextSpan(text: 'for 1 day', style: TextStyle(color: Colors.orange)),
+                            TextSpan(text: 'for ${day.toInt()} day', style: TextStyle(color: Colors.orange)),
                           ],
                         ),
                       )

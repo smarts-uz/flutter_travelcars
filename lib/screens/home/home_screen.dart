@@ -354,7 +354,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: MediaQuery.of(context).size.width * .45,
                             alignment: Alignment.center,
                             child: Text(
-                              "$pul",
+                              pul == 0 ? "1\$ = " : "1\$ = $pul",
                               textAlign: TextAlign.justify,
                               style: TextStyle(
                                 fontSize: 25

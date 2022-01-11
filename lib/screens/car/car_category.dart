@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:http/http.dart' as http;
@@ -60,6 +61,13 @@ class _CarCategoryState extends State<CarCategory> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    isLoading = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -99,16 +107,9 @@ class _CarCategoryState extends State<CarCategory> {
             itemCount: categories.length,
             itemBuilder: (context, index) => GestureDetector(
               onTap: () async {
-                Uri url = Uri.parse("${AppConfig.BASE_URL}/sort");
-                final response = await http.post(
-                    url,
-                    body: {
-                      "car_models[0]": "${categories[index]["id"]}",
-                    }
-                );
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SearchResult(jsonDecode(response.body)["routes"])
+                    MaterialPageRoute(builder: (context) => SearchResult(isCarCategory: true, carCategory: categories[index]["id"])
                     )
                 );
               },
