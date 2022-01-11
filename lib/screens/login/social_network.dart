@@ -19,7 +19,7 @@ class _SocialScreenState extends State<SocialScreen> {
   final TextEditingController _phoneEmailController = TextEditingController();
 
   List<Map<String, dynamic>> data = [
-    {"image": "viber.svg", "check_box": false},
+    {"image": "viber", "check_box": false},
     {"image": "wechat", "check_box": false},
     {"image": "telegram", "check_box": false},
     {"image": "whatsapp", "check_box": false},
@@ -82,12 +82,12 @@ class _SocialScreenState extends State<SocialScreen> {
                               padding: const EdgeInsets.only(top: 8.0),
                               child: Text(
                                 item["image"],
+                                style: TextStyle(
+                                  fontSize: 15
+                                ),
                               ),
                             ),
-                            SizedBox(
-                              height:
-                                  MediaQuery.of(context).size.height * 0.02,
-                            ),
+                            SizedBox(height: 5),
                             Checkbox(
                                 value: item["check_box"],
                                 onChanged: (value) {
@@ -99,8 +99,8 @@ class _SocialScreenState extends State<SocialScreen> {
                           ],
                         ),
                       )
-                      .toList()),
-              SizedBox(height: 15,),
+                      .toList(),
+              ),
               Spacer(),
               GestureDetector(
                 onTap: () async {
@@ -140,12 +140,14 @@ class _SocialScreenState extends State<SocialScreen> {
                       color: Colors.orange
                   ),
                   height: 40,
+                  width: MediaQuery.of(context).size.width * .75,
                   child: Center(
                     child: Text(
                       "Подтвердить",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
+                        fontSize: 20
                       ),
                     ),
                   ),
