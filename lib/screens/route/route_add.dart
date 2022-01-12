@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/translations/locale_keys.g.dart';
 import '../../app_config.dart';
 
 class RouteAdd extends StatefulWidget {
@@ -193,8 +195,8 @@ class _RouteAddState extends State<RouteAdd> {
                                 ),
                               ),
                             ),
-                            TFF("Quantity of passengers", data[index]["controllers2"][0], 45),
-                            TFF("The address of the place to pick up from.", data[index]["controllers2"][1], 110),
+                            TFF("${LocaleKeys.Quantity_of_passengers.tr()}", data[index]["controllers2"][0], 45),
+                            TFF("${LocaleKeys.The_address_of_the_place_to_pick_up_from.tr()}", data[index]["controllers2"][1], 110),
                           ]
                       ),
                     ),
@@ -403,7 +405,7 @@ class _RouteAddState extends State<RouteAdd> {
                   }
                 },
                 child: Text(
-                  'Submit your application',
+                  LocaleKeys.submit_your_application.tr(),
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white

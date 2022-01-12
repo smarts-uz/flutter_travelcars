@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class DropButtonMny extends StatefulWidget {
   const DropButtonMny({Key? key}) : super(key: key);
@@ -45,7 +47,7 @@ class _DropButtonMnyState extends State<DropButtonMny> {
       child: DropdownButtonHideUnderline(
         child: Container(
           child: DropdownButton<String>(
-            hint: Text("Выберите валюту"),
+            hint: Text(LocaleKeys.choose_val.tr()),
             dropdownColor: Colors.grey[50],
             icon: Icon(Icons.keyboard_arrow_down),
             value: DropButtonMny.dropdawnvalue,

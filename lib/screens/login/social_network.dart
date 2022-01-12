@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/main_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 import '../../app_config.dart';
 
@@ -143,7 +145,7 @@ class _SocialScreenState extends State<SocialScreen> {
                   width: MediaQuery.of(context).size.width * .75,
                   child: Center(
                     child: Text(
-                      "Подтвердить",
+                      LocaleKeys.confirm.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,

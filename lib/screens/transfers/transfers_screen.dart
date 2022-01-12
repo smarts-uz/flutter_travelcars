@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
@@ -9,6 +10,7 @@ import 'package:travelcars/screens/transfers/transfers_info.dart';
 import 'package:travelcars/screens/transfers/trasfers_add.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 import '../../app_config.dart';
 
@@ -68,7 +70,7 @@ class _TransfersScreenState extends State<TransfersScreen> {
           ),
         ),
         title: Text(
-          'Transfers',
+          LocaleKeys.transfer.tr(),
           style:TextStyle(
               fontSize: 25,
               color: Colors.white
@@ -79,7 +81,7 @@ class _TransfersScreenState extends State<TransfersScreen> {
         child: CircularProgressIndicator(),
       ) : info.isEmpty ?  Center(
         child: Text(
-          "No transfers are found",
+          LocaleKeys.no_transfer_are_found.tr(),
           style: TextStyle(
               fontSize: 20
           ),
@@ -165,7 +167,7 @@ class List_T extends StatelessWidget {
                   padding: EdgeInsets.only(left: 16, bottom: 8),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Route',
+                    LocaleKeys.routes.tr(),
                     style: TextStyle(
                         fontSize: 20
                     ),),
@@ -221,7 +223,7 @@ class List_T extends StatelessWidget {
                   padding: EdgeInsets.only(left: 16,bottom: 10,top: 10),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Contact',
+                    LocaleKeys.contact.tr(),
                     style: TextStyle(
                         fontSize: 20
                     ),),
@@ -241,7 +243,7 @@ class List_T extends StatelessWidget {
                   padding: EdgeInsets.only(left: 16,bottom: 12,top: 10),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Created at:',
+                    '${LocaleKeys.Created_at.tr()}:',
                     style: TextStyle(
                         fontSize: 20
                     ),),
@@ -258,7 +260,7 @@ class List_T extends StatelessWidget {
                   child: RaisedButton(
                     color: Colors.white,
                     child:  Text(
-                      'Look',
+                      LocaleKeys.look.tr(),
                       style: TextStyle(
                           color: Colors.orange,
                           fontSize: 22

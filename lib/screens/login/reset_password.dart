@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/screens/login/confirm.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/login/set_password.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 import '../../app_config.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -31,7 +33,7 @@ class _ResetPasswordState extends State<ResetPassword> {
           ),
         ),
         title: Text(
-          "Восстановить пароль",
+          LocaleKeys.Restore_password.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 23,
@@ -48,7 +50,7 @@ class _ResetPasswordState extends State<ResetPassword> {
             children: [
               SizedBox(height: 20),
               Text(
-                "Введите электронную почту или номер\n телефона, и мы отправим код для сброса пароля ",
+                "${LocaleKeys.enter_your_email_or_number.tr()}\n ${LocaleKeys.phone_and_we_will_send_code_to_reset_your_password.tr()} ",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontStyle: FontStyle.normal,
@@ -121,7 +123,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Далее",
+                        LocaleKeys.next.tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,

@@ -1,4 +1,6 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 class RouteInfo extends StatelessWidget {
   Map<String, dynamic> info;
 
@@ -95,7 +97,7 @@ class RouteInfo extends StatelessWidget {
             Padding(
                 padding: EdgeInsets.only(left: 16),
                 child: Text(
-                  'Contacts',
+                  LocaleKeys.contact.tr(),
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500
@@ -113,7 +115,7 @@ class RouteInfo extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                          text: 'E-mail: ',
+                          text: '}: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
                       TextSpan(text: '${info['user_email']}\n'),

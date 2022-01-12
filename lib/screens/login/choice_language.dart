@@ -9,6 +9,7 @@ import 'package:travelcars/screens/login/components/drop_button_mny.dart';
 import 'package:travelcars/screens/login/login_srcreen.dart';
 import 'package:travelcars/screens/main_screen.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class ChoicePage extends StatefulWidget {
   const ChoicePage({Key? key}) : super(key: key);
@@ -32,14 +33,14 @@ class _ChoicePageState extends State<ChoicePage> {
               child: SvgPicture.asset("assets/images/earth.svg"),
             ),
             Text(
-              "Language:",
+              "${LocaleKeys.language.tr()}:",
               style: TextStyle(
                 fontSize: 21,
               ),
             ),
             DropButton(),
             Text(
-              "Currency:",
+              "${LocaleKeys.Currency.tr()}:",
               style: TextStyle(
                 fontSize: 21,
               ),
@@ -87,7 +88,7 @@ class _ChoicePageState extends State<ChoicePage> {
                 width: MediaQuery.of(context).size.width * .75,
                 child: Center(
                   child: Text(
-                    "Подтвердить",
+                    LocaleKeys.confirm.tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,

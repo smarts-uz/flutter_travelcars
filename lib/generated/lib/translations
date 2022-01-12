@@ -116,7 +116,6 @@ class CodegenLoader extends AssetLoader{
   "Cancellation_terms": "Cancellation terms",
   "transfer": "Transfer",
   "no_transfer_are_found": "No transfers are found",
-  "route": "Route",
   "contact": "Contact",
   "Created_at": "Created at",
   "look": "Look",
@@ -125,7 +124,14 @@ class CodegenLoader extends AssetLoader{
   "no_car_found": "No car categories are found",
   "All_rights_reserved": "All rights reserved",
   "choose_language": "Select language",
-  "choose_val": "Select currency"
+  "choose_val": "Select currency",
+  "confirm": "Confirm",
+  "enter_mail_or_phone": "Enter the confirmation code that we sent you by email or phone",
+  "entered": "Enter",
+  "routes": "Routes",
+  "aboute": "Aboute",
+  "no_routes_found": "No routes are found",
+  "The_address_of_the_place_to_pick_up_from": "The address of the place to pick up from"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги между всеми городами Узбекистана: путешествия и бизнесs",
@@ -229,7 +235,6 @@ static const Map<String,dynamic> ru = {
   "Cancellation_terms": "Условия отмены",
   "transfer": "Перечислить",
   "no_transfer_are_found": "Передачи не найдены",
-  "route": "Маршрут",
   "contact": "Контакт",
   "Created_at": "Создано в",
   "look": "Смотреть",
@@ -238,7 +243,14 @@ static const Map<String,dynamic> ru = {
   "no_car_found": "Категории автомобилей не найдены",
   "All_rights_reserved": "Все права защищены",
   "choose_language": "Выберите язык",
-  "choose_val": "Выберите валюту"
+  "choose_val": "Выберите валюту",
+  "confirm": "Подтвердить",
+  "enter_mail_or_phone": "Введите код подтверждения, который я отправил вам по электронной почте или по телефону",
+  "entered": "Войти",
+  "routes": "Маршруты",
+  "aboute": "об",
+  "no_routes_found": "Маршруты не найдены",
+  "The_address_of_the_place_to_pick_up_from": "Адрес места, где можно забрать"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Oʻzbekistonning barcha shaharlari oʻrtasida transport xizmatlari: sayohat va biznes",
@@ -342,7 +354,6 @@ static const Map<String,dynamic> uz = {
   "Cancellation_terms": "Bekor qilish shartlari",
   "transfer": "Transfer",
   "no_transfer_are_found": "Hech qanday transfer topilmadi",
-  "route": "Marshrut",
   "contact": "Aloqa",
   "Created_at": "Yaratilgan",
   "look": "Ko'rish",
@@ -351,7 +362,14 @@ static const Map<String,dynamic> uz = {
   "no_car_found": "Avtomobil toifalari topilmadi",
   "All_rights_reserved": "Barcha huquqlar himoyalangan",
   "choose_language": "Til tanlang",
-  "choose_val": "Valyutani tanlang"
+  "choose_val": "Valyutani tanlang",
+  "confirm": "Tasdiqlash",
+  "enter_mail_or_phone": "Sizga elektron pochta yoki telefon orqali yuborilgan tasdiqlash kodini kiriting",
+  "entered": "Kirish",
+  "routes": "Marshrutlar",
+  "aboute": "Batafsil",
+  "no_routes_found": "Hech qanday marshrut topilmadi",
+  "The_address_of_the_place_to_pick_up_from": "Qabul qilinadigan joyning manzili"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

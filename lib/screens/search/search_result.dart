@@ -11,6 +11,7 @@ import 'package:travelcars/screens/search/details_screen.dart';
 import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class SearchResult extends StatefulWidget {
   final Map<dynamic, dynamic> search_body;
@@ -112,7 +113,7 @@ class _SearchResultState extends State<SearchResult> {
           ),
         ),
         title: Text(
-          "Results of searching",
+          LocaleKeys.Results_of_searching.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 25
@@ -138,7 +139,7 @@ class _SearchResultState extends State<SearchResult> {
         child: CircularProgressIndicator(),
     ) : routes.isEmpty ? Center(
         child: Text(
-          "No matching results are found",
+          LocaleKeys.No_matching_results_are_found.tr(),
           style: TextStyle(
             fontSize: 20
           ),
@@ -196,7 +197,7 @@ class _SearchResultState extends State<SearchResult> {
                     padding: EdgeInsets.only(left: 15, bottom: 3),
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "Made year: ${car["year"]}",
+                      "${LocaleKeys.year_of_issue.tr()}: ${car["year"]}",
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
@@ -207,7 +208,7 @@ class _SearchResultState extends State<SearchResult> {
                     padding: EdgeInsets.only(left: 15, top: 3, bottom: 5),
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "ID number: ${car["uid"]}",
+                      "${LocaleKeys.id_number.tr()}: ${car["uid"]}",
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
@@ -255,7 +256,7 @@ class _SearchResultState extends State<SearchResult> {
                     padding: EdgeInsets.only(left: 15),
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "The tariff includes:",
+                      "${LocaleKeys.The_tariff_includes.tr()}:",
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,
@@ -365,7 +366,7 @@ class _SearchResultState extends State<SearchResult> {
                           ),
                         ),
                         child: Text(
-                          "Details",
+                          LocaleKeys.details.tr(),
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.orange,

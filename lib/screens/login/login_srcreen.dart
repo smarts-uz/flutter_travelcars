@@ -1,7 +1,10 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travelcars/screens/login/sign_in.dart';
 import 'package:travelcars/screens/login/sing_up.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -26,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         title: Text(
-          "Авторизация",
+          'wd',
           style: TextStyle(
             color: Colors.white,
             fontSize: 23,
@@ -48,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: SvgPicture.asset("assets/images/way.svg"),
                 ),
                 Text(
-                  "Войдите или зарегестрируйтесь чтобы продолжить",
+                  LocaleKeys.login_or_register_to.tr(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontStyle: FontStyle.normal,
@@ -71,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: Center(
                       child: Text(
-                        "Войти",
+                        LocaleKeys.entered.tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
@@ -107,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: Center(
                       child: Text(
-                        "Зарегестрироваться",
+                        LocaleKeys.Register_now.tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.orange,

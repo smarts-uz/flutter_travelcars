@@ -100,7 +100,6 @@
   "Cancellation_terms": "Bekor qilish shartlari",
   "transfer": "Transfer",
   "no_transfer_are_found": "Hech qanday transfer topilmadi",
-  "route": "Marshrut",
   "contact": "Aloqa",
   "Created_at": "Yaratilgan",
   "look": "Ko'rish",
@@ -109,5 +108,12 @@
   "no_car_found": "Avtomobil toifalari topilmadi",
   "All_rights_reserved": "Barcha huquqlar himoyalangan",
   "choose_language": "Til tanlang",
-  "choose_val": "Valyutani tanlang"
+  "choose_val": "Valyutani tanlang",
+  "confirm": "Tasdiqlash",
+  "enter_mail_or_phone": "Sizga elektron pochta yoki telefon orqali yuborilgan tasdiqlash kodini kiriting",
+  "entered": "Kirish",
+  "routes": "Marshrutlar",
+  "aboute": "Batafsil",
+  "no_routes_found": "Hech qanday marshrut topilmadi",
+  "The_address_of_the_place_to_pick_up_from": "Qabul qilinadigan joyning manzili"
 }

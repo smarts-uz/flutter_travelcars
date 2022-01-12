@@ -41,7 +41,7 @@ class _ConfirmState extends State<Confirm> {
           ),
         ),
         title: Text(
-          "Регистрация",
+         LocaleKeys.Register_now.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 23,
@@ -65,7 +65,7 @@ class _ConfirmState extends State<Confirm> {
               ),
               SizedBox(height: 15),
               Text(
-                "Введите код подтверждения, которую мы отправили вам на электронную почту или на телефон",
+                LocaleKeys.enter_mail_or_phone.tr(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontStyle: FontStyle.normal,
@@ -168,7 +168,7 @@ class _ConfirmState extends State<Confirm> {
                   width: MediaQuery.of(context).size.width * .75,
                   child: Center(
                     child: Text(
-                      "Подтвердить",
+                      LocaleKeys.confirm.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,

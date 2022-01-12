@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/choice_language.dart';
 import 'package:travelcars/screens/main_screen.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class SplashScreen extends StatefulWidget {
   static String? til;
@@ -71,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 Container(
                   child: Text(
-                    "2018 - 2021 Travel Cars\n Все права защищены",
+                    "2018 - 2021 Travel Cars\n ${LocaleKeys.All_rights_reserved.tr()}",
                     style: TextStyle(
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w400,

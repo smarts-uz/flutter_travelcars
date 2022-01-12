@@ -102,7 +102,6 @@ abstract class  LocaleKeys {
   static const Cancellation_terms = 'Cancellation_terms';
   static const transfer = 'transfer';
   static const no_transfer_are_found = 'no_transfer_are_found';
-  static const route = 'route';
   static const contact = 'contact';
   static const Created_at = 'Created_at';
   static const look = 'look';
@@ -112,5 +111,12 @@ abstract class  LocaleKeys {
   static const All_rights_reserved = 'All_rights_reserved';
   static const choose_language = 'choose_language';
   static const choose_val = 'choose_val';
+  static const confirm = 'confirm';
+  static const enter_mail_or_phone = 'enter_mail_or_phone';
+  static const entered = 'entered';
+  static const routes = 'routes';
+  static const aboute = 'aboute';
+  static const no_routes_found = 'no_routes_found';
+  static const The_address_of_the_place_to_pick_up_from = 'The_address_of_the_place_to_pick_up_from';
 
 }

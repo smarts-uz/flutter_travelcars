@@ -100,7 +100,6 @@
   "Cancellation_terms": "Условия отмены",
   "transfer": "Перечислить",
   "no_transfer_are_found": "Передачи не найдены",
-  "route": "Маршрут",
   "contact": "Контакт",
   "Created_at": "Создано в",
   "look": "Смотреть",
@@ -109,5 +108,12 @@
   "no_car_found": "Категории автомобилей не найдены",
   "All_rights_reserved": "Все права защищены",
   "choose_language": "Выберите язык",
-  "choose_val": "Выберите валюту"
+  "choose_val": "Выберите валюту",
+  "confirm": "Подтвердить",
+  "enter_mail_or_phone": "Введите код подтверждения, который я отправил вам по электронной почте или по телефону",
+  "entered": "Войти",
+  "routes": "Маршруты",
+  "aboute": "об",
+  "no_routes_found": "Маршруты не найдены",
+  "The_address_of_the_place_to_pick_up_from": "Адрес места, где можно забрать"
 }

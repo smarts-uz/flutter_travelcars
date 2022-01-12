@@ -14,7 +14,7 @@ class Routes extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Routes',
+          LocaleKeys.routes.tr(),
           style:TextStyle(
               fontSize: 25,
               color: Colors.white
@@ -47,7 +47,7 @@ class Routes extends StatelessWidget {
             Container(
                 width: MediaQuery.of(context).size.width*.7,
                 child: Text(
-                  'Вы можете оставить заявку\n нажимая кнопку ниже',
+                  '${LocaleKeys.You_can_leave_request.tr()}\n ${LocaleKeys.by_clicking_the_button_below.tr()}',
                   maxLines: 2,
                   style: TextStyle(
                     fontSize: 13,
@@ -70,7 +70,7 @@ class Routes extends StatelessWidget {
                     ),
                     SizedBox(width: 10),
                     Text(
-                      'Add',
+                      LocaleKeys.add.tr(),
                       style: TextStyle(
                           color: Colors.orange
                       ),
@@ -109,7 +109,7 @@ void _startAddNewTransaction(BuildContext ctx) {
           margin: EdgeInsets.all(16),
           child: Column(
             children: [
-              Text('about ',
+              Text(LocaleKeys.aboute.tr(),
                 textAlign: TextAlign.end,
                 style: TextStyle(
                     fontSize: 24

@@ -54,7 +54,7 @@ class _SignUpState extends State<SignUp> {
           ),
         ),
         title: Text(
-          "Регистрация",
+          LocaleKeys.Register_now.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 23,
@@ -318,7 +318,7 @@ class _SignUpState extends State<SignUp> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Далее",
+                            LocaleKeys.next.tr(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,

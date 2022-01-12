@@ -35,7 +35,7 @@ class _SetPasswordState extends State<SetPassword> {
           ),
         ),
         title: Text(
-          "Сброс пароля",
+          LocaleKeys.Password_reset.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 23,
@@ -54,7 +54,7 @@ class _SetPasswordState extends State<SetPassword> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Создайте новый пароль",
+                    LocaleKeys.create_new_password.tr(),
                     textAlign: TextAlign.start,
                     style: TextStyle(
                         fontStyle: FontStyle.normal,
@@ -196,7 +196,7 @@ class _SetPasswordState extends State<SetPassword> {
                   width: MediaQuery.of(context).size.width * .75,
                   child: Center(
                     child: Text(
-                      "Завершить",
+                      LocaleKeys.complete.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
