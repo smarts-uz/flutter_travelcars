@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/login/components/drop_button_lang.dart';
 import 'package:travelcars/screens/login/components/drop_button_mny.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
@@ -16,6 +17,8 @@ class AccountChoicePage extends StatefulWidget {
 }
 
 class _AccountChoicePageState extends State<AccountChoicePage> {
+  bool testServer = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,6 +65,79 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                 ),
               ),
               DropButtonMny(),
+              Row(
+                children: [
+                  Checkbox(
+                    onChanged: (bool? value) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext dialogContext) {
+                          return AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            content: Container(
+                              height: 70,
+                              width: MediaQuery.of(context).size.width * .85,
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Вы действительно хотите использовать тестовый сервер для приложения",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 20
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            actions: [
+                              FlatButton(
+                                child: Text(
+                                  "Yes",
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  setState(() {
+                                    testServer = true;
+                                  });
+                                },
+                              ),
+                              FlatButton(
+                                child: Text(
+                                  "No",
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.green
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  setState(() {
+                                    testServer = false;
+                                  });
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    value: testServer,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    "Turn on test server",
+                    style: TextStyle(
+                        fontSize: 20
+                    ),
+                  ),
+                ],
+              ),
               Spacer(),
               GestureDetector(
                 onTap: () async {
@@ -81,6 +157,9 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                         "currency": "${DropButtonMny.dropdawnvalue}",
                       })
                   );
+                  if(testServer) {
+                    AppConfig.url = "http://userapp.travelcars.teampro.uz";
+                  }
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (_)=> SplashScreen()

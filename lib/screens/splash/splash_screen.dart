@@ -4,6 +4,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/choice_language.dart';
 import 'package:travelcars/screens/main_screen.dart';
@@ -45,6 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => MainScreen()));
         print(SplashScreen.til);
         print(SplashScreen.kurs);
+        print(AppConfig.url);
       } else {
         prefs.setBool("isFirst", true);
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => ChoicePage()));
