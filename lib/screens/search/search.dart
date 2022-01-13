@@ -709,11 +709,15 @@ class _SearchScreenState extends State<SearchScreen> {
                         ind1++;
                       }
                     });
+                    int cityTour = -1;
+                    if(city_end == 24) {
+                      cityTour = city_start;
+                    }
                     if(widget.isDrawer) Navigator.pop(context);
                     if(widget.isDrawer) Navigator.pop(context);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SearchResult(search_body: search_body)
+                      MaterialPageRoute(builder: (context) => SearchResult(search_body: search_body, cityTour: cityTour,)
                       )
                     );
                   }

@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+//import 'package:geocoder/geocoder.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/dialogs.dart';
@@ -13,12 +15,14 @@ import 'package:travelcars/screens/profile/reviews.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 
 import '../../app_config.dart';
+import '../../map.dart';
 
 
 class DetailScreen extends StatefulWidget {
   final Map<String, dynamic> route_item;
+  final List<Coordinates> points;
 
-  DetailScreen(this.route_item);
+  DetailScreen(this.route_item, this.points);
 
   @override
   _DetailScreenState createState() => _DetailScreenState();
@@ -355,8 +359,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 ],
               ),
             ),
-            //_text(text: "Карта поездки"),
-            /*Stack(
+            if(widget.points.isNotEmpty) _text(text: "Карта поездки"),
+            if(widget.points.isNotEmpty) Stack(
               children: [
                 Container(
                   height: MediaQuery.of(context).size.height * 0.5,
@@ -374,7 +378,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: GestureDetector(
                     onTap: (){
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => MapScreen()));
+                          MaterialPageRoute(builder: (_) => MapScreen(widget.points)));
                     },
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.06,
@@ -396,7 +400,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 ),
               ],
-            ),*/
+            ),
             _text(text: "Стоимость поездки за"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

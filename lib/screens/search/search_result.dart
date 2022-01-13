@@ -1,10 +1,11 @@
 import 'dart:convert';
-import 'dart:developer';
+import 'dart:html';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/search/details_screen.dart';
@@ -12,16 +13,17 @@ import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/translations/locale_keys.g.dart';
+//import 'package:geocoder/geocoder.dart';
 
 class SearchResult extends StatefulWidget {
   final Map<dynamic, dynamic> search_body;
-  final bool isCarCategory;
   final int carCategory;
+  final int cityTour;
 
   SearchResult({
-    this.isCarCategory = false,
     this.search_body = const {},
-    this.carCategory = 0,
+    this.carCategory = -1,
+    this.cityTour = -1
   });
 
 
@@ -30,6 +32,7 @@ class SearchResult extends StatefulWidget {
 }
 
 class _SearchResultState extends State<SearchResult> {
+  List<Coordinates> points = [];
   bool isLoading = true;
   List<dynamic> routes = [];
   List<String> icons = [
@@ -41,14 +44,14 @@ class _SearchResultState extends State<SearchResult> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    if(widget.cityTour > -1) getCityTourPoints();
     getSearchResult();
   }
 
   void getSearchResult() async {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/sort");
-    if(widget.isCarCategory) {
+    if(widget.carCategory < 0) {
       DateTime current =  DateTime.now();
       String time = "31.12.${current.year}";
       final result_reverse = await http.post(
@@ -90,6 +93,21 @@ class _SearchResultState extends State<SearchResult> {
     setState(() {
       isLoading = false;
     });
+  }
+
+  void getCityTourPoints() async {
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/getWaypoints/1");
+    //Uri url = Uri.parse("${AppConfig.BASE_URL}/getWaypoints/${widget.cityTour}");
+    final response  = await http.get(url);
+    if(jsonDecode(response.body).isNotEmpty) {
+      jsonDecode(response.body).forEach((element) async {
+        /*final query = element["data"];
+        var addresses = await Geocoder.local.findAddressesFromQuery(query);
+        var first = addresses.first;
+        points.add(first.coordinates);
+        print("${first.featureName} : ${first.coordinates}");*/
+      });
+    }
   }
 
   @override
@@ -350,7 +368,11 @@ class _SearchResultState extends State<SearchResult> {
                     onTap: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => DetailScreen(routes[index]))
+                          MaterialPageRoute(
+                              builder: (context) => DetailScreen(
+                                  routes[index],
+                                  points)
+                          )
                       );
                     },
                     child: Container(

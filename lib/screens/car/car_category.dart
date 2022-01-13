@@ -109,7 +109,7 @@ class _CarCategoryState extends State<CarCategory> {
               onTap: () async {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SearchResult(isCarCategory: true, carCategory: categories[index]["id"])
+                    MaterialPageRoute(builder: (context) => SearchResult(carCategory: categories[index]["id"])
                     )
                 );
               },

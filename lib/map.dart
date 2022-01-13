@@ -1,10 +1,14 @@
 import 'dart:async';
+import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+//import 'package:geocoder/geocoder.dart';
 
 
 class MapScreen extends StatefulWidget {
+  List<Coordinates> points = [];
+  MapScreen(this.points);
   @override
   _MapScreenState createState() => _MapScreenState();
 }
@@ -17,6 +21,13 @@ class _MapScreenState extends State<MapScreen> {
     target: LatLng(41.313982679270374, 69.24889682717135),
     zoom: 14.4746,
   );
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
