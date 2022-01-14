@@ -12,6 +12,7 @@ import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/translations/locale_keys.g.dart';
+import 'package:geocoding/geocoding.dart';
 
 class SearchResult extends StatefulWidget {
   final Map<dynamic, dynamic> search_body;
@@ -31,6 +32,7 @@ class SearchResult extends StatefulWidget {
 
 class _SearchResultState extends State<SearchResult> {
   bool isLoading = true;
+  Map<String, Location> points = {};
   List<dynamic> routes = [];
   List<String> icons = [
     "assets/icons/places.jpg",
@@ -48,17 +50,17 @@ class _SearchResultState extends State<SearchResult> {
 
   void getSearchResult() async {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/sort");
-    if(widget.carCategory < 0) {
-      DateTime current =  DateTime.now();
-      String time = "31.12.${current.year}";
-      final result_reverse = await http.post(
+    if(widget.carCategory > -1) {
+      String time = "${DateFormat('dd.MM.yyyy').format(DateTime.now())}";
+      print(time);
+      /*final result_reverse = await http.post(
           url,
           body: {
             "reverse": "1",
             "car_models[0]": "${widget.carCategory}",
             "date_end": time,
           }
-      );
+      );*/
       final result_nonreverse = await http.post(
           url,
           body: {
@@ -69,15 +71,15 @@ class _SearchResultState extends State<SearchResult> {
       );
 
       print("Non-reverse: ${jsonDecode(result_nonreverse.body)["routes"].toString()}");
-      print("Reverese: ${jsonDecode(result_reverse.body)["routes"].toString()}");
+      //print("Reverese: ${jsonDecode(result_reverse.body)["routes"].toString()}");
 
       if(jsonDecode(result_nonreverse.body)["routes"].isNotEmpty) {
         routes.addAll(jsonDecode(result_nonreverse.body)["routes"]);
       }
 
-      if(jsonDecode(result_reverse.body)["routes"].isNotEmpty) {
+      /*if(jsonDecode(result_reverse.body)["routes"].isNotEmpty) {
         routes.addAll(jsonDecode(result_reverse.body)["routes"]);
-      }
+      }*/
     } else {
       final response = await http.post(
           url,
@@ -93,16 +95,17 @@ class _SearchResultState extends State<SearchResult> {
   }
 
   void getCityTourPoints() async {
-    Uri url = Uri.parse("${AppConfig.BASE_URL}/getWaypoints/1");
-    //Uri url = Uri.parse("${AppConfig.BASE_URL}/getWaypoints/${widget.cityTour}");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/getWaypoints/${widget.cityTour}");
     final response  = await http.get(url);
     if(jsonDecode(response.body).isNotEmpty) {
       jsonDecode(response.body).forEach((element) async {
-        /*final query = element["data"];
-        var addresses = await Geocoder.local.findAddressesFromQuery(query);
-        var first = addresses.first;
-        points.add(first.coordinates);
-        print("${first.featureName} : ${first.coordinates}");*/
+        await locationFromAddress(element["data"]).then((locations) {
+          if (locations.isNotEmpty) {
+            points.addAll({
+              "${element["data"]}": locations[0]
+            });
+          }
+        });
       });
     }
   }
@@ -368,6 +371,7 @@ class _SearchResultState extends State<SearchResult> {
                           MaterialPageRoute(
                               builder: (context) => DetailScreen(
                                   routes[index],
+                                  points
                               )
                           )
                       );

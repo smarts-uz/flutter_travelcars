@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/dialogs.dart';
@@ -18,8 +19,9 @@ import '../../map.dart';
 
 class DetailScreen extends StatefulWidget {
   final Map<String, dynamic> route_item;
+  final Map<String, Location> points;
 
-  DetailScreen(this.route_item);
+  DetailScreen(this.route_item, this.points);
 
   @override
   _DetailScreenState createState() => _DetailScreenState();
@@ -119,6 +121,7 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
+    print(widget.points);
     double app_kurs = 1;
     HomeScreen.kurs.forEach((element) {
       if(SplashScreen.kurs == element["code"]) {
