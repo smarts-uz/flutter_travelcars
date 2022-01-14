@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/dialogs.dart';
@@ -14,7 +16,6 @@ import 'package:travelcars/screens/profile/reviews.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 
 import '../../app_config.dart';
-import '../../map.dart';
 
 
 class DetailScreen extends StatefulWidget {
@@ -29,7 +30,6 @@ class DetailScreen extends StatefulWidget {
 
 
 class _DetailScreenState extends State<DetailScreen> {
-
   final CarouselController _controller = CarouselController();
   int _current = 0;
   int narx_index = 0;
@@ -50,6 +50,83 @@ class _DetailScreenState extends State<DetailScreen> {
           child: Text(value),
         ),
   ).toList();
+
+  final Map<MarkerId, Marker> markers = {};
+  final Set<Polyline> _polyline={};
+  final List<LatLng> _polyline_points = [];
+  Completer<GoogleMapController> _mapController = Completer();
+  double origin_lat = 0;
+  double origin_lng = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    double app_kurs = 1;
+    HomeScreen.kurs.forEach((element) {
+      if(SplashScreen.kurs == element["code"]) {
+        app_kurs = element["rate"].toDouble();
+      }
+    });
+    jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
+      if(value != null) {
+        double cost;
+        if(value.runtimeType == String) {
+          cost = double.parse(value) * app_kurs;
+        } else {
+          cost = value * app_kurs;
+        }
+        narxlar.add({
+          "day": "$key day",
+          "cost": cost
+        });
+      }
+    });
+    dropdown = narxlar[0]["day"];
+
+
+    jsonDecode(widget.route_item["cost_data"]).forEach((key, value) {
+      costlar.add({
+        "day": key,
+        "cost": value != null ? value : 0
+      });
+    });
+
+    jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
+      pricelar.add({
+        "day": key,
+        "cost": value != null ? value : 0
+      });
+    });
+
+    bool first = true;
+    widget.points.forEach((key, value) {
+      if(first) {
+        origin_lat = value.latitude;
+        origin_lng = value.longitude;
+        first = false;
+      }
+
+      MarkerId markerId = MarkerId(UniqueKey().toString());
+      Marker marker = Marker(
+          markerId: markerId,
+          position: LatLng(
+            value.latitude,
+            value.longitude,
+          ),
+          infoWindow: InfoWindow(title: key));
+      markers[markerId] = marker;
+
+      _polyline_points.add(LatLng(value.latitude, value.longitude));
+    });
+
+    _polyline.add(Polyline(
+      polylineId: PolylineId(UniqueKey().toString()),
+      visible: true,
+      //latlng is List<LatLng>
+      points: _polyline_points,
+      color: Colors.blue,
+    ));
+  }
 
   void _otmen(BuildContext ctx) {
     showModalBottomSheet(
@@ -119,49 +196,6 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    print(widget.points);
-    double app_kurs = 1;
-    HomeScreen.kurs.forEach((element) {
-      if(SplashScreen.kurs == element["code"]) {
-        app_kurs = element["rate"].toDouble();
-      }
-    });
-    jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
-      if(value != null) {
-        double cost;
-        if(value.runtimeType == String) {
-          cost = double.parse(value) * app_kurs;
-        } else {
-          cost = value * app_kurs;
-        }
-        narxlar.add({
-          "day": "$key day",
-          "cost": cost
-        });
-      }
-    });
-    dropdown = narxlar[0]["day"];
-
-
-    jsonDecode(widget.route_item["cost_data"]).forEach((key, value) {
-      costlar.add({
-        "day": key,
-        "cost": value != null ? value : 0
-      });
-    });
-
-    jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
-      pricelar.add({
-        "day": key,
-        "cost": value != null ? value : 0
-      });
-    });
-
-  }
-
-  @override
   Widget build(BuildContext context) {
     Map<String, dynamic> results = widget.route_item;
     return Scaffold(
@@ -174,7 +208,7 @@ class _DetailScreenState extends State<DetailScreen> {
               children: [
                 Container(
                   padding: EdgeInsets.only(top: 24),
-                  height: 330,
+                  height: MediaQuery.of(context).size.height * .4,
                   width: double.infinity,
                   child: CarouselSlider(
                     options: CarouselOptions(
@@ -336,9 +370,10 @@ class _DetailScreenState extends State<DetailScreen> {
                     height: results["route_options"].length * 35.0,
                     width: double.infinity,
                     decoration: BoxDecoration(color: HexColor("#F5F5F6")),
-                    padding: EdgeInsets.only(bottom: 8, left: 16),
+                    padding: EdgeInsets.only(top: 5, left: 16),
                     child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero,
                       itemCount: results["route_options"].length,
                       itemExtent: 28,
                       itemBuilder: (context, i) => Row(
@@ -353,53 +388,35 @@ class _DetailScreenState extends State<DetailScreen> {
                             style: TextStyle(fontSize: 17),
                           )
                         ],
-                      ),
+                      )
                     ),
                   ),
                 ],
               ),
             ),
-            _text(text: "Карта поездки"),
-            Stack(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  padding: const EdgeInsets.only(left: 16, right: 16),
-                  width: double.infinity,
-                  child: Image.asset(
-                    "assets/images/map.jpg",
-                    fit: BoxFit.fill,
-                  ),
+            if(widget.points.isNotEmpty) _text(text: "Карта поездки"),
+            if(widget.points.isNotEmpty) Container(
+              height: MediaQuery.of(context).size.height * 0.4,
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              width: double.infinity,
+              child: GoogleMap(
+                onMapCreated: (GoogleMapController controller) {
+                  _mapController.complete(controller);
+                },
+                markers: Set<Marker>.of(markers.values),
+                polylines: _polyline,
+                myLocationEnabled: true,
+                tiltGesturesEnabled: true,
+                compassEnabled: true,
+                scrollGesturesEnabled: true,
+                zoomGesturesEnabled: true,
+                mapType: MapType.normal,
+                myLocationButtonEnabled: true,
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(origin_lat, origin_lng),
+                  zoom: 14.4746,
                 ),
-                Positioned(
-                  left: 20,
-                  right: 20,
-                  bottom: 10,
-                  child: GestureDetector(
-                    onTap: (){
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => MapScreen()));
-                    },
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.06,
-                      padding: EdgeInsets.only(
-                        left: 16,
-                        right: 16,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: Colors.orange,
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Посмотреть маршрут",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
             _text(text: "Стоимость поездки за"),
             Row(

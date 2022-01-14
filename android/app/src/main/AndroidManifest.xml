@@ -40,7 +40,7 @@
             android:value="2" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC0-IcuJ-QzHPK99JJdw8mKBzi5arU51bI" />
+            android:value="AIzaSyBfclKdBDMynmFFZo9LcFpNS0gmrkLMttE" />
     </application>
     <queries>
         <!-- If your app opens https URLs -->
