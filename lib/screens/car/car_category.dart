@@ -161,8 +161,11 @@ class _CarCategoryState extends State<CarCategory> {
                           height: MediaQuery.of(context).size.height * .17,
                           width: MediaQuery.of(context).size.width * .32,
                           margin: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 8.0),
-                          child: Image.network(
+                          child: categories[index]["image"] != null  ? Image.network(
                             "${AppConfig.image_url}/car-models/${categories[index]["image"]}",
+                            fit: BoxFit.contain,
+                          ) : Image.asset(
+                            "assets/images/no_image.png",
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -188,7 +191,7 @@ class _CarCategoryState extends State<CarCategory> {
                                             index_in == 3 ?
                                               categories[index][names[index_in]["data"]] == 1 ?
                                                 "Yes" : "No" :
-                                                  categories[index][names[index_in]["data"]]
+                                                  categories[index][names[index_in]["data"]] != null ? categories[index][names[index_in]["data"]] : "--"
                                         }",
                                         style: TextStyle(
                                           fontSize: 15.0
