@@ -54,6 +54,7 @@ class _DetailScreenState extends State<DetailScreen> {
   final Map<MarkerId, Marker> markers = {};
   final Set<Polyline> _polyline={};
   final List<LatLng> _polyline_points = [];
+  final List<String> _adresses = [];
   Completer<GoogleMapController> _mapController = Completer();
   double origin_lat = 0;
   double origin_lng = 0;
@@ -116,6 +117,7 @@ class _DetailScreenState extends State<DetailScreen> {
           infoWindow: InfoWindow(title: key));
       markers[markerId] = marker;
 
+      _adresses.add(key);
       _polyline_points.add(LatLng(value.latitude, value.longitude));
     });
 
@@ -396,7 +398,23 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
             if(widget.points.isNotEmpty) _text(text: "Карта поездки"),
             if(widget.points.isNotEmpty) Container(
-              height: MediaQuery.of(context).size.height * 0.4,
+              margin: EdgeInsets.only(left: 16),
+              height: _adresses.length * 30,
+              child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: _adresses.length,
+                  itemExtent: 28,
+                  padding: EdgeInsets.zero,
+                  itemBuilder: (context, index) => Text(
+                    "* ${_adresses[index]}",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 18
+                    ),
+                  )),
+            ),
+            if(widget.points.isNotEmpty) Container(
+              height: MediaQuery.of(context).size.height * 0.45,
               padding: const EdgeInsets.only(left: 16, right: 16),
               width: double.infinity,
               child: GoogleMap(
