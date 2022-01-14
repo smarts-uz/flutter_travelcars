@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:html';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/translations/locale_keys.g.dart';
-//import 'package:geocoder/geocoder.dart';
 
 class SearchResult extends StatefulWidget {
   final Map<dynamic, dynamic> search_body;
@@ -32,7 +30,6 @@ class SearchResult extends StatefulWidget {
 }
 
 class _SearchResultState extends State<SearchResult> {
-  List<Coordinates> points = [];
   bool isLoading = true;
   List<dynamic> routes = [];
   List<String> icons = [
@@ -371,7 +368,7 @@ class _SearchResultState extends State<SearchResult> {
                           MaterialPageRoute(
                               builder: (context) => DetailScreen(
                                   routes[index],
-                                  points)
+                              )
                           )
                       );
                     },

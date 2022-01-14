@@ -17,7 +17,7 @@ class AccountChoicePage extends StatefulWidget {
 }
 
 class _AccountChoicePageState extends State<AccountChoicePage> {
-  bool testServer = false;
+  bool testServer = AppConfig.url == "http://userapp.travelcars.teampro.uz" ? true : false;
 
   @override
   Widget build(BuildContext context) {
@@ -69,63 +69,66 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                 children: [
                   Checkbox(
                     onChanged: (bool? value) {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext dialogContext) {
-                          return AlertDialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                            content: Container(
-                              height: 70,
-                              width: MediaQuery.of(context).size.width * .85,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "Вы действительно хотите использовать тестовый сервер для приложения",
-                                    textAlign: TextAlign.center,
+                      if(!testServer) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext dialogContext) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              content: Container(
+                                height: 70,
+                                width: MediaQuery.of(context).size.width * .85,
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Вы действительно хотите использовать тестовый сервер для приложения",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 20
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              actions: [
+                                FlatButton(
+                                  child: Text(
+                                    "Yes",
                                     style: TextStyle(
-                                        fontSize: 20
+                                      fontSize: 22,
+                                      color: Colors.red,
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                            actions: [
-                              FlatButton(
-                                child: Text(
-                                  "Yes",
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    color: Colors.red,
-                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    setState(() {
+                                      testServer = true;
+                                    });
+                                  },
                                 ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  setState(() {
-                                    testServer = true;
-                                  });
-                                },
-                              ),
-                              FlatButton(
-                                child: Text(
-                                  "No",
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    color: Colors.green
+                                FlatButton(
+                                  child: Text(
+                                    "No",
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        color: Colors.green
+                                    ),
                                   ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
                                 ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  setState(() {
-                                    testServer = false;
-                                  });
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+                        setState(() {
+                          testServer = false;
+                        });
+                      }
                     },
                     value: testServer,
                   ),
@@ -159,6 +162,8 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                   );
                   if(testServer) {
                     AppConfig.url = "http://userapp.travelcars.teampro.uz";
+                  } else {
+                    AppConfig.url = "http://userapp.travelcars.uz";
                   }
                   Navigator.pushAndRemoveUntil(
                     context,

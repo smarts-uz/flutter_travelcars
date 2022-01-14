@@ -1,14 +1,11 @@
 import 'dart:async';
-import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-//import 'package:geocoder/geocoder.dart';
 
 
 class MapScreen extends StatefulWidget {
-  List<Coordinates> points = [];
-  MapScreen(this.points);
+
   @override
   _MapScreenState createState() => _MapScreenState();
 }
