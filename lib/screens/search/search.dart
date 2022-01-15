@@ -81,7 +81,7 @@ class _SearchScreenState extends State<SearchScreen> {
     ).toList();
 
     HomeScreen.city_list.forEach((element) {
-      if(element["id"] <= 20 && element["id"] >= 24) {
+      if(!(element["city_id"] >= 20 && element["city_id"] <= 24)) {
         city_start.add(element["name"]);
       }
     });
@@ -731,7 +731,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
                     String? startCity = "";
                     String? endCity = "";
-                    if(city_end <= 20 && city_end >= 24) {
+                    if(!(city_end >= 20 && city_end <= 24)) {
                       startCity = SearchScreen.SelectedVal1;
                       endCity = SearchScreen.SelectedVal2;
                     }
@@ -743,7 +743,10 @@ class _SearchScreenState extends State<SearchScreen> {
                       MaterialPageRoute(
                           builder: (context) => SearchResult(
                             search_body: search_body,
-                            cityTour: cityTour,)
+                            cityTour: cityTour,
+                            CityStart: startCity,
+                            CityEnd: endCity,
+                          )
                       )
                     );
                   }

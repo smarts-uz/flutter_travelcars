@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/search/details_screen.dart';
@@ -18,8 +17,8 @@ class SearchResult extends StatefulWidget {
   final Map<dynamic, dynamic> search_body;
   final int carCategory;
   final int cityTour;
-  final String CityStart;
-  final String CityEnd;
+  final String? CityStart;
+  final String? CityEnd;
 
   SearchResult({
     this.search_body = const {},
@@ -49,6 +48,7 @@ class _SearchResultState extends State<SearchResult> {
   void initState() {
     super.initState();
     if(widget.cityTour > -1) getCityTourPoints();
+    if(widget.CityEnd!.isNotEmpty && widget.CityStart!.isNotEmpty)  getTwoCitiesPoints();
     getSearchResult();
   }
 
@@ -112,6 +112,24 @@ class _SearchResultState extends State<SearchResult> {
         });
       });
     }
+  }
+
+  void getTwoCitiesPoints() async {
+    await locationFromAddress(widget.CityStart!).then((locations) {
+      if (locations.isNotEmpty) {
+        points.addAll({
+          "${widget.CityStart}": locations[0]
+        });
+      }
+    });
+
+    await locationFromAddress(widget.CityEnd!).then((locations) {
+      if (locations.isNotEmpty) {
+        points.addAll({
+          "${widget.CityEnd}": locations[0]
+        });
+      }
+    });
   }
 
   @override
