@@ -1,6 +1,8 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/car/car_category.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class CarTypes extends StatelessWidget {
   final List carslist;
@@ -22,7 +24,7 @@ class CarTypes extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Auto types',
+          LocaleKeys.Auto_types.tr(),
           style:TextStyle(
               fontSize: 25,
               color: Colors.white

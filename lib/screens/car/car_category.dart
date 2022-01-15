@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/app_config.dart';
@@ -7,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/car/cars_list.dart';
 import 'package:travelcars/screens/search/search_result.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class CarCategory extends StatefulWidget {
   final String name;
@@ -93,7 +95,7 @@ class _CarCategoryState extends State<CarCategory> {
         child: CircularProgressIndicator(),
       ) : categories.isEmpty ? Center (
         child: Text(
-          "No car categories are found",
+          LocaleKeys.No_car_categories_are_found.tr(),
           style: TextStyle(
             fontSize: 20
           ),
