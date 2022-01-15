@@ -285,7 +285,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   Container(
                     padding: EdgeInsets.only(left: 16, top: 10, bottom: 5.0),
                     child: Text(
-                      "В тарифе включено:",
+                      "В тарифе включено::",
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.black,
