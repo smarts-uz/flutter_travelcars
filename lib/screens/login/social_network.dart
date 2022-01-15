@@ -42,7 +42,7 @@ class _SocialScreenState extends State<SocialScreen> {
           ),
         ),
         title: Text(
-          "Выбор Соц. Сетей",
+         LocaleKeys.The_choice_of_social_networks.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 23,
@@ -58,7 +58,7 @@ class _SocialScreenState extends State<SocialScreen> {
             children: [
               SizedBox(height: 35),
               Text(
-                "Выберите социальную сеть, через которую мы можем с вами связаться",
+                LocaleKeys.Select_social_network_through_which_we_can_contact_you.tr(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontStyle: FontStyle.normal,

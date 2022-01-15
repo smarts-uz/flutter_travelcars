@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -9,6 +10,7 @@ import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/screens/login/reset_password.dart';
 import 'package:travelcars/screens/main_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 
 class SignIn extends StatefulWidget {
@@ -38,7 +40,7 @@ class _SignInState extends State<SignIn> {
           ),
         ),
         title: Text(
-          "Войти",
+          LocaleKeys.come_in.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 23,
@@ -203,7 +205,7 @@ class _SignInState extends State<SignIn> {
                   margin: EdgeInsets.symmetric(horizontal: 30),
                   child: Center(
                     child: Text(
-                      "Войти",
+                      LocaleKeys.come_in.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
@@ -238,7 +240,7 @@ class _SignInState extends State<SignIn> {
                   margin: EdgeInsets.symmetric(horizontal: 30),
                   child: Center(
                     child: Text(
-                      "Восстановить пароль",
+                    LocaleKeys.Restore_password.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.orange,

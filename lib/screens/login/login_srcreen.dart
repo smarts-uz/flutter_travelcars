@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         title: Text(
-          'wd',
+          LocaleKeys.come_in.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 23,
