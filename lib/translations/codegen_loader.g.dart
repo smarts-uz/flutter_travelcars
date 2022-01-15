@@ -170,7 +170,13 @@ class CodegenLoader extends AssetLoader{
   "select_payment_method": "Select a Payment Method",
   "The_cost_of_the_trip": "The cost of the trip",
   "day": "day",
-  "for_atp": "for"
+  "for_atp": "for",
+  "country": "country",
+  "driver": "driver",
+  "car": "car",
+  "overall_score": "overall score",
+  "leave_feedback": "leave feedback",
+  "post_reviews": "Post a review"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги между всеми городами Узбекистана: путешествия и бизнесs",
@@ -328,7 +334,13 @@ static const Map<String,dynamic> ru = {
   "select_payment_method": "Выберите способ оплаты",
   "The_cost_of_the_trip": "Стоимость поездки",
   "day": "день",
-  "for_atp": "за"
+  "for_atp": "за",
+  "country": "страна",
+  "driver": "Водитель",
+  "car": "машина",
+  "overall_score": "Общая оценка",
+  "leave_feedback": "oставить отзыв",
+  "post_reviews": "Отправить отзыв"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Oʻzbekistonning barcha shaharlari oʻrtasida transport xizmatlari: sayohat va biznes",
@@ -486,7 +498,13 @@ static const Map<String,dynamic> uz = {
   "select_payment_method": "To'lov usulini tanlang",
   "The_cost_of_the_trip": "Sayohat narxi",
   "day": ".",
-  "for_atp": "bir kun uchun "
+  "for_atp": "bir kun uchun ",
+  "country": "mamlakat",
+  "driver": "haydovchi",
+  "car": "mashina",
+  "overall_score": "Umumiy ball",
+  "leave_feedback": "fikr va mulohazalaringizni yozib qoldiring ",
+  "post_reviews": "Ko'rib chiqish"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

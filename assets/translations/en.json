@@ -154,5 +154,11 @@
   "select_payment_method": "Select a Payment Method",
   "The_cost_of_the_trip": "The cost of the trip",
   "day": "day",
-  "for_atp": "for"
+  "for_atp": "for",
+  "country": "country",
+  "driver": "driver",
+  "car": "car",
+  "overall_score": "overall score",
+  "leave_feedback": "leave feedback",
+  "post_reviews": "Post a review"
 }

@@ -154,5 +154,11 @@
   "select_payment_method": "Выберите способ оплаты",
   "The_cost_of_the_trip": "Стоимость поездки",
   "day": "день",
-  "for_atp": "за"
+  "for_atp": "за",
+  "country": "страна",
+  "driver": "Водитель",
+  "car": "машина",
+  "overall_score": "Общая оценка",
+  "leave_feedback": "oставить отзыв",
+  "post_reviews": "Отправить отзыв"
 }

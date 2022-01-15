@@ -157,5 +157,11 @@ abstract class  LocaleKeys {
   static const The_cost_of_the_trip = 'The_cost_of_the_trip';
   static const day = 'day';
   static const for_atp = 'for_atp';
+  static const country = 'country';
+  static const driver = 'driver';
+  static const car = 'car';
+  static const overall_score = 'overall_score';
+  static const leave_feedback = 'leave_feedback';
+  static const post_reviews = 'post_reviews';
 
 }

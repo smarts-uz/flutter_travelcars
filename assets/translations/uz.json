@@ -154,5 +154,11 @@
   "select_payment_method": "To'lov usulini tanlang",
   "The_cost_of_the_trip": "Sayohat narxi",
   "day": ".",
-  "for_atp": "bir kun uchun "
+  "for_atp": "bir kun uchun ",
+  "country": "mamlakat",
+  "driver": "haydovchi",
+  "car": "mashina",
+  "overall_score": "Umumiy ball",
+  "leave_feedback": "fikr va mulohazalaringizni yozib qoldiring ",
+  "post_reviews": "Ko'rib chiqish"
 }

@@ -125,7 +125,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         ),
         backgroundColor: Colors.orange,
         title: Text(
-          "Написать отзыв",
+          LocaleKeys.write_feedback.tr(),
           style: TextStyle(
             fontSize: 25,
             fontFamily: "Poppins",
@@ -195,7 +195,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 child: DropdownButton<String>(
                   menuMaxHeight: MediaQuery.of(context).size.height * .5,
                   hint: Text(
-                      "Country",
+                     LocaleKeys.country.tr(),
                       style: TextStyle(
                           fontSize: 19,
                           color: Colors.black
@@ -300,13 +300,13 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 ),
               ),
             ),
-            _text(text: "Водитель:"),
+            _text(text: "${LocaleKeys.driver.tr()}:"),
             _list(rate['driver']),
-            _text(text: "Автомобиль:"),
+            _text(text: "${LocaleKeys.car.tr()}:"),
             _list(rate['car']),
-            _text(text: "Общая оценка:"),
+            _text(text: "${LocaleKeys.overall_score.tr()}:"),
             _list(rate['all']),
-            _text(text: "Оставить отзыв"),
+            _text(text: "${LocaleKeys.leave_feedback.tr()} :"),
             Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height*0.3,
@@ -423,7 +423,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    "Отправить отзыв",
+                      LocaleKeys.post_reviews.tr(),
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,
