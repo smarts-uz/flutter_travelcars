@@ -18,11 +18,15 @@ class SearchResult extends StatefulWidget {
   final Map<dynamic, dynamic> search_body;
   final int carCategory;
   final int cityTour;
+  final String CityStart;
+  final String CityEnd;
 
   SearchResult({
     this.search_body = const {},
     this.carCategory = -1,
-    this.cityTour = -1
+    this.cityTour = -1,
+    this.CityStart = "",
+    this.CityEnd = "",
   });
 
 

@@ -15,6 +15,7 @@ import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/screens/profile/reviews.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 import '../../app_config.dart';
@@ -32,6 +33,7 @@ class DetailScreen extends StatefulWidget {
 
 
 class _DetailScreenState extends State<DetailScreen> {
+  bool isLoading = true;
   final CarouselController _controller = CarouselController();
   int _current = 0;
   int narx_index = 0;
@@ -54,8 +56,11 @@ class _DetailScreenState extends State<DetailScreen> {
   ).toList();
 
   final Map<MarkerId, Marker> markers = {};
-  final Set<Polyline> _polyline={};
-  final List<LatLng> _polyline_points = [];
+
+  Map<PolylineId, Polyline> polylines = {};
+  List<LatLng> polylineCoordinates = [];
+  PolylinePoints polylinePoints = PolylinePoints();
+
   final List<String> _adresses = [];
   Completer<GoogleMapController> _mapController = Completer();
   double origin_lat = 0;
@@ -101,35 +106,65 @@ class _DetailScreenState extends State<DetailScreen> {
       });
     });
 
-    bool first = true;
-    widget.points.forEach((key, value) {
-      if(first) {
-        origin_lat = value.latitude;
-        origin_lng = value.longitude;
-        first = false;
-      }
+    drawPolyLine();
+  }
 
+  Future<void> drawPolyLine() async {
+    bool first = true;
+    double temp_origin_lat = 0;
+    double temp_origin_lng = 0;
+    int indexc = 0;
+    for(var entry in widget.points.entries) {
+      indexc=indexc+1;
+
+      //put markers
       MarkerId markerId = MarkerId(UniqueKey().toString());
       Marker marker = Marker(
           markerId: markerId,
           position: LatLng(
-            value.latitude,
-            value.longitude,
+            entry.value.latitude,
+            entry.value.longitude,
           ),
-          infoWindow: InfoWindow(title: key));
+          infoWindow: InfoWindow(title: entry.key)
+      );
       markers[markerId] = marker;
 
-      _adresses.add(key);
-      _polyline_points.add(LatLng(value.latitude, value.longitude));
-    });
+      //get addresses
+      _adresses.add(entry.key);
+      if(first) {
+        origin_lat = entry.value.latitude;
+        origin_lng = entry.value.longitude;
+        temp_origin_lat = entry.value.latitude;
+        temp_origin_lng = entry.value.longitude;
+        first = false;
+      } else {
+        //draw polyline
+        PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+          "AIzaSyBfclKdBDMynmFFZo9LcFpNS0gmrkLMttE",
+          PointLatLng(temp_origin_lat, temp_origin_lng),
+          PointLatLng(entry.value.latitude, entry.value.longitude),
+          travelMode: TravelMode.driving,
+        );
+        if (result.points.isNotEmpty) {
+          result.points.forEach((PointLatLng point) {
+            polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+          });
+        }
+        PolylineId id = PolylineId("poly");
+        Polyline polyline = Polyline(
+            polylineId: id,
+            color: Colors.lightBlueAccent,
+            width: 4,
+            points: polylineCoordinates);
+        polylines[id] = polyline;
+        temp_origin_lat = entry.value.latitude;
+        temp_origin_lng = entry.value.longitude;
+      }
+    }
 
-    _polyline.add(Polyline(
-      polylineId: PolylineId(UniqueKey().toString()),
-      visible: true,
-      //latlng is List<LatLng>
-      points: _polyline_points,
-      color: Colors.blue,
-    ));
+    setState(() {
+      isLoading = false;
+    });
   }
 
   void _otmen(BuildContext ctx) {
@@ -203,7 +238,9 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     Map<String, dynamic> results = widget.route_item;
     return Scaffold(
-      body: SingleChildScrollView(
+      body: isLoading ? Center(
+        child: CircularProgressIndicator(),
+      ): SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -424,7 +461,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   _mapController.complete(controller);
                 },
                 markers: Set<Marker>.of(markers.values),
-                polylines: _polyline,
+                polylines: Set<Polyline>.of(polylines.values),
                 myLocationEnabled: true,
                 tiltGesturesEnabled: true,
                 compassEnabled: true,
@@ -540,7 +577,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: DropdownButton<String>(
                   menuMaxHeight: MediaQuery.of(context).size.height * .5,
                   hint: Text(
-                     LocaleKeys.Payment.tr(),
+                      LocaleKeys.Payment.tr(),
                       style: TextStyle(
                           fontSize: 19,
                           color: Colors.black
@@ -571,7 +608,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   _otmen(context);
                 },
                 child: Text(
-                LocaleKeys.Cancellation_terms.tr(),
+                  LocaleKeys.Cancellation_terms.tr(),
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.red,
@@ -589,7 +626,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   _inform(context);
                 },
                 child: Text(
-                 LocaleKeys.important_information.tr(),
+                  LocaleKeys.important_information.tr(),
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.orangeAccent,

@@ -56,6 +56,9 @@ class _SearchScreenState extends State<SearchScreen> {
   List<String> city = [];
   late final List<DropdownMenuItem<String>> cities;
 
+  List<String> city_start = [];
+  late final List<DropdownMenuItem<String>> cities_start;
+
   @override
   void initState() {
     super.initState();
@@ -74,6 +77,18 @@ class _SearchScreenState extends State<SearchScreen> {
           (String value) => DropdownMenuItem<String>(
             value: value,
             child: Text(value),
+      ),
+    ).toList();
+
+    HomeScreen.city_list.forEach((element) {
+      if(element["id"] <= 20 && element["id"] >= 24) {
+        city_start.add(element["name"]);
+      }
+    });
+    cities_start = city_start.map((String value) =>
+        DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
       ),
     ).toList();
   }
@@ -247,7 +262,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       SearchScreen.SelectedVal1 = newValue!;
                     });
                   },
-                  items: cities,
+                  items: cities_start,
                 ),
               ),
             ),
@@ -713,11 +728,22 @@ class _SearchScreenState extends State<SearchScreen> {
                     if(city_end == 24) {
                       cityTour = city_start;
                     }
+
+                    String? startCity = "";
+                    String? endCity = "";
+                    if(city_end <= 20 && city_end >= 24) {
+                      startCity = SearchScreen.SelectedVal1;
+                      endCity = SearchScreen.SelectedVal2;
+                    }
+
                     if(widget.isDrawer) Navigator.pop(context);
                     if(widget.isDrawer) Navigator.pop(context);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SearchResult(search_body: search_body, cityTour: cityTour,)
+                      MaterialPageRoute(
+                          builder: (context) => SearchResult(
+                            search_body: search_body,
+                            cityTour: cityTour,)
                       )
                     );
                   }
