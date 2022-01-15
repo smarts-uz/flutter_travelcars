@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
@@ -7,6 +8,7 @@ import 'package:travelcars/screens/bookings/booking_item_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class BookingsScreen extends StatefulWidget {
   const BookingsScreen({Key? key}) : super(key: key);
@@ -70,7 +72,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
           ),
         ),
         title: Text(
-          "Bookings",
+         LocaleKeys.bookings.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 25
@@ -81,7 +83,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
         child: CircularProgressIndicator(),
       ) : results.isEmpty ? Center(
         child: Text(
-          "No bookings found",
+          LocaleKeys.no_booking_found.tr(),
           style: TextStyle(
             fontSize: 20
           ),
@@ -152,7 +154,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Status: $status",
+                          "${LocaleKeys.status.tr()}: $status",
                           style: TextStyle(
                             fontSize: 20,
                           ),
@@ -218,7 +220,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     padding: EdgeInsets.only(left: 15, top: 6, bottom: 5),
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "The tariff includes:",
+                      "${LocaleKeys.The_tariff_includes.tr()}:",
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,
@@ -290,8 +292,8 @@ class _BookingsScreenState extends State<BookingsScreen> {
                             color: Colors.black,
                           ),
                           children: <TextSpan>[
-                            TextSpan(text: 'The cost of the trip '),
-                            TextSpan(text: 'for ${day.toInt()} day', style: TextStyle(color: Colors.orange)),
+                            TextSpan(text: '${LocaleKeys.The_cost_of_the_trip.tr()} '),
+                            TextSpan(text: '${LocaleKeys.for_atp.tr()} ${day.toInt()} day', style: TextStyle(color: Colors.orange)),
                           ],
                         ),
                       )
@@ -329,7 +331,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                           ),
                         ),
                         child: Text(
-                          "Details",
+                         LocaleKeys.details.tr(),
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.orange,

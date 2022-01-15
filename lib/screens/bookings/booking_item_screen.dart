@@ -107,7 +107,7 @@ class _BookingScreenState extends State<BookingScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
-        title: Text("Booking #${results["id"]}",
+        title: Text("${LocaleKeys.booking.tr()} #${results["id"]}",
           style: TextStyle(
           fontSize: 25,
           color: Colors.white,
@@ -225,7 +225,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         left: 16,
                       ),
                       child: Text(
-                        "Статус: $status",
+                        "${LocaleKeys.status.tr()}: $status",
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.black,
@@ -285,7 +285,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   Container(
                     padding: EdgeInsets.only(left: 16, top: 10, bottom: 5.0),
                     child: Text(
-                      "В тарифе включено::",
+                      "${LocaleKeys.Included_in_the_tariff.tr()}:",
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.black,
@@ -423,7 +423,7 @@ class _BookingScreenState extends State<BookingScreen> {
             results["status"] == "accepted" && results["paid"] == null ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _text(text: "Выберите способ оплаты:"),
+                _text(text: "${LocaleKeys.select_payment_method.tr()}:"),
                 SizedBox(
                   height: 270,
                   child: ListView.builder(
@@ -571,7 +571,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        "Оплатить",
+                        LocaleKeys.Payment.tr(),
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.white,
