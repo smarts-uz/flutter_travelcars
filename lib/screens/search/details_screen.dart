@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
@@ -14,7 +15,7 @@ import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/screens/profile/reviews.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 import '../../app_config.dart';
 
@@ -31,7 +32,6 @@ class DetailScreen extends StatefulWidget {
 
 
 class _DetailScreenState extends State<DetailScreen> {
-  bool isLoading = true;
   final CarouselController _controller = CarouselController();
   int _current = 0;
   int narx_index = 0;
@@ -54,11 +54,8 @@ class _DetailScreenState extends State<DetailScreen> {
   ).toList();
 
   final Map<MarkerId, Marker> markers = {};
-
-  Map<PolylineId, Polyline> polylines = {};
-  List<LatLng> polylineCoordinates = [];
-  PolylinePoints polylinePoints = PolylinePoints();
-
+  final Set<Polyline> _polyline={};
+  final List<LatLng> _polyline_points = [];
   final List<String> _adresses = [];
   Completer<GoogleMapController> _mapController = Completer();
   double origin_lat = 0;
@@ -104,65 +101,35 @@ class _DetailScreenState extends State<DetailScreen> {
       });
     });
 
-    drawPolyLine();
-  }
-
-  Future<void> drawPolyLine() async {
     bool first = true;
-    double temp_origin_lat = 0;
-    double temp_origin_lng = 0;
-    int indexc = 0;
-    for(var entry in widget.points.entries) {
-      indexc=indexc+1;
+    widget.points.forEach((key, value) {
+      if(first) {
+        origin_lat = value.latitude;
+        origin_lng = value.longitude;
+        first = false;
+      }
 
-      //put markers
       MarkerId markerId = MarkerId(UniqueKey().toString());
       Marker marker = Marker(
           markerId: markerId,
           position: LatLng(
-            entry.value.latitude,
-            entry.value.longitude,
+            value.latitude,
+            value.longitude,
           ),
-          infoWindow: InfoWindow(title: entry.key)
-      );
+          infoWindow: InfoWindow(title: key));
       markers[markerId] = marker;
 
-      //get addresses
-      _adresses.add(entry.key);
-      if(first) {
-        origin_lat = entry.value.latitude;
-        origin_lng = entry.value.longitude;
-        temp_origin_lat = entry.value.latitude;
-        temp_origin_lng = entry.value.longitude;
-        first = false;
-      } else {
-        //draw polyline
-        PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-          "AIzaSyBfclKdBDMynmFFZo9LcFpNS0gmrkLMttE",
-          PointLatLng(temp_origin_lat, temp_origin_lng),
-          PointLatLng(entry.value.latitude, entry.value.longitude),
-          travelMode: TravelMode.driving,
-        );
-        if (result.points.isNotEmpty) {
-          result.points.forEach((PointLatLng point) {
-            polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-          });
-        }
-        PolylineId id = PolylineId("poly");
-        Polyline polyline = Polyline(
-            polylineId: id,
-            color: Colors.lightBlueAccent,
-            width: 4,
-            points: polylineCoordinates);
-        polylines[id] = polyline;
-        temp_origin_lat = entry.value.latitude;
-        temp_origin_lng = entry.value.longitude;
-      }
-    }
-
-    setState(() {
-      isLoading = false;
+      _adresses.add(key);
+      _polyline_points.add(LatLng(value.latitude, value.longitude));
     });
+
+    _polyline.add(Polyline(
+      polylineId: PolylineId(UniqueKey().toString()),
+      visible: true,
+      //latlng is List<LatLng>
+      points: _polyline_points,
+      color: Colors.blue,
+    ));
   }
 
   void _otmen(BuildContext ctx) {
@@ -177,7 +144,7 @@ class _DetailScreenState extends State<DetailScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                'Условия отмены',
+                LocaleKeys.Cancellation_terms.tr(),
                 textAlign: TextAlign.start,
                 style: TextStyle(fontSize: 15, color: Colors.red),
               ),
@@ -208,7 +175,7 @@ class _DetailScreenState extends State<DetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Важная информация',
+                LocaleKeys.important_information.tr(),
                 textAlign: TextAlign.end,
                 style: TextStyle(
                     fontSize: 15,
@@ -236,9 +203,7 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     Map<String, dynamic> results = widget.route_item;
     return Scaffold(
-      body: isLoading ? Center(
-        child: CircularProgressIndicator(),
-      ): SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -350,7 +315,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 Container(
                   padding: EdgeInsets.only(left: 10, bottom: 3),
                   child: Text(
-                    "Год выпуска: ${results["car"]["year"]}\nID номер: ${results["car"]["uid"]}",
+                    "${LocaleKeys.year_of_issue.tr()}: ${results["car"]["year"]}\nID номер: ${results["car"]["uid"]}",
                     style: TextStyle(
                       fontSize: 15,
                       height: 1.3,
@@ -394,7 +359,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   Padding(
                     padding: EdgeInsets.only(left: 16, top: 10, bottom: 0),
                     child: Text(
-                      "В тарифе включено: ",
+                      "${LocaleKeys.Included_in_the_tariff.tr()}: ",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 17,
@@ -433,7 +398,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ],
               ),
             ),
-            if(widget.points.isNotEmpty) _text(text: "Карта поездки"),
+            if(widget.points.isNotEmpty) _text(text: "${LocaleKeys.trip_mapp.tr()}"),
             if(widget.points.isNotEmpty) Container(
               margin: EdgeInsets.only(left: 16),
               height: _adresses.length * 30,
@@ -459,7 +424,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   _mapController.complete(controller);
                 },
                 markers: Set<Marker>.of(markers.values),
-                polylines: Set<Polyline>.of(polylines.values),
+                polylines: _polyline,
                 myLocationEnabled: true,
                 tiltGesturesEnabled: true,
                 compassEnabled: true,
@@ -473,7 +438,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
             ),
-            _text(text: "Стоимость поездки за"),
+            _text(text: "${LocaleKeys.travel_cost_for.tr()}"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -561,7 +526,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 )
               ],
             ),
-            _text(text: "Choose the payment type"),
+            _text(text: "${LocaleKeys.choose_the_payment_type.tr()}"),
             Container(
               width: double.infinity,
               height: 45,
@@ -575,7 +540,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: DropdownButton<String>(
                   menuMaxHeight: MediaQuery.of(context).size.height * .5,
                   hint: Text(
-                      "Payment",
+                     LocaleKeys.Payment.tr(),
                       style: TextStyle(
                           fontSize: 19,
                           color: Colors.black
@@ -606,7 +571,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   _otmen(context);
                 },
                 child: Text(
-                  "Условия отмены",
+                LocaleKeys.Cancellation_terms.tr(),
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.red,
@@ -624,7 +589,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   _inform(context);
                 },
                 child: Text(
-                  "Важная информация",
+                 LocaleKeys.important_information.tr(),
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.orangeAccent,
@@ -722,7 +687,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    "Бронировать",
+                    LocaleKeys.book.tr(),
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.white,

@@ -191,7 +191,7 @@ class _SearchResultState extends State<SearchResult> {
                         ),
                         SizedBox(width: 13),
                         Text(
-                          routes[index]["status"] == 1 ? "Confirmation requires" : "Instant confirmation",
+                          routes[index]["status"] == 1 ? "${LocaleKeys.confirmation_requires.tr()}" : "${LocaleKeys.Instant_confirmation.tr()}",
                           style: TextStyle(
                             fontSize: 20,
                             color: routes[index]["status"] == 1 ? Colors.red : Colors.green,
@@ -346,11 +346,11 @@ class _SearchResultState extends State<SearchResult> {
                             color: Colors.black,
                           ),
                           children: <TextSpan>[
-                            TextSpan(text: 'The cost of the trip '),
-                            TextSpan(text: 'for 1 day', style: TextStyle(color: Colors.orange)),
+                            TextSpan(text: '${LocaleKeys.The_cost_of_the_trip.tr()}'),
+                            TextSpan(text: '${LocaleKeys.for_one_day.tr()}', style: TextStyle(color: Colors.orange)),
                           ],
                         ),
-                      )
+                      ),
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),

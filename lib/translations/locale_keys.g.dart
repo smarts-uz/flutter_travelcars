@@ -163,5 +163,30 @@ abstract class  LocaleKeys {
   static const overall_score = 'overall_score';
   static const leave_feedback = 'leave_feedback';
   static const post_reviews = 'post_reviews';
+  static const publish = 'publish';
+  static const upload = 'upload';
+  static const Create_advert = 'Create_advert';
+  static const Camera = 'Camera';
+  static const Photo_library = 'Photo_library';
+  static const Announcement = 'Announcement';
+  static const From = 'From';
+  static const To = 'To';
+  static const Date = 'Date';
+  static const Time = 'Time';
+  static const Car_type = 'Car_type';
+  static const Quantity_ = 'Quantity_';
+  static const Quantity = 'Quantity';
+  static const Contacts_of_driver = 'Contacts_of_driver';
+  static const name = 'name';
+  static const Phone = 'Phone';
+  static const comment = 'comment';
+  static const Along_the_way = 'Along_the_way';
+  static const sorting = 'sorting';
+  static const Sort = 'Sort';
+  static const Nothing_found = 'Nothing_found';
+  static const for_one_day = 'for_one_day';
+  static const Confirmation_requires = 'Confirmation_requires';
+  static const Instant_confirmation = 'Instant_confirmation';
+  static const trip_mapp = 'trip_mapp';
 
 }
