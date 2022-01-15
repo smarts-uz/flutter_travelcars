@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/login/components/drop_button_lang.dart';
 import 'package:travelcars/screens/login/components/drop_button_mny.dart';
+import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 
 
@@ -160,6 +161,10 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                         "currency": "${DropButtonMny.dropdawnvalue}",
                       })
                   );
+
+                  SearchScreen.SelectedVal1 = null;
+                  SearchScreen.SelectedVal2 = null;
+
                   if(testServer) {
                     AppConfig.url = "http://userapp.travelcars.teampro.uz";
                   } else {
