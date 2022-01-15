@@ -599,7 +599,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(10.0)
                 ),
                 child: Text(
-                  "See all",
+                  LocaleKeys.see_all.tr(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25.0
