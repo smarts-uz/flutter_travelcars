@@ -209,5 +209,11 @@ abstract class  LocaleKeys {
   static const cashback_application = 'cashback_application';
   static const note = 'note';
   static const where = 'where';
+  static const home = 'home';
+  static const search = 'search';
+  static const transfers = 'transfers';
+  static const route = 'route';
+  static const Account_settings = 'Account_settings';
+  static const aboute_us = 'aboute_us';
 
 }

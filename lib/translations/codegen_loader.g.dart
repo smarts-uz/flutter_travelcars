@@ -222,7 +222,13 @@ class CodegenLoader extends AssetLoader{
   "Social_networks_for_communication": "Social networks for communication",
   "cashback_application": "The amount of the percentage depends on the activity of bookings through our website or mobile. applications",
   "note": "Note",
-  "where": "Where"
+  "where": "Where",
+  "home": "Home",
+  "search": "Search",
+  "transfers": "Transfers",
+  "route": "Route",
+  "Account_settings": "Account Settings",
+  "aboute_us": "About us"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги между всеми городами Узбекистана: путешествия и бизнесs",
@@ -432,7 +438,13 @@ static const Map<String,dynamic> ru = {
   "Social_networks_for_communication": "Социальные сети для связи",
   "cashback_application": "Размер процента зависит от активности бронирований через наш веб-сайт или моб. приложения",
   "note": "Hота",
-  "where": "Где"
+  "where": "Где",
+  "home": "Домой",
+  "search": "Поиск",
+  "transfers": "Трансферы",
+  "route": "Маршрут",
+  "Account_settings": "Настройки аккаунта",
+  "aboute_us": "О нас"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Oʻzbekistonning barcha shaharlari oʻrtasida transport xizmatlari: sayohat va biznes",
@@ -566,7 +578,7 @@ static const Map<String,dynamic> uz = {
   "come_in": "Kirish",
   "The_choice_of_social_networks": "Ijtimoiy tarmoqlarni tanlash",
   "Select_social_network_through_which_we_can_contact_you": "Siz bilan bog'lanishimiz mumkin bo'lgan ijtimoiy tarmoqni tanlang",
-  "profile": "Profile",
+  "profile": "Profil",
   "application": "Ilova",
   "book_now": "Hoziroq band qiling",
   "We_will_be_glad_to_receive_your_order": "Buyurtmangizni qabul qilishdan xursand bo'lamiz",
@@ -604,7 +616,7 @@ static const Map<String,dynamic> uz = {
   "Photo_library": "Foto albomlar",
   "Announcement": "E'lon",
   "From": "Dan",
-  "To": "To",
+  "To": "Gacha",
   "Date": "Sana",
   "Time": "Vaqt",
   "Car_type": "Avtomobil turi",
@@ -642,7 +654,13 @@ static const Map<String,dynamic> uz = {
   "Social_networks_for_communication": "Muloqot uchun ijtimoiy tarmoqlar",
   "cashback_application": "Foiz miqdori bizning veb-saytimiz yoki mobil telefonimiz orqali bron qilish faolligiga bog'liq. ilovalar",
   "note": "Izoh",
-  "where": "Qayerda"
+  "where": "Qayerda",
+  "home": "Uy",
+  "search": "Qidirish",
+  "transfers": "Transferlar",
+  "route": "Marshrut",
+  "Account_settings": "Profil sozlamalari",
+  "aboute_us": "Biz haqimizda"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

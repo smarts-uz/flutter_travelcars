@@ -111,19 +111,19 @@ class List_R extends StatelessWidget {
           Color color = Colors.grey;
           switch(info[index]['status']) {
             case "moderating":
-              status = "На рассмотрения";
+              status = LocaleKeys.route_one_on_consideration.tr();
               color = Colors.amber;
               break;
             case "proceed":
-              status = "В ожидании";
+              status = LocaleKeys.pending.tr();
               color =Colors.blue;
               break;
             case "rejected":
               color = Colors.red;
-              status = "Отклонен";
+              status = LocaleKeys.rejected.tr();
               break;
             case "accepted":
-              status = "Одобрен";
+              status = LocaleKeys.approved.tr();
               color = Colors.green;
               break;
           }

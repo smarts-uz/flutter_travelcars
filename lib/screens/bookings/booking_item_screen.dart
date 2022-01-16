@@ -92,16 +92,17 @@ class _BookingScreenState extends State<BookingScreen> {
     Color color = Colors.grey;
     switch(results['status']) {
       case "moderating":
-        status = "На рассмотрения";
+        status = LocaleKeys.route_one_on_consideration.tr();
         break;
       case "proceed":
-        status = "В ожидании";
+        status = LocaleKeys.pending.tr();
         break;
       case "rejected":
         color = Colors.red;
+        status = LocaleKeys.rejected.tr();
         break;
       case "accepted":
-        status = "Одобрен";
+        status = LocaleKeys.approved.tr();
         break;
     }
     return Scaffold(

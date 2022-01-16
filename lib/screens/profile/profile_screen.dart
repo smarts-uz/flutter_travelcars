@@ -27,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   List<Map<String, dynamic>> routes = [
     {
       "icon": SvgPicture.asset("assets/icons/profile_s.svg"),
-      "text": "Account Settings",
+      "text": LocaleKeys.Account_settings.tr(),
       "trailing": true,
       "route": AccountScreen(),
     },
@@ -39,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     },
     {
       "icon": SvgPicture.asset('assets/icons/transfer_black.svg'),
-      "text": "${LocaleKeys.transfer.tr()}",
+      "text": "${LocaleKeys.transfers.tr()}",
       "trailing": true,
       "route": TransfersScreen(),
     },
@@ -63,7 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     },
     {
       "icon": Icon(Icons.work_outline, color: Colors.black,),
-      "text": "About us",
+      "text": LocaleKeys.aboute_us.tr(),
       "trailing": false,
       "route": "https://travelcars.uz/about",
     },

@@ -114,19 +114,19 @@ class _BookingsScreenState extends State<BookingsScreen> {
                 }
               }
             });
-            String status = "Unknown";
+            String? status = "Unknown";
             switch(results[index]['status']) {
               case "moderating":
-                status = "На рассмотрения";
+                status = LocaleKeys.route_one_on_consideration.tr();
                 break;
               case "proceed":
-                status = "В ожидании";
+                status = LocaleKeys.pending.tr();
                 break;
               case "rejected":
-                status = "Отклонен";
+                status = LocaleKeys.rejected.tr();
                 break;
               case "accepted":
-                status = "Одобрен";
+                status = LocaleKeys.approved.tr();
                 break;
             }
             return Card(

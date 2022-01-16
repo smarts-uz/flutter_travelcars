@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
@@ -5,6 +6,7 @@ import 'package:travelcars/screens/profile/profile_screen.dart';
 import 'package:travelcars/screens/route/route.dart';
 import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/transfers/transfer.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -26,11 +28,11 @@ class _MainScreenState extends State<MainScreen> {
       ProfileScreen(),
     ];
     final _BottomNavBarItems = <BottomNavigationBarItem>[
-      const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-      const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-      BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/transfer.svg'), label: 'Transfers'),
-      const BottomNavigationBarItem(icon: Icon(Icons.map_outlined), label: 'Route'),
-      const BottomNavigationBarItem(icon: Icon(Icons.person_outline_outlined), label: 'Profile'),
+       BottomNavigationBarItem(icon: Icon(Icons.home), label: '${LocaleKeys.home.tr()}'),
+       BottomNavigationBarItem(icon: Icon(Icons.search), label: '${LocaleKeys.search.tr()}'),
+       BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/transfer.svg'), label: '${LocaleKeys.transfers.tr()}'),
+       BottomNavigationBarItem(icon: Icon(Icons.map_outlined), label: '${LocaleKeys.routes.tr()}'),
+       BottomNavigationBarItem(icon: Icon(Icons.person_outline_outlined), label: '${LocaleKeys.profile.tr()}'),
     ];
     assert(_kTabPages.length == _BottomNavBarItems.length);
     final bottomNavBar = BottomNavigationBar(
