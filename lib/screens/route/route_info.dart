@@ -10,7 +10,7 @@ class RouteInfo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Application #${info['id']}",
+          "${LocaleKeys.application.tr()} #${info['id']}",
           style: TextStyle(
               color: Colors.white,
               fontSize: 25
@@ -76,7 +76,7 @@ class RouteInfo extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                          text: 'Type auto: ',
+                          text: '${LocaleKeys.Auto_types}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
                       TextSpan(text: '${info['carType']}\n'),
@@ -86,7 +86,7 @@ class RouteInfo extends StatelessWidget {
                       ),
                       TextSpan(text: '${info['car_type']["name"]}\n'),
                       TextSpan(
-                          text: 'Status: ',
+                          text: '${LocaleKeys.status.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
                       TextSpan(text: '${info['status']}')
@@ -115,17 +115,17 @@ class RouteInfo extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                          text: '}: ',
+                          text: 'E-mail: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
                       TextSpan(text: '${info['user_email']}\n'),
                       TextSpan(
-                          text: 'Phone number: ',
+                          text: '${LocaleKeys.Phone.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
                       TextSpan(text: '${info['user_phone']}\n'),
                       TextSpan(
-                          text: 'Name: ',
+                          text: '${LocaleKeys.name.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
                       TextSpan(text: '${info['user_name']}')

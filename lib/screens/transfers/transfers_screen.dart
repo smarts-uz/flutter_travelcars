@@ -306,7 +306,7 @@ class Empty extends StatelessWidget {
           Container(
               width: MediaQuery.of(context).size.width*.7,
               child: Text(
-                'Вы можете оставить заявку\n нажимая кнопку ниже',
+                '${LocaleKeys.You_can_leave_request.tr()}\n ${LocaleKeys.by_clicking_the_button_below.tr()}',
                 maxLines: 2,
                 style: TextStyle(
                   fontSize: 13,
@@ -330,7 +330,7 @@ class Empty extends StatelessWidget {
                   SizedBox(
                       width: 10),
                   Text(
-                    'Add',
+                    LocaleKeys.add.tr(),
                     style: TextStyle(
                         color: Colors.orange
                     ),),

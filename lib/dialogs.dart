@@ -1,7 +1,9 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travelcars/screens/login/choice_language.dart';
 import 'package:travelcars/screens/login/login_srcreen.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class Dialogs {
   static Future<dynamic> ZayavkaDialog(BuildContext ctx) {
@@ -29,7 +31,7 @@ class Dialogs {
                   ),
                 ),
                 Text(
-                  "Ваша заявка принята!",
+                  "${LocaleKeys.Your_application_is_accepted.tr()}!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 22,
@@ -45,7 +47,7 @@ class Dialogs {
                       Navigator.pop(ctx);
                     },
                     child: Text(
-                      "Закрыть",
+                      LocaleKeys.close.tr(),
                       style: TextStyle(
                         color: Color.fromRGBO(239, 127, 26, 1),
                         fontSize: 24
@@ -88,7 +90,7 @@ class Dialogs {
                   Column(
                     children: [
                       Text(
-                        "Ваш отзыв успешно отправлен!",
+                        "${LocaleKeys.Your_review_has_been_sent_successfully.tr()}!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 22,
@@ -106,7 +108,7 @@ class Dialogs {
                         Navigator.pop(ctx);
                         },
                       child: Text(
-                        "Закрыть",
+                        LocaleKeys.close.tr(),
                         style: TextStyle(
                           fontSize: 24,
                           color: Color.fromRGBO(239, 127, 26, 1),
@@ -143,7 +145,7 @@ class Dialogs {
                 Column(
                   children: [
                     Text(
-                      "Что - то не так! Проверьте\n соединение с интернетом",
+                      "${LocaleKeys.Something_is_wrong_Check.tr()}\n ${LocaleKeys.internet_connection.tr()}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 20,
@@ -160,7 +162,7 @@ class Dialogs {
                       Navigator.pop(ctx);
                     },
                     child: Text(
-                      "Повторить",
+                      LocaleKeys.Repeat.tr(),
                       style: TextStyle(
                         fontSize: 24,
                         color: Color.fromRGBO(239, 127, 26, 1),
@@ -201,7 +203,7 @@ class Dialogs {
                 Column(
                   children: [
                     Text(
-                      "Ваш запрос успешно принят к рассмотрению",
+                      LocaleKeys.your_request_has_been_successfully_accepted_for_consideration.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 18,
@@ -265,7 +267,7 @@ class Dialogs {
                       Navigator.pop(ctx);
                     },
                     child: Text(
-                      "Закрыть",
+                      LocaleKeys.close.tr(),
                       style: TextStyle(
                         fontSize: 20,
                         color: Color.fromRGBO(239, 127, 26, 1),
@@ -302,7 +304,7 @@ class Dialogs {
                 Column(
                   children: [
                     Text(
-                      "Please login to do this action",
+                     LocaleKeys.please_login_to_do_this_action.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 18,
@@ -325,7 +327,7 @@ class Dialogs {
                       );
                     },
                     child: Text(
-                      "Go to login page",
+                      LocaleKeys.go_to_login_page.tr(),
                       style: TextStyle(
                         fontSize: 22,
                         color: Color.fromRGBO(239, 127, 26, 1),
@@ -365,7 +367,7 @@ class Dialogs {
                   ),
                 ),
                 Text(
-                  "Ваша объявление опубликована!",
+                  "${LocaleKeys.Your_ad_has_been_published.tr()}!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 22,
@@ -381,7 +383,7 @@ class Dialogs {
                       Navigator.pop(ctx);
                     },
                     child: Text(
-                      "Закрыть",
+                      LocaleKeys.close.tr(),
                       style: TextStyle(
                           color: Color.fromRGBO(239, 127, 26, 1),
                           fontSize: 24

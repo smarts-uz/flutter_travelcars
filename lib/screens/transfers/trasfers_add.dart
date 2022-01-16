@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -8,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 
 class TransfersAdd extends StatefulWidget {
@@ -70,7 +72,7 @@ class _TransfersAddState extends State<TransfersAdd> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Add transfer',
+          LocaleKeys.add_transfer.tr(),
           style: TextStyle(
             fontSize: 23,
             color: Colors.white,
@@ -209,7 +211,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                                 child: DropdownButton<String>(
                                   menuMaxHeight: MediaQuery.of(context).size.height * .5,
                                   hint: Text(
-                                      "City",
+                                      LocaleKeys.city.tr(),
                                       style: TextStyle(
                                           fontSize: 19,
                                           color: Colors.black
@@ -310,10 +312,10 @@ class _TransfersAddState extends State<TransfersAdd> {
                                 ),
                               ),
                             ),
-                            TFF(data[index]["controllers4"][0], "Quantity of passengers", 45),
-                            TFF(data[index]["controllers4"][1], "From", 45),
-                            TFF(data[index]["controllers4"][2], "To", 45),
-                            TFF(data[index]["controllers4"][3], "The address of the place to pick up from.", 110),
+                            TFF(data[index]["controllers4"][0], "${LocaleKeys.Quantity_of_passengers.tr()}", 45),
+                            TFF(data[index]["controllers4"][1], "${LocaleKeys.From.tr()}", 45),
+                            TFF(data[index]["controllers4"][2], "${LocaleKeys.To.tr()}", 45),
+                            TFF(data[index]["controllers4"][3], "${LocaleKeys.The_address_of_the_place_to_pick_up_from.tr().tr()}", 110),
                           ]
                       ),
                     ),
@@ -334,7 +336,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                     children: [
                       SizedBox(width: 10),
                       Text(
-                        '---  Delete',
+                        '-- ${LocaleKeys.delete.tr()}',
                         style: TextStyle(
                           color: Colors.red,
                           fontSize: 18,
@@ -378,7 +380,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                       ),
                       SizedBox(width: 10),
                       Text(
-                        'Add',
+                        LocaleKeys.add.tr(),
                         style: TextStyle(
                             color: Colors.orange,
                             fontSize: 18
@@ -480,7 +482,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                   }
                 },
                 child: Text(
-                  'Submit your application',
+                  LocaleKeys.submit_your_application.tr(),
                   style: TextStyle(
                       fontSize: 20,
                       color: Colors.white

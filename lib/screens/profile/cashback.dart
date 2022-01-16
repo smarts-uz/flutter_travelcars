@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
@@ -84,7 +85,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
               padding: const EdgeInsets.only(top: 24, bottom: 8),
               child: Row(
                 children: [
-                  Text("Вам назначен процент в размере:"),
+                  Text("${LocaleKeys.You_have_been_assigned_percentage_of.tr()}:"),
                 ],
               ),
             ),
@@ -103,7 +104,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
               padding: const EdgeInsets.only(top: 24, bottom: 8),
               child: Row(children: [
                 Text(
-                  "Вам начислен кэшбек в размере:",
+                  "${LocaleKeys.You_have_received_cashback_in_the_amount_of.tr()}:",
                   textAlign: TextAlign.center,
                 ),
               ]),
@@ -145,7 +146,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
                   Container(
                     padding: EdgeInsets.only(left: 32, top: 32),
                     child: Text(
-                      "О Кешбэке",
+                      LocaleKeys.aboute_cashback.tr(),
                       style: TextStyle(
                           fontStyle: FontStyle.normal,
                           fontSize: 19,
@@ -167,7 +168,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 18, top: 16),
                           child: Text(
-                            "Кэшбэк - это возврат средств.",
+                            LocaleKeys.Cashback_is_refund.tr(),
                             style: TextStyle(
                                 color: Color.fromRGBO(0, 0, 0, 1),
                                 fontStyle: FontStyle.normal,
@@ -180,7 +181,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 16),
                           child: Text(
-                            "В случае оплаты через платежные системы (Click и Payme) и международные карты (Visa, Master Card) Вам начисляется кэшбэк до 5% от общий суммы платежа.",
+                            LocaleKeys.take_cashback.tr(),
                             style: TextStyle(
                                 fontStyle: FontStyle.normal,
                                 fontSize: 13,
@@ -192,7 +193,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 16),
                           child: Text(
-                            "Начисленный кэшбэк выплачивается на счет клиента (на личную банковскую карту) в сумах ежемесячно с 5-го по 10-е число месяца.  ",
+                            LocaleKeys.pay_between_fiveday.tr(),
                             style: TextStyle(
                                 fontStyle: FontStyle.normal,
                                 fontSize: 13,
@@ -204,7 +205,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 16),
                           child: Text(
-                            " Размер процента зависит от активности бронирований через наш веб-сайт или моб. приложения.",
+                            LocaleKeys.cashback_application.tr(),
                             style: TextStyle(
                                 fontStyle: FontStyle.normal,
                                 fontSize: 13,

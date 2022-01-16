@@ -141,7 +141,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 );
               },
               title: Text(
-                "Социальные сети для связи",
+                LocaleKeys.Social_networks_for_communication.tr(),
                 style: TextStyle(
                   fontSize: 20,
                 ),

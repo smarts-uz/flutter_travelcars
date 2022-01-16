@@ -280,7 +280,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                                       color: Colors.black
                                   ),
                                   children: [
-                                    //TextSpan(text: "Quantity (without cargo): "),
+                                    TextSpan(text: "${LocaleKeys.Quantity_within_baggage.tr()}: "),
                                     TextSpan(text: "${ways[index]["place"]}", style: TextStyle(fontWeight: FontWeight.normal)),
                                   ]
                               )
@@ -310,7 +310,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                                         color: Colors.black
                                     ),
                                     children: [
-                                      TextSpan(text: "Quantity (without cargo): "),
+                                      TextSpan(text: "${LocaleKeys.quantity_without_baggage.tr()}: "),
                                       TextSpan(text: "${ways[index]["place_bag"]}", style: TextStyle(fontWeight: FontWeight.normal)),
                                     ]
                                 )

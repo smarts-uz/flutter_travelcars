@@ -1,6 +1,8 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class TripsScreen extends StatelessWidget {
   List<dynamic> trips_list = HomeScreen.tour_list;
@@ -11,7 +13,7 @@ class TripsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Tours",
+          LocaleKeys.tours.tr(),
           style: TextStyle(
               color: Colors.white,
               fontSize: 25

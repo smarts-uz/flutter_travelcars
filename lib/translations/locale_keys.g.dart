@@ -205,5 +205,9 @@ abstract class  LocaleKeys {
   static const Where_to_pick_up = 'Where_to_pick_up';
   static const tours = 'tours';
   static const trip = 'trip';
+  static const Social_networks_for_communication = 'Social_networks_for_communication';
+  static const cashback_application = 'cashback_application';
+  static const note = 'note';
+  static const where = 'where';
 
 }

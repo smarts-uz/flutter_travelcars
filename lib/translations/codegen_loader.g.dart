@@ -218,7 +218,11 @@ class CodegenLoader extends AssetLoader{
   "Passengers": "Passengers",
   "Where_to_pick_up": "Where to pick up",
   "tours": "Tours",
-  "trip": "Trip"
+  "trip": "Trip",
+  "Social_networks_for_communication": "Social networks for communication",
+  "cashback_application": "The amount of the percentage depends on the activity of bookings through our website or mobile. applications",
+  "note": "Note",
+  "where": "Where"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги между всеми городами Узбекистана: путешествия и бизнесs",
@@ -424,7 +428,11 @@ static const Map<String,dynamic> ru = {
   "Passengers": "Пассажиры",
   "Where_to_pick_up": "Где забрать",
   "tours": "Экскурсии",
-  "trip": "поездка"
+  "trip": "поездка",
+  "Social_networks_for_communication": "Социальные сети для связи",
+  "cashback_application": "Размер процента зависит от активности бронирований через наш веб-сайт или моб. приложения",
+  "note": "Hота",
+  "where": "Где"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Oʻzbekistonning barcha shaharlari oʻrtasida transport xizmatlari: sayohat va biznes",
@@ -630,7 +638,11 @@ static const Map<String,dynamic> uz = {
   "Passengers": "Yo'lovchilar",
   "Where_to_pick_up": "Qayerdan olish kerak",
   "tours": "Ekskursiyalar",
-  "trip": "Sayohat"
+  "trip": "Sayohat",
+  "Social_networks_for_communication": "Muloqot uchun ijtimoiy tarmoqlar",
+  "cashback_application": "Foiz miqdori bizning veb-saytimiz yoki mobil telefonimiz orqali bron qilish faolligiga bog'liq. ilovalar",
+  "note": "Izoh",
+  "where": "Qayerda"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

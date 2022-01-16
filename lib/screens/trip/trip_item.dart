@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,6 +8,7 @@ import 'package:travelcars/app_config.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class TripItem extends StatefulWidget {
   final Map<String, dynamic> trip_item;
@@ -178,7 +180,7 @@ class _TripItemState extends State<TripItem> {
                       left: 15,
                       bottom: size_h * .2,
                       child: Text(
-                        "Book now",
+                        LocaleKeys.book_now.tr(),
                         style: TextStyle(
                           fontSize: 30.0,
                           color: Colors.white
@@ -189,7 +191,7 @@ class _TripItemState extends State<TripItem> {
                       left: 15,
                       bottom: size_h * .05,
                       child: Text(
-                        "We will be glad to receive your order!",
+                        "${LocaleKeys.We_will_be_glad_to_receive_your_order.tr()} !",
                         style: TextStyle(
                           fontSize: 18.0,
                             color: Colors.white
@@ -286,7 +288,7 @@ class _TripItemState extends State<TripItem> {
                   padding: EdgeInsets.all(8),
                   textColor: Colors.white,
                   child: Text(
-                    "Send",
+                   LocaleKeys.send.tr(),
                     style: TextStyle(
                       fontSize: 23,
                       fontWeight: FontWeight.bold,

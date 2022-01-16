@@ -60,7 +60,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         centerTitle: true,
         title: Text(
-          "Соц. сети для связи",
+          LocaleKeys.Social_networks_for_communication.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 23,

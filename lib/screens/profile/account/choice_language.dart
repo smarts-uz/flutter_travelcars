@@ -85,7 +85,7 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                                 child: Column(
                                   children: [
                                     Text(
-                                      "Вы действительно хотите использовать тестовый сервер для приложения",
+                                      LocaleKeys.test_server.tr(),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: 20
@@ -97,7 +97,7 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                               actions: [
                                 FlatButton(
                                   child: Text(
-                                    "Yes",
+                                    LocaleKeys.yes.tr(),
                                     style: TextStyle(
                                       fontSize: 22,
                                       color: Colors.red,
@@ -112,7 +112,7 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                                 ),
                                 FlatButton(
                                   child: Text(
-                                    "No",
+                                    LocaleKeys.no.tr(),
                                     style: TextStyle(
                                         fontSize: 22,
                                         color: Colors.green
@@ -136,7 +136,7 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                   ),
                   SizedBox(width: 5),
                   Text(
-                    "Turn on test server",
+                    LocaleKeys.Turn_on_test_server.tr(),
                     style: TextStyle(
                         fontSize: 20
                     ),
