@@ -185,5 +185,22 @@
   "for_one_day": "for 1 day",
   "Confirmation_requires": "Confirmation requires",
   "Instant_confirmation": "Instant confirmation",
-  "trip_mapp": "Trip map"
+  "trip_mapp": "Trip map",
+  "car_model": "Car model",
+  "quantity_without_baggage": "Quantity without baggage",
+  "Quantity_within_baggage": "Quantity within baggage",
+  "test_server": "Do you really want to use the test server for the application",
+  "yes": "Yes",
+  "no": "No",
+  "Turn_on_test_server": "Turn on test server",
+  "You_have_been_assigned_percentage_of": "You have been assigned a percentage of",
+  "You_have_received_cashback_in_the_amount_of": "You have received cashback in the amount of",
+  "aboute_cashback": "Aboute Cashback",
+  "Cashback_is_refund": "Cashback is a refund",
+  "take_cashback": "In case of payment through payment systems (Click and Payme) and international cards (Visa, Master Card), you will receive a cashback of up to 5% of the total payment amount",
+  "pay_between_fiveday": "The accrued cashback is paid to the client's account (to a personal bank card) in soums monthly from the 5th to the 10th day of the month",
+  "Passengers": "Passengers",
+  "Where_to_pick_up": "Where to pick up",
+  "tours": "Tours",
+  "trip": "Trip"
 }

@@ -7,6 +7,7 @@ import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/po_puti/add.dart';
 import 'package:travelcars/screens/po_puti/info.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class PoPutiScreen extends StatefulWidget {
   const PoPutiScreen({Key? key}) : super(key: key);
@@ -49,7 +50,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Along the way',
+          LocaleKeys.Along_the_way.tr(),
           style: TextStyle(
             fontSize: 23,
             color: Colors.white,
@@ -108,7 +109,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                   )
               ),
               title: Text(
-                "Sorting",
+                LocaleKeys.sorting.tr(),
                 style: TextStyle(
                   fontSize: 25,
                   color: Colors.white,
@@ -187,7 +188,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      'Sort',
+                      LocaleKeys.Sort.tr(),
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.white
@@ -204,7 +205,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
         child: CircularProgressIndicator(),
       ) : ways.isEmpty ? Center(
         child: Text(
-          "Nothing found",
+          LocaleKeys.Nothing_found.tr(),
           style: TextStyle(
             fontSize: 25,
           ),
@@ -279,7 +280,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                                       color: Colors.black
                                   ),
                                   children: [
-                                    TextSpan(text: "Quantity (without cargo): "),
+                                    //TextSpan(text: "Quantity (without cargo): "),
                                     TextSpan(text: "${ways[index]["place"]}", style: TextStyle(fontWeight: FontWeight.normal)),
                                   ]
                               )
@@ -384,7 +385,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                       height: MediaQuery.of(context).size.height * .05,
                       width: MediaQuery.of(context).size.width * .9,
                       child:  Text(
-                        'Details',
+                        LocaleKeys.details.tr(),
                         style: TextStyle(
                             fontSize: 22,
                             color: Colors.orange

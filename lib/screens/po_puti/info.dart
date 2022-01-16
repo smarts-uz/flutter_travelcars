@@ -1,4 +1,6 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 import '../../app_config.dart';
 
@@ -12,7 +14,7 @@ class InfoScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Announcement #${way_item["id"]}",
+          "${LocaleKeys.Announcement.tr()} #${way_item["id"]}",
           style: TextStyle(
               color: Colors.white,
               fontSize: 25
@@ -53,19 +55,19 @@ class InfoScreen extends StatelessWidget {
                       color: Colors.black
                     ),
                     children: [
-                      TextSpan(text: "From: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: "${LocaleKeys.From.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "${way_item["address1"]}\n"),
-                      TextSpan(text: "To: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: "${LocaleKeys.To.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "${way_item["address2"]}\n"),
-                      TextSpan(text: "Date: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: "${LocaleKeys.Date.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "${way_item["date"]}\n"),
-                      TextSpan(text: "Time: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: "${LocaleKeys.Time.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "${way_item["time"].substring(0, 5)}\n"),
-                      TextSpan(text: "Car type: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: "${LocaleKeys.Car_type.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "${way_item["model_car"]}\n"),
-                      TextSpan(text: "Quantity (without cargo): ", style: TextStyle(fontWeight: FontWeight.bold)),
+                     // TextSpan(text: "${LocaleKeys.Quantity_.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "${way_item["place"]}\n"),
-                      TextSpan(text: "Quantity (with cargo): ", style: TextStyle(fontWeight: FontWeight.bold)),
+                     // TextSpan(text: "${LocaleKeys..tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "${way_item["place_bag"]}\n"),
                       TextSpan(text: "Contacts of driver\n", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "\t\tName: ", style: TextStyle(fontWeight: FontWeight.bold)),

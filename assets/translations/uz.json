@@ -185,5 +185,22 @@
   "for_one_day": "1 kun uchun",
   "Confirmation_requires": "Tasdiqlash talab qilinadi",
   "Instant_confirmation": "Darhol tasdiqlash",
-  "trip_mapp": "Sayohat xaritasi"
+  "trip_mapp": "Sayohat xaritasi",
+  "car_model": "Avtomobil modeli",
+  "quantity_without_baggage": "Bagajsiz miqdor",
+  "Quantity_within_baggage": "Bagaj ichidagi miqdor",
+  "test_server": "Haqiqatan ham dastur uchun test serveridan foydalanmoqchimisiz",
+  "yes": "Ha",
+  "no": "Yo'q",
+  "Turn_on_test_server": "Sinov serverini yoqing",
+  "You_have_been_assigned_percentage_of": "Sizga foiz tayinlangan",
+  "You_have_received_cashback_in_the_amount_of": "miqdorida naqd pul oldingiz",
+  "aboute_cashback": "Cashback haqida",
+  "Cashback_is_refund": "Cashback - bu pulni qaytarish",
+  "take_cashback": "Toʻlov tizimlari (Click and Payme) va xalqaro kartalar (Visa, Master Card) orqali amalga oshirilgan taqdirda, siz toʻlovning umumiy summasining 5% gacha naqd pul olasiz.",
+  "pay_between_fiveday": "Hisoblangan naqd pul mijozning hisob raqamiga (shaxsiy bank kartasiga) har oy oyning 5-kunidan 10-kuniga qadar so‘mda to‘lanadi.",
+  "Passengers": "Yo'lovchilar",
+  "Where_to_pick_up": "Qayerdan olish kerak",
+  "tours": "Ekskursiyalar",
+  "trip": "Sayohat"
 }

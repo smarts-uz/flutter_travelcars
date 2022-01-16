@@ -68,7 +68,7 @@ class _RouteAddState extends State<RouteAdd> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Add route',
+          LocaleKeys.add_route.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 23
@@ -146,15 +146,15 @@ class _RouteAddState extends State<RouteAdd> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Center(
-                              child: Text('Trip ${index + 1}',
+                              child: Text('${LocaleKeys.trip_mapp.tr()} ${index + 1}',
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold
                                 ),
                               ),
                             ),
-                            DDM(true, "From"),
-                            DDM(false, "To"),
+                            DDM(true, "${LocaleKeys.From.tr()}"),
+                            DDM(false, "${LocaleKeys.To.tr()}"),
                             GestureDetector(
                               onTap: () {
                                 showDatePicker(
@@ -221,7 +221,7 @@ class _RouteAddState extends State<RouteAdd> {
                         SizedBox(
                             width: 10),
                         Text(
-                          '--Delete',
+                         LocaleKeys.delete.tr(),
                           style: TextStyle(
                               color: Colors.red,
                               fontSize: 18
@@ -265,7 +265,7 @@ class _RouteAddState extends State<RouteAdd> {
                         SizedBox(
                             width: 10),
                         Text(
-                          'Add',
+                          LocaleKeys.add.tr(),
                           style: TextStyle(
                               color: Colors.orange,
                             fontSize: 18

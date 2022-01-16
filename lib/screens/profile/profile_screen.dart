@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,6 +13,7 @@ import 'package:travelcars/screens/route/route_screen.dart';
 import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/screens/transfers/transfers_screen.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -79,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Profile",
+         LocaleKeys.profile.tr(),
           style: TextStyle(
             fontSize: 25,
             color: Colors.white,

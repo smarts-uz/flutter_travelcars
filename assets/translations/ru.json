@@ -185,5 +185,22 @@
   "for_one_day": "на 1 день",
   "Confirmation_requires": "Требуется подтверждение",
   "Instant_confirmation": "Мгновенное подтверждение",
-  "trip_mapp": "Карта поездки"
+  "trip_mapp": "Карта поездки",
+  "car_model": "Модель автомобиля",
+  "quantity_without_baggage": "Количество без багажа",
+  "Quantity_within_baggage": "Количество в багаже",
+  "test_server": "Вы действительно хотите использовать тестовый сервер для приложения",
+  "yes": "да",
+  "no": "Нет",
+  "Turn_on_test_server": "Включите тестовый сервер",
+  "You_have_been_assigned_percentage_of": "Вам назначен процент в размере",
+  "You_have_received_cashback_in_the_amount_of": "Вы получили кэшбэк в размере",
+  "aboute_cashback": "О Кешбэке",
+  "Cashback_is_refund": "Кэшбэк — это возврат",
+  "take_cashback": "В случае оплаты через платежные системы (Click и Payme) и международные карты (Visa, Master Card) Вам начисляется кешбек до 5% от общего суммы платежа",
+  "pay_between_fiveday": "Начисленный кэшбэк выплачивается на счет клиента (на личную банковскую карту) в сумах ежемесячно с 5-го по 10-е число месяца",
+  "Passengers": "Пассажиры",
+  "Where_to_pick_up": "Где забрать",
+  "tours": "Экскурсии",
+  "trip": "поездка"
 }

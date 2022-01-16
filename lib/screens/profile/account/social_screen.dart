@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class ThirdScreen extends StatefulWidget {
   @override
@@ -90,7 +92,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
                   height: MediaQuery.of(context).size.height * 0.20,
                 ),
                 Text(
-                  "Выберите социальную сеть, через\n которую мы можем с вами связаться",
+                  "${LocaleKeys.Select_social_network_through_which_we_can_contact_you.tr()}\n ",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontStyle: FontStyle.normal,
@@ -168,7 +170,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
                     width: double.infinity,
                     child: Center(
                       child: Text(
-                        "Сохранить",
+                        LocaleKeys.save.tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white,
                         ),

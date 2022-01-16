@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 
 class CashbackScreen extends StatefulWidget {
@@ -54,7 +55,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
           ),
         ),
         title: Text(
-          "Кешбэк",
+          LocaleKeys.cashback,
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w500,
@@ -179,7 +180,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 16),
                           child: Text(
-                            "В случае оплаты через платежные системы (Click и Payme) и международные карты (Visa, Master Card) Вам начисляется кэшбэк до 5%* от общий суммы платежа.",
+                            "В случае оплаты через платежные системы (Click и Payme) и международные карты (Visa, Master Card) Вам начисляется кэшбэк до 5% от общий суммы платежа.",
                             style: TextStyle(
                                 fontStyle: FontStyle.normal,
                                 fontSize: 13,
@@ -203,7 +204,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 16),
                           child: Text(
-                            "* Размер процента зависит от активности бронирований через наш веб-сайт или моб. приложения.",
+                            " Размер процента зависит от активности бронирований через наш веб-сайт или моб. приложения.",
                             style: TextStyle(
                                 fontStyle: FontStyle.normal,
                                 fontSize: 13,

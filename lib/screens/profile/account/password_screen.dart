@@ -28,7 +28,7 @@ class _SecondScreenState extends State<SecondScreen> {
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         centerTitle: true,
         title: Text(
-          "Изменение пароля",
+          LocaleKeys.change_password.tr(),
           style: TextStyle(
               color: Colors.white,
               fontSize: 23
@@ -168,7 +168,7 @@ class _SecondScreenState extends State<SecondScreen> {
                   width: double.infinity,
                   child: Center(
                     child: Text(
-                      "Сохранить",
+                      LocaleKeys.save.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,

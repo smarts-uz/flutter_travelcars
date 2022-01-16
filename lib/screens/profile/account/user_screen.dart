@@ -82,7 +82,7 @@ class _FirstSceenState extends State<FirstSceen> {
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         centerTitle: true,
         title: Text(
-          "Изменение профиля",
+          LocaleKeys.change_password.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 23
@@ -334,7 +334,7 @@ class _FirstSceenState extends State<FirstSceen> {
                     width: double.infinity,
                     child: Center(
                       child: Text(
-                        "Сохранить",
+                       LocaleKeys.save.tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white,
                         ),

@@ -8,6 +8,7 @@ import 'package:travelcars/screens/login/components/drop_button_lang.dart';
 import 'package:travelcars/screens/login/components/drop_button_mny.dart';
 import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 
 class AccountChoicePage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         centerTitle: true,
         title: Text(
-          "Настройка языка и курса",
+          LocaleKeys.Setting_the_language_and_course.tr(),
           style: TextStyle(
               color: Colors.white,
               fontSize: 23
@@ -52,7 +53,7 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
             children: [
               SizedBox(height: MediaQuery.of(context).size.height*0.05,),
               Text(
-                "Language:",
+                "${LocaleKeys.language.tr()}:",
                 style: TextStyle(
                   fontSize: 17,
                 ),
@@ -60,7 +61,7 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
               DropButton(),
               SizedBox(height: 20),
               Text(
-                "Currency:",
+                "${LocaleKeys.Currency.tr()}:",
                 style: TextStyle(
                   fontSize: 17,
                 ),
@@ -185,7 +186,7 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                   width: double.infinity,
                   child: Center(
                     child: Text(
-                      "Сохранить",
+                      LocaleKeys.save.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white,
 

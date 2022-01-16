@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/feedback/feedback.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 import '../../app_config.dart';
 import '../../dialogs.dart';
 class Reviews extends StatefulWidget {
@@ -121,7 +123,7 @@ class _ReviewsState extends State<Reviews> {
             size: 28,
           ),
         ),
-        title: Text('Reviews',
+        title: Text(LocaleKeys.reviews.tr(),
         style: TextStyle(
           fontSize: 25,
           color: Colors.white
@@ -134,7 +136,7 @@ class _ReviewsState extends State<Reviews> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "No comments are found\n\n",
+              "${LocaleKeys.no_comment_are_found.tr()}\n\n",
               style: TextStyle(
                 fontSize: 17
               ),
@@ -145,7 +147,7 @@ class _ReviewsState extends State<Reviews> {
               child: RaisedButton(
                 color: Colors.white,
                 child:Text(
-                  'Write a feedback',
+                  LocaleKeys.write_feedback.tr(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 15,
@@ -178,7 +180,7 @@ class _ReviewsState extends State<Reviews> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Customer Reviews',
+                    LocaleKeys.customer_reviews.tr(),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     fontSize: 25,
@@ -231,7 +233,7 @@ class _ReviewsState extends State<Reviews> {
                                 child: RaisedButton(
                                   color: Colors.white,
                                   child:Text(
-                                    'Write a feedback',
+                                   LocaleKeys.write_feedback.tr(),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                     fontSize: 15,
@@ -332,7 +334,7 @@ class _ReviewsState extends State<Reviews> {
 
                   ),
                   Text(
-                    'Guest reviews:',
+                    '${LocaleKeys.Guest_reviews.tr()}:',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
@@ -460,7 +462,7 @@ class _ReviewsState extends State<Reviews> {
                                  crossAxisAlignment: CrossAxisAlignment.start,
                                  children: [
                                    Text(
-                                     "Время отзыва: ${reviews["reviews"][index1]["created_at"].substring(0,10)}",
+                                     "${LocaleKeys.recall_time.tr()}: ${reviews["reviews"][index1]["created_at"].substring(0,10)}",
                                      textAlign: TextAlign.start,
                                      style: TextStyle(
                                          fontSize: 15,

@@ -201,7 +201,24 @@ class CodegenLoader extends AssetLoader{
   "for_one_day": "for 1 day",
   "Confirmation_requires": "Confirmation requires",
   "Instant_confirmation": "Instant confirmation",
-  "trip_mapp": "Trip map"
+  "trip_mapp": "Trip map",
+  "car_model": "Car model",
+  "quantity_without_baggage": "Quantity without baggage",
+  "Quantity_within_baggage": "Quantity within baggage",
+  "test_server": "Do you really want to use the test server for the application",
+  "yes": "Yes",
+  "no": "No",
+  "Turn_on_test_server": "Turn on test server",
+  "You_have_been_assigned_percentage_of": "You have been assigned a percentage of",
+  "You_have_received_cashback_in_the_amount_of": "You have received cashback in the amount of",
+  "aboute_cashback": "Aboute Cashback",
+  "Cashback_is_refund": "Cashback is a refund",
+  "take_cashback": "In case of payment through payment systems (Click and Payme) and international cards (Visa, Master Card), you will receive a cashback of up to 5% of the total payment amount",
+  "pay_between_fiveday": "The accrued cashback is paid to the client's account (to a personal bank card) in soums monthly from the 5th to the 10th day of the month",
+  "Passengers": "Passengers",
+  "Where_to_pick_up": "Where to pick up",
+  "tours": "Tours",
+  "trip": "Trip"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги между всеми городами Узбекистана: путешествия и бизнесs",
@@ -390,7 +407,24 @@ static const Map<String,dynamic> ru = {
   "for_one_day": "на 1 день",
   "Confirmation_requires": "Требуется подтверждение",
   "Instant_confirmation": "Мгновенное подтверждение",
-  "trip_mapp": "Карта поездки"
+  "trip_mapp": "Карта поездки",
+  "car_model": "Модель автомобиля",
+  "quantity_without_baggage": "Количество без багажа",
+  "Quantity_within_baggage": "Количество в багаже",
+  "test_server": "Вы действительно хотите использовать тестовый сервер для приложения",
+  "yes": "да",
+  "no": "Нет",
+  "Turn_on_test_server": "Включите тестовый сервер",
+  "You_have_been_assigned_percentage_of": "Вам назначен процент в размере",
+  "You_have_received_cashback_in_the_amount_of": "Вы получили кэшбэк в размере",
+  "aboute_cashback": "О Кешбэке",
+  "Cashback_is_refund": "Кэшбэк — это возврат",
+  "take_cashback": "В случае оплаты через платежные системы (Click и Payme) и международные карты (Visa, Master Card) Вам начисляется кешбек до 5% от общего суммы платежа",
+  "pay_between_fiveday": "Начисленный кэшбэк выплачивается на счет клиента (на личную банковскую карту) в сумах ежемесячно с 5-го по 10-е число месяца",
+  "Passengers": "Пассажиры",
+  "Where_to_pick_up": "Где забрать",
+  "tours": "Экскурсии",
+  "trip": "поездка"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Oʻzbekistonning barcha shaharlari oʻrtasida transport xizmatlari: sayohat va biznes",
@@ -579,7 +613,24 @@ static const Map<String,dynamic> uz = {
   "for_one_day": "1 kun uchun",
   "Confirmation_requires": "Tasdiqlash talab qilinadi",
   "Instant_confirmation": "Darhol tasdiqlash",
-  "trip_mapp": "Sayohat xaritasi"
+  "trip_mapp": "Sayohat xaritasi",
+  "car_model": "Avtomobil modeli",
+  "quantity_without_baggage": "Bagajsiz miqdor",
+  "Quantity_within_baggage": "Bagaj ichidagi miqdor",
+  "test_server": "Haqiqatan ham dastur uchun test serveridan foydalanmoqchimisiz",
+  "yes": "Ha",
+  "no": "Yo'q",
+  "Turn_on_test_server": "Sinov serverini yoqing",
+  "You_have_been_assigned_percentage_of": "Sizga foiz tayinlangan",
+  "You_have_received_cashback_in_the_amount_of": "miqdorida naqd pul oldingiz",
+  "aboute_cashback": "Cashback haqida",
+  "Cashback_is_refund": "Cashback - bu pulni qaytarish",
+  "take_cashback": "Toʻlov tizimlari (Click and Payme) va xalqaro kartalar (Visa, Master Card) orqali amalga oshirilgan taqdirda, siz toʻlovning umumiy summasining 5% gacha naqd pul olasiz.",
+  "pay_between_fiveday": "Hisoblangan naqd pul mijozning hisob raqamiga (shaxsiy bank kartasiga) har oy oyning 5-kunidan 10-kuniga qadar so‘mda to‘lanadi.",
+  "Passengers": "Yo'lovchilar",
+  "Where_to_pick_up": "Qayerdan olish kerak",
+  "tours": "Ekskursiyalar",
+  "trip": "Sayohat"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

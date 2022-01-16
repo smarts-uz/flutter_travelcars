@@ -188,5 +188,22 @@ abstract class  LocaleKeys {
   static const Confirmation_requires = 'Confirmation_requires';
   static const Instant_confirmation = 'Instant_confirmation';
   static const trip_mapp = 'trip_mapp';
+  static const car_model = 'car_model';
+  static const quantity_without_baggage = 'quantity_without_baggage';
+  static const Quantity_within_baggage = 'Quantity_within_baggage';
+  static const test_server = 'test_server';
+  static const yes = 'yes';
+  static const no = 'no';
+  static const Turn_on_test_server = 'Turn_on_test_server';
+  static const You_have_been_assigned_percentage_of = 'You_have_been_assigned_percentage_of';
+  static const You_have_received_cashback_in_the_amount_of = 'You_have_received_cashback_in_the_amount_of';
+  static const aboute_cashback = 'aboute_cashback';
+  static const Cashback_is_refund = 'Cashback_is_refund';
+  static const take_cashback = 'take_cashback';
+  static const pay_between_fiveday = 'pay_between_fiveday';
+  static const Passengers = 'Passengers';
+  static const Where_to_pick_up = 'Where_to_pick_up';
+  static const tours = 'tours';
+  static const trip = 'trip';
 
 }

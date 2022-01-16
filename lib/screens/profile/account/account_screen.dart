@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/profile/account/password_screen.dart';
 import 'package:travelcars/screens/profile/account/social_screen.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 import 'choice_language.dart';
 import 'user_screen.dart';
@@ -39,7 +41,7 @@ class _AccountScreenState extends State<AccountScreen> {
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         centerTitle: true,
         title: Text(
-          "Настройки профиля",
+          LocaleKeys.profile_settings.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 25
@@ -96,7 +98,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   );
                 },
                 title: Text(
-                  "Изменение профиля",
+                  LocaleKeys.Change_profile.tr(),
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -118,7 +120,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 );
               },
               title: Text(
-                "Изменение пароля",
+                LocaleKeys.change_password.tr(),
                 style: TextStyle(
                   fontSize: 20,
                 ),
@@ -162,7 +164,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 );
               },
               title: Text(
-                "Выход",
+                LocaleKeys.come_in.tr(),
                 style: TextStyle(
                   color: Color.fromRGBO(176, 0, 32, 1),
                   fontSize: 20,

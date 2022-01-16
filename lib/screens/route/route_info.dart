@@ -53,11 +53,11 @@ class RouteInfo extends StatelessWidget {
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             TextSpan(text: '( ${info["routes"][index]['date'].substring(0, 10)} )\n'),
                             TextSpan(
-                                text: '\t\t\t\tPassengers: ',
+                                text: '\t\t\t\t${LocaleKeys.Passengers.tr()}: ',
                                 style: TextStyle(fontWeight: FontWeight.bold,)),
                             TextSpan(text: '${info["routes"][index]['passengers']}\n'),
                             TextSpan(
-                                text: '\t\t\t\tWhere to pick up: ',
+                                text: '\t\t\t\t${LocaleKeys.Where_to_pick_up.tr()}: ',
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             TextSpan(text: '${info["routes"][index]['address']}'),
                           ],),

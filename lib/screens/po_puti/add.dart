@@ -8,6 +8,7 @@ import 'package:travelcars/app_config.dart';
 import 'package:travelcars/dialogs.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/translations/locale_keys.g.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class _AddScreenState extends State<AddScreen> {
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
-                      title: new Text('Photo Library'),
+                      title: new Text(LocaleKeys.Photo_library.tr()),
                       onTap: () async {
                         final pickedImageFile = await _picker.pickImage(
                           source: ImageSource.gallery,
@@ -52,7 +53,7 @@ class _AddScreenState extends State<AddScreen> {
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
+                    title: new Text(LocaleKeys.Camera.tr()),
                     onTap: () async {
                       final pickedImageFile = await _picker.pickImage(
                         source: ImageSource.camera,
@@ -79,7 +80,7 @@ class _AddScreenState extends State<AddScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Create advert",
+         LocaleKeys.Create_advert.tr(),
           style: TextStyle(
             fontSize: 25,
             color: Colors.white,
@@ -188,12 +189,12 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                   ),
                 ),
-                TFF("Car model", text_controllers[2], 45, false),
-                TFF("Quantity without baggage", text_controllers[3], 45, true),
-                TFF("Quantity within baggage", text_controllers[4], 45, true),
-                TFF("Name", text_controllers[5], 45, false),
-                TFF("Phone", text_controllers[6], 45, true),
-                TFF("Comment", text_controllers[7], 110, false),
+                TFF("${LocaleKeys.car}", text_controllers[2], 45, false),
+                TFF("${LocaleKeys.Quantity_.tr()}", text_controllers[3], 45, true),
+                TFF("${LocaleKeys.Quantity.tr()}", text_controllers[4], 45, true),
+                TFF("${LocaleKeys.name.tr()}", text_controllers[5], 45, false),
+                TFF("${LocaleKeys.Phone.tr()}", text_controllers[6], 45, true),
+                TFF("${LocaleKeys.comment.tr()}", text_controllers[7], 110, false),
                 Row(
                   children: [
                     Container(
@@ -239,7 +240,7 @@ class _AddScreenState extends State<AddScreen> {
                                   ),
                                   SizedBox(width: 10),
                                   Text(
-                                    'Upload',
+                                    LocaleKeys.upload.tr(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 25
@@ -274,7 +275,7 @@ class _AddScreenState extends State<AddScreen> {
                                   ),
                                   SizedBox(width: 10),
                                   Text(
-                                    'Delete',
+                                    LocaleKeys.delete.tr(),
                                     style: TextStyle(
                                         color: Colors.orange,
                                         fontSize: 25
@@ -337,7 +338,7 @@ class _AddScreenState extends State<AddScreen> {
                       }
                     },
                     child: Text(
-                      'Publish',
+                      LocaleKeys.publish.tr(),
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white
