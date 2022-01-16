@@ -111,7 +111,7 @@ void _startAddNewTransaction(BuildContext ctx) {
           margin: EdgeInsets.all(16),
           child: Column(
             children: [
-              Text(LocaleKeys.about_transfer.tr(),
+              Text(LocaleKeys.aboute.tr(),
                 textAlign: TextAlign.end,
                 style: TextStyle(
                     fontSize: 24

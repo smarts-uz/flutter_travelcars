@@ -130,7 +130,7 @@
   "come_in": "Kirish",
   "The_choice_of_social_networks": "Ijtimoiy tarmoqlarni tanlash",
   "Select_social_network_through_which_we_can_contact_you": "Siz bilan bog'lanishimiz mumkin bo'lgan ijtimoiy tarmoqni tanlang",
-  "profile": "Profile",
+  "profile": "Profil",
   "application": "Ilova",
   "book_now": "Hoziroq band qiling",
   "We_will_be_glad_to_receive_your_order": "Buyurtmangizni qabul qilishdan xursand bo'lamiz",
@@ -168,7 +168,7 @@
   "Photo_library": "Foto albomlar",
   "Announcement": "E'lon",
   "From": "Dan",
-  "To": "To",
+  "To": "Gacha",
   "Date": "Sana",
   "Time": "Vaqt",
   "Car_type": "Avtomobil turi",
@@ -206,5 +206,11 @@
   "Social_networks_for_communication": "Muloqot uchun ijtimoiy tarmoqlar",
   "cashback_application": "Foiz miqdori bizning veb-saytimiz yoki mobil telefonimiz orqali bron qilish faolligiga bog'liq. ilovalar",
   "note": "Izoh",
-  "where": "Qayerda"
+  "where": "Qayerda",
+  "home": "Uy",
+  "search": "Qidirish",
+  "transfers": "Transferlar",
+  "route": "Marshrut",
+  "Account_settings": "Profil sozlamalari",
+  "aboute_us": "Biz haqimizda"
 }
