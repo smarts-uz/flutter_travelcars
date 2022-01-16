@@ -731,7 +731,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
                     String? startCity = "";
                     String? endCity = "";
-                    if(!(city_end >= 20 && city_end <= 24)) {
+                    if(!(city_end >= 20 && city_end <= 24) && (SearchScreen.SelectedVal1 != null && SearchScreen.SelectedVal2 != null)) {
                       startCity = SearchScreen.SelectedVal1;
                       endCity = SearchScreen.SelectedVal2;
                     }
