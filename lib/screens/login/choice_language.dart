@@ -62,13 +62,17 @@ class _ChoicePageState extends State<ChoicePage> {
                     await context.setLocale(Locale('uz'));
                     SplashScreen.til = "uz";
                     break;
+                  default:
+                    await context.setLocale(Locale('ru'));
+                    DropButton.dropdawnvalue = "RUS";
+                    SplashScreen.til = "ru";
                 }
                 final prefs = await SharedPreferences.getInstance();
                 prefs.setString(
                     "settings",
                     json.encode({
                       "locale": "${DropButton.dropdawnvalue}",
-                      "currency": "${DropButtonMny.dropdawnvalue}",
+                      "currency": "${DropButtonMny.dropdawnvalue ?? "USD"}",
                     })
                 );
                 SplashScreen.kurs = DropButtonMny.dropdawnvalue;
