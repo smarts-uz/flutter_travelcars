@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/src/public_ext.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
@@ -473,6 +475,11 @@ class _DetailScreenState extends State<DetailScreen> {
                   target: LatLng(origin_lat, origin_lng),
                   zoom: 14.4746,
                 ),
+                  gestureRecognizers: < Factory < OneSequenceGestureRecognizer >> [
+                    new Factory < OneSequenceGestureRecognizer > (
+                          () => new EagerGestureRecognizer(),
+                    ),
+                  ].toSet()
               ),
             ),
             _text(text: "${LocaleKeys.travel_cost_for.tr()}"),
