@@ -35,6 +35,7 @@ class SearchResult extends StatefulWidget {
 
 class _SearchResultState extends State<SearchResult> {
   bool isLoading = true;
+  String refund = "";
   Map<String, Location> points = {};
   List<dynamic> routes = [];
   List<String> icons = [
@@ -71,6 +72,7 @@ class _SearchResultState extends State<SearchResult> {
             "reverse": "0",
             "car_models[0]": "${widget.carCategory}",
             "date_end": time,
+            "lang": "${SplashScreen.til}",
           }
       );
 
@@ -79,6 +81,7 @@ class _SearchResultState extends State<SearchResult> {
 
       if(jsonDecode(result_nonreverse.body)["routes"].isNotEmpty) {
         routes.addAll(jsonDecode(result_nonreverse.body)["routes"]);
+        refund = jsonDecode(result_nonreverse.body)["commission"] + " " + jsonDecode(result_nonreverse.body)["cur"];
       }
 
       /*if(jsonDecode(result_reverse.body)["routes"].isNotEmpty) {
@@ -90,6 +93,7 @@ class _SearchResultState extends State<SearchResult> {
           body: widget.search_body
       );
       routes = jsonDecode(response.body)["routes"];
+      refund = jsonDecode(response.body)["commission"] + " " + jsonDecode(response.body)["cur"];
     }
     print("All: ${routes.toString()}");
 
@@ -393,8 +397,9 @@ class _SearchResultState extends State<SearchResult> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => DetailScreen(
-                                  routes[index],
-                                  points
+                                routes[index],
+                                points,
+                                refund,
                               )
                           )
                       );

@@ -26,8 +26,9 @@ import '../../app_config.dart';
 class DetailScreen extends StatefulWidget {
   final Map<String, dynamic> route_item;
   final Map<String, Location> points;
+  final String refund;
 
-  DetailScreen(this.route_item, this.points);
+  DetailScreen(this.route_item, this.points, this.refund);
 
   @override
   _DetailScreenState createState() => _DetailScreenState();
@@ -40,6 +41,7 @@ class _DetailScreenState extends State<DetailScreen> {
   int _current = 0;
   int narx_index = 0;
   late String dropdown;
+  String overtime_cost = "0 USD";
   List<dynamic> narxlar = [];
   List<dynamic> costlar = [];
   List<dynamic> pricelar = [];
@@ -119,6 +121,8 @@ class _DetailScreenState extends State<DetailScreen> {
           "day": "${day == 0.5 ? day : day.toInt()} day",
           "cost": cost
         });
+      } else if(key == "overtime") {
+        overtime_cost = "$value USD";
       }
     });
     dropdown = narxlar[0]["day"];
@@ -236,7 +240,7 @@ class _DetailScreenState extends State<DetailScreen> {
       context: ctx,
       builder: (_) {
         return Container(
-          height: MediaQuery.of(ctx).size.height * 0.15,
+          height: MediaQuery.of(ctx).size.height * 0.1,
           margin: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -251,7 +255,8 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
               Divider(),
               Text(
-                '${widget.route_item["company"]["important"]}',
+                //'${widget.route_item["company"]["important"]}',
+                "Овертайм за 1 час – $overtime_cost\nКомиссия за банковский перевод - ${widget.refund}",
                 textAlign: TextAlign.justify,
                 maxLines: 5,
                 style: TextStyle(

@@ -507,7 +507,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 15,
             ),
             Container(
-              padding: EdgeInsets.only(left: 12, top: 12, bottom: 6),
+              padding: EdgeInsets.only(left: 12, top: 20),
               child: Text(
                LocaleKeys.Most_popular_cars_book.tr(),
                 textAlign: TextAlign.start,
@@ -518,77 +518,25 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
-              height: 320.0,
-              margin: EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10.0,
-                      mainAxisSpacing: 10.0
+              height: 340.0,
+              margin: EdgeInsets.only(left: 15, right: 15, top: 5),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CarsCard(carslist[0]["image"], carslist[0]["name"], carslist[0]["quantity"], carslist[0]["meta_url"]),
+                      CarsCard(carslist[1]["image"], carslist[1]["name"], carslist[1]["quantity"], carslist[1]["meta_url"])
+                    ],
                   ),
-                  itemCount: 4,
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (BuildContext ctx, index) {
-                    return GestureDetector(
-                      onTap: (){
-                        Navigator.push(context,MaterialPageRoute(
-                            builder: (_) => CarCategory(carslist[index]["name"], carslist[index]["meta_url"])));
-                      },
-                      child: Container(
-                        height: 100,
-                        child: Card(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                          elevation: 4,
-                          child: Stack(
-                            children: [
-                              Container(
-                                height: 120,
-                                width: MediaQuery.of(context).size.width * .43,
-                                child: Image.network("${AppConfig.image_url}/car-types/${carslist[index]["image"]}"),
-                              ),
-                              Positioned(
-                                top: 10,
-                                right: 10,
-                                child: Container(
-                                    height: 25,
-                                    width: 25,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      color: Color.fromRGBO(239, 127, 26, 1),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "${carslist[index]["quantity"]}",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 17
-                                        ),
-                                      ),
-                                    )
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 15,
-                                left: 5,
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width * .4,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "${carslist[index]["name"]}",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 14
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  }
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CarsCard(carslist[2]["image"], carslist[2]["name"], carslist[2]["quantity"], carslist[2]["meta_url"]),
+                      CarsCard(carslist[3]["image"], carslist[3]["name"], carslist[3]["quantity"], carslist[3]["meta_url"])
+                    ],
+                  )
+                ],
               ),
             ),
             GestureDetector(
@@ -619,10 +567,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 25,
             ),
             Container(
-              padding: EdgeInsets.only(left: 12, bottom: 6),
+              padding: EdgeInsets.only(left: 12, bottom: 5),
               child: Text(
                LocaleKeys.News_and_special_offers.tr(),
                 textAlign: TextAlign.start,
@@ -703,89 +651,73 @@ class CarsCard extends StatelessWidget {
   final String image;
   final int number;
   final String name;
+  final String meta_url;
 
-  CarsCard(this.image, this.name, this.number);
+  CarsCard(this.image, this.name, this.number, this.meta_url);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      elevation: 4,
-      child: Stack(
-        children: [
-          Container(
-            height: 130,
-            width: MediaQuery.of(context).size.width * .43,
-            child: Image.asset(image),
-          ),
-          Positioned(
-            top: 10,
-            right: 10,
-            child: Container(
-                height: 25,
-                width: 25,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: Color.fromRGBO(239, 127, 26, 1),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => CarCategory(name, meta_url)
+            )
+        );
+      },
+      child: Container(
+        height: 170,
+        child: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          elevation: 4,
+          child: Stack(
+            children: [
+              Container(
+                height: 140,
+                width: MediaQuery.of(context).size.width * .43,
+                child: Image.network("${AppConfig.image_url}/car-types/$image"),
+              ),
+              Positioned(
+                top: 10,
+                right: 10,
+                child: Container(
+                    height: 25,
+                    width: 25,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: Color.fromRGBO(239, 127, 26, 1),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "$number",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17
+                        ),
+                      ),
+                    )
                 ),
-                child: Center(
+              ),
+              Positioned(
+                bottom: 10,
+                left: 5,
+                child: Container(
+                  height: 40,
+                  width: MediaQuery.of(context).size.width * .4,
+                  alignment: Alignment.bottomCenter,
                   child: Text(
-                    "$number",
+                    name,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17
+                        fontSize: 15
                     ),
                   ),
-                )
-            ),
+                ),
+              )
+            ],
           ),
-          Positioned(
-            bottom: 10,
-            left: 60,
-
-            child: Text(
-              name,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 17
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-  Widget WeatherCard() {
-    return Container(
-      height: 150,
-      width: double.infinity * .45,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color.fromRGBO(204, 243, 255, 1),
-              Color.fromRGBO(56, 163, 197, 1),
-            ]
         ),
-      ),
-      child: Stack(
-        children: [
-          ListTile(
-            leading: Text("Tashkent"),
-            trailing: Icon(Icons.expand_more_rounded),
-          ),
-          Positioned(
-              top: 10,
-              left: 5,
-              child: SvgPicture.asset("assets/icons/weather.svg")
-          ),
-          Positioned(
-              top: 10,
-              right: 5,
-              child: Text("18 C")
-          )
-        ],
       ),
     );
   }

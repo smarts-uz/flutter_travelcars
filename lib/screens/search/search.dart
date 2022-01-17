@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/search/search_result.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/screens/trip/trips.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
@@ -695,6 +696,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       "passengers": "${number_controller.text}",
                       "s": _radioVal2 == 0 ? "price" : "places",
                       "price": "${_currentRangeValues.start.round()}+-+${_currentRangeValues.end.round()}",
+                      "lang": "${SplashScreen.til}",
                     };
 
                     print(search_body);
