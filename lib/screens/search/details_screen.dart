@@ -760,7 +760,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   Widget _listWrap(List wrap) {
     return Container(
-      height: wrap.length * 30,
+      height: wrap.length * 27,
       child: GridView.builder(
         physics: NeverScrollableScrollPhysics(),
         itemCount: wrap.length,
@@ -769,6 +769,7 @@ class _DetailScreenState extends State<DetailScreen> {
           crossAxisCount: 2,
           childAspectRatio: 1,
         ),
+        padding: EdgeInsets.zero,
         itemBuilder: (context, index) {
           return Container(
             alignment: Alignment.topLeft,
