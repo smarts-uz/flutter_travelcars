@@ -15,8 +15,8 @@ class Dialogs {
             borderRadius: BorderRadius.circular(18),
           ),
           content: Container(
-            height: MediaQuery.of(ctx).size.height * .25,
-            width: MediaQuery.of(ctx).size.width * .85,
+            height: 180,
+            width: MediaQuery.of(ctx).size.width * .8,
             child: Column(
               children: [
                 Container(
@@ -34,7 +34,7 @@ class Dialogs {
                   "${LocaleKeys.Your_application_is_accepted.tr()}!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Color.fromRGBO(0, 0, 0, 1),
                       letterSpacing: 0.15),
@@ -50,7 +50,7 @@ class Dialogs {
                       LocaleKeys.close.tr(),
                       style: TextStyle(
                         color: Color.fromRGBO(239, 127, 26, 1),
-                        fontSize: 24
+                        fontSize: 15
                       ),
                     ),
                   ),
@@ -72,8 +72,8 @@ class Dialogs {
               borderRadius: BorderRadius.circular(18),
             ),
             child: Container(
-              height: MediaQuery.of(ctx).size.height * .3,
-              width: MediaQuery.of(ctx).size.width * .85,
+              height: 200,
+              width: MediaQuery.of(ctx).size.width * .8,
               child: Column(
                 children: [
                   Container(
@@ -93,7 +93,7 @@ class Dialogs {
                         "${LocaleKeys.Your_review_has_been_sent_successfully.tr()}!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 15,
                             fontWeight: FontWeight.w400,
                             color: Color.fromRGBO(0, 0, 0, 1),
                             letterSpacing: 0.15),
@@ -110,7 +110,7 @@ class Dialogs {
                       child: Text(
                         LocaleKeys.close.tr(),
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 15,
                           color: Color.fromRGBO(239, 127, 26, 1),
                         ),
                       ),
@@ -132,8 +132,8 @@ class Dialogs {
             borderRadius: BorderRadius.circular(18),
           ),
           child: Container(
-            height: MediaQuery.of(ctx).size.height * .30,
-            width: MediaQuery.of(ctx).size.width * .85,
+            height: 200,
+            width: MediaQuery.of(ctx).size.width * .8,
             child: Column(
               children: [
                 Container(
@@ -148,7 +148,7 @@ class Dialogs {
                       "${LocaleKeys.Something_is_wrong_Check.tr()}\n ${LocaleKeys.internet_connection.tr()}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 15,
                           fontWeight: FontWeight.normal,
                           color: Color.fromRGBO(0, 0, 0, 1),
                           letterSpacing: 0.15),
@@ -164,7 +164,7 @@ class Dialogs {
                     child: Text(
                       LocaleKeys.Repeat.tr(),
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 15,
                         color: Color.fromRGBO(239, 127, 26, 1),
                       ),
                     ),
@@ -185,8 +185,8 @@ class Dialogs {
             borderRadius: BorderRadius.circular(18),
           ),
           child: Container(
-            height: MediaQuery.of(ctx).size.height * .38,
-            width: MediaQuery.of(ctx).size.width * .85,
+            height: 250,
+            width: MediaQuery.of(ctx).size.width * .8,
             child: Column(
               children: [
                 Container(
@@ -206,7 +206,7 @@ class Dialogs {
                       LocaleKeys.your_request_has_been_successfully_accepted_for_consideration.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 15,
                           fontWeight: FontWeight.normal,
                           color: Color.fromRGBO(0, 0, 0, 1),
                           letterSpacing: 0.15),
@@ -214,7 +214,7 @@ class Dialogs {
                     Container(
                       margin: EdgeInsets.only(top: 13),
                       color: Color.fromRGBO(255, 250, 241, 1),
-                      height: MediaQuery.of(ctx).size.height * .08,
+                      height: 50,
                       padding: EdgeInsets.symmetric(vertical: 4),
                       child: ListView.builder(
                           itemCount: routes.length,
@@ -246,7 +246,7 @@ class Dialogs {
                                       "${routes[index]["date"]}",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 18,
+                                        fontSize: 15,
                                         height: 1.3
                                       ),
                                     ),
@@ -269,7 +269,7 @@ class Dialogs {
                     child: Text(
                       LocaleKeys.close.tr(),
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 15,
                         color: Color.fromRGBO(239, 127, 26, 1),
                       ),
                     ),
@@ -290,15 +290,15 @@ class Dialogs {
             borderRadius: BorderRadius.circular(18),
           ),
           child: Container(
-            height: MediaQuery.of(ctx).size.height * .25,
-            width: MediaQuery.of(ctx).size.width * .85,
+            height: 200,
+            width: MediaQuery.of(ctx).size.width * .8,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
                   height: 60,
                   width: 60,
-                  margin: EdgeInsets.symmetric(vertical: 15),
+                  margin: EdgeInsets.symmetric(vertical: 5),
                   child:  SvgPicture.asset("assets/error.svg", fit: BoxFit.cover),
                 ),
                 Column(
@@ -307,7 +307,7 @@ class Dialogs {
                      LocaleKeys.please_login_to_do_this_action.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 15,
                           fontWeight: FontWeight.normal,
                           color: Color.fromRGBO(0, 0, 0, 1),
                           letterSpacing: 0.15),
@@ -329,7 +329,7 @@ class Dialogs {
                     child: Text(
                       LocaleKeys.go_to_login_page.tr(),
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 15,
                         color: Color.fromRGBO(239, 127, 26, 1),
                       ),
                     ),
@@ -351,8 +351,8 @@ class Dialogs {
             borderRadius: BorderRadius.circular(18),
           ),
           content: Container(
-            height: MediaQuery.of(ctx).size.height * .27,
-            width: MediaQuery.of(ctx).size.width * .85,
+            height: 200,
+            width: MediaQuery.of(ctx).size.width * .8,
             child: Column(
               children: [
                 Container(
@@ -370,7 +370,7 @@ class Dialogs {
                   "${LocaleKeys.Your_ad_has_been_published.tr()}!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Color.fromRGBO(0, 0, 0, 1),
                       letterSpacing: 0.15),
@@ -386,7 +386,7 @@ class Dialogs {
                       LocaleKeys.close.tr(),
                       style: TextStyle(
                           color: Color.fromRGBO(239, 127, 26, 1),
-                          fontSize: 24
+                          fontSize: 15
                       ),
                     ),
                   ),

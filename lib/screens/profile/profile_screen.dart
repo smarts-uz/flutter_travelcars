@@ -120,7 +120,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: EdgeInsets.symmetric(horizontal: 3),
               child: Column(
                 children: [
-                  if(index == 5 )SizedBox(height: MediaQuery.of(context).size.height * .08),
+                  //if(index == 5 )SizedBox(height: MediaQuery.of(context).size.height * .08),
                   ListTile(
                     leading: Container(
                       height: 20,

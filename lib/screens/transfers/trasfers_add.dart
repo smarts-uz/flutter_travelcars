@@ -327,19 +327,23 @@ class _TransfersAddState extends State<TransfersAdd> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                height: MediaQuery.of(context).size.height*.045,
-                width: MediaQuery.of(context).size.width*.40,
+                height: 35,
+                width: 140,
                 child: RaisedButton(
                   color: Colors.white,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(width: 10),
+                      Icon(
+                        Icons.remove,
+                        color: Colors.red,
+                      ),
+                      SizedBox(width: 5),
                       Text(
-                        '-- ${LocaleKeys.delete.tr()}',
+                        LocaleKeys.delete.tr(),
                         style: TextStyle(
                           color: Colors.red,
-                          fontSize: 18,
+                          fontSize: 15,
                         ),
                       ),
                     ],
@@ -367,8 +371,8 @@ class _TransfersAddState extends State<TransfersAdd> {
                 ),
               ),
               Container(
-                height: MediaQuery.of(context).size.height*.045,
-                width: MediaQuery.of(context).size.width*.40,
+                height: 35,
+                width: 140,
                 child: RaisedButton(
                   color: Colors.white,
                   child: Row(
@@ -378,12 +382,12 @@ class _TransfersAddState extends State<TransfersAdd> {
                         Icons.add,
                         color: Colors.orange,
                       ),
-                      SizedBox(width: 10),
+                      SizedBox(width: 5),
                       Text(
                         LocaleKeys.add.tr(),
                         style: TextStyle(
                             color: Colors.orange,
-                            fontSize: 18
+                            fontSize: 15
                         ),
                       ),
                     ],
@@ -418,12 +422,12 @@ class _TransfersAddState extends State<TransfersAdd> {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 15),
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40)
             ),
-            height: MediaQuery.of(context).size.height*.050,
+            height: MediaQuery.of(context).size.height* 0.05,
             width: MediaQuery.of(context).size.width*.70,
             child:  RaisedButton(
                 onPressed: () async {

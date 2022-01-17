@@ -6,12 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/search/search_result.dart';
 import 'package:travelcars/screens/trip/trips.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
-import 'package:http/http.dart' as http;
 
 class SearchScreen extends StatefulWidget {
   final bool isDrawer;
@@ -48,6 +46,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   static List<dynamic> autoTypes = [];
   Map<String, dynamic> categories = {};
+  List<dynamic> chosen_types = [];
+  List<int> indexes = [];
 
   static List<dynamic> autoOptions = [];
 
@@ -64,6 +64,9 @@ class _SearchScreenState extends State<SearchScreen> {
     super.initState();
     getcities();
     autoTypes = HomeScreen.cars_list;
+    for(int i = 0; i < autoTypes.length; i++) {
+      indexes.add(i);
+    }
     categories = HomeScreen.category_list;
     autoOptions = HomeScreen.options_list;
     tarif = HomeScreen.tariff_list;
@@ -96,14 +99,14 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double catHeight = 0;
-    List<dynamic> chosen_types = [];
+    /*double catHeight = 0;
+    chosen_types = [];
     autoTypes.forEach((element) {
       if(element["chosen"]) {
         chosen_types.add(element);
         catHeight += categories["${element["name"]}"].length * 33.0 + 30.0;
       }
-    });
+    });*/
     return Scaffold(
       appBar: AppBar(
         leading: widget.isDrawer ? IconButton(
@@ -533,43 +536,44 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(left: 5, bottom: 5),
-              height: autoTypes.length * 33,
+              padding: EdgeInsets.symmetric(horizontal: 20),
               width: double.infinity,
-              child: ListBox(autoTypes)
-            ),
-            Container(
-                padding: EdgeInsets.only(left: 5),
-                height: catHeight,
-                width: MediaQuery.of(context).size.width,
-                child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: chosen_types.length,
-                  itemBuilder: (context, index) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, top: 7.0, bottom: 3.5),
-                        child: Text(
-                          chosen_types[index]["name"],
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            fontStyle: FontStyle.italic
+              child: Column(
+                children: indexes.map((index) => Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          autoTypes[index]["chosen"] = !autoTypes[index]["chosen"];
+                        });
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "${autoTypes[index]["name"]}",
+                            style: TextStyle(
+                              fontSize: 19,
+                            ),
                           ),
-                        ),
+                           Icon(
+                             autoTypes[index]["chosen"] ? Icons.expand_less_rounded : Icons.expand_more_rounded,
+                             size: 25,
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                          height: categories["${chosen_types[index]["name"]}"].length * 33.0,
-                          child: ListBox(categories["${chosen_types[index]["name"]}"])
-                      ),
-                    ],
-                  ),
-                )
+                    ),
+                    autoTypes[index]["chosen"] ? SizedBox(
+                        height: categories["${autoTypes[index]["meta_url"]}"].length * 33.0,
+                        child: ListBox(categories["${autoTypes[index]["meta_url"]}"])
+                    ) : SizedBox(height: 8,),
+                  ],
+                )).toList(),
+              )
             ),
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 15, bottom: 5, top: 15.0),
+              padding: EdgeInsets.only(left: 15, bottom: 5, top: 10.0),
               child: Text(
                 LocaleKeys.Options.tr(),
                 style: TextStyle(
@@ -693,6 +697,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       "price": "${_currentRangeValues.start.round()}+-+${_currentRangeValues.end.round()}",
                     };
 
+                    print(search_body);
                     int ind1 = 0;
                     categories.forEach((key, value) {
                       value.forEach((element) {
@@ -790,6 +795,7 @@ class _SearchScreenState extends State<SearchScreen> {
         }
     );
   }
+
 
 
 }

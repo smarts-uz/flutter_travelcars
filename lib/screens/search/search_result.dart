@@ -210,12 +210,13 @@ class _SearchResultState extends State<SearchResult> {
                         Icon(
                           Icons.info_outline,
                           color: routes[index]["status"] == 1 ? Colors.red : Colors.green,
+                          size: 22,
                         ),
                         SizedBox(width: 13),
                         Text(
                           routes[index]["status"] == 1 ? "${LocaleKeys.confirmation_requires.tr()}" : "${LocaleKeys.Instant_confirmation.tr()}",
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 17,
                             color: routes[index]["status"] == 1 ? Colors.red : Colors.green,
                           ),
                         ),
@@ -368,7 +369,7 @@ class _SearchResultState extends State<SearchResult> {
                             color: Colors.black,
                           ),
                           children: <TextSpan>[
-                            TextSpan(text: '${LocaleKeys.The_cost_of_the_trip.tr()}'),
+                            TextSpan(text: '${LocaleKeys.The_cost_of_the_trip.tr()} '),
                             TextSpan(text: '${LocaleKeys.for_one_day.tr()}', style: TextStyle(color: Colors.orange)),
                           ],
                         ),

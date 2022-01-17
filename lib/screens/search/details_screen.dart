@@ -43,19 +43,27 @@ class _DetailScreenState extends State<DetailScreen> {
   List<dynamic> narxlar = [];
   List<dynamic> costlar = [];
   List<dynamic> pricelar = [];
-  static List<String> payment_title = [
-    "Online payment",
-    "Cashless payments",
-    "Cash company",
-    "Cash driver",
+  List<dynamic> payment_types = [
+    {
+      "text": "Online payment",
+      "type": "online",
+    },
+    {
+      "text": "Cashless payments",
+      "type": "pay_bank",
+    },
+    {
+      "text": "Cash company",
+      "type": "pay_cash_company",
+    },
+    {
+      "text": "Cash driver",
+      "type": "pay_cash_driver",
+    },
   ];
   String? selectedVal;
-  final List<DropdownMenuItem<String>> payments = payment_title.map(
-        (String value) => DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        ),
-  ).toList();
+  final List<DropdownMenuItem<String>> payments = [];
+
 
   final Map<MarkerId, Marker> markers = {};
 
@@ -71,22 +79,44 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
+    payment_types.forEach((element) {
+      payments.add( DropdownMenuItem<String>(
+        value: element["text"],
+        child: Text(element["text"]),
+      ),);
+    });
     double app_kurs = 1;
     HomeScreen.kurs.forEach((element) {
       if(SplashScreen.kurs == element["code"]) {
         app_kurs = element["rate"].toDouble();
       }
     });
+
+    double day = 1.0;
     jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
-      if(value != null) {
+      if(key != "overtime" && value != null) {
         double cost;
         if(value.runtimeType == String) {
           cost = double.parse(value) * app_kurs;
         } else {
           cost = value * app_kurs;
         }
+        day = 1.0;
+        switch(key) {
+          case "one":
+            day = 1.0;
+            break;
+          case "two":
+            day = 2.0;
+            break;
+          case "three":
+            day = 3.0;
+            break;
+          case "half":
+            day = 0.5;
+        }
         narxlar.add({
-          "day": "$key day",
+          "day": "${day == 0.5 ? day : day.toInt()} day",
           "cost": cost
         });
       }
@@ -96,14 +126,14 @@ class _DetailScreenState extends State<DetailScreen> {
 
     jsonDecode(widget.route_item["cost_data"]).forEach((key, value) {
       costlar.add({
-        "day": key,
+        "day": day == 0.5 ? day : day.toInt(),
         "cost": value != null ? value : 0
       });
     });
 
     jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
       pricelar.add({
-        "day": key,
+        "day": day == 0.5 ? day : day.toInt(),
         "cost": value != null ? value : 0
       });
     });
@@ -437,7 +467,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ],
               ),
             ),
-            if(widget.points.isNotEmpty) _text(text: "${LocaleKeys.trip_mapp.tr()}"),
+            /*if(widget.points.isNotEmpty) _text(text: "${LocaleKeys.trip_mapp.tr()}"),
             if(widget.points.isNotEmpty) Container(
               margin: EdgeInsets.only(left: 16),
               height: _adresses.length * 30,
@@ -453,7 +483,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       fontSize: 18
                     ),
                   )),
-            ),
+            ),*/
             if(widget.points.isNotEmpty) Container(
               height: MediaQuery.of(context).size.height * 0.45,
               padding: const EdgeInsets.only(left: 16, right: 16),
@@ -649,7 +679,12 @@ class _DetailScreenState extends State<DetailScreen> {
                 final prefs = await SharedPreferences.getInstance();
                 if(prefs.containsKey("userData")) {
                   String pay_key = "";
-                  switch(selectedVal) {
+                  for(var element in payment_types) {
+                    if(element["text"] == selectedVal) {
+                      pay_key = element["type"];
+                    }
+                  }
+                  /*switch(selectedVal) {
                     case "Online payment":
                       pay_key = "online";
                       break;
@@ -662,7 +697,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     case "Cash driver":
                       pay_key = "pay_cash_driver";
                       break;
-                  }
+                  }*/
                   if(pay_key.isEmpty) {
                     ToastComponent.showDialog("Choose payment type");
                     return;
@@ -708,7 +743,8 @@ class _DetailScreenState extends State<DetailScreen> {
                     );
                     print(response.body);
                     if(jsonDecode(response.body)["success"]) {
-                      Dialogs.ZayavkaDialog(context);
+                      //Dialogs.ZayavkaDialog(context);
+                      Navigator.pop(context);
                     } else {
                       Dialogs.ErrorDialog(context);
                     }

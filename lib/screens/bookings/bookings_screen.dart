@@ -97,23 +97,25 @@ class _BookingsScreenState extends State<BookingsScreen> {
             icon_numbers.add(results[index]["car"]["small_bags"]);
             icon_numbers.add(results[index]["car"]["doors"]);
             double day = 1.0;
-            results[index]["price_data"].forEach((key, value) {
-              if(value == results[index]["price"]) {
-                switch(key) {
-                  case "one":
-                    day = 1;
-                    break;
-                  case "two":
-                    day = 2;
-                    break;
-                  case "three":
-                    day = 3;
-                    break;
-                  case "half":
-                    day = 0.5;
+            if(results[index]["price_data"] != null) {
+              results[index]["price_data"].forEach((key, value) {
+                if(value == results[index]["price"]) {
+                  switch(key) {
+                    case "one":
+                      day = 1;
+                      break;
+                    case "two":
+                      day = 2;
+                      break;
+                    case "three":
+                      day = 3;
+                      break;
+                    case "half":
+                      day = 0.5;
+                  }
                 }
-              }
-            });
+              });
+            }
             String? status = "Unknown";
             switch(results[index]['status']) {
               case "moderating":

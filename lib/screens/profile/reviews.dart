@@ -70,6 +70,7 @@ class _ReviewsState extends State<Reviews> {
     ],
     "reviews": []
   };
+  List<int> indexes = [];
 
   @override
   void initState() {
@@ -104,6 +105,10 @@ class _ReviewsState extends State<Reviews> {
     reviews.addAll({
         "average": average.toString(),
     });
+
+    for(int i = 0; i<reviews["reviews"].length; i++) {
+      indexes.add(i);
+    }
     setState(() {
       isLoading = false;
     });
@@ -155,7 +160,6 @@ class _ReviewsState extends State<Reviews> {
                   ),
                 ),
                 onPressed: () async {
-                  final prefs = await SharedPreferences.getInstance();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -265,7 +269,7 @@ class _ReviewsState extends State<Reviews> {
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 10),
-                    height: MediaQuery.of(context).size.height * .95,
+                    height: 625,
                     child: ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: reviews['rate'].length,
@@ -276,7 +280,7 @@ class _ReviewsState extends State<Reviews> {
                             "Overall rating"
                           ];
                           String text_t = index == 0 ? titles[0] : index == 5 ? titles[1] : index == 7 ? titles[2] : " ";
-                          double h_cal =  index == 5 || index == 7 || index == 0? 110 : 55;
+                          double h_cal =  index == 5 || index == 7 || index == 0? 85 : 55;
                           double rate = (reviews['rate'][index]["score"])/10;
 
                           return Container(
@@ -344,152 +348,147 @@ class _ReviewsState extends State<Reviews> {
                     thickness: 2,
                     color: Colors.orange,
                   ),
-                  Container(
-                   height: reviews["reviews"].length * 330.0,
-                   child: ListView.builder(
-                     physics: NeverScrollableScrollPhysics(),
-                     itemCount:reviews["reviews"].length,
-                     itemBuilder: (context,index1) {
-                       double sumper = 0;
-                       reviews["reviews"][index1]["grade"].forEach((key, value){
-                         if(value is String) {
-                           sumper+=double.parse(value);
-                         } else {
-                           sumper += value;
-                         }
-                       });
-                       sumper /= 9;
-                       return Card(
-                         margin: EdgeInsets.symmetric(vertical: 8),
-                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                         elevation: 4,
-                         child: Column(
-                           crossAxisAlignment: CrossAxisAlignment.start,
-                           mainAxisAlignment: MainAxisAlignment.start,
-                           children: [
-                             Padding(
-                               padding: const EdgeInsets.only(top: 10.0, right: 12.0, left: 12.0),
-                               child: Row(
-                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                 children: [
-                                   Column(
-                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                     children: [
-                                       Text(
-                                         "${reviews["reviews"][index1]["name"]}",
-                                         style: TextStyle(
-                                             fontSize: 20
-                                         ),
-                                       ),
-                                       Text(
-                                         "${reviews['reviews'][index1]['country_name']}",
-                                         style: TextStyle(
-                                             fontSize: 15
-                                         ),
-                                       ),
-                                     ],
-                                   ),
-                                   Container(
-                                     height: 27,
-                                     width: 27,
-                                     decoration: BoxDecoration(
-                                       color: Colors.orange,
-                                       borderRadius: BorderRadius.circular(4.0),
-                                     ),
-                                     child: Center(
-                                       child: Text(
-                                         sumper.round().toInt().toString(),
-                                         style: TextStyle(
-                                             color: Colors.white
-                                         ),
-                                       ),
-                                     ),
-                                   ),
-                                 ],
-                               ),
-                             ),
+                  Column(
+                    children: indexes.map((index1) {
+                      double sumper = 0;
+                      reviews["reviews"][index1]["grade"].forEach((key, value){
+                        if(value is String) {
+                          sumper+=double.parse(value);
+                        } else {
+                          sumper += value;
+                        }
+                      });
+                      sumper /= 9;
+                      return Card(
+                        margin: EdgeInsets.symmetric(vertical: 8),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                        elevation: 4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10.0, right: 12.0, left: 12.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "${reviews["reviews"][index1]["name"]}",
+                                        style: TextStyle(
+                                            fontSize: 20
+                                        ),
+                                      ),
+                                      Text(
+                                        "${reviews['reviews'][index1]['country_name']}",
+                                        style: TextStyle(
+                                            fontSize: 15
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    height: 27,
+                                    width: 27,
+                                    decoration: BoxDecoration(
+                                      color: Colors.orange,
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        sumper.round().toInt().toString(),
+                                        style: TextStyle(
+                                            color: Colors.white
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
 
-                             Padding(
-                               padding: const EdgeInsets.only(left: 8, top: 0),
-                               child: Row(
-                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                 children: [
-                                   Container(
-                                     width : MediaQuery.of(context).size.width*.5,
-                                     child: Row(
-                                       mainAxisAlignment: MainAxisAlignment.start,
-                                       children: [
-                                         Icon(
-                                           Icons.location_on,
-                                           color: Colors.orange,
-                                         ),
-                                         Expanded(
-                                           child: Text(
-                                             '${reviews['reviews'][index1]["route_name"]}',
-                                             overflow: TextOverflow.ellipsis,
-                                             //softWrap: false,
-                                             style: TextStyle(
-                                                 fontWeight: FontWeight.bold,
-                                                 fontStyle: FontStyle.italic
-                                             ),
-                                           ),
-                                         ),
-                                       ],
-                                     ),
-                                   ),
-                                   FlatButton.icon(
-                                       onPressed: () {},
-                                       icon:  Icon(
-                                         Icons.calendar_today_outlined,
-                                         color: Colors.orange,
-                                       ),
-                                       label: Text(
-                                         reviews['reviews'][index1]["route_date"] == null ? "" :
-                                         '${reviews['reviews'][index1]["route_date"].substring(0,10)}',
-                                         style: TextStyle(
-                                             fontWeight: FontWeight.bold,
-                                             fontStyle: FontStyle.italic
-                                         ),
-                                       )
-                                   ),
-                                 ],
-                               ),
-                             ),
-                             Container(
-                               padding: EdgeInsets.only(left: 16, bottom: 10, right: 16),
-                               child: Column(
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   Text(
-                                     "${LocaleKeys.recall_time.tr()}: ${reviews["reviews"][index1]["created_at"].substring(0,10)}",
-                                     textAlign: TextAlign.start,
-                                     style: TextStyle(
-                                         fontSize: 15,
-                                         decoration: TextDecoration.underline,
-                                         fontStyle: FontStyle.italic
-                                     ),
-                                   ),
-                                   SizedBox(
-                                     height: 10,
-                                   ),
-                                   Text("${reviews["reviews"][index1]["text"]}",
-                                     maxLines: 12,
-                                     textAlign: TextAlign.justify,
-                                     style: TextStyle(
-                                       fontSize: 15,
-                                         fontStyle: FontStyle.italic
-                                     ),
-                                   )
-                                 ],
-                               ),
-                             ),
-                           ],
-                         ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8, top: 0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width : MediaQuery.of(context).size.width*.5,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Icon(
+                                          Icons.location_on,
+                                          color: Colors.orange,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            '${reviews['reviews'][index1]["route_name"]}',
+                                            overflow: TextOverflow.ellipsis,
+                                            //softWrap: false,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle: FontStyle.italic
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  FlatButton.icon(
+                                      onPressed: () {},
+                                      icon:  Icon(
+                                        Icons.calendar_today_outlined,
+                                        color: Colors.orange,
+                                      ),
+                                      label: Text(
+                                        reviews['reviews'][index1]["route_date"] == null ? "" :
+                                        '${reviews['reviews'][index1]["route_date"].substring(0,10)}',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle: FontStyle.italic
+                                        ),
+                                      )
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: 16, bottom: 10, right: 16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "${LocaleKeys.recall_time.tr()}: ${reviews["reviews"][index1]["created_at"].substring(0,10)}",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        decoration: TextDecoration.underline,
+                                        fontStyle: FontStyle.italic
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text("${reviews["reviews"][index1]["text"]}",
+                                    maxLines: 12,
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontStyle: FontStyle.italic
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
 
-                       );
-                     },
-                   )
+                      );
+                    }).toList(),
                   ),
                 ]
               )

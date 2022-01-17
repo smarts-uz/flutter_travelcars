@@ -41,7 +41,7 @@ class Cars {
           );
         });
         categories.addAll({
-          "${element["name"]}": item_category,
+          "${element["meta_url"]}": item_category,
         });
       })
     );

@@ -89,7 +89,7 @@ class _RouteAddState extends State<RouteAdd> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * .73,
+              height: MediaQuery.of(context).size.height * .75,
               child: ListView.builder(
                 controller: _controller,
                 itemCount: count,
@@ -204,27 +204,28 @@ class _RouteAddState extends State<RouteAdd> {
                 },
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 15,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height*.05,
-                  width: MediaQuery.of(context).size.width*.40,
+                  height: 35,
+                  width: 140,
                   child: RaisedButton(
                     color: Colors.white,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                            width: 10),
+                        Icon(
+                          Icons.remove,
+                          color: Colors.red,
+                        ),
+                        SizedBox(width: 5),
                         Text(
                          LocaleKeys.delete.tr(),
                           style: TextStyle(
                               color: Colors.red,
-                              fontSize: 18
+                              fontSize: 15
                           ),
                         ),
                       ],
@@ -251,8 +252,8 @@ class _RouteAddState extends State<RouteAdd> {
                   ),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height*.05,
-                  width: MediaQuery.of(context).size.width*.40,
+                  height: 35,
+                  width: 140,
                   child: RaisedButton(
                     color: Colors.white,
                     child: Row(
@@ -262,13 +263,12 @@ class _RouteAddState extends State<RouteAdd> {
                           Icons.add,
                           color: Colors.orange,
                         ),
-                        SizedBox(
-                            width: 10),
+                        SizedBox(width: 5),
                         Text(
                           LocaleKeys.add.tr(),
                           style: TextStyle(
                               color: Colors.orange,
-                            fontSize: 18
+                            fontSize: 15
                           ),
                         ),
                       ],
@@ -302,9 +302,7 @@ class _RouteAddState extends State<RouteAdd> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
