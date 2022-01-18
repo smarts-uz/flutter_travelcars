@@ -110,8 +110,8 @@ class _AddScreenState extends State<AddScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TFF("From", text_controllers[0], 45, false),
-                TFF("To", text_controllers[1], 45, false),
+                TFF("${LocaleKeys.From.tr()}", text_controllers[0], 45, false),
+                TFF("${LocaleKeys.To.tr()}", text_controllers[1], 45, false),
                 GestureDetector(
                   onTap: () {
                     showDatePicker(
@@ -189,7 +189,7 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                   ),
                 ),
-                TFF("${LocaleKeys.car}", text_controllers[2], 45, false),
+                TFF("${LocaleKeys.car.tr()}", text_controllers[2], 45, false),
                 TFF("${LocaleKeys.Quantity_.tr()}", text_controllers[3], 45, true),
                 TFF("${LocaleKeys.Quantity.tr()}", text_controllers[4], 45, true),
                 TFF("${LocaleKeys.name.tr()}", text_controllers[5], 45, false),

@@ -212,5 +212,15 @@
   "transfers": "Transfers",
   "route": "Route",
   "Account_settings": "Account Settings",
-  "aboute_us": "About us"
+  "aboute_us": "About us",
+  "or": "or",
+  "password": "password",
+  "paasword_confirmation": "Password confirmation ",
+  "name_surname": "Full name",
+  "Current_password": "Current Password",
+  "new_password": "New password",
+  "New_password_confirmation": "New password confirmation",
+  "Write_comment_for_order": "Write a comment for order",
+  "meeting": "Pick up",
+  "Drop_of": "Drop of"
 }

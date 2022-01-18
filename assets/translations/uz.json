@@ -167,8 +167,8 @@
   "Camera": "Kamera",
   "Photo_library": "Foto albomlar",
   "Announcement": "E'lon",
-  "From": "Dan",
-  "To": "Gacha",
+  "From": "Qayerdan ",
+  "To": "Qayergacha",
   "Date": "Sana",
   "Time": "Vaqt",
   "Car_type": "Avtomobil turi",
@@ -212,5 +212,15 @@
   "transfers": "Transferlar",
   "route": "Marshrut",
   "Account_settings": "Profil sozlamalari",
-  "aboute_us": "Biz haqimizda"
+  "aboute_us": "Biz haqimizda",
+  "or": "yoki",
+  "password": "parol",
+  "paasword_confirmation": "parolni tasdiqlash",
+  "name_surname": "To'liq ismTo'liq ism",
+  "Current_password": "Joriy Parol",
+  "new_password": "Yangi parol",
+  "New_password_confirmation": "Yangi parolni tasdiqlang",
+  "Write_comment_for_order": "Buyurtma berish uchun izoh yozing",
+  "meeting": "Kutib olish",
+  "Drop_of": "Kuzatish"
 }

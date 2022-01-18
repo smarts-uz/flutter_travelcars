@@ -154,7 +154,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               child: TextFormField(
                 autovalidateMode: AutovalidateMode.always,
                 decoration: InputDecoration(
-                  hintText: "Имя",
+                  hintText: "${LocaleKeys.name.tr()}",
                   hintMaxLines: 3,
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
@@ -319,8 +319,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               child: TextFormField(
                 maxLines: 10,
                 autovalidateMode: AutovalidateMode.always,
-                decoration: const InputDecoration(
-                    hintText: "Напишите отзыв...",
+                decoration:  InputDecoration(
+                    hintText: "${LocaleKeys.write_feedback.tr()}...",
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.white,

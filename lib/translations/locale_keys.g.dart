@@ -215,5 +215,15 @@ abstract class  LocaleKeys {
   static const route = 'route';
   static const Account_settings = 'Account_settings';
   static const aboute_us = 'aboute_us';
+  static const or = 'or';
+  static const password = 'password';
+  static const paasword_confirmation = 'paasword_confirmation';
+  static const name_surname = 'name_surname';
+  static const Current_password = 'Current_password';
+  static const new_password = 'new_password';
+  static const New_password_confirmation = 'New_password_confirmation';
+  static const Write_comment_for_order = 'Write_comment_for_order';
+  static const meeting = 'meeting';
+  static const Drop_of = 'Drop_of';
 
 }

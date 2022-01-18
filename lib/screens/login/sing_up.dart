@@ -128,8 +128,8 @@ class _SignUpState extends State<SignUp> {
                         borderRadius: BorderRadius.circular(5)),
                     child: TextFormField(
                       autovalidateMode: AutovalidateMode.always,
-                      decoration: const InputDecoration(
-                        hintText: "ФИО",
+                      decoration:  InputDecoration(
+                        hintText: "${LocaleKeys.name_surname.tr()}",
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.white,
@@ -162,8 +162,8 @@ class _SignUpState extends State<SignUp> {
                         borderRadius: BorderRadius.circular(5)),
                     child: TextFormField(
                       autovalidateMode: AutovalidateMode.always,
-                      decoration: const InputDecoration(
-                        hintText: "Phone(998) or e-mail",
+                      decoration:  InputDecoration(
+                        hintText: "${LocaleKeys.Phone.tr()}(998) ${LocaleKeys.or.tr()} e-mail",
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.white,
@@ -198,7 +198,7 @@ class _SignUpState extends State<SignUp> {
                       obscureText: show,
                       autovalidateMode: AutovalidateMode.always,
                       decoration:  InputDecoration(
-                        hintText: "Пароль",
+                        hintText: "${LocaleKeys.password.tr()}",
                         suffixIcon: IconButton(
                           onPressed: () {
                             setState(() {
@@ -240,7 +240,7 @@ class _SignUpState extends State<SignUp> {
                       obscureText: show1,
                       autovalidateMode: AutovalidateMode.always,
                       decoration:  InputDecoration(
-                        hintText: "Подтверждение пароля",
+                        hintText: "${LocaleKeys.paasword_confirmation.tr()}",
                         suffixIcon: IconButton(
                           onPressed: () {
                             setState(() {

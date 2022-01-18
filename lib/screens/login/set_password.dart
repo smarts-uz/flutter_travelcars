@@ -76,7 +76,7 @@ class _SetPasswordState extends State<SetPassword> {
                   obscureText: show,
                   autovalidateMode: AutovalidateMode.always,
                   decoration: InputDecoration(
-                    hintText: "Пароль",
+                    hintText: "${LocaleKeys.password.tr()}",
                     suffixIcon: IconButton(
                       onPressed: () {
                         setState(() {
@@ -119,7 +119,7 @@ class _SetPasswordState extends State<SetPassword> {
                   obscureText: show,
                   autovalidateMode: AutovalidateMode.always,
                   decoration:  InputDecoration(
-                    hintText: "Подтверждение пароля",
+                    hintText: "${LocaleKeys.paasword_confirmation.tr()}",
                     suffixIcon: IconButton(
                       onPressed: () {
                         setState(() {

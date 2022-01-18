@@ -214,7 +214,7 @@ class _TripItemState extends State<TripItem> {
                 keyboardType: TextInputType.text,
                 autovalidateMode: AutovalidateMode.always,
                 decoration: InputDecoration(
-                  hintText: "Write a comment for order",
+                  hintText: "${LocaleKeys.Write_comment_for_order.tr()}",
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.white,

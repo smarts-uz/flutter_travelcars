@@ -59,7 +59,7 @@ class _SecondScreenState extends State<SecondScreen> {
                 padding: EdgeInsets.only(bottom: 10,top: 10),
                 child: TextField(
                   decoration: InputDecoration(
-                    hintText: "Текущий пароль",
+                    hintText: "${LocaleKeys.Current_password.tr()}",
                     labelStyle: TextStyle(
                       color: Colors.white10,
                     ),
@@ -83,7 +83,7 @@ class _SecondScreenState extends State<SecondScreen> {
                 padding: EdgeInsets.only(bottom: 10,top: 10),
                 child: TextField(
                   decoration: InputDecoration(
-                    hintText: "Новый пароль",
+                    hintText: "${LocaleKeys.new_password.tr()}",
                     errorText: null,
                     labelStyle: TextStyle(
                       color: Colors.white10,
@@ -108,7 +108,7 @@ class _SecondScreenState extends State<SecondScreen> {
                 padding: EdgeInsets.only(bottom: 10,top: 10),
                 child: TextField(
                   decoration: InputDecoration(
-                    hintText: "Подтверждение нового пароля",
+                    hintText: "${LocaleKeys.New_password_confirmation.tr()}",
                     errorText: null,
                     labelStyle: TextStyle(
                       color: Colors.white10,

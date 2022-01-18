@@ -23,8 +23,8 @@ class _TransfersAddState extends State<TransfersAdd> {
   final ScrollController _controller = ScrollController();
 
   List<String> directions = [
-    'Meeting',
-    'The wire'
+    '${LocaleKeys.meeting.tr()}',
+    '${LocaleKeys.Drop_of.tr()}'
   ];
   int i = 1;
   List<String> city = [];

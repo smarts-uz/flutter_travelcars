@@ -402,8 +402,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   FilteringTextInputFormatter.digitsOnly
                 ],
                 autovalidateMode: AutovalidateMode.always,
-                decoration: const InputDecoration(
-                  hintText: "Quantity of passengers",
+                decoration:  InputDecoration(
+                  hintText: "${LocaleKeys.Quantity_of_passengers.tr()}",
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.white,
