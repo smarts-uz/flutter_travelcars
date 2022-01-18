@@ -487,7 +487,7 @@ static const Map<String,dynamic> ru = {
   "New_password_confirmation": "Подтверждение нового пароля",
   "Write_comment_for_order": "Напишите комментарий к заказу",
   "meeting": "Bстреча",
-  "Drop_of": "проводы",
+  "Drop_of": "Проводы",
   "one": "один",
   "twoo": "два",
   "three": "три",
