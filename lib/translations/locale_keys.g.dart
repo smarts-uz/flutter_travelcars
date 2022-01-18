@@ -225,5 +225,23 @@ abstract class  LocaleKeys {
   static const Write_comment_for_order = 'Write_comment_for_order';
   static const meeting = 'meeting';
   static const Drop_of = 'Drop_of';
+  static const twoo = 'twoo';
+  static const three = 'three';
+  static const half = 'half';
+  static const Online_payment = 'Online_payment';
+  static const Cashless_payments = 'Cashless_payments';
+  static const Cash_company = 'Cash_company';
+  static const Cash_driver = 'Cash_driver';
+  static const punctuality = 'punctuality';
+  static const car_driving = 'car_driving';
+  static const knowledge_of_traffic = 'knowledge_of_traffic';
+  static const Terrain_orientation = 'Terrain_orientation';
+  static const Knowledge_of_the_language = 'Knowledge_of_the_language';
+  static const Automobile = 'Automobile';
+  static const Cleanliness_smell_in_the_cabin = 'Cleanliness_smell_in_the_cabin';
+  static const Amenities_in_the_salon = 'Amenities_in_the_salon';
+  static const Overall_rating = 'Overall_rating';
+  static const Level_of_professionalism_of_the_driver = 'Level_of_professionalism_of_the_driver';
+  static const Price_quality_ratio = 'Price_quality_ratio';
 
 }

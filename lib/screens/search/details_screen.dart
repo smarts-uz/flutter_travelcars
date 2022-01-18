@@ -47,19 +47,19 @@ class _DetailScreenState extends State<DetailScreen> {
   List<dynamic> pricelar = [];
   List<dynamic> payment_types = [
     {
-      "text": "Online payment",
+      "text":  LocaleKeys.Online_payment.tr(),
       "type": "online",
     },
     {
-      "text": "Cashless payments",
+      "text":  LocaleKeys.Cashless_payments.tr(),
       "type": "pay_bank",
     },
     {
-      "text": "Cash company",
+      "text":  LocaleKeys.Cash_company.tr(),
       "type": "pay_cash_company",
     },
     {
-      "text": "Cash driver",
+      "text":  LocaleKeys.Cash_driver.tr(),
       "type": "pay_cash_driver",
     },
   ];
@@ -118,7 +118,7 @@ class _DetailScreenState extends State<DetailScreen> {
             day = 0.5;
         }
         narxlar.add({
-          "day": "${day == 0.5 ? day : day.toInt()} day",
+          "day": "${day == 0.5 ? day : day.toInt()} ${LocaleKeys.day.tr()}",
           "cost": cost
         });
       } else if(key == "overtime") {
@@ -712,13 +712,13 @@ class _DetailScreenState extends State<DetailScreen> {
                   String price = "0";
                   String cost = "0";
                   pricelar.forEach((element) {
-                    if(element["day"] + " day" == dropdown) {
+                    if(element["day"] + " ${LocaleKeys.day.tr()}" == dropdown) {
                       price = element["cost"];
                     }
                   });
 
                   costlar.forEach((element) {
-                    if(element["day"] + " day" == dropdown) {
+                    if(element["day"] + " ${LocaleKeys.day.tr()}" == dropdown) {
                       if(element["cost"] is String) {
                         cost = element["cost"];
                       } else {

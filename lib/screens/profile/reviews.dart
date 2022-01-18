@@ -23,47 +23,47 @@ class _ReviewsState extends State<Reviews> {
   Map<String, dynamic> reviews = {
     'rate': [
       {
-        'title': 'Punctuality',
+        'title': LocaleKeys.punctuality.tr(),
         'name': 'Punctuality',
         "score": 8.0
       },
       {
-        'title': 'Car driving',
+        'title': LocaleKeys.car_driving.tr(),
         'name': "driving",
         "score": 3.0
       },
       {
-        'title': 'Knowledge',
+        'title': LocaleKeys.knowledge_of_traffic.tr(),
         "name": "rules",
         "score": 7.0
       },
       {
-        'title': 'Orientation',
+        'title': LocaleKeys.Terrain_orientation.tr(),
         "name": "orientation",
         "score": 6.0
       },
       {
-        'title': 'Language',
+        'title': LocaleKeys.Knowledge_of_the_language.tr(),
         "name": "language",
         "score": 9.0
       },
       {
-        'title': 'Chistota',
+        'title': LocaleKeys.Cleanliness_smell_in_the_cabin.tr(),
         "name": "Cleanliness",
         "score": 9.0
       },
       {
-        'title': 'Qulalylik',
+        'title': LocaleKeys.Amenities_in_the_salon.tr(),
         "name": "salon",
         "score": 5.0
       },
       {
-        'title': 'Profiessinal',
+        'title': LocaleKeys.Level_of_professionalism_of_the_driver.tr(),
         'name': "professionalism",
         "score": 5.0
       },
       {
-        'title': 'Sena kachestva',
+        'title':  LocaleKeys.Price_quality_ratio.tr(),
         'name': "Price_quality",
         "score": 10.0
       },
@@ -275,9 +275,9 @@ class _ReviewsState extends State<Reviews> {
                         itemCount: reviews['rate'].length,
                         itemBuilder: (context,index) {
                           List<String> titles = [
-                            "Driver",
-                            "Car",
-                            "Overall rating"
+                            LocaleKeys.driver.tr(),
+                            LocaleKeys.car.tr(),
+                            LocaleKeys.Overall_rating.tr()
                           ];
                           String text_t = index == 0 ? titles[0] : index == 5 ? titles[1] : index == 7 ? titles[2] : " ";
                           double h_cal =  index == 5 || index == 7 || index == 0? 85 : 55;
