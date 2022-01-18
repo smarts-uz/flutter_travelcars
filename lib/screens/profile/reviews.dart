@@ -225,7 +225,7 @@ class _ReviewsState extends State<Reviews> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                                 Text(
-                                  "${reviews['reviews'].length} comments",
+                                  "${reviews['reviews'].length} ${LocaleKeys.comment.tr()}",
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold
