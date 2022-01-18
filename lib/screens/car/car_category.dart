@@ -173,7 +173,6 @@ class _CarCategoryState extends State<CarCategory> {
                         ),
                         Expanded(
                           child: Container(
-                            height: MediaQuery.of(context).size.height * .16,
                             width: MediaQuery.of(context).size.width * .5,
                             padding: EdgeInsets.only(right: 3.0),
                             child: ListView.builder(
@@ -188,15 +187,17 @@ class _CarCategoryState extends State<CarCategory> {
                                         color: Colors.orange,
                                         size: 27.0,
                                       ),
-                                      Text(
-                                        "${names[index_in]["name"]}: ${
-                                            index_in == 3 ?
-                                              categories[index][names[index_in]["data"]] == 1 ?
-                                                "${LocaleKeys.yes.tr()}" : "${LocaleKeys.no.tr()}" :
-                                                  categories[index][names[index_in]["data"]] != null ? categories[index][names[index_in]["data"]] : "--"
-                                        }",
-                                        style: TextStyle(
-                                          fontSize: 15.0
+                                      Expanded(
+                                        child: Text(
+                                          "${names[index_in]["name"]}: ${
+                                              index_in == 3 ?
+                                                categories[index][names[index_in]["data"]] == 1 ?
+                                                  "${LocaleKeys.yes.tr()}" : "${LocaleKeys.no.tr()}" :
+                                                    categories[index][names[index_in]["data"]] != null ? categories[index][names[index_in]["data"]] : "--"
+                                          }",
+                                          style: TextStyle(
+                                            fontSize: 15.0
+                                          ),
                                         ),
                                       ),
                                     ],

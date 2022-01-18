@@ -11,18 +11,19 @@ class Dialogs {
       context: ctx,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
+          contentPadding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
           ),
           content: Container(
-            height: 180,
-            width: MediaQuery.of(ctx).size.width * .8,
+            height: 150,
+            width: 240,
             child: Column(
               children: [
                 Container(
-                  height: 80,
-                  width: 80,
-                  margin: EdgeInsets.symmetric(vertical: 10),
+                  height: 70,
+                  width: 70,
+                  margin: EdgeInsets.symmetric(vertical: 5),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/image.jpg"),
@@ -34,24 +35,21 @@ class Dialogs {
                   "${LocaleKeys.Your_application_is_accepted.tr()}!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 17,
                       fontWeight: FontWeight.w400,
                       color: Color.fromRGBO(0, 0, 0, 1),
                       letterSpacing: 0.15),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.pop(ctx);
-                      Navigator.pop(ctx);
-                    },
-                    child: Text(
-                      LocaleKeys.close.tr(),
-                      style: TextStyle(
-                        color: Color.fromRGBO(239, 127, 26, 1),
-                        fontSize: 15
-                      ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    Navigator.pop(ctx);
+                  },
+                  child: Text(
+                    LocaleKeys.close.tr(),
+                    style: TextStyle(
+                      color: Color.fromRGBO(239, 127, 26, 1),
+                      fontSize: 17
                     ),
                   ),
                 ),
@@ -67,19 +65,20 @@ class Dialogs {
     return showDialog(
         context: ctx,
         builder: (BuildContext dialogContext) {
-          return Dialog(
+          return AlertDialog(
+            contentPadding: EdgeInsets.zero,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18),
             ),
-            child: Container(
-              height: 200,
-              width: MediaQuery.of(ctx).size.width * .8,
+            content: Container(
+              height: 150,
+              width: 240,
               child: Column(
                 children: [
                   Container(
-                    height: 80,
-                    width: 80,
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    height: 70,
+                    width: 70,
+                    margin: EdgeInsets.symmetric(vertical: 5),
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("assets/image.jpg"),
@@ -93,26 +92,23 @@ class Dialogs {
                         "${LocaleKeys.Your_review_has_been_sent_successfully.tr()}!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 17,
                             fontWeight: FontWeight.w400,
                             color: Color.fromRGBO(0, 0, 0, 1),
                             letterSpacing: 0.15),
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 15),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pop(ctx);
-                        Navigator.pop(ctx);
-                        },
-                      child: Text(
-                        LocaleKeys.close.tr(),
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Color.fromRGBO(239, 127, 26, 1),
-                        ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                      Navigator.pop(ctx);
+                      },
+                    child: Text(
+                      LocaleKeys.close.tr(),
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: Color.fromRGBO(239, 127, 26, 1),
                       ),
                     ),
                   ),
@@ -127,19 +123,20 @@ class Dialogs {
   static Future<dynamic> ErrorDialog(BuildContext ctx) {
     return showDialog(
         context: ctx,
-        builder: (BuildContext dialogContext) => Dialog(
+        builder: (BuildContext dialogContext) => AlertDialog(
+          contentPadding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
           ),
-          child: Container(
-            height: 200,
-            width: MediaQuery.of(ctx).size.width * .8,
+          content: Container(
+            height: 175,
+            width: 240,
             child: Column(
               children: [
                 Container(
-                  height: 80,
-                  width: 80,
-                  margin: EdgeInsets.symmetric(vertical: 15),
+                  height: 70,
+                  width: 70,
+                  margin: EdgeInsets.symmetric(vertical: 8),
                   child:  SvgPicture.asset("assets/error.svg", fit: BoxFit.cover),
                 ),
                 Column(
@@ -148,25 +145,22 @@ class Dialogs {
                       "${LocaleKeys.Something_is_wrong_Check.tr()}\n ${LocaleKeys.internet_connection.tr()}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 17,
                           fontWeight: FontWeight.normal,
                           color: Color.fromRGBO(0, 0, 0, 1),
                           letterSpacing: 0.15),
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.pop(ctx);
-                    },
-                    child: Text(
-                      LocaleKeys.Repeat.tr(),
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Color.fromRGBO(239, 127, 26, 1),
-                      ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                  },
+                  child: Text(
+                    LocaleKeys.Repeat.tr(),
+                    style: TextStyle(
+                      fontSize: 17,
+                      color: Color.fromRGBO(239, 127, 26, 1),
                     ),
                   ),
                 ),
@@ -180,19 +174,20 @@ class Dialogs {
   static Future<dynamic> TripDialog(BuildContext ctx, List routes,)  {
     return showDialog(
         context: ctx,
-        builder: (BuildContext dialogContext) => Dialog(
+        builder: (BuildContext dialogContext) => AlertDialog(
+          contentPadding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
           ),
-          child: Container(
-            height: 250,
-            width: MediaQuery.of(ctx).size.width * .8,
+          content: Container(
+            height: 240,
+            width: 250,
             child: Column(
               children: [
                 Container(
-                  height: 80,
-                  width: 80,
-                  margin: EdgeInsets.symmetric(vertical: 15),
+                  height: 70,
+                  width: 70,
+                  margin: EdgeInsets.symmetric(vertical: 5),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/image.jpg",),
@@ -206,20 +201,20 @@ class Dialogs {
                       LocaleKeys.your_request_has_been_successfully_accepted_for_consideration.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 17,
                           fontWeight: FontWeight.normal,
                           color: Color.fromRGBO(0, 0, 0, 1),
                           letterSpacing: 0.15),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 13),
+                      margin: EdgeInsets.only(top: 5),
                       color: Color.fromRGBO(255, 250, 241, 1),
-                      height: 50,
-                      padding: EdgeInsets.symmetric(vertical: 4),
+                      height: 55,
+                      padding: EdgeInsets.symmetric(vertical: 5),
                       child: ListView.builder(
                           itemCount: routes.length,
                           itemBuilder: (context, index) =>  Container(
-                            height: MediaQuery.of(ctx).size.height * .07,
+                            height: 45,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -256,22 +251,18 @@ class Dialogs {
                             ),
                           ),),
                     ),
-
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.pop(ctx);
-                      Navigator.pop(ctx);
-                    },
-                    child: Text(
-                      LocaleKeys.close.tr(),
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Color.fromRGBO(239, 127, 26, 1),
-                      ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    Navigator.pop(ctx);
+                  },
+                  child: Text(
+                    LocaleKeys.close.tr(),
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Color.fromRGBO(239, 127, 26, 1),
                     ),
                   ),
                 ),
@@ -285,19 +276,20 @@ class Dialogs {
   static Future<dynamic> LoginDialog(BuildContext ctx) {
     return showDialog(
         context: ctx,
-        builder: (BuildContext dialogContext) => Dialog(
+        builder: (BuildContext dialogContext) => AlertDialog(
+          contentPadding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
           ),
-          child: Container(
-            height: 200,
-            width: MediaQuery.of(ctx).size.width * .8,
+          content: Container(
+            height: 180,
+            width: 240,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  height: 60,
-                  width: 60,
+                  height: 70,
+                  width: 70,
                   margin: EdgeInsets.symmetric(vertical: 5),
                   child:  SvgPicture.asset("assets/error.svg", fit: BoxFit.cover),
                 ),
@@ -307,31 +299,28 @@ class Dialogs {
                      LocaleKeys.please_login_to_do_this_action.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 17,
                           fontWeight: FontWeight.normal,
                           color: Color.fromRGBO(0, 0, 0, 1),
                           letterSpacing: 0.15),
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.pop(ctx);
-                      Navigator.push(
-                          ctx,
-                          MaterialPageRoute(
-                              builder: (_) => LoginScreen()
-                          )
-                      );
-                    },
-                    child: Text(
-                      LocaleKeys.go_to_login_page.tr(),
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Color.fromRGBO(239, 127, 26, 1),
-                      ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    Navigator.push(
+                        ctx,
+                        MaterialPageRoute(
+                            builder: (_) => LoginScreen()
+                        )
+                    );
+                  },
+                  child: Text(
+                    LocaleKeys.go_to_login_page.tr(),
+                    style: TextStyle(
+                      fontSize: 17,
+                      color: Color.fromRGBO(239, 127, 26, 1),
                     ),
                   ),
                 ),
@@ -347,18 +336,19 @@ class Dialogs {
       context: ctx,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
+          contentPadding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
           ),
           content: Container(
-            height: 200,
-            width: MediaQuery.of(ctx).size.width * .8,
+            height: 170,
+            width: 240,
             child: Column(
               children: [
                 Container(
-                  height: 80,
-                  width: 80,
-                  margin: EdgeInsets.symmetric(vertical: 7),
+                  height: 70,
+                  width: 70,
+                  margin: EdgeInsets.symmetric(vertical: 5),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("assets/image.jpg"),
@@ -370,24 +360,21 @@ class Dialogs {
                   "${LocaleKeys.Your_ad_has_been_published.tr()}!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 18,
                       fontWeight: FontWeight.w400,
                       color: Color.fromRGBO(0, 0, 0, 1),
                       letterSpacing: 0.15),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.pop(ctx);
-                      Navigator.pop(ctx);
-                    },
-                    child: Text(
-                      LocaleKeys.close.tr(),
-                      style: TextStyle(
-                          color: Color.fromRGBO(239, 127, 26, 1),
-                          fontSize: 15
-                      ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    Navigator.pop(ctx);
+                  },
+                  child: Text(
+                    LocaleKeys.close.tr(),
+                    style: TextStyle(
+                        color: Color.fromRGBO(239, 127, 26, 1),
+                        fontSize: 17
                     ),
                   ),
                 ),
