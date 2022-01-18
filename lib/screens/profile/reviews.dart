@@ -219,21 +219,20 @@ class _ReviewsState extends State<Reviews> {
                         Container(
                           margin: EdgeInsets.only(top: 27,left: 14),
                           height: MediaQuery.of(context).size.height*.1,
-                          width: MediaQuery.of(context).size.width*.35,
+                          width: MediaQuery.of(context).size.width*.4,
                           child: Column(
-                          //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                                 Text(
                                   "${reviews['reviews'].length} ${LocaleKeys.comment.tr()}",
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 17,
                                       fontWeight: FontWeight.bold
                                 ),
                               ),
                               Container(
-                                height: MediaQuery.of(context).size.height*.055,
-                                width: MediaQuery.of(context).size.width*.45,
+                                height: 45,
+                                width: MediaQuery.of(context).size.width*.35,
                                 child: RaisedButton(
                                   color: Colors.white,
                                   child:Text(

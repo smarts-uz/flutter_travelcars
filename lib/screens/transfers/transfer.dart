@@ -50,7 +50,7 @@ class Transfer extends StatelessWidget {
                   '${LocaleKeys.You_can_leave_request.tr()}\n ${LocaleKeys.by_clicking_the_button_below.tr()}',
                   maxLines: 2,
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 15,
                   ),
                   textAlign: TextAlign.center,
                 )
@@ -74,7 +74,8 @@ class Transfer extends StatelessWidget {
                     Text(
                      LocaleKeys.add.tr(),
                       style: TextStyle(
-                          color: Colors.orange
+                          color: Colors.orange,
+                          fontSize: 17
                       ),
                     ),
                   ],
@@ -105,9 +106,9 @@ class Transfer extends StatelessWidget {
 void _startAddNewTransaction(BuildContext ctx) {
   showModalBottomSheet(
       context: ctx,
-      builder: (_)
-      {
+      builder: (_) {
         return  Container(
+          height: 200,
           margin: EdgeInsets.all(16),
           child: Column(
             children: [
@@ -118,12 +119,11 @@ void _startAddNewTransaction(BuildContext ctx) {
                 ),
               ),
               Divider(),
-              Text(LocaleKeys.about_transfer.tr(),
-
-                maxLines: 2,
+              Text(
+                LocaleKeys.about_transfer.tr(),
                 style: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500
                 ),
               ),
             ],

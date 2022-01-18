@@ -50,7 +50,7 @@ class Routes extends StatelessWidget {
                   '${LocaleKeys.You_can_leave_request.tr()}\n ${LocaleKeys.by_clicking_the_button_below.tr()}',
                   maxLines: 2,
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 15,
                   ),
                   textAlign: TextAlign.center,
                 )
@@ -72,7 +72,8 @@ class Routes extends StatelessWidget {
                     Text(
                       LocaleKeys.add.tr(),
                       style: TextStyle(
-                          color: Colors.orange
+                          color: Colors.orange,
+                        fontSize: 17
                       ),
                     ),
                   ],
@@ -103,24 +104,25 @@ class Routes extends StatelessWidget {
 void _startAddNewTransaction(BuildContext ctx) {
   showModalBottomSheet(
       context: ctx,
-      builder: (_)
-      {
+      builder: (_) {
         return  Container(
+          height: 160,
           margin: EdgeInsets.all(16),
           child: Column(
             children: [
-              Text(LocaleKeys.aboute.tr(),
+              Text(
+                LocaleKeys.aboute.tr(),
                 textAlign: TextAlign.end,
                 style: TextStyle(
                     fontSize: 24
                 ),
               ),
               Divider(),
-              Text(LocaleKeys.about_route.tr(),
-                maxLines: 3,
+              Text(
+                LocaleKeys.about_route.tr(),
                 style: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500
                 ),
               ),
             ],

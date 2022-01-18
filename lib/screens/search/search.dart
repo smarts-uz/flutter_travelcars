@@ -121,7 +121,7 @@ class _SearchScreenState extends State<SearchScreen> {
             )
         ) : null,
         title: Text(
-          LocaleKeys.Search_and_sort.tr(),
+          LocaleKeys.Search.tr(), //LocaleKeys.Search_and_sort.tr(),
           style: TextStyle(
             fontSize: 25,
             color: Colors.white,
@@ -148,7 +148,8 @@ class _SearchScreenState extends State<SearchScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(height: 10),
+           /*Container(
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 20, top: 15),
               child: Text(
@@ -159,7 +160,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
             ),
-            /*widget.isDrawer*/ true ? Column(
+            widget.isDrawer*/ true ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [0, 1].map((int index) => Container(
