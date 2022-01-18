@@ -159,37 +159,33 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
             ),
-            widget.isDrawer ? Column(
+            /*widget.isDrawer*/ true ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [0, 1].map((int index) => Container(
-                height: 50,
-                width: 140,
-                padding: EdgeInsets.all(12),
+                height: 40,
+                width: double.infinity,
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Expanded(
-                      flex: 1,
-                      child: Radio<int>(
-                        value: index,
-                        groupValue: _radioVal1,
-                        onChanged: (int? value) {
-                          if (value != null) {
-                            setState(() => _radioVal1 = value);
-                            print(value);
-                          }},
-                      ),
+                    Radio<int>(
+                      value: index,
+                      groupValue: _radioVal1,
+                      onChanged: (int? value) {
+                        if (value != null) {
+                          setState(() => _radioVal1 = value);
+                          print(value);
+                        }},
                     ),
-                    Expanded(
-                      flex: 5,
-                      child: Text(
-                        directions[index],
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 22,
-                        ),
-                        maxLines: 2,
+                    Text(
+                      directions[index],
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 19,
                       ),
+                      maxLines: 2,
                     ),
                   ],
                 ),
@@ -198,36 +194,27 @@ class _SearchScreenState extends State<SearchScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [0, 1].map((int index) => Container(
                 height: 50,
-                width: MediaQuery.of(context).size.width * .4,
-                padding: EdgeInsets.all(12),
+                width: MediaQuery.of(context).size.width * .5,
+                padding: EdgeInsets.symmetric(horizontal: 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Expanded(
-                      flex: 1,
-                      child: Radio<int>(
-                        value: index,
-                        groupValue: _radioVal1,
-                        onChanged: (int? value) {
-                          if (value != null) {
-                            setState(() => _radioVal1 = value);
-                            print(value);
-                          }},
-                      ),
+                    Radio<int>(
+                      value: index,
+                      groupValue: _radioVal1,
+                      onChanged: (int? value) {
+                        if (value != null) {
+                          setState(() => _radioVal1 = value);
+                          print(value);
+                        }},
                     ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      flex: 5,
-                      child: Text(
-                        directions[index],
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 22,
-                        ),
-                        maxLines: 2,
+                    Text(
+                      directions[index],
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 20,
                       ),
+                      maxLines: 2,
                     ),
                   ],
                 ),
