@@ -64,7 +64,7 @@
   "You_entered_confirma": "Tasdiqlash uchun noto'g'ri parol kiritdingiz",
   "snackbar": "Oʻzgartirish muvaffaqiyatli saqlandi",
   "about_route": "Yo‘nalish – sayyohat davomida mahalliy joylarga tashrif buyurish, geografik punktlar va joylarga tashrif buyurishni o‘z ichiga oladi.",
-  "about_transfer": "Transfer – bukzallarga qulayligi uchun xizmat qilinadi, ya'ni aeroport yoki vokzalda kutib olib qo'yiladi.",
+  "about_transfer": "Transfer –bu mehmonlarga qulaylik uchun ko'rsatiladigan xizmat turi hisoblanadi, yani aeroport yoki vokzalda kutib olib mehmonhonaga olib kelish shuningdek aeroport yoki vokzalga kuzatib qo'yish.",
   "add_route": "Marshrut qo'shing",
   "add_transfer": "Transfer qo'shish",
   "delete": "O'chirish",
@@ -157,7 +157,7 @@
   "for_atp": "bir kun uchun ",
   "country": "mamlakat",
   "driver": "Haydovchi",
-  "car": "mashina",
+  "car": "Mashina",
   "overall_score": "Umumiy ball",
   "leave_feedback": "fikr va mulohazalaringizni yozib qoldiring ",
   "post_reviews": "Ko'rib chiqish",
@@ -177,7 +177,7 @@
   "Contacts_of_driver": "Haydovchi kontakti",
   "name": "Ism",
   "Phone": "Telefon",
-  "comment": "Izoh",
+  "comment": "izoh",
   "Along_the_way": "Yo'l yoqalab",
   "sorting": "Tartiblash",
   "Sort": "Saralash",
@@ -241,5 +241,9 @@
   "Amenities_in_the_salon": "Salondagi qulaylik",
   "Overall_rating": "Umumiy baho",
   "Level_of_professionalism_of_the_driver": "Haydovchining mahorati",
-  "Price_quality_ratio": "Narx / sifat uyg'unligi"
+  "Price_quality_ratio": "Narx / sifat uyg'unligi",
+  "Places_with_luggage": "Bagajli joylar",
+  "Places_without_luggage": "Bagajsiz joylar",
+  "Air_conditioning": "havo sovutish",
+  "class_atp": "Turi "
 }

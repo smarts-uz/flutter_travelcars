@@ -157,7 +157,7 @@
   "for_atp": "for",
   "country": "country",
   "driver": "Driver",
-  "car": "car",
+  "car": "Car",
   "overall_score": "overall score",
   "leave_feedback": "leave feedback",
   "post_reviews": "Post a review",
@@ -177,7 +177,7 @@
   "Contacts_of_driver": "Contacts of driver",
   "name": "Name",
   "Phone": "Phone",
-  "comment": "Comment",
+  "comment": "comment",
   "Along_the_way": "Along the way",
   "sorting": "Sorting",
   "Sort": "Sort",
@@ -241,5 +241,9 @@
   "Amenities_in_the_salon": "Amenities in the salon",
   "Overall_rating": "Overall rating",
   "Level_of_professionalism_of_the_driver": "Level of professionalism of the driver",
-  "Price_quality_ratio": "Price-quality ratio"
+  "Price_quality_ratio": "Price-quality ratio",
+  "Places_with_luggage": "Places with luggage",
+  "Places_without_luggage": "Places without luggage",
+  "Air_conditioning": "Air conditioning",
+  "class_atp": "Class"
 }

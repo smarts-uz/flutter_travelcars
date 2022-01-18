@@ -173,7 +173,7 @@ class CodegenLoader extends AssetLoader{
   "for_atp": "for",
   "country": "country",
   "driver": "Driver",
-  "car": "car",
+  "car": "Car",
   "overall_score": "overall score",
   "leave_feedback": "leave feedback",
   "post_reviews": "Post a review",
@@ -193,7 +193,7 @@ class CodegenLoader extends AssetLoader{
   "Contacts_of_driver": "Contacts of driver",
   "name": "Name",
   "Phone": "Phone",
-  "comment": "Comment",
+  "comment": "comment",
   "Along_the_way": "Along the way",
   "sorting": "Sorting",
   "Sort": "Sort",
@@ -257,7 +257,11 @@ class CodegenLoader extends AssetLoader{
   "Amenities_in_the_salon": "Amenities in the salon",
   "Overall_rating": "Overall rating",
   "Level_of_professionalism_of_the_driver": "Level of professionalism of the driver",
-  "Price_quality_ratio": "Price-quality ratio"
+  "Price_quality_ratio": "Price-quality ratio",
+  "Places_with_luggage": "Places with luggage",
+  "Places_without_luggage": "Places without luggage",
+  "Air_conditioning": "Air conditioning",
+  "class_atp": "Class"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги между всеми городами Узбекистана: путешествия и бизнесs",
@@ -276,7 +280,7 @@ static const Map<String,dynamic> ru = {
   "Clear_data": "Очистить данные",
   "One_way": "В одну сторону",
   "Round_trip ": "Туда и обратно",
-  "By_price": "По Цене",
+  "By_price": "По цене",
   "By_capacity": "По вместимости",
   "Cars": "Машины",
   "Microbus": "Микробус",
@@ -292,7 +296,7 @@ static const Map<String,dynamic> ru = {
   "Driver_nutrition": "Питание водителя",
   "Parking_payments": "Плата за парковку",
   "Car_delivery_to_a_convenient_place": "Доставка авто в удобное место",
-  "Auto_types": "типы авто",
+  "Auto_types": "Tипы авто",
   "Fuel_cost": "Стоимость топлива",
   "Sort_by_result": "Сортировать по результату",
   "Overtime_UZS": "Сверхурочные за 1 час - 0 сум",
@@ -418,7 +422,7 @@ static const Map<String,dynamic> ru = {
   "for_atp": "за",
   "country": "страна",
   "driver": "Водитель",
-  "car": "машина",
+  "car": "Mашина",
   "overall_score": "Общая оценка",
   "leave_feedback": "oставить отзыв",
   "post_reviews": "Отправить отзыв",
@@ -438,7 +442,7 @@ static const Map<String,dynamic> ru = {
   "Contacts_of_driver": "Контакты водителя",
   "name": "имя",
   "Phone": "Телефон",
-  "comment": "Комментарий",
+  "comment": "kомментарий",
   "Along_the_way": "По пути",
   "sorting": "Сортировка",
   "Sort": "Сортировать",
@@ -451,7 +455,7 @@ static const Map<String,dynamic> ru = {
   "quantity_without_baggage": "Количество без багажа",
   "Quantity_within_baggage": "Количество в багаже",
   "test_server": "Вы действительно хотите использовать тестовый сервер для приложения",
-  "yes": "да",
+  "yes": "Да",
   "no": "Нет",
   "Turn_on_test_server": "Включите тестовый сервер",
   "You_have_been_assigned_percentage_of": "Вам назначен процент в размере",
@@ -502,7 +506,11 @@ static const Map<String,dynamic> ru = {
   "Amenities_in_the_salon": "Удобства в салоне",
   "Overall_rating": "Общая оценка",
   "Level_of_professionalism_of_the_driver": "Профессионализм водителя",
-  "Price_quality_ratio": "Соотношение цена / качество"
+  "Price_quality_ratio": "Соотношение цена / качество",
+  "Places_with_luggage": "Места с багажом",
+  "Places_without_luggage": "Места без багажа",
+  "Air_conditioning": "Кондиционер",
+  "class_atp": "Класс"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Oʻzbekistonning barcha shaharlari oʻrtasida transport xizmatlari: sayohat va biznes",
@@ -570,7 +578,7 @@ static const Map<String,dynamic> uz = {
   "You_entered_confirma": "Tasdiqlash uchun noto'g'ri parol kiritdingiz",
   "snackbar": "Oʻzgartirish muvaffaqiyatli saqlandi",
   "about_route": "Yo‘nalish – sayyohat davomida mahalliy joylarga tashrif buyurish, geografik punktlar va joylarga tashrif buyurishni o‘z ichiga oladi.",
-  "about_transfer": "Transfer – bukzallarga qulayligi uchun xizmat qilinadi, ya'ni aeroport yoki vokzalda kutib olib qo'yiladi.",
+  "about_transfer": "Transfer –bu mehmonlarga qulaylik uchun ko'rsatiladigan xizmat turi hisoblanadi, yani aeroport yoki vokzalda kutib olib mehmonhonaga olib kelish shuningdek aeroport yoki vokzalga kuzatib qo'yish.",
   "add_route": "Marshrut qo'shing",
   "add_transfer": "Transfer qo'shish",
   "delete": "O'chirish",
@@ -663,7 +671,7 @@ static const Map<String,dynamic> uz = {
   "for_atp": "bir kun uchun ",
   "country": "mamlakat",
   "driver": "Haydovchi",
-  "car": "mashina",
+  "car": "Mashina",
   "overall_score": "Umumiy ball",
   "leave_feedback": "fikr va mulohazalaringizni yozib qoldiring ",
   "post_reviews": "Ko'rib chiqish",
@@ -683,7 +691,7 @@ static const Map<String,dynamic> uz = {
   "Contacts_of_driver": "Haydovchi kontakti",
   "name": "Ism",
   "Phone": "Telefon",
-  "comment": "Izoh",
+  "comment": "izoh",
   "Along_the_way": "Yo'l yoqalab",
   "sorting": "Tartiblash",
   "Sort": "Saralash",
@@ -747,7 +755,11 @@ static const Map<String,dynamic> uz = {
   "Amenities_in_the_salon": "Salondagi qulaylik",
   "Overall_rating": "Umumiy baho",
   "Level_of_professionalism_of_the_driver": "Haydovchining mahorati",
-  "Price_quality_ratio": "Narx / sifat uyg'unligi"
+  "Price_quality_ratio": "Narx / sifat uyg'unligi",
+  "Places_with_luggage": "Bagajli joylar",
+  "Places_without_luggage": "Bagajsiz joylar",
+  "Air_conditioning": "havo sovutish",
+  "class_atp": "Turi "
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

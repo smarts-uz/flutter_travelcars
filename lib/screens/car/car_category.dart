@@ -24,22 +24,22 @@ class _CarCategoryState extends State<CarCategory> {
   bool isLoading = true;
   List<Map<String, dynamic>> names = [
     {
-      "name": "Class",
+      "name": LocaleKeys.class_atp.tr(),
       "icon": Icons.directions_car,
       "data": "class"
     },
     {
-      "name": "Places with luggage",
+      "name": LocaleKeys.Places_with_luggage.tr(),
       "icon": Icons.people_outline,
       "data": "place"
     },
     {
-      "name": "Places without luggage",
+      "name": LocaleKeys.Places_without_luggage.tr(),
       "icon": Icons.home_repair_service_outlined,
       "data": "place_bag"
     },
     {
-      "name": "Air conditioning",
+      "name": LocaleKeys.Air_Conditional.tr(),
       "icon": Icons.ac_unit_outlined,
       "data": "cooler"
     },
@@ -192,7 +192,7 @@ class _CarCategoryState extends State<CarCategory> {
                                         "${names[index_in]["name"]}: ${
                                             index_in == 3 ?
                                               categories[index][names[index_in]["data"]] == 1 ?
-                                                "Yes" : "No" :
+                                                "${LocaleKeys.yes.tr()}" : "${LocaleKeys.no.tr()}" :
                                                   categories[index][names[index_in]["data"]] != null ? categories[index][names[index_in]["data"]] : "--"
                                         }",
                                         style: TextStyle(

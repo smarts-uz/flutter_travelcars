@@ -243,5 +243,9 @@ abstract class  LocaleKeys {
   static const Overall_rating = 'Overall_rating';
   static const Level_of_professionalism_of_the_driver = 'Level_of_professionalism_of_the_driver';
   static const Price_quality_ratio = 'Price_quality_ratio';
+  static const Places_with_luggage = 'Places_with_luggage';
+  static const Places_without_luggage = 'Places_without_luggage';
+  static const Air_conditioning = 'Air_conditioning';
+  static const class_atp = 'class_atp';
 
 }
