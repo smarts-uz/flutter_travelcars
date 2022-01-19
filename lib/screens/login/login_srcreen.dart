@@ -46,18 +46,9 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Container(
                   alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * .5,
+                  height: MediaQuery.of(context).size.height * .6,
                   width: double.infinity,
                   child: SvgPicture.asset("assets/images/way.svg"),
-                ),
-                Text(
-                  LocaleKeys.login_or_register_to.tr(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 19,
-                      fontFamily: "Poppins"),
                 ),
                 Spacer(),
                 GestureDetector(
@@ -121,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: MediaQuery.of(context).size.height * .12,
                 ),
               ],
             ),

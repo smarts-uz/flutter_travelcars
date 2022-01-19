@@ -50,7 +50,7 @@ class Routes extends StatelessWidget {
                   '${LocaleKeys.You_can_leave_request.tr()}\n ${LocaleKeys.by_clicking_the_button_below.tr()}',
                   maxLines: 2,
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 18,
                   ),
                   textAlign: TextAlign.center,
                 )

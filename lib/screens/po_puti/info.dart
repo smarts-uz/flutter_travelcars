@@ -69,11 +69,6 @@ class InfoScreen extends StatelessWidget {
                       TextSpan(text: "${way_item["place"]}\n"),
                       TextSpan(text: "${LocaleKeys.Quantity.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "${way_item["place_bag"]}\n"),
-                      TextSpan(text: "${LocaleKeys.contact.tr()}\n", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: "\t\t${LocaleKeys.name.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: "${way_item["name"]}\n"),
-                      TextSpan(text: "\t\t${LocaleKeys.Phone.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: "${way_item["tel"]}\n"),
                       TextSpan(text: "${LocaleKeys.comment.tr()}:", style: TextStyle(fontWeight: FontWeight.bold)),
                     ]
                   )
@@ -89,8 +84,26 @@ class InfoScreen extends StatelessWidget {
                   height: 1.3,
                 ),
               ),
-
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0, right: 20),
+              child: RichText(
+                  text: TextSpan(
+                      style: TextStyle(
+                          fontSize: 19,
+                          height: 1.7,
+                          color: Colors.black
+                      ),
+                      children: [
+                        TextSpan(text: "${LocaleKeys.contact.tr()}\n", style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(text: "\t\t${LocaleKeys.name.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(text: "${way_item["name"]}\n"),
+                        TextSpan(text: "\t\t${LocaleKeys.Phone.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(text: "${way_item["tel"]}\n"),
+                      ]
+                  )
+              ),
+            ),
           ],
         ),
       ),

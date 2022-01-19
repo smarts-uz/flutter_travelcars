@@ -20,6 +20,10 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
   bool isLoading = true;
   late List<dynamic> ways;
   late List<dynamic> main_ways;
+  List<int> indexes = [];
+  String info = "Теперь Вы можете доехать до пункта назначения на попутной машине за меньшие деньги и быстрее, или же отправить ваши посылки или почту через проверенных водителей."
+  "А если Вы водитель, и выезжаете из одной точки в другую, и у вас есть возможность забрать людей или доставить посылку / почту и т.д., то Вы можете добавить ниже свой маршрут поездки."
+  "(* Для того чтобы «изменить» или «удалить» маршрут вашей поездки, Вы должны нажать на кнопку «Войти» или сделать «Вход» и пройти регистрацию).";
 
 
   final TextEditingController from = new TextEditingController();
@@ -40,6 +44,9 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
     setState(() {
       isLoading = false;
       ways = json.decode(result.body)["data"];
+      for(int i = 0; i < ways.length; i++) {
+        indexes.add(i);
+      }
       main_ways = json.decode(result.body)["data"];
     });
   }
@@ -210,192 +217,96 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
             fontSize: 25,
           ),
         ),
-      ) : SizedBox(
-        height: double.infinity,
-        child: ListView.builder(
-            physics: BouncingScrollPhysics(),
-            itemCount: ways.length,
-            itemBuilder: (context, index) => Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                      width: 1.5,
-                      color: Colors.grey
-                  )
+      ) : SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              child: Text(
+                info,
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                  fontSize: 16
+                ),
               ),
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.15,
-                        width: MediaQuery.of(context).size.width * 0.3,
-                        margin: EdgeInsets.all(10),
-                        child: Image.network(
-                          "${AppConfig.image_url}/Onways/${ways[index]["image"]}",
-                          fit: BoxFit.cover,),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: RichText(
-                              text: TextSpan(
+            ),
+            Column(
+              children: indexes.map((index) => Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                        width: 1.5,
+                        color: Colors.grey
+                    )
+                ),
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0, right: 20),
+                      child: Expanded(
+                        child: RichText(
+                            text: TextSpan(
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17,
-                                  height: 1.8,
-                                  color: Colors.black
+                                    fontSize: 19,
+                                    height: 1.7,
+                                    color: Colors.black
                                 ),
                                 children: [
-                                  TextSpan(text: "${ways[index]["address1"]} - ${ways[index]["address2"]}\n", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 19)),
-                                  TextSpan(text: "${ways[index]["date"]} | ${ways[index]["time"].substring(0, 5)} \n${ways[index]["model_car"]} "),
+                                  TextSpan(text: "${LocaleKeys.From.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                  TextSpan(text: "${ways[index]["address1"]}\n"),
+                                  TextSpan(text: "${LocaleKeys.To.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                  TextSpan(text: "${ways[index]["address2"]}\n"),
+                                  TextSpan(text: "${LocaleKeys.Date.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                  TextSpan(text: "${ways[index]["date"]}\n"),
+                                  TextSpan(text: "${LocaleKeys.Time.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                  TextSpan(text: "${ways[index]["time"].substring(0, 5)}\n"),
+                                  TextSpan(text: "${LocaleKeys.Car_type.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                  TextSpan(text: "${ways[index]["model_car"]}"),
                                 ]
-                              )
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10.0, left: 10.0, bottom: 5.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.people,
-                          size: 28,
-                          color: Colors.orange,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: RichText(
-                              text: TextSpan(
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: Colors.black
-                                  ),
-                                  children: [
-                                    TextSpan(text: "${LocaleKeys.Quantity_within_baggage.tr()}: "),
-                                    TextSpan(text: "${ways[index]["place"]}", style: TextStyle(fontWeight: FontWeight.normal)),
-                                  ]
-                              )
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10.0, bottom: 10.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.work_outlined,
-                          size: 28,
-                          color: Colors.orange,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                            child: RichText(
-                                text: TextSpan(
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        color: Colors.black
-                                    ),
-                                    children: [
-                                      TextSpan(text: "${LocaleKeys.quantity_without_baggage.tr()}: "),
-                                      TextSpan(text: "${ways[index]["place_bag"]}", style: TextStyle(fontWeight: FontWeight.normal)),
-                                    ]
-                                )
                             )
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0, bottom: 5.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.person,
-                          size: 28,
-                          color: Colors.orange,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          "${ways[index]["name"]}",
-                          style: TextStyle(
-                              fontSize: 18
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0, bottom: 10.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.call,
-                          size: 28,
-                          color: Colors.orange,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          "${ways[index]["tel"]}",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => InfoScreen(ways[index])
-                          )
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 1.5
-                        )
-                      ),
-                      height: MediaQuery.of(context).size.height * .05,
-                      width: MediaQuery.of(context).size.width * .9,
-                      child:  Text(
-                        LocaleKeys.details.tr(),
-                        style: TextStyle(
-                            fontSize: 22,
-                            color: Colors.orange
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            )),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => InfoScreen(ways[index])
+                            )
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: Colors.grey,
+                                width: 1.5
+                            )
+                        ),
+                        height: MediaQuery.of(context).size.height * .05,
+                        width: MediaQuery.of(context).size.width * .9,
+                        child:  Text(
+                          LocaleKeys.details.tr(),
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.orange
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )).toList(),
+            ),
+          ],
+        ),
       ),
     );
   }
