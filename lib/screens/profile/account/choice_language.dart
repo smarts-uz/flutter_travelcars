@@ -4,6 +4,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
+import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/components/drop_button_lang.dart';
 import 'package:travelcars/screens/login/components/drop_button_mny.dart';
 import 'package:travelcars/screens/search/search.dart';
@@ -165,6 +166,8 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
 
                   SearchScreen.SelectedVal1 = null;
                   SearchScreen.SelectedVal2 = null;
+                  HomeScreen.city = [];
+                  HomeScreen.SelectedVal = null;
 
                   if(testServer) {
                     AppConfig.url = "http://userapp.travelcars.teampro.uz";

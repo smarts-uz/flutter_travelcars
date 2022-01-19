@@ -29,6 +29,9 @@ class HomeScreen extends StatefulWidget {
   static List<dynamic> tariff_list = [];
   static Map<String, dynamic> category_list = {};
   static List<dynamic> kurs = [];
+  static String? SelectedVal;
+
+  static List<String> city = [];
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -54,27 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     "${LocaleKeys.fargona.tr()}": 0,
     "${LocaleKeys.namangan.tr()}": 0,
   };
-  static List<String> city = <String>[
-    LocaleKeys.tashkent.tr(),
-    LocaleKeys.buxoro.tr(),
-    LocaleKeys.xiva.tr(),
-    LocaleKeys.samarkand.tr(),
-    LocaleKeys.nukus.tr(),
-    LocaleKeys.navoiy.tr(),
-    LocaleKeys.termiz.tr(),
-    LocaleKeys.guliston.tr(),
-    LocaleKeys.andijon.tr(),
-    LocaleKeys.fargona.tr(),
-    LocaleKeys.namangan.tr(),
-    LocaleKeys.karshi.tr(),
-    LocaleKeys.jizzax.tr(),
-  ];
-  static final List<DropdownMenuItem<String>> cities = city.map(
-        (String value) => DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-      )).toList();
-  static String? SelectedVal;
+  static List<DropdownMenuItem<String>> cities = [];
 
   static List<dynamic> valyuta = [];
   static const currency = <String>[
@@ -97,6 +80,40 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     if(HomeScreen.isLoading) {
+      HomeScreen.city = <String>[
+        LocaleKeys.tashkent.tr(),
+        LocaleKeys.buxoro.tr(),
+        LocaleKeys.xiva.tr(),
+        LocaleKeys.samarkand.tr(),
+        LocaleKeys.nukus.tr(),
+        LocaleKeys.navoiy.tr(),
+        LocaleKeys.termiz.tr(),
+        LocaleKeys.guliston.tr(),
+        LocaleKeys.andijon.tr(),
+        LocaleKeys.fargona.tr(),
+        LocaleKeys.namangan.tr(),
+        LocaleKeys.karshi.tr(),
+        LocaleKeys.jizzax.tr(),
+      ];
+      weather = {
+        "${LocaleKeys.tashkent.tr()}": 0,
+        "${LocaleKeys.buxoro.tr()}": 0,
+        "${LocaleKeys.xiva.tr()}": 0,
+        "${LocaleKeys.samarkand.tr()}": 0,
+        "${LocaleKeys.nukus.tr()}": 0,
+        "${LocaleKeys.navoiy.tr()}": 0,
+        "${LocaleKeys.karshi.tr()}": 0,
+        "${LocaleKeys.termiz.tr()}": 0,
+        "${LocaleKeys.jizzax.tr()}": 0,
+        "${LocaleKeys.guliston.tr()}": 0,
+        "${LocaleKeys.andijon.tr()}": 0,
+        "${LocaleKeys.fargona.tr()}": 0,
+        "${LocaleKeys.namangan.tr()}": 0,
+      };
+      cities = HomeScreen.city.map((String value) => DropdownMenuItem<String>(
+        value: value,
+        child: Text(value),
+      )).toList();
       getTrips();
       getCars();
       getnews();
@@ -166,15 +183,20 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void getweather() async {
-    for(int i =0; i<city.length; i++) {
-      Uri url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=${city[i]}&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
+    for(int i =0; i<HomeScreen.city.length; i++) {
+      Uri url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=${HomeScreen.city[i]}&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
       var response = await http.get(url);
-      if(jsonDecode(response.body)["code"] == 404) {
-        weather["${city[i]}"] = 0;
+      if(jsonDecode(response.body)["cod"] == "404") {
+        Uri another_url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=Jizzax&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
+        final another_response = await http.get(another_url);
+        weather["${HomeScreen.city[i]}"] = json.decode(another_response.body)["main"]["temp"].round();
       } else {
-        weather["${city[i]}"] = json.decode(response.body)["main"]["temp"].round();
+        weather["${HomeScreen.city[i]}"] = json.decode(response.body)["main"]["temp"].round();
       }
     }
+    setState(() {
+
+    });
   }
   
   void getCountries() async {
@@ -271,10 +293,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         focusColor: Colors.white,
                         dropdownColor: Colors.grey[300],
-                        value: SelectedVal,
+                        value: HomeScreen.SelectedVal,
                         onChanged: (String? newValue) {
                           if (newValue != null) {
-                            setState(() => SelectedVal = newValue);
+                            setState(() => HomeScreen.SelectedVal = newValue);
                           }},
                         items: cities,
                       ),
@@ -302,8 +324,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     Positioned(
                       right: 50,
                       top: 40,
-                      child: weather["$SelectedVal"] != null ? Text(
-                        "${weather["$SelectedVal"]}",
+                      child: weather["${HomeScreen.SelectedVal}"] != null ? Text(
+                        "${weather["${HomeScreen.SelectedVal}"]}",
                         style: TextStyle(
                           fontSize: 32,
                           color: Colors.white,

@@ -140,7 +140,6 @@ abstract class  LocaleKeys {
   static const Car_type = 'Car_type';
   static const Quantity_ = 'Quantity_';
   static const Quantity = 'Quantity';
-  static const Contacts_of_driver = 'Contacts_of_driver';
   static const name = 'name';
   static const Phone = 'Phone';
   static const comment = 'comment';
@@ -223,5 +222,6 @@ abstract class  LocaleKeys {
   static const poputi1 = 'poputi1';
   static const poputi2 = 'poputi2';
   static const review = 'review';
+  static const unpaid = 'unpaid';
 
 }

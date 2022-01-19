@@ -154,7 +154,6 @@ class CodegenLoader extends AssetLoader{
   "Car_type": "Car type",
   "Quantity_": "Quantity (without cargo)",
   "Quantity": "Quantity (with cargo)",
-  "Contacts_of_driver": "Contacts of driver",
   "name": "Name",
   "Phone": "Phone",
   "comment": "comment",
@@ -236,7 +235,8 @@ class CodegenLoader extends AssetLoader{
   "ver_bad": "Very bad",
   "poputi1": "Now you can reach your destination in a passing cars for less money and faster, or send your parcels or mail through trusted drivers. And if you are a driver, and you are leaving from one point to another, and you have an opportunity to pick up passengers or deliver a parcel / mail, etc., then you can add your trip below.",
   "poputi2": "(In order to change or delete the itinerary of your trip, you must click on the Login button and register).",
-  "review": "reviews"
+  "review": "reviews",
+  "unpaid": "Unpaid"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги по всем городам Узбекистана: экскурсионные и бизнес-поездки",
@@ -305,7 +305,7 @@ static const Map<String,dynamic> ru = {
   "Cancellation_terms": "Условия отмены",
   "transfer": "Трансферы",
   "no_transfer_are_found": "Передачи не найдены",
-  "contact": "Контакт",
+  "contact": "Контакты",
   "Created_at": "Создано в",
   "look": "Смотреть",
   "You_can_leave_request": "Вы можете оставить заявку нажимая кнопку ниже",
@@ -378,7 +378,6 @@ static const Map<String,dynamic> ru = {
   "Car_type": "Марка машины",
   "Quantity_": "Кол. мест (с багажом):",
   "Quantity": "Кол. мест (без багажа):",
-  "Contacts_of_driver": "Контакты",
   "name": "Имя",
   "Phone": "Телефон",
   "comment": "Комментарии",
@@ -460,7 +459,8 @@ static const Map<String,dynamic> ru = {
   "ver_bad": "Очень плохой",
   "poputi1": "Теперь Вы можете доехать до пункта назначения на попутной машине за меньшие деньги и быстрее, или же отправить ваши посылки или почту через проверенных водителей. А если Вы водитель, и выезжаете из одной точки в другую, и у вас есть возможность забрать людей или доставить посылку / почту и т.д., то Вы можете добавить ниже свой маршрут поездки.",
   "poputi2": "(Для того чтобы «изменить» или «удалить» маршрут вашей поездки, Вы должны нажать на кнопку «Войти» или сделать «Вход» и пройти регистрацию).",
-  "review": "отзывов"
+  "review": "отзывов",
+  "unpaid": "Не оплачено"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Oʻzbekistonning barcha shaharlari o'rtasida transport xizmatlari: sayohat va biznes",
@@ -602,7 +602,6 @@ static const Map<String,dynamic> uz = {
   "Car_type": "Avtomobil turi",
   "Quantity_": "Miqdori (yuksiz)",
   "Quantity": "Miqdori (yuk bilan)",
-  "Contacts_of_driver": "Haydovchi kontakti",
   "name": "Ism",
   "Phone": "Telefon",
   "comment": "Izoh",
@@ -684,7 +683,8 @@ static const Map<String,dynamic> uz = {
   "ver_bad": "Juda yomon",
   "poputi1": "Энди сиз йўл-йўлакай кетаётган машиналарда манзилингизгача арзонроқ ва тезроқ етиб олишингиз, ҳамда ишончли ҳайдовчилар орқали почта ёки муайян буюмларингизни бериб юборишингиз мумкин.Агар сиз ҳайдовчи бўлсангиз ва бир манзилдан бошқасига кетаётган бўлсангиз, ҳамда сизда ўзингиз билан йўловчиларни олиб кетиш ёки почта / муайян буюмларни етказиб бериш имконияти мавжуд бўлса, у ҳолда сафарингиз йўналишини қўшишингиз мумкин.",
   "poputi2": "(Сафарингиз йўналишини “ўзгартириш” ёки “ўчириш” учун “Кириш” тугмасини босиб рўйхатдан ўтишингиз керак).",
-  "review": "фикр"
+  "review": "фикр",
+  "unpaid": "To'lanmagan"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

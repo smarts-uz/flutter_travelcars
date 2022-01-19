@@ -138,7 +138,6 @@
   "Car_type": "Car type",
   "Quantity_": "Quantity (without cargo)",
   "Quantity": "Quantity (with cargo)",
-  "Contacts_of_driver": "Contacts of driver",
   "name": "Name",
   "Phone": "Phone",
   "comment": "comment",
@@ -220,5 +219,6 @@
   "ver_bad": "Very bad",
   "poputi1": "Now you can reach your destination in a passing cars for less money and faster, or send your parcels or mail through trusted drivers. And if you are a driver, and you are leaving from one point to another, and you have an opportunity to pick up passengers or deliver a parcel / mail, etc., then you can add your trip below.",
   "poputi2": "(In order to change or delete the itinerary of your trip, you must click on the Login button and register).",
-  "review": "reviews"
+  "review": "reviews",
+  "unpaid": "Unpaid"
 }

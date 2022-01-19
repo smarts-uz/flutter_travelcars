@@ -95,7 +95,7 @@ class InfoScreen extends StatelessWidget {
                           color: Colors.black
                       ),
                       children: [
-                        TextSpan(text: "${LocaleKeys.Contacts_of_driver.tr()}\n", style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(text: "${LocaleKeys.contact.tr()}\n", style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(text: "\t\t${LocaleKeys.name.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(text: "${way_item["name"]}\n"),
                         TextSpan(text: "\t\t${LocaleKeys.Phone.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),

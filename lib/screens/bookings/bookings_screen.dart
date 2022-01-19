@@ -179,7 +179,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                             ),
                           ),
                           child: Text(
-                            results[index]["paid"] != null ? "${results[index]["paid"]}" : "Unpaid",
+                            results[index]["paid"] != null ? "${results[index]["paid"]}" : "${LocaleKeys.unpaid.tr()}",
                             style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.white
