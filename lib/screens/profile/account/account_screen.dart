@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/profile/account/password_screen.dart';
 import 'package:travelcars/screens/profile/account/social_screen.dart';
+import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
@@ -157,6 +158,8 @@ class _AccountScreenState extends State<AccountScreen> {
                 final prefs = await SharedPreferences.getInstance();
                 prefs.remove("userData");
                 prefs.remove("companyData");
+                SearchScreen.SelectedVal1 = null;
+                SearchScreen.SelectedVal2 = null;
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => SplashScreen()),

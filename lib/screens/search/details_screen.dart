@@ -583,7 +583,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _text(text: LocaleKeys.Included_in_the_tariff.tr(), top: 8.0),
+                  _text(text: LocaleKeys.Included_in_type.tr(), top: 8.0),
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(color: HexColor("#F5F5F6")),

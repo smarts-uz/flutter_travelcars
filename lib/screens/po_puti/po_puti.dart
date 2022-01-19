@@ -21,9 +21,6 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
   late List<dynamic> ways;
   late List<dynamic> main_ways;
   List<int> indexes = [];
-  String info = "Теперь Вы можете доехать до пункта назначения на попутной машине за меньшие деньги и быстрее, или же отправить ваши посылки или почту через проверенных водителей."
-  "А если Вы водитель, и выезжаете из одной точки в другую, и у вас есть возможность забрать людей или доставить посылку / почту и т.д., то Вы можете добавить ниже свой маршрут поездки."
-  "(* Для того чтобы «изменить» или «удалить» маршрут вашей поездки, Вы должны нажать на кнопку «Войти» или сделать «Вход» и пройти регистрацию).";
 
 
   final TextEditingController from = new TextEditingController();
@@ -223,11 +220,18 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
             SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
-              child: Text(
-                info,
+              child: RichText(
                 textAlign: TextAlign.justify,
-                style: TextStyle(
-                  fontSize: 16
+                text: TextSpan(
+                  style: TextStyle(
+                      fontSize: 15,
+                      height: 1.4,
+                      color: Colors.black
+                  ),
+                  children: [
+                    TextSpan(text: "${LocaleKeys.poputi1.tr()}\n", style: TextStyle(fontWeight: FontWeight.bold)),
+                    TextSpan(text: LocaleKeys.poputi2.tr(), style: TextStyle(fontStyle: FontStyle.italic)),
+                  ]
                 ),
               ),
             ),

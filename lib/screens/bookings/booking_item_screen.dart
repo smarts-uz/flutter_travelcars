@@ -302,7 +302,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   Container(
                     padding: EdgeInsets.only(left: 16, top: 10, bottom: 5.0),
                     child: Text(
-                      "${LocaleKeys.Included_in_the_tariff.tr()}:",
+                      "${LocaleKeys.Included_in_type.tr()}:",
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.black,

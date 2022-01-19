@@ -338,7 +338,7 @@ class _AddScreenState extends State<AddScreen> {
                       }
                     },
                     child: Text(
-                      LocaleKeys.publish.tr(),
+                      LocaleKeys.send.tr(),
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white

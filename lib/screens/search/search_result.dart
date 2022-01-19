@@ -292,7 +292,7 @@ class _SearchResultState extends State<SearchResult> {
                     padding: EdgeInsets.only(left: 15),
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "${LocaleKeys.The_tariff_includes.tr()}:",
+                      "${LocaleKeys.Included_in_type.tr()}:",
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,
@@ -355,9 +355,9 @@ class _SearchResultState extends State<SearchResult> {
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 18),
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     child: RichText(
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.center,
                       text: TextSpan(
                         style: TextStyle(
                           fontSize: 18.0,
@@ -372,7 +372,7 @@ class _SearchResultState extends State<SearchResult> {
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 5, left: 18),
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     child: Text(
                       "${(routes[index]["price"] * app_kurs).toStringAsFixed(2)} ${SplashScreen.kurs}",
                       style: TextStyle(

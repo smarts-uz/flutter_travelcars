@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:http/http.dart' as http;
-import 'package:travelcars/screens/car/cars_list.dart';
 import 'package:travelcars/screens/search/search_result.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
@@ -30,17 +29,17 @@ class _CarCategoryState extends State<CarCategory> {
       "data": "class"
     },
     {
-      "name": LocaleKeys.Places_with_luggage.tr(),
+      "name": LocaleKeys.Quantity.tr(),
       "icon": Icons.people_outline,
       "data": "place"
     },
     {
-      "name": LocaleKeys.Places_without_luggage.tr(),
+      "name": LocaleKeys.Quantity_.tr(),
       "icon": Icons.home_repair_service_outlined,
       "data": "place_bag"
     },
     {
-      "name": LocaleKeys.Air_Conditional.tr(),
+      "name": LocaleKeys.Air_conditioning.tr(),
       "icon": Icons.ac_unit_outlined,
       "data": "cooler"
     },

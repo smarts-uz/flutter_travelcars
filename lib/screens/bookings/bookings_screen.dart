@@ -226,7 +226,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     padding: EdgeInsets.only(left: 15, top: 6, bottom: 5),
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "${LocaleKeys.The_tariff_includes.tr()}:",
+                      "${LocaleKeys.Included_in_type.tr()}:",
                       style: TextStyle(
                           fontSize: 19,
                           color: Colors.black,

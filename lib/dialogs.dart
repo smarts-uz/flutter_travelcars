@@ -142,7 +142,7 @@ class Dialogs {
                 Column(
                   children: [
                     Text(
-                      "${LocaleKeys.Something_is_wrong_Check.tr()}\n ${LocaleKeys.internet_connection.tr()}",
+                      "${LocaleKeys.Something_is_wrong_Check.tr()}}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 17,

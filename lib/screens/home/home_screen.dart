@@ -4,7 +4,6 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/dummy_data/cars.dart';
 import 'package:travelcars/dummy_data/cities_list.dart';
@@ -15,7 +14,6 @@ import 'package:travelcars/screens/profile/account/choice_language.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/screens/trip/trip_item.dart';
 import 'package:http/http.dart' as http;
-import 'package:travelcars/screens/trip/trips.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -42,34 +40,34 @@ class _HomeScreenState extends State<HomeScreen> {
   static List<dynamic> carslist = [];
 
   static Map<String, int> weather = {
-    "Tashkent": 0,
-    "Buxoro": 0,
-    "Xiva": 0,
-    "Samarkand": 0,
-    "Nukus": 0,
-    "Navoiy": 0,
-    "Qarshi": 0,
-    "Termiz": 0,
-    "Jizzax": 0,
-    "Guliston": 0,
-    "Andijon": 0,
-    "Farg'ona": 0,
-    "Namangan": 0,
+    "${LocaleKeys.tashkent.tr()}": 0,
+    "${LocaleKeys.buxoro.tr()}": 0,
+    "${LocaleKeys.xiva.tr()}": 0,
+    "${LocaleKeys.samarkand.tr()}": 0,
+    "${LocaleKeys.nukus.tr()}": 0,
+    "${LocaleKeys.navoiy.tr()}": 0,
+    "${LocaleKeys.karshi.tr()}": 0,
+    "${LocaleKeys.termiz.tr()}": 0,
+    "${LocaleKeys.jizzax.tr()}": 0,
+    "${LocaleKeys.guliston.tr()}": 0,
+    "${LocaleKeys.andijon.tr()}": 0,
+    "${LocaleKeys.fargona.tr()}": 0,
+    "${LocaleKeys.namangan.tr()}": 0,
   };
   static List<String> city = <String>[
-    "Tashkent",
-    "Buxoro",
-    "Xiva",
-    "Samarkand",
-    "Nukus",
-    "Navoiy",
-    "Qarshi",
-    "Termiz",
-    "Jizzax",
-    "Guliston",
-    "Andijon",
-    "Farg'ona",
-    "Namangan",
+    LocaleKeys.tashkent.tr(),
+    LocaleKeys.buxoro.tr(),
+    LocaleKeys.xiva.tr(),
+    LocaleKeys.samarkand.tr(),
+    LocaleKeys.nukus.tr(),
+    LocaleKeys.navoiy.tr(),
+    LocaleKeys.termiz.tr(),
+    LocaleKeys.guliston.tr(),
+    LocaleKeys.andijon.tr(),
+    LocaleKeys.fargona.tr(),
+    LocaleKeys.namangan.tr(),
+    LocaleKeys.karshi.tr(),
+    LocaleKeys.jizzax.tr(),
   ];
   static final List<DropdownMenuItem<String>> cities = city.map(
         (String value) => DropdownMenuItem<String>(
@@ -170,8 +168,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void getweather() async {
     for(int i =0; i<city.length; i++) {
       Uri url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=${city[i]}&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
-      final response = await http.get(url);
-      weather["${city[i]}"] = json.decode(response.body)["main"]["temp"].round();
+      var response = await http.get(url);
+      if(jsonDecode(response.body)["code"] == 404) {
+        weather["${city[i]}"] = 0;
+      } else {
+        weather["${city[i]}"] = json.decode(response.body)["main"]["temp"].round();
+      }
     }
   }
   
@@ -327,23 +329,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Container(
                           width: MediaQuery.of(context).size.width * .45,
                           alignment: Alignment.center,
-                          child: Column(
-                            children: [
-                              Text(
-                               LocaleKeys.Rate_change.tr(),
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
-                                ),
-                              ),
-                              Text(
-                                "${valyuta[0]["date"]}",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
-                                ),
-                              ),
-                            ],
+                          child: Text(
+                           LocaleKeys.Rate_change.tr(),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15
+                            ),
                           )
                         ),
                       ),
@@ -570,7 +561,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 18,
             ),
             Container(
-              padding: EdgeInsets.only(left: 8, bottom: 5, right: 8),
+              padding: EdgeInsets.only(left: 15, bottom: 5, right: 15),
               child: Text(
                LocaleKeys.News_and_special_offers.tr(),
                 textAlign: TextAlign.center,

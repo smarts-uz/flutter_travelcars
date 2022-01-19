@@ -110,13 +110,13 @@ class _ReviewsState extends State<Reviews> {
     int average = summa.round();
     String average_word = "";
     if(average>=9) {
-      average_word = "Excellent";
+      average_word = LocaleKeys.excellent.tr();
     } else if(average>=6 && average < 9) {
-      average_word = "Good";
+      average_word = LocaleKeys.good.tr();
     } else if(average>=3 && average < 6) {
-      average_word = "Bad";
+      average_word = LocaleKeys.bad.tr();
     } else {
-      average_word = "Very bad";
+      average_word = LocaleKeys.ver_bad.tr();
     }
     reviews.addAll({
       "average": average.toString(),
@@ -306,7 +306,7 @@ class _ReviewsState extends State<Reviews> {
                                 text_t != " " ? Container(
                                   padding: EdgeInsets.only(bottom: 3),
                                   child: Text(
-                                   text_t,
+                                   "$text_t: ",
                                     style: TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold
