@@ -109,7 +109,7 @@ class _FirstSceenState extends State<FirstSceen> {
                 child: Column(
                   children: <Widget> [
                     Container(
-                      padding: EdgeInsets.only(top: 50, right: 16, left: 16),
+                      padding: EdgeInsets.only(top: 35, right: 16, left: 16),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3.5),
                       ),
@@ -117,80 +117,88 @@ class _FirstSceenState extends State<FirstSceen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TextFormField(
-                            controller: _emailController,
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              labelText: "Mail",
-                              floatingLabelBehavior: FloatingLabelBehavior.always,
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                              border: OutlineInputBorder(),
+                          Container(
+                            height: 45,
+                            child: TextFormField(
+                              controller: _emailController,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                labelText: "Mail",
+                                floatingLabelBehavior: FloatingLabelBehavior.always,
+                                contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                border: OutlineInputBorder(),
+                              ),
                             ),
                           ),
-                          SizedBox(height: 33),
-                          TextFormField(
-                            controller: _nameController,
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              labelText: "ФИО",
-                              floatingLabelBehavior: FloatingLabelBehavior.always,
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                              border: OutlineInputBorder(),
+                          SizedBox(height: 20),
+                          Container(
+                            height: 45,
+                            child: TextFormField(
+                              controller: _nameController,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                labelText: "ФИО",
+                                floatingLabelBehavior: FloatingLabelBehavior.always,
+                                contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                border: OutlineInputBorder(),
+                              ),
                             ),
                           ),
-                          SizedBox(height: 33),
-                          TextFormField(
-                            controller: _phoneController,
-                            keyboardType: TextInputType.phone,
-                            decoration: InputDecoration(
-                              labelText: "Телефон",
-                              floatingLabelBehavior: FloatingLabelBehavior.always,
-                              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                              border: OutlineInputBorder(),
+                          SizedBox(height: 20),
+                          Container(
+                            height: 45,
+                            child: TextFormField(
+                              controller: _phoneController,
+                              keyboardType: TextInputType.phone,
+                              decoration: InputDecoration(
+                                labelText: "Телефон",
+                                floatingLabelBehavior: FloatingLabelBehavior.always,
+                                contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                border: OutlineInputBorder(),
+                              ),
                             ),
                           ),
-                          SizedBox(height: 25),
+                          SizedBox(height: 15),
                           SizedBox(
                             width: double.infinity,
                             child: Column(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
-                              children: [0, 1]
-                                  .map((int index) => Container(
-                                        alignment: Alignment.centerLeft,
-                                        height: 40,
-                                        width: double.infinity,
-                                        child: Row(
-                                          children: [
-                                            Radio<int>(
-                                              value: index,
-                                              groupValue: _radioVal2,
-                                              onChanged: (int? value) {
-                                                if (value != null) {
-                                                  setState(() => this
-                                                      ._radioVal2 = value);
-                                                }
-                                              },
-                                            ),
-                                            Text(
-                                              sort[index],
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ],
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [0, 1].map((int index) =>
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    height: 35,
+                                    width: double.infinity,
+                                    child: Row(
+                                      children: [
+                                        Radio<int>(
+                                          value: index,
+                                          groupValue: _radioVal2,
+                                          onChanged: (int? value) {
+                                            if (value != null) {
+                                              setState(() => this
+                                                  ._radioVal2 = value);
+                                            }
+                                            },
                                         ),
-                                      ))
-                                  .toList(),
+                                        Text(
+                                          sort[index],
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                              ).toList(),
                             ),
                           ),
-                          if (_radioVal2 ==1) Column(
+                          if (_radioVal2 == 1) Column(
                             children: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((e) => Container(
                               width: double.infinity,
-                              height:  65,
+                              height:  45,
                               padding: EdgeInsets.only(left: 15),
-                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                              margin: EdgeInsets.symmetric(vertical: 5),
                               decoration: BoxDecoration(
                                   border: Border.all(color: Colors.grey),
                                   borderRadius: BorderRadius.circular(5)
@@ -215,7 +223,7 @@ class _FirstSceenState extends State<FirstSceen> {
                                 controller: controllers[e],
                                 cursorColor: Colors.black,
                                 style: TextStyle(
-                                    fontSize: 20
+                                    fontSize: 15
                                 ),
                                 expands: false,
                               ),
@@ -336,7 +344,9 @@ class _FirstSceenState extends State<FirstSceen> {
                       child: Text(
                        LocaleKeys.save.tr(),
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18
                         ),
                       ),
                     ),

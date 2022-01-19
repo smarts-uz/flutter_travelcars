@@ -25,47 +25,47 @@ class _ReviewsState extends State<Reviews> {
       {
         'title': LocaleKeys.punctuality.tr(),
         'name': 'Punctuality',
-        "score": 8.0
+        "score": 0
       },
       {
         'title': LocaleKeys.car_driving.tr(),
         'name': "driving",
-        "score": 3.0
+        "score": 0
       },
       {
         'title': LocaleKeys.knowledge_of_traffic.tr(),
         "name": "rules",
-        "score": 7.0
+        "score": 0
       },
       {
         'title': LocaleKeys.Terrain_orientation.tr(),
         "name": "orientation",
-        "score": 6.0
+        "score": 0
       },
       {
         'title': LocaleKeys.Knowledge_of_the_language.tr(),
         "name": "language",
-        "score": 9.0
+        "score": 0
       },
       {
         'title': LocaleKeys.Cleanliness_smell_in_the_cabin.tr(),
         "name": "Cleanliness",
-        "score": 9.0
+        "score": 0
       },
       {
         'title': LocaleKeys.Amenities_in_the_salon.tr(),
         "name": "salon",
-        "score": 5.0
+        "score": 0
       },
       {
         'title': LocaleKeys.Level_of_professionalism_of_the_driver.tr(),
         'name': "professionalism",
-        "score": 5.0
+        "score": 0
       },
       {
         'title':  LocaleKeys.Price_quality_ratio.tr(),
         'name': "Price_quality",
-        "score": 10.0
+        "score": 0
       },
     ],
     "reviews": []
@@ -75,7 +75,13 @@ class _ReviewsState extends State<Reviews> {
   @override
   void initState() {
     super.initState();
-    getComment();
+    if(widget.route_price_id != -2) {
+      getComment();
+    } else {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   void getComment() async {
@@ -152,21 +158,21 @@ class _ReviewsState extends State<Reviews> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "${LocaleKeys.no_comment_are_found.tr()}\n\n",
+              "${LocaleKeys.no_comment_are_found.tr()}\n ",
               style: TextStyle(
                 fontSize: 17
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height *.055,
-              width: MediaQuery.of(context).size.width *.45,
+              height: 45,
+              width: 200,
               child: RaisedButton(
                 color: Colors.white,
                 child:Text(
                   LocaleKeys.write_feedback.tr(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 18,
                       color: Colors.orange
                   ),
                 ),

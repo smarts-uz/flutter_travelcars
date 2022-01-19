@@ -57,7 +57,6 @@ class _TripItemState extends State<TripItem> {
 
   @override
   Widget build(BuildContext context) {
-    double size_h = MediaQuery.of(context).size.height * .25;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -159,7 +158,7 @@ class _TripItemState extends State<TripItem> {
               ),
             ),
             Container(
-              height: size_h,
+              height: 180,
               width: double.infinity,
               padding: EdgeInsets.only(top: 20, left: 17, right: 17, bottom: 5),
               child: Stack(
@@ -168,32 +167,32 @@ class _TripItemState extends State<TripItem> {
                     color: Color.fromRGBO(239, 127, 26, 1),
                   ),
                   Positioned(
-                    top: size_h * .05,
+                    top: 10,
                     left: 15,
                     child: Icon(
                       Icons.email,
                       color: Colors.white,
-                      size: 85,
+                      size: 75,
                     ),
                   ),
                   Positioned(
                       left: 15,
-                      bottom: size_h * .2,
+                      bottom: 40,
                       child: Text(
                         LocaleKeys.book_now.tr(),
                         style: TextStyle(
-                          fontSize: 30.0,
+                          fontSize: 25.0,
                           color: Colors.white
                         ),
                       )
                   ),
                   Positioned(
                       left: 15,
-                      bottom: size_h * .05,
+                      bottom: 10,
                       child: Text(
                         "${LocaleKeys.We_will_be_glad_to_receive_your_order.tr()} !",
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 17.0,
                             color: Colors.white
                         ),
                       )

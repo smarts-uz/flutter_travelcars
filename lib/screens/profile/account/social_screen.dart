@@ -18,10 +18,10 @@ class _ThirdScreenState extends State<ThirdScreen> {
   final TextEditingController _phoneEmailController = TextEditingController();
 
   List<Map<String, dynamic>> data = [
-    {"image": "viber", "check_box": false},
-    {"image": "wechat", "check_box": false},
-    {"image": "telegram", "check_box": false},
-    {"image": "whatsapp", "check_box": false},
+    {"image": "Telegram", "check_box": false},
+    {"image": "Whatsapp", "check_box": false},
+    {"image": "Viber", "check_box": false},
+    {"image": "Wechat", "check_box": false},
   ];
 
   @override
@@ -97,7 +97,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
                   style: TextStyle(
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w400,
-                      fontSize: 15,
+                      fontSize: 18,
                       fontFamily: "Poppins"),
                 ),
                 SizedBox(
@@ -145,10 +145,10 @@ class _ThirdScreenState extends State<ThirdScreen> {
                       "viber": 0,
                       "wechat": 0
                     };
-                    socials["viber"] = data[0]["check_box"] ? 1 : 0;
-                    socials["wechat"] = data[1]["check_box"] ? 1 : 0;
-                    socials["telegram"] = data[2]["check_box"] ? 1 : 0;
-                    socials["whatsapp"] = data[3]["check_box"] ? 1 : 0;
+                    socials["telegram"] = data[0]["check_box"] ? 1 : 0;
+                    socials["whatsapp"] = data[1]["check_box"] ? 1 : 0;
+                    socials["viber"] = data[2]["check_box"] ? 1 : 0;
+                    socials["wechat"] = data[3]["check_box"] ? 1 : 0;
 
                     final result = await http.post(
                       Uri.parse(url),
@@ -172,13 +172,15 @@ class _ThirdScreenState extends State<ThirdScreen> {
                       child: Text(
                         LocaleKeys.save.tr(),
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(height: 20),
               ],
             ),
           ),

@@ -74,6 +74,10 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/translations/
+    - assets/images/Whatsapp.svg
+    - assets/images/Viber.svg
+    - assets/images/Wechat.svg
+    - assets/images/Telegram.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

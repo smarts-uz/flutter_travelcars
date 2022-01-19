@@ -201,7 +201,7 @@ class List_T extends StatelessWidget {
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                      text: '${info[index]["places"][index_p]['type']}\n',
+                                      text: '${info[index]["places"][index_p]['type'] == "meeting" ? LocaleKeys.meeting.tr() : LocaleKeys.Drop_of.tr()}\n',
                                       style: TextStyle(color: Colors.orange, fontSize: 20, fontWeight: FontWeight.bold,)
                                   ),
                                   TextSpan(text: "$location",),
@@ -219,7 +219,7 @@ class List_T extends StatelessWidget {
                       }
                   ),
                 ),
-                Container(
+                /*Container(
                   padding: EdgeInsets.only(left: 16,bottom: 10,top: 10),
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -238,7 +238,7 @@ class List_T extends StatelessWidget {
                         fontSize: 15
                     ),
                   ),
-                ),
+                ),*/
                 if(info[index]['created_at'] != null) Container(
                   padding: EdgeInsets.only(left: 16,bottom: 12,top: 10),
                   alignment: Alignment.centerLeft,
@@ -246,16 +246,22 @@ class List_T extends StatelessWidget {
                     '${LocaleKeys.Created_at.tr()}:',
                     style: TextStyle(
                         fontSize: 20
-                    ),),
+                    ),
+                  ),
                 ),
                 if(info[index]['created_at'] != null) Container(
                   padding: EdgeInsets.only(left: 16),
                   alignment: Alignment.centerLeft,
-                  child: Text('${info[index]['created_at'].substring(0, 10)}'),
+                  child: Text(
+                    '${info[index]['created_at'].substring(0, 10)}',
+                    style: TextStyle(
+                        fontSize: 17
+                    ),
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.only(bottom: 16, top: 20),
-                  height: MediaQuery.of(context).size.height*.05,
+                  height: 45,
                   width: MediaQuery.of(context).size.width*.9,
                   child: RaisedButton(
                     color: Colors.white,

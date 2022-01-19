@@ -206,7 +206,7 @@ class List_R extends StatelessWidget {
                       }
                   ),
                 ),
-                Container(
+                /*Container(
                   padding: EdgeInsets.only(left: 16, bottom: 5, top: 12),
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -226,7 +226,7 @@ class List_R extends StatelessWidget {
                         fontSize: 15
                     ),
                   ),
-                ),
+                ),*/
                 if(info[index]['created_at'] != null) Container(
                   padding: EdgeInsets.only(left: 16, bottom: 8, top: 8),
                   alignment: Alignment.centerLeft,
@@ -244,7 +244,7 @@ class List_R extends StatelessWidget {
                 ),
                 Container(
                   margin: EdgeInsets.only(bottom: 16),
-                  height: MediaQuery.of(context).size.height*.05,
+                  height: 45,
                   width: MediaQuery.of(context).size.width*.90,
                   child: RaisedButton(
                     color: Colors.white,

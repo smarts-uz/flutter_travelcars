@@ -33,13 +33,13 @@ class RouteInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.only(top: 12),
-              height: info["routes"].length * 90.0,
+              padding: EdgeInsets.only(top: 15, bottom: 15),
+              height: info["routes"].length * 100.0,
               child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: info["routes"].length,
                   itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.only(left: 15, bottom: 8),
+                        padding: EdgeInsets.only(left: 15, bottom: 15),
                         child: RichText(
                           text: TextSpan(
                             style: TextStyle(
@@ -53,11 +53,11 @@ class RouteInfo extends StatelessWidget {
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             TextSpan(text: '( ${info["routes"][index]['date'].substring(0, 10)} )\n'),
                             TextSpan(
-                                text: '\t\t\t\t${LocaleKeys.Passengers.tr()}: ',
+                                text: '${LocaleKeys.Passengers.tr()}: ',
                                 style: TextStyle(fontWeight: FontWeight.bold,)),
                             TextSpan(text: '${info["routes"][index]['passengers']}\n'),
                             TextSpan(
-                                text: '\t\t\t\t${LocaleKeys.Where_to_pick_up.tr()}: ',
+                                text: '${LocaleKeys.Where_to_pick_up.tr()}: ',
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             TextSpan(text: '${info["routes"][index]['address']}'),
                           ],),
@@ -71,7 +71,7 @@ class RouteInfo extends StatelessWidget {
                 text: TextSpan(
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 18,
+                        fontSize: 17,
                         height: 1.4
                     ),
                     children: [
@@ -105,7 +105,7 @@ class RouteInfo extends StatelessWidget {
                 )
             ),
             Padding(
-              padding: EdgeInsets.only(left: 30, top: 8),
+              padding: EdgeInsets.only(left: 23, top: 8),
               child: RichText(
                 text: TextSpan(
                     style: TextStyle(

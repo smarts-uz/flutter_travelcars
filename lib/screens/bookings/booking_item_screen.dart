@@ -9,7 +9,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/screens/profile/reviews.dart';
-import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -62,34 +61,12 @@ class _BookingScreenState extends State<BookingScreen> {
   void initState() {
     super.initState();
     double app_kurs = 1;
-    /*HomeScreen.kurs.forEach((element) {
-      if(SplashScreen.kurs == element["code"]) {
-        app_kurs = element["rate"].toDouble();
-      }
-    });
-
-    widget.book_item["price_data"].forEach((key, value) {
-      if(value != null) {
-        if(value is String) {
-          if(value == widget.book_item["price"]) {
-            dropdown = value;
-            day = "$key day";
-          }
-        } else {
-          if(value == widget.book_item["price"].toString()) {
-            dropdown = value;
-            day = "$key day";
-          }
-        }
-      }
-    });*/
   }
 
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> results = widget.book_item;
     String status = "Unknown";
-    Color color = Colors.grey;
     switch(results['status']) {
       case "moderating":
         status = LocaleKeys.route_one_on_consideration.tr();
@@ -98,13 +75,23 @@ class _BookingScreenState extends State<BookingScreen> {
         status = LocaleKeys.pending.tr();
         break;
       case "rejected":
-        color = Colors.red;
         status = LocaleKeys.rejected.tr();
         break;
       case "accepted":
         status = LocaleKeys.approved.tr();
         break;
     }
+
+    List<int> car_options = [];
+    for(int i = 0; i < results['carOption'].length; i++) {
+      car_options.add(i);
+    }
+
+    List<int> route_options = [];
+    for(int i = 0; i < results["routeOption"].length; i++) {
+      route_options.add(i);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
@@ -177,7 +164,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) => Reviews(route_price_id: results["route_price_id"],)
+                              builder: (_) => Reviews(route_price_id: results["route_price_id"] ?? -2,)
                           )
                       );
                     },
@@ -277,7 +264,36 @@ class _BookingScreenState extends State<BookingScreen> {
                 ),
               ],
             ),
-            _listWrap(results['carOption']),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+              child: Column(
+                children: car_options.map((e) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Row(
+                    children: [
+                      Image.network(
+                        "${AppConfig.image_url}/car-options/${results['carOption'][e]["image"]}",
+                        width: 25,
+                        height: 25,
+                      ),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          results['carOption'][e]["name"],
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Poppins',
+                            fontStyle: FontStyle.normal,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )).toList(),
+              ),
+            ),
             if(results["routeOption"].isNotEmpty) Container(
               decoration: BoxDecoration(color: HexColor("#F5F5F6")),
               child: Column(
@@ -297,15 +313,12 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                   ),
                   Container(
-                    height: results["routeOption"].length * 33.0,
                     width: double.infinity,
                     decoration: BoxDecoration(color: HexColor("#F5F5F6")),
                     padding: EdgeInsets.only(left: 16),
-                    child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: results["routeOption"].length,
-                      itemBuilder: (context, i) => Container(
-                        height: 30,
+                    child: Column(
+                      children: route_options.map((e) => Padding(
+                        padding:  EdgeInsets.symmetric(vertical: 2.0),
                         child: Row(
                           children: [
                             Icon(Icons.check, color: Colors.green),
@@ -313,114 +326,18 @@ class _BookingScreenState extends State<BookingScreen> {
                               width: 5,
                             ),
                             Text(
-                              results["routeOption"][i]["name"],
+                              results["routeOption"][e]["name"],
                               textAlign: TextAlign.start,
                               style: TextStyle(fontSize: 17),
                             )
                           ],
                         ),
-                      ),
+                      ),).toList(),
                     ),
                   ),
                 ],
               ),
             ),
-            /*_text(text: "Стоимость поездки за"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Container(
-                    padding: EdgeInsets.only(left: 16,right: 16),
-                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                    height: 55,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.grey[50],
-                        border: Border.all(color: Colors.grey),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.7),
-                          ),
-                        ]),
-                    child: Text(
-                      day,
-                      style: TextStyle(
-                        fontSize: 19
-                      ),
-                    )
-                    /*DropdownButtonHideUnderline(
-                      child: Container(
-                        child: DropdownButton<String>(
-                          hint: Text("Страна"),
-                          dropdownColor: Colors.grey[50],
-                          icon: Icon(Icons.keyboard_arrow_down),
-                          isExpanded: true,
-                          underline: SizedBox(),
-                          value: dropdown,
-                          onChanged: (newValue) {
-                            int newIndex = 0;
-                            narxlar.forEach((element) {
-                              if(element["day"] == newValue) {
-                                setState(() {
-                                  dropdown = newValue!;
-                                  narx_index = newIndex;
-                                });
-                              }
-                              newIndex++;
-                            });
-
-                          },
-                          items: narxlar.map<DropdownMenuItem<String>>((value) {
-                            return DropdownMenuItem<String>(
-                              value: value['day'],
-                              child: Text(
-                                value['day'],
-                                style: TextStyle(
-                                  fontFamily: "Poppins",
-                                  fontWeight: FontWeight.w500,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 15,
-                                  color: HexColor('#3C3C43'),
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),*/
-                  ),
-                ),
-                Flexible(
-                  child: Container(
-                      padding: EdgeInsets.only(left: 16,right: 16 ),
-                      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                      height: 55,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.grey[50],
-                          border: Border.all(color: Colors.grey),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.7),
-                            ),
-                          ]),
-                      child: Center(
-                        child: Text(
-                          dropdown,
-                          style: TextStyle(
-                            fontFamily: "Poppins",
-                            fontWeight: FontWeight.w500,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 15,
-                            color: HexColor('#3C3C43'),
-                          ),
-                        ),
-                      )
-                  ),
-                )
-              ],
-            ),*/
             results["status"] == "accepted" && results["paid"] == null ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -493,6 +410,9 @@ class _BookingScreenState extends State<BookingScreen> {
                     Container(
                       child: RichText(
                         text: TextSpan(
+                            style: TextStyle(
+                                fontSize: 14
+                            ),
                             children: [
                               TextSpan(
                                 text: 'Я ознакомлен и согласен с ',
@@ -574,7 +494,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       child: Text(
                         LocaleKeys.Payment.tr(),
                         style: TextStyle(
-                          fontSize: 13,
+                          fontSize: 20,
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                           fontFamily: 'Poppins',
@@ -598,47 +518,12 @@ class _BookingScreenState extends State<BookingScreen> {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 23,
+          fontSize: 20,
           color: Colors.black,
           fontWeight: FontWeight.w500,
           fontFamily: 'Poppins',
           fontStyle: FontStyle.normal,
         ),
-      ),
-    );
-  }
-
-  Widget _listWrap(List wrap) {
-    return Container(
-      height: wrap.length * 25,
-      child: GridView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        itemCount: wrap.length,
-        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-          mainAxisExtent: 45,
-          crossAxisCount: 2,
-          childAspectRatio: 1,
-        ),
-        itemBuilder: (context, index) {
-          return Container(
-            alignment: Alignment.topLeft,
-            width: MediaQuery.of(context).size.width * 0.43,
-            child: Chip(
-              backgroundColor: Colors.transparent,
-              avatar: SvgPicture.asset("assets/icons/globus.svg"),
-              label: Text(
-                wrap[index]["name"],
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'Poppins',
-                  fontStyle: FontStyle.normal,
-                ),
-              ),
-            ),
-          );
-        },
       ),
     );
   }

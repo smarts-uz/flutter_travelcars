@@ -37,7 +37,7 @@ class TransfersInfo extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.only(top: 12),
-              height: info["places"].length * 157.0,
+              height: info["places"].length * 170.0,
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: info["places"].length,
@@ -47,7 +47,7 @@ class TransfersInfo extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left: 16, top: 8),
                         child: Text(
-                          '${info["places"][index]["type"]}',
+                          '${info["places"][index]['type'] == "meeting" ? LocaleKeys.meeting.tr() : LocaleKeys.Drop_of.tr()}',
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class TransfersInfo extends StatelessWidget {
                             style: TextStyle(
                               height: 1.5,
                               color: Colors.black,
-                              fontSize: 15
+                              fontSize: 17
                             ),
                             children: <TextSpan>[
                               TextSpan(
@@ -109,7 +109,7 @@ class TransfersInfo extends StatelessWidget {
                 text: TextSpan(
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 18
+                        fontSize: 17
                     ),
                     children: [
                       TextSpan(
@@ -147,7 +147,7 @@ class TransfersInfo extends StatelessWidget {
                 text: TextSpan(
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16
+                        fontSize: 17
                     ),
                     children: [
                       TextSpan(

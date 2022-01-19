@@ -131,6 +131,10 @@ class _BookingsScreenState extends State<BookingsScreen> {
                 status = LocaleKeys.approved.tr();
                 break;
             }
+            List<int> indexes_options = [];
+            for(int i = 0; i < results[index]["routeOption"].length; i++) {
+              indexes_options.add(i);
+            }
             return Card(
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -145,12 +149,12 @@ class _BookingsScreenState extends State<BookingsScreen> {
                       "${results[index]["car"]["title"]}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 28,
+                        fontSize: 23,
                       ),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 15, bottom: 8, top: 10),
+                    padding: EdgeInsets.only(left: 15, bottom: 8, top: 4),
                     alignment: Alignment.topLeft,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -158,7 +162,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                         Text(
                           "${LocaleKeys.status.tr()}: $status",
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 18,
                           ),
                         ),
                         Container(
@@ -194,18 +198,18 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     ),
                     child: Image.network(
                         "${AppConfig.image_url}/cars/${results[index]["images"][0]["original"]}",
-                        fit: BoxFit.cover
+                        fit: BoxFit.contain
                     ),
                   ),
                   Container(
                       width: MediaQuery.of(context).size.width * 0.65,
                       alignment: Alignment.centerLeft,
-                      height: 50,
+                      height: 35,
                       padding: EdgeInsets.symmetric(vertical: 3, horizontal: 6),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [0, 1, 2, 3].map((e) => Container(
-                            height: 40,
+                            height: 25,
                             width: 50,
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -224,17 +228,33 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     child: Text(
                       "${LocaleKeys.The_tariff_includes.tr()}:",
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 19,
                           color: Colors.black,
                           fontWeight: FontWeight.bold
                       ),
                     ),
                   ),
                   if(results[index]["routeOption"].isNotEmpty) Container(
-                    height: results[index]["routeOption"].length * 32.0,
                     width: double.infinity,
-                    padding: EdgeInsets.only(top: 5, left: 15),
-                    child: ListView.builder(
+                    padding: EdgeInsets.only(left: 15),
+                    child: Column(
+                      children: indexes_options.map((i) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 2.0),
+                        child: Row(
+                          children: [
+                            Icon(Icons.check, color: Colors.green),
+                            Text(
+                              results[index]["routeOption"][i]["name"],
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  fontSize: 17
+                              ),
+                            )
+                          ],
+                        ),
+                      ),).toList(),
+                    ),
+                      /*ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
                         itemExtent: 30,
                         itemCount: results[index]["routeOption"].length,
@@ -252,16 +272,15 @@ class _BookingsScreenState extends State<BookingsScreen> {
                             ],
                           ),
                         )
-                    ),
+                    ),*/
                   ),
                   Container(
-                    height: 70,
+                    height: 60,
                     width: double.infinity,
-                    margin: EdgeInsets.all(5),
                     child: ListTile(
                       title: Text(
                         "${results[index]["route"]["title"]}",
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.left,
                         style: TextStyle(
                             fontSize: 19,
                             fontWeight: FontWeight.w600
@@ -270,7 +289,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                       subtitle: Padding(
                         padding: const EdgeInsets.only(top: 4.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Icon(Icons.watch_later_outlined, color: Colors.orange,),
                             SizedBox(width: 8),
@@ -286,8 +305,9 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     ),
                   ),
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       child:  RichText(
+                        textAlign: TextAlign.left,
                         text: TextSpan(
                           style: TextStyle(
                             fontSize: 22.0,
@@ -295,14 +315,13 @@ class _BookingsScreenState extends State<BookingsScreen> {
                           ),
                           children: <TextSpan>[
                             TextSpan(text: '${LocaleKeys.The_cost_of_the_trip.tr()} '),
-                            TextSpan(text: '${LocaleKeys.for_atp.tr()} ${day.toInt()} day', style: TextStyle(color: Colors.orange)),
+                            TextSpan(text: '${LocaleKeys.for_atp.tr()} ${day.toInt()} ${LocaleKeys.day.tr()}', style: TextStyle(color: Colors.orange)),
                           ],
                         ),
                       )
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    alignment: Alignment.center,
+                    padding: EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
                       "${(double.parse(results[index]["price"]) * app_kurs).toStringAsFixed(2)} ${SplashScreen.kurs}",
                       style: TextStyle(

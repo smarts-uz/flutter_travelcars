@@ -89,7 +89,7 @@ class _RouteAddState extends State<RouteAdd> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * .75,
+              height: MediaQuery.of(context).size.height * .7,
               child: ListView.builder(
                 controller: _controller,
                 itemCount: count,
@@ -204,7 +204,7 @@ class _RouteAddState extends State<RouteAdd> {
                 },
               ),
             ),
-            SizedBox(height: 15,),
+            SizedBox(height: MediaQuery.of(context).size.height * .05),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

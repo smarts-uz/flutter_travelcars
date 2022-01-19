@@ -93,7 +93,7 @@ class _TransfersAddState extends State<TransfersAdd> {
         child: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * .77,
+            height: MediaQuery.of(context).size.height * .75,
             child: ListView.builder(
               controller: _controller,
                 itemCount: i,
@@ -323,6 +323,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                 },
             ),
           ),
+          SizedBox(height: MediaQuery.of(context).size.height * .01),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

@@ -48,7 +48,7 @@ class _SecondScreenState extends State<SecondScreen> {
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * .1,
+              top: 20,
               left: 10,
               right: 10),
           height: MediaQuery.of(context).size.height * .9,
@@ -56,7 +56,7 @@ class _SecondScreenState extends State<SecondScreen> {
           child: Column(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(bottom: 10,top: 10),
+                padding: EdgeInsets.only(bottom: 10, top: 10),
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "${LocaleKeys.Current_password.tr()}",
@@ -172,6 +172,7 @@ class _SecondScreenState extends State<SecondScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
+                        fontSize: 17
                       ),
                     ),
                   ),

@@ -108,26 +108,14 @@ void _startAddNewTransaction(BuildContext ctx) {
       context: ctx,
       builder: (_) {
         return  Container(
-          height: 200,
+          height: 130,
           margin: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Text(LocaleKeys.aboute.tr(),
-                textAlign: TextAlign.end,
-                style: TextStyle(
-                    fontSize: 24
-                ),
-              ),
-              Divider(),
-              Text(
-                LocaleKeys.about_transfer.tr(),
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500
-                ),
-              ),
-            ],
-
+          child: Text(
+            LocaleKeys.about_transfer.tr(),
+            style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500
+            ),
           ),
         );
       }

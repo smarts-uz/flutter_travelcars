@@ -21,10 +21,10 @@ class _SocialScreenState extends State<SocialScreen> {
   final TextEditingController _phoneEmailController = TextEditingController();
 
   List<Map<String, dynamic>> data = [
-    {"image": "viber", "check_box": false},
-    {"image": "wechat", "check_box": false},
-    {"image": "telegram", "check_box": false},
-    {"image": "whatsapp", "check_box": false},
+    {"image": "Telegram", "check_box": false},
+    {"image": "Whatsapp", "check_box": false},
+    {"image": "Viber", "check_box": false},
+    {"image": "Wechat", "check_box": false},
   ];
 
   @override
@@ -115,10 +115,10 @@ class _SocialScreenState extends State<SocialScreen> {
                     "viber": 0,
                     "wechat": 0
                   };
-                  socials["viber"] = data[0]["check_box"] ? 1 : 0;
-                  socials["wechat"] = data[1]["check_box"] ? 1 : 0;
-                  socials["telegram"] = data[2]["check_box"] ? 1 : 0;
-                  socials["whatsapp"] = data[3]["check_box"] ? 1 : 0;
+                  socials["telegram"] = data[0]["check_box"] ? 1 : 0;
+                  socials["whatsapp"] = data[1]["check_box"] ? 1 : 0;
+                  socials["viber"] = data[2]["check_box"] ? 1 : 0;
+                  socials["wechat"] = data[3]["check_box"] ? 1 : 0;
 
                   final result = await http.post(
                       url,
