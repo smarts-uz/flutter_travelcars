@@ -1,8 +1,10 @@
 import 'package:easy_localization/src/public_ext.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travelcars/screens/login/choice_language.dart';
 import 'package:travelcars/screens/login/login_srcreen.dart';
+import 'package:travelcars/screens/po_puti/po_puti.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 class Dialogs {
@@ -369,6 +371,13 @@ class Dialogs {
                   onPressed: () {
                     Navigator.pop(ctx);
                     Navigator.pop(ctx);
+                    Navigator.pop(ctx);
+                    Navigator.push(
+                        ctx,
+                        CupertinoPageRoute(
+                            builder: (_) => PoPutiScreen()
+                        )
+                    );
                   },
                   child: Text(
                     LocaleKeys.close.tr(),

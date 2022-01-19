@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/po_puti/add.dart';
 import 'package:travelcars/screens/po_puti/info.dart';
@@ -17,6 +18,8 @@ class PoPutiScreen extends StatefulWidget {
 }
 
 class _PoPutiScreenState extends State<PoPutiScreen> {
+  int user_id = 0;
+  String? token;
   bool isLoading = true;
   late List<dynamic> ways;
   late List<dynamic> main_ways;
@@ -38,13 +41,16 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
     final result = await http.get(
       Uri.parse(url)
     );
+    final prefs = await SharedPreferences.getInstance();
+    user_id = jsonDecode(prefs.getString("userData")!)["user_id"];
+    token = jsonDecode(prefs.getString("userData")!)["token"];
+    ways = json.decode(result.body)["data"];
+    main_ways = json.decode(result.body)["data"];
+    for(int i = 0; i < main_ways.length; i++) {
+      indexes.add(i);
+    }
     setState(() {
       isLoading = false;
-      ways = json.decode(result.body)["data"];
-      for(int i = 0; i < ways.length; i++) {
-        indexes.add(i);
-      }
-      main_ways = json.decode(result.body)["data"];
     });
   }
 
@@ -186,6 +192,10 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                       });
                       setState(() {
                         ways = new_ways;
+                        indexes = [];
+                        for(int i = 0; i < ways.length; i++) {
+                          indexes.add(i);
+                        }
                       });
                       day = null;
                       FocusScope.of(context).unfocus();
@@ -274,7 +284,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                         ),
                       ),
                     ),
-                    GestureDetector(
+                    ways[index]["user_id"] != user_id ? GestureDetector(
                       onTap: () {
                         Navigator.push(
                             context,
@@ -303,6 +313,94 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                               color: Colors.orange
                           ),
                         ),
+                      ),
+                    ) : Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => InfoScreen(ways[index])
+                                  )
+                              );
+                            },
+                            child: Container(
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(10)
+                              ),
+                              child: Icon(
+                                Icons.remove_red_eye,
+                                color: Colors.white,
+                                size: 25,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 15),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => AddScreen(way_item: ways[index],)
+                                  )
+                              );
+                            },
+                            child: Container(
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                  color: Colors.orange,
+                                  borderRadius: BorderRadius.circular(10)
+                              ),
+                              child: Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                                size: 25,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 15),
+                          GestureDetector(
+                            onTap: () async {
+                              print("hello");
+                              Uri url = Uri.parse("${AppConfig.BASE_URL}/onway/delete");
+                              final response = await http.delete(
+                                url,
+                                headers: {
+                                  "Authorization": "Bearer $token"
+                                },
+                                body: {
+                                  "id": "${ways[index]["id"]}"
+                                }
+                              );
+                              setState(() {
+                                isLoading = true;
+                              });
+                              indexes = [];
+                              getways();
+                            },
+                            child: Container(
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(10)
+                              ),
+                              child: Icon(
+                                Icons.clear,
+                                color: Colors.white,
+                                size: 25,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ],

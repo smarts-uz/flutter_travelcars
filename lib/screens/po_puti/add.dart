@@ -1,17 +1,22 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:http_parser/http_parser.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/dialogs.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/po_puti/po_puti.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 class AddScreen extends StatefulWidget {
-  const AddScreen({Key? key}) : super(key: key);
+  final Map<String, dynamic> way_item;
+
+  AddScreen({this.way_item = const {}});
 
   @override
   _AddScreenState createState() => _AddScreenState();
@@ -20,13 +25,12 @@ class AddScreen extends StatefulWidget {
 class _AddScreenState extends State<AddScreen> {
   DateTime day = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
-  List text_controllers =  [
-    for (int i = 0; i < 8; i++)
-      TextEditingController()
-  ];
+  List text_controllers =  [];
+
 
   File? _pickedImage;
   final ImagePicker _picker = ImagePicker();
+  String? image;
 
   void _showPicker(BuildContext cont) {
     showModalBottomSheet(
@@ -73,6 +77,29 @@ class _AddScreenState extends State<AddScreen> {
           );
         }
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    image = widget.way_item["image"];
+    if(widget.way_item.isNotEmpty) {
+      text_controllers.add(TextEditingController(text: widget.way_item["address1"]));
+      text_controllers.add(TextEditingController(text: widget.way_item["address2"]));
+      day = DateTime.parse(widget.way_item["date"]);
+      time = TimeOfDay(hour:int.parse(widget.way_item["time"].split(":")[0]),minute: int.parse(widget.way_item["time"].split(":")[1]));
+      text_controllers.add(TextEditingController(text: widget.way_item["model_car"]));
+      text_controllers.add(TextEditingController(text: widget.way_item["place_bag"]));
+      text_controllers.add(TextEditingController(text: widget.way_item["place"]));
+      text_controllers.add(TextEditingController(text: widget.way_item["name"]));
+      text_controllers.add(TextEditingController(text: widget.way_item["tel"]));
+      text_controllers.add(TextEditingController(text: widget.way_item["comment"]));
+    } else {
+      text_controllers = [
+        for (int i = 0; i < 8; i++)
+          TextEditingController()
+      ];
+    }
   }
 
   @override
@@ -203,9 +230,13 @@ class _AddScreenState extends State<AddScreen> {
                       margin: EdgeInsets.symmetric(horizontal: 9.0, vertical: 7.0),//MediaQuery.of(context).size.width * .2,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
-                        image:  _pickedImage != null ?
+                        image:   _pickedImage != null ?
                         DecorationImage(
                           image: FileImage(_pickedImage!),
+                        ) : image != null ? DecorationImage(
+                          image: NetworkImage(
+                              "${AppConfig.image_url}/Onways/${widget.way_item["image"]}"
+                          ),
                         ) : DecorationImage(
                             image: AssetImage("assets/images/no_image.png"))
                       ),
@@ -254,6 +285,7 @@ class _AddScreenState extends State<AddScreen> {
                             onTap: () {
                               setState(() {
                                 _pickedImage = null;
+                                image = null;
                               });
                             },
                             child: Container(
@@ -306,35 +338,75 @@ class _AddScreenState extends State<AddScreen> {
                           return;
                         }
                       }
-                      if(_pickedImage == null) {
+                      if(_pickedImage == null && widget.way_item.isEmpty) {
                         print("no_image");
                         return;
                       }
-                      Uri url = Uri.parse("${AppConfig.BASE_URL}/createWay");
-                      var request = http.MultipartRequest('POST', url)
-                        ..fields['address1'] = '${text_controllers[0].text}'
-                        ..fields['address2'] = '${text_controllers[1].text}'
-                        ..fields['date'] = '${DateFormat('yyyy-MM-dd').format(day)}'
-                        ..fields['time'] = '${time.format(context)}'
-                        ..fields['model'] = '${text_controllers[2].text}'
-                        ..fields['place'] = '${text_controllers[3].text}'
-                        ..fields['place_bag'] = '${text_controllers[4].text}'
-                        ..fields['name'] = '${text_controllers[5].text}'
-                        ..fields['tel'] = '${text_controllers[6].text}'
-                        ..fields['comment_text'] = '${text_controllers[7].text}'
-                        ..files.add(
-                            await http.MultipartFile.fromPath(
-                                'image',
-                                '${_pickedImage?.path}',
-                                contentType: MediaType(
-                                    'image', 'jpg'
+                      final prefs = await SharedPreferences.getInstance();
+                      int user_id = jsonDecode(prefs.getString("userData")!)["user_id"];
+                      String token = jsonDecode(prefs.getString("userData")!)["token"];
+                      Uri url_add = Uri.parse("${AppConfig.BASE_URL}/createWay");
+                      Uri url_edit = Uri.parse("${AppConfig.BASE_URL}/onway/edit");
+                      var request;
+                      if(_pickedImage != null) {
+                        request = http.MultipartRequest('POST', widget.way_item.isEmpty ? url_add : url_edit)
+                          ..headers["Authorization"] = widget.way_item.isNotEmpty ? 'Bearer $token' : ''
+                          ..fields['address1'] = '${text_controllers[0].text}'
+                          ..fields['address2'] = '${text_controllers[1].text}'
+                          ..fields['date'] = '${DateFormat('yyyy-MM-dd').format(day)}'
+                          ..fields['time'] = '${time.format(context)}'
+                          ..fields['model'] = '${text_controllers[2].text}'
+                          ..fields['place'] = '${text_controllers[3].text}'
+                          ..fields['place_bag'] = '${text_controllers[4].text}'
+                          ..fields['name'] = '${text_controllers[5].text}'
+                          ..fields['tel'] = '${text_controllers[6].text}'
+                          ..fields['comment_text'] = '${text_controllers[7].text}'
+                          ..fields['user_id'] = '$user_id'
+                          ..fields['id'] = '${widget.way_item["id"] ?? "0"}'
+                          ..files.add(
+                              await http.MultipartFile.fromPath(
+                                  'image',
+                                  '${_pickedImage?.path}',
+                                  contentType: MediaType(
+                                      'image', 'jpg'
+                                  )
+                              )
+                          );
+                      } else {
+                        request = http.MultipartRequest('POST', url_edit)
+                          ..headers["Authorization"] = 'Bearer $token'
+                          ..fields['address1'] = '${text_controllers[0].text}'
+                          ..fields['address2'] = '${text_controllers[1].text}'
+                          ..fields['date'] = '${DateFormat('yyyy-MM-dd').format(day)}'
+                          ..fields['time'] = '${time.format(context)}'
+                          ..fields['model'] = '${text_controllers[2].text}'
+                          ..fields['place'] = '${text_controllers[3].text}'
+                          ..fields['place_bag'] = '${text_controllers[4].text}'
+                          ..fields['name'] = '${text_controllers[5].text}'
+                          ..fields['tel'] = '${text_controllers[6].text}'
+                          ..fields['comment_text'] = '${text_controllers[7].text}'
+                          ..fields['id'] = '${widget.way_item["id"]}';
+                      }
+                      try{
+                        var response = await request.send();
+                        print(response.reasonPhrase);
+                        if (response.statusCode == 200) {
+                          if(widget.way_item.isNotEmpty) {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (_) =>PoPutiScreen()
                                 )
-                            )
-                        );
-                      var response = await request.send();
-                      print(response.reasonPhrase);
-                      if (response.statusCode == 200) {
-                        Dialogs.PoPutiDialog(context);
+                            );
+                          } else {
+                            Dialogs.PoPutiDialog(context);
+                          }
+                        }
+                      } catch (e) {
+                        print(e);
+                        Dialogs.ErrorDialog(context);
                       }
                     },
                     child: Text(

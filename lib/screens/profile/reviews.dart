@@ -238,7 +238,7 @@ class _ReviewsState extends State<Reviews> {
                         SizedBox(width: MediaQuery.of(context).size.width*.08),
                         Center(
                           child: Text(
-                            "${reviews['average_word']}\n${reviews['reviews'].length} ${LocaleKeys.comment.tr()}",
+                            "${reviews['average_word']}\n${reviews['reviews'].length} ${LocaleKeys.review.tr()}",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 height: 1.8,

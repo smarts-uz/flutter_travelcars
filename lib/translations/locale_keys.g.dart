@@ -222,5 +222,6 @@ abstract class  LocaleKeys {
   static const ver_bad = 'ver_bad';
   static const poputi1 = 'poputi1';
   static const poputi2 = 'poputi2';
+  static const review = 'review';
 
 }
