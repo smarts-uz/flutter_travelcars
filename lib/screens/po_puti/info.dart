@@ -41,7 +41,7 @@ class InfoScreen extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.95,
               margin: EdgeInsets.all(15),
               child: Image.network(
-                "${AppConfig.image_url}/onways/${way_item["image"]}",
+                "${AppConfig.image_url}/Onways/${way_item["image"]}",
                 fit: BoxFit.cover,
               ),
             ),

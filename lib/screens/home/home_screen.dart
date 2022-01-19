@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
     "Farg'ona": 0,
     "Namangan": 0,
   };
-  static const city = <String>[
+  static List<String> city = <String>[
     "Tashkent",
     "Buxoro",
     "Xiva",
@@ -236,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Stack(
                   children: [
                     Container(
-                      height: 130,
+                      height: 120,
                       width: MediaQuery.of(context).size.width * .45,
                       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 14),
                       decoration: BoxDecoration(
@@ -259,12 +259,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         hint: Text(
                             LocaleKeys.city.tr(),
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 color: Colors.white
                             )
                         ),
                         style: TextStyle(
-                          fontSize: 17,
+                          fontSize: 16,
                           color: Colors.black,
                         ),
                         focusColor: Colors.white,
@@ -281,8 +281,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       left: 25,
                       top: 30,
                       child: Container(
-                          height: 45,
-                          width: 45,
+                          height: 40,
+                          width: 40,
                           child: SvgPicture.asset("assets/icons/weather.svg", fit: BoxFit.contain,)
                       ),
                     ),
@@ -292,18 +292,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Text(
                           "°C",
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 15,
                             color: Colors.white,
                           ),
                         )
                     ),
                     Positioned(
-                      right: 45,
-                      top: 30,
+                      right: 50,
+                      top: 40,
                       child: weather["$SelectedVal"] != null ? Text(
                         "${weather["$SelectedVal"]}",
                         style: TextStyle(
-                          fontSize: 45,
+                          fontSize: 32,
                           color: Colors.white,
                         ),
                       ) : Text(" "),
@@ -311,7 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 Container(
-                  height: 130,
+                  height: 120,
                   width: MediaQuery.of(context).size.width * .45,
                   margin: EdgeInsets.symmetric(horizontal: 5, vertical: 14),
                   child: Stack(
@@ -348,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Positioned(
-                          bottom: 35,
+                          bottom: 40,
                           child: Container(
                             width: MediaQuery.of(context).size.width * .45,
                             alignment: Alignment.center,
@@ -356,7 +356,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               pul == 0 ? "1\$ = " : "1\$ = $pul",
                               textAlign: TextAlign.justify,
                               style: TextStyle(
-                                fontSize: 25
+                                fontSize: 17
                               ),
                             ),
                           )
@@ -507,10 +507,10 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 15,
             ),
             Container(
-              padding: EdgeInsets.only(left: 12, top: 20),
+              padding: EdgeInsets.only(left: 8, top: 20, right: 8),
               child: Text(
                LocaleKeys.Most_popular_cars_book.tr(),
-                textAlign: TextAlign.start,
+                textAlign: TextAlign.center,
                 maxLines: 2,
                 style: TextStyle(
                     fontSize: 22
@@ -567,13 +567,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             SizedBox(
-              height: 25,
+              height: 18,
             ),
             Container(
-              padding: EdgeInsets.only(left: 12, bottom: 5),
+              padding: EdgeInsets.only(left: 8, bottom: 5, right: 8),
               child: Text(
                LocaleKeys.News_and_special_offers.tr(),
-                textAlign: TextAlign.start,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 24
                 ),

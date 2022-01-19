@@ -22,6 +22,7 @@ class CarCategory extends StatefulWidget {
 
 class _CarCategoryState extends State<CarCategory> {
   bool isLoading = true;
+  List<int> indexes = [];
   List<Map<String, dynamic>> names = [
     {
       "name": LocaleKeys.class_atp.tr(),
@@ -60,11 +61,13 @@ class _CarCategoryState extends State<CarCategory> {
       categories = json.decode(response.body);
       isLoading = false;
     });
+    for(int i = 0; i < categories.length; i++) {
+      indexes.add(i);
+    }
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     isLoading = false;
   }
@@ -80,13 +83,13 @@ class _CarCategoryState extends State<CarCategory> {
           icon: Icon(
               Icons.arrow_back,
               color: Colors.white,
-              size: 28
+              size: 25
           ),
         ),
         title: Text(
           widget.name,
           style:TextStyle(
-              fontSize: 25,
+              fontSize: 23,
               color: Colors.white
           ),
         ),
@@ -100,118 +103,110 @@ class _CarCategoryState extends State<CarCategory> {
             fontSize: 20
           ),
         ),
-      ):
-      SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: ListView.builder(
-            padding: EdgeInsets.only(top: 10.0),
-            physics: BouncingScrollPhysics(),
-            itemCount: categories.length,
-            itemBuilder: (context, index) => GestureDetector(
-              onTap: () async {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SearchResult(carCategory: categories[index]["id"])
-                    )
-                );
-              },
-              child: Container(
-                decoration: BoxDecoration(
+      ) : SingleChildScrollView(
+        child: Column(
+          children: indexes.map((index) => GestureDetector(
+            onTap: () async {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SearchResult(carCategory: categories[index]["id"])
+                  )
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
                   border: Border.all(
-                    color: Colors.grey,
-                    width: 1.5
+                      color: Colors.grey,
+                      width: 1.5
                   )
-                ),
-                margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15.0, right: 18.0, top: 15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            categories[index]["name"],
-                            style: TextStyle(
-                              fontSize: 20.0
-                            ),
-                          ),
-                          Container(
-                              height: 27,
-                              width: 27,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.0),
-                                color: Color.fromRGBO(239, 127, 26, 1),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "${categories[index]["quantity"]}",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20
-                                  ),
-                                ),
-                              )
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
+              ),
+              margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0, right: 18.0, top: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: MediaQuery.of(context).size.height * .17,
-                          width: MediaQuery.of(context).size.width * .32,
-                          margin: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 8.0),
-                          child: categories[index]["image"] != null  ? Image.network(
-                            "${AppConfig.image_url}/car-models/${categories[index]["image"]}",
-                            fit: BoxFit.contain,
-                          ) : Image.asset(
-                            "assets/images/no_image.png",
-                            fit: BoxFit.contain,
+                        Text(
+                          categories[index]["name"] ?? " ",
+                          style: TextStyle(
+                              fontSize: 20.0
                           ),
                         ),
-                        Expanded(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * .5,
-                            padding: EdgeInsets.only(right: 3.0),
-                            child: ListView.builder(
-                                itemCount: 4,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index_in) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 5.0),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        names[index_in]["icon"],
-                                        color: Colors.orange,
-                                        size: 27.0,
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          "${names[index_in]["name"]}: ${
-                                              index_in == 3 ?
-                                                categories[index][names[index_in]["data"]] == 1 ?
-                                                  "${LocaleKeys.yes.tr()}" : "${LocaleKeys.no.tr()}" :
-                                                    categories[index][names[index_in]["data"]] != null ? categories[index][names[index_in]["data"]] : "--"
-                                          }",
-                                          style: TextStyle(
-                                            fontSize: 15.0
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
+                        Container(
+                            height: 27,
+                            width: 27,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.0),
+                              color: Color.fromRGBO(239, 127, 26, 1),
                             ),
-                          ),
-                        )
+                            child: Center(
+                              child: Text(
+                                "${categories[index]["quantity"] ?? "0"}",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20
+                                ),
+                              ),
+                            )
+                        ),
                       ],
-                    )
-                  ],
-                ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height * .17,
+                        width: MediaQuery.of(context).size.width * .32,
+                        margin: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 8.0),
+                        child: categories[index]["image"] != null  ? Image.network(
+                          "${AppConfig.image_url}/car-models/${categories[index]["image"]}",
+                          fit: BoxFit.contain,
+                        ) : Image.asset(
+                          "assets/images/no_image.png",
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * .5,
+                        padding: EdgeInsets.only(right: 3.0),
+                        child: Column(
+                          children: [0, 1, 2, 3].map((index_in) => Padding(
+                            padding: const EdgeInsets.only(bottom: 5.0),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  names[index_in]["icon"],
+                                  color: Colors.orange,
+                                  size: 27.0,
+                                ),
+                                SizedBox(width: 4),
+                                Expanded(
+                                  child: Text(
+                                    "${names[index_in]["name"]}: ${
+                                        index_in == 3 ?
+                                        categories[index][names[index_in]["data"]] == 1 ?
+                                        "${LocaleKeys.yes.tr()}" : "${LocaleKeys.no.tr()}" :
+                                        categories[index][names[index_in]["data"]] ?? "--"
+                                    }",
+                                    style: TextStyle(
+                                        fontSize: 15.0
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )).toList(),
+                        )
+                      ),
+                    ],
+                  )
+                ],
               ),
-            )
+            ),
+          )).toList(),
         ),
       ),
     );

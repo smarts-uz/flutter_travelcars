@@ -431,7 +431,6 @@ class _SearchScreenState extends State<SearchScreen> {
                 alignment: Alignment.centerLeft,
                 height: 40,
                 width: double.infinity,
-                //padding: EdgeInsets.all(12),
                 child: Row(
                   children: [
                     Radio<int>(
@@ -468,50 +467,48 @@ class _SearchScreenState extends State<SearchScreen> {
             Container(
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 15, bottom: 10),
-              child: Row(
+               child: Row(
                 children: [
                   Expanded(
-                    flex: 1,
-                    child: FittedBox(
-                      child: Text(
-                        "50",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 13,
-                    child: RangeSlider(
-                      values: _currentRangeValues,
-                      min: 50,
-                      max: 250,
-                      divisions: 10,
-                      labels: RangeLabels(
-                        _currentRangeValues.start.round().toString(),
-                        _currentRangeValues.end.round().toString(),
-                      ),
-                      onChanged: (RangeValues values) {
-                        setState(() {
-                          _currentRangeValues = values;
-                        });
-                        },
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
+                    flex: widget.isDrawer ? 2 : 1,
                     child: Text(
-                      "250",
+                      "50",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
-                    ),
-                  )
+                   ),
+                 ),
+                 Expanded(
+                   flex: 13,
+                   child: RangeSlider(
+                     values: _currentRangeValues,
+                     min: 50,
+                     max: 250,
+                     divisions: 10,
+                     labels: RangeLabels(
+                       _currentRangeValues.start.round().toString(),
+                       _currentRangeValues.end.round().toString(),
+                     ),
+                     onChanged: (RangeValues values) {
+                       setState(() {
+                         _currentRangeValues = values;
+                       },);
+                       },
+                   ),
+                 ),
+                 Expanded(
+                   flex: 2,
+                   child: Text(
+                     "250",
+                     style: TextStyle(
+                       fontSize: 18,
+                       fontWeight: FontWeight.bold,
+                     ),
+                   ),
+                 ),
                 ],
-              ),
+               ),
             ),
             Container(
               alignment: Alignment.centerLeft,
@@ -552,10 +549,8 @@ class _SearchScreenState extends State<SearchScreen> {
                         ],
                       ),
                     ),
-                    autoTypes[index]["chosen"] ? SizedBox(
-                        height: categories["${autoTypes[index]["meta_url"]}"].length * 33.0,
-                        child: ListBox(categories["${autoTypes[index]["meta_url"]}"])
-                    ) : SizedBox(height: 8,),
+                    autoTypes[index]["chosen"] ? ListBox(categories["${autoTypes[index]["meta_url"]}"]) : SizedBox(height: 10),
+
                   ],
                 )).toList(),
               )
@@ -573,7 +568,6 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Container(
                 padding: EdgeInsets.only(left: 5),
-                height: autoOptions.length * 33,
                 width: double.infinity,
                 child: ListBox(autoOptions)
             ),
@@ -589,8 +583,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             Container(
-                padding: EdgeInsets.only(left: 5),
-                height: tarif.length * 33,
+                padding: EdgeInsets.symmetric(horizontal: 5),
                 width: double.infinity,
                 child: ListBox(tarif)
             ),
@@ -754,39 +747,34 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Widget ListBox(List<dynamic> boxes) {
-    return ListView.builder(
-        padding: EdgeInsets.all(0),
-        itemExtent: 33.0,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: boxes.length,
-        itemBuilder: (context, index) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Checkbox(
-                onChanged: (bool? value) {
-                  if (value != null) {
-                    setState(() => boxes[index]["chosen"] = value);
-                  }
-                },
-                value: boxes[index]["chosen"],
+    List<int> indexes = [];
+    for(int i = 0; i<boxes.length; i++) {
+      indexes.add(i);
+    }
+    return Column(
+      children: indexes.map((index) => Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Checkbox(
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            onChanged: (bool? value) {
+              if (value != null) {
+                setState(() => boxes[index]["chosen"] = value);
+              }
+            },
+            value: boxes[index]["chosen"],
+          ),
+          Expanded(
+            child: Text(
+              "${boxes[index]["name"]}",
+              style: TextStyle(
+                fontSize: 18,
               ),
-              Expanded(
-                child: Text(
-                  "${boxes[index]["name"]}",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-            ],
-          );
-        }
+            ),
+          ),
+        ],
+      ),).toList(),
     );
   }
-
-
-
 }
 

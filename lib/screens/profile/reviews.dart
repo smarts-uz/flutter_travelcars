@@ -102,8 +102,19 @@ class _ReviewsState extends State<Reviews> {
     });
     summa /= 9;
     int average = summa.round();
+    String average_word = "";
+    if(average>=9) {
+      average_word = "Excellent";
+    } else if(average>=6 && average < 9) {
+      average_word = "Good";
+    } else if(average>=3 && average < 6) {
+      average_word = "Bad";
+    } else {
+      average_word = "Very bad";
+    }
     reviews.addAll({
-        "average": average.toString(),
+      "average": average.toString(),
+      "average_word": average_word,
     });
 
     for(int i = 0; i<reviews["reviews"].length; i++) {
@@ -187,20 +198,22 @@ class _ReviewsState extends State<Reviews> {
                     LocaleKeys.customer_reviews.tr(),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                  ),),
+                      fontSize: 25,
+                    ),
+                  ),
                   Divider(
-                    endIndent: 220,
+                    indent: 3,
+                    endIndent: 5,
                     thickness: 2,
                     color: Colors.orange,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 15.0),
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 15.0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          padding: EdgeInsets.only(top: 11,right: 30),
+                          alignment: Alignment.center,
                           height: MediaQuery.of(context).size.height*.15,
                           width: MediaQuery.of(context).size.width*.45,
                           decoration: BoxDecoration(
@@ -209,65 +222,60 @@ class _ReviewsState extends State<Reviews> {
                           ),
                           child: Center(
                             child: Text(
-                            "  ${reviews['average']}",
+                            "${reviews['average']}",
                               style: TextStyle(
                                 fontSize: 65,
                                 color: Colors.white
                             ),),
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(top: 27,left: 14),
-                          height: MediaQuery.of(context).size.height*.1,
-                          width: MediaQuery.of(context).size.width*.4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                                Text(
-                                  "${reviews['reviews'].length} ${LocaleKeys.comment.tr()}",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold
-                                ),
-                              ),
-                              Container(
-                                height: 45,
-                                width: MediaQuery.of(context).size.width*.35,
-                                child: RaisedButton(
-                                  color: Colors.white,
-                                  child:Text(
-                                   LocaleKeys.write_feedback.tr(),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.orange
-                                  ),
-                                  ),
-                                  onPressed: () async {
-                                    final prefs = await SharedPreferences.getInstance();
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) => FeedbackScreen(widget.route_price_id)
-                                        )
-                                    );
-                                  },
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                      side: BorderSide(
-                                          color: Colors.orange
-                                      )
-                                  ),
-                                ),
-                              )
-                            ],
+                        SizedBox(width: MediaQuery.of(context).size.width*.08),
+                        Center(
+                          child: Text(
+                            "${reviews['average_word']}\n${reviews['reviews'].length} ${LocaleKeys.comment.tr()}",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                height: 1.8,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold
                           ),
+                              ),
                         )
                       ],
                     ),
                   ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => FeedbackScreen(widget.route_price_id)
+                          )
+                      );
+                    },
+                    child: Container(
+                      height: 45,
+                      margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .05),
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width * .8,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.orange
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        LocaleKeys.write_feedback.tr(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 17,
+                            color: Colors.orange
+                        ),
+                      ),
+                    ),
+                  ),
                   Container(
-                    padding: EdgeInsets.only(top: 10),
                     height: 625,
                     child: ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
@@ -279,7 +287,7 @@ class _ReviewsState extends State<Reviews> {
                             LocaleKeys.Overall_rating.tr()
                           ];
                           String text_t = index == 0 ? titles[0] : index == 5 ? titles[1] : index == 7 ? titles[2] : " ";
-                          double h_cal =  index == 5 || index == 7 || index == 0? 85 : 55;
+                          double h_cal =  index == 5 || index == 7 || index == 0? 88 : 55;
                           double rate = (reviews['rate'][index]["score"])/10;
 
                           return Container(
@@ -367,7 +375,7 @@ class _ReviewsState extends State<Reviews> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 10.0, right: 12.0, left: 12.0),
+                              padding: const EdgeInsets.only(top: 10.0, right: 15.0, left: 16.0, bottom: 8.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -408,14 +416,12 @@ class _ReviewsState extends State<Reviews> {
                                 ],
                               ),
                             ),
-
                             Padding(
-                              padding: const EdgeInsets.only(left: 8, top: 0),
+                              padding: const EdgeInsets.only(left: 9, right: 16),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
-                                    width : MediaQuery.of(context).size.width*.5,
+                                  Expanded(
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
@@ -437,21 +443,25 @@ class _ReviewsState extends State<Reviews> {
                                       ],
                                     ),
                                   ),
-                                  FlatButton.icon(
-                                      onPressed: () {},
-                                      icon:  Icon(
-                                        Icons.calendar_today_outlined,
-                                        color: Colors.orange,
-                                      ),
-                                      label: Text(
-                                        reviews['reviews'][index1]["route_date"] == null ? "" :
-                                        '${reviews['reviews'][index1]["route_date"].substring(0,10)}',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle: FontStyle.italic
+                                  Container(
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.calendar_today_outlined,
+                                          color: Colors.orange,
                                         ),
-                                      )
-                                  ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          reviews['reviews'][index1]["route_date"] == null ? "" :
+                                          '${reviews['reviews'][index1]["route_date"].substring(0,10)}',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle: FontStyle.italic
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
@@ -470,10 +480,10 @@ class _ReviewsState extends State<Reviews> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 10,
+                                    height: 15,
                                   ),
                                   Text("${reviews["reviews"][index1]["text"]}",
-                                    maxLines: 12,
+                                    maxLines: 100,
                                     textAlign: TextAlign.justify,
                                     style: TextStyle(
                                         fontSize: 15,
@@ -485,7 +495,6 @@ class _ReviewsState extends State<Reviews> {
                             ),
                           ],
                         ),
-
                       );
                     }).toList(),
                   ),

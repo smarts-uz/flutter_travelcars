@@ -56,37 +56,24 @@ class _SearchResultState extends State<SearchResult> {
   void getSearchResult() async {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/sort");
     if(widget.carCategory > -1) {
-      String time = "${DateFormat('dd.MM.yyyy').format(DateTime.now())}";
-      print(time);
-      /*final result_reverse = await http.post(
-          url,
-          body: {
-            "reverse": "1",
-            "car_models[0]": "${widget.carCategory}",
-            "date_end": time,
-          }
-      );*/
       final result_nonreverse = await http.post(
           url,
           body: {
             "reverse": "0",
+            "city_start": "1",
+            "cities[]": "24",
             "car_models[0]": "${widget.carCategory}",
-            "date_end": time,
             "lang": "${SplashScreen.til}",
           }
       );
 
       print("Non-reverse: ${jsonDecode(result_nonreverse.body)["routes"].toString()}");
-      //print("Reverese: ${jsonDecode(result_reverse.body)["routes"].toString()}");
 
       if(jsonDecode(result_nonreverse.body)["routes"].isNotEmpty) {
         routes.addAll(jsonDecode(result_nonreverse.body)["routes"]);
         refund = jsonDecode(result_nonreverse.body)["commission"] + " " + jsonDecode(result_nonreverse.body)["cur"];
       }
-
-      /*if(jsonDecode(result_reverse.body)["routes"].isNotEmpty) {
-        routes.addAll(jsonDecode(result_reverse.body)["routes"]);
-      }*/
+      refund = jsonDecode(result_nonreverse.body)["commission"] + " " + jsonDecode(result_nonreverse.body)["cur"];
     } else {
       final response = await http.post(
           url,
@@ -160,7 +147,7 @@ class _SearchResultState extends State<SearchResult> {
           LocaleKeys.Results_of_searching.tr(),
           style: TextStyle(
             color: Colors.white,
-            fontSize: 25
+            fontSize: 22
           ),
         ),
         actions: [
@@ -181,7 +168,7 @@ class _SearchResultState extends State<SearchResult> {
       ),
       body: isLoading ? Center(
         child: CircularProgressIndicator(),
-    ) : routes.isEmpty ? Center(
+      ) : routes.isEmpty ? Center(
         child: Text(
           LocaleKeys.No_matching_results_are_found.tr(),
           style: TextStyle(
@@ -198,6 +185,10 @@ class _SearchResultState extends State<SearchResult> {
             icon_numbers.add(car["big_bags"]);
             icon_numbers.add(car["small_bags"]);
             icon_numbers.add(car["doors"]);
+            List<int> indexes_options = [];
+            for(int i = 0; i < options.length; i++) {
+              indexes_options.add(i);
+            }
             return Card(
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -234,7 +225,7 @@ class _SearchResultState extends State<SearchResult> {
                       "${car["title"]}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 28,
+                        fontSize: 23,
                       ),
                     ),
                   ),
@@ -244,7 +235,7 @@ class _SearchResultState extends State<SearchResult> {
                     child: Text(
                       "${LocaleKeys.year_of_issue.tr()}: ${car["year"]}",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 15,
                         color: Colors.grey,
                       ),
                     ),
@@ -255,13 +246,13 @@ class _SearchResultState extends State<SearchResult> {
                     child: Text(
                       "${LocaleKeys.id_number.tr()}: ${car["uid"]}",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 15,
                         color: Colors.grey,
                       ),
                     ),
                   ),
                   Container(
-                    height: 180,
+                    height: 190,
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(vertical: 6, horizontal: 15),
                     decoration: BoxDecoration(
@@ -273,7 +264,7 @@ class _SearchResultState extends State<SearchResult> {
                       fit: BoxFit.cover,)
                         : Image.network(
                         "${AppConfig.image_url}/cars/${car["images"][0]["original"]}",
-                        fit: BoxFit.cover
+                        fit: BoxFit.contain
                     ),
                   ),
                   Container(
@@ -303,60 +294,58 @@ class _SearchResultState extends State<SearchResult> {
                     child: Text(
                       "${LocaleKeys.The_tariff_includes.tr()}:",
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           color: Colors.black,
                           fontWeight: FontWeight.bold
                       ),
                     ),
                   ),
                   if(options.isNotEmpty) Container(
-                    height: options.length * 31.0,
                     width: double.infinity,
-                    padding: EdgeInsets.only(top: 5, bottom: 8, left: 15),
-                    child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: options.length,
-                        itemBuilder: (context, i) => Container(
-                          height: 30,
-                          child: Row(
-                            children: [
-                              Icon(Icons.check, color: Colors.green),
-                              Text(
-                                options[i]["name"],
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontSize: 17
-                                ),
-                              )
-                            ],
-                          ),
-                        )
+                    padding: EdgeInsets.only(top: 5, bottom: 8, left: 15, right: 5),
+                    child: Column(
+                      children: indexes_options.map((i) => Row(
+                        children: [
+                          Icon(Icons.check, color: Colors.green, size: 20,),
+                          Expanded(
+                            child: Text(
+                              options[i]["name"],
+                              textAlign: TextAlign.start,
+                              maxLines: 2,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                height: 1.6
+                              ),
+                            ),
+                          )
+                        ],
+                      ),).toList(),
                     ),
                   ),
                   Container(
                     height: 80,
                     width: double.infinity,
-                    margin: EdgeInsets.all(5),
+                    padding: EdgeInsets.only(left: 3),
                     child: ListTile(
                       title: Text(
                         "${routes[index]["title"]}",
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.left,
                         style: TextStyle(
-                            fontSize: 19,
+                            fontSize: 18,
                             fontWeight: FontWeight.w600
                         ),
                       ),
                       subtitle: Padding(
                         padding: const EdgeInsets.only(top: 4.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Icon(Icons.watch_later_outlined, color: Colors.orange,),
                             SizedBox(width: 8),
                             Text(
                               "${routes[index]["date"]}",
                               style: TextStyle(
-                                fontSize: 17,
+                                fontSize: 18,
                               ),
                             )
                           ],
@@ -365,27 +354,29 @@ class _SearchResultState extends State<SearchResult> {
                     ),
                   ),
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: RichText(
-                        text: TextSpan(
-                          style: TextStyle(
-                            fontSize: 22.0,
-                            color: Colors.black,
-                          ),
-                          children: <TextSpan>[
-                            TextSpan(text: '${LocaleKeys.The_cost_of_the_trip.tr()} '),
-                            TextSpan(text: '${LocaleKeys.for_one_day.tr()}', style: TextStyle(color: Colors.orange)),
-                          ],
+                    padding: EdgeInsets.only(left: 18),
+                    alignment: Alignment.centerLeft,
+                    child: RichText(
+                      textAlign: TextAlign.left,
+                      text: TextSpan(
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.black,
                         ),
+                        children: <TextSpan>[
+                          TextSpan(text: '${LocaleKeys.The_cost_of_the_trip.tr()} '),
+                          TextSpan(text: '${LocaleKeys.for_one_day.tr()}', style: TextStyle(color: Colors.orange)),
+                        ],
                       ),
+                    ),
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(top: 5, left: 18),
+                    alignment: Alignment.centerLeft,
                     child: Text(
                       "${(routes[index]["price"] * app_kurs).toStringAsFixed(2)} ${SplashScreen.kurs}",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 23,
                           color: Colors.black,
                           fontWeight: FontWeight.bold
                       ),
@@ -407,7 +398,7 @@ class _SearchResultState extends State<SearchResult> {
                     child: Container(
                         height: 50,
                         width: MediaQuery.of(context).size.width * 0.9,
-                        margin: EdgeInsets.symmetric(vertical: 10),
+                        margin: EdgeInsets.only(top: 5, bottom: 8),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -419,7 +410,7 @@ class _SearchResultState extends State<SearchResult> {
                         child: Text(
                           LocaleKeys.details.tr(),
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 18,
                             color: Colors.orange,
                           ),
                         )

@@ -185,8 +185,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             Container(
               width: double.infinity,
               height: 45,
-              padding: EdgeInsets.symmetric(horizontal: 18),
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              margin: EdgeInsets.symmetric(horizontal: 13, vertical: 8),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5)
@@ -205,7 +205,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   icon: Icon(Icons.keyboard_arrow_down),
                   value: country,
                   style: TextStyle(
-                      fontSize: 19,
+                      fontSize: 18,
                       color: Colors.black
                   ),
                   isExpanded: true,
@@ -223,8 +223,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               width: double.infinity,
               height: 45,
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 15),
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              margin: EdgeInsets.symmetric(horizontal: 13, vertical: 8),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5)),
@@ -251,7 +251,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   keyboardType: TextInputType.text,
                   cursorColor: Colors.black,
                   style: TextStyle(
-                    fontSize: 19,
+                    fontSize: 18,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w400,
                     fontStyle: FontStyle.normal,
@@ -281,8 +281,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               child: Container(
                 width: double.infinity,
                 height: 45,
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 8),
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(5)),
@@ -292,7 +292,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     Text(
                       "${DateFormat('dd/MM/yyyy').format(_selectedDate2!)}",
                       style: TextStyle(
-                          fontSize: 19
+                          fontSize: 18
                       ),
                     ),
                     Icon(Icons.calendar_today),
@@ -338,7 +338,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 keyboardType: TextInputType.text,
                 cursorColor: Colors.black,
                 style: TextStyle(
-                    fontSize: 20
+                    fontSize: 18
                 ),
                 expands: false,
               ),
@@ -447,7 +447,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 19,
+          fontSize: 18,
           color: Colors.black,
           fontWeight: FontWeight.w500,
           fontFamily: 'Poppins',
@@ -458,38 +458,38 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   }
   Widget _list (List given){
     return Container(
-      height: given.length*80,
+      height: given.length * 68,
       child: ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         itemCount: given.length,
         itemBuilder: (context, index) => Container(
-          padding: EdgeInsets.only(left: 8, bottom: 5, top: 15),
+          height: 68,
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.only(left: 16, bottom: 5, top: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 padding: EdgeInsets.only(bottom: 5),
                 child: Text(
-                    given[index]["title"],
-
-                ),//rate['driver'][index]["title"]
+                  given[index]["title"],
+                  style: TextStyle(
+                    fontSize: 15
+                  ),
+                ),
               ),
-              Container(
-                width: double.infinity,
+              FittedBox(
                 child: RatingBar.builder(
                   maxRating: 10,
                   itemCount: 10,
-                  //unratedColor: Colors.amber.withAlpha(50),
                   itemSize: 35,
                   itemBuilder: (context, _) => Icon(
                     Icons.star_rate_outlined,
                     color: Colors.amber,
                   ),
                   onRatingUpdate: (rating) => {
-                    setState(
-                          () {
-                            given[index]["rating"] = rating;
-                            //print(rating);
+                    setState(() {
+                      given[index]["rating"] = rating;
                       },
                     ),
                   },

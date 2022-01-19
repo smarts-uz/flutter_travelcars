@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
@@ -58,35 +59,36 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-       // height: MediaQuery.of(context).size.height*0.9,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 30,top: 192),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Center(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * .45,
-                    child: Image.asset("assets/images/logo.png"),
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 20,top: 20),
+        child: Center(
+          child: Column(
+            children: [
+              Center(
+                child: Container(
+                  alignment: Alignment.center,
+                  height: MediaQuery.of(context).size.height * .8,
+                  child: Image.asset(
+                    "assets/images/logo.png",
+                    height: 300,
+                    width: 200,
                   ),
                 ),
-                Container(
-                  child: Text(
-                    "2018 - 2021 Travel Cars\n ${LocaleKeys.All_rights_reserved.tr()}",
-                    style: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                        fontFamily: 'Poppins',
-                    ),
-                    textAlign: TextAlign.center,
+              ),
+              Spacer(),
+              Container(
+                child: Text(
+                  "2018 - ${DateFormat('yyyy').format(DateTime.now())} Travel Cars\n ${LocaleKeys.All_rights_reserved.tr()}",
+                  style: TextStyle(
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                      fontFamily: 'Poppins',
                   ),
+                  textAlign: TextAlign.center,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

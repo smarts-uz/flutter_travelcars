@@ -42,6 +42,8 @@ class _DetailScreenState extends State<DetailScreen> {
   int narx_index = 0;
   late String dropdown;
   String overtime_cost = "0 USD";
+  List<int> car_options = [];
+  List<int> route_options = [];
   List<dynamic> narxlar = [];
   List<dynamic> costlar = [];
   List<dynamic> pricelar = [];
@@ -141,6 +143,12 @@ class _DetailScreenState extends State<DetailScreen> {
         "cost": value != null ? value : 0
       });
     });
+    for(int i = 0; i < widget.route_item["car"]['car_options'].length; i++) {
+      car_options.add(i);
+    }
+    for(int i = 0; i < widget.route_item["route_options"].length; i++) {
+      route_options.add(i);
+    }
 
     drawPolyLine();
   }
@@ -208,7 +216,7 @@ class _DetailScreenState extends State<DetailScreen> {
       context: ctx,
       builder: (_) {
         return Container(
-          height: MediaQuery.of(ctx).size.height * 0.3,
+          height: 260,
           margin: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -240,7 +248,7 @@ class _DetailScreenState extends State<DetailScreen> {
       context: ctx,
       builder: (_) {
         return Container(
-          height: MediaQuery.of(ctx).size.height * 0.1,
+          height: 80,
           margin: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -338,7 +346,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 Positioned(
                   right: 25,
-                  bottom: -25,
+                  bottom: -20,
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -387,7 +395,7 @@ class _DetailScreenState extends State<DetailScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: EdgeInsets.only(left: 10, bottom: 3),
+                  padding: EdgeInsets.only(left: 13, bottom: 3),
                   child: Text(
                     "${LocaleKeys.year_of_issue.tr()}: ${results["car"]["year"]}\nID номер: ${results["car"]["uid"]}",
                     style: TextStyle(
@@ -411,7 +419,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       child: Text(
                         "${results["car"]["views"]}",
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 15,
                           color: Colors.grey,
                           fontWeight: FontWeight.w500,
                           fontFamily: 'Poppins',
@@ -423,75 +431,39 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ],
             ),
-            _listWrap(results["car"]['car_options']),
-            if(results["route_options"].isNotEmpty) Container(
-              decoration: BoxDecoration(color: HexColor("#F5F5F6")),
+            Padding(
+              padding: const EdgeInsets.only(left: 13.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 16, top: 10, bottom: 0),
-                    child: Text(
-                      "${LocaleKeys.Included_in_the_tariff.tr()}: ",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 17,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Poppins',
-                        fontStyle: FontStyle.normal,
+                children: car_options.map((e) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Row(
+                    children: [
+                      Image.network(
+                          "${AppConfig.image_url}/car-options/${results["car"]['car_options'][e]["image"]}",
+                        width: 25,
+                        height: 25,
                       ),
-                    ),
-                  ),
-                  Container(
-                    height: results["route_options"].length * 35.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(color: HexColor("#F5F5F6")),
-                    padding: EdgeInsets.only(top: 5, left: 16),
-                    child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      padding: EdgeInsets.zero,
-                      itemCount: results["route_options"].length,
-                      itemExtent: 28,
-                      itemBuilder: (context, i) => Row(
-                        children: [
-                          Icon(Icons.check, color: Colors.green),
-                          SizedBox(
-                            width: 5,
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          results["car"]['car_options'][e]["name"],
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Poppins',
+                            fontStyle: FontStyle.normal,
                           ),
-                          Text(
-                            results["route_options"][i]["name"],
-                            textAlign: TextAlign.start,
-                            style: TextStyle(fontSize: 17),
-                          )
-                        ],
-                      )
-                    ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                )).toList(),
               ),
             ),
-            /*if(widget.points.isNotEmpty) _text(text: "${LocaleKeys.trip_mapp.tr()}"),
-            if(widget.points.isNotEmpty) Container(
-              margin: EdgeInsets.only(left: 16),
-              height: _adresses.length * 30,
-              child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: _adresses.length,
-                  itemExtent: 28,
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (context, index) => Text(
-                    "* ${_adresses[index]}",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 18
-                    ),
-                  )),
-            ),*/
             if(widget.points.isNotEmpty) Container(
               height: MediaQuery.of(context).size.height * 0.45,
-              padding: const EdgeInsets.only(left: 16, right: 16),
+              padding: const EdgeInsets.only(top: 10, left: 16, right: 16),
               width: double.infinity,
               child: GoogleMap(
                 onMapCreated: (GoogleMapController controller) {
@@ -605,6 +577,41 @@ class _DetailScreenState extends State<DetailScreen> {
                 )
               ],
             ),
+            if(results["route_options"].isNotEmpty) Container(
+              decoration: BoxDecoration(color: HexColor("#F5F5F6")),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _text(text: LocaleKeys.Included_in_the_tariff.tr(), top: 8.0),
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(color: HexColor("#F5F5F6")),
+                    padding: EdgeInsets.only(top: 5, left: 16),
+                    child: Column(
+                      children: route_options.map((e) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 2.0),
+                        child: Row(
+                          children: [
+                            Icon(Icons.check, color: Colors.green),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: Text(
+                                results["route_options"][e]["name"],
+                                textAlign: TextAlign.start,
+                                style: TextStyle(fontSize: 17),
+                              ),
+                            )
+                          ],
+                        ),
+                      )).toList(),
+                    )
+                  ),
+                ],
+              ),
+            ),
             _text(text: "${LocaleKeys.choose_the_payment_type.tr()}"),
             Container(
               width: double.infinity,
@@ -629,7 +636,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   icon: Icon(Icons.keyboard_arrow_down),
                   value: selectedVal,
                   style: TextStyle(
-                      fontSize: 19,
+                      fontSize: 17,
                       color: Colors.black
                   ),
                   isExpanded: true,
@@ -644,6 +651,7 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
             Container(
+              height: 45,
               padding: EdgeInsets.only(left: 16),
               child: TextButton(
                 onPressed: () {
@@ -652,7 +660,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: Text(
                   LocaleKeys.Cancellation_terms.tr(),
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 17,
                     color: Colors.red,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Poppins',
@@ -662,6 +670,7 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
             Container(
+              height: 45,
               padding: EdgeInsets.only(left: 16, bottom: 5),
               child: TextButton(
                 onPressed: () {
@@ -670,7 +679,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: Text(
                   LocaleKeys.important_information.tr(),
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 17,
                     color: Colors.orangeAccent,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Poppins',
@@ -689,20 +698,6 @@ class _DetailScreenState extends State<DetailScreen> {
                       pay_key = element["type"];
                     }
                   }
-                  /*switch(selectedVal) {
-                    case "Online payment":
-                      pay_key = "online";
-                      break;
-                    case "Cashless payments":
-                      pay_key = "pay_bank";
-                      break;
-                    case "Cash company":
-                      pay_key = "pay_cash_company";
-                      break;
-                    case "Cash driver":
-                      pay_key = "pay_cash_driver";
-                      break;
-                  }*/
                   if(pay_key.isEmpty) {
                     ToastComponent.showDialog("Choose payment type");
                     return;
@@ -774,7 +769,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: Text(
                     LocaleKeys.book.tr(),
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 20,
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
                       fontFamily: 'Poppins',
@@ -790,9 +785,9 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
-  Widget _text({text}) {
+  Widget _text({text, top = 25.0}) {
     return Container(
-      padding: EdgeInsets.only(left: 15, bottom: 10, top: 20),
+      padding: EdgeInsets.only(left: 13, top: top),
       child: Text(
         text,
         style: TextStyle(
@@ -805,40 +800,21 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
     );
   }
-
-  Widget _listWrap(List wrap) {
-    return Container(
-      height: wrap.length * 27,
-      child: GridView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        itemCount: wrap.length,
-        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-          mainAxisExtent: 50,
-          crossAxisCount: 2,
-          childAspectRatio: 1,
-        ),
-        padding: EdgeInsets.zero,
-        itemBuilder: (context, index) {
-          return Container(
-            alignment: Alignment.topLeft,
-            width: MediaQuery.of(context).size.width * 0.43,
-            child: Chip(
-              backgroundColor: Colors.transparent,
-              avatar: SvgPicture.asset("assets/icons/globus.svg"),
-              label: Text(
-                wrap[index]["name"],
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'Poppins',
-                  fontStyle: FontStyle.normal,
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
 }
+/*if(widget.points.isNotEmpty) _text(text: "${LocaleKeys.trip_mapp.tr()}"),
+            if(widget.points.isNotEmpty) Container(
+              margin: EdgeInsets.only(left: 16),
+              height: _adresses.length * 30,
+              child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: _adresses.length,
+                  itemExtent: 28,
+                  padding: EdgeInsets.zero,
+                  itemBuilder: (context, index) => Text(
+                    "* ${_adresses[index]}",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 18
+                    ),
+                  )),
+            ),*/

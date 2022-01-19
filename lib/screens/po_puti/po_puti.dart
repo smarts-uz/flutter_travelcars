@@ -235,7 +235,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                         width: MediaQuery.of(context).size.width * 0.3,
                         margin: EdgeInsets.all(10),
                         child: Image.network(
-                          "${AppConfig.image_url}/onways/${ways[index]["image"]}",
+                          "${AppConfig.image_url}/Onways/${ways[index]["image"]}",
                           fit: BoxFit.cover,),
                       ),
                       Expanded(
