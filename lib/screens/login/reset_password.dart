@@ -50,8 +50,8 @@ class _ResetPasswordState extends State<ResetPassword> {
             children: [
               SizedBox(height: 20),
               Text(
-                "${LocaleKeys.enter_your_email_or_number.tr()}\n ${LocaleKeys.phone_and_we_will_send_code_to_reset_your_password.tr()} ",
-                textAlign: TextAlign.center,
+                "${LocaleKeys.enter_your_email_or_number.tr()}",
+                textAlign: TextAlign.justify,
                 style: TextStyle(
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w400,

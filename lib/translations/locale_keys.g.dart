@@ -43,7 +43,6 @@ abstract class  LocaleKeys {
   static const submit_your_application = 'submit_your_application';
   static const see_all = 'see_all';
   static const authorization = 'authorization';
-  static const login_or_register_to = 'login_or_register_to';
   static const cashback = 'cashback';
   static const You_are_assigned_percentage_of = 'You_are_assigned_percentage_of';
   static const you_have_been_credited_with_cashback_in_the_amount_of = 'you_have_been_credited_with_cashback_in_the_amount_of';
@@ -59,7 +58,6 @@ abstract class  LocaleKeys {
   static const Register_now = 'Register_now';
   static const Restore_password = 'Restore_password';
   static const enter_your_email_or_number = 'enter_your_email_or_number';
-  static const phone_and_we_will_send_code_to_reset_your_password = 'phone_and_we_will_send_code_to_reset_your_password';
   static const next = 'next';
   static const Password_reset = 'Password_reset';
   static const create_new_password = 'create_new_password';
@@ -127,7 +125,6 @@ abstract class  LocaleKeys {
   static const overall_score = 'overall_score';
   static const leave_feedback = 'leave_feedback';
   static const post_reviews = 'post_reviews';
-  static const publish = 'publish';
   static const upload = 'upload';
   static const Create_advert = 'Create_advert';
   static const Camera = 'Camera';
@@ -148,7 +145,6 @@ abstract class  LocaleKeys {
   static const Sort = 'Sort';
   static const Nothing_found = 'Nothing_found';
   static const for_one_day = 'for_one_day';
-  static const Confirmation_requires = 'Confirmation_requires';
   static const Instant_confirmation = 'Instant_confirmation';
   static const trip_mapp = 'trip_mapp';
   static const test_server = 'test_server';

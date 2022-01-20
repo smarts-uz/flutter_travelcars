@@ -187,10 +187,12 @@ class _HomeScreenState extends State<HomeScreen> {
       Uri url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=${HomeScreen.city[i]}&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
       var response = await http.get(url);
       if(jsonDecode(response.body)["cod"] == "404") {
-        Uri another_url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=Jizzax&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
+        print("Error: ${HomeScreen.city[i]}");
+        Uri another_url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=${HomeScreen.city[i] == "Жиззах" || HomeScreen.city[i] == "Джизакс" ? "Jizzax" : "Qarshi"}&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
         final another_response = await http.get(another_url);
         weather["${HomeScreen.city[i]}"] = json.decode(another_response.body)["main"]["temp"].round();
       } else {
+        print("Success: ${HomeScreen.city[i]}");
         weather["${HomeScreen.city[i]}"] = json.decode(response.body)["main"]["temp"].round();
       }
     }
