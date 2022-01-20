@@ -219,5 +219,7 @@
   "unpaid": "Unpaid",
   "no_image": "Pick a image",
   "phone": "Phone",
-  "code": "Code"
+  "code": "Code",
+  "important1": "Overtime in 1 hour",
+  "important2": "Bank transfer fee"
 }

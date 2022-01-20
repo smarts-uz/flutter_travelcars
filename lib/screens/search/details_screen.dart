@@ -264,7 +264,7 @@ class _DetailScreenState extends State<DetailScreen> {
               Divider(),
               Text(
                 //'${widget.route_item["company"]["important"]}',
-                "Овертайм за 1 час – $overtime_cost\nКомиссия за банковский перевод - ${widget.refund}",
+                "${LocaleKeys.important1} – $overtime_cost\n${LocaleKeys.important2} - ${widget.refund}",
                 textAlign: TextAlign.justify,
                 maxLines: 5,
                 style: TextStyle(
@@ -448,7 +448,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         child: Text(
                           results["car"]['car_options'][e]["name"],
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 17,
                             color: Colors.black,
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Poppins',

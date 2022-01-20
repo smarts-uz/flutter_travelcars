@@ -235,7 +235,9 @@ class CodegenLoader extends AssetLoader{
   "unpaid": "Unpaid",
   "no_image": "Pick a image",
   "phone": "Phone",
-  "code": "Code"
+  "code": "Code",
+  "important1": "Overtime in 1 hour",
+  "important2": "Bank transfer fee"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги по всем городам Узбекистана: экскурсионные и бизнес-поездки",
@@ -261,7 +263,7 @@ static const Map<String,dynamic> ru = {
   "details": "Подробно",
   "id_number": "ID номер",
   "important_information ": "Важная информация",
-  "year_of_issue": "Год выпуска:",
+  "year_of_issue": "Год выпуска",
   "add_route": "Добавить маршрут",
   "about_route": "Маршрут – путь следования туриста, включающий посещение объектов, географических пунктов и мест при совершении путешествия.",
   "about_transfer": "Трансфер — это услуга, которая предоставляется для удобства гостей, то есть встреча в аэропорту или на вокзале, и доставка их в отель и обратно в аэропорт или на вокзал.",
@@ -345,7 +347,7 @@ static const Map<String,dynamic> ru = {
   "change_password": "Изменение пароля",
   "No_car_categories_are_found": "Категории автомобилей не найдены",
   "travel_cost_for": "Стоимость поездки за",
-  "choose_the_payment_type": "Как Вам удобнее оплачивать",
+  "choose_the_payment_type": "Как вам удобнее оплачивать",
   "Payment": "Оплата",
   "book": "Бронировать",
   "Setting_the_language_and_course": "Настройка языка и курса",
@@ -458,7 +460,9 @@ static const Map<String,dynamic> ru = {
   "unpaid": "Не оплачено",
   "no_image": "Выберите изображение",
   "phone": "Телефон",
-  "code": "Код"
+  "code": "Код",
+  "important1": "Овертайм за 1 час",
+  "important2": "Комиссия за банковский перевод"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Ўзбекистоннинг барча шаҳарлари ўртасида транспорт хизматлари: саёҳат ва бизнес",
@@ -480,7 +484,7 @@ static const Map<String,dynamic> uz = {
   "By_capacity": "Сиғими бўйича",
   "Auto_types": "Автомобиль турлари",
   "Sort_by_result": "Излаш натижалари",
-  "year_of_issue": "Чиқарилган йили:",
+  "year_of_issue": "Чиқарилган йили",
   "id_number": "ИД рақами:",
   "important_information ": "Муҳим маълумотлар",
   "confirmation_requires": "Тасдиқлаш талаб қилинади",
@@ -681,7 +685,9 @@ static const Map<String,dynamic> uz = {
   "unpaid": "Тўланмаган",
   "no_image": "Rasm yuklang",
   "phone": "Telefon",
-  "code": "Kod"
+  "code": "Kod",
+  "important1": "Овертайм (бир соат учун)",
+  "important2": "Банк орқали ўтказма учун комиссия"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

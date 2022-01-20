@@ -18,7 +18,7 @@
   "By_capacity": "Сиғими бўйича",
   "Auto_types": "Автомобиль турлари",
   "Sort_by_result": "Излаш натижалари",
-  "year_of_issue": "Чиқарилган йили:",
+  "year_of_issue": "Чиқарилган йили",
   "id_number": "ИД рақами:",
   "important_information ": "Муҳим маълумотлар",
   "confirmation_requires": "Тасдиқлаш талаб қилинади",
@@ -219,5 +219,7 @@
   "unpaid": "Тўланмаган",
   "no_image": "Rasm yuklang",
   "phone": "Telefon",
-  "code": "Kod"
+  "code": "Kod",
+  "important1": "Овертайм (бир соат учун)",
+  "important2": "Банк орқали ўтказма учун комиссия"
 }

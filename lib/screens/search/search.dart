@@ -173,7 +173,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       directions[index],
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 19,
+                        fontSize: 18,
                       ),
                       maxLines: 2,
                     ),
@@ -196,7 +196,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   hint: Text(
                       LocaleKeys.city.tr(),
                       style: TextStyle(
-                          fontSize: 19,
+                          fontSize: 18,
                           color: Colors.black
                       )
                   ),
@@ -204,7 +204,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   icon: Icon(Icons.keyboard_arrow_down),
                   value: SearchScreen.SelectedVal1,
                   style: TextStyle(
-                      fontSize: 19,
+                      fontSize: 18,
                       color: Colors.black
                   ),
                   isExpanded: true,
@@ -233,7 +233,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   hint: Text(
                       LocaleKeys.city.tr(),
                       style: TextStyle(
-                          fontSize: 19,
+                          fontSize: 18,
                           color: Colors.black
                       )
                   ),
@@ -242,7 +242,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   value: SearchScreen.SelectedVal2,
                   isExpanded: true,
                   style: TextStyle(
-                      fontSize: 19,
+                      fontSize: 18,
                       color: Colors.black
                   ),
                   underline: SizedBox(),
@@ -287,7 +287,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     Text(
                       "${DateFormat('dd/MM/yyyy').format(_selectedDate1!)}",
                       style: TextStyle(
-                        fontSize: 19
+                        fontSize: 18
                       ),
                     ),
                     Icon(Icons.calendar_today),
@@ -327,7 +327,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     Text(
                       "${DateFormat('dd/MM/yyyy').format(_selectedDate2!)}",
                       style: TextStyle(
-                        fontSize: 19
+                        fontSize: 18
                       ),
                     ),
                     Icon(Icons.calendar_today),
@@ -368,7 +368,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 controller: number_controller,
                 cursorColor: Colors.black,
                 style: TextStyle(
-                  fontSize: 19
+                  fontSize: 17
                 ),
                 expands: false,
                 maxLines: 1,
@@ -406,7 +406,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       sort[index],
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 17,
                       ),
                     ),
                   ],
@@ -434,7 +434,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: Text(
                       "50",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold,
                       ),
                    ),
@@ -476,7 +476,7 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Text(
                 LocaleKeys.Auto_types.tr(),
                 style: TextStyle(
-                  fontSize: 23,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -499,7 +499,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           Text(
                             "${autoTypes[index]["name"]}",
                             style: TextStyle(
-                              fontSize: 19,
+                              fontSize: 17,
                             ),
                           ),
                            Icon(
@@ -580,7 +580,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: Text(
                   LocaleKeys.Clear_data.tr(),
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 21,
                     fontWeight: FontWeight.bold,
                     color: Colors.red
                   ),
@@ -728,7 +728,7 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Text(
               "${boxes[index]["name"]}",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 17,
               ),
             ),
           ),
