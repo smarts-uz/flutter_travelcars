@@ -148,7 +148,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               height: 45,
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 15),
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              margin: EdgeInsets.symmetric(horizontal: 13, vertical: 8),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5)),
@@ -156,6 +156,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 autovalidateMode: AutovalidateMode.always,
                 decoration: InputDecoration(
                   hintText: "${LocaleKeys.name.tr()}",
+                  hintStyle: TextStyle(
+                    color: Colors.black,
+                  ),
                   hintMaxLines: 3,
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
@@ -234,6 +237,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   autovalidateMode: AutovalidateMode.always,
                   decoration: InputDecoration(
                     hintText: "Название маршрута",
+                    hintStyle: TextStyle(
+                      color: Colors.black,
+                    ),
                     hintMaxLines: 3,
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
