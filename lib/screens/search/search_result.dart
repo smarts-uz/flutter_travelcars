@@ -23,7 +23,7 @@ class SearchResult extends StatefulWidget {
   SearchResult({
     this.search_body = const {},
     this.carCategory = -1,
-    this.cityTour = -1,
+    this.cityTour = 1,
     this.CityStart = "",
     this.CityEnd = "",
   });
