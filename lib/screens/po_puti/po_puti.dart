@@ -167,9 +167,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                     trailing: Icon(Icons.calendar_today),
                   ),
                 ),
-                Expanded(
-                  child: SizedBox(),
-                ),
+                Spacer(),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 35, horizontal: 25),
                   decoration: BoxDecoration(
@@ -262,28 +260,26 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 20),
-                      child: Expanded(
-                        child: RichText(
-                            text: TextSpan(
-                                style: TextStyle(
-                                    fontSize: 19,
-                                    height: 1.7,
-                                    color: Colors.black
-                                ),
-                                children: [
-                                  TextSpan(text: "${LocaleKeys.From.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                  TextSpan(text: "${ways[index]["address1"]}\n"),
-                                  TextSpan(text: "${LocaleKeys.To.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                  TextSpan(text: "${ways[index]["address2"]}\n"),
-                                  TextSpan(text: "${LocaleKeys.Date.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                  TextSpan(text: "${ways[index]["date"]}\n"),
-                                  TextSpan(text: "${LocaleKeys.Time.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                  TextSpan(text: "${ways[index]["time"].substring(0, 5)}\n"),
-                                  TextSpan(text: "${LocaleKeys.Car_type.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                  TextSpan(text: "${ways[index]["model_car"]}"),
-                                ]
-                            )
-                        ),
+                      child: RichText(
+                          text: TextSpan(
+                              style: TextStyle(
+                                  fontSize: 19,
+                                  height: 1.7,
+                                  color: Colors.black
+                              ),
+                              children: [
+                                TextSpan(text: "${LocaleKeys.From.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(text: "${ways[index]["address1"]}\n"),
+                                TextSpan(text: "${LocaleKeys.To.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(text: "${ways[index]["address2"]}\n"),
+                                TextSpan(text: "${LocaleKeys.Date.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(text: "${ways[index]["date"]}\n"),
+                                TextSpan(text: "${LocaleKeys.Time.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(text: "${ways[index]["time"].substring(0, 5)}\n"),
+                                TextSpan(text: "${LocaleKeys.Car_type.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(text: "${ways[index]["model_car"]}"),
+                              ]
+                          )
                       ),
                     ),
                     ways[index]["user_id"] != user_id ? GestureDetector(
