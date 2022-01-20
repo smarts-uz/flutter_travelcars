@@ -420,7 +420,6 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               color: Color.fromRGBO(245, 245, 246, 1),
               padding: EdgeInsets.all(8),
-              height: 85,
               width: double.infinity,
               child: Text(
                 LocaleKeys.home_screen_Transport_services.tr(),

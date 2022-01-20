@@ -168,6 +168,8 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                   SearchScreen.SelectedVal2 = null;
                   HomeScreen.city = [];
                   HomeScreen.SelectedVal = null;
+                  HomeScreen.options_list = [];
+                  HomeScreen.tariff_list = [];
 
                   if(testServer) {
                     AppConfig.url = "http://userapp.travelcars.teampro.uz";

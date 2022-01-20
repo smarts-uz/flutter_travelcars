@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 import '../../app_config.dart';
@@ -90,7 +91,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   void initState() {
     super.initState();
     HomeScreen.countries_list.forEach((element){
-      api_countries.add(element["country_name"]);
+      SplashScreen.til == "en" ? api_countries.add(element["country_name"]) : api_countries.add(element["country_name_ru"]);
     });
     countries = api_countries.map((String value) => DropdownMenuItem<String>(
         value: value,

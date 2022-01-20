@@ -75,7 +75,11 @@ class _SearchScreenState extends State<SearchScreen> {
 
   void getcities() {
     HomeScreen.city_list.forEach((element) {
-      city.add(element["name"]);
+      if(element["name"] != null) {
+        city.add(element["name"]);
+      } else {
+        return;
+      }
     });
     cities = city.map(
           (String value) => DropdownMenuItem<String>(
@@ -86,7 +90,11 @@ class _SearchScreenState extends State<SearchScreen> {
 
     HomeScreen.city_list.forEach((element) {
       if(!(element["city_id"] >= 20 && element["city_id"] <= 24)) {
-        city_start.add(element["name"]);
+        if(element["name"] != null) {
+          city_start.add(element["name"]);
+        } else {
+          return;
+        }
       }
     });
     cities_start = city_start.map((String value) =>
@@ -100,14 +108,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    /*double catHeight = 0;
-    chosen_types = [];
-    autoTypes.forEach((element) {
-      if(element["chosen"]) {
-        chosen_types.add(element);
-        catHeight += categories["${element["name"]}"].length * 33.0 + 30.0;
-      }
-    });*/
     return Scaffold(
       appBar: AppBar(
         leading: widget.isDrawer ? IconButton(
@@ -149,18 +149,7 @@ class _SearchScreenState extends State<SearchScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(height: 10),
-           /*Container(
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 20, top: 15),
-              child: Text(
-                LocaleKeys.Search.tr(),
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            widget.isDrawer*/ true ? Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [0, 1].map((int index) => Container(
@@ -185,35 +174,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 19,
-                      ),
-                      maxLines: 2,
-                    ),
-                  ],
-                ),
-              )).toList(),
-            ) : Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [0, 1].map((int index) => Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width * .5,
-                padding: EdgeInsets.symmetric(horizontal: 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Radio<int>(
-                      value: index,
-                      groupValue: _radioVal1,
-                      onChanged: (int? value) {
-                        if (value != null) {
-                          setState(() => _radioVal1 = value);
-                          print(value);
-                        }},
-                    ),
-                    Text(
-                      directions[index],
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        fontSize: 20,
                       ),
                       maxLines: 2,
                     ),
