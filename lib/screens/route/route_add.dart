@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 import '../../app_config.dart';
 
@@ -334,10 +335,11 @@ class _RouteAddState extends State<RouteAdd> {
                         "address": "${element["controllers2"][1].text}",
                       });
                     });
+                    String empty_gap = " ";
                     info.forEach((element) {
                       element.forEach((key, value) {
                         if(value == "") {
-                          print(key);
+                          empty_gap = key;
                           isValid = false;
                         }
                       });
@@ -397,6 +399,7 @@ class _RouteAddState extends State<RouteAdd> {
                         });
                         ind++;
                       });
+                      ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}: $empty_gap");
                     }
                   } else {
                     Dialogs.LoginDialog(context);

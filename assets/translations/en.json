@@ -90,7 +90,7 @@
   "bookings": "Bookings",
   "no_booking_found": "No bookings found",
   "status": "Status",
-  "come_in": "Enter",
+  "come_in": "Logout",
   "The_choice_of_social_networks": "The choice of social networks",
   "Select_social_network_through_which_we_can_contact_you": "Select a social network through which we can contact you",
   "profile": "Profile",
@@ -136,7 +136,7 @@
   "Quantity_": "Seats (with luggage):",
   "Quantity": "Seats (without luggage):",
   "name": "Name",
-  "Phone": "Phone",
+  "Phone": "Phone withe code or e-mail",
   "comment": "Comment",
   "Along_the_way": "Along the way",
   "sorting": "Sorting",
@@ -216,5 +216,8 @@
   "poputi1": "Now you can reach your destination in a passing cars for less money and faster, or send your parcels or mail through trusted drivers. And if you are a driver, and you are leaving from one point to another, and you have an opportunity to pick up passengers or deliver a parcel / mail, etc., then you can add your trip below.",
   "poputi2": "(In order to change or delete the itinerary of your trip, you must click on the Login button and register).",
   "review": "reviews",
-  "unpaid": "Unpaid"
+  "unpaid": "Unpaid",
+  "no_image": "Pick a image",
+  "phone": "Phone",
+  "code": "Code"
 }

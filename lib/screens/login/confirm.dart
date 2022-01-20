@@ -88,7 +88,7 @@ class _ConfirmState extends State<Confirm> {
                   obscureText: show,
                   autovalidateMode: AutovalidateMode.always,
                   decoration:  InputDecoration(
-                    hintText: "Код",
+                    hintText: LocaleKeys.code.tr(),
                     suffixIcon: IconButton(
                       onPressed: () {
                         setState(() {
@@ -121,11 +121,15 @@ class _ConfirmState extends State<Confirm> {
               Spacer(),
               GestureDetector(
                 onTap: () async {
+                  if(_emailController.text.isEmpty) {
+                    ToastComponent.showDialog(LocaleKeys.TextField_is_empty.tr());
+                    return;
+                  }
                   String url = "${AppConfig.BASE_URL}/verify";
                   final result = await http.post(
                       Uri.parse(url),
                       body: {
-                      'user_id': widget.id.toString(),
+                        'user_id': widget.id.toString(),
                         'code': '${_emailController.text}',
                       }
                   );

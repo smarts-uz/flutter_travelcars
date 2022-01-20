@@ -163,7 +163,7 @@ class _SignUpState extends State<SignUp> {
                     child: TextFormField(
                       autovalidateMode: AutovalidateMode.always,
                       decoration:  InputDecoration(
-                        hintText: "${LocaleKeys.Phone.tr()}(998) ${LocaleKeys.or.tr()} e-mail",
+                        hintText: LocaleKeys.Phone.tr(),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.white,

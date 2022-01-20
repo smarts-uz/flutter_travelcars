@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/login/set_password.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 import '../../app_config.dart';
+import 'components/toast.dart';
 
 class ResetPassword extends StatefulWidget {
 
@@ -71,7 +72,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 child: TextFormField(
                   autovalidateMode: AutovalidateMode.always,
                   decoration:  InputDecoration(
-                    hintText: "${LocaleKeys.Phone.tr()}(998) ${LocaleKeys.or.tr()} e-mail",
+                    hintText: LocaleKeys.Phone.tr(),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.white,
@@ -97,6 +98,10 @@ class _ResetPasswordState extends State<ResetPassword> {
               Spacer(),
               GestureDetector(
                 onTap: () async {
+                  if(_emailController.text.isEmpty) {
+                    ToastComponent.showDialog(LocaleKeys.TextField_is_empty.tr());
+                    return;
+                  }
                   String url = "${AppConfig.BASE_URL}/password/forgot";
                   final result = await http.post(
                       Uri.parse(url),

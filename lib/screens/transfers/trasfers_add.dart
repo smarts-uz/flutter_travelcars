@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
+import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 
@@ -455,10 +456,11 @@ class _TransfersAddState extends State<TransfersAdd> {
                         "additional": "${element["controllers4"][3].text}",
                       });
                     });
+                    String empty_gap = " ";
                     info.forEach((element) {
                       element.forEach((key, value) {
                         if(value == "") {
-                          print(key);
+                          empty_gap = key;
                           isValid = false;
                         }
                       });
@@ -481,6 +483,8 @@ class _TransfersAddState extends State<TransfersAdd> {
                       } catch (error) {
                         Dialogs.ErrorDialog(context);
                       }
+                    } else {
+                      ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}: $empty_gap");
                     }
                   } else {
                     Dialogs.LoginDialog(context);

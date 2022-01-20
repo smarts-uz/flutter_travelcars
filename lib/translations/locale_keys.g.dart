@@ -219,5 +219,8 @@ abstract class  LocaleKeys {
   static const poputi2 = 'poputi2';
   static const review = 'review';
   static const unpaid = 'unpaid';
+  static const no_image = 'no_image';
+  static const phone = 'phone';
+  static const code = 'code';
 
 }

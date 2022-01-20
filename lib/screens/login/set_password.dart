@@ -153,9 +153,14 @@ class _SetPasswordState extends State<SetPassword> {
               Spacer(),
               GestureDetector(
                 onTap: () async {
+                  if(_newPasswordController.text.isEmpty) {
+                    ToastComponent.showDialog(LocaleKeys.TextField_is_empty.tr());
+                    return;
+                  }
                   final prefs = await SharedPreferences.getInstance();
                   String url = "${AppConfig.BASE_URL}/password/reset";
                   String token = json.decode(prefs.getString('userData')!)["token"];
+
 
                   if(_newPasswordController.text == _passwordController.text){
                     try{

@@ -318,7 +318,7 @@ class _TripItemState extends State<TripItem> {
                     info.forEach((key, value) {
                       if(value == null || value == "") {
                         isValid = false;
-                        ToastComponent.showDialog("Write $key");
+                        ToastComponent.showDialog("${LocaleKeys.TextField_is_empty} $key");
                       }
                     });
                     print(info);

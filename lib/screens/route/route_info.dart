@@ -120,7 +120,7 @@ class RouteInfo extends StatelessWidget {
                       ),
                       TextSpan(text: '${info['user_email']}\n'),
                       TextSpan(
-                          text: '${LocaleKeys.Phone.tr()}: ',
+                          text: '${LocaleKeys.phone.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
                       TextSpan(text: '${info['user_phone']}\n'),

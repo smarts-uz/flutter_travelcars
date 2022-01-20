@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         title: Text(
-          LocaleKeys.come_in.tr(),
+          LocaleKeys.entered.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 23,
@@ -53,7 +53,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 Spacer(),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_)=>SignIn()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => SignIn()
+                        )
+                    );
                   },
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .1),

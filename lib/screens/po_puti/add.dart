@@ -10,6 +10,7 @@ import 'package:travelcars/app_config.dart';
 import 'package:travelcars/dialogs.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/screens/po_puti/po_puti.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
@@ -220,7 +221,7 @@ class _AddScreenState extends State<AddScreen> {
                 TFF("${LocaleKeys.Quantity_.tr()}", text_controllers[3], 45, true),
                 TFF("${LocaleKeys.Quantity.tr()}", text_controllers[4], 45, true),
                 TFF("${LocaleKeys.name.tr()}", text_controllers[5], 45, false),
-                TFF("${LocaleKeys.Phone.tr()}", text_controllers[6], 45, true),
+                TFF("${LocaleKeys.phone.tr()}", text_controllers[6], 45, true),
                 TFF("${LocaleKeys.comment.tr()}", text_controllers[7], 110, false),
                 Row(
                   children: [
@@ -334,12 +335,12 @@ class _AddScreenState extends State<AddScreen> {
                       FocusScope.of(context).unfocus();
                       for(int i = 0; i< text_controllers.length; i++) {
                         if(text_controllers[i].text == null || text_controllers[i].text == "") {
-                          print(i);
+                          ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}: $i");
                           return;
                         }
                       }
                       if(_pickedImage == null && widget.way_item.isEmpty) {
-                        print("no_image");
+                        ToastComponent.showDialog(LocaleKeys.no_image.tr());
                         return;
                       }
                       final prefs = await SharedPreferences.getInstance();

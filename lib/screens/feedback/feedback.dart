@@ -447,7 +447,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 18,
+          fontSize: 20,
           color: Colors.black,
           fontWeight: FontWeight.w500,
           fontFamily: 'Poppins',
@@ -458,12 +458,12 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   }
   Widget _list (List given){
     return Container(
-      height: given.length * 68,
+      height: given.length * 73,
       child: ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         itemCount: given.length,
         itemBuilder: (context, index) => Container(
-          height: 68,
+          height: 73,
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.only(left: 16, bottom: 5, top: 5),
           child: Column(
@@ -474,7 +474,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 child: Text(
                   given[index]["title"],
                   style: TextStyle(
-                    fontSize: 15
+                    fontSize: 17
                   ),
                 ),
               ),

@@ -106,7 +106,7 @@ class CodegenLoader extends AssetLoader{
   "bookings": "Bookings",
   "no_booking_found": "No bookings found",
   "status": "Status",
-  "come_in": "Enter",
+  "come_in": "Logout",
   "The_choice_of_social_networks": "The choice of social networks",
   "Select_social_network_through_which_we_can_contact_you": "Select a social network through which we can contact you",
   "profile": "Profile",
@@ -152,7 +152,7 @@ class CodegenLoader extends AssetLoader{
   "Quantity_": "Seats (with luggage):",
   "Quantity": "Seats (without luggage):",
   "name": "Name",
-  "Phone": "Phone",
+  "Phone": "Phone withe code or e-mail",
   "comment": "Comment",
   "Along_the_way": "Along the way",
   "sorting": "Sorting",
@@ -232,7 +232,10 @@ class CodegenLoader extends AssetLoader{
   "poputi1": "Now you can reach your destination in a passing cars for less money and faster, or send your parcels or mail through trusted drivers. And if you are a driver, and you are leaving from one point to another, and you have an opportunity to pick up passengers or deliver a parcel / mail, etc., then you can add your trip below.",
   "poputi2": "(In order to change or delete the itinerary of your trip, you must click on the Login button and register).",
   "review": "reviews",
-  "unpaid": "Unpaid"
+  "unpaid": "Unpaid",
+  "no_image": "Pick a image",
+  "phone": "Phone",
+  "code": "Code"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги по всем городам Узбекистана: экскурсионные и бизнес-поездки",
@@ -372,7 +375,7 @@ static const Map<String,dynamic> ru = {
   "Quantity_": "Кол. мест (с багажом):",
   "Quantity": "Кол. мест (без багажа):",
   "name": "Имя",
-  "Phone": "Телефон",
+  "Phone": "Телефон с кодом или е-майл",
   "comment": "Комментарии",
   "Along_the_way": "По пути",
   "sorting": "Сортировка",
@@ -452,7 +455,10 @@ static const Map<String,dynamic> ru = {
   "poputi1": "Теперь Вы можете доехать до пункта назначения на попутной машине за меньшие деньги и быстрее, или же отправить ваши посылки или почту через проверенных водителей. А если Вы водитель, и выезжаете из одной точки в другую, и у вас есть возможность забрать людей или доставить посылку / почту и т.д., то Вы можете добавить ниже свой маршрут поездки.",
   "poputi2": "(Для того чтобы «изменить» или «удалить» маршрут вашей поездки, Вы должны нажать на кнопку «Войти» или сделать «Вход» и пройти регистрацию).",
   "review": "отзывов",
-  "unpaid": "Не оплачено"
+  "unpaid": "Не оплачено",
+  "no_image": "Выберите изображение",
+  "phone": "Телефон",
+  "code": "Код"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Ўзбекистоннинг барча шаҳарлари ўртасида транспорт хизматлари: саёҳат ва бизнес",
@@ -546,7 +552,7 @@ static const Map<String,dynamic> uz = {
   "bookings": "Бронлар",
   "no_booking_found": "Ҳеч қандай бронь топилмади",
   "status": "Ҳолат",
-  "come_in": "Кириш",
+  "come_in": "Чиқиш",
   "The_choice_of_social_networks": "Ижтимоий тармоқларни танлаш",
   "Select_social_network_through_which_we_can_contact_you": "Сиз билан боғланишимиз мумкин бўлган ижтимоий тармоқни танланг",
   "profile": "Профиль",
@@ -592,7 +598,7 @@ static const Map<String,dynamic> uz = {
   "Quantity_": "Ўриндиқлар (юксиз)",
   "Quantity": "Ўриндиқлар (юк билан)",
   "name": "Исм",
-  "Phone": "Телефон",
+  "Phone": "Телефон коди билан ёки э-маил",
   "comment": "Изоҳ",
   "Along_the_way": "Йўл-йўлакай",
   "sorting": "Тартиблаш",
@@ -672,7 +678,10 @@ static const Map<String,dynamic> uz = {
   "poputi1": "Энди сиз йўл-йўлакай кетаётган машиналарда манзилингизгача арзонроқ ва тезроқ етиб олишингиз, ҳамда ишончли ҳайдовчилар орқали почта ёки муайян буюмларингизни бериб юборишингиз мумкин.Агар сиз ҳайдовчи бўлсангиз ва бир манзилдан бошқасига кетаётган бўлсангиз, ҳамда сизда ўзингиз билан йўловчиларни олиб кетиш ёки почта / муайян буюмларни етказиб бериш имконияти мавжуд бўлса, у ҳолда сафарингиз йўналишини қўшишингиз мумкин.",
   "poputi2": "(Сафарингиз йўналишини “ўзгартириш” ёки “ўчириш” учун “Кириш” тугмасини босиб рўйхатдан ўтишингиз керак).",
   "review": "фикр",
-  "unpaid": "Тўланмаган"
+  "unpaid": "Тўланмаган",
+  "no_image": "Rasm yuklang",
+  "phone": "Telefon",
+  "code": "Kod"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

@@ -40,7 +40,7 @@ class _SignInState extends State<SignIn> {
           ),
         ),
         title: Text(
-          LocaleKeys.come_in.tr(),
+          LocaleKeys.entered.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 23,
@@ -73,7 +73,7 @@ class _SignInState extends State<SignIn> {
                 child: TextFormField(
                   autovalidateMode: AutovalidateMode.always,
                   decoration:  InputDecoration(
-                    hintText: "${LocaleKeys.Phone.tr()}(998) ${LocaleKeys.or.tr()} e-mail",
+                    hintText: LocaleKeys.Phone.tr(),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.white,
@@ -142,6 +142,10 @@ class _SignInState extends State<SignIn> {
               Spacer(),
               GestureDetector(
                 onTap: () async {
+                  if(_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+                    ToastComponent.showDialog(LocaleKeys.TextField_is_empty.tr());
+                    return;
+                  }
                   String url = "${AppConfig.BASE_URL}/login";
                   final result = await http.post(
                     Uri.parse(url),
@@ -205,7 +209,7 @@ class _SignInState extends State<SignIn> {
                   margin: EdgeInsets.symmetric(horizontal: 30),
                   child: Center(
                     child: Text(
-                      LocaleKeys.come_in.tr(),
+                      LocaleKeys.entered.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
