@@ -42,45 +42,45 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   {
     'driver': [
       {
-        "title": "Пунктуальность",
+        "title": LocaleKeys.punctuality.tr(),
         "rating": 0
       },
       {
-        "title": "Вождение автомобиля",
+        "title": LocaleKeys.car_driving.tr(),
         "rating": 0
       },
       {
-        "title": "Знание ПДД",
+        "title": LocaleKeys.knowledge_of_traffic.tr(),
         "rating": 0
       },
       {
-        "title": "Ориентировка на местность",
+        "title": LocaleKeys.Terrain_orientation.tr(),
         "rating": 0
       },
       {
-        "title": "Знание языка",
+        "title": LocaleKeys.Knowledge_of_the_language.tr(),
         "rating": 0
       },
     ],
 
     'car':[
       {
-        "title": "Чистота/запах в салоне",
+        "title": LocaleKeys.Cleanliness_smell_in_the_cabin.tr(),
         "rating": 0
       },
       {
-        "title": "Удобства в салоне",
+        "title": LocaleKeys.Amenities_in_the_salon.tr(),
         "rating": 0
       },
     ],
 
     'all':[
       {
-        "title": "Профессионализм водителя",
+        "title": LocaleKeys.Level_of_professionalism_of_the_driver.tr(),
         "rating": 0
       },
       {
-        "title": "Соотношение цена/качество",
+        "title": LocaleKeys.Price_quality_ratio.tr(),
         "rating": 0
       },
     ]

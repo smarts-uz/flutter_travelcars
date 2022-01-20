@@ -372,6 +372,16 @@ class _ReviewsState extends State<Reviews> {
                         }
                       });
                       sumper /= 9;
+                      String? sumper_word;
+                      if(sumper>=9) {
+                        sumper_word = LocaleKeys.excellent.tr();
+                      } else if(sumper>=6 && sumper < 9) {
+                        sumper_word = LocaleKeys.good.tr();
+                      } else if(sumper>=3 && sumper < 6) {
+                        sumper_word = LocaleKeys.bad.tr();
+                      } else {
+                        sumper_word = LocaleKeys.ver_bad.tr();
+                      }
                       return Card(
                         margin: EdgeInsets.symmetric(vertical: 8),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -403,21 +413,33 @@ class _ReviewsState extends State<Reviews> {
                                       ),
                                     ],
                                   ),
-                                  Container(
-                                    height: 27,
-                                    width: 27,
-                                    decoration: BoxDecoration(
-                                      color: Colors.orange,
-                                      borderRadius: BorderRadius.circular(4.0),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        sumper.round().toInt().toString(),
-                                        style: TextStyle(
-                                            color: Colors.white
+                                  Column(
+                                    children: [
+                                      Container(
+                                        height: 27,
+                                        width: 27,
+                                        decoration: BoxDecoration(
+                                          color: Colors.orange,
+                                          borderRadius: BorderRadius.circular(4.0),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            sumper.round().toInt().toString(),
+                                            style: TextStyle(
+                                                color: Colors.white
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
+                                      SizedBox(height: 3),
+                                      Text(
+                                        sumper_word,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 15
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),

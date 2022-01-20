@@ -42,8 +42,10 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
       Uri.parse(url)
     );
     final prefs = await SharedPreferences.getInstance();
-    user_id = jsonDecode(prefs.getString("userData")!)["user_id"];
-    token = jsonDecode(prefs.getString("userData")!)["token"];
+    if(prefs.getString("userData") != null) {
+      user_id = jsonDecode(prefs.getString("userData")!)["user_id"];
+      token = jsonDecode(prefs.getString("userData")!)["token"];
+    }
     ways = json.decode(result.body)["data"];
     main_ways = json.decode(result.body)["data"];
     for(int i = 0; i < main_ways.length; i++) {

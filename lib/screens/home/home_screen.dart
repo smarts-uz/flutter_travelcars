@@ -361,7 +361,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Positioned(
-                          bottom: 40,
+                          bottom: 50,
                           child: Container(
                             width: MediaQuery.of(context).size.width * .45,
                             alignment: Alignment.center,

@@ -167,7 +167,6 @@ class _BookingsScreenState extends State<BookingsScreen> {
                         ),
                         Container(
                           height: 25,
-                          width: 70,
                           alignment: Alignment.center,
                           margin: EdgeInsets.only(right: 15),
                           decoration: BoxDecoration(
@@ -181,7 +180,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                           child: Text(
                             results[index]["paid"] != null ? "${results[index]["paid"]}" : "${LocaleKeys.unpaid.tr()}",
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 15,
                                 color: Colors.white
                             ),
                           ),
