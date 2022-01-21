@@ -393,4 +393,59 @@ class Dialogs {
       },
     );
   }
+
+  static Future<dynamic> OplataDialog(BuildContext ctx) {
+    return showDialog(
+        context: ctx,
+        builder: (BuildContext dialogContext) => AlertDialog(
+          contentPadding: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
+          content: Container(
+            height: 240,
+            width: 240,
+            child: Column(
+              children: [
+                Container(
+                  height: 70,
+                  width: 70,
+                  margin: EdgeInsets.symmetric(vertical: 8),
+                  child:  Icon(
+                    Icons.info_outline_rounded,
+                    color: Colors.blue,
+                    size: 60,
+                  )
+                ),
+                Column(
+                  children: [
+                    Text(
+                      "${LocaleKeys.oplata.tr()}",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.normal,
+                          color: Color.fromRGBO(0, 0, 0, 1),
+                          letterSpacing: 0.15),
+                    ),
+                  ],
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                  },
+                  child: Text(
+                    LocaleKeys.close.tr(),
+                    style: TextStyle(
+                      fontSize: 19,
+                      color: Color.fromRGBO(239, 127, 26, 1),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+    );
+  }
 }

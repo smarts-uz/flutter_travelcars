@@ -386,8 +386,8 @@ class _SearchResultState extends State<SearchResult> {
                               textAlign: TextAlign.start,
                               maxLines: 2,
                               style: TextStyle(
-                                  fontSize: 15,
-                                height: 1.6
+                                  fontSize: 18,
+                                  height: 1.6
                               ),
                             ),
                           )
@@ -449,7 +449,7 @@ class _SearchResultState extends State<SearchResult> {
                     child: Text(
                       "${(routes[index]["price"] * app_kurs).toStringAsFixed(2)} ${SplashScreen.kurs}",
                       style: TextStyle(
-                          fontSize: 23,
+                          fontSize: 21,
                           color: Colors.black,
                           fontWeight: FontWeight.bold
                       ),

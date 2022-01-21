@@ -131,6 +131,27 @@ class _BookingsScreenState extends State<BookingsScreen> {
                 status = LocaleKeys.approved.tr();
                 break;
             }
+
+            String payment_status = LocaleKeys.naqd_pul.tr();
+            switch(results[index]['paid']) {
+              case "uzcard":
+                payment_status = LocaleKeys.uzcard.tr();
+                break;
+              case "cash":
+                payment_status = LocaleKeys.naqd_pul.tr();
+                break;
+              case "visa":
+                payment_status = LocaleKeys.visa.tr();
+                break;
+              case "__mastercard":
+                payment_status = LocaleKeys.mcard.tr();
+                break;
+              case "__perechisleniya":
+                payment_status = LocaleKeys.no_cash.tr();
+                break;
+            }
+
+
             List<int> indexes_options = [];
             for(int i = 0; i < results[index]["routeOption"].length; i++) {
               indexes_options.add(i);
@@ -178,7 +199,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                             ),
                           ),
                           child: Text(
-                            results[index]["paid"] != null ? "${results[index]["paid"]}" : "${LocaleKeys.unpaid.tr()}",
+                            results[index]["paid"] != null ? "$payment_status" : "${LocaleKeys.unpaid.tr()}",
                             style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.white
@@ -242,39 +263,21 @@ class _BookingsScreenState extends State<BookingsScreen> {
                         child: Row(
                           children: [
                             Icon(Icons.check, color: Colors.green),
-                            Text(
-                              results[index]["routeOption"][i]["name"],
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontSize: 17
+                            Expanded(
+                              child: Text(
+                                results[index]["routeOption"][i]["name"],
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontSize: 17
+                                ),
                               ),
                             )
                           ],
                         ),
                       ),).toList(),
                     ),
-                      /*ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        itemExtent: 30,
-                        itemCount: results[index]["routeOption"].length,
-                        itemBuilder: (context, i) => Container(
-                          child: Row(
-                            children: [
-                              Icon(Icons.check, color: Colors.green),
-                              Text(
-                                results[index]["routeOption"][i]["name"],
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontSize: 17
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                    ),*/
                   ),
                   Container(
-                    height: 60,
                     width: double.infinity,
                     child: ListTile(
                       title: Text(
@@ -295,7 +298,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                             Text(
                               "${results[index]["date"].substring(0, 10)}",
                               style: TextStyle(
-                                fontSize: 17,
+                                fontSize: 19,
                               ),
                             )
                           ],
@@ -304,12 +307,12 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     ),
                   ),
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      padding: EdgeInsets.symmetric(horizontal: 15),
                       child:  RichText(
-                        textAlign: TextAlign.left,
+                        textAlign: TextAlign.center,
                         text: TextSpan(
                           style: TextStyle(
-                            fontSize: 22.0,
+                            fontSize: 19.0,
                             color: Colors.black,
                           ),
                           children: <TextSpan>[
@@ -324,7 +327,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     child: Text(
                       "${(double.parse(results[index]["price"]) * app_kurs).toStringAsFixed(2)} ${SplashScreen.kurs}",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 21,
                           color: Colors.black,
                           fontWeight: FontWeight.bold
                       ),

@@ -45,7 +45,7 @@ class Transfer extends StatelessWidget {
             Container(
                 width: MediaQuery.of(context).size.width*.7,
                 child: Text(
-                  LocaleKeys.You_can_leave_request.tr(),
+                  LocaleKeys.transfer_text.tr(),
                   maxLines: 3,
                   style: TextStyle(
                     fontSize: 18,

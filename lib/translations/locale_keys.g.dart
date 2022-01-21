@@ -240,5 +240,13 @@ abstract class  LocaleKeys {
   static const inn = 'inn';
   static const okenh = 'okenh';
   static const mail = 'mail';
+  static const oplata = 'oplata';
+  static const route_text = 'route_text';
+  static const transfer_text = 'transfer_text';
+  static const visa = 'visa';
+  static const mcard = 'mcard';
+  static const naqd_pul = 'naqd_pul';
+  static const uzcard = 'uzcard';
+  static const no_cash = 'no_cash';
 
 }

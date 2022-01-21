@@ -237,5 +237,13 @@
   "mfo": "МФО",
   "inn": "ИНН",
   "okenh": "ОКОНХ",
-  "mail": "E-mail"
+  "mail": "E-mail",
+  "oplata": "Тўловга ўтишдан олдин \"Махфийлик сиёсати\" ва \"Оммавий оферта\" билан танишиб чиқиб, уларни қабул қилишингизни сўраймиз",
+  "route_text": "Йўналиш учун сўров қолдиринг",
+  "transfer_text": "Transfer uchun so'rov qoldiring",
+  "visa": "Онлайн VISA",
+  "mcard": "Онлайн MCard",
+  "naqd_pul": "Нақд пул",
+  "uzcard": "Онлайн UzCard",
+  "no_cash": "Пул ўтқазиш"
 }

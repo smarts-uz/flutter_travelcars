@@ -5,6 +5,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/screens/profile/reviews.dart';
@@ -94,7 +95,8 @@ class _BookingScreenState extends State<BookingScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
-        title: Text("${LocaleKeys.booking.tr()} #${results["id"]}",
+        title: Text(
+          "${LocaleKeys.bookings.tr()} #${results["id"]}",
           style: TextStyle(
           fontSize: 21,
           color: Colors.white,
@@ -446,7 +448,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 GestureDetector(
                   onTap: () {
                     if(!agree) {
-                      ToastComponent.showDialog(LocaleKeys.Please_agree.tr());
+                      Dialogs.OplataDialog(context);
                       return;
                     }
                     String type = "click";
@@ -465,7 +467,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     });
                     switch(type) {
                       case "click":
-                        launch("https://my.click.uz/services/pay?service_id=13729&merchant_id=9367&amount=$amount&transaction_param=$id&return_url=https://travelcars.uz/bookings/show/299&card_type=uzcard");
+                        launch("https://my.click.uz/services/pay?service_id=13729&merchant_id=9367&amount=$amount&transaction_param=$id");
                         break;
                       case "payme":
                         String data = "m=5cd1820b1722d50474387f3a;ac.booking_id=$id;a=${amount * 100}";

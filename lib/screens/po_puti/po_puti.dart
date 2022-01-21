@@ -80,9 +80,21 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
         ),
         actions: [
           IconButton(
+            color: Colors.white,
+            onPressed: (){
+              _startAddNewTransaction(context);
+            },
+            icon: Icon(
+              Icons.info_outline_rounded,
+              color: Colors.white,
+              size: 26,
+            ),
+          ),
+          IconButton(
             icon: Icon(
               Icons.add,
               color: Colors.white,
+              size: 26,
             ),
             onPressed: () {
               Navigator.push(
@@ -101,6 +113,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                    icon: Icon(
                      Icons.search,
                      color: Colors.white,
+                     size: 26,
                    ),
                );
              }
@@ -225,190 +238,171 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
           ),
         ),
       ) : SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 13.0),
-              child: RichText(
-                textAlign: TextAlign.justify,
-                text: TextSpan(
-                  style: TextStyle(
-                      fontSize: 15,
-                      height: 1.4,
-                      color: Colors.black
-                  ),
-                  children: [
-                    TextSpan(text: "${LocaleKeys.poputi1.tr()}\n", style: TextStyle(fontWeight: FontWeight.bold)),
-                    TextSpan(text: LocaleKeys.poputi2.tr(), style: TextStyle(fontStyle: FontStyle.italic)),
-                  ]
+        child: Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Column(
+            children: indexes.map((index) {
+              print("Way item: ${ways[index]["user_id"]}");
+              return Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                        width: 1.5,
+                        color: Colors.grey
+                    )
                 ),
-              ),
-            ),
-            Column(
-              children: indexes.map((index) {
-                print("Way item: ${ways[index]["user_id"]}");
-                return Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                          width: 1.5,
-                          color: Colors.grey
-                      )
-                  ),
-                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0, right: 20),
-                        child: RichText(
-                            text: TextSpan(
-                                style: TextStyle(
-                                    fontSize: 19,
-                                    height: 1.7,
-                                    color: Colors.black
-                                ),
-                                children: [
-                                  TextSpan(text: "${LocaleKeys.From.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                  TextSpan(text: "${ways[index]["address1"]}\n"),
-                                  TextSpan(text: "${LocaleKeys.To.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                  TextSpan(text: "${ways[index]["address2"]}\n"),
-                                  TextSpan(text: "${LocaleKeys.Date.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                  TextSpan(text: "${ways[index]["date"]}\n"),
-                                  TextSpan(text: "${LocaleKeys.Time.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                  TextSpan(text: "${ways[index]["time"].substring(0, 5)}\n"),
-                                  TextSpan(text: "${LocaleKeys.Car_type.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                  TextSpan(text: "${ways[index]["model_car"]}"),
-                                ]
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0, right: 20),
+                      child: RichText(
+                          text: TextSpan(
+                              style: TextStyle(
+                                  fontSize: 19,
+                                  height: 1.7,
+                                  color: Colors.black
+                              ),
+                              children: [
+                                TextSpan(text: "${LocaleKeys.From.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(text: "${ways[index]["address1"]}\n"),
+                                TextSpan(text: "${LocaleKeys.To.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(text: "${ways[index]["address2"]}\n"),
+                                TextSpan(text: "${LocaleKeys.Date.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(text: "${ways[index]["date"]}\n"),
+                                TextSpan(text: "${LocaleKeys.Time.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(text: "${ways[index]["time"].substring(0, 5)}\n"),
+                                TextSpan(text: "${LocaleKeys.Car_type.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(text: "${ways[index]["model_car"]}"),
+                              ]
+                          )
+                      ),
+                    ),
+                    ways[index]["user_id"] != user_id || user_id == null ? GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => InfoScreen(ways[index])
+                            )
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: Colors.grey,
+                                width: 1.5
                             )
                         ),
-                      ),
-                      ways[index]["user_id"] != user_id || user_id == null ? GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => InfoScreen(ways[index])
-                              )
-                          );
-                        },
-                        child: Container(
-                          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  color: Colors.grey,
-                                  width: 1.5
-                              )
-                          ),
-                          height: MediaQuery.of(context).size.height * .05,
-                          width: MediaQuery.of(context).size.width * .9,
-                          child:  Text(
-                            LocaleKeys.details.tr(),
-                            style: TextStyle(
-                                fontSize: 22,
-                                color: Colors.orange
-                            ),
+                        height: MediaQuery.of(context).size.height * .05,
+                        width: MediaQuery.of(context).size.width * .9,
+                        child:  Text(
+                          LocaleKeys.details.tr(),
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.orange
                           ),
                         ),
-                      ) : Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => InfoScreen(ways[index])
-                                    )
-                                );
-                              },
-                              child: Container(
-                                height: 45,
-                                width: 45,
-                                decoration: BoxDecoration(
-                                    color: Colors.blue,
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                                child: Icon(
-                                  Icons.remove_red_eye,
-                                  color: Colors.white,
-                                  size: 25,
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 15),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => AddScreen(way_item: ways[index],)
-                                    )
-                                );
-                              },
-                              child: Container(
-                                height: 45,
-                                width: 45,
-                                decoration: BoxDecoration(
-                                    color: Colors.orange,
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                                child: Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
-                                  size: 25,
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 15),
-                            GestureDetector(
-                              onTap: () async {
-                                print("hello");
-                                Uri url = Uri.parse("${AppConfig.BASE_URL}/onway/delete");
-                                final response = await http.delete(
-                                    url,
-                                    headers: {
-                                      "Authorization": "Bearer $token"
-                                    },
-                                    body: {
-                                      "id": "${ways[index]["id"]}"
-                                    }
-                                );
-                                setState(() {
-                                  isLoading = true;
-                                });
-                                indexes = [];
-                                getways();
-                              },
-                              child: Container(
-                                height: 45,
-                                width: 45,
-                                decoration: BoxDecoration(
-                                    color: Colors.red,
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                                child: Icon(
-                                  Icons.clear,
-                                  color: Colors.white,
-                                  size: 25,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
                       ),
-                    ],
-                  ),
-                );
-              }).toList(),
-            ),
-          ],
+                    ) : Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => InfoScreen(ways[index])
+                                  )
+                              );
+                            },
+                            child: Container(
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(10)
+                              ),
+                              child: Icon(
+                                Icons.remove_red_eye,
+                                color: Colors.white,
+                                size: 25,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 15),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => AddScreen(way_item: ways[index],)
+                                  )
+                              );
+                            },
+                            child: Container(
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                  color: Colors.orange,
+                                  borderRadius: BorderRadius.circular(10)
+                              ),
+                              child: Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                                size: 25,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 15),
+                          GestureDetector(
+                            onTap: () async {
+                              print("hello");
+                              Uri url = Uri.parse("${AppConfig.BASE_URL}/onway/delete");
+                              final response = await http.delete(
+                                  url,
+                                  headers: {
+                                    "Authorization": "Bearer $token"
+                                  },
+                                  body: {
+                                    "id": "${ways[index]["id"]}"
+                                  }
+                              );
+                              setState(() {
+                                isLoading = true;
+                              });
+                              indexes = [];
+                              getways();
+                            },
+                            child: Container(
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(10)
+                              ),
+                              child: Icon(
+                                Icons.clear,
+                                color: Colors.white,
+                                size: 25,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
@@ -445,4 +439,32 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
       ),
     );
   }
+}
+
+void _startAddNewTransaction(BuildContext ctx) {
+  showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return  SingleChildScrollView(
+          child: Container(
+            height: 290,
+            margin: EdgeInsets.all(16),
+            child: RichText(
+              textAlign: TextAlign.justify,
+              text: TextSpan(
+                  style: TextStyle(
+                      fontSize: 15,
+                      height: 1.4,
+                      color: Colors.black
+                  ),
+                  children: [
+                    TextSpan(text: "${LocaleKeys.poputi1.tr()}\n", style: TextStyle(fontWeight: FontWeight.bold)),
+                    TextSpan(text: LocaleKeys.poputi2.tr(), style: TextStyle(fontStyle: FontStyle.italic)),
+                  ]
+              ),
+            ),
+          ),
+        );
+      }
+  );
 }

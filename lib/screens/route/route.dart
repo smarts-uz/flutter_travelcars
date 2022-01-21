@@ -45,7 +45,7 @@ class Routes extends StatelessWidget {
             Container(
                 width: MediaQuery.of(context).size.width*.7,
                 child: Text(
-                  LocaleKeys.You_can_leave_request.tr(),
+                  LocaleKeys.route_text.tr(),
                   maxLines: 2,
                   style: TextStyle(
                     fontSize: 18,

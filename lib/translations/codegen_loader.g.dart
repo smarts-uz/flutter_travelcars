@@ -92,7 +92,7 @@ class CodegenLoader extends AssetLoader{
   "entered": "Enter",
   "routes": "Routes",
   "no_routes_found": "No routes are found",
-  "The_address_of_the_place_to_pick_up_from": "The address of the place to pick up from",
+  "The_address_of_the_place_to_pick_up_from": "Notice",
   "route_one_on_consideration": "On consideration",
   "pending": "Pending",
   "approved": "Approved",
@@ -171,7 +171,7 @@ class CodegenLoader extends AssetLoader{
   "take_cashback": "In case of payment through payment systems (Click and Payme) and international cards (Visa, Master Card), you will receive a cashback of up to 5% of the total payment amount",
   "pay_between_fiveday": "The accrued cashback is paid to the client's account (to a personal bank card) in soums monthly from the 5th to the 10th day of the month",
   "Passengers": "Passengers",
-  "Where_to_pick_up": "Where to pick up",
+  "Where_to_pick_up": "A place address where you will be picked up.",
   "tours": "Tours",
   "trip": "Trip",
   "Social_networks_for_communication": "Social networks for communication",
@@ -253,7 +253,15 @@ class CodegenLoader extends AssetLoader{
   "mfo": "MFO",
   "inn": "INN",
   "okenh": "OKONH",
-  "mail": "E-mail"
+  "mail": "E-mail",
+  "oplata": "We ask that you please read this «Privacy policy» and «Public offer» carefully prior to proceeding to payment.",
+  "route_text": "Leave a request for an itinerary",
+  "transfer_text": "Leave a request for a transfer",
+  "visa": "Online VISA",
+  "mcard": "Online MCard",
+  "naqd_pul": "Cash",
+  "uzcard": "Online UzCard",
+  "no_cash": "Enumeration"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги по всем городам Узбекистана: экскурсионные и бизнес-поездки",
@@ -333,7 +341,7 @@ static const Map<String,dynamic> ru = {
   "entered": "Войти",
   "routes": "Маршруты",
   "no_routes_found": "Маршруты не найдены",
-  "The_address_of_the_place_to_pick_up_from": "Адрес места, где можно забрать",
+  "The_address_of_the_place_to_pick_up_from": "Примечание",
   "route_one_on_consideration": "На рассмотрении",
   "pending": "В ожидании",
   "approved": "Одобрен",
@@ -412,7 +420,7 @@ static const Map<String,dynamic> ru = {
   "take_cashback": "В случае оплаты через платежные системы (Click и Payme) и международные карты (Visa, Master Card) Вам начисляется кешбек до 5% от общего суммы платежа",
   "pay_between_fiveday": "Начисленный кэшбэк выплачивается на счет клиента (на личную банковскую карту) в сумах ежемесячно с 5-го по 10-е число месяца",
   "Passengers": "Пассажиры",
-  "Where_to_pick_up": "Где забрать",
+  "Where_to_pick_up": "Адрес места, откуда забрать.",
   "tours": "Экскурсии",
   "trip": "Поездка",
   "Social_networks_for_communication": "Социальные сети для связи",
@@ -431,7 +439,7 @@ static const Map<String,dynamic> ru = {
   "name_surname": "ФИО",
   "Current_password": "Tекущий пароль",
   "new_password": "Новый пароль",
-  "New_password_confirmation": "Подтверждение нового пароля",
+  "New_password_confirmation": "Подтверждение пароля",
   "Write_comment_for_order": "Напишите комментарий к заказу",
   "meeting": "Bстреча",
   "Drop_of": "Проводы",
@@ -494,7 +502,15 @@ static const Map<String,dynamic> ru = {
   "mfo": "МФО",
   "inn": "ИНН",
   "okenh": "ОКОНХ",
-  "mail": "Е-мейл"
+  "mail": "Е-мейл",
+  "oplata": "Прежде чем перейти к оплате, просим Вас ознакомиться и согласиться с «Политикой конфиденциальности» и «Публичной офертой»",
+  "route_text": "Оставьте заявку на поездку",
+  "transfer_text": "Оставьте заявку на транфер",
+  "visa": "Онлайн VISA",
+  "mcard": "Онлайн MCard",
+  "naqd_pul": "Наличными",
+  "uzcard": "Онлайн UzCard",
+  "no_cash": "Перечислением"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Ўзбекистоннинг барча шаҳарлари ўртасида транспорт хизматлари: саёҳат ва бизнес",
@@ -574,7 +590,7 @@ static const Map<String,dynamic> uz = {
   "entered": "Кириш",
   "routes": "Йўналишлар",
   "no_routes_found": "Ҳеч қандай маршрут топилмади",
-  "The_address_of_the_place_to_pick_up_from": "Олиб кетиш манзили",
+  "The_address_of_the_place_to_pick_up_from": "Изоҳ",
   "route_one_on_consideration": "Кўриб чиқилмоқда",
   "pending": "Кутиш жараёнида",
   "approved": "Тасдиқланган",
@@ -592,7 +608,7 @@ static const Map<String,dynamic> uz = {
   "The_choice_of_social_networks": "Ижтимоий тармоқларни танлаш",
   "Select_social_network_through_which_we_can_contact_you": "Сиз билан боғланишимиз мумкин бўлган ижтимоий тармоқни танланг",
   "profile": "Профиль",
-  "application": "Илова",
+  "application": "Буюртма",
   "book_now": "Ҳозироқ банд қилинг",
   "We_will_be_glad_to_receive_your_order": "Буюртмангизни қабул қилишдан хурсанд бўламиз",
   "send": "Юбориш",
@@ -653,7 +669,7 @@ static const Map<String,dynamic> uz = {
   "take_cashback": "Тўлов тизимлари (Cлиcк анд Пайме) ва халқаро карталар (Виса, Мастер Cард) орқали амалга оширилган тақдирда, сиз тўловнинг умумий суммасининг 5% гача нақд пул оласиз.",
   "pay_between_fiveday": "Ҳисобланган нақд пул мижознинг ҳисоб рақамига (шахсий банк картасига) ҳар ой ойнинг 5-кунидан 10-кунига қадар сўмда тўланади.",
   "Passengers": "Йўловчилар",
-  "Where_to_pick_up": "Қаердан олиш керак",
+  "Where_to_pick_up": "Олиб кетиш манзили",
   "tours": "Экскурциялар",
   "trip": "Саёҳат",
   "Social_networks_for_communication": "Мулоқот учун ижтимоий тармоқлар",
@@ -735,7 +751,15 @@ static const Map<String,dynamic> uz = {
   "mfo": "МФО",
   "inn": "ИНН",
   "okenh": "ОКОНХ",
-  "mail": "E-mail"
+  "mail": "E-mail",
+  "oplata": "Тўловга ўтишдан олдин \"Махфийлик сиёсати\" ва \"Оммавий оферта\" билан танишиб чиқиб, уларни қабул қилишингизни сўраймиз",
+  "route_text": "Йўналиш учун сўров қолдиринг",
+  "transfer_text": "Transfer uchun so'rov qoldiring",
+  "visa": "Онлайн VISA",
+  "mcard": "Онлайн MCard",
+  "naqd_pul": "Нақд пул",
+  "uzcard": "Онлайн UzCard",
+  "no_cash": "Пул ўтқазиш"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }
