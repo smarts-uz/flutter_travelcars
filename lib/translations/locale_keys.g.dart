@@ -114,7 +114,6 @@ abstract class  LocaleKeys {
   static const Setting_the_language_and_course = 'Setting_the_language_and_course';
   static const save = 'save';
   static const booking = 'booking';
-  static const continue_atp = 'continue_atp';
   static const select_payment_method = 'select_payment_method';
   static const The_cost_of_the_trip = 'The_cost_of_the_trip';
   static const day = 'day';
