@@ -478,7 +478,7 @@ static const Map<String,dynamic> uz = {
   "Quantity_of_passengers": "Йўловчилар",
   "Price": "Нархи",
   "Options": "Авто опциялари",
-  "Included_in_type": "Тарифга қўшилган:",
+  "Included_in_type": "Тарифга қўшилган",
   "Clear_data": "Маълумотларни тозалаш",
   "One_way": "Бир тарафга",
   "Round_trip ": "Икки тарафга",
