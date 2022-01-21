@@ -684,13 +684,13 @@ static const Map<String,dynamic> uz = {
   "poputi2": "(Сафарингиз йўналишини “ўзгартириш” ёки “ўчириш” учун “Кириш” тугмасини босиб рўйхатдан ўтишингиз керак).",
   "review": "фикр",
   "unpaid": "Тўланмаган",
-  "no_image": "Rasm yuklang",
-  "phone": "Telefon",
-  "code": "Kod",
+  "no_image": "Расм юкланг",
+  "phone": "Телефон",
+  "code": "Код",
   "important1": "Овертайм (бир соат учун)",
   "important2": "Банк орқали ўтказма учун комиссия",
-  "edit_advert": "Safarni tahrirlash",
-  "route_name": "Travel itinerary"
+  "edit_advert": "Сафарни таҳрирлаш",
+  "route_name": "Йўналиш номи"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }
