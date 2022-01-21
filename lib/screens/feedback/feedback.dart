@@ -121,14 +121,14 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
         backgroundColor: Colors.orange,
         title: Text(
           LocaleKeys.write_feedback.tr(),
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 21,
             fontFamily: "Poppins",
             fontWeight: FontWeight.w400,
             fontStyle: FontStyle.normal,

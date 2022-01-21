@@ -229,5 +229,16 @@ abstract class  LocaleKeys {
   static const trip_comment = 'trip_comment';
   static const fizik = 'fizik';
   static const yuridik = 'yuridik';
+  static const yur_name = 'yur_name';
+  static const yur_city = 'yur_city';
+  static const yur_address = 'yur_address';
+  static const yur_pochta = 'yur_pochta';
+  static const yur_bank = 'yur_bank';
+  static const yur_account = 'yur_account';
+  static const oked = 'oked';
+  static const mfo = 'mfo';
+  static const inn = 'inn';
+  static const okenh = 'okenh';
+  static const mail = 'mail';
 
 }

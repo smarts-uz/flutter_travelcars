@@ -96,7 +96,7 @@ class _BookingScreenState extends State<BookingScreen> {
         backgroundColor: Colors.orange,
         title: Text("${LocaleKeys.booking.tr()} #${results["id"]}",
           style: TextStyle(
-          fontSize: 25,
+          fontSize: 21,
           color: Colors.white,
           fontWeight: FontWeight.w500,
           fontFamily: 'Poppins',
@@ -110,7 +110,7 @@ class _BookingScreenState extends State<BookingScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
       ),

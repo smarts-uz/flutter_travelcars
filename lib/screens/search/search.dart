@@ -36,7 +36,7 @@ class _SearchScreenState extends State<SearchScreen> {
   ];
   static int? _radioVal1;
   static int? _radioVal2;
-  static RangeValues _currentRangeValues = RangeValues(50, 250);
+  static RangeValues _currentRangeValues = RangeValues(160, 800);
 
 
 
@@ -116,14 +116,14 @@ class _SearchScreenState extends State<SearchScreen> {
             },
             icon: Icon(
               Icons.close,
-              size: 30,
+              size: 25,
               color: Colors.white,
             )
         ) : null,
         title: Text(
           LocaleKeys.Search.tr(), //LocaleKeys.Search_and_sort.tr(),
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 23,
             color: Colors.white,
           ),
         ),
@@ -426,47 +426,40 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 15, bottom: 10),
+              padding: EdgeInsets.only(left: 15, bottom: 10, right: 15),
                child: Row(
-                children: [
-                  Expanded(
-                    flex: widget.isDrawer ? 2 : 1,
-                    child: Text(
-                      "50",
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
-                   ),
-                 ),
-                 Expanded(
-                   flex: 13,
-                   child: RangeSlider(
-                     values: _currentRangeValues,
-                     min: 50,
-                     max: 250,
-                     divisions: 10,
-                     labels: RangeLabels(
-                       _currentRangeValues.start.round().toString(),
-                       _currentRangeValues.end.round().toString(),
-                     ),
-                     onChanged: (RangeValues values) {
-                       setState(() {
-                         _currentRangeValues = values;
-                       },);
-                       },
-                   ),
-                 ),
-                 Expanded(
-                   flex: 2,
-                   child: Text(
-                     "250",
+                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                 children: [
+                   Text(
+                     _currentRangeValues.start.round().toString(),
                      style: TextStyle(
-                       fontSize: 18,
+                       fontSize: 17,
                        fontWeight: FontWeight.bold,
                      ),
                    ),
-                 ),
+                   Expanded(
+                     child: RangeSlider(
+                       values: _currentRangeValues,
+                       min: 160,
+                       max: 800,
+                       labels: RangeLabels(
+                         _currentRangeValues.start.round().toString(),
+                         _currentRangeValues.end.round().toString(),
+                       ),
+                       onChanged: (RangeValues values) {
+                         setState(() {
+                           _currentRangeValues = values;
+                         });
+                         },
+                     ),
+                   ),
+                   Text(
+                     _currentRangeValues.end.round().toString(),
+                     style: TextStyle(
+                       fontSize: 17,
+                       fontWeight: FontWeight.bold,
+                     ),
+                   ),
                 ],
                ),
             ),

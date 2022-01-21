@@ -72,7 +72,7 @@ class _RouteAddState extends State<RouteAdd> {
           LocaleKeys.add_route.tr(),
           style: TextStyle(
             color: Colors.white,
-            fontSize: 23
+            fontSize: 21
           ),
         ),
         leading: IconButton(
@@ -82,7 +82,7 @@ class _RouteAddState extends State<RouteAdd> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
       ),
@@ -90,7 +90,7 @@ class _RouteAddState extends State<RouteAdd> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * .7,
+              height: MediaQuery.of(context).size.height * .69,
               child: ListView.builder(
                 controller: _controller,
                 itemCount: count,
@@ -209,7 +209,56 @@ class _RouteAddState extends State<RouteAdd> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
+                if(count < 10) Container(
+                  height: 35,
+                  width: 140,
+                  child: RaisedButton(
+                    color: Colors.white,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add,
+                          color: Colors.orange,
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          LocaleKeys.add.tr(),
+                          style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 15
+                          ),
+                        ),
+                      ],
+                    ),
+                    onPressed: () {
+                      if(count <= 10) count++;
+                      data.add({
+                        "city1": city[0],
+                        "city2": city[0],
+                        "day": DateTime.now(),
+                        "controllers2": [
+                          for (int i = 0; i < 2; i++)
+                            TextEditingController()
+                        ],
+                      });
+                      setState(() {
+
+                      });
+
+                      Future.delayed(const Duration(milliseconds: 500), () async {
+                        _scrollDown();
+                      });
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(
+                            color: Colors.orange
+                        )
+                    ),
+                  ),
+                ),
+                if(count > 1) Container(
                   height: 35,
                   width: 140,
                   child: RaisedButton(
@@ -248,55 +297,6 @@ class _RouteAddState extends State<RouteAdd> {
                         borderRadius: BorderRadius.circular(8),
                         side: BorderSide(
                             color: Colors.red
-                        )
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 35,
-                  width: 140,
-                  child: RaisedButton(
-                    color: Colors.white,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.add,
-                          color: Colors.orange,
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          LocaleKeys.add.tr(),
-                          style: TextStyle(
-                              color: Colors.orange,
-                            fontSize: 15
-                          ),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      if(count <= 10) count++;
-                      data.add({
-                        "city1": city[0],
-                        "city2": city[0],
-                        "day": DateTime.now(),
-                        "controllers2": [
-                          for (int i = 0; i < 2; i++)
-                            TextEditingController()
-                        ],
-                      });
-                      setState(() {
-
-                      });
-
-                      Future.delayed(const Duration(milliseconds: 500), () async {
-                        _scrollDown();
-                      });
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(
-                            color: Colors.orange
                         )
                     ),
                   ),

@@ -31,14 +31,14 @@ class _SetPasswordState extends State<SetPassword> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
         title: Text(
           LocaleKeys.Password_reset.tr(),
           style: TextStyle(
             color: Colors.white,
-            fontSize: 23,
+            fontSize: 21,
             fontStyle: FontStyle.normal,
           ),
         ),

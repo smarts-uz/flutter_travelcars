@@ -83,7 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: Text(
          LocaleKeys.profile.tr(),
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 23,
             color: Colors.white,
           ),
         ),

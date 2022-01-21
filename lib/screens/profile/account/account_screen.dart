@@ -38,12 +38,11 @@ class _AccountScreenState extends State<AccountScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
-        centerTitle: true,
         title: Text(
           LocaleKeys.profile_settings.tr(),
           style: TextStyle(
             color: Colors.white,
-            fontSize: 25
+            fontSize: 21
           ),
         ),
         leading: IconButton(
@@ -53,7 +52,7 @@ class _AccountScreenState extends State<AccountScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 30,
+            size: 25,
           ),
         ),
       ),

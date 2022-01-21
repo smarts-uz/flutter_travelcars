@@ -26,12 +26,11 @@ class _SecondScreenState extends State<SecondScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
-        centerTitle: true,
         title: Text(
           LocaleKeys.change_password.tr(),
           style: TextStyle(
               color: Colors.white,
-              fontSize: 23
+              fontSize: 21
           ),
         ),
         leading: IconButton(
@@ -41,7 +40,7 @@ class _SecondScreenState extends State<SecondScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
       ),
@@ -84,7 +83,6 @@ class _SecondScreenState extends State<SecondScreen> {
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "${LocaleKeys.new_password.tr()}",
-                    errorText: null,
                     labelStyle: TextStyle(
                       color: Colors.white10,
                     ),
@@ -109,6 +107,7 @@ class _SecondScreenState extends State<SecondScreen> {
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "${LocaleKeys.New_password_confirmation.tr()}",
+
                     errorText: null,
                     labelStyle: TextStyle(
                       color: Colors.white10,

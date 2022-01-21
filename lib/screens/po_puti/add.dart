@@ -109,8 +109,9 @@ class _AddScreenState extends State<AddScreen> {
       appBar: AppBar(
         title: Text(
           widget.way_item.isNotEmpty ? LocaleKeys.edit_advert.tr() : LocaleKeys.Create_advert.tr(),
+          maxLines: 3,
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 21,
             color: Colors.white,
           ),
         ),
@@ -121,7 +122,7 @@ class _AddScreenState extends State<AddScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
       ),

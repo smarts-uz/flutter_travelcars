@@ -32,16 +32,15 @@ class _FirstSceenState extends State<FirstSceen> {
       TextEditingController()
   ];
   List<String> hints = [
-    "Юридическое название",
-    "Юридический город",
-    "Юридический адрес",
-    "Почтовый индекс",
-    "Банк",
-    "Расчетный счет",
-    "ОКЭД",
-    "МФО",
-    "ИНН",
-    "ОКОНХ",
+    LocaleKeys.yur_name.tr(),
+    LocaleKeys.yur_city.tr(),
+    LocaleKeys.yur_pochta.tr(),
+    LocaleKeys.yur_bank.tr(),
+    LocaleKeys.yur_account.tr(),
+    LocaleKeys.oked.tr(),
+    LocaleKeys.mfo.tr(),
+    LocaleKeys.inn.tr(),
+    LocaleKeys.okenh.tr(),
   ];
 
   Map<String, dynamic> userinfo = {};
@@ -83,12 +82,11 @@ class _FirstSceenState extends State<FirstSceen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
-        centerTitle: true,
         title: Text(
-          LocaleKeys.change_password.tr(),
+          LocaleKeys.Change_profile.tr(),
           style: TextStyle(
             color: Colors.white,
-            fontSize: 23
+            fontSize: 21
           ),
         ),
         leading: IconButton(
@@ -98,7 +96,7 @@ class _FirstSceenState extends State<FirstSceen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
       ),
@@ -123,10 +121,10 @@ class _FirstSceenState extends State<FirstSceen> {
                           Container(
                             height: 45,
                             child: TextFormField(
-                              controller: _emailController,
-                              keyboardType: TextInputType.text,
+                              controller: _phoneController,
+                              keyboardType: TextInputType.phone,
                               decoration: InputDecoration(
-                                labelText: "Mail",
+                                labelText: LocaleKeys.Phone.tr(),
                                 floatingLabelBehavior: FloatingLabelBehavior.always,
                                 contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                 border: OutlineInputBorder(),
@@ -140,7 +138,7 @@ class _FirstSceenState extends State<FirstSceen> {
                               controller: _nameController,
                               keyboardType: TextInputType.text,
                               decoration: InputDecoration(
-                                labelText: "ФИО",
+                                labelText: LocaleKeys.name.tr(),
                                 floatingLabelBehavior: FloatingLabelBehavior.always,
                                 contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                 border: OutlineInputBorder(),
@@ -151,10 +149,10 @@ class _FirstSceenState extends State<FirstSceen> {
                           Container(
                             height: 45,
                             child: TextFormField(
-                              controller: _phoneController,
-                              keyboardType: TextInputType.phone,
+                              controller: _emailController,
+                              keyboardType: TextInputType.text,
                               decoration: InputDecoration(
-                                labelText: "Телефон",
+                                labelText: LocaleKeys.mail.tr(),
                                 floatingLabelBehavior: FloatingLabelBehavior.always,
                                 contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                 border: OutlineInputBorder(),

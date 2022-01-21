@@ -58,12 +58,11 @@ class _ThirdScreenState extends State<ThirdScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
-        centerTitle: true,
         title: Text(
           LocaleKeys.Social_networks_for_communication.tr(),
           style: TextStyle(
             color: Colors.white,
-            fontSize: 23,
+            fontSize: 21,
             fontStyle: FontStyle.normal,
           ),
         ),
@@ -74,7 +73,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
       ),

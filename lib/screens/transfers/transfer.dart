@@ -14,7 +14,7 @@ class Transfer extends StatelessWidget {
         title: Text(
          LocaleKeys.transfer.tr(),
           style:TextStyle(
-              fontSize: 25,
+              fontSize: 21,
               color: Colors.white
           ),
         ),
@@ -26,7 +26,7 @@ class Transfer extends StatelessWidget {
             },
             icon: Icon(
               Icons.info_outline_rounded,
-              size: 30,
+              size: 25,
             ),
           )
         ],

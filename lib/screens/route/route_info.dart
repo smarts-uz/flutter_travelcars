@@ -13,7 +13,7 @@ class RouteInfo extends StatelessWidget {
           "${LocaleKeys.application.tr()} #${info['id']}",
           style: TextStyle(
               color: Colors.white,
-              fontSize: 25
+              fontSize: 21
           ),
         ),
         leading: IconButton(
@@ -23,7 +23,7 @@ class RouteInfo extends StatelessWidget {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
       ),

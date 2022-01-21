@@ -68,14 +68,14 @@ class _BookingsScreenState extends State<BookingsScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
         title: Text(
          LocaleKeys.bookings.tr(),
           style: TextStyle(
             color: Colors.white,
-            fontSize: 25
+            fontSize: 21
           ),
         ),
       ),

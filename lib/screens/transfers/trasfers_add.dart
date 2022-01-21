@@ -75,7 +75,7 @@ class _TransfersAddState extends State<TransfersAdd> {
         title: Text(
           LocaleKeys.add_transfer.tr(),
           style: TextStyle(
-            fontSize: 23,
+            fontSize: 21,
             color: Colors.white,
           ),
         ),
@@ -86,7 +86,7 @@ class _TransfersAddState extends State<TransfersAdd> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
       ),
@@ -94,7 +94,7 @@ class _TransfersAddState extends State<TransfersAdd> {
         child: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * .75,
+            height: MediaQuery.of(context).size.height * .73,
             child: ListView.builder(
               controller: _controller,
                 itemCount: i,
@@ -289,51 +289,7 @@ class _TransfersAddState extends State<TransfersAdd> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                height: 35,
-                width: 140,
-                child: RaisedButton(
-                  color: Colors.white,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.remove,
-                        color: Colors.red,
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        LocaleKeys.delete.tr(),
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ],
-                  ),
-                  onPressed: (){
-                    if(i > 1) {
-                      data.removeAt(i-1);
-                      i--;
-                    }
-                    setState(() {
-
-                      }
-                    );
-
-                    Future.delayed(const Duration(milliseconds: 500), () async {
-                      _scrollDown();
-                    });
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(
-                          color: Colors.red
-                      )
-                  ),
-                ),
-              ),
-              Container(
+              if(i < 10) Container(
                 height: 35,
                 width: 140,
                 child: RaisedButton(
@@ -379,6 +335,50 @@ class _TransfersAddState extends State<TransfersAdd> {
                       borderRadius: BorderRadius.circular(8),
                       side: BorderSide(
                           color: Colors.orange
+                      )
+                  ),
+                ),
+              ),
+              if(i > 1) Container(
+                height: 35,
+                width: 140,
+                child: RaisedButton(
+                  color: Colors.white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.remove,
+                        color: Colors.red,
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        LocaleKeys.delete.tr(),
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                  onPressed: (){
+                    if(i > 1) {
+                      data.removeAt(i-1);
+                      i--;
+                    }
+                    setState(() {
+
+                    }
+                    );
+
+                    Future.delayed(const Duration(milliseconds: 500), () async {
+                      _scrollDown();
+                    });
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(
+                          color: Colors.red
                       )
                   ),
                 ),

@@ -38,14 +38,14 @@ class _SocialScreenState extends State<SocialScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
         title: Text(
          LocaleKeys.The_choice_of_social_networks.tr(),
           style: TextStyle(
             color: Colors.white,
-            fontSize: 23,
+            fontSize: 21,
             fontStyle: FontStyle.normal,
           ),
         ),

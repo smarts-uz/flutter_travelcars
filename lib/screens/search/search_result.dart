@@ -6,10 +6,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
+import 'package:travelcars/screens/route/route_add.dart';
 import 'package:travelcars/screens/search/details_screen.dart';
 import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/transfers/trasfers_add.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 import 'package:geocoding/geocoding.dart';
 
@@ -140,14 +142,15 @@ class _SearchResultState extends State<SearchResult> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
         title: Text(
           LocaleKeys.Results_of_searching.tr(),
+          maxLines: 3,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 22
+            fontSize: 21
           ),
         ),
         actions: [
@@ -168,14 +171,83 @@ class _SearchResultState extends State<SearchResult> {
       ),
       body: isLoading ? Center(
         child: CircularProgressIndicator(),
-      ) : routes.isEmpty ? Center(
-        child: Text(
-          LocaleKeys.No_matching_results_are_found.tr(),
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 18
+      ) : routes.isEmpty ? Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+                style: TextStyle(
+                    fontSize: 17,
+                    color: Colors.black
+                ),
+                children: [
+                  TextSpan(text: "${LocaleKeys.no_matching_1.tr()}\n\n", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
+                  TextSpan(text: LocaleKeys.No_matching_results_are_found.tr()),
+                ]
+            ),
           ),
-        ),
+          SizedBox(height: 25),
+          SizedBox(
+            height: 40,
+            width: MediaQuery.of(context).size.width * .6,
+            child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => TransfersAdd()
+                      )
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.airplanemode_active,
+                      color: Colors.black,
+                    ),
+                    Text(
+                      "  ${LocaleKeys.transfer.tr()}",
+                      style: TextStyle(
+                        fontSize: 17
+                      ),
+                    )
+                  ],
+                )
+            ),
+          ),
+          SizedBox(height: 15),
+          SizedBox(
+            height: 40,
+            width: MediaQuery.of(context).size.width * .6,
+            child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => RouteAdd()
+                      )
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.map,
+                      color: Colors.black,
+                    ),
+                    Text(
+                      "  ${LocaleKeys.route.tr()}",
+                      style: TextStyle(
+                          fontSize: 17
+                      ),
+                    )
+                  ],
+                )
+            ),
+          ),
+        ],
       ) : ListView.builder(
           itemCount: routes.length,
           itemBuilder: (context, index) {

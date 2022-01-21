@@ -16,7 +16,7 @@ class TripsScreen extends StatelessWidget {
           LocaleKeys.tours.tr(),
           style: TextStyle(
               color: Colors.white,
-              fontSize: 25
+              fontSize: 21
           ),
         ),
         leading: IconButton(
@@ -26,7 +26,7 @@ class TripsScreen extends StatelessWidget {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
       ),

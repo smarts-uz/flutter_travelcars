@@ -64,7 +64,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
         title: Text(
           LocaleKeys.Along_the_way.tr(),
           style: TextStyle(
-            fontSize: 23,
+            fontSize: 21,
             color: Colors.white,
           ),
         ),
@@ -75,7 +75,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
         actions: [

@@ -87,7 +87,7 @@ class _CarCategoryState extends State<CarCategory> {
         title: Text(
           widget.name,
           style:TextStyle(
-              fontSize: 23,
+              fontSize: 21,
               color: Colors.white
           ),
         ),

@@ -14,7 +14,7 @@ class Routes extends StatelessWidget {
         title: Text(
           LocaleKeys.routes.tr(),
           style:TextStyle(
-              fontSize: 25,
+              fontSize: 23,
               color: Colors.white
           ),
         ),

@@ -60,13 +60,13 @@ class _RouteScreenState extends State<RouteScreen> {
           icon: Icon(
               Icons.arrow_back,
               color: Colors.white,
-              size: 28
+              size: 25
           ),
         ),
         title: Text(
           LocaleKeys.routes.tr(),
-          style:TextStyle(
-              fontSize: 25,
+          style: TextStyle(
+              fontSize: 21,
               color: Colors.white
           ),
         ),

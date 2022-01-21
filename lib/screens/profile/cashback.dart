@@ -52,7 +52,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
         title: Text(
@@ -60,7 +60,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w500,
-            fontSize: 25,
+            fontSize: 21,
           ),
         ),
         actions: [

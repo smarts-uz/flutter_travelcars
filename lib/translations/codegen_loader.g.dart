@@ -242,7 +242,18 @@ class CodegenLoader extends AssetLoader{
   "no_matching_1": "No results were found that match your request",
   "trip_comment": "Add a comment",
   "fizik": "Physical person",
-  "yuridik": "Legal entity"
+  "yuridik": "Legal entity",
+  "yur_name": "Company name",
+  "yur_city": "Company city",
+  "yur_address": "Company address",
+  "yur_pochta": "Post index",
+  "yur_bank": "Bank",
+  "yur_account": "Bank account",
+  "oked": "OKED",
+  "mfo": "MFO",
+  "inn": "INN",
+  "okenh": "OKONH",
+  "mail": "E-mail"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги по всем городам Узбекистана: экскурсионные и бизнес-поездки",
@@ -449,7 +460,7 @@ static const Map<String,dynamic> ru = {
   "nukus": "Нукус",
   "navoiy": "Навои",
   "termiz": "Термез",
-  "jizzax": "Джизакс",
+  "jizzax": "Джизак",
   "guliston": "Гулистан",
   "andijon": "Андижан",
   "fargona": "Фергана",
@@ -472,7 +483,18 @@ static const Map<String,dynamic> ru = {
   "no_matching_1": "По вашему запросу ничего не найдено",
   "trip_comment": "Написать комментарий",
   "fizik": "Физический лицо",
-  "yuridik": "Юридический лицо"
+  "yuridik": "Юридический лицо",
+  "yur_name": "Юридическое название",
+  "yur_city": "Юридический город",
+  "yur_address": "Юридический адрес",
+  "yur_pochta": "Почтовый индекс",
+  "yur_bank": "Банк",
+  "yur_account": "Расчетный счет",
+  "oked": "ОКЭД",
+  "mfo": "МФО",
+  "inn": "ИНН",
+  "okenh": "ОКОНХ",
+  "mail": "Е-мейл"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Ўзбекистоннинг барча шаҳарлари ўртасида транспорт хизматлари: саёҳат ва бизнес",
@@ -702,7 +724,18 @@ static const Map<String,dynamic> uz = {
   "no_matching_1": "Сўровингиз бўйича ҳеч нарса топилмади",
   "trip_comment": "Изоҳ қолдириш",
   "fizik": "Жисмоний шахс",
-  "yuridik": "Yurudik shaxs"
+  "yuridik": "Yurudik shaxs",
+  "yur_name": "Юридик номи",
+  "yur_city": "Компания жойлашган шаҳар",
+  "yur_address": "Юридик манзили",
+  "yur_pochta": "Почта индекси",
+  "yur_bank": "Банк",
+  "yur_account": "Ҳисоб рақами",
+  "oked": "ОКЭД",
+  "mfo": "МФО",
+  "inn": "ИНН",
+  "okenh": "ОКОНХ",
+  "mail": "E-mail"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

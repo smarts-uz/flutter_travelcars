@@ -212,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           "TravelCars",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 23,
             color: Colors.white,
           ),
         ),

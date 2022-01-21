@@ -20,13 +20,13 @@ class CarTypes extends StatelessWidget {
           icon: Icon(
               Icons.arrow_back,
               color: Colors.white,
-              size: 28
+              size: 25
           ),
         ),
         title: Text(
           LocaleKeys.Auto_types.tr(),
-          style:TextStyle(
-              fontSize: 25,
+          style: TextStyle(
+              fontSize: 21,
               color: Colors.white
           ),
         ),

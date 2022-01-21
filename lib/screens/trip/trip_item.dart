@@ -67,7 +67,7 @@ class _TripItemState extends State<TripItem> {
         title: Text(
           widget.trip_item["name"],
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 21,
             color: Colors.white,
           ),
         ),
@@ -78,7 +78,7 @@ class _TripItemState extends State<TripItem> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
       ),

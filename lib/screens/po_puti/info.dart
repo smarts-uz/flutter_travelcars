@@ -17,7 +17,7 @@ class InfoScreen extends StatelessWidget {
           "${LocaleKeys.Announcement.tr()} #${way_item["id"]}",
           style: TextStyle(
               color: Colors.white,
-              fontSize: 25
+              fontSize: 21
           ),
         ),
         leading: IconButton(
@@ -27,7 +27,7 @@ class InfoScreen extends StatelessWidget {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
       ),

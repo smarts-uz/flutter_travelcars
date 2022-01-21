@@ -27,12 +27,12 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
-        centerTitle: true,
         title: Text(
           LocaleKeys.Setting_the_language_and_course.tr(),
+          maxLines: 3,
           style: TextStyle(
               color: Colors.white,
-              fontSize: 23
+              fontSize: 21
           ),
         ),
         leading: IconButton(
@@ -42,7 +42,7 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 28,
+            size: 25,
           ),
         ),
       ),
