@@ -140,7 +140,7 @@ class CodegenLoader extends AssetLoader{
   "leave_feedback": "Leave feedback",
   "post_reviews": "Post a review",
   "upload": "Upload",
-  "Create_advert": "Create advert",
+  "Create_advert": "Create trip",
   "Camera": "Camera",
   "Photo_library": "Gallery",
   "Announcement": "Announcement",
@@ -154,7 +154,7 @@ class CodegenLoader extends AssetLoader{
   "name": "Name",
   "Phone": "Phone withe code or e-mail",
   "comment": "Comment",
-  "Along_the_way": "Along the way",
+  "Along_the_way": "En route",
   "sorting": "Sorting",
   "Sort": "Sort",
   "Nothing_found": "Nothing found",
@@ -237,7 +237,9 @@ class CodegenLoader extends AssetLoader{
   "phone": "Phone",
   "code": "Code",
   "important1": "Overtime in 1 hour",
-  "important2": "Bank transfer fee"
+  "important2": "Bank transfer fee",
+  "edit_advert": "Edit trip",
+  "route_name": "Travel itinerary"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги по всем городам Узбекистана: экскурсионные и бизнес-поездки",
@@ -365,7 +367,7 @@ static const Map<String,dynamic> ru = {
   "leave_feedback": "Оставить отзыв",
   "post_reviews": "Отправить отзыв",
   "upload": "Загрузить",
-  "Create_advert": "Создать объявление",
+  "Create_advert": "Добавить поездку",
   "Camera": "Камера",
   "Photo_library": "Галерея",
   "Announcement": "Объявление",
@@ -462,7 +464,9 @@ static const Map<String,dynamic> ru = {
   "phone": "Телефон",
   "code": "Код",
   "important1": "Овертайм за 1 час",
-  "important2": "Комиссия за банковский перевод"
+  "important2": "Комиссия за банковский перевод",
+  "edit_advert": "Изменить поездку",
+  "route_name": "Название маршрута"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Ўзбекистоннинг барча шаҳарлари ўртасида транспорт хизматлари: саёҳат ва бизнес",
@@ -687,7 +691,9 @@ static const Map<String,dynamic> uz = {
   "phone": "Telefon",
   "code": "Kod",
   "important1": "Овертайм (бир соат учун)",
-  "important2": "Банк орқали ўтказма учун комиссия"
+  "important2": "Банк орқали ўтказма учун комиссия",
+  "edit_advert": "Safarni tahrirlash",
+  "route_name": "Travel itinerary"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

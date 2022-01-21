@@ -18,7 +18,7 @@ class PoPutiScreen extends StatefulWidget {
 }
 
 class _PoPutiScreenState extends State<PoPutiScreen> {
-  int user_id = 0;
+  int? user_id;
   String? token;
   bool isLoading = true;
   late List<dynamic> ways;
@@ -246,164 +246,167 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
               ),
             ),
             Column(
-              children: indexes.map((index) => Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                        width: 1.5,
-                        color: Colors.grey
-                    )
-                ),
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15.0, right: 20),
-                      child: RichText(
-                          text: TextSpan(
-                              style: TextStyle(
-                                  fontSize: 19,
-                                  height: 1.7,
-                                  color: Colors.black
-                              ),
-                              children: [
-                                TextSpan(text: "${LocaleKeys.From.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(text: "${ways[index]["address1"]}\n"),
-                                TextSpan(text: "${LocaleKeys.To.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(text: "${ways[index]["address2"]}\n"),
-                                TextSpan(text: "${LocaleKeys.Date.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(text: "${ways[index]["date"]}\n"),
-                                TextSpan(text: "${LocaleKeys.Time.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(text: "${ways[index]["time"].substring(0, 5)}\n"),
-                                TextSpan(text: "${LocaleKeys.Car_type.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(text: "${ways[index]["model_car"]}"),
-                              ]
-                          )
-                      ),
-                    ),
-                    ways[index]["user_id"] != user_id ? GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => InfoScreen(ways[index])
-                            )
-                        );
-                      },
-                      child: Container(
-                        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                color: Colors.grey,
-                                width: 1.5
+              children: indexes.map((index) {
+                print("Way item: ${ways[index]["user_id"]}");
+                return Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                          width: 1.5,
+                          color: Colors.grey
+                      )
+                  ),
+                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15.0, right: 20),
+                        child: RichText(
+                            text: TextSpan(
+                                style: TextStyle(
+                                    fontSize: 19,
+                                    height: 1.7,
+                                    color: Colors.black
+                                ),
+                                children: [
+                                  TextSpan(text: "${LocaleKeys.From.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                  TextSpan(text: "${ways[index]["address1"]}\n"),
+                                  TextSpan(text: "${LocaleKeys.To.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                  TextSpan(text: "${ways[index]["address2"]}\n"),
+                                  TextSpan(text: "${LocaleKeys.Date.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                  TextSpan(text: "${ways[index]["date"]}\n"),
+                                  TextSpan(text: "${LocaleKeys.Time.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                  TextSpan(text: "${ways[index]["time"].substring(0, 5)}\n"),
+                                  TextSpan(text: "${LocaleKeys.Car_type.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                  TextSpan(text: "${ways[index]["model_car"]}"),
+                                ]
                             )
                         ),
-                        height: MediaQuery.of(context).size.height * .05,
-                        width: MediaQuery.of(context).size.width * .9,
-                        child:  Text(
-                          LocaleKeys.details.tr(),
-                          style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.orange
+                      ),
+                      ways[index]["user_id"] != user_id || user_id == null ? GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => InfoScreen(ways[index])
+                              )
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                  color: Colors.grey,
+                                  width: 1.5
+                              )
+                          ),
+                          height: MediaQuery.of(context).size.height * .05,
+                          width: MediaQuery.of(context).size.width * .9,
+                          child:  Text(
+                            LocaleKeys.details.tr(),
+                            style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.orange
+                            ),
                           ),
                         ),
+                      ) : Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => InfoScreen(ways[index])
+                                    )
+                                );
+                              },
+                              child: Container(
+                                height: 45,
+                                width: 45,
+                                decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: Icon(
+                                  Icons.remove_red_eye,
+                                  color: Colors.white,
+                                  size: 25,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 15),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => AddScreen(way_item: ways[index],)
+                                    )
+                                );
+                              },
+                              child: Container(
+                                height: 45,
+                                width: 45,
+                                decoration: BoxDecoration(
+                                    color: Colors.orange,
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: Icon(
+                                  Icons.edit,
+                                  color: Colors.white,
+                                  size: 25,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 15),
+                            GestureDetector(
+                              onTap: () async {
+                                print("hello");
+                                Uri url = Uri.parse("${AppConfig.BASE_URL}/onway/delete");
+                                final response = await http.delete(
+                                    url,
+                                    headers: {
+                                      "Authorization": "Bearer $token"
+                                    },
+                                    body: {
+                                      "id": "${ways[index]["id"]}"
+                                    }
+                                );
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                indexes = [];
+                                getways();
+                              },
+                              child: Container(
+                                height: 45,
+                                width: 45,
+                                decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: Icon(
+                                  Icons.clear,
+                                  color: Colors.white,
+                                  size: 25,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ) : Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => InfoScreen(ways[index])
-                                  )
-                              );
-                            },
-                            child: Container(
-                              height: 45,
-                              width: 45,
-                              decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
-                              child: Icon(
-                                Icons.remove_red_eye,
-                                color: Colors.white,
-                                size: 25,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 15),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => AddScreen(way_item: ways[index],)
-                                  )
-                              );
-                            },
-                            child: Container(
-                              height: 45,
-                              width: 45,
-                              decoration: BoxDecoration(
-                                  color: Colors.orange,
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.white,
-                                size: 25,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 15),
-                          GestureDetector(
-                            onTap: () async {
-                              print("hello");
-                              Uri url = Uri.parse("${AppConfig.BASE_URL}/onway/delete");
-                              final response = await http.delete(
-                                url,
-                                headers: {
-                                  "Authorization": "Bearer $token"
-                                },
-                                body: {
-                                  "id": "${ways[index]["id"]}"
-                                }
-                              );
-                              setState(() {
-                                isLoading = true;
-                              });
-                              indexes = [];
-                              getways();
-                            },
-                            child: Container(
-                              height: 45,
-                              width: 45,
-                              decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
-                              child: Icon(
-                                Icons.clear,
-                                color: Colors.white,
-                                size: 25,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              )).toList(),
+                    ],
+                  ),
+                );
+              }).toList(),
             ),
           ],
         ),
@@ -413,7 +416,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
   Widget TFF (String? hintText, TextEditingController controller) {
     return Container(
       width: double.infinity,
-      height: 55,
+      height: 48,
       padding: EdgeInsets.only(left: 6),
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       decoration: BoxDecoration(
@@ -425,24 +428,17 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
         decoration: InputDecoration(
           hintText: hintText,
           hintMaxLines: 3,
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white,
-              width: 0,
-            ),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white,
-              width: 0,
-            ),
-          ),
+          border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
         ),
         controller: controller,
         keyboardType: TextInputType.text,
         cursorColor: Colors.black,
         style: TextStyle(
-            fontSize: 20
+            fontSize: 18
         ),
         expands: false,
         maxLines: 7,

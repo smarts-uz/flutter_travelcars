@@ -224,5 +224,7 @@ abstract class  LocaleKeys {
   static const code = 'code';
   static const important1 = 'important1';
   static const important2 = 'important2';
+  static const edit_advert = 'edit_advert';
+  static const route_name = 'route_name';
 
 }

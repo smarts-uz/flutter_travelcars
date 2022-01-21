@@ -145,7 +145,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
             if(token.isEmpty) Container(
               width: double.infinity,
-              height: 45,
+              height: 48,
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 15),
               margin: EdgeInsets.symmetric(horizontal: 13, vertical: 8),
@@ -177,7 +177,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 keyboardType: TextInputType.name,
                 cursorColor: Colors.black,
                 style: TextStyle(
-                    fontSize: 19,
+                    fontSize: 18,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w400,
                     fontStyle: FontStyle.normal,
@@ -188,7 +188,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
             Container(
               width: double.infinity,
-              height: 45,
+              height: 48,
               padding: EdgeInsets.symmetric(horizontal: 10),
               margin: EdgeInsets.symmetric(horizontal: 13, vertical: 8),
               decoration: BoxDecoration(
@@ -201,7 +201,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   hint: Text(
                      LocaleKeys.country.tr(),
                       style: TextStyle(
-                          fontSize: 19,
+                          fontSize: 18,
                           color: Colors.black
                       )
                   ),
@@ -225,7 +225,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
             if(widget.route_price_id < 0) Container(
               width: double.infinity,
-              height: 45,
+              height: 48,
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.symmetric(horizontal: 10),
               margin: EdgeInsets.symmetric(horizontal: 13, vertical: 8),
@@ -236,7 +236,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 child: TextFormField(
                   autovalidateMode: AutovalidateMode.always,
                   decoration: InputDecoration(
-                    hintText: "Название маршрута",
+                    hintText: LocaleKeys.route_name,
                     hintStyle: TextStyle(
                       color: Colors.black,
                     ),

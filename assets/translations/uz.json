@@ -221,5 +221,7 @@
   "phone": "Telefon",
   "code": "Kod",
   "important1": "Овертайм (бир соат учун)",
-  "important2": "Банк орқали ўтказма учун комиссия"
+  "important2": "Банк орқали ўтказма учун комиссия",
+  "edit_advert": "Safarni tahrirlash",
+  "route_name": "Travel itinerary"
 }

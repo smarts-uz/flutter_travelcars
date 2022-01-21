@@ -252,23 +252,16 @@ class _TripItemState extends State<TripItem> {
                   autovalidateMode: AutovalidateMode.always,
                   decoration: InputDecoration(
                     hintText: hints[e],
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                        width: 0,
-                      ),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                        width: 0,
-                      ),
-                    ),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
                   ),
                   controller: controllers[e],
                   cursorColor: Colors.black,
                   style: TextStyle(
-                      fontSize: 20
+                      fontSize: 19
                   ),
                   expands: false,
                   maxLines: e == 3 ? 3 : 1,

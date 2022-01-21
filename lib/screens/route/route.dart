@@ -73,7 +73,7 @@ class Routes extends StatelessWidget {
                       LocaleKeys.add.tr(),
                       style: TextStyle(
                           color: Colors.orange,
-                        fontSize: 15
+                        fontSize: 17
                       ),
                     ),
                   ],

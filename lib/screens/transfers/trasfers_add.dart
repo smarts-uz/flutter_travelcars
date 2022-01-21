@@ -99,45 +99,6 @@ class _TransfersAddState extends State<TransfersAdd> {
               controller: _controller,
                 itemCount: i,
                 itemBuilder: (context, index) {
-                  Widget TFF(TextEditingController controller, String? hint, double height) {
-                    return Container(
-                      width: double.infinity,
-                      height: height,
-                      alignment: Alignment.topCenter,
-                      padding: EdgeInsets.only(left: 12),
-                      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(5)
-                      ),
-                      child: TextFormField(
-                        autovalidateMode: AutovalidateMode.always,
-                        decoration: InputDecoration(
-                          hintText: hint,
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.white,
-                              width: 0,
-                            ),
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.white,
-                              width: 0,
-                            ),
-                          ),
-                        ),
-                        controller: controller,
-                        keyboardType: hint == "Quantity of passengers" ? TextInputType.number : TextInputType.text,
-                        cursorColor: Colors.black,
-                        style: TextStyle(
-                            fontSize: 19
-                        ),
-                        expands: false,
-                        maxLines: height == 165 ? 7 : 2,
-                      ),
-                    );
-                  }
                   return Card(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                     elevation: 4,
@@ -313,9 +274,9 @@ class _TransfersAddState extends State<TransfersAdd> {
                                 ),
                               ),
                             ),
-                            TFF(data[index]["controllers4"][0], "${LocaleKeys.Quantity_of_passengers.tr()}", 45),
-                            TFF(data[index]["controllers4"][1], "${LocaleKeys.From.tr()}", 45),
-                            TFF(data[index]["controllers4"][2], "${LocaleKeys.To.tr()}", 45),
+                            TFF(data[index]["controllers4"][0], "${LocaleKeys.Quantity_of_passengers.tr()}", 48, isNumber: true),
+                            TFF(data[index]["controllers4"][1], "${LocaleKeys.From.tr()}", 48),
+                            TFF(data[index]["controllers4"][2], "${LocaleKeys.To.tr()}", 48),
                             TFF(data[index]["controllers4"][3], "${LocaleKeys.The_address_of_the_place_to_pick_up_from.tr()}", 110),
                           ]
                       ),
@@ -502,6 +463,45 @@ class _TransfersAddState extends State<TransfersAdd> {
           ),
         ],
         ),
+      ),
+    );
+  }
+  Widget TFF(TextEditingController controller, String? hint, double height, {isNumber = false}) {
+    return Container(
+      width: double.infinity,
+      height: height,
+      alignment: Alignment.topCenter,
+      padding: EdgeInsets.only(left: 12),
+      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(5)
+      ),
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.always,
+        decoration: InputDecoration(
+          hintText: hint,
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white,
+              width: 0,
+            ),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white,
+              width: 0,
+            ),
+          ),
+        ),
+        controller: controller,
+        keyboardType: isNumber ? TextInputType.number : TextInputType.text,
+        cursorColor: Colors.black,
+        style: TextStyle(
+            fontSize: 19
+        ),
+        expands: false,
+        maxLines: height == 165 ? 7 : 2,
       ),
     );
   }

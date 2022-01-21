@@ -196,7 +196,7 @@ class _RouteAddState extends State<RouteAdd> {
                                 ),
                               ),
                             ),
-                            TFF("${LocaleKeys.Quantity_of_passengers.tr()}", data[index]["controllers2"][0], 45),
+                            TFF("${LocaleKeys.Quantity_of_passengers.tr()}", data[index]["controllers2"][0], 48),
                             TFF("${LocaleKeys.The_address_of_the_place_to_pick_up_from.tr()}", data[index]["controllers2"][1], 110),
                           ]
                       ),
@@ -436,24 +436,17 @@ class _RouteAddState extends State<RouteAdd> {
         decoration: InputDecoration(
           hintText: hint_text,
           hintMaxLines: 3,
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white,
-              width: 0,
-            ),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white,
-              width: 0,
-            ),
-          ),
+          border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
         ),
         controller: controller,
         keyboardType: TextInputType.text,
         cursorColor: Colors.black,
         style: TextStyle(
-            fontSize: 19
+            fontSize: 18
         ),
         expands: false,
         maxLines: 7,

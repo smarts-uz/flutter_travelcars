@@ -108,7 +108,7 @@ class _AddScreenState extends State<AddScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-         LocaleKeys.Create_advert.tr(),
+          widget.way_item.isNotEmpty ? LocaleKeys.edit_advert.tr() : LocaleKeys.Create_advert.tr(),
           style: TextStyle(
             fontSize: 25,
             color: Colors.white,
@@ -138,8 +138,8 @@ class _AddScreenState extends State<AddScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TFF("${LocaleKeys.From.tr()}", text_controllers[0], 45, false),
-                TFF("${LocaleKeys.To.tr()}", text_controllers[1], 45, false),
+                TFF("${LocaleKeys.From.tr()}", text_controllers[0], 48, false),
+                TFF("${LocaleKeys.To.tr()}", text_controllers[1], 48, false),
                 GestureDetector(
                   onTap: () {
                     showDatePicker(
@@ -217,11 +217,11 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                   ),
                 ),
-                TFF("${LocaleKeys.car.tr()}", text_controllers[2], 45, false),
-                TFF("${LocaleKeys.Quantity_.tr()}", text_controllers[3], 45, true),
-                TFF("${LocaleKeys.Quantity.tr()}", text_controllers[4], 45, true),
-                TFF("${LocaleKeys.name.tr()}", text_controllers[5], 45, false),
-                TFF("${LocaleKeys.phone.tr()}", text_controllers[6], 45, true),
+                TFF("${LocaleKeys.car.tr()}", text_controllers[2], 48, false),
+                TFF("${LocaleKeys.Quantity_.tr()}", text_controllers[3], 48, true),
+                TFF("${LocaleKeys.Quantity.tr()}", text_controllers[4], 48, true),
+                TFF("${LocaleKeys.name.tr()}", text_controllers[5], 48, false),
+                TFF("${LocaleKeys.phone.tr()}", text_controllers[6], 48, true),
                 TFF("${LocaleKeys.comment.tr()}", text_controllers[7], 110, false),
                 Row(
                   children: [
@@ -411,7 +411,7 @@ class _AddScreenState extends State<AddScreen> {
                       }
                     },
                     child: Text(
-                      LocaleKeys.send.tr(),
+                      widget.way_item.isNotEmpty ? LocaleKeys.save.tr() : LocaleKeys.send.tr(),
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white
@@ -431,7 +431,7 @@ class _AddScreenState extends State<AddScreen> {
     return Container(
       width: double.infinity,
       height: height,
-      padding: EdgeInsets.only(left: 12),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
@@ -440,26 +440,24 @@ class _AddScreenState extends State<AddScreen> {
       child: TextFormField(
         autovalidateMode: AutovalidateMode.always,
         decoration: InputDecoration(
+          border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
           hintText: hintText,
+          hintStyle: TextStyle(
+            fontSize: 18
+          ),
           hintMaxLines: 3,
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white,
-              width: 0,
-            ),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.white,
-              width: 0,
-            ),
-          ),
         ),
         controller: controller,
         keyboardType: isNumber ? TextInputType.number : TextInputType.text,
         cursorColor: Colors.black,
         style: TextStyle(
-            fontSize: 19
+            fontSize: 18,
+            fontStyle: FontStyle.normal,
+            decoration: TextDecoration.none
         ),
         expands: false,
         maxLines: 7,
