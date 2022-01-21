@@ -7,7 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:travelcars/screens/feedback/feedback.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 import '../../app_config.dart';
-import '../../dialogs.dart';
+
+
 class Reviews extends StatefulWidget {
   final int route_price_id;
   Reviews({this.route_price_id = -1});

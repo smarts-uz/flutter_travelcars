@@ -140,7 +140,7 @@ class _SecondScreenState extends State<SecondScreen> {
                     return;
                   }
 
-                  if(new_p.text!.compareTo(new_p_c.text) != 0) {
+                  if(new_p.text.compareTo(new_p_c.text) != 0) {
                     ToastComponent.showDialog(LocaleKeys.You_entered_confirma.tr());
                     return;
                   }

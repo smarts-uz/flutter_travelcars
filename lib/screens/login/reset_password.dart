@@ -4,7 +4,6 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/screens/login/confirm.dart';
 import 'package:http/http.dart' as http;
-import 'package:travelcars/screens/login/set_password.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 import '../../app_config.dart';
 import 'components/toast.dart';
@@ -102,6 +101,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                     ToastComponent.showDialog(LocaleKeys.TextField_is_empty.tr());
                     return;
                   }
+
+                  if(_emailController.text.substring(0, 1) == "+") {
+                    _emailController.text = _emailController.text.substring(1, _emailController.text.length -1);
+                  }
+
                   String url = "${AppConfig.BASE_URL}/password/forgot";
                   final result = await http.post(
                       Uri.parse(url),

@@ -8,8 +8,6 @@ import 'package:travelcars/screens/profile/account/social_screen.dart';
 import 'package:travelcars/screens/search/search.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
-
-import 'choice_language.dart';
 import 'user_screen.dart';
 
 class AccountScreen extends StatefulWidget {

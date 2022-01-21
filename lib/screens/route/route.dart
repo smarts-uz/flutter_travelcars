@@ -1,10 +1,8 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/route/route_add.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
-import '../../dialogs.dart';
 
 class Routes extends StatelessWidget {
   const Routes({Key? key}) : super(key: key);

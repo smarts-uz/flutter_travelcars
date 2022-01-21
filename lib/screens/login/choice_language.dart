@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/login/components/drop_button_lang.dart';
 import 'package:travelcars/screens/login/components/drop_button_mny.dart';
-import 'package:travelcars/screens/login/login_srcreen.dart';
 import 'package:travelcars/screens/main_screen.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';

@@ -1,10 +1,8 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/screens/transfers/trasfers_add.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
-import '../../dialogs.dart';
 
 class Transfer extends StatelessWidget {
   const Transfer({Key? key}) : super(key: key);

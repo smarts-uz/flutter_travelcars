@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
@@ -146,6 +145,11 @@ class _SignInState extends State<SignIn> {
                     ToastComponent.showDialog(LocaleKeys.TextField_is_empty.tr());
                     return;
                   }
+
+                  if(_emailController.text.substring(0, 1) == "+") {
+                    _emailController.text = _emailController.text.substring(1, _emailController.text.length -1);
+                  }
+
                   String url = "${AppConfig.BASE_URL}/login";
                   final result = await http.post(
                     Uri.parse(url),

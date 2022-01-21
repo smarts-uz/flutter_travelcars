@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:travelcars/screens/login/social_network.dart';
 import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/codegen_loader.g.dart';
 
