@@ -46,11 +46,11 @@ class InfoScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: RichText(
                   text: TextSpan(
                     style: TextStyle(
-                      fontSize: 19,
+                      fontSize: 18,
                       height: 1.7,
                       color: Colors.black
                     ),
@@ -69,38 +69,14 @@ class InfoScreen extends StatelessWidget {
                       TextSpan(text: "${way_item["place"]}\n"),
                       TextSpan(text: "${LocaleKeys.Quantity.tr()} ", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "${way_item["place_bag"]}\n"),
-                      TextSpan(text: "${LocaleKeys.comment.tr()} ", style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: "${LocaleKeys.comment.tr()}:\n", style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: "${way_item["comment"]}\n"),
+                      TextSpan(text: "${LocaleKeys.contact.tr()}\n", style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: "${LocaleKeys.name.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: "${way_item["name"]}\n"),
+                      TextSpan(text: "${LocaleKeys.phone.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: "${way_item["tel"]}\n"),
                     ]
-                  )
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 25, right: 25, top: 5, bottom: 15),
-              child: Text(
-                "${way_item["comment"]}",
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                  fontSize: 17,
-                  height: 1.3,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 20),
-              child: RichText(
-                  text: TextSpan(
-                      style: TextStyle(
-                          fontSize: 19,
-                          height: 1.7,
-                          color: Colors.black
-                      ),
-                      children: [
-                        TextSpan(text: "${LocaleKeys.contact.tr()}\n", style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: "\t\t${LocaleKeys.name.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: "${way_item["name"]}\n"),
-                        TextSpan(text: "\t\t${LocaleKeys.phone.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: "${way_item["tel"]}\n"),
-                      ]
                   )
               ),
             ),

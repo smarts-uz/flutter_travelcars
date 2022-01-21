@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Uri url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=${HomeScreen.city[i]}&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
       var response = await http.get(url);
       if(jsonDecode(response.body)["cod"] == "404") {
-        Uri another_url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=${HomeScreen.city[i] == "Жиззах" || HomeScreen.city[i] == "Джизакс" ? "Jizzax" : "Qarshi"}&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
+        Uri another_url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=Qarshi&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
         final another_response = await http.get(another_url);
         weather["${HomeScreen.city[i]}"] = json.decode(another_response.body)["main"]["temp"].round();
       } else {
@@ -421,10 +421,11 @@ class _HomeScreenState extends State<HomeScreen> {
               width: double.infinity,
               child: Text(
                 LocaleKeys.home_screen_Transport_services.tr(),
-                maxLines: 3,
+                maxLines: 10,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 20
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
                 ),
               ),
             ),
@@ -433,8 +434,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Text(
                 LocaleKeys.Most_popular_routes.tr(),
                 textAlign: TextAlign.center,
+                maxLines: 10,
                 style: TextStyle(
-                    fontSize: 24
+                    fontSize: 19
                 ),
               ),
             ),
@@ -515,17 +517,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               }).toList(),
             ),
-            SizedBox(
-              height: 15,
-            ),
+            SizedBox(height: 15),
             Container(
               padding: EdgeInsets.only(left: 8, top: 20, right: 8),
               child: Text(
                LocaleKeys.Most_popular_cars_book.tr(),
                 textAlign: TextAlign.center,
-                maxLines: 2,
+                maxLines: 10,
                 style: TextStyle(
-                    fontSize: 22
+                    fontSize: 19
                 ),
               ),
             ),
@@ -573,21 +573,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   LocaleKeys.see_all.tr(),
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 25.0
+                    fontSize: 20.0
                   ),
                 ),
               ),
             ),
-            SizedBox(
-              height: 18,
-            ),
+            SizedBox(height: 18),
             Container(
               padding: EdgeInsets.only(left: 15, bottom: 5, right: 15),
               child: Text(
                LocaleKeys.News_and_special_offers.tr(),
+                maxLines: 10,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 24
+                    fontSize: 19
                 ),
               ),
             ),

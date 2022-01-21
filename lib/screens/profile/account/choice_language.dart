@@ -136,10 +136,13 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                     value: testServer,
                   ),
                   SizedBox(width: 5),
-                  Text(
-                    LocaleKeys.Turn_on_test_server.tr(),
-                    style: TextStyle(
-                        fontSize: 20
+                  Expanded(
+                    child: Text(
+                      LocaleKeys.Turn_on_test_server.tr(),
+                      maxLines: 3,
+                      style: TextStyle(
+                          fontSize: 20
+                      ),
                     ),
                   ),
                 ],

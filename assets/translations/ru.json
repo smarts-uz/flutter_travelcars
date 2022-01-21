@@ -45,7 +45,7 @@
   "You_are_assigned_percentage_of": "Вам назначен процент в размере",
   "you_have_been_credited_with_cashback_in_the_amount_of": "Вам начислен кэшбек в размере",
   "Results_of_searching": "Результаты поиска",
-  "No_matching_results_are_found": "Подходящие результаты не найдены",
+  "No_matching_results_are_found": "Если Вы не нашли, что искали. Нажмите на форму заявки и заполните ее.",
   "Your_application_is_accepted": "Ваша заявка принята",
   "close": "Закрыть",
   "Your_review_has_been_sent_successfully": "Ваш отзыв успешно отправлен",
@@ -203,7 +203,7 @@
   "nukus": "Нукус",
   "navoiy": "Навои",
   "termiz": "Термез",
-  "jizzax": "Джизакс",
+  "jizzax": "Джизак",
   "guliston": "Гулистан",
   "andijon": "Андижан",
   "fargona": "Фергана",
@@ -222,5 +222,9 @@
   "important1": "Овертайм за 1 час",
   "important2": "Комиссия за банковский перевод",
   "edit_advert": "Изменить поездку",
-  "route_name": "Название маршрута"
+  "route_name": "Название маршрута",
+  "no_matching_1": "По вашему запросу ничего не найдено",
+  "trip_comment": "Написать комментарий",
+  "fizik": "Физический лицо",
+  "yuridik": "Юридический лицо"
 }

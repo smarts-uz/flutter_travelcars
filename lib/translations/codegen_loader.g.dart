@@ -61,7 +61,7 @@ class CodegenLoader extends AssetLoader{
   "You_are_assigned_percentage_of": "You are assigned a percentage of",
   "you_have_been_credited_with_cashback_in_the_amount_of": "You have been credited with cashback in the amount of",
   "Results_of_searching": "Results of searching",
-  "No_matching_results_are_found": "No matching results are found",
+  "No_matching_results_are_found": "If you did not find what you were looking for. Click on the application form and fill it out.",
   "Your_application_is_accepted": "Your request is accepted",
   "close": "Close",
   "Your_review_has_been_sent_successfully": "Your review has been sent successfully",
@@ -238,7 +238,11 @@ class CodegenLoader extends AssetLoader{
   "important1": "Overtime in 1 hour",
   "important2": "Bank transfer fee",
   "edit_advert": "Edit trip",
-  "route_name": "Travel itinerary"
+  "route_name": "Travel itinerary",
+  "no_matching_1": "No results were found that match your request",
+  "trip_comment": "Add a comment",
+  "fizik": "Physical person",
+  "yuridik": "Legal entity"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги по всем городам Узбекистана: экскурсионные и бизнес-поездки",
@@ -287,7 +291,7 @@ static const Map<String,dynamic> ru = {
   "You_are_assigned_percentage_of": "Вам назначен процент в размере",
   "you_have_been_credited_with_cashback_in_the_amount_of": "Вам начислен кэшбек в размере",
   "Results_of_searching": "Результаты поиска",
-  "No_matching_results_are_found": "Подходящие результаты не найдены",
+  "No_matching_results_are_found": "Если Вы не нашли, что искали. Нажмите на форму заявки и заполните ее.",
   "Your_application_is_accepted": "Ваша заявка принята",
   "close": "Закрыть",
   "Your_review_has_been_sent_successfully": "Ваш отзыв успешно отправлен",
@@ -464,7 +468,11 @@ static const Map<String,dynamic> ru = {
   "important1": "Овертайм за 1 час",
   "important2": "Комиссия за банковский перевод",
   "edit_advert": "Изменить поездку",
-  "route_name": "Название маршрута"
+  "route_name": "Название маршрута",
+  "no_matching_1": "По вашему запросу ничего не найдено",
+  "trip_comment": "Написать комментарий",
+  "fizik": "Физический лицо",
+  "yuridik": "Юридический лицо"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Ўзбекистоннинг барча шаҳарлари ўртасида транспорт хизматлари: саёҳат ва бизнес",
@@ -513,7 +521,7 @@ static const Map<String,dynamic> uz = {
   "You_are_assigned_percentage_of": "Сизга фоиз тайинланган",
   "you_have_been_credited_with_cashback_in_the_amount_of": "миқдорида нақд пул ўтказилди",
   "Results_of_searching": "Қидирув натижалари",
-  "No_matching_results_are_found": "Ҳеч қандай мос натижа топилмади",
+  "No_matching_results_are_found": "Агар излаган йўналишингизни топа олмаган бўлсангиз, сўров юбориш тугмасига босинг ва уни тўлдиринг.",
   "Your_application_is_accepted": "Сизнинг аризангиз қабул қилинди",
   "close": "Ёпиш",
   "Your_review_has_been_sent_successfully": "Шарҳингиз муваффақиятли юборилди",
@@ -690,7 +698,11 @@ static const Map<String,dynamic> uz = {
   "important1": "Овертайм (бир соат учун)",
   "important2": "Банк орқали ўтказма учун комиссия",
   "edit_advert": "Сафарни таҳрирлаш",
-  "route_name": "Йўналиш номи"
+  "route_name": "Йўналиш номи",
+  "no_matching_1": "Сўровингиз бўйича ҳеч нарса топилмади",
+  "trip_comment": "Изоҳ қолдириш",
+  "fizik": "Жисмоний шахс",
+  "yuridik": "Yurudik shaxs"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

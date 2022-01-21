@@ -22,7 +22,10 @@ class _FirstSceenState extends State<FirstSceen> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
 
-  List<String> sort = ["Физическое лицо", "Юридическое лицо"];
+  List<String> sort = [
+    LocaleKeys.fizik.tr(),
+    LocaleKeys.yuridik.tr(),
+   ];
   int? _radioVal2;
   List<TextEditingController> controllers = [
     for (int i = 0; i < 10; i++)

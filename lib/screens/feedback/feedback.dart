@@ -236,7 +236,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 child: TextFormField(
                   autovalidateMode: AutovalidateMode.always,
                   decoration: InputDecoration(
-                    hintText: LocaleKeys.route_name,
+                    hintText: LocaleKeys.route_name.tr(),
                     hintStyle: TextStyle(
                       color: Colors.black,
                     ),

@@ -129,7 +129,7 @@ class _AddScreenState extends State<AddScreen> {
         child: Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           elevation: 4,
-          margin: EdgeInsets.fromLTRB(24, 20, 24, 24),
+          margin: EdgeInsets.fromLTRB(20, 16, 20, 20),
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20)
@@ -226,9 +226,9 @@ class _AddScreenState extends State<AddScreen> {
                 Row(
                   children: [
                     Container(
-                      height: 120, //MediaQuery.of(context).size.height * .2,
-                      width: 120,
-                      margin: EdgeInsets.symmetric(horizontal: 9.0, vertical: 7.0),//MediaQuery.of(context).size.width * .2,
+                      height: 120,
+                      width: MediaQuery.of(context).size.width * .4,
+                      margin: EdgeInsets.symmetric(vertical: 7.0),//MediaQuery.of(context).size.width * .2,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
                         image:   _pickedImage != null ?
@@ -244,6 +244,7 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                     Container(
                       height: 120,
+                      width: MediaQuery.of(context).size.width * .4,
                       padding: EdgeInsets.symmetric(vertical: 10.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -254,7 +255,7 @@ class _AddScreenState extends State<AddScreen> {
                             },
                             child: Container(
                               height: 40,
-                              width: MediaQuery.of(context).size.width * .45,
+                              width: MediaQuery.of(context).size.width * .35,
                               decoration: BoxDecoration(
                                   color: Colors.orange,
                                   borderRadius: BorderRadius.circular(8),
@@ -262,24 +263,26 @@ class _AddScreenState extends State<AddScreen> {
                                       color: Colors.grey
                                   )
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.upload,
-                                    size: 25,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    LocaleKeys.upload.tr(),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 25
+                              child: FittedBox(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.upload,
+                                      size: 20,
+                                      color: Colors.white,
                                     ),
-                                  ),
-                                ],
-                              ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      LocaleKeys.upload.tr(),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
                             ),
                           ),
                           GestureDetector(
@@ -291,30 +294,32 @@ class _AddScreenState extends State<AddScreen> {
                             },
                             child: Container(
                               height: 40,
-                              width: MediaQuery.of(context).size.width * .45,
+                              width: MediaQuery.of(context).size.width * .35,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(
                                   color: Colors.grey
                                 )
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.delete,
-                                    size: 25,
-                                    color: Colors.orange,
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    LocaleKeys.delete.tr(),
-                                    style: TextStyle(
-                                        color: Colors.orange,
-                                        fontSize: 25
+                              child: FittedBox(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.delete,
+                                      size: 20,
+                                      color: Colors.orange,
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(width: 5),
+                                    Text(
+                                      LocaleKeys.delete.tr(),
+                                      style: TextStyle(
+                                          color: Colors.orange,
+                                          fontSize: 18
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

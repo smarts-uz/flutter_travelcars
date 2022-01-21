@@ -32,7 +32,12 @@ class _TripItemState extends State<TripItem> {
     for (int i = 0; i < 4; i++)
       TextEditingController()
   ];
-  List<String> hints = ["Name", "E-mail", "Phone", "Write a comment for order"];
+  List<String> hints = [
+    LocaleKeys.name.tr(),
+    "E-mail",
+    LocaleKeys.Phone.tr(),
+    LocaleKeys.trip_comment.tr()
+  ];
 
   @override
   void initState() {

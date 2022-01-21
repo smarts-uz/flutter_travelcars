@@ -45,7 +45,7 @@
   "You_are_assigned_percentage_of": "Сизга фоиз тайинланган",
   "you_have_been_credited_with_cashback_in_the_amount_of": "миқдорида нақд пул ўтказилди",
   "Results_of_searching": "Қидирув натижалари",
-  "No_matching_results_are_found": "Ҳеч қандай мос натижа топилмади",
+  "No_matching_results_are_found": "Агар излаган йўналишингизни топа олмаган бўлсангиз, сўров юбориш тугмасига босинг ва уни тўлдиринг.",
   "Your_application_is_accepted": "Сизнинг аризангиз қабул қилинди",
   "close": "Ёпиш",
   "Your_review_has_been_sent_successfully": "Шарҳингиз муваффақиятли юборилди",
@@ -222,5 +222,9 @@
   "important1": "Овертайм (бир соат учун)",
   "important2": "Банк орқали ўтказма учун комиссия",
   "edit_advert": "Сафарни таҳрирлаш",
-  "route_name": "Йўналиш номи"
+  "route_name": "Йўналиш номи",
+  "no_matching_1": "Сўровингиз бўйича ҳеч нарса топилмади",
+  "trip_comment": "Изоҳ қолдириш",
+  "fizik": "Жисмоний шахс",
+  "yuridik": "Yurudik shaxs"
 }

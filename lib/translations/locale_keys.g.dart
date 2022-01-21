@@ -225,5 +225,9 @@ abstract class  LocaleKeys {
   static const important2 = 'important2';
   static const edit_advert = 'edit_advert';
   static const route_name = 'route_name';
+  static const no_matching_1 = 'no_matching_1';
+  static const trip_comment = 'trip_comment';
+  static const fizik = 'fizik';
+  static const yuridik = 'yuridik';
 
 }

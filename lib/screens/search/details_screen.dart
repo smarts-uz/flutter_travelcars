@@ -119,7 +119,7 @@ class _DetailScreenState extends State<DetailScreen> {
             day = 0.5;
         }
         narxlar.add({
-          "day": "${day == 0.5 ? day : day.toInt()} ${LocaleKeys.day.tr()}",
+          "day": "${day == 0.5 ? day : day.toInt()} ${day == 1.0 && SplashScreen.til == "ru" ? LocaleKeys.day.tr() : "дня"}",
           "cost": cost
         });
       } else if(key == "overtime") {
@@ -215,27 +215,29 @@ class _DetailScreenState extends State<DetailScreen> {
       context: ctx,
       builder: (_) {
         return Container(
-          height: 260,
-          margin: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                LocaleKeys.Cancellation_terms.tr(),
-                textAlign: TextAlign.start,
-                style: TextStyle(fontSize: 15, color: Colors.red),
-              ),
-              Divider(),
-              Text(
-                '${widget.route_item["company"]["refund"]}',
-                maxLines: 12,
-                style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.red
+          height: 280,
+          margin: EdgeInsets.all(15),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  LocaleKeys.Cancellation_terms.tr(),
+                  textAlign: TextAlign.start,
+                  style: TextStyle(fontSize: 15, color: Colors.red),
                 ),
-              ),
-            ],
+                Divider(),
+                Text(
+                  '${widget.route_item["company"]["refund"]}',
+                  maxLines: 12,
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.red
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -249,29 +251,31 @@ class _DetailScreenState extends State<DetailScreen> {
         return Container(
           height: 80,
           margin: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                LocaleKeys.important_information.tr(),
-                textAlign: TextAlign.end,
-                style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.orangeAccent
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  LocaleKeys.important_information.tr(),
+                  textAlign: TextAlign.end,
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.orangeAccent
+                  ),
                 ),
-              ),
-              Divider(),
-              Text(
-                //'${widget.route_item["company"]["important"]}',
-                "${LocaleKeys.important1} – $overtime_cost\n${LocaleKeys.important2} - ${widget.refund}",
-                textAlign: TextAlign.justify,
-                maxLines: 5,
-                style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.orangeAccent
-                ),
-              )
-            ],
+                Divider(),
+                Text(
+                  //'${widget.route_item["company"]["important"]}',
+                  "${LocaleKeys.important1.tr()} – $overtime_cost\n${LocaleKeys.important2.tr()} - ${widget.refund}",
+                  textAlign: TextAlign.justify,
+                  maxLines: 5,
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.orangeAccent
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },

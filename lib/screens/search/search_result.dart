@@ -171,8 +171,9 @@ class _SearchResultState extends State<SearchResult> {
       ) : routes.isEmpty ? Center(
         child: Text(
           LocaleKeys.No_matching_results_are_found.tr(),
+          textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 20
+            fontSize: 18
           ),
         ),
       ) : ListView.builder(
