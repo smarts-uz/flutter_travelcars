@@ -153,15 +153,11 @@ abstract class  LocaleKeys {
   static const You_have_been_assigned_percentage_of = 'You_have_been_assigned_percentage_of';
   static const You_have_received_cashback_in_the_amount_of = 'You_have_received_cashback_in_the_amount_of';
   static const aboute_cashback = 'aboute_cashback';
-  static const Cashback_is_refund = 'Cashback_is_refund';
-  static const take_cashback = 'take_cashback';
-  static const pay_between_fiveday = 'pay_between_fiveday';
   static const Passengers = 'Passengers';
   static const Where_to_pick_up = 'Where_to_pick_up';
   static const tours = 'tours';
   static const trip = 'trip';
   static const Social_networks_for_communication = 'Social_networks_for_communication';
-  static const cashback_application = 'cashback_application';
   static const note = 'note';
   static const where = 'where';
   static const home = 'home';
@@ -248,5 +244,8 @@ abstract class  LocaleKeys {
   static const naqd_pul = 'naqd_pul';
   static const uzcard = 'uzcard';
   static const no_cash = 'no_cash';
+  static const write_comment = 'write_comment';
+  static const cashback1 = 'cashback1';
+  static const cashback2 = 'cashback2';
 
 }

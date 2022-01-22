@@ -64,7 +64,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
         title: Text(
           LocaleKeys.Along_the_way.tr(),
           style: TextStyle(
-            fontSize: 21,
+            fontSize: 23,
             color: Colors.white,
           ),
         ),
@@ -147,8 +147,8 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                TFF("From", from),
-                TFF("To", to),
+                TFF(LocaleKeys.From.tr(), from),
+                TFF(LocaleKeys.To.tr(), to),
                 Container(
                   width: double.infinity,
                   height: 55,
@@ -162,8 +162,8 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                       showDatePicker(
                         context: context,
                         initialDate: DateTime.now(),
-                        firstDate: DateTime(2021),
-                        lastDate: DateTime(2030),
+                        firstDate: DateTime(2022),
+                        lastDate: DateTime(2050),
                       ).then((pickedDate) {
                         if(pickedDate==null)
                         {
@@ -175,7 +175,10 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                       });
                     },
                     title: Text(
-                      day == null ? " " : "${DateFormat('yyyy-MM-dd').format(day!)}",
+                      day == null ? " " : "${DateFormat('dd.MM.yyyy').format(day!)}",
+                      style: TextStyle(
+                        fontSize: 16
+                      ),
                     ),
                     trailing: Icon(Icons.calendar_today),
                   ),
@@ -196,7 +199,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                           if(element["address2"] == to.text || to.text.isEmpty) {
                             if(day == null) {
                               new_ways.add(element);
-                            } else if(element["date"] == DateFormat('yyyy-MM-dd').format(day!))
+                            } else if(element["date"] == DateFormat('dd.MM.yyyy').format(day!))
                               {
                                 new_ways.add(element);
                               }
@@ -411,7 +414,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
     return Container(
       width: double.infinity,
       height: 48,
-      padding: EdgeInsets.only(left: 6),
+      padding: EdgeInsets.symmetric(horizontal: 16),
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
@@ -435,7 +438,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
             fontSize: 18
         ),
         expands: false,
-        maxLines: 7,
+        maxLines: 1,
       ),
     );
   }

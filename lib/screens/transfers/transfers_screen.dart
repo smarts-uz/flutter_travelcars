@@ -70,7 +70,7 @@ class _TransfersScreenState extends State<TransfersScreen> {
         title: Text(
           LocaleKeys.transfer.tr(),
           style:TextStyle(
-              fontSize: 21,
+              fontSize: 23,
               color: Colors.white
           ),
         ),
@@ -202,13 +202,12 @@ class List_T extends StatelessWidget {
                                       text: '${info[index]["places"][index_p]['type'] == "meeting" ? LocaleKeys.meeting.tr() : LocaleKeys.Drop_of.tr()}\n',
                                       style: TextStyle(color: Colors.orange, fontSize: 20, fontWeight: FontWeight.bold,)
                                   ),
-                                  TextSpan(text: "$location",),
-                                  TextSpan(
-                                      text:"  ${info[index]["places"][index_p]['date'].substring(0, 10)} ${info[index]["places"][index_p]['time']}\n",
+                                  TextSpan(text: "$location",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       )
                                   ),
+                                  TextSpan(text:"  (${info[index]["places"][index_p]['date'].substring(0, 10)}, ${info[index]["places"][index_p]['time']})\n",),
                                   TextSpan(text: '${info[index]["places"][index_p]['from']} - ${info[index]["places"][index_p]['to']}',),
                                 ],
                               ),
@@ -217,33 +216,13 @@ class List_T extends StatelessWidget {
                       }
                   ),
                 ),
-                /*Container(
-                  padding: EdgeInsets.only(left: 16,bottom: 10,top: 10),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    LocaleKeys.contact.tr(),
-                    style: TextStyle(
-                        fontSize: 20
-                    ),),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 16,bottom:4 ),
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    '${info[index]['user_name']}\n${info[index]['user_email']}\n${info[index]['user_phone']}',
-                    style: TextStyle(
-                        height: 1.5,
-                        fontSize: 15
-                    ),
-                  ),
-                ),*/
                 if(info[index]['created_at'] != null) Container(
                   padding: EdgeInsets.only(left: 16,bottom: 12,top: 10),
                   alignment: Alignment.centerLeft,
                   child: Text(
                     '${LocaleKeys.Created_at.tr()}:',
                     style: TextStyle(
-                        fontSize: 20
+                        fontSize: 18
                     ),
                   ),
                 ),
@@ -271,8 +250,12 @@ class List_T extends StatelessWidget {
                       ),
                     ),
                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => TransfersInfo(info[index])));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TransfersInfo(info[index], status)
+                          )
+                      );
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),

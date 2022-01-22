@@ -5,8 +5,9 @@ import 'package:travelcars/translations/locale_keys.g.dart';
 
 class TransfersInfo extends StatelessWidget {
   Map<String, dynamic> info;
+  final String status;
 
-  TransfersInfo(@required this.info);
+  TransfersInfo(@required this.info, this.status);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class TransfersInfo extends StatelessWidget {
           "${LocaleKeys.application.tr()} #${info['id']}",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 21
+            fontSize: 23
           ),
         ),
         leading: IconButton(
@@ -69,7 +70,7 @@ class TransfersInfo extends StatelessWidget {
                                   text: '${info["places"][index]['city']} ',
                                   style: TextStyle(fontWeight: FontWeight.bold)
                               ),
-                              TextSpan(text: '( ${info["places"][index]['date'].substring(0, 10)} '),
+                              TextSpan(text: '(${info["places"][index]['date'].substring(0, 10)}, '),
                               TextSpan(text: '${info["places"][index]['time']})\n'),
                               TextSpan(
                                   text: '${LocaleKeys.Passengers.tr()}: ',
@@ -103,46 +104,42 @@ class TransfersInfo extends StatelessWidget {
                   )
               ),
             ),
-            if(info['car_type'] != null) Padding(
-              padding: EdgeInsets.only(left: 16,top: 16),
+            Padding(
+              padding: EdgeInsets.only(left: 16,top: 15),
               child: RichText(
                 text: TextSpan(
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 17
+                        fontSize: 17,
+                        height: 1.5
                     ),
                     children: [
                       TextSpan(
                           text: '${LocaleKeys.Auto_types.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
-                      TextSpan(text: '${info['car']}\n'),
-                      TextSpan(
-                          text: 'Auto: ',
-                          style: TextStyle(fontWeight: FontWeight.w500)
-                      ),
-                      TextSpan(text: '${info['car_type']["name"]}\n'),
+                      TextSpan(text: '${info['car_model'] != null ? info['car_model'] : ""}\n'),
                       TextSpan(
                           text: '${LocaleKeys.status.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
-                      TextSpan(text: '${info['status']}')
+                      TextSpan(text: status)
                     ]
                 ),
               ),
             ),
             Padding(
-                padding: EdgeInsets.only(left: 16,top: 24),
+                padding: EdgeInsets.only(left: 16, top: 15),
                 child: Text(
                   LocaleKeys.contact.tr(),
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.w500
                   ),
                 )
             ),
             Padding(
-              padding: EdgeInsets.only(left: 24,top: 8),
+              padding: EdgeInsets.only(left: 24, top: 5),
               child: RichText(
                 text: TextSpan(
                     style: TextStyle(
@@ -151,20 +148,20 @@ class TransfersInfo extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                          text: 'E-mail: ',
+                          text: '${LocaleKeys.name.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
-                      TextSpan(text: '${info['user_email']}\n'),
+                      TextSpan(text: '${info['user_name']}\n'),
                       TextSpan(
                           text: '${LocaleKeys.phone.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
                       TextSpan(text: '${info['user_phone']}\n'),
                       TextSpan(
-                          text: '${LocaleKeys.name.tr()}: ',
+                          text: 'E-mail: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
-                      TextSpan(text: '${info['user_name']}')
+                      TextSpan(text: '${info['user_email']}\n'),
                     ]
                 ),
               ),

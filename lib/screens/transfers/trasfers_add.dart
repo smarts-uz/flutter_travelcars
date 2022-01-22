@@ -203,7 +203,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                                   context: context,
                                   initialDate: DateTime.now(),
                                   firstDate: DateTime.now(),
-                                  lastDate: DateTime(2030),
+                                  lastDate: DateTime(2050),
                                 ).then((pickedDate) {
                                   if(pickedDate==null)
                                   {
@@ -227,7 +227,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "${DateFormat('dd/MM/yyyy').format(data[index]["day"])}",
+                                      "${DateFormat('dd.MM.yyyy').format(data[index]["day"])}",
                                       style: TextStyle(
                                         fontSize: 18
                                       ),

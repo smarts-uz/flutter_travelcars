@@ -87,7 +87,11 @@ class _AddScreenState extends State<AddScreen> {
     if(widget.way_item.isNotEmpty) {
       text_controllers.add(TextEditingController(text: widget.way_item["address1"]));
       text_controllers.add(TextEditingController(text: widget.way_item["address2"]));
-      day = DateTime.parse(widget.way_item["date"]);
+      //kevotti 29.01.2022
+      //kerak 2020-01-02
+      String a = widget.way_item["date"];
+      String dayParse = "${a.substring(6, 10)}-${a.substring(3, 5)}-${a.substring(0, 2)}";
+      day = DateTime.parse(dayParse);
       time = TimeOfDay(hour:int.parse(widget.way_item["time"].split(":")[0]),minute: int.parse(widget.way_item["time"].split(":")[1]));
       text_controllers.add(TextEditingController(text: widget.way_item["model_car"]));
       text_controllers.add(TextEditingController(text: widget.way_item["place_bag"]));
@@ -147,7 +151,7 @@ class _AddScreenState extends State<AddScreen> {
                       context: context,
                       initialDate: DateTime.now(),
                       firstDate: DateTime.now(),
-                      lastDate: DateTime(2030),
+                      lastDate: DateTime(2050),
                     ).then((pickedDate) {
                       if(pickedDate==null)
                       {
@@ -171,7 +175,7 @@ class _AddScreenState extends State<AddScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "${DateFormat('dd/MM/yyyy').format(day)}",
+                          "${DateFormat('dd.MM.yyyy').format(day)}",
                           style: TextStyle(
                               fontSize: 19
                           ),

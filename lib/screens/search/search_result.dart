@@ -36,6 +36,8 @@ class SearchResult extends StatefulWidget {
 }
 
 class _SearchResultState extends State<SearchResult> {
+  double min_price = 10;
+  double max_price = 1000;
   bool isLoading = true;
   String refund = "";
   Map<String, Location> points = {};
@@ -58,6 +60,17 @@ class _SearchResultState extends State<SearchResult> {
   void getSearchResult() async {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/sort");
     if(widget.carCategory > -1) {
+      SearchScreen.radioVal1 = 0;
+      for(var element in HomeScreen.city_list) {
+        if(element["city_id"] == 1) {
+          SearchScreen.SelectedVal1 = element["name"];
+        }
+
+        if(element["city_id"] == 24) {
+          SearchScreen.SelectedVal2 = element["name"];
+        }
+      }
+
       final result_nonreverse = await http.post(
           url,
           body: {
@@ -74,18 +87,23 @@ class _SearchResultState extends State<SearchResult> {
       if(jsonDecode(result_nonreverse.body)["routes"].isNotEmpty) {
         routes.addAll(jsonDecode(result_nonreverse.body)["routes"]);
         refund = jsonDecode(result_nonreverse.body)["commission"] + " " + jsonDecode(result_nonreverse.body)["cur"];
+        min_price = jsonDecode(result_nonreverse.body)["min_price"].toDouble();
+        max_price = jsonDecode(result_nonreverse.body)["max_price"].toDouble();
       }
       refund = jsonDecode(result_nonreverse.body)["commission"] + " " + jsonDecode(result_nonreverse.body)["cur"];
     } else {
+      print(widget.search_body);
       final response = await http.post(
           url,
           body: widget.search_body
       );
+
       routes = jsonDecode(response.body)["routes"];
       refund = jsonDecode(response.body)["commission"] + " " + jsonDecode(response.body)["cur"];
+      min_price = jsonDecode(response.body)["min_price"].toDouble();
+      max_price = jsonDecode(response.body)["max_price"].toDouble();
     }
     print("All: ${routes.toString()}");
-
     setState(() {
       isLoading = false;
     });
@@ -167,7 +185,7 @@ class _SearchResultState extends State<SearchResult> {
         ],
       ),
       endDrawer: Drawer(
-        child: SearchScreen(isDrawer: true,),
+        child: SearchScreen(isDrawer: true, max_val: max_price, min_val: min_price,),
       ),
       body: isLoading ? Center(
         child: CircularProgressIndicator(),
@@ -262,12 +280,10 @@ class _SearchResultState extends State<SearchResult> {
             for(int i = 0; i < options.length; i++) {
               indexes_options.add(i);
             }
-            String route_name = "";
-            /*"${routes[index]["city"]["name"]}${routes[index]["cities"].length > 0 ? " - ${routes[index]["cities"][0]["name"]}" : routes[index]["cities"] > 1 ? " - ${routes[index]["cities"][1]["name"]},*/
-            route_name = routes[index]["city"]["name"];
-            routes[index]["cities"].forEach((element) {
-              route_name = route_name + " - ${element["name"]}";
-            });
+            String route_name = routes[index]["city"]["name"] + " - ${routes[index]["cities"][0]["name"]}";
+            if(routes[index]["reverse"] == 1) {
+              route_name = route_name + " - ${routes[index]["city"]["name"]}";
+            }
             return Card(
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -381,7 +397,7 @@ class _SearchResultState extends State<SearchResult> {
                   ),
                   if(options.isNotEmpty) Container(
                     width: double.infinity,
-                    padding: EdgeInsets.only(top: 5, bottom: 8, left: 15, right: 5),
+                    padding: EdgeInsets.only(top: 5, left: 15, right: 5),
                     child: Column(
                       children: indexes_options.map((i) => Row(
                         children: [
@@ -402,12 +418,11 @@ class _SearchResultState extends State<SearchResult> {
                     ),
                   ),
                   Container(
-                    height: 80,
                     width: double.infinity,
                     padding: EdgeInsets.only(left: 3),
                     child: ListTile(
                       title: Text(
-                        routes[index]["title"].substring(0, routes[index]["title"].length - 11),//route_name,
+                        route_name,
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontSize: 18,
@@ -450,7 +465,7 @@ class _SearchResultState extends State<SearchResult> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 5, left: 18),
+                    padding: EdgeInsets.only(top: 5, left: 18, bottom: 4.0),
                     alignment: Alignment.center,
                     child: Text(
                       "${(routes[index]["price"] * app_kurs).toStringAsFixed(2)} ${SplashScreen.kurs}",

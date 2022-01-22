@@ -6,6 +6,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
+import 'package:travelcars/screens/home/home_screen.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 
@@ -16,6 +18,7 @@ class CashbackScreen extends StatefulWidget {
 
 class _CashbackScreenState extends State<CashbackScreen> {
   bool isLoading = true;
+  double summa = 0;
   Map<String, dynamic> info = {};
 
 
@@ -36,6 +39,15 @@ class _CashbackScreenState extends State<CashbackScreen> {
         }
     );
     info = jsonDecode(result.body)["data"];
+    double app_kurs = 1;
+    HomeScreen.kurs.forEach((element) {
+      if(SplashScreen.kurs == element["code"]) {
+        app_kurs = element["rate"].toDouble();
+      }
+    });
+
+    summa = app_kurs * double.parse(info["cashback_money"]);
+
     setState(() {
       isLoading = false;
     });
@@ -68,7 +80,10 @@ class _CashbackScreenState extends State<CashbackScreen> {
             onPressed: () {
               _showBottomSheet(context);
             },
-            icon: SvgPicture.asset("assets/Vector.svg"),
+            icon: SvgPicture.asset(
+              "assets/Vector.svg",
+            ),
+            iconSize: 40,
           ),
         ],
       ),
@@ -81,43 +96,55 @@ class _CashbackScreenState extends State<CashbackScreen> {
             SvgPicture.asset(
               "assets/Group 278.svg",
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 24, bottom: 8),
-              child: Row(
-                children: [
-                  Text("${LocaleKeys.You_have_been_assigned_percentage_of.tr()}:"),
-                ],
-              ),
-            ),
+            SizedBox(height: 20),
             Container(
-              height: 85,
-              width: 328,
-              alignment: Alignment.center,
-              color: Color.fromRGBO(255, 245, 228, 1),
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              alignment: Alignment.centerLeft,
               child: Text(
-                "${info["cashback_percent"]}%",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 46),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 24, bottom: 8),
-              child: Row(children: [
-                Text(
-                  "${LocaleKeys.You_have_received_cashback_in_the_amount_of.tr()}:",
-                  textAlign: TextAlign.center,
+                "${LocaleKeys.You_have_been_assigned_percentage_of.tr()}:",
+                textAlign: TextAlign.left,
+                maxLines: 2,
+                style: TextStyle(
+                  fontSize: 17,
                 ),
-              ]),
+              ),
             ),
             Container(
               height: 85,
-              width: 328,
+              width: MediaQuery.of(context).size.width * .8,
               alignment: Alignment.center,
               color: Color.fromRGBO(255, 245, 228, 1),
+              child: FittedBox(
+                child: Text(
+                  "${info["cashback_percent"]} %",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 46),
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
-                "${info["cashback_money"]} UZS",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 46),
+                "${LocaleKeys.You_have_received_cashback_in_the_amount_of.tr()}: ",
+                textAlign: TextAlign.left,
+                maxLines: 2,
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
+            ),
+            Container(
+              height: 85,
+              width: MediaQuery.of(context).size.width * .8,
+              alignment: Alignment.center,
+              color: Color.fromRGBO(255, 245, 228, 1),
+              child: FittedBox(
+                child: Text(
+                  "${summa.toStringAsFixed(2)} ${SplashScreen.kurs}",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 46),
+                ),
               ),
             ),
           ],
@@ -137,83 +164,34 @@ class _CashbackScreenState extends State<CashbackScreen> {
         context: context,
         builder: (BuildContext ctx) {
           return Container(
-            height: 350,
-            padding: EdgeInsets.only(bottom: 50),
+            height: 400,
+            padding: EdgeInsets.only(left: 17, right: 17, top: 17, bottom: 10),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    padding: EdgeInsets.only(left: 32, top: 32),
-                    child: Text(
-                      LocaleKeys.aboute_cashback.tr(),
-                      style: TextStyle(
-                          fontStyle: FontStyle.normal,
-                          fontSize: 19,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 0.15),
-                    ),
+                  Text(
+                    LocaleKeys.aboute_cashback.tr(),
+                    style: TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontSize: 19,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 0.15),
                   ),
                   Divider(
                     color: Color.fromRGBO(223, 223, 223, 1),
                     height: 16,
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(left: 18, top: 16),
-                          child: Text(
-                            LocaleKeys.Cashback_is_refund.tr(),
-                            style: TextStyle(
-                                color: Color.fromRGBO(0, 0, 0, 1),
-                                fontStyle: FontStyle.normal,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 0.15),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 16),
-                          child: Text(
-                            LocaleKeys.take_cashback.tr(),
-                            style: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 0.15),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 16),
-                          child: Text(
-                            LocaleKeys.pay_between_fiveday.tr(),
-                            style: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 0.15),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 16),
-                          child: Text(
-                            LocaleKeys.cashback_application.tr(),
-                            style: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 0.15),
-                          ),
-                        ),
-                      ],
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black
+                      ),
+                      children: [
+                        TextSpan(text: "${LocaleKeys.cashback1.tr()}\n\n",),
+                        TextSpan(text: LocaleKeys.cashback2.tr(), style: TextStyle(fontStyle: FontStyle.italic))
+                      ]
                     ),
                   ),
                 ],

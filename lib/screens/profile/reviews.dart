@@ -148,7 +148,7 @@ class _ReviewsState extends State<Reviews> {
         title: Text(
           LocaleKeys.reviews.tr(),
           style: TextStyle(
-              fontSize: 21,
+              fontSize: 23,
               color: Colors.white
           ),
         ),
@@ -393,7 +393,7 @@ class _ReviewsState extends State<Reviews> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 10.0, right: 15.0, left: 16.0, bottom: 8.0),
+                              padding: const EdgeInsets.only(top: 10.0, right: 15.0, left: 16.0, bottom: 7.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -407,11 +407,23 @@ class _ReviewsState extends State<Reviews> {
                                             fontSize: 20
                                         ),
                                       ),
-                                      Text(
-                                        "${reviews['reviews'][index1]['country_name']}",
-                                        style: TextStyle(
-                                            fontSize: 15
-                                        ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        children: [
+                                          Image.network(
+                                            "https://flagcdn.com/w320/${reviews['reviews'][index1]['country_code'].toLowerCase()}.png",
+                                            width: 23,
+                                            height: 18,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            "${reviews['reviews'][index1]['country_name']}",
+                                            style: TextStyle(
+                                                fontSize: 15
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -447,61 +459,59 @@ class _ReviewsState extends State<Reviews> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 9, right: 16),
+                              padding: const EdgeInsets.only(left: 15, bottom: 7, right: 16),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
+                                  Icon(
+                                    Icons.location_on,
+                                    color: Colors.orange,
+                                  ),
+                                  SizedBox(width: 8),
                                   Expanded(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.location_on,
-                                          color: Colors.orange,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            '${reviews['reviews'][index1]["route_name"]}',
-                                            overflow: TextOverflow.ellipsis,
-                                            //softWrap: false,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle: FontStyle.italic
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                    child: Text(
+                                      '${reviews['reviews'][index1]["route_name"]}',
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 3,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic
+                                      ),
                                     ),
                                   ),
-                                  Container(
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.calendar_today_outlined,
-                                          color: Colors.orange,
-                                        ),
-                                        SizedBox(width: 5),
-                                        Text(
-                                          reviews['reviews'][index1]["route_date"] == null ? "" :
-                                          '${reviews['reviews'][index1]["route_date"].substring(0,10)}',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle: FontStyle.italic
-                                          ),
-                                        )
-                                      ],
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 16, bottom: 7, right: 16),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.calendar_today_outlined,
+                                    color: Colors.orange,
+                                  ),
+                                  SizedBox(width: 8),
+                                  Expanded(
+                                    child: Text(
+                                      reviews['reviews'][index1]["route_date"] == null ? "" :
+                                      '${reviews['reviews'][index1]["route_date"].substring(0,10)}',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic
+                                      ),
                                     ),
                                   )
                                 ],
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(left: 16, bottom: 10, right: 16),
+                              padding: EdgeInsets.only(left: 16, bottom: 7, right: 16),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "${LocaleKeys.recall_time.tr()}: ${reviews["reviews"][index1]["created_at"].substring(0,10)}",
+                                    "${LocaleKeys.recall_time.tr()}: ${reviews["reviews"][index1]["created_at"].substring(0, 16)}",
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
                                         fontSize: 15,
@@ -509,9 +519,7 @@ class _ReviewsState extends State<Reviews> {
                                         fontStyle: FontStyle.italic
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
+                                  SizedBox(height: 15),
                                   Text("${reviews["reviews"][index1]["text"]}",
                                     maxLines: 100,
                                     textAlign: TextAlign.justify,

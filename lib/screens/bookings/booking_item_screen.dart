@@ -17,7 +17,8 @@ import '../../app_config.dart';
 
 class BookingScreen extends StatefulWidget {
   final Map<String, dynamic> book_item;
-  BookingScreen(this.book_item);
+  String route_name;
+  BookingScreen(this.book_item, this.route_name);
 
   @override
   _BookingScreenState createState() => _BookingScreenState();
@@ -60,7 +61,6 @@ class _BookingScreenState extends State<BookingScreen> {
   @override
   void initState() {
     super.initState();
-    double app_kurs = 1;
   }
 
   @override
@@ -98,7 +98,7 @@ class _BookingScreenState extends State<BookingScreen> {
         title: Text(
           "${LocaleKeys.bookings.tr()} #${results["id"]}",
           style: TextStyle(
-          fontSize: 21,
+          fontSize: 23,
           color: Colors.white,
           fontWeight: FontWeight.w500,
           fontFamily: 'Poppins',
@@ -229,7 +229,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 Container(
                   padding: EdgeInsets.only(left: 16,top: 8, bottom: 5,),
                   child: Text(
-                    "${results["route"]["title"]}",
+                    "${widget.route_name}",
                     style: TextStyle(
                       fontSize: 15,
                       color: Colors.grey,

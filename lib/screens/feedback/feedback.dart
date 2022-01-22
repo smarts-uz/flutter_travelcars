@@ -297,7 +297,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "${DateFormat('dd/MM/yyyy').format(_selectedDate2!)}",
+                      "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
                       style: TextStyle(
                           fontSize: 18
                       ),
@@ -327,7 +327,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 maxLines: 10,
                 autovalidateMode: AutovalidateMode.always,
                 decoration:  InputDecoration(
-                    hintText: "${LocaleKeys.write_feedback.tr()}...",
+                    hintText: "${LocaleKeys.write_comment.tr()}...",
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.white,
@@ -430,7 +430,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 ),
                 child: Center(
                   child: Text(
-                      LocaleKeys.post_reviews.tr(),
+                    LocaleKeys.send.tr(),
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,

@@ -479,14 +479,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       Positioned(
                         bottom: 12.0,
                         child: Container(
-                          height: 70,
+                          height: 120,
                           alignment: Alignment.bottomLeft,
                           width: MediaQuery.of(context).size.width * .8,
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
+                          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                           child: Text(
                             "${item["name"]}",
-                            maxLines: 2,
+                            maxLines: 3,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,
@@ -561,9 +560,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
               child: Container(
-                height: 40.0,
                 width: double.infinity,
                 margin: EdgeInsets.symmetric(vertical: 7.0, horizontal: 17.0),
+                padding: EdgeInsets.symmetric(vertical: 7.0),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.orange,
@@ -571,6 +570,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Text(
                   LocaleKeys.see_all.tr(),
+                  maxLines: 3,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20.0
@@ -578,7 +579,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 18),
+            SizedBox(height: 10),
             Container(
               padding: EdgeInsets.only(left: 15, bottom: 5, right: 15),
               child: Text(
@@ -610,7 +611,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                           elevation: 4,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
@@ -621,13 +622,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                       "${AppConfig.image_url}/pages/${item["thumb"]}",
                                     ),
                                 ),
-
                                 Text(
                                   item["short"],
-                                  maxLines: 2,
-                                  textAlign: TextAlign.center,
+                                  maxLines: 10,
+                                  textAlign: TextAlign.justify,
                                   style: TextStyle(
-                                      fontSize: 17,
+                                      fontSize: 15,
+                                      height: 1.3,
                                       fontWeight: FontWeight.bold
                                   ),
                                 ),

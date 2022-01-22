@@ -66,7 +66,7 @@ class _RouteScreenState extends State<RouteScreen> {
         title: Text(
           LocaleKeys.routes.tr(),
           style: TextStyle(
-              fontSize: 21,
+              fontSize: 23,
               color: Colors.white
           ),
         ),
@@ -190,55 +190,38 @@ class List_R extends StatelessWidget {
                               height: 1.5,
                             ),
                             children: <TextSpan>[
-                              TextSpan(text: '${info[index]["routes"][index_p]["from"]} - '),
-                              TextSpan(text: '${info[index]["routes"][index_p]["to"]}  ',),
                               TextSpan(
-                                  text: '(${info[index]["routes"][index_p]["date"].substring(0, 10)})',
+                                text: '${info[index]["routes"][index_p]["from"]} - ${info[index]["routes"][index_p]["to"]} ',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold
                                   )
-                              )
+                              ),
+                              TextSpan(text: '(${info[index]["routes"][index_p]["date"].substring(0, 10)})',)
                             ],
                           ),
                         );
                       }
                   ),
                 ),
-                /*Container(
-                  padding: EdgeInsets.only(left: 16, bottom: 5, top: 12),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    LocaleKeys.contact.tr(),
-                    style: TextStyle(
-                        fontSize: 23
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 23),
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    '${info[index]['user_name']}\n${info[index]['user_email']}\n${info[index]['user_phone']}',
-                    style: TextStyle(
-                        height: 1.3,
-                        fontSize: 15
-                    ),
-                  ),
-                ),*/
                 if(info[index]['created_at'] != null) Container(
                   padding: EdgeInsets.only(left: 16, bottom: 8, top: 8),
                   alignment: Alignment.centerLeft,
                   child: Text(
                     LocaleKeys.Created_at.tr(),
                     style: TextStyle(
-                        fontSize: 23
+                        fontSize: 18
                     ),
                   ),
                 ),
                 if(info[index]['created_at'] != null) Container(
                   padding: EdgeInsets.only(left: 23 ,bottom:20 ),
                   alignment: Alignment.centerLeft,
-                  child: Text('${info[index]['created_at'].substring(0, 10)}'),
+                  child: Text(
+                    '${info[index]['created_at'].substring(0, 10)}',
+                    style: TextStyle(
+                      fontSize: 17
+                    ),
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.only(bottom: 16),
@@ -257,7 +240,7 @@ class List_R extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => RouteInfo(info[index])
+                              builder: (context) => RouteInfo(info[index], status)
                           )
                       );
                     },

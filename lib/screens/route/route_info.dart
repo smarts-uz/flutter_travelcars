@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 class RouteInfo extends StatelessWidget {
   Map<String, dynamic> info;
+  final String status;
 
-  RouteInfo(@required this.info);
+  RouteInfo(@required this.info, this.status);
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +14,7 @@ class RouteInfo extends StatelessWidget {
           "${LocaleKeys.application.tr()} #${info['id']}",
           style: TextStyle(
               color: Colors.white,
-              fontSize: 21
+              fontSize: 23
           ),
         ),
         leading: IconButton(
@@ -51,7 +52,7 @@ class RouteInfo extends StatelessWidget {
                               TextSpan(
                                 text: '${info["routes"][index]['from']} - ${info["routes"][index]['to']}  ',
                                 style: TextStyle(fontWeight: FontWeight.bold)),
-                            TextSpan(text: '( ${info["routes"][index]['date'].substring(0, 10)} )\n'),
+                            TextSpan(text: '(${info["routes"][index]['date'].substring(0, 10)})\n'),
                             TextSpan(
                                 text: '${LocaleKeys.Passengers.tr()}: ',
                                 style: TextStyle(fontWeight: FontWeight.bold,)),
@@ -65,7 +66,7 @@ class RouteInfo extends StatelessWidget {
                   ),
               ),
             ),
-            if(info['car_type'] != null) Padding(
+            Padding(
               padding: EdgeInsets.only(left: 16, bottom: 16),
               child: RichText(
                 text: TextSpan(
@@ -76,20 +77,15 @@ class RouteInfo extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                          text: '${LocaleKeys.Auto_types}: ',
+                          text: '${LocaleKeys.Auto_types.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
-                      TextSpan(text: '${info['carType']}\n'),
-                      TextSpan(
-                          text: 'Auto: ',
-                          style: TextStyle(fontWeight: FontWeight.w500)
-                      ),
-                      TextSpan(text: '${info['car_type']["name"]}\n'),
+                      TextSpan(text: '${info['car_type'] ?? ""}\n'),
                       TextSpan(
                           text: '${LocaleKeys.status.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
-                      TextSpan(text: '${info['status']}')
+                      TextSpan(text: status)
                     ]
                 ),
               ),
@@ -99,7 +95,7 @@ class RouteInfo extends StatelessWidget {
                 child: Text(
                   LocaleKeys.contact.tr(),
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.w500
                   ),
                 )
@@ -110,25 +106,25 @@ class RouteInfo extends StatelessWidget {
                 text: TextSpan(
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 16,
+                      fontSize: 17,
                       height: 1.3,
                     ),
                     children: [
                       TextSpan(
-                          text: 'E-mail: ',
+                          text: '${LocaleKeys.name.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
-                      TextSpan(text: '${info['user_email']}\n'),
+                      TextSpan(text: '${info['user_name']}\n'),
                       TextSpan(
                           text: '${LocaleKeys.phone.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
                       TextSpan(text: '${info['user_phone']}\n'),
                       TextSpan(
-                          text: '${LocaleKeys.name.tr()}: ',
+                          text: 'E-mail: ',
                           style: TextStyle(fontWeight: FontWeight.w600)
                       ),
-                      TextSpan(text: '${info['user_name']}')
+                      TextSpan(text: '${info['user_email']}\n'),
                     ]
                 ),
               ),

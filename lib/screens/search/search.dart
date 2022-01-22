@@ -14,9 +14,12 @@ import 'package:travelcars/translations/locale_keys.g.dart';
 
 class SearchScreen extends StatefulWidget {
   final bool isDrawer;
-  SearchScreen({this.isDrawer=false});
+  final double max_val;
+  final double min_val;
+  SearchScreen({this.isDrawer=false, this.max_val = 1000, this.min_val = 10});
   static String? SelectedVal1;
   static String? SelectedVal2;
+  static int? radioVal1;
 
   @override
   _SearchScreenState createState() => _SearchScreenState();
@@ -34,9 +37,9 @@ class _SearchScreenState extends State<SearchScreen> {
     LocaleKeys.By_price.tr(),
     LocaleKeys.By_capacity.tr()
   ];
-  static int? _radioVal1;
+
   static int? _radioVal2;
-  static RangeValues _currentRangeValues = RangeValues(160, 800);
+  static RangeValues _currentRangeValues = RangeValues(10, 1000);
 
 
 
@@ -63,6 +66,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
+    _currentRangeValues = RangeValues(widget.min_val, widget.max_val);
     getcities();
     autoTypes = HomeScreen.cars_list;
     for(int i = 0; i < autoTypes.length; i++) {
@@ -162,10 +166,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   children: [
                     Radio<int>(
                       value: index,
-                      groupValue: _radioVal1,
+                      groupValue: SearchScreen.radioVal1,
                       onChanged: (int? value) {
                         if (value != null) {
-                          setState(() => _radioVal1 = value);
+                          setState(() => SearchScreen.radioVal1 = value);
                           print(value);
                         }},
                     ),
@@ -260,8 +264,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 showDatePicker(
                   context: context,
                   initialDate: DateTime.now(),
-                  firstDate: DateTime(2018),
-                  lastDate: DateTime(2030),
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime(2050),
                 ).then((pickedDate) {
                   if(pickedDate==null)
                   {
@@ -285,7 +289,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "${DateFormat('dd/MM/yyyy').format(_selectedDate1!)}",
+                      "${DateFormat('dd.MM.yyyy').format(_selectedDate1!)}",
                       style: TextStyle(
                         fontSize: 18
                       ),
@@ -300,8 +304,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 showDatePicker(
                   context: context,
                   initialDate: DateTime.now(),
-                  firstDate: DateTime(2018),
-                  lastDate: DateTime(2030),
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime(2050),
                 ).then((pickedDate) {
                   if(pickedDate==null)
                   {
@@ -325,7 +329,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "${DateFormat('dd/MM/yyyy').format(_selectedDate2!)}",
+                      "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
                       style: TextStyle(
                         fontSize: 18
                       ),
@@ -440,8 +444,8 @@ class _SearchScreenState extends State<SearchScreen> {
                    Expanded(
                      child: RangeSlider(
                        values: _currentRangeValues,
-                       min: 160,
-                       max: 800,
+                       min: widget.min_val,
+                       max: widget.max_val,
                        labels: RangeLabels(
                          _currentRangeValues.start.round().toString(),
                          _currentRangeValues.end.round().toString(),
@@ -552,7 +556,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     SearchScreen.SelectedVal1 = null;
                     SearchScreen.SelectedVal2 = null;
                     _currentRangeValues = RangeValues(50, 250);
-                    _radioVal1 = null;
+                    SearchScreen.radioVal1 = null;
                     _radioVal2 = null;
                     autoTypes.forEach((element) {
                       element["chosen"] = false;
@@ -622,14 +626,15 @@ class _SearchScreenState extends State<SearchScreen> {
 
 
                     Map<String, String> search_body = {
-                      "reverse": "$_radioVal1",
+                      "reverse": "${SearchScreen.radioVal1}",
                       "city_start": "$city_start",
                       "cities[]": "$city_end",
                       "date_start": "${DateFormat('dd.MM.yyyy').format(_selectedDate1!)}",
                       "date_end": "${DateFormat('dd.MM.yyyy').format(_selectedDate2!)}",
                       "passengers": "${number_controller.text}",
                       "s": _radioVal2 == 0 ? "price" : "places",
-                      "price": "${_currentRangeValues.start.round()}+-+${_currentRangeValues.end.round()}",
+                      "d": _radioVal2 == 0 ? "asc" : "desc",
+                      "price": "${_currentRangeValues.start.round()} - ${_currentRangeValues.end.round()}",
                       "lang": "${SplashScreen.til}",
                     };
 

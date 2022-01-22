@@ -162,7 +162,7 @@ class _RouteAddState extends State<RouteAdd> {
                                   context: context,
                                   initialDate: DateTime.now(),
                                   firstDate: DateTime.now(),
-                                  lastDate: DateTime(2030),
+                                  lastDate: DateTime(2050),
                                 ).then((pickedDate) {
                                   if(pickedDate==null)
                                   {
@@ -186,7 +186,7 @@ class _RouteAddState extends State<RouteAdd> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "${DateFormat('dd/MM/yyyy').format(data[index]["day"])}",
+                                      "${DateFormat('dd.MM.yyyy').format(data[index]["day"])}",
                                       style: TextStyle(
                                           fontSize: 19
                                       ),

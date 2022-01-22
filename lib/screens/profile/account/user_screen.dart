@@ -121,10 +121,10 @@ class _FirstSceenState extends State<FirstSceen> {
                           Container(
                             height: 45,
                             child: TextFormField(
-                              controller: _phoneController,
-                              keyboardType: TextInputType.phone,
+                              controller: _nameController,
+                              keyboardType: TextInputType.text,
                               decoration: InputDecoration(
-                                labelText: LocaleKeys.Phone.tr(),
+                                labelText: LocaleKeys.name.tr(),
                                 floatingLabelBehavior: FloatingLabelBehavior.always,
                                 contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                 border: OutlineInputBorder(),
@@ -135,10 +135,10 @@ class _FirstSceenState extends State<FirstSceen> {
                           Container(
                             height: 45,
                             child: TextFormField(
-                              controller: _nameController,
-                              keyboardType: TextInputType.text,
+                              controller: _phoneController,
+                              keyboardType: TextInputType.phone,
                               decoration: InputDecoration(
-                                labelText: LocaleKeys.name.tr(),
+                                labelText: LocaleKeys.phone.tr(),
                                 floatingLabelBehavior: FloatingLabelBehavior.always,
                                 contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                 border: OutlineInputBorder(),

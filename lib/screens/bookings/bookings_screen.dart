@@ -75,7 +75,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
          LocaleKeys.bookings.tr(),
           style: TextStyle(
             color: Colors.white,
-            fontSize: 21
+            fontSize: 23
           ),
         ),
       ),
@@ -154,11 +154,17 @@ class _BookingsScreenState extends State<BookingsScreen> {
                 break;
             }
 
-
             List<int> indexes_options = [];
             for(int i = 0; i < results[index]["routeOption"].length; i++) {
               indexes_options.add(i);
             }
+
+            String route_name = "";
+            route_name = results[index]["cityStart"] + " - ${results[index]["cities"][0]}";
+            if(results[index]["reverse"] == 1) {
+              route_name = route_name + " - ${results[index]["cityStart"]}";
+            }
+
             return Card(
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -284,7 +290,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     width: double.infinity,
                     child: ListTile(
                       title: Text(
-                        "${results[index]["city"]["name"]} - ${results[index]["cities"][0]["name"]}",
+                        route_name,
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontSize: 19,
@@ -340,7 +346,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     onTap: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => BookingScreen(results[index])
+                          MaterialPageRoute(builder: (context) => BookingScreen(results[index], route_name)
                           )
                       );
                     },
