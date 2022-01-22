@@ -143,10 +143,13 @@ class _BookingsScreenState extends State<BookingsScreen> {
               case "visa":
                 payment_status = LocaleKeys.visa.tr();
                 break;
-              case "__mastercard":
+              case "Visa":
+                payment_status = LocaleKeys.visa.tr();
+                break;
+              case "mcard":
                 payment_status = LocaleKeys.mcard.tr();
                 break;
-              case "__perechisleniya":
+              case "transfer":
                 payment_status = LocaleKeys.no_cash.tr();
                 break;
             }
@@ -281,7 +284,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     width: double.infinity,
                     child: ListTile(
                       title: Text(
-                        "${results[index]["route"]["title"]}",
+                        "${results[index]["city"]["name"]} - ${results[index]["cities"][0]["name"]}",
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontSize: 19,

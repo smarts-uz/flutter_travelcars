@@ -255,13 +255,13 @@ class CodegenLoader extends AssetLoader{
   "okenh": "OKONH",
   "mail": "E-mail",
   "oplata": "We ask that you please read this «Privacy policy» and «Public offer» carefully prior to proceeding to payment.",
-  "route_text": "Leave a request for an itinerary",
+  "route_text": "Leave a request for a trip",
   "transfer_text": "Leave a request for a transfer",
   "visa": "Online VISA",
   "mcard": "Online MCard",
   "naqd_pul": "Cash",
   "uzcard": "Online UzCard",
-  "no_cash": "Enumeration"
+  "no_cash": "Bank transfer"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги по всем городам Узбекистана: экскурсионные и бизнес-поездки",
@@ -753,13 +753,13 @@ static const Map<String,dynamic> uz = {
   "okenh": "ОКОНХ",
   "mail": "E-mail",
   "oplata": "Тўловга ўтишдан олдин \"Махфийлик сиёсати\" ва \"Оммавий оферта\" билан танишиб чиқиб, уларни қабул қилишингизни сўраймиз",
-  "route_text": "Йўналиш учун сўров қолдиринг",
-  "transfer_text": "Transfer uchun so'rov qoldiring",
+  "route_text": "Саёҳат учун сўров қолдиринг",
+  "transfer_text": "Трансфер учун сўров қолдиринг",
   "visa": "Онлайн VISA",
   "mcard": "Онлайн MCard",
   "naqd_pul": "Нақд пул",
   "uzcard": "Онлайн UzCard",
-  "no_cash": "Пул ўтқазиш"
+  "no_cash": "Пул ўтказиш"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

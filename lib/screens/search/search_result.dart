@@ -262,6 +262,12 @@ class _SearchResultState extends State<SearchResult> {
             for(int i = 0; i < options.length; i++) {
               indexes_options.add(i);
             }
+            String route_name = "";
+            /*"${routes[index]["city"]["name"]}${routes[index]["cities"].length > 0 ? " - ${routes[index]["cities"][0]["name"]}" : routes[index]["cities"] > 1 ? " - ${routes[index]["cities"][1]["name"]},*/
+            route_name = routes[index]["city"]["name"];
+            routes[index]["cities"].forEach((element) {
+              route_name = route_name + " - ${element["name"]}";
+            });
             return Card(
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -401,7 +407,7 @@ class _SearchResultState extends State<SearchResult> {
                     padding: EdgeInsets.only(left: 3),
                     child: ListTile(
                       title: Text(
-                        "${routes[index]["title"]}",
+                        routes[index]["title"].substring(0, routes[index]["title"].length - 11),//route_name,
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontSize: 18,

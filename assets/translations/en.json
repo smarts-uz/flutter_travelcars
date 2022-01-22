@@ -239,11 +239,11 @@
   "okenh": "OKONH",
   "mail": "E-mail",
   "oplata": "We ask that you please read this «Privacy policy» and «Public offer» carefully prior to proceeding to payment.",
-  "route_text": "Leave a request for an itinerary",
+  "route_text": "Leave a request for a trip",
   "transfer_text": "Leave a request for a transfer",
   "visa": "Online VISA",
   "mcard": "Online MCard",
   "naqd_pul": "Cash",
   "uzcard": "Online UzCard",
-  "no_cash": "Enumeration"
+  "no_cash": "Bank transfer"
 }

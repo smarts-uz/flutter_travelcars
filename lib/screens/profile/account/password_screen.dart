@@ -107,7 +107,7 @@ class _SecondScreenState extends State<SecondScreen> {
                 child: TextField(
                   scrollPadding: EdgeInsets.zero,
                   decoration: InputDecoration(
-                    hintText: "dc erf ef fe few few wef fwe wef efw wds defwcv k ,mlk ",//"${LocaleKeys.New_password_confirmation.tr()}",
+                    hintText: LocaleKeys.New_password_confirmation.tr(),
                     errorText: null,
                     labelStyle: TextStyle(
                       color: Colors.white10,
