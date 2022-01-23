@@ -1,5 +1,7 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:travelcars/screens/home/home_screen.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 class RouteInfo extends StatelessWidget {
   Map<String, dynamic> info;
@@ -8,6 +10,18 @@ class RouteInfo extends StatelessWidget {
   RouteInfo(@required this.info, this.status);
 
   Widget build(BuildContext context) {
+    double app_kurs = 1;
+    double summa = 0;
+    HomeScreen.kurs.forEach((element) {
+      if(SplashScreen.kurs == element["code"]) {
+        app_kurs = element["rate"].toDouble();
+      }
+    });
+    if(info["price"] != null) {
+      summa = app_kurs * info["price"].toDouble();
+    }
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -34,8 +48,8 @@ class RouteInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.only(top: 15, bottom: 15),
-              height: info["routes"].length * 100.0,
+              padding: EdgeInsets.only(top: 15),
+              height: info["routes"].length * 95.0,
               child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: info["routes"].length,
@@ -67,7 +81,7 @@ class RouteInfo extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 16, bottom: 16),
+              padding: EdgeInsets.only(left: 16, bottom: 20),
               child: RichText(
                 text: TextSpan(
                     style: TextStyle(
@@ -81,11 +95,16 @@ class RouteInfo extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
                       TextSpan(text: '${info['car_type'] != null ? info['car_type']["name"] : ""}\n'),
-                      TextSpan(
+                      if(info['additional'] != null) TextSpan(
                           text: '${LocaleKeys.additional.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
-                      TextSpan(text: '${info['additional'] ?? ""}\n'),
+                      if(info['additional'] != null) TextSpan(text: '${info['additional']}\n'),
+                      if(info['price'] != null && info['price'] != 0) TextSpan(
+                          text: '${LocaleKeys.pricing.tr()}: ',
+                          style: TextStyle(fontWeight: FontWeight.w500)
+                      ),
+                      if(info['price'] != null && info['price'] != 0) TextSpan(text: '${summa.toStringAsFixed(2)} ${SplashScreen.kurs}\n'),
                       TextSpan(
                           text: '${LocaleKeys.status.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
@@ -106,7 +125,7 @@ class RouteInfo extends StatelessWidget {
                 )
             ),
             Padding(
-              padding: EdgeInsets.only(left: 23, top: 8),
+              padding: EdgeInsets.only(left: 16, top: 8),
               child: RichText(
                 text: TextSpan(
                     style: TextStyle(
