@@ -260,7 +260,9 @@ class CodegenLoader extends AssetLoader{
   "no_cash": "Bank transfer",
   "write_comment": "Write a review...",
   "cashback1": "Cashback is a refund. In case of payment via payment systems (Click and Pay me) and international cards (Visa, MasterCard), you will receive cashback up to 5%* of the total payment amount.\n\nThe accrued cashback is paid to the client's account (to a personal bank card) in sums monthly from the 5th to the 10th day of the month.",
-  "cashback2": "* The percentage amount depends on active bookings through our website and is assigned by the administrator of the online system."
+  "cashback2": "* The percentage amount depends on active bookings through our website and is assigned by the administrator of the online system.",
+  "pricing": "Expected Price",
+  "additional": "Other wishes"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги по всем городам Узбекистана: экскурсионные и бизнес-поездки",
@@ -508,7 +510,9 @@ static const Map<String,dynamic> ru = {
   "no_cash": "Перечислением",
   "write_comment": "Напишите отзыв...",
   "cashback1": "Кэшбэк - это возврат средств. В случае оплаты через платежные системы (Click и Payme) и международные карты (Visa, Master Card) Вам начисляется кэшбэк до 5%* от общий суммы платежа.\n\nНачисленный кэшбэк выплачивается на счет клиента (на личную банковскую карту) в сумах ежемесячно с 5-го по 10-е число месяца.",
-  "cashback2": "* Размер процента зависит от активности бронирований через наш веб-сайт или моб. приложения."
+  "cashback2": "* Размер процента зависит от активности бронирований через наш веб-сайт или моб. приложения.",
+  "pricing": "Ожидаемая цена",
+  "additional": "Қўшимча истаклар"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Ўзбекистоннинг барча шаҳарлари ўртасида транспорт хизматлари: саёҳат ва бизнес",
@@ -756,7 +760,9 @@ static const Map<String,dynamic> uz = {
   "no_cash": "Пул ўтказиш",
   "write_comment": "Фикр қолдиринг...",
   "cashback1": "Кэшбэк - бу пул маблағларининг қайтиши. Агар сиз тўлов тизимлари (Click ва Payme) ва халқаро карталар (Visa ва Master Card) орқали тўловларни амалга оширсангиз, Сизга тўловнинг умумий суммасидан 5% гача* кэшбек ҳисобланади.\n\nҲисобланган кэшбек мижознинг ҳисобига (шахсий банк картасига) ҳар ойнинг 5- дан 10-санасига қадар сўмда ўтказиб берилади.",
-  "cashback2": "* Фоиз миқдори веб-сайтимиз ёки моб. иловамиз орқали амалга оширилган бронлар фаол эканлигига боғлиқ."
+  "cashback2": "* Фоиз миқдори веб-сайтимиз ёки моб. иловамиз орқали амалга оширилган бронлар фаол эканлигига боғлиқ.",
+  "pricing": "Кутилаётган нарх",
+  "additional": "Дополнительные пожелания"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

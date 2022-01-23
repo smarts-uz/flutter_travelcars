@@ -247,5 +247,7 @@ abstract class  LocaleKeys {
   static const write_comment = 'write_comment';
   static const cashback1 = 'cashback1';
   static const cashback2 = 'cashback2';
+  static const pricing = 'pricing';
+  static const additional = 'additional';
 
 }

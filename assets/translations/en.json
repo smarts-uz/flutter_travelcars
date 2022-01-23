@@ -244,5 +244,7 @@
   "no_cash": "Bank transfer",
   "write_comment": "Write a review...",
   "cashback1": "Cashback is a refund. In case of payment via payment systems (Click and Pay me) and international cards (Visa, MasterCard), you will receive cashback up to 5%* of the total payment amount.\n\nThe accrued cashback is paid to the client's account (to a personal bank card) in sums monthly from the 5th to the 10th day of the month.",
-  "cashback2": "* The percentage amount depends on active bookings through our website and is assigned by the administrator of the online system."
+  "cashback2": "* The percentage amount depends on active bookings through our website and is assigned by the administrator of the online system.",
+  "pricing": "Expected Price",
+  "additional": "Other wishes"
 }

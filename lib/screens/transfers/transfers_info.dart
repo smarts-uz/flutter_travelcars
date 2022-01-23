@@ -1,5 +1,7 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:travelcars/screens/home/home_screen.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 
@@ -11,6 +13,14 @@ class TransfersInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double app_kurs = 1;
+    HomeScreen.kurs.forEach((element) {
+      if(SplashScreen.kurs == element["code"]) {
+        app_kurs = element["rate"].toDouble();
+      }
+    });
+    double summa = app_kurs * info["price"].toDouble();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -118,7 +128,12 @@ class TransfersInfo extends StatelessWidget {
                           text: '${LocaleKeys.Auto_types.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
-                      TextSpan(text: '${info['car_model'] != null ? info['car_model'] : ""}\n'),
+                      TextSpan(text: '${info['car_model'] != null ? info['car_model']['name'] : ""}\n'),
+                      if(info['price'] != null && info['price'] != 0) TextSpan(
+                          text: '${LocaleKeys.pricing.tr()}: ',
+                          style: TextStyle(fontWeight: FontWeight.w500)
+                      ),
+                      if(info['price'] != null && info['price'] != 0) TextSpan(text: '${summa.toStringAsFixed(2)} ${SplashScreen.kurs}\n'),
                       TextSpan(
                           text: '${LocaleKeys.status.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)

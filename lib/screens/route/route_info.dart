@@ -80,7 +80,12 @@ class RouteInfo extends StatelessWidget {
                           text: '${LocaleKeys.Auto_types.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
-                      TextSpan(text: '${info['car_type'] ?? ""}\n'),
+                      TextSpan(text: '${info['car_type'] != null ? info['car_type']["name"] : ""}\n'),
+                      TextSpan(
+                          text: '${LocaleKeys.additional.tr()}: ',
+                          style: TextStyle(fontWeight: FontWeight.w500)
+                      ),
+                      TextSpan(text: '${info['additional'] ?? ""}\n'),
                       TextSpan(
                           text: '${LocaleKeys.status.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
