@@ -119,7 +119,7 @@ class _DetailScreenState extends State<DetailScreen> {
             day = 0.5;
         }
         narxlar.add({
-          "day": "${day == 0.5 ? day : day.toInt()} ${day == 1.0 && SplashScreen.til == "ru" ? LocaleKeys.day.tr() : "дня"}",
+          "day": "${day == 0.5 ? day : day.toInt()} ${SplashScreen.til == "ru" ? day == 1.0 ? LocaleKeys.day.tr() : "дня" : LocaleKeys.day.tr()}",
           "cost": cost
         });
       } else if(key == "overtime") {
@@ -400,7 +400,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 Container(
                   padding: EdgeInsets.only(left: 13, bottom: 3),
                   child: Text(
-                    "${LocaleKeys.year_of_issue.tr()}: ${results["car"]["year"]}\nID номер: ${results["car"]["uid"]}",
+                    "${LocaleKeys.year_of_issue.tr()}: ${results["car"]["year"]}\n${LocaleKeys.id_number.tr()}: ${results["car"]["uid"]}",
                     style: TextStyle(
                       fontSize: 15,
                       height: 1.3,

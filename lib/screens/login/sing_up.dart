@@ -23,8 +23,8 @@ class _SignUpState extends State<SignUp> {
   bool show1 = false;
 
 
-  List<String> _items = ["Физ. лицо", "Юр. лицо"];
-  String _currentItem = "Физ. лицо";
+  List<String> _items = [LocaleKeys.fizik.tr(), LocaleKeys.yuridik.tr()];
+  String _currentItem = LocaleKeys.fizik.tr();
 
 
 
@@ -39,7 +39,7 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    String type = _currentItem == 0 ?"individual" : "legal";
+    String type = _currentItem == LocaleKeys.fizik.tr() ?"individual" : "legal";
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -63,14 +63,15 @@ class _SignUpState extends State<SignUp> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height*0.9,
+          height: MediaQuery.of(context).size.height * 0.9,
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(13),
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Radio(
                           value: _items[0],
@@ -91,9 +92,10 @@ class _SignUpState extends State<SignUp> {
                             fontStyle: FontStyle.normal,
                             fontFamily: 'Montserrat'),
                       ),
-                      SizedBox(
-                        width: 25,
-                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
                       Radio(
                           value: _items[1],
                           groupValue: _currentItem,
