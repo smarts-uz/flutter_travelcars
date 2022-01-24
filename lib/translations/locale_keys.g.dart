@@ -249,5 +249,7 @@ abstract class  LocaleKeys {
   static const cashback2 = 'cashback2';
   static const pricing = 'pricing';
   static const additional = 'additional';
+  static const login = 'login';
+  static const Authorization = 'Authorization';
 
 }

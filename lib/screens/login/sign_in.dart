@@ -39,7 +39,7 @@ class _SignInState extends State<SignIn> {
           ),
         ),
         title: Text(
-          LocaleKeys.entered.tr(),
+          LocaleKeys.login.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 21,
@@ -100,7 +100,7 @@ class _SignInState extends State<SignIn> {
                 width: double.infinity,
                 height: 50,
                 padding: EdgeInsets.only(left: 15),
-               // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                // margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(5)),
@@ -152,11 +152,11 @@ class _SignInState extends State<SignIn> {
 
                   String url = "${AppConfig.BASE_URL}/login";
                   final result = await http.post(
-                    Uri.parse(url),
-                    body: {
-                      'username': "${_emailController.text}",
-                      'password': "${_passwordController.text}",
-                    }
+                      Uri.parse(url),
+                      body: {
+                        'username': "${_emailController.text}",
+                        'password': "${_passwordController.text}",
+                      }
                   );
                   final Map<String, dynamic> response = json.decode(result.body);
 
@@ -216,8 +216,8 @@ class _SignInState extends State<SignIn> {
                       LocaleKeys.entered.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22
+                          color: Colors.white,
+                          fontSize: 22
                       ),
                     ),
                   ),
@@ -235,8 +235,8 @@ class _SignInState extends State<SignIn> {
                       borderRadius: BorderRadius.circular(8),
                       color: Colors.grey[50],
                       border: Border.all(
-                        color: Colors.grey,
-                        width: 1.0
+                          color: Colors.grey,
+                          width: 1.0
                       ),
                       boxShadow: [
                         BoxShadow(
@@ -248,11 +248,11 @@ class _SignInState extends State<SignIn> {
                   margin: EdgeInsets.symmetric(horizontal: 30),
                   child: Center(
                     child: Text(
-                    LocaleKeys.Restore_password.tr(),
+                      LocaleKeys.Restore_password.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.orange,
-                        fontSize: 20
+                          color: Colors.orange,
+                          fontSize: 20
                       ),
                     ),
                   ),

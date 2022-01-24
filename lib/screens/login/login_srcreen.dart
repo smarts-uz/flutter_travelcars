@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         title: Text(
-          LocaleKeys.entered.tr(),
+          LocaleKeys.Authorization.tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: 21,
@@ -73,8 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         LocaleKeys.entered.tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18
+                            color: Colors.white,
+                            fontSize: 18
                         ),
                       ),
                     ),
@@ -90,17 +90,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .1),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.grey[50],
-                        border: Border.all(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.grey[50],
+                      border: Border.all(
                           color: Colors.grey,
                           width: 1.5
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.7),
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.7),
-                          ),
-                        ],
+                      ],
                     ),
                     height: 40,
                     width: double.infinity,
@@ -109,8 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         LocaleKeys.Register_now.tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.orange,
-                          fontSize: 18
+                            color: Colors.orange,
+                            fontSize: 18
                         ),
                       ),
                     ),
