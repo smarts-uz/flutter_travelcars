@@ -602,7 +602,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         size: 27,
                       ),
                       Text(
-                        LocaleKeys.Search.tr(),
+                        LocaleKeys.Sort.tr(),
                         style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,

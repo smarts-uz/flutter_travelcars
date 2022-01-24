@@ -222,7 +222,7 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                   ),
                 ),
-                TFF("${LocaleKeys.car.tr()}", text_controllers[2], 48, false),
+                TFF("${LocaleKeys.Car_type.tr()}", text_controllers[2], 48, false),
                 TFF("${LocaleKeys.Quantity_.tr()}", text_controllers[3], 48, true),
                 TFF("${LocaleKeys.Quantity.tr()}", text_controllers[4], 48, true),
                 TFF("${LocaleKeys.name.tr()}", text_controllers[5], 48, false),
