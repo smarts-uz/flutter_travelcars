@@ -53,10 +53,9 @@
   "your_request_has_been_successfully_accepted_for_consideration": "Ваш запрос успешно принят к рассмотрению",
   "language": "Язык",
   "Register_now": "Зарегистрироваться",
-  "Restore_password": "Восстановить пароль",
+  "Restore_password": "Восстановление пароля",
   "enter_your_email_or_number": "Введите электронную почту или номер телефон, и мы отправим код для сброса пароля",
   "next": "Далее",
-  "Password_reset": "Сброс пароля",
   "create_new_password": "Создайте новый пароль",
   "complete": "Завершить",
   "Cancellation_terms": "Условия отмены",
@@ -154,7 +153,6 @@
   "Where_to_pick_up": "Откуда забрать",
   "tours": "Поездки по городам",
   "trip": "Поездка",
-  "Social_networks_for_communication": "Социальные сети ",
   "note": "Примечание",
   "where": "Куда",
   "home": "Домой",
@@ -251,5 +249,7 @@
   "and": " и ",
   "i_agree": "Я ознакомлен и согласен с ",
   "privacy": "Политикой конфиденциальности",
-  "oferta": "Публичной офертой"
+  "oferta": "Публичной офертой",
+  "code_confirm": "Подтверждение кода",
+  "Social_networks_for_communication": "Социальные сети для связи"
 }

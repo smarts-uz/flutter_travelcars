@@ -58,7 +58,6 @@ abstract class  LocaleKeys {
   static const Restore_password = 'Restore_password';
   static const enter_your_email_or_number = 'enter_your_email_or_number';
   static const next = 'next';
-  static const Password_reset = 'Password_reset';
   static const create_new_password = 'create_new_password';
   static const complete = 'complete';
   static const Cancellation_terms = 'Cancellation_terms';
@@ -156,7 +155,6 @@ abstract class  LocaleKeys {
   static const Where_to_pick_up = 'Where_to_pick_up';
   static const tours = 'tours';
   static const trip = 'trip';
-  static const Social_networks_for_communication = 'Social_networks_for_communication';
   static const note = 'note';
   static const where = 'where';
   static const home = 'home';
@@ -254,5 +252,7 @@ abstract class  LocaleKeys {
   static const i_agree = 'i_agree';
   static const privacy = 'privacy';
   static const oferta = 'oferta';
+  static const code_confirm = 'code_confirm';
+  static const Social_networks_for_communication = 'Social_networks_for_communication';
 
 }

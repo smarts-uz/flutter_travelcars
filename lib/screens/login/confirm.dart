@@ -41,7 +41,7 @@ class _ConfirmState extends State<Confirm> {
           ),
         ),
         title: Text(
-         LocaleKeys.Register_now.tr(),
+         LocaleKeys.code_confirm.tr(),
           maxLines: 2,
           style: TextStyle(
             color: Colors.white,

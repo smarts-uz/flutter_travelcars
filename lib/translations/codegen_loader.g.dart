@@ -72,7 +72,6 @@ class CodegenLoader extends AssetLoader{
   "Restore_password": "Password recovery",
   "enter_your_email_or_number": "Enter your email or number phone, and we will send a code to reset your password",
   "next": "Next",
-  "Password_reset": "Password reset",
   "create_new_password": "Create a new password",
   "complete": "Complete",
   "Cancellation_terms": "Cancellation policy",
@@ -170,7 +169,6 @@ class CodegenLoader extends AssetLoader{
   "Where_to_pick_up": "Take from",
   "tours": "City trips",
   "trip": "Trip",
-  "Social_networks_for_communication": "Social networks",
   "note": "Notice",
   "where": "Take to",
   "home": "Home",
@@ -267,7 +265,9 @@ class CodegenLoader extends AssetLoader{
   "and": " and ",
   "i_agree": "Please tick the box to confirm you have read ",
   "privacy": "Privacy policy",
-  "oferta": "Public offer"
+  "oferta": "Public offer",
+  "code_confirm": "Code confirmation",
+  "Social_networks_for_communication": "Social networks for communication"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги по всем городам Узбекистана: экскурсионные и бизнес-поездки",
@@ -324,10 +324,9 @@ static const Map<String,dynamic> ru = {
   "your_request_has_been_successfully_accepted_for_consideration": "Ваш запрос успешно принят к рассмотрению",
   "language": "Язык",
   "Register_now": "Зарегистрироваться",
-  "Restore_password": "Восстановить пароль",
+  "Restore_password": "Восстановление пароля",
   "enter_your_email_or_number": "Введите электронную почту или номер телефон, и мы отправим код для сброса пароля",
   "next": "Далее",
-  "Password_reset": "Сброс пароля",
   "create_new_password": "Создайте новый пароль",
   "complete": "Завершить",
   "Cancellation_terms": "Условия отмены",
@@ -425,7 +424,6 @@ static const Map<String,dynamic> ru = {
   "Where_to_pick_up": "Откуда забрать",
   "tours": "Поездки по городам",
   "trip": "Поездка",
-  "Social_networks_for_communication": "Социальные сети ",
   "note": "Примечание",
   "where": "Куда",
   "home": "Домой",
@@ -522,7 +520,9 @@ static const Map<String,dynamic> ru = {
   "and": " и ",
   "i_agree": "Я ознакомлен и согласен с ",
   "privacy": "Политикой конфиденциальности",
-  "oferta": "Публичной офертой"
+  "oferta": "Публичной офертой",
+  "code_confirm": "Подтверждение кода",
+  "Social_networks_for_communication": "Социальные сети для связи"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Ўзбекистоннинг барча шаҳарлари ўртасида транспорт хизматлари: саёҳат ва бизнес",
@@ -551,11 +551,11 @@ static const Map<String,dynamic> uz = {
   "details": "Батафсил",
   "Code_is_wrong": "Код нотўғри",
   "Fill_all_fields": "Барча майдонларни тўлдиринг",
-  "Password_doesn_match": "Пароль мос эмас",
-  "Passwords_should_be_same": "Пароль бир хил бўлиши керак",
+  "Password_doesn_match": "Парол мос эмас",
+  "Passwords_should_be_same": "Парол бир хил бўлиши керак",
   "TextField_is_empty": "Майдонлар бўш",
   "You_entered": "Сиз жорий паролни нотўғри киритдингиз",
-  "You_entered_confirma": "Тасдиқлаш учун нотўғри пароль киритдингиз",
+  "You_entered_confirma": "Тасдиқлаш учун нотўғри парол киритдингиз",
   "snackbar": "Ўзгартириш муваффақиятли сақланди",
   "about_route": "Йўналиш – сайёҳат давомида маҳаллий жойларга ташриф буюриш, географик пунктлар ва жойларга ташриф буюришни ўз ичига олади.",
   "about_transfer": "Трансфер –бу меҳмонларга қулайлик учун кўрсатиладиган хизмат тури ҳисобланади, яъни аэропорт ёки вокзалда кутиб олиб меҳмонҳонага олиб келиш шунингдек аэропорт ёки вокзалга кузатиб қўйиш.",
@@ -582,9 +582,8 @@ static const Map<String,dynamic> uz = {
   "Restore_password": "Паролни тиклаш",
   "enter_your_email_or_number": "Электрон почтангизни ёки рақамингизни киритинг телефон ва биз паролни тиклаш кодини юборамиз",
   "next": "Кейингиси",
-  "Password_reset": "Паролни тиклаш",
-  "create_new_password": "Янги пароль яратинг",
-  "complete": "Бажарилди",
+  "create_new_password": "Янги парол яратинг",
+  "complete": "Якунлаш",
   "Cancellation_terms": "Бекор қилиш шартлари",
   "transfer": "Трансфер",
   "no_transfer_are_found": "Ҳеч қандай трансфер топилмади",
@@ -680,7 +679,6 @@ static const Map<String,dynamic> uz = {
   "Where_to_pick_up": "Олиб кетиш манзили",
   "tours": "Сафарлар",
   "trip": "Саёҳат",
-  "Social_networks_for_communication": "Ижтимоий тармоқлар",
   "note": "Изоҳ",
   "where": "Қаерда",
   "home": "Уй",
@@ -691,10 +689,10 @@ static const Map<String,dynamic> uz = {
   "aboute_us": "Биз ҳақимизда",
   "or": "ёки",
   "password": "Парол",
-  "paasword_confirmation": "паролни тасдиқлаш",
+  "paasword_confirmation": "Паролни тасдиқлаш",
   "name_surname": "Тўлиқ исм",
-  "Current_password": "Жорий Пароль",
-  "new_password": "Янги пароль",
+  "Current_password": "Жорий Парол",
+  "new_password": "Янги парол",
   "New_password_confirmation": "Янги паролни тасдиқланг",
   "Write_comment_for_order": "Буюртма бериш учун изоҳ ёзинг",
   "meeting": "Кутиб олиш",
@@ -777,7 +775,9 @@ static const Map<String,dynamic> uz = {
   "and": " va ",
   "i_agree": "Мен танишиб чиқдим ва қабул қилдим ",
   "privacy": "Махфийлик сиёсати билан",
-  "oferta": "Оммавий оферта билан"
+  "oferta": "Оммавий оферта билан",
+  "code_confirm": "Кодни тасдиқлаш",
+  "Social_networks_for_communication": "Мулоқот учун ижтимоий тармоқлар"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

@@ -56,7 +56,6 @@
   "Restore_password": "Password recovery",
   "enter_your_email_or_number": "Enter your email or number phone, and we will send a code to reset your password",
   "next": "Next",
-  "Password_reset": "Password reset",
   "create_new_password": "Create a new password",
   "complete": "Complete",
   "Cancellation_terms": "Cancellation policy",
@@ -154,7 +153,6 @@
   "Where_to_pick_up": "Take from",
   "tours": "City trips",
   "trip": "Trip",
-  "Social_networks_for_communication": "Social networks",
   "note": "Notice",
   "where": "Take to",
   "home": "Home",
@@ -251,5 +249,7 @@
   "and": " and ",
   "i_agree": "Please tick the box to confirm you have read ",
   "privacy": "Privacy policy",
-  "oferta": "Public offer"
+  "oferta": "Public offer",
+  "code_confirm": "Code confirmation",
+  "Social_networks_for_communication": "Social networks for communication"
 }
