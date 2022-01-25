@@ -84,6 +84,7 @@ class _FirstSceenState extends State<FirstSceen> {
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         title: Text(
           LocaleKeys.Change_profile.tr(),
+          maxLines: 2,
           style: TextStyle(
             color: Colors.white,
             fontSize: 21

@@ -43,6 +43,7 @@ class _SocialScreenState extends State<SocialScreen> {
         ),
         title: Text(
          LocaleKeys.The_choice_of_social_networks.tr(),
+          maxLines: 2,
           style: TextStyle(
             color: Colors.white,
             fontSize: 21,

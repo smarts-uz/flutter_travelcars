@@ -125,7 +125,8 @@ class _SearchScreenState extends State<SearchScreen> {
             )
         ) : null,
         title: Text(
-          LocaleKeys.Search.tr(), //LocaleKeys.Search_and_sort.tr(),
+          LocaleKeys.Search.tr(),
+          maxLines: 2,
           style: TextStyle(
             fontSize: 23,
             color: Colors.white,
@@ -372,7 +373,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 controller: number_controller,
                 cursorColor: Colors.black,
                 style: TextStyle(
-                  fontSize: 17
+                  fontSize: 18
                 ),
                 expands: false,
                 maxLines: 1,
@@ -410,7 +411,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       sort[index],
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 18,
                       ),
                     ),
                   ],
@@ -437,7 +438,7 @@ class _SearchScreenState extends State<SearchScreen> {
                    Text(
                      _currentRangeValues.start.round().toString(),
                      style: TextStyle(
-                       fontSize: 17,
+                       fontSize: 18,
                        fontWeight: FontWeight.bold,
                      ),
                    ),
@@ -460,7 +461,7 @@ class _SearchScreenState extends State<SearchScreen> {
                    Text(
                      _currentRangeValues.end.round().toString(),
                      style: TextStyle(
-                       fontSize: 17,
+                       fontSize: 18,
                        fontWeight: FontWeight.bold,
                      ),
                    ),
@@ -496,7 +497,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           Text(
                             "${autoTypes[index]["name"]}",
                             style: TextStyle(
-                              fontSize: 17,
+                              fontSize: 18,
                             ),
                           ),
                            Icon(
@@ -601,8 +602,9 @@ class _SearchScreenState extends State<SearchScreen> {
                         Icons.search,
                         size: 27,
                       ),
+                      SizedBox(width: 5),
                       Text(
-                        LocaleKeys.Sort.tr(),
+                        LocaleKeys.search.tr(),
                         style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,

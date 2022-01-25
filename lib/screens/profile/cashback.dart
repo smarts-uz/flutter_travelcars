@@ -69,6 +69,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
         ),
         title: Text(
           LocaleKeys.cashback.tr(),
+          maxLines: 2,
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w500,

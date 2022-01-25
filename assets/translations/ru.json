@@ -29,7 +29,6 @@
   "snackbar": "Изменение успешно сохранены",
   "Passwords_should_be_same": "Пароли должны быть одинаковыми",
   "TextField_is_empty": "Текстовое поле пусто",
-  "Please_agree": "Пожалуйста, согласитесь",
   "Code_is_wrong": "Код неверный",
   "Password_doesn_match": "Пароль не подходит",
   "You_entered": "Вы вошли",
@@ -107,7 +106,7 @@
   "No_car_categories_are_found": "Категории автомобилей не найдены",
   "travel_cost_for": "Стоимость поездки за",
   "choose_the_payment_type": "Как вам удобнее оплачивать",
-  "Payment": "Оплата",
+  "Payment": "Оплатить",
   "book": "Бронировать",
   "Setting_the_language_and_course": "Настройка языка и курса",
   "save": "Сохранить",
@@ -155,7 +154,7 @@
   "Where_to_pick_up": "Откуда забрать",
   "tours": "Поездки по городам",
   "trip": "Поездка",
-  "Social_networks_for_communication": "Социальные сети для связи",
+  "Social_networks_for_communication": "Социальные сети ",
   "note": "Примечание",
   "where": "Куда",
   "home": "Домой",
@@ -248,5 +247,9 @@
   "pricing": "Ожидаемая цена",
   "additional": "Қўшимча истаклар",
   "login": "Логин",
-  "Authorization": "Авторизация"
+  "Authorization": "Авторизация",
+  "and": " и ",
+  "i_agree": "Я ознакомлен и согласен с ",
+  "privacy": "Политикой конфиденциальности",
+  "oferta": "Публичной офертой"
 }

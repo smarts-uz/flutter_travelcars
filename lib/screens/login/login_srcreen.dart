@@ -30,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         title: Text(
           LocaleKeys.Authorization.tr(),
+          maxLines: 2,
           style: TextStyle(
             color: Colors.white,
             fontSize: 21,

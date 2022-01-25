@@ -34,6 +34,7 @@ class _ResetPasswordState extends State<ResetPassword> {
         ),
         title: Text(
           LocaleKeys.Restore_password.tr(),
+          maxLines: 2,
           style: TextStyle(
             color: Colors.white,
             fontSize: 21,

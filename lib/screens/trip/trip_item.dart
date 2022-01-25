@@ -66,6 +66,7 @@ class _TripItemState extends State<TripItem> {
       appBar: AppBar(
         title: Text(
           widget.trip_item["name"],
+          maxLines: 2,
           style: TextStyle(
             fontSize: 21,
             color: Colors.white,

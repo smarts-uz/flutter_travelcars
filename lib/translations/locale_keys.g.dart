@@ -27,7 +27,6 @@ abstract class  LocaleKeys {
   static const Fill_all_fields = 'Fill_all_fields';
   static const Password_doesn_match = 'Password_doesn_match';
   static const Passwords_should_be_same = 'Passwords_should_be_same';
-  static const Please_agree = 'Please_agree';
   static const TextField_is_empty = 'TextField_is_empty';
   static const You_entered = 'You_entered';
   static const You_entered_confirma = 'You_entered_confirma';
@@ -251,5 +250,9 @@ abstract class  LocaleKeys {
   static const additional = 'additional';
   static const login = 'login';
   static const Authorization = 'Authorization';
+  static const and = 'and';
+  static const i_agree = 'i_agree';
+  static const privacy = 'privacy';
+  static const oferta = 'oferta';
 
 }

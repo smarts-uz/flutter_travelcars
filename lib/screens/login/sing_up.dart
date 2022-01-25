@@ -54,6 +54,7 @@ class _SignUpState extends State<SignUp> {
         ),
         title: Text(
           LocaleKeys.Register_now.tr(),
+          maxLines: 2,
           style: TextStyle(
             color: Colors.white,
             fontSize: 21,

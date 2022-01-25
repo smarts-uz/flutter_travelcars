@@ -15,6 +15,7 @@ class InfoScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "${LocaleKeys.Announcement.tr()} #${way_item["id"]}",
+          maxLines: 2,
           style: TextStyle(
               color: Colors.white,
               fontSize: 21

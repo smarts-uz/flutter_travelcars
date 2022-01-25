@@ -28,6 +28,7 @@ class _SecondScreenState extends State<SecondScreen> {
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         title: Text(
           LocaleKeys.change_password.tr(),
+          maxLines: 2,
           style: TextStyle(
               color: Colors.white,
               fontSize: 21

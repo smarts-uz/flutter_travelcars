@@ -40,6 +40,7 @@ class _SignInState extends State<SignIn> {
         ),
         title: Text(
           LocaleKeys.login.tr(),
+          maxLines: 2,
           style: TextStyle(
             color: Colors.white,
             fontSize: 21,

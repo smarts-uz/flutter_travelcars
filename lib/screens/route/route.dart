@@ -13,6 +13,7 @@ class Routes extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           LocaleKeys.routes.tr(),
+          maxLines: 2,
           style:TextStyle(
               fontSize: 23,
               color: Colors.white

@@ -63,6 +63,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
       appBar: AppBar(
         title: Text(
           LocaleKeys.Along_the_way.tr(),
+          maxLines: 2,
           style: TextStyle(
             fontSize: 23,
             color: Colors.white,
@@ -135,8 +136,9 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
               ),
               title: Text(
                 LocaleKeys.sorting.tr(),
+                maxLines: 2,
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 22,
                   color: Colors.white,
                 ),
               ),

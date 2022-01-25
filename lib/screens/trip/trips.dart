@@ -15,6 +15,7 @@ class TripsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           LocaleKeys.tours.tr(),
+          maxLines: 2,
           style: TextStyle(
               color: Colors.white,
               fontSize: 21

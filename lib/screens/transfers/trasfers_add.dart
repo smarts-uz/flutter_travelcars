@@ -40,7 +40,9 @@ class _TransfersAddState extends State<TransfersAdd> {
   void getcities() {
     api_cities = HomeScreen.city_list;
     api_cities.forEach((element) {
-      city.add(element["name"]);
+      if(element["name"] != null) {
+        city.add(element["name"]);
+      }
     });
     cities = city.map(
           (String value) => DropdownMenuItem<String>(
@@ -74,6 +76,7 @@ class _TransfersAddState extends State<TransfersAdd> {
       appBar: AppBar(
         title: Text(
           LocaleKeys.add_transfer.tr(),
+          maxLines: 2,
           style: TextStyle(
             fontSize: 21,
             color: Colors.white,
@@ -501,7 +504,7 @@ class _TransfersAddState extends State<TransfersAdd> {
             fontSize: 19
         ),
         expands: false,
-        maxLines: height == 165 ? 7 : 2,
+        maxLines: height == 110 ? 7 : 2,
       ),
     );
   }

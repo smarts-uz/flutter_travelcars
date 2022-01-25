@@ -36,7 +36,9 @@ class _RouteAddState extends State<RouteAdd> {
   void getcities() {
     api_cities = HomeScreen.city_list;
     api_cities.forEach((element) {
-      city.add(element["name"]);
+      if(element["name"] != null) {
+        city.add(element["name"]);
+      }
     });
     cities = city.map(
           (String value) => DropdownMenuItem<String>(
@@ -70,6 +72,7 @@ class _RouteAddState extends State<RouteAdd> {
       appBar: AppBar(
         title: Text(
           LocaleKeys.add_route.tr(),
+          maxLines: 2,
           style: TextStyle(
             color: Colors.white,
             fontSize: 21

@@ -25,6 +25,7 @@ class CarTypes extends StatelessWidget {
         ),
         title: Text(
           LocaleKeys.Auto_types.tr(),
+          maxLines: 2,
           style: TextStyle(
               fontSize: 21,
               color: Colors.white

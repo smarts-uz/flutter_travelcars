@@ -13,6 +13,7 @@ class Transfer extends StatelessWidget {
       appBar: AppBar(
         title: Text(
          LocaleKeys.transfer.tr(),
+          maxLines: 2,
           style:TextStyle(
               fontSize: 21,
               color: Colors.white

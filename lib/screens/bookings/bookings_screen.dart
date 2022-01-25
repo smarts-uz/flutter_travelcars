@@ -73,6 +73,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
         ),
         title: Text(
          LocaleKeys.bookings.tr(),
+          maxLines: 2,
           style: TextStyle(
             color: Colors.white,
             fontSize: 23

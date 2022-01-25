@@ -33,6 +33,7 @@ class TransfersInfo extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "${LocaleKeys.application.tr()} #${info['id']}",
+          maxLines: 2,
           style: TextStyle(
             color: Colors.white,
             fontSize: 23

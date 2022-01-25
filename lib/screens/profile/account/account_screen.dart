@@ -40,6 +40,7 @@ class _AccountScreenState extends State<AccountScreen> {
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         title: Text(
           LocaleKeys.profile_settings.tr(),
+          maxLines: 2,
           style: TextStyle(
             color: Colors.white,
             fontSize: 21

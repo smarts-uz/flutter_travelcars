@@ -147,6 +147,7 @@ class _ReviewsState extends State<Reviews> {
         ),
         title: Text(
           LocaleKeys.reviews.tr(),
+          maxLines: 2,
           style: TextStyle(
               fontSize: 23,
               color: Colors.white
@@ -342,15 +343,14 @@ class _ReviewsState extends State<Reviews> {
                                         ),
                                       ),
                                     ),
-                                    Text("${reviews['rate'][index]["score"].toInt()}"),
+                                    Text("${reviews['rate'][index]["score"].round()}"),
                                   ],
                                 ),
                               ],
                             ),
                           );
-                        }
-                        ),
-
+                        },
+                    ),
                   ),
                   Text(
                     '${LocaleKeys.Guest_reviews.tr()}:',

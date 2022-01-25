@@ -68,7 +68,8 @@ class _TransfersScreenState extends State<TransfersScreen> {
           ),
         ),
         title: Text(
-          LocaleKeys.transfer.tr(),
+          LocaleKeys.transfers.tr(),
+          maxLines: 2,
           style:TextStyle(
               fontSize: 23,
               color: Colors.white

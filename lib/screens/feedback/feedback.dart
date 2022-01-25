@@ -127,6 +127,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         backgroundColor: Colors.orange,
         title: Text(
           LocaleKeys.write_feedback.tr(),
+          maxLines: 2,
           style: TextStyle(
             fontSize: 21,
             fontFamily: "Poppins",

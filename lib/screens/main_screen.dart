@@ -29,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
     ];
     final _BottomNavBarItems = <BottomNavigationBarItem>[
        BottomNavigationBarItem(icon: Icon(Icons.home), label: '${LocaleKeys.home.tr()}'),
-       BottomNavigationBarItem(icon: Icon(Icons.search), label: '${LocaleKeys.search.tr()}'),
+       BottomNavigationBarItem(icon: Icon(Icons.search), label: '${LocaleKeys.Sort.tr()}'),
        BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/transfer.svg'), label: '${LocaleKeys.transfers.tr()}'),
        BottomNavigationBarItem(icon: Icon(Icons.map_outlined), label: '${LocaleKeys.routes.tr()}'),
        BottomNavigationBarItem(icon: Icon(Icons.person_outline_outlined), label: '${LocaleKeys.profile.tr()}'),

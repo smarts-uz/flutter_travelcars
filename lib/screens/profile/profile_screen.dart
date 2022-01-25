@@ -81,7 +81,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-         LocaleKeys.profile.tr(),
+          LocaleKeys.profile.tr(),
+          maxLines: 2,
           style: TextStyle(
             fontSize: 23,
             color: Colors.white,

@@ -96,13 +96,14 @@ class _BookingScreenState extends State<BookingScreen> {
       appBar: AppBar(
         backgroundColor: Colors.orange,
         title: Text(
-          "${LocaleKeys.bookings.tr()} #${results["id"]}",
+          "${LocaleKeys.booking.tr()} #${results["id"]}",
+          maxLines: 2,
           style: TextStyle(
-          fontSize: 23,
-          color: Colors.white,
-          fontWeight: FontWeight.w500,
-          fontFamily: 'Poppins',
-          fontStyle: FontStyle.normal,
+            fontSize: 23,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Poppins',
+            fontStyle: FontStyle.normal,
           ),
         ),
         leading: IconButton(
@@ -296,6 +297,7 @@ class _BookingScreenState extends State<BookingScreen> {
               ),
             ),
             if(results["routeOption"].isNotEmpty) Container(
+              margin: EdgeInsets.only(bottom: 20.0),
               decoration: BoxDecoration(color: HexColor("#F5F5F6")),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -333,16 +335,16 @@ class _BookingScreenState extends State<BookingScreen> {
                             )
                           ],
                         ),
-                      ),).toList(),
+                      )).toList(),
                     ),
                   ),
                 ],
               ),
             ),
-            results["status"] == "accepted" && results["paid"] == null ? Column(
+            if(results["status"] == "accepted" && results["paid"] == null) Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _text(text: "${LocaleKeys.select_payment_method.tr()}:"),
+                _text(text: "${LocaleKeys.select_payment_method.tr()}:", top: 0),
                 SizedBox(
                   height: 270,
                   child: ListView.builder(
@@ -408,19 +410,20 @@ class _BookingScreenState extends State<BookingScreen> {
                             agree = value!;
                           });
                         }),
-                    Container(
+                    Expanded(
                       child: RichText(
+                        maxLines: 3,
                         text: TextSpan(
                             style: TextStyle(
-                                fontSize: 14
+                                fontSize: 15
                             ),
                             children: [
                               TextSpan(
-                                text: 'Я ознакомлен и согласен с ',
+                                text: LocaleKeys.i_agree.tr(),
                                 style: new TextStyle(color: Colors.black),
                               ),
                               TextSpan(
-                                text: 'Политикой\nконфиденциальности ',
+                                text: LocaleKeys.privacy.tr(),
                                 style: new TextStyle(color: Colors.blue),
                                 recognizer: new TapGestureRecognizer()
                                   ..onTap = () {
@@ -428,11 +431,11 @@ class _BookingScreenState extends State<BookingScreen> {
                                   },
                               ),
                               TextSpan(
-                                text: 'и',
+                                text: LocaleKeys.and.tr(),
                                 style: new TextStyle(color: Colors.black),
                               ),
                               TextSpan(
-                                text: ' Публичной офертой',
+                                text: LocaleKeys.oferta.tr(),
                                 style: new TextStyle(color: Colors.blue),
                                 recognizer: new TapGestureRecognizer()
                                   ..onTap = () {
@@ -506,16 +509,16 @@ class _BookingScreenState extends State<BookingScreen> {
                   ),
                 ),
               ],
-            ) : Container(),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _text({text}) {
+  Widget _text({text, double top = 20.0}) {
     return Container(
-      padding: EdgeInsets.only(left: 16, bottom: 10, top: 20),
+      padding: EdgeInsets.only(left: 16, bottom: 10, top: top),
       child: Text(
         text,
         style: TextStyle(

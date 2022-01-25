@@ -65,6 +65,7 @@ class _RouteScreenState extends State<RouteScreen> {
         ),
         title: Text(
           LocaleKeys.routes.tr(),
+          maxLines: 2,
           style: TextStyle(
               fontSize: 23,
               color: Colors.white
@@ -207,7 +208,7 @@ class List_R extends StatelessWidget {
                   padding: EdgeInsets.only(left: 16, bottom: 8, top: 8),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    LocaleKeys.Created_at.tr(),
+                    "${LocaleKeys.Created_at.tr()}:",
                     style: TextStyle(
                         fontSize: 18
                     ),
