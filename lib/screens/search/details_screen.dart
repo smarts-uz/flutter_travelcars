@@ -216,7 +216,7 @@ class _DetailScreenState extends State<DetailScreen> {
       builder: (_) {
         return Container(
           height: 280,
-          margin: EdgeInsets.all(15),
+          margin: EdgeInsets.all(16),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,12 +225,15 @@ class _DetailScreenState extends State<DetailScreen> {
                 Text(
                   LocaleKeys.Cancellation_terms.tr(),
                   textAlign: TextAlign.start,
-                  style: TextStyle(fontSize: 15, color: Colors.red),
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.red
+                  ),
                 ),
                 Divider(),
                 Text(
                   '${widget.route_item["company"]["refund"]}',
-                  maxLines: 12,
+                  maxLines: 60,
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.red
@@ -254,10 +257,11 @@ class _DetailScreenState extends State<DetailScreen> {
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   LocaleKeys.important_information.tr(),
-                  textAlign: TextAlign.end,
+                  textAlign: TextAlign.start,
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.orangeAccent
@@ -265,10 +269,9 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 Divider(),
                 Text(
-                  //'${widget.route_item["company"]["important"]}',
                   "${LocaleKeys.important1.tr()} – $overtime_cost\n${LocaleKeys.important2.tr()} - ${widget.refund}",
                   textAlign: TextAlign.justify,
-                  maxLines: 5,
+                  maxLines: 10,
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.orangeAccent

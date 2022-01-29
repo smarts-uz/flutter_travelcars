@@ -86,11 +86,11 @@ class _SearchResultState extends State<SearchResult> {
 
       if(jsonDecode(result_nonreverse.body)["routes"].isNotEmpty) {
         routes.addAll(jsonDecode(result_nonreverse.body)["routes"]);
-        refund = jsonDecode(result_nonreverse.body)["commission"] + " " + jsonDecode(result_nonreverse.body)["cur"];
+        refund = jsonDecode(result_nonreverse.body)["commission"] + " %";
         min_price = jsonDecode(result_nonreverse.body)["min_price"].toDouble();
         max_price = jsonDecode(result_nonreverse.body)["max_price"].toDouble();
       }
-      refund = jsonDecode(result_nonreverse.body)["commission"] + " " + jsonDecode(result_nonreverse.body)["cur"];
+
     } else {
       print(widget.search_body);
       final response = await http.post(
@@ -98,10 +98,13 @@ class _SearchResultState extends State<SearchResult> {
           body: widget.search_body
       );
 
-      routes = jsonDecode(response.body)["routes"];
-      refund = jsonDecode(response.body)["commission"] + " " + jsonDecode(response.body)["cur"];
-      min_price = jsonDecode(response.body)["min_price"].toDouble();
-      max_price = jsonDecode(response.body)["max_price"].toDouble();
+      if(jsonDecode(response.body)["routes"].isNotEmpty) {
+        routes = jsonDecode(response.body)["routes"];
+        refund = jsonDecode(response.body)["commission"] + " %";
+        min_price = jsonDecode(response.body)["min_price"].toDouble();
+        max_price = jsonDecode(response.body)["max_price"].toDouble();
+      }
+
     }
     print("All: ${routes.toString()}");
     setState(() {

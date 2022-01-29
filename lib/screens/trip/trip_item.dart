@@ -34,26 +34,26 @@ class _TripItemState extends State<TripItem> {
   ];
   List<String> hints = [
     LocaleKeys.name.tr(),
-    "E-mail",
-    LocaleKeys.Phone.tr(),
+    LocaleKeys.mail.tr(),
+    LocaleKeys.phone.tr(),
     LocaleKeys.trip_comment.tr()
   ];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getUserInfo();
   }
 
   void getUserInfo() async {
     final prefs = await SharedPreferences.getInstance();
-    token = json.decode(prefs.getString('userData')!)["token"] != null ? json.decode(prefs.getString('userData')!)["token"] : "";
-    if(token.isNotEmpty) {
+    if(prefs.containsKey('userData')) {
+      token = json.decode(prefs.getString('userData')!)["token"] != null ? json.decode(prefs.getString('userData')!)["token"] : "";
       name = json.decode(prefs.getString('userData')!)["name"] != null ? json.decode(prefs.getString('userData')!)["name"] : "";
       phone = json.decode(prefs.getString('userData')!)["phone"] != null ? json.decode(prefs.getString('userData')!)["phone"] : "";
       email = json.decode(prefs.getString('userData')!)["email"] != null ? json.decode(prefs.getString('userData')!)["email"] : "";
     }
+
     setState(() {
 
     });

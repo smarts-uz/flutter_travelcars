@@ -34,6 +34,7 @@ class _FirstSceenState extends State<FirstSceen> {
   List<String> hints = [
     LocaleKeys.yur_name.tr(),
     LocaleKeys.yur_city.tr(),
+    LocaleKeys.yur_address.tr(),
     LocaleKeys.yur_pochta.tr(),
     LocaleKeys.yur_bank.tr(),
     LocaleKeys.yur_account.tr(),

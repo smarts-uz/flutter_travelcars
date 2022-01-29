@@ -16,7 +16,7 @@ class SearchScreen extends StatefulWidget {
   final bool isDrawer;
   final double max_val;
   final double min_val;
-  SearchScreen({this.isDrawer=false, this.max_val = 1000, this.min_val = 10});
+  SearchScreen({this.isDrawer=false, this.max_val = 1000, this.min_val = 50});
   static String? SelectedVal1;
   static String? SelectedVal2;
   static int? radioVal1;
@@ -39,7 +39,8 @@ class _SearchScreenState extends State<SearchScreen> {
   ];
 
   static int? _radioVal2;
-  static RangeValues _currentRangeValues = RangeValues(10, 1000);
+  static RangeValues _currentRangeValues = RangeValues(50, 1000);
+  int divisons = 1;
 
 
 
@@ -67,6 +68,8 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     _currentRangeValues = RangeValues(widget.min_val, widget.max_val);
+    divisons = (widget.max_val - widget.min_val) ~/ 50;
+
     getcities();
     autoTypes = HomeScreen.cars_list;
     for(int i = 0; i < autoTypes.length; i++) {
@@ -445,6 +448,7 @@ class _SearchScreenState extends State<SearchScreen> {
                    Expanded(
                      child: RangeSlider(
                        values: _currentRangeValues,
+                       divisions: divisons,
                        min: widget.min_val,
                        max: widget.max_val,
                        labels: RangeLabels(

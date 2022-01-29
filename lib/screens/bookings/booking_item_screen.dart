@@ -37,13 +37,13 @@ class _BookingScreenState extends State<BookingScreen> {
       "chosen": false,
     },
     {
-      "icon": "mastercard",
-      "name": "MasterCard",
+      "icon": "visa",
+      "name": "Visa",
       "chosen": false,
     },
     {
-      "icon": "visa",
-      "name": "Visa",
+      "icon": "mastercard",
+      "name": "MasterCard",
       "chosen": false,
     },
   ];
@@ -309,7 +309,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.black,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w700,
                         fontFamily: 'Poppins',
                         fontStyle: FontStyle.normal,
                       ),
@@ -321,17 +321,19 @@ class _BookingScreenState extends State<BookingScreen> {
                     padding: EdgeInsets.only(left: 16),
                     child: Column(
                       children: route_options.map((e) => Padding(
-                        padding:  EdgeInsets.symmetric(vertical: 2.0),
+                        padding: EdgeInsets.symmetric(vertical: 2.0),
                         child: Row(
                           children: [
                             Icon(Icons.check, color: Colors.green),
                             SizedBox(
                               width: 5,
                             ),
-                            Text(
-                              results["routeOption"][e]["name"],
-                              textAlign: TextAlign.start,
-                              style: TextStyle(fontSize: 17),
+                            Expanded(
+                              child: Text(
+                                results["routeOption"][e]["name"],
+                                textAlign: TextAlign.start,
+                                style: TextStyle(fontSize: 17),
+                              ),
                             )
                           ],
                         ),
