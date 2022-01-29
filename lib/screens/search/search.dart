@@ -277,6 +277,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   }
                   setState(() {
                     _selectedDate1 = pickedDate;
+                    _selectedDate2 = pickedDate;
                   });
                 });
               },
@@ -307,8 +308,8 @@ class _SearchScreenState extends State<SearchScreen> {
               onTap: () {
                 showDatePicker(
                   context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime.now(),
+                  initialDate: _selectedDate1!,
+                  firstDate: _selectedDate1!,
                   lastDate: DateTime(2050),
                 ).then((pickedDate) {
                   if(pickedDate==null)

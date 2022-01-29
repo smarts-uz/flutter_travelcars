@@ -52,6 +52,9 @@ class _TripItemState extends State<TripItem> {
       name = json.decode(prefs.getString('userData')!)["name"] != null ? json.decode(prefs.getString('userData')!)["name"] : "";
       phone = json.decode(prefs.getString('userData')!)["phone"] != null ? json.decode(prefs.getString('userData')!)["phone"] : "";
       email = json.decode(prefs.getString('userData')!)["email"] != null ? json.decode(prefs.getString('userData')!)["email"] : "";
+      controllers[0] = new TextEditingController(text: name);
+      controllers[1] = new TextEditingController(text: phone);
+      controllers[2] = new TextEditingController(text: email);
     }
 
     setState(() {
@@ -206,47 +209,11 @@ class _TripItemState extends State<TripItem> {
                 ],
               ),
             ),
-            if(token.isNotEmpty) Container(
-              width: double.infinity,
-              height: 150,
-              padding: EdgeInsets.only(left: 15),
-              margin: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(5)
-              ),
-              child: TextFormField(
-                keyboardType: TextInputType.text,
-                autovalidateMode: AutovalidateMode.always,
-                decoration: InputDecoration(
-                  hintText: "${LocaleKeys.Write_comment_for_order.tr()}",
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.white,
-                      width: 0,
-                    ),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.white,
-                      width: 0,
-                    ),
-                  ),
-                ),
-                controller: comment_controller,
-                cursorColor: Colors.black,
-                style: TextStyle(
-                    fontSize: 20
-                ),
-                expands: false,
-                maxLines: 3,
-              ),
-            ),
-            if(token.isEmpty) Column(
+            Column(
               children: [0, 1, 2, 3].map((e) => Container(
                 width: double.infinity,
-                height: e == 3 ? 150 : 50,
-                padding: EdgeInsets.only(left: 15),
+                height: e == 3 ? 145 : 45,
+                padding: EdgeInsets.only(left: 15, right: 8),
                 margin: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
@@ -267,10 +234,10 @@ class _TripItemState extends State<TripItem> {
                   controller: controllers[e],
                   cursorColor: Colors.black,
                   style: TextStyle(
-                      fontSize: 19
+                      fontSize: 17
                   ),
                   expands: false,
-                  maxLines: e == 3 ? 3 : 1,
+                  maxLines: e == 3 ? 6 : 1,
                 ),
               ),).toList(),
             ),

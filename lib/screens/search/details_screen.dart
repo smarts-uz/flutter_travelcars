@@ -40,7 +40,7 @@ class _DetailScreenState extends State<DetailScreen> {
   int _current = 0;
   int narx_index = 0;
   late String dropdown;
-  String overtime_cost = "0 USD";
+  String? overtime_cost;
   List<int> car_options = [];
   List<int> route_options = [];
   List<dynamic> narxlar = [];
@@ -123,7 +123,9 @@ class _DetailScreenState extends State<DetailScreen> {
           "cost": cost
         });
       } else if(key == "overtime") {
-        overtime_cost = "$value USD";
+        if(value != null) {
+          overtime_cost = "${value * app_kurs} ${SplashScreen.kurs}";
+        }
       }
     });
     dropdown = narxlar[0]["day"];
@@ -269,7 +271,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 Divider(),
                 Text(
-                  "${LocaleKeys.important1.tr()} – $overtime_cost\n${LocaleKeys.important2.tr()} - ${widget.refund}",
+                  overtime_cost != null ? "${LocaleKeys.important1.tr()} – $overtime_cost\n" : ""
+                      "${LocaleKeys.important2.tr()} - ${widget.refund}",
                   textAlign: TextAlign.justify,
                   maxLines: 10,
                   style: TextStyle(
