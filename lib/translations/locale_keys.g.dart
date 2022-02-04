@@ -254,5 +254,6 @@ abstract class  LocaleKeys {
   static const oferta = 'oferta';
   static const code_confirm = 'code_confirm';
   static const Social_networks_for_communication = 'Social_networks_for_communication';
+  static const itinerary = 'itinerary';
 
 }

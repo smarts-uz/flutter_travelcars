@@ -54,7 +54,7 @@ class CarTypes extends StatelessWidget {
                   );
                 },
                 child: Container(
-                  height: 170,
+                  height: 180,
                   child: Card(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                     elevation: 4,

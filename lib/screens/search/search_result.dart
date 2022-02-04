@@ -36,7 +36,7 @@ class SearchResult extends StatefulWidget {
 }
 
 class _SearchResultState extends State<SearchResult> {
-  double min_price = 10;
+  double min_price = 50;
   double max_price = 1000;
   bool isLoading = true;
   String refund = "";

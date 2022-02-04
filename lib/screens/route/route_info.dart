@@ -50,12 +50,12 @@ class RouteInfo extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.only(top: 15),
-              height: info["routes"].length * 95.0,
+              height: info["routes"].length * 90.0,
               child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: info["routes"].length,
                   itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.only(left: 15, bottom: 15),
+                        padding: EdgeInsets.only(left: 16, bottom: 15),
                         child: RichText(
                           text: TextSpan(
                             style: TextStyle(
@@ -82,13 +82,13 @@ class RouteInfo extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 16, bottom: 20),
+              padding: EdgeInsets.only(left: 16),
               child: RichText(
                 text: TextSpan(
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 17,
-                        height: 1.4
+                        height: 1.6
                     ),
                     children: [
                       TextSpan(
@@ -118,7 +118,7 @@ class RouteInfo extends StatelessWidget {
             Padding(
                 padding: EdgeInsets.only(left: 16),
                 child: Text(
-                  LocaleKeys.contact.tr(),
+                  "${LocaleKeys.contact.tr()}: ",
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500
@@ -126,13 +126,13 @@ class RouteInfo extends StatelessWidget {
                 )
             ),
             Padding(
-              padding: EdgeInsets.only(left: 16, top: 8),
+              padding: EdgeInsets.only(left: 16),
               child: RichText(
                 text: TextSpan(
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 17,
-                      height: 1.3,
+                      height: 1.6,
                     ),
                     children: [
                       TextSpan(

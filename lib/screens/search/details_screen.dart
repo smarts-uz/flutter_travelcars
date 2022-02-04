@@ -48,21 +48,21 @@ class _DetailScreenState extends State<DetailScreen> {
   List<dynamic> pricelar = [];
   List<dynamic> payment_types = [
     {
-      "text":  LocaleKeys.Online_payment.tr(),
-      "type": "online",
-    },
-    {
-      "text":  LocaleKeys.Cashless_payments.tr(),
-      "type": "pay_bank",
+      "text":  LocaleKeys.Cash_driver.tr(),
+      "type": "pay_cash_driver",
     },
     {
       "text":  LocaleKeys.Cash_company.tr(),
       "type": "pay_cash_company",
     },
     {
-      "text":  LocaleKeys.Cash_driver.tr(),
-      "type": "pay_cash_driver",
+      "text":  LocaleKeys.Online_payment.tr(),
+      "type": "online",
     },
+    {
+      "text":  LocaleKeys.Cashless_payments.tr(),
+      "type": "pay_bank",
+    }
   ];
   String? selectedVal;
   final List<DropdownMenuItem<String>> payments = [];
@@ -124,7 +124,12 @@ class _DetailScreenState extends State<DetailScreen> {
         });
       } else if(key == "overtime") {
         if(value != null) {
-          overtime_cost = "${value * app_kurs} ${SplashScreen.kurs}";
+          if(value is String) {
+            overtime_cost = "${double.parse(value) * app_kurs} ${SplashScreen.kurs}";
+          } else {
+            overtime_cost = "${value * app_kurs} ${SplashScreen.kurs}";
+          }
+
         }
       }
     });
@@ -291,6 +296,7 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> results = widget.route_item;
+    selectedVal = payment_types[0]["text"];
     return Scaffold(
       body: isLoading ? Center(
         child: CircularProgressIndicator(),
@@ -634,13 +640,6 @@ class _DetailScreenState extends State<DetailScreen> {
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   menuMaxHeight: MediaQuery.of(context).size.height * .5,
-                  hint: Text(
-                      LocaleKeys.Payment.tr(),
-                      style: TextStyle(
-                          fontSize: 19,
-                          color: Colors.black
-                      )
-                  ),
                   dropdownColor: Colors.grey[50],
                   icon: Icon(Icons.keyboard_arrow_down),
                   value: selectedVal,

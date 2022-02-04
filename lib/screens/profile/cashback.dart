@@ -90,65 +90,67 @@ class _CashbackScreenState extends State<CashbackScreen> {
       ),
       body: isLoading ? Center(
         child: CircularProgressIndicator(),
-      ) : Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            SvgPicture.asset(
-              "assets/Group 278.svg",
-            ),
-            SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "${LocaleKeys.You_have_been_assigned_percentage_of.tr()}:",
-                textAlign: TextAlign.left,
-                maxLines: 2,
-                style: TextStyle(
-                  fontSize: 17,
-                ),
+      ) : SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              SvgPicture.asset(
+                "assets/Group 278.svg",
               ),
-            ),
-            Container(
-              height: 85,
-              width: MediaQuery.of(context).size.width * .8,
-              alignment: Alignment.center,
-              color: Color.fromRGBO(255, 245, 228, 1),
-              child: FittedBox(
+              SizedBox(height: 20),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                alignment: Alignment.centerLeft,
                 child: Text(
-                  "${info["cashback_percent"]} %",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 46),
+                  "${LocaleKeys.You_have_been_assigned_percentage_of.tr()}:",
+                  textAlign: TextAlign.left,
+                  maxLines: 2,
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                "${LocaleKeys.You_have_received_cashback_in_the_amount_of.tr()}: ",
-                textAlign: TextAlign.left,
-                maxLines: 2,
-                style: TextStyle(
-                  fontSize: 17,
+              Container(
+                height: 85,
+                width: MediaQuery.of(context).size.width * .8,
+                alignment: Alignment.center,
+                color: Color.fromRGBO(255, 245, 228, 1),
+                child: FittedBox(
+                  child: Text(
+                    "${info["cashback_percent"]} %",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 46),
+                  ),
                 ),
               ),
-            ),
-            Container(
-              height: 85,
-              width: MediaQuery.of(context).size.width * .8,
-              alignment: Alignment.center,
-              color: Color.fromRGBO(255, 245, 228, 1),
-              child: FittedBox(
+              Container(
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Text(
-                  "${summa.toStringAsFixed(2)} ${SplashScreen.kurs}",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 46),
+                  "${LocaleKeys.You_have_received_cashback_in_the_amount_of.tr()}: ",
+                  textAlign: TextAlign.left,
+                  maxLines: 2,
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
                 ),
               ),
-            ),
-          ],
+              Container(
+                height: 85,
+                width: MediaQuery.of(context).size.width * .8,
+                alignment: Alignment.center,
+                color: Color.fromRGBO(255, 245, 228, 1),
+                child: FittedBox(
+                  child: Text(
+                    "${summa.toStringAsFixed(2)} ${SplashScreen.kurs}",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 46),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -165,7 +167,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
         context: context,
         builder: (BuildContext ctx) {
           return Container(
-            height: 400,
+            height: 360,
             padding: EdgeInsets.only(left: 17, right: 17, top: 17, bottom: 10),
             child: SingleChildScrollView(
               child: Column(
@@ -184,6 +186,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
                     height: 16,
                   ),
                   RichText(
+                    textAlign: TextAlign.justify,
                     text: TextSpan(
                       style: TextStyle(
                         fontSize: 18,

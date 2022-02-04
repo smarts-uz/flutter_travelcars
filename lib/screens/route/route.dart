@@ -104,14 +104,17 @@ void _startAddNewTransaction(BuildContext ctx) {
   showModalBottomSheet(
       context: ctx,
       builder: (_) {
-        return  Container(
-          height: 120,
-          margin: EdgeInsets.all(16),
-          child: Text(
-            LocaleKeys.about_route.tr(),
-            style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500
+        return  SingleChildScrollView(
+          child: Container(
+            height: 60,
+            margin: EdgeInsets.all(16),
+            child: Text(
+              LocaleKeys.about_route.tr(),
+              textAlign: TextAlign.justify,
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500
+              ),
             ),
           ),
         );

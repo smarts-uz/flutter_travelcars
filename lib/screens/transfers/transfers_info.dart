@@ -75,7 +75,7 @@ class TransfersInfo extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 24, top: 6),
+                          padding: EdgeInsets.only(left: 16, top: 6),
                           child: RichText(
                             text: TextSpan(
                               style: TextStyle(
@@ -217,7 +217,7 @@ class TransfersInfo extends StatelessWidget {
             Padding(
                 padding: EdgeInsets.only(left: 16, top: 15),
                 child: Text(
-                  LocaleKeys.contact.tr(),
+                  "${LocaleKeys.contact.tr()}:",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500

@@ -602,7 +602,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 items: newslist.map((item) =>
                     InkWell(
                       onTap: () {
-                        launch("https://travelcars.uz/news/${item["meta_url"]}");
+                        launch("https://travelcars.uz/${SplashScreen.til}/news/${item["meta_url"]}");
                        // Navigator.push(context,MaterialPageRoute(builder: (_)=>DetailScreen()));
                         },
                       child: Container(

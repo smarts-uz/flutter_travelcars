@@ -72,7 +72,7 @@ class InfoScreen extends StatelessWidget {
                       TextSpan(text: "${way_item["place_bag"]}\n"),
                       TextSpan(text: "${LocaleKeys.comment.tr()}:\n", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "${way_item["comment"]}\n"),
-                      TextSpan(text: "${LocaleKeys.contact.tr()}\n", style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: "${LocaleKeys.contact.tr()}:\n", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "${LocaleKeys.name.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(text: "${way_item["name"]}\n"),
                       TextSpan(text: "${LocaleKeys.phone.tr()}: ", style: TextStyle(fontWeight: FontWeight.bold)),

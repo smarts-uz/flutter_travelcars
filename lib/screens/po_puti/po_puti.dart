@@ -451,7 +451,7 @@ void _startAddNewTransaction(BuildContext ctx) {
       context: ctx,
       builder: (_) {
         return  Container(
-          height: 290,
+          height: 185,
           margin: EdgeInsets.all(16),
           child: SingleChildScrollView(
             child: RichText(

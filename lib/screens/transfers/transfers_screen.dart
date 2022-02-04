@@ -166,7 +166,7 @@ class List_T extends StatelessWidget {
                   padding: EdgeInsets.only(left: 16, bottom: 8),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    LocaleKeys.routes.tr(),
+                    LocaleKeys.transfers.tr(),
                     style: TextStyle(
                         fontSize: 20
                     ),),

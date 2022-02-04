@@ -199,7 +199,8 @@ class _TripItemState extends State<TripItem> {
                       left: 15,
                       bottom: 10,
                       child: Text(
-                        "${LocaleKeys.We_will_be_glad_to_receive_your_order.tr()} !",
+                        "${LocaleKeys.We_will_be_glad_to_receive_your_order.tr()} jofwivend kqwfjprv oevidk jpoqeifno !",
+                        maxLines: 3,
                         style: TextStyle(
                           fontSize: 17.0,
                             color: Colors.white
