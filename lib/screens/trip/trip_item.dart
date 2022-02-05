@@ -169,7 +169,7 @@ class _TripItemState extends State<TripItem> {
             Container(
               height: 180,
               width: double.infinity,
-              padding: EdgeInsets.only(top: 20, left: 17, right: 17, bottom: 5),
+              padding: EdgeInsets.only(top: 15, left: 17, right: 17, bottom: 5),
               child: Stack(
                 children: [
                   Container(
@@ -181,28 +181,29 @@ class _TripItemState extends State<TripItem> {
                     child: Icon(
                       Icons.email,
                       color: Colors.white,
-                      size: 75,
+                      size: 70,
                     ),
                   ),
                   Positioned(
-                      left: 15,
+                      left: 17,
                       bottom: 40,
                       child: Text(
                         LocaleKeys.book_now.tr(),
                         style: TextStyle(
-                          fontSize: 25.0,
+                          fontSize: 23.0,
                           color: Colors.white
                         ),
                       )
                   ),
                   Positioned(
-                      left: 15,
+                      left: 17,
                       bottom: 10,
                       child: Text(
-                        "${LocaleKeys.We_will_be_glad_to_receive_your_order.tr()} jofwivend kqwfjprv oevidk jpoqeifno !",
+                        "${LocaleKeys.We_will_be_glad_to_receive_your_order.tr()}!",
+                        textAlign: TextAlign.justify,
                         maxLines: 3,
                         style: TextStyle(
-                          fontSize: 17.0,
+                          fontSize: 15.0,
                             color: Colors.white
                         ),
                       )

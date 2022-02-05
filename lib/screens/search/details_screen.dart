@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/src/public_ext.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
@@ -37,6 +39,11 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   bool isLoading = true;
   final CarouselController _controller = CarouselController();
+  final TextEditingController name_controller = TextEditingController();
+  final TextEditingController additional_controller = TextEditingController();
+  bool logo_check = false;
+  File? _pickedImage;
+  final ImagePicker _picker = ImagePicker();
   int _current = 0;
   int narx_index = 0;
   late String dropdown;
@@ -293,6 +300,53 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
+  void _showPicker(BuildContext cont) {
+    showModalBottomSheet(
+        context: cont,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text(LocaleKeys.Photo_library.tr()),
+                      onTap: () async {
+                        final pickedImageFile = await _picker.pickImage(
+                          source: ImageSource.gallery,
+                          imageQuality: 50,
+                          maxWidth: 150,
+                        );
+                        File file = File(pickedImageFile!.path);
+                        setState(() {
+                          _pickedImage = file;
+                        });
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text(LocaleKeys.Camera.tr()),
+                    onTap: () async {
+                      final pickedImageFile = await _picker.pickImage(
+                        source: ImageSource.camera,
+                        imageQuality: 50,
+                        maxWidth: 150,
+                      );
+                      File file = File(pickedImageFile!.path);
+                      setState(() {
+                        _pickedImage = file;
+                      });
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> results = widget.route_item;
@@ -454,7 +508,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: Row(
                     children: [
                       Image.network(
-                          "${AppConfig.image_url}/car-options/${results["car"]['car_options'][e]["image"]}",
+                        "${AppConfig.image_url}/car-options/${results["car"]['car_options'][e]["image"]}",
                         width: 25,
                         height: 25,
                       ),
@@ -481,22 +535,22 @@ class _DetailScreenState extends State<DetailScreen> {
               padding: const EdgeInsets.only(top: 10, left: 16, right: 16),
               width: double.infinity,
               child: GoogleMap(
-                onMapCreated: (GoogleMapController controller) {
-                  _mapController.complete(controller);
-                },
-                markers: Set<Marker>.of(markers.values),
-                polylines: Set<Polyline>.of(polylines.values),
-                myLocationEnabled: true,
-                tiltGesturesEnabled: true,
-                compassEnabled: true,
-                scrollGesturesEnabled: true,
-                zoomGesturesEnabled: true,
-                mapType: MapType.normal,
-                myLocationButtonEnabled: true,
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(origin_lat, origin_lng),
-                  zoom: 14.4746,
-                ),
+                  onMapCreated: (GoogleMapController controller) {
+                    _mapController.complete(controller);
+                  },
+                  markers: Set<Marker>.of(markers.values),
+                  polylines: Set<Polyline>.of(polylines.values),
+                  myLocationEnabled: true,
+                  tiltGesturesEnabled: true,
+                  compassEnabled: true,
+                  scrollGesturesEnabled: true,
+                  zoomGesturesEnabled: true,
+                  mapType: MapType.normal,
+                  myLocationButtonEnabled: true,
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(origin_lat, origin_lng),
+                    zoom: 14.4746,
+                  ),
                   gestureRecognizers: < Factory < OneSequenceGestureRecognizer >> [
                     new Factory < OneSequenceGestureRecognizer > (
                           () => new EagerGestureRecognizer(),
@@ -600,29 +654,29 @@ class _DetailScreenState extends State<DetailScreen> {
                 children: [
                   _text(text: LocaleKeys.Included_in_type.tr(), top: 8.0),
                   Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(color: HexColor("#F5F5F6")),
-                    padding: EdgeInsets.only(top: 5, left: 16),
-                    child: Column(
-                      children: route_options.map((e) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2.0),
-                        child: Row(
-                          children: [
-                            Icon(Icons.check, color: Colors.green),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Expanded(
-                              child: Text(
-                                results["route_options"][e]["name"],
-                                textAlign: TextAlign.start,
-                                style: TextStyle(fontSize: 17),
+                      width: double.infinity,
+                      decoration: BoxDecoration(color: HexColor("#F5F5F6")),
+                      padding: EdgeInsets.only(top: 5, left: 16),
+                      child: Column(
+                        children: route_options.map((e) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 2.0),
+                          child: Row(
+                            children: [
+                              Icon(Icons.check, color: Colors.green),
+                              SizedBox(
+                                width: 5,
                               ),
-                            )
-                          ],
-                        ),
-                      )).toList(),
-                    )
+                              Expanded(
+                                child: Text(
+                                  results["route_options"][e]["name"],
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(fontSize: 17),
+                                ),
+                              )
+                            ],
+                          ),
+                        )).toList(),
+                      )
                   ),
                 ],
               ),
@@ -659,7 +713,7 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
             Container(
-              height: 45,
+              height: 40,
               padding: EdgeInsets.only(left: 16),
               child: TextButton(
                 onPressed: () {
@@ -678,7 +732,7 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
             Container(
-              height: 45,
+              height: 40,
               padding: EdgeInsets.only(left: 16, bottom: 5),
               child: TextButton(
                 onPressed: () {
@@ -694,6 +748,131 @@ class _DetailScreenState extends State<DetailScreen> {
                     fontStyle: FontStyle.normal,
                   ),
                 ),
+              ),
+            ),
+            TFF(additional_controller, "Дополнительные сведения. Например, адрес куда приехать, авто, пожелания и т.д.", 120),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 5.0),
+              child: Row(
+                children: [
+                  Checkbox(
+                    onChanged: (bool? newValue) {
+                      setState(() {
+                        logo_check = newValue!;
+                      });
+                    },
+                    value: logo_check,
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Встречать с табличкой(имя гостя или логотип компании)",
+                      maxLines: 3,
+                      style: TextStyle(
+                        fontSize: 17
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            TFF(name_controller, "Имя гостя ", 45),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                children: [
+                  Container(
+                    height: 120,
+                    width: MediaQuery.of(context).size.width * .4,
+                    margin: EdgeInsets.symmetric(vertical: 7.0),//MediaQuery.of(context).size.width * .2,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        image:   _pickedImage != null ?
+                        DecorationImage(
+                          image: FileImage(_pickedImage!),
+                        ) : DecorationImage(
+                            image: AssetImage("assets/images/no_image.png"))
+                    ),
+                  ),
+                  Container(
+                    height: 120,
+                    width: MediaQuery.of(context).size.width * .6,
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            _showPicker(context);
+                          },
+                          child: Container(
+                              height: 40,
+                              width: MediaQuery.of(context).size.width * .5,
+                              decoration: BoxDecoration(
+                                  color: Colors.orange,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                      color: Colors.grey
+                                  )
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.upload,
+                                    size: 25,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    LocaleKeys.upload.tr(),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20
+                                    ),
+                                  ),
+                                ],
+                              )
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _pickedImage = null;
+                            });
+                          },
+                          child: Container(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width * .5,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                    color: Colors.grey
+                                )
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.delete,
+                                  size: 25,
+                                  color: Colors.orange,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  LocaleKeys.delete.tr(),
+                                  style: TextStyle(
+                                      color: Colors.orange,
+                                      fontSize: 20
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
             GestureDetector(
@@ -738,16 +917,16 @@ class _DetailScreenState extends State<DetailScreen> {
                   });
                   try{
                     final response = await http.post(
-                        url,
-                        headers: {
-                          "Authorization": "Bearer $token"
-                        },
-                        body: {
-                          "route_price_id": "${results["route_price_id"]}",
-                          "cost": "$cost",
-                          "price": "$price",
-                          "pay_key": "$pay_key",
-                        },
+                      url,
+                      headers: {
+                        "Authorization": "Bearer $token"
+                      },
+                      body: {
+                        "route_price_id": "${results["route_price_id"]}",
+                        "cost": "$cost",
+                        "price": "$price",
+                        "pay_key": "$pay_key",
+                      },
                     );
                     print(response.body);
                     if(jsonDecode(response.body)["success"]) {
@@ -808,21 +987,38 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
     );
   }
+
+  Widget TFF(TextEditingController controller, String hint, double height) {
+    return Container(
+      height: height,
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 12),
+      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(5)
+      ),
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.always,
+        decoration: InputDecoration(
+          hintText: hint,
+          hintMaxLines: 4,
+          border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
+        ),
+        controller: controller,
+        keyboardType: TextInputType.text,
+        cursorColor: Colors.black,
+        style: TextStyle(
+            fontSize: 17
+        ),
+        expands: false,
+        maxLines: 7,
+      ),
+    );
+  }
 }
-/*if(widget.points.isNotEmpty) _text(text: "${LocaleKeys.trip_mapp.tr()}"),
-            if(widget.points.isNotEmpty) Container(
-              margin: EdgeInsets.only(left: 16),
-              height: _adresses.length * 30,
-              child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: _adresses.length,
-                  itemExtent: 28,
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (context, index) => Text(
-                    "* ${_adresses[index]}",
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 18
-                    ),
-                  )),
-            ),*/
+

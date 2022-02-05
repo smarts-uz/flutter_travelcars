@@ -23,6 +23,7 @@ class HomeScreen extends StatefulWidget {
   static bool isLoading = true;
   static List<dynamic> countries_list = [];
   static List<dynamic> cars_list = [];
+  static List<dynamic> carModels_list = [];
   static List<dynamic> city_list = [];
   static List<dynamic> tour_list = [];
   static List<dynamic> options_list = [];
@@ -79,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    print("start1");
     if(HomeScreen.isLoading) {
       HomeScreen.city = <String>[
         LocaleKeys.tashkent.tr(),
@@ -122,6 +124,8 @@ class _HomeScreenState extends State<HomeScreen> {
       getcities();
       getOptionsTariffs();
       getCountries();
+
+      getAllModels();
     }
   }
 
@@ -198,9 +202,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
     });
   }
+
+  void getAllModels() async {
+    print("start2");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/carmodels/lang=${SplashScreen.til}");
+    final response = await http.get(url);
+    HomeScreen.carModels_list = jsonDecode(response.body)["data"];
+    print(HomeScreen.carModels_list);
+  }
   
   void getCountries() async {
-    Uri url = Uri.parse("${AppConfig.BASE_URL}/getCountries");
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/getCountries/locale=${SplashScreen.til}");
     final response = await http.get(url);
     HomeScreen.countries_list = jsonDecode(response.body)["data"];
   }

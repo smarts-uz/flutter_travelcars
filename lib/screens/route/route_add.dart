@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/dialogs.dart';
@@ -23,6 +25,17 @@ class RouteAdd extends StatefulWidget {
 class _RouteAddState extends State<RouteAdd> {
   final ScrollController _controller = ScrollController();
 
+  final TextEditingController name_controller = TextEditingController();
+  final TextEditingController additional_controller = TextEditingController();
+  final TextEditingController price_controller = TextEditingController();
+  bool logo_check = false;
+  File? _pickedImage;
+  final ImagePicker _picker = ImagePicker();
+  List<String> car = [];
+  late final List<DropdownMenuItem<String>> cars;
+  late List api_cars;
+  String? chosen_car;
+
   List<String> city = [];
   late final List<DropdownMenuItem<String>> cities;
   late List api_cities;
@@ -32,6 +45,7 @@ class _RouteAddState extends State<RouteAdd> {
   void initState() {
     super.initState();
     getcities();
+    getCars();
   }
   void getcities() {
     api_cities = HomeScreen.city_list;
@@ -57,6 +71,20 @@ class _RouteAddState extends State<RouteAdd> {
     },);
   }
 
+  void getCars() {
+    api_cars = HomeScreen.cars_list;
+    chosen_car = api_cars[0]["name"];
+    api_cars.forEach((element) {
+      car.add(element["name"]);
+    });
+    cars = car.map(
+          (String value) => DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+      ),
+    ).toList();
+  }
+
   void _scrollDown() {
     _controller.animateTo(
       _controller.position.maxScrollExtent,
@@ -65,6 +93,52 @@ class _RouteAddState extends State<RouteAdd> {
     );
   }
 
+  void _showPicker(BuildContext cont) {
+    showModalBottomSheet(
+        context: cont,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text(LocaleKeys.Photo_library.tr()),
+                      onTap: () async {
+                        final pickedImageFile = await _picker.pickImage(
+                          source: ImageSource.gallery,
+                          imageQuality: 50,
+                          maxWidth: 150,
+                        );
+                        File file = File(pickedImageFile!.path);
+                        setState(() {
+                          _pickedImage = file;
+                        });
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text(LocaleKeys.Camera.tr()),
+                    onTap: () async {
+                      final pickedImageFile = await _picker.pickImage(
+                        source: ImageSource.camera,
+                        imageQuality: 50,
+                        maxWidth: 150,
+                      );
+                      File file = File(pickedImageFile!.path);
+                      setState(() {
+                        _pickedImage = file;
+                      });
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +167,7 @@ class _RouteAddState extends State<RouteAdd> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * .69,
+              height: 430,
               child: ListView.builder(
                 controller: _controller,
                 itemCount: count,
@@ -208,112 +282,282 @@ class _RouteAddState extends State<RouteAdd> {
                 },
               ),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * .05),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                if(count < 10) Container(
-                  height: 35,
-                  width: 140,
-                  child: RaisedButton(
-                    color: Colors.white,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.add,
-                          color: Colors.orange,
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          LocaleKeys.add.tr(),
-                          style: TextStyle(
-                              color: Colors.orange,
-                              fontSize: 15
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  if(count < 10) Container(
+                    height: 35,
+                    width: 140,
+                    child: RaisedButton(
+                      color: Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add,
+                            color: Colors.orange,
                           ),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      if(count <= 10) count++;
-                      data.add({
-                        "city1": city[0],
-                        "city2": city[0],
-                        "day": DateTime.now(),
-                        "controllers2": [
-                          for (int i = 0; i < 2; i++)
-                            TextEditingController()
+                          SizedBox(width: 5),
+                          Text(
+                            LocaleKeys.add.tr(),
+                            style: TextStyle(
+                                color: Colors.orange,
+                                fontSize: 15
+                            ),
+                          ),
                         ],
-                      });
-                      setState(() {
+                      ),
+                      onPressed: () {
+                        if(count <= 10) count++;
+                        data.add({
+                          "city1": city[0],
+                          "city2": city[0],
+                          "day": DateTime.now(),
+                          "controllers2": [
+                            for (int i = 0; i < 2; i++)
+                              TextEditingController()
+                          ],
+                        });
+                        setState(() {
 
-                      });
+                        });
 
-                      Future.delayed(const Duration(milliseconds: 500), () async {
-                        _scrollDown();
-                      });
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(
-                            color: Colors.orange
-                        )
+                        Future.delayed(const Duration(milliseconds: 500), () async {
+                          _scrollDown();
+                        });
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(
+                              color: Colors.orange
+                          )
+                      ),
                     ),
                   ),
+                  if(count > 1) Container(
+                    height: 35,
+                    width: 140,
+                    child: RaisedButton(
+                      color: Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.remove,
+                            color: Colors.red,
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                           LocaleKeys.delete.tr(),
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 15
+                            ),
+                          ),
+                        ],
+                      ),
+                      onPressed: () {
+                        if(count > 1) {
+                          data.removeAt(count-1);
+                          count--;
+                        }
+                        setState(() {
+
+                        });
+
+                        Future.delayed(const Duration(milliseconds: 500), () async {
+                          _scrollDown();
+                        });
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(
+                              color: Colors.red
+                          )
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              child: Container(
+                width: double.infinity,
+                height: 45,
+                padding: EdgeInsets.only(left: 6, right: 6),
+                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(5)
                 ),
-                if(count > 1) Container(
-                  height: 35,
-                  width: 140,
-                  child: RaisedButton(
-                    color: Colors.white,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                child:DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    menuMaxHeight: MediaQuery.of(context).size.height * .5,
+                    dropdownColor: Colors.grey[50],
+                    icon: Icon(Icons.keyboard_arrow_down),
+                    value: chosen_car,
+                    isExpanded: true,
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black
+                    ),
+                    underline: SizedBox(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        chosen_car = newValue;
+                      });
+                    },
+                    items: cars,
+                  ),
+                ),
+              )
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              child: TFF("Ожидаемая цена", price_controller, 45),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              child: TFF("Дополнительные сведения. Например, адрес куда приехать, авто, пожелания и т.д.", additional_controller, 120),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+              child: Row(
+                children: [
+                  Checkbox(
+                    onChanged: (bool? newValue) {
+                      setState(() {
+                        logo_check = newValue!;
+                      });
+                    },
+                    value: logo_check,
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Встречать с табличкой(имя гостя или логотип компании)",
+                      maxLines: 3,
+                      style: TextStyle(
+                          fontSize: 17
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            if(logo_check) Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              child: TFF("Имя гостя ", name_controller, 45),
+            ),
+            if(logo_check) Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    height: 120,
+                    width: MediaQuery.of(context).size.width * .4,
+                    margin: EdgeInsets.symmetric(vertical: 7.0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        image:   _pickedImage != null ?
+                        DecorationImage(
+                          image: FileImage(_pickedImage!),
+                        ) : DecorationImage(
+                            image: AssetImage("assets/images/no_image.png"))
+                    ),
+                  ),
+                  Container(
+                    height: 120,
+                    width: MediaQuery.of(context).size.width * .6,
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(
-                          Icons.remove,
-                          color: Colors.red,
+                        GestureDetector(
+                          onTap: () {
+                            _showPicker(context);
+                          },
+                          child: Container(
+                              height: 40,
+                              width: MediaQuery.of(context).size.width * .5,
+                              decoration: BoxDecoration(
+                                  color: Colors.orange,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                      color: Colors.grey
+                                  )
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.upload,
+                                    size: 25,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    LocaleKeys.upload.tr(),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20
+                                    ),
+                                  ),
+                                ],
+                              )
+                          ),
                         ),
-                        SizedBox(width: 5),
-                        Text(
-                         LocaleKeys.delete.tr(),
-                          style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 15
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _pickedImage = null;
+                            });
+                          },
+                          child: Container(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width * .5,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                    color: Colors.grey
+                                )
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.delete,
+                                  size: 25,
+                                  color: Colors.orange,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  LocaleKeys.delete.tr(),
+                                  style: TextStyle(
+                                      color: Colors.orange,
+                                      fontSize: 20
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    onPressed: () {
-                      if(count > 1) {
-                        data.removeAt(count-1);
-                        count--;
-                      }
-                      setState(() {
-
-                      });
-
-                      Future.delayed(const Duration(milliseconds: 500), () async {
-                        _scrollDown();
-                      });
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(
-                            color: Colors.red
-                        )
-                    ),
-                  ),
-                ),
-              ],
+                  )
+                ],
+              ),
             ),
-            SizedBox(height: 15),
             Container(
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(4)
               ),
-              height: MediaQuery.of(context).size.height*.050,
-              width: MediaQuery.of(context).size.width*.70,
+              height: 40,
+              width: MediaQuery.of(context).size.width * .70,
               child: RaisedButton(
                 onPressed: () async {
                   FocusScope.of(context).unfocus();
@@ -417,7 +661,8 @@ class _RouteAddState extends State<RouteAdd> {
                 ),
                 color: Colors.blue,
               ),
-            )
+            ),
+            SizedBox(height: 15)
           ],
         ),
       ),

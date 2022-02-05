@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,6 +25,18 @@ class TransfersAdd extends StatefulWidget {
 class _TransfersAddState extends State<TransfersAdd> {
   final ScrollController _controller = ScrollController();
 
+  final TextEditingController name_controller = TextEditingController();
+  final TextEditingController additional_controller = TextEditingController();
+  final TextEditingController price_controller = TextEditingController();
+  bool logo_check = false;
+  File? _pickedImage;
+  final ImagePicker _picker = ImagePicker();
+  List<String> car = [];
+  late final List<DropdownMenuItem<String>> cars;
+  late List api_cars;
+  String? chosen_car;
+
+
   List<String> directions = [
     '${LocaleKeys.meeting.tr()}',
     '${LocaleKeys.Drop_of.tr()}'
@@ -36,6 +50,7 @@ class _TransfersAddState extends State<TransfersAdd> {
   void initState() {
     super.initState();
     getcities();
+    getModels();
   }
   void getcities() {
     api_cities = HomeScreen.city_list;
@@ -62,11 +77,74 @@ class _TransfersAddState extends State<TransfersAdd> {
     );
   }
 
+  void getModels() {
+    print("===========");
+    print(HomeScreen.carModels_list);
+    api_cars = HomeScreen.carModels_list;
+    //chosen_car = api_cars[0]["name"];
+    api_cars.forEach((element) {
+      car.add(element["name"]);
+    });
+    cars = car.map(
+          (String value) => DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+      ),
+    ).toList();
+  }
+
   void _scrollDown() {
     _controller.animateTo(
       _controller.position.maxScrollExtent,
       duration: Duration(seconds: 1),
       curve: Curves.fastOutSlowIn,
+    );
+  }
+
+  void _showPicker(BuildContext cont) {
+    showModalBottomSheet(
+        context: cont,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text(LocaleKeys.Photo_library.tr()),
+                      onTap: () async {
+                        final pickedImageFile = await _picker.pickImage(
+                          source: ImageSource.gallery,
+                          imageQuality: 50,
+                          maxWidth: 150,
+                        );
+                        File file = File(pickedImageFile!.path);
+                        setState(() {
+                          _pickedImage = file;
+                        });
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text(LocaleKeys.Camera.tr()),
+                    onTap: () async {
+                      final pickedImageFile = await _picker.pickImage(
+                        source: ImageSource.camera,
+                        imageQuality: 50,
+                        maxWidth: 150,
+                      );
+                      File file = File(pickedImageFile!.path);
+                      setState(() {
+                        _pickedImage = file;
+                      });
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
     );
   }
 
@@ -387,6 +465,171 @@ class _TransfersAddState extends State<TransfersAdd> {
                 ),
               ),
             ],
+          ),
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              child: Container(
+                width: double.infinity,
+                height: 45,
+                padding: EdgeInsets.only(left: 6, right: 6),
+                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(5)
+                ),
+                child:DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    menuMaxHeight: MediaQuery.of(context).size.height * .5,
+                    dropdownColor: Colors.grey[50],
+                    icon: Icon(Icons.keyboard_arrow_down),
+                    value: chosen_car,
+                    isExpanded: true,
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black
+                    ),
+                    underline: SizedBox(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        chosen_car = newValue;
+                      });
+                    },
+                    items: cars,
+                  ),
+                ),
+              )
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 13.0),
+            child: TFF(price_controller, "Ожидаемая цена", 45),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+            child: Row(
+              children: [
+                Checkbox(
+                  onChanged: (bool? newValue) {
+                    setState(() {
+                      logo_check = newValue!;
+                    });
+                  },
+                  value: logo_check,
+                ),
+                Expanded(
+                  child: Text(
+                    "Встречать с табличкой(имя гостя или логотип компании)",
+                    maxLines: 3,
+                    style: TextStyle(
+                        fontSize: 17
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          if(logo_check) Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 13.0),
+            child: TFF(name_controller, "Имя гостя ", 45),
+          ),
+          if(logo_check) Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  height: 120,
+                  width: MediaQuery.of(context).size.width * .4,
+                  margin: EdgeInsets.symmetric(vertical: 7.0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      image:   _pickedImage != null ?
+                      DecorationImage(
+                        image: FileImage(_pickedImage!),
+                      ) : DecorationImage(
+                          image: AssetImage("assets/images/no_image.png"))
+                  ),
+                ),
+                Container(
+                  height: 120,
+                  width: MediaQuery.of(context).size.width * .6,
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          _showPicker(context);
+                        },
+                        child: Container(
+                            height: 40,
+                            width: MediaQuery.of(context).size.width * .5,
+                            decoration: BoxDecoration(
+                                color: Colors.orange,
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                    color: Colors.grey
+                                )
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.upload,
+                                  size: 25,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  LocaleKeys.upload.tr(),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20
+                                  ),
+                                ),
+                              ],
+                            )
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _pickedImage = null;
+                          });
+                        },
+                        child: Container(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width * .5,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                  color: Colors.grey
+                              )
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.delete,
+                                size: 25,
+                                color: Colors.orange,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                LocaleKeys.delete.tr(),
+                                style: TextStyle(
+                                    color: Colors.orange,
+                                    fontSize: 20
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
           SizedBox(height: 15),
           Container(

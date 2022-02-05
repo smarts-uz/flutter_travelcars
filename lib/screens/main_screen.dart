@@ -31,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
        BottomNavigationBarItem(icon: Icon(Icons.home), label: '${LocaleKeys.home.tr()}'),
        BottomNavigationBarItem(icon: Icon(Icons.search), label: '${LocaleKeys.Sort.tr()}'),
        BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/transfer.svg'), label: '${LocaleKeys.transfers.tr()}'),
-       BottomNavigationBarItem(icon: Icon(Icons.map_outlined), label: '${LocaleKeys.routes.tr()}'),
+       BottomNavigationBarItem(icon: Icon(Icons.map_outlined), label: '${LocaleKeys.itinerary.tr()}'),
        BottomNavigationBarItem(icon: Icon(Icons.person_outline_outlined), label: '${LocaleKeys.profile.tr()}'),
     ];
     assert(_kTabPages.length == _BottomNavBarItems.length);
