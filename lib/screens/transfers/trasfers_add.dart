@@ -81,7 +81,7 @@ class _TransfersAddState extends State<TransfersAdd> {
     print("===========");
     print(HomeScreen.carModels_list);
     api_cars = HomeScreen.carModels_list;
-    //chosen_car = api_cars[0]["name"];
+    chosen_car = api_cars[0]["name"];
     api_cars.forEach((element) {
       car.add(element["name"]);
     });
@@ -366,105 +366,107 @@ class _TransfersAddState extends State<TransfersAdd> {
                 },
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * .01),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              if(i < 10) Container(
-                height: 35,
-                width: 140,
-                child: RaisedButton(
-                  color: Colors.white,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.add,
-                        color: Colors.orange,
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        LocaleKeys.add.tr(),
-                        style: TextStyle(
-                            color: Colors.orange,
-                            fontSize: 15
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                if(i < 10) Container(
+                  height: 35,
+                  width: 140,
+                  child: RaisedButton(
+                    color: Colors.white,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add,
+                          color: Colors.orange,
                         ),
-                      ),
-                    ],
-                  ),
-                  onPressed: () {
-                    if(i <= 10) i++;
-                    data.add({
-                      "direction": 0,
-                      "city": city[0],
-                      "day": DateTime.now(),
-                      "time": TimeOfDay.now(),
-                      "controllers4": [
-                        for (int i = 0; i < 4; i++)
-                          TextEditingController()
+                        SizedBox(width: 5),
+                        Text(
+                          LocaleKeys.add.tr(),
+                          style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 15
+                          ),
+                        ),
                       ],
-                    });
-                    setState(() {
+                    ),
+                    onPressed: () {
+                      if(i <= 10) i++;
+                      data.add({
+                        "direction": 0,
+                        "city": city[0],
+                        "day": DateTime.now(),
+                        "time": TimeOfDay.now(),
+                        "controllers4": [
+                          for (int i = 0; i < 4; i++)
+                            TextEditingController()
+                        ],
+                      });
+                      setState(() {
 
-                    });
+                      });
 
-                    Future.delayed(const Duration(milliseconds: 500), () async {
-                      _scrollDown();
-                    });
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(
-                          color: Colors.orange
-                      )
+                      Future.delayed(const Duration(milliseconds: 500), () async {
+                        _scrollDown();
+                      });
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(
+                            color: Colors.orange
+                        )
+                    ),
                   ),
                 ),
-              ),
-              if(i > 1) Container(
-                height: 35,
-                width: 140,
-                child: RaisedButton(
-                  color: Colors.white,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.remove,
-                        color: Colors.red,
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        LocaleKeys.delete.tr(),
-                        style: TextStyle(
+                if(i > 1) Container(
+                  height: 35,
+                  width: 140,
+                  child: RaisedButton(
+                    color: Colors.white,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.remove,
                           color: Colors.red,
-                          fontSize: 15,
                         ),
-                      ),
-                    ],
-                  ),
-                  onPressed: (){
-                    if(i > 1) {
-                      data.removeAt(i-1);
-                      i--;
-                    }
-                    setState(() {
+                        SizedBox(width: 5),
+                        Text(
+                          LocaleKeys.delete.tr(),
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onPressed: (){
+                      if(i > 1) {
+                        data.removeAt(i-1);
+                        i--;
+                      }
+                      setState(() {
 
-                    }
-                    );
+                      }
+                      );
 
-                    Future.delayed(const Duration(milliseconds: 500), () async {
-                      _scrollDown();
-                    });
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(
-                          color: Colors.red
-                      )
+                      Future.delayed(const Duration(milliseconds: 500), () async {
+                        _scrollDown();
+                      });
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(
+                            color: Colors.red
+                        )
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
@@ -501,10 +503,10 @@ class _TransfersAddState extends State<TransfersAdd> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 13.0),
-            child: TFF(price_controller, "Ожидаемая цена", 45),
+            child: TFF(price_controller, LocaleKeys.expectedPrice.tr(), 45),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             child: Row(
               children: [
                 Checkbox(
@@ -517,7 +519,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                 ),
                 Expanded(
                   child: Text(
-                    "Встречать с табличкой(имя гостя или логотип компании)",
+                    LocaleKeys.needPoster.tr(),
                     maxLines: 3,
                     style: TextStyle(
                         fontSize: 17
@@ -529,10 +531,10 @@ class _TransfersAddState extends State<TransfersAdd> {
           ),
           if(logo_check) Padding(
             padding: const EdgeInsets.symmetric(horizontal: 13.0),
-            child: TFF(name_controller, "Имя гостя ", 45),
+            child: TFF(name_controller, LocaleKeys.guestName.tr(), 45),
           ),
           if(logo_check) Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.only(bottom: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -631,81 +633,83 @@ class _TransfersAddState extends State<TransfersAdd> {
               ],
             ),
           ),
-          SizedBox(height: 15),
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40)
-            ),
-            height: MediaQuery.of(context).size.height* 0.05,
-            width: MediaQuery.of(context).size.width*.70,
-            child:  RaisedButton(
-                onPressed: () async {
-                  FocusScope.of(context).unfocus();
-                  final prefs = await SharedPreferences.getInstance();
-                  if(prefs.containsKey("userData")) {
-                    bool isValid = true;
-                    List<Map<String, dynamic>> info = [];
-                    data.forEach((element) {
-                      int cityID = 0;
-                      api_cities.forEach((cityid) {
-                        if(cityid["name"] == element["city"]) {
-                          cityID = cityid["city_id"];
+          Padding(
+            padding: const EdgeInsets.only(bottom: 13),
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40)
+              ),
+              height: 40,
+              width: MediaQuery.of(context).size.width*.70,
+              child:  RaisedButton(
+                  onPressed: () async {
+                    FocusScope.of(context).unfocus();
+                    final prefs = await SharedPreferences.getInstance();
+                    if(prefs.containsKey("userData")) {
+                      bool isValid = true;
+                      List<Map<String, dynamic>> info = [];
+                      data.forEach((element) {
+                        int cityID = 0;
+                        api_cities.forEach((cityid) {
+                          if(cityid["name"] == element["city"]) {
+                            cityID = cityid["city_id"];
+                          }
+                        });
+                        info.add({
+                          "from": "${element["controllers4"][1].text}",
+                          "to": "${element["controllers4"][2].text}",
+                          "type": element["direction"] == 0 ? "meeting" : "cunduct",
+                          "city_id": "$cityID",
+                          "date": "${DateFormat('dd.MM.yyyy').format(element["day"])}",
+                          "time": "${element["time"].format(context).substring(0, 5)}",
+                          "quantity": "${element["controllers4"][0].text}",
+                          "additional": "${element["controllers4"][3].text}",
+                        });
+                      });
+                      String empty_gap = " ";
+                      info.forEach((element) {
+                        element.forEach((key, value) {
+                          if(value == "") {
+                            empty_gap = key;
+                            isValid = false;
+                          }
+                        });
+                      });
+                      if(isValid) {
+                        try{
+                          String url = "${AppConfig.BASE_URL}/postTransfers";
+                          String token = json.decode(prefs.getString('userData')!)["token"];
+                          final result = await http.post(
+                              Uri.parse(url),
+                              headers: {
+                                "Authorization": "Bearer $token",
+                              },
+                              body: {
+                                "transfers" : "${json.encode(info)}"
+                              }
+                          );
+                          print(json.decode(result.body)['message']);
+                          Dialogs.ZayavkaDialog(context);
+                        } catch (error) {
+                          Dialogs.ErrorDialog(context);
                         }
-                      });
-                      info.add({
-                        "from": "${element["controllers4"][1].text}",
-                        "to": "${element["controllers4"][2].text}",
-                        "type": element["direction"] == 0 ? "meeting" : "cunduct",
-                        "city_id": "$cityID",
-                        "date": "${DateFormat('dd.MM.yyyy').format(element["day"])}",
-                        "time": "${element["time"].format(context).substring(0, 5)}",
-                        "quantity": "${element["controllers4"][0].text}",
-                        "additional": "${element["controllers4"][3].text}",
-                      });
-                    });
-                    String empty_gap = " ";
-                    info.forEach((element) {
-                      element.forEach((key, value) {
-                        if(value == "") {
-                          empty_gap = key;
-                          isValid = false;
-                        }
-                      });
-                    });
-                    if(isValid) {
-                      try{
-                        String url = "${AppConfig.BASE_URL}/postTransfers";
-                        String token = json.decode(prefs.getString('userData')!)["token"];
-                        final result = await http.post(
-                            Uri.parse(url),
-                            headers: {
-                              "Authorization": "Bearer $token",
-                            },
-                            body: {
-                              "transfers" : "${json.encode(info)}"
-                            }
-                        );
-                        print(json.decode(result.body)['message']);
-                        Dialogs.ZayavkaDialog(context);
-                      } catch (error) {
-                        Dialogs.ErrorDialog(context);
+                      } else {
+                        ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}: $empty_gap");
                       }
                     } else {
-                      ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}: $empty_gap");
+                      Dialogs.LoginDialog(context);
                     }
-                  } else {
-                    Dialogs.LoginDialog(context);
-                  }
-                },
-                child: Text(
-                  LocaleKeys.submit_your_application.tr(),
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white
+                  },
+                  child: Text(
+                    LocaleKeys.submit_your_application.tr(),
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white
+                    ),
                   ),
+                  color: Colors.blue,
                 ),
-                color: Colors.blue,
-              ),
+            ),
           ),
         ],
         ),

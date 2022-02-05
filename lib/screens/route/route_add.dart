@@ -417,14 +417,14 @@ class _RouteAddState extends State<RouteAdd> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
-              child: TFF("Ожидаемая цена", price_controller, 45),
+              child: TFF(LocaleKeys.expectedPrice.tr(), price_controller, 45),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
-              child: TFF("Дополнительные сведения. Например, адрес куда приехать, авто, пожелания и т.д.", additional_controller, 120),
+              child: TFF(LocaleKeys.additional_info.tr(), additional_controller, 120),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               child: Row(
                 children: [
                   Checkbox(
@@ -437,7 +437,7 @@ class _RouteAddState extends State<RouteAdd> {
                   ),
                   Expanded(
                     child: Text(
-                      "Встречать с табличкой(имя гостя или логотип компании)",
+                      LocaleKeys.needPoster.tr(),
                       maxLines: 3,
                       style: TextStyle(
                           fontSize: 17
@@ -449,10 +449,10 @@ class _RouteAddState extends State<RouteAdd> {
             ),
             if(logo_check) Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
-              child: TFF("Имя гостя ", name_controller, 45),
+              child: TFF(LocaleKeys.guestName.tr(), name_controller, 45),
             ),
             if(logo_check) Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.only(bottom: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -551,118 +551,120 @@ class _RouteAddState extends State<RouteAdd> {
                 ],
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(4)
-              ),
-              height: 40,
-              width: MediaQuery.of(context).size.width * .70,
-              child: RaisedButton(
-                onPressed: () async {
-                  FocusScope.of(context).unfocus();
-                  final prefs = await SharedPreferences.getInstance();
-                  if(prefs.containsKey("userData")) {
-                    bool isValid = true;
-                    List<Map<String, dynamic>> info = [];
-                    data.forEach((element) {
-                      api_cities.forEach((cityid) {
-                        if(cityid["name"] == element["city1"]) {
-                          element["city1"] = cityid["city_id"];
-                        }
-                        if(cityid["name"] == element["city2"]) {
-                          element["city2"] = cityid["city_id"];
-                        }
-                      });
-                      info.add({
-                        "from": "${element["city1"]}",
-                        "to": "${element["city2"]}",
-                        "date": "${DateFormat('dd-MM-yyyy').format(element["day"])}",
-                        "passengers": "${element["controllers2"][0].text}",
-                        "address": "${element["controllers2"][1].text}",
-                      });
-                    });
-                    String empty_gap = " ";
-                    info.forEach((element) {
-                      element.forEach((key, value) {
-                        if(value == "") {
-                          empty_gap = key;
-                          isValid = false;
-                        }
-                      });
-                    });
-                    if(isValid) {
-                      int ind = 0;
-                      data.forEach((element_info) {
-                        api_cities.forEach((element_city) {
-                          setState(() {
-                            if(element_info["city1"] == element_city["city_id"]) {
-                              data[ind]["city1"] = element_city["name"];
-                            }
-                            if(element_info["city2"] == element_city["city_id"]) {
-                              data[ind]["city2"] = element_city["name"];
-                            }
-                          });
+            Padding(
+              padding: const EdgeInsets.only(bottom: 13.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(4)
+                ),
+                height: 40,
+                width: MediaQuery.of(context).size.width * .70,
+                child: RaisedButton(
+                  onPressed: () async {
+                    FocusScope.of(context).unfocus();
+                    final prefs = await SharedPreferences.getInstance();
+                    if(prefs.containsKey("userData")) {
+                      bool isValid = true;
+                      List<Map<String, dynamic>> info = [];
+                      data.forEach((element) {
+                        api_cities.forEach((cityid) {
+                          if(cityid["name"] == element["city1"]) {
+                            element["city1"] = cityid["city_id"];
+                          }
+                          if(cityid["name"] == element["city2"]) {
+                            element["city2"] = cityid["city_id"];
+                          }
                         });
-                        ind++;
-                      });
-                      try {
-                        String url = "${AppConfig.BASE_URL}/custom/booking/create";
-                        String token = json.decode(prefs.getString('userData')!)["token"];
-                        final result = await http.post(
-                            Uri.parse(url),
-                            headers: {
-                              "Authorization": "Bearer $token",
-                            },
-                            body: {
-                              "data" : "${json.encode(info)}"
-                            }
-                        );
-                        print(json.decode(result.body)['message']);
-                        List<Map<String, String>> routes = [];
-                        data.forEach((element) {
-                          routes.add({
-                            "from": element["city1"],
-                            "to": element["city2"],
-                            "date": "${DateFormat('dd-MM-yyyy').format(element["day"])}",
-                          });
+                        info.add({
+                          "from": "${element["city1"]}",
+                          "to": "${element["city2"]}",
+                          "date": "${DateFormat('dd-MM-yyyy').format(element["day"])}",
+                          "passengers": "${element["controllers2"][0].text}",
+                          "address": "${element["controllers2"][1].text}",
                         });
-                        Dialogs.TripDialog(context, routes);
-                      } catch (error) {
-                        Dialogs.ErrorDialog(context);
+                      });
+                      String empty_gap = " ";
+                      info.forEach((element) {
+                        element.forEach((key, value) {
+                          if(value == "") {
+                            empty_gap = key;
+                            isValid = false;
+                          }
+                        });
+                      });
+                      if(isValid) {
+                        int ind = 0;
+                        data.forEach((element_info) {
+                          api_cities.forEach((element_city) {
+                            setState(() {
+                              if(element_info["city1"] == element_city["city_id"]) {
+                                data[ind]["city1"] = element_city["name"];
+                              }
+                              if(element_info["city2"] == element_city["city_id"]) {
+                                data[ind]["city2"] = element_city["name"];
+                              }
+                            });
+                          });
+                          ind++;
+                        });
+                        try {
+                          String url = "${AppConfig.BASE_URL}/custom/booking/create";
+                          String token = json.decode(prefs.getString('userData')!)["token"];
+                          final result = await http.post(
+                              Uri.parse(url),
+                              headers: {
+                                "Authorization": "Bearer $token",
+                              },
+                              body: {
+                                "data" : "${json.encode(info)}"
+                              }
+                          );
+                          print(json.decode(result.body)['message']);
+                          List<Map<String, String>> routes = [];
+                          data.forEach((element) {
+                            routes.add({
+                              "from": element["city1"],
+                              "to": element["city2"],
+                              "date": "${DateFormat('dd-MM-yyyy').format(element["day"])}",
+                            });
+                          });
+                          Dialogs.TripDialog(context, routes);
+                        } catch (error) {
+                          Dialogs.ErrorDialog(context);
+                        }
+                      } else {
+                        int ind = 0;
+                        data.forEach((element_info) {
+                          api_cities.forEach((element_city) {
+                            setState(() {
+                              if(element_info["city1"] == element_city["city_id"]) {
+                                data[ind]["city1"] = element_city["name"];
+                              }
+                              if(element_info["city2"] == element_city["city_id"]) {
+                                data[ind]["city2"] = element_city["name"];
+                              }
+                            });
+                          });
+                          ind++;
+                        });
+                        ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}: $empty_gap");
                       }
                     } else {
-                      int ind = 0;
-                      data.forEach((element_info) {
-                        api_cities.forEach((element_city) {
-                          setState(() {
-                            if(element_info["city1"] == element_city["city_id"]) {
-                              data[ind]["city1"] = element_city["name"];
-                            }
-                            if(element_info["city2"] == element_city["city_id"]) {
-                              data[ind]["city2"] = element_city["name"];
-                            }
-                          });
-                        });
-                        ind++;
-                      });
-                      ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}: $empty_gap");
+                      Dialogs.LoginDialog(context);
                     }
-                  } else {
-                    Dialogs.LoginDialog(context);
-                  }
-                },
-                child: Text(
-                  LocaleKeys.submit_your_application.tr(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white
+                  },
+                  child: Text(
+                    LocaleKeys.submit_your_application.tr(),
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white
+                    ),
                   ),
+                  color: Colors.blue,
                 ),
-                color: Colors.blue,
               ),
             ),
-            SizedBox(height: 15)
           ],
         ),
       ),

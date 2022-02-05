@@ -750,7 +750,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
             ),
-            TFF(additional_controller, "Дополнительные сведения. Например, адрес куда приехать, авто, пожелания и т.д.", 120),
+            TFF(additional_controller, LocaleKeys.additional_info.tr(), 120),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 5.0),
               child: Row(
@@ -765,7 +765,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                   Expanded(
                     child: Text(
-                      "Встречать с табличкой(имя гостя или логотип компании)",
+                      LocaleKeys.needPoster.tr(),
                       maxLines: 3,
                       style: TextStyle(
                         fontSize: 17
@@ -775,7 +775,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ],
               ),
             ),
-            TFF(name_controller, "Имя гостя ", 45),
+            TFF(name_controller, LocaleKeys.guestName.tr(), 45),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Row(

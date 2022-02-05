@@ -252,5 +252,9 @@
   "oferta": "Public offer",
   "code_confirm": "Code confirmation",
   "Social_networks_for_communication": "My social networks",
-  "itinerary": "Itinerary"
+  "itinerary": "Itinerary",
+  "needPoster": "Meet with a sign(guest name or company logo)",
+  "guestName": "Guest name",
+  "expectedPrice": "Expected price",
+  "additional_info": "Additional information. For example, pick-up address, other wishes, etc."
 }

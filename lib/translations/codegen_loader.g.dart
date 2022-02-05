@@ -268,7 +268,11 @@ class CodegenLoader extends AssetLoader{
   "oferta": "Public offer",
   "code_confirm": "Code confirmation",
   "Social_networks_for_communication": "My social networks",
-  "itinerary": "Itinerary"
+  "itinerary": "Itinerary",
+  "needPoster": "Meet with a sign(guest name or company logo)",
+  "guestName": "Guest name",
+  "expectedPrice": "Expected price",
+  "additional_info": "Additional information. For example, pick-up address, other wishes, etc."
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги по всем городам Узбекистана: экскурсионные и бизнес-поездки",
@@ -524,7 +528,11 @@ static const Map<String,dynamic> ru = {
   "oferta": "Публичной офертой",
   "code_confirm": "Подтверждение кода",
   "Social_networks_for_communication": "Социальные сети для связи",
-  "itinerary": "Маршрут"
+  "itinerary": "Маршрут",
+  "needPoster": "Встречать с табличкой(имя гостя или логотип компании)",
+  "guestName": "Имя гостя",
+  "expectedPrice": "Ожидаемая цена",
+  "additional_info": "Дополнительные сведения. Например, адрес куда приехать, авто, пожелания и т.д."
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Ўзбекистоннинг барча шаҳарлари ўртасида транспорт хизматлари: саёҳат ва бизнес",
@@ -780,7 +788,11 @@ static const Map<String,dynamic> uz = {
   "oferta": "Оммавий оферта билан",
   "code_confirm": "Кодни тасдиқлаш",
   "Social_networks_for_communication": "Мулоқот учун ижтимоий тармоқлар",
-  "itinerary": "Йўналиш"
+  "itinerary": "Йўналиш",
+  "needPoster": "Ёзув билан кутиб олиш(меҳмон исми ёки компания логотипи)",
+  "guestName": "Меҳмон исми",
+  "expectedPrice": "Кутилаётган нарх",
+  "additional_info": "Қўшимча малумотлар. Масалан манзил, хоҳишлар ва ҳ.к"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }
