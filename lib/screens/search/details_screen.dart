@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
+import 'package:http_parser/http_parser.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/src/public_ext.dart';
@@ -775,8 +777,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 ],
               ),
             ),
-            TFF(name_controller, LocaleKeys.guestName.tr(), 45),
-            Padding(
+            if(logo_check) TFF(name_controller, LocaleKeys.guestName.tr(), 45),
+            if(logo_check) Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Row(
                 children: [
@@ -879,6 +881,18 @@ class _DetailScreenState extends State<DetailScreen> {
               onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
                 if(prefs.containsKey("userData")) {
+                  if(logo_check) {
+                    if(name_controller.text.isEmpty || additional_controller.text.isEmpty) {
+                      ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}");
+                      return;
+                    }
+
+                    if(_pickedImage == null) {
+                      ToastComponent.showDialog(LocaleKeys.no_image.tr());
+                      return;
+                    }
+                  }
+
                   String pay_key = "";
                   for(var element in payment_types) {
                     if(element["text"] == selectedVal) {
@@ -886,11 +900,10 @@ class _DetailScreenState extends State<DetailScreen> {
                     }
                   }
                   if(pay_key.isEmpty) {
-                    ToastComponent.showDialog("Choose payment type");
+                    ToastComponent.showDialog(LocaleKeys.choose_pay.tr());
                     return;
                   }
-                  String token = json.decode(prefs.getString('userData')!)["token"];
-                  Uri url = Uri.parse("${AppConfig.BASE_URL}/book/create");
+
                   String price = "0";
                   String cost = "0";
                   pricelar.forEach((element) {
@@ -898,7 +911,6 @@ class _DetailScreenState extends State<DetailScreen> {
                       price = element["cost"];
                     }
                   });
-
                   costlar.forEach((element) {
                     if(element["day"] + " ${LocaleKeys.day.tr()}" == dropdown) {
                       if(element["cost"] is String) {
@@ -909,28 +921,60 @@ class _DetailScreenState extends State<DetailScreen> {
 
                     }
                   });
+
                   print({
                     "route_price_id": "${results["route_price_id"]}",
                     "cost": "$cost",
                     "price": "$price",
                     "pay_key": "$pay_key",
                   });
+
+                  if(logo_check) {
+                    if(name_controller.text.isEmpty) {
+                      ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}");
+                      return;
+                    }
+                    if(_pickedImage == null) {
+                      ToastComponent.showDialog("${LocaleKeys.no_image.tr()}");
+                      return;
+                    }
+                  }
+
+                  http.BaseRequest request;
+                  String token = json.decode(prefs.getString('userData')!)["token"];
+                  if(logo_check) {
+                    request = http.MultipartRequest('POST', Uri.parse("${AppConfig.BASE_URL}/book/create"))
+                      ..headers["Authorization"] = 'Bearer $token'
+                      ..fields['route_price_id'] = "${results["route_price_id"]}"
+                      ..fields['cost'] = "$cost"
+                      ..fields['price'] = '$price'
+                      ..fields['pay_key'] = '$pay_key'
+                      ..fields['additional'] = '${additional_controller.text}'
+                      ..fields['with_poster'] = '1'
+                      ..fields['poster_name'] = '${name_controller.text}'
+                      ..files.add(
+                          await http.MultipartFile.fromPath(
+                              'poster_logo',
+                              '${_pickedImage?.path}',
+                              contentType: MediaType(
+                                  'image', 'jpg'
+                              )
+                          )
+                      );
+                  } else {
+                    request = http.MultipartRequest('POST', Uri.parse("${AppConfig.BASE_URL}/book/create"))
+                      ..headers["Authorization"] = 'Bearer $token'
+                      ..fields['route_price_id'] = "${results["route_price_id"]}"
+                      ..fields['cost'] = "$cost"
+                      ..fields['price'] = '$price'
+                      ..fields['pay_key'] = '$pay_key'
+                      ..fields['additional'] = '${additional_controller.text}'
+                      ..fields['with_poster'] = '0';
+                  }
                   try{
-                    final response = await http.post(
-                      url,
-                      headers: {
-                        "Authorization": "Bearer $token"
-                      },
-                      body: {
-                        "route_price_id": "${results["route_price_id"]}",
-                        "cost": "$cost",
-                        "price": "$price",
-                        "pay_key": "$pay_key",
-                      },
-                    );
-                    print(response.body);
-                    if(jsonDecode(response.body)["success"]) {
-                      //Dialogs.ZayavkaDialog(context);
+                    var response = await request.send();
+                    print(response.reasonPhrase);
+                    if(response.statusCode == 200) {
                       Navigator.pop(context);
                     } else {
                       Dialogs.ErrorDialog(context);

@@ -272,7 +272,8 @@ class CodegenLoader extends AssetLoader{
   "needPoster": "Meet with a sign(guest name or company logo)",
   "guestName": "Guest name",
   "expectedPrice": "Expected price",
-  "additional_info": "Additional information. For example, pick-up address, other wishes, etc."
+  "additional_info": "Additional information. For example, pick-up address, other wishes, etc.",
+  "choose_pay": "Choose payment type"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги по всем городам Узбекистана: экскурсионные и бизнес-поездки",
@@ -532,7 +533,8 @@ static const Map<String,dynamic> ru = {
   "needPoster": "Встречать с табличкой(имя гостя или логотип компании)",
   "guestName": "Имя гостя",
   "expectedPrice": "Ожидаемая цена",
-  "additional_info": "Дополнительные сведения. Например, адрес куда приехать, авто, пожелания и т.д."
+  "additional_info": "Дополнительные сведения. Например, адрес куда приехать, авто, пожелания и т.д.",
+  "choose_pay": "Выберите тип оплаты"
 };
 static const Map<String,dynamic> uz = {
   "home_screen_Transport_services": "Ўзбекистоннинг барча шаҳарлари ўртасида транспорт хизматлари: саёҳат ва бизнес",
@@ -792,7 +794,8 @@ static const Map<String,dynamic> uz = {
   "needPoster": "Ёзув билан кутиб олиш(меҳмон исми ёки компания логотипи)",
   "guestName": "Меҳмон исми",
   "expectedPrice": "Кутилаётган нарх",
-  "additional_info": "Қўшимча малумотлар. Масалан манзил, хоҳишлар ва ҳ.к"
+  "additional_info": "Қўшимча малумотлар. Масалан манзил, хоҳишлар ва ҳ.к",
+  "choose_pay": "Тўлов турини танланг"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

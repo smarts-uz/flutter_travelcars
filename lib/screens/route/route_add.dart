@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
+import 'package:http_parser/http_parser.dart';
 
 import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
@@ -35,6 +36,7 @@ class _RouteAddState extends State<RouteAdd> {
   late final List<DropdownMenuItem<String>> cars;
   late List api_cars;
   String? chosen_car;
+  int? car_type_id;
 
   List<String> city = [];
   late final List<DropdownMenuItem<String>> cities;
@@ -74,6 +76,7 @@ class _RouteAddState extends State<RouteAdd> {
   void getCars() {
     api_cars = HomeScreen.cars_list;
     chosen_car = api_cars[0]["name"];
+    car_type_id = api_cars[0]["id"];
     api_cars.forEach((element) {
       car.add(element["name"]);
     });
@@ -417,7 +420,7 @@ class _RouteAddState extends State<RouteAdd> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
-              child: TFF(LocaleKeys.expectedPrice.tr(), price_controller, 45),
+              child: TFF("${LocaleKeys.expectedPrice.tr()}(USD)", price_controller, 45),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
@@ -565,6 +568,20 @@ class _RouteAddState extends State<RouteAdd> {
                     FocusScope.of(context).unfocus();
                     final prefs = await SharedPreferences.getInstance();
                     if(prefs.containsKey("userData")) {
+                      if(price_controller.text.isEmpty) {
+                        ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}");
+                        return;
+                      }
+                      if(logo_check) {
+                        if(name_controller.text.isEmpty) {
+                          ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}");
+                          return;
+                        }
+                        if(_pickedImage == null) {
+                          ToastComponent.showDialog("${LocaleKeys.no_image.tr()}");
+                          return;
+                        }
+                      }
                       bool isValid = true;
                       List<Map<String, dynamic>> info = [];
                       data.forEach((element) {
@@ -584,6 +601,8 @@ class _RouteAddState extends State<RouteAdd> {
                           "address": "${element["controllers2"][1].text}",
                         });
                       });
+
+
                       String empty_gap = " ";
                       info.forEach((element) {
                         element.forEach((key, value) {
@@ -593,46 +612,63 @@ class _RouteAddState extends State<RouteAdd> {
                           }
                         });
                       });
+
+                      api_cars.forEach((element) {
+                        if(element["name"] == chosen_car) {
+                          car_type_id = element["id"];
+                        }
+                      });
+
                       if(isValid) {
-                        int ind = 0;
-                        data.forEach((element_info) {
-                          api_cities.forEach((element_city) {
-                            setState(() {
-                              if(element_info["city1"] == element_city["city_id"]) {
-                                data[ind]["city1"] = element_city["name"];
-                              }
-                              if(element_info["city2"] == element_city["city_id"]) {
-                                data[ind]["city2"] = element_city["name"];
-                              }
+                        http.BaseRequest request;
+                        String token = json.decode(prefs.getString('userData')!)["token"];
+                        if(logo_check) {
+                          request = http.MultipartRequest('POST', Uri.parse("${AppConfig.BASE_URL}/custom/booking/create"))
+                            ..headers["Authorization"] = 'Bearer $token'
+                            ..fields['data'] = "${json.encode(info)}"
+                            ..fields['car_type_id'] = "$car_type_id"
+                            ..fields['additional'] = '${additional_controller.text}'
+                            ..fields['price'] = '${price_controller.text}'
+                            ..fields['with_poster'] = '1'
+                            ..fields['poster_name'] = '${name_controller.text}'
+                            ..files.add(
+                                await http.MultipartFile.fromPath(
+                                    'poster_logo',
+                                    '${_pickedImage?.path}',
+                                    contentType: MediaType(
+                                        'image', 'jpg'
+                                    )
+                                )
+                            );
+                        } else {
+                          request = http.MultipartRequest('POST', Uri.parse("${AppConfig.BASE_URL}/custom/booking/create"))
+                            ..headers["Authorization"] = 'Bearer $token'
+                            ..fields['data'] = "${json.encode(info)}"
+                            ..fields['car_type_id'] = "$car_type_id"
+                            ..fields['additional'] = '${additional_controller.text}'
+                            ..fields['price'] = '${price_controller.text}'
+                            ..fields['with_poster'] = '0';
+                        }
+                        try{
+                          var response = await request.send();
+                          print(response.reasonPhrase);
+                          if(response.statusCode == 200) {
+                            List<Map<String, String>> routes = [];
+                            data.forEach((element) {
+                              routes.add({
+                                "from": element["city1"],
+                                "to": element["city2"],
+                                "date": "${DateFormat('dd-MM-yyyy').format(element["day"])}",
+                              });
                             });
-                          });
-                          ind++;
-                        });
-                        try {
-                          String url = "${AppConfig.BASE_URL}/custom/booking/create";
-                          String token = json.decode(prefs.getString('userData')!)["token"];
-                          final result = await http.post(
-                              Uri.parse(url),
-                              headers: {
-                                "Authorization": "Bearer $token",
-                              },
-                              body: {
-                                "data" : "${json.encode(info)}"
-                              }
-                          );
-                          print(json.decode(result.body)['message']);
-                          List<Map<String, String>> routes = [];
-                          data.forEach((element) {
-                            routes.add({
-                              "from": element["city1"],
-                              "to": element["city2"],
-                              "date": "${DateFormat('dd-MM-yyyy').format(element["day"])}",
-                            });
-                          });
-                          Dialogs.TripDialog(context, routes);
+                            Dialogs.TripDialog(context, routes);
+                          } else {
+                            Dialogs.ErrorDialog(context);
+                          }
                         } catch (error) {
                           Dialogs.ErrorDialog(context);
                         }
+
                       } else {
                         int ind = 0;
                         data.forEach((element_info) {

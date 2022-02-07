@@ -358,7 +358,7 @@ class _AddScreenState extends State<AddScreen> {
                       String token = jsonDecode(prefs.getString("userData")!)["token"];
                       Uri url_add = Uri.parse("${AppConfig.BASE_URL}/createWay");
                       Uri url_edit = Uri.parse("${AppConfig.BASE_URL}/onway/edit");
-                      var request;
+                      http.BaseRequest request;
                       if(_pickedImage != null) {
                         request = http.MultipartRequest('POST', widget.way_item.isEmpty ? url_add : url_edit)
                           ..headers["Authorization"] = widget.way_item.isNotEmpty ? 'Bearer $token' : ''

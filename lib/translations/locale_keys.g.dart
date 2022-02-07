@@ -259,5 +259,6 @@ abstract class  LocaleKeys {
   static const guestName = 'guestName';
   static const expectedPrice = 'expectedPrice';
   static const additional_info = 'additional_info';
+  static const choose_pay = 'choose_pay';
 
 }

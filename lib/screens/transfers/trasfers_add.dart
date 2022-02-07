@@ -1,18 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
+import 'package:http_parser/http_parser.dart';
 
 import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
+import 'package:http/http.dart' as http;
 
 
 class TransfersAdd extends StatefulWidget {
@@ -26,7 +27,6 @@ class _TransfersAddState extends State<TransfersAdd> {
   final ScrollController _controller = ScrollController();
 
   final TextEditingController name_controller = TextEditingController();
-  final TextEditingController additional_controller = TextEditingController();
   final TextEditingController price_controller = TextEditingController();
   bool logo_check = false;
   File? _pickedImage;
@@ -35,6 +35,7 @@ class _TransfersAddState extends State<TransfersAdd> {
   late final List<DropdownMenuItem<String>> cars;
   late List api_cars;
   String? chosen_car;
+  int? car_model_id;
 
 
   List<String> directions = [
@@ -78,10 +79,9 @@ class _TransfersAddState extends State<TransfersAdd> {
   }
 
   void getModels() {
-    print("===========");
-    print(HomeScreen.carModels_list);
     api_cars = HomeScreen.carModels_list;
     chosen_car = api_cars[0]["name"];
+    car_model_id = api_cars[0]["id"];
     api_cars.forEach((element) {
       car.add(element["name"]);
     });
@@ -503,7 +503,7 @@ class _TransfersAddState extends State<TransfersAdd> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 13.0),
-            child: TFF(price_controller, LocaleKeys.expectedPrice.tr(), 45),
+            child: TFF(price_controller, "${LocaleKeys.expectedPrice.tr()}(USD)", 45),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
@@ -646,6 +646,20 @@ class _TransfersAddState extends State<TransfersAdd> {
                     FocusScope.of(context).unfocus();
                     final prefs = await SharedPreferences.getInstance();
                     if(prefs.containsKey("userData")) {
+                      if(price_controller.text.isEmpty) {
+                        ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}");
+                        return;
+                      }
+                      if(logo_check) {
+                        if(name_controller.text.isEmpty) {
+                          ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}");
+                          return;
+                        }
+                        if(_pickedImage == null) {
+                          ToastComponent.showDialog("${LocaleKeys.no_image.tr()}");
+                          return;
+                        }
+                      }
                       bool isValid = true;
                       List<Map<String, dynamic>> info = [];
                       data.forEach((element) {
@@ -666,6 +680,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                           "additional": "${element["controllers4"][3].text}",
                         });
                       });
+
                       String empty_gap = " ";
                       info.forEach((element) {
                         element.forEach((key, value) {
@@ -675,21 +690,49 @@ class _TransfersAddState extends State<TransfersAdd> {
                           }
                         });
                       });
+
+                      api_cars.forEach((element) {
+                        if(element["name"] == chosen_car) {
+                          car_model_id = element["id"];
+                        }
+                      });
+
                       if(isValid) {
+                        http.BaseRequest request;
+                        String token = json.decode(prefs.getString('userData')!)["token"];
+                        if(logo_check) {
+                          request = http.MultipartRequest('POST', Uri.parse("${AppConfig.BASE_URL}/postTransfers"))
+                            ..headers["Authorization"] = 'Bearer $token'
+                            ..fields['transfers'] = "${json.encode(info)}"
+                            ..fields['car_model_id'] = "$car_model_id"
+                            ..fields['price'] = '${price_controller.text}'
+                            ..fields['with_poster'] = '1'
+                            ..fields['poster_name'] = '${name_controller.text}'
+                            ..files.add(
+                                await http.MultipartFile.fromPath(
+                                    'poster_logo',
+                                    '${_pickedImage?.path}',
+                                    contentType: MediaType(
+                                        'image', 'jpg'
+                                    )
+                                )
+                            );
+                        } else {
+                          request = http.MultipartRequest('POST', Uri.parse("${AppConfig.BASE_URL}/postTransfers"))
+                            ..headers["Authorization"] = 'Bearer $token'
+                            ..fields['transfers'] = "${json.encode(info)}"
+                            ..fields['car_model_id'] = "$car_model_id"
+                            ..fields['price'] = '${price_controller.text}'
+                            ..fields['with_poster'] = '0';
+                        }
                         try{
-                          String url = "${AppConfig.BASE_URL}/postTransfers";
-                          String token = json.decode(prefs.getString('userData')!)["token"];
-                          final result = await http.post(
-                              Uri.parse(url),
-                              headers: {
-                                "Authorization": "Bearer $token",
-                              },
-                              body: {
-                                "transfers" : "${json.encode(info)}"
-                              }
-                          );
-                          print(json.decode(result.body)['message']);
-                          Dialogs.ZayavkaDialog(context);
+                          var response = await request.send();
+                          print(response.reasonPhrase);
+                          if(response.statusCode == 200) {
+                            Dialogs.ZayavkaDialog(context);
+                          } else {
+                            Dialogs.ErrorDialog(context);
+                          }
                         } catch (error) {
                           Dialogs.ErrorDialog(context);
                         }
