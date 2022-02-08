@@ -12,6 +12,8 @@ class RouteInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     double app_kurs = 1;
     double summa = 0;
+    List<int> indexes = [];
+
     HomeScreen.kurs.forEach((element) {
       if(SplashScreen.kurs == element["code"]) {
         app_kurs = element["rate"].toDouble();
@@ -21,6 +23,9 @@ class RouteInfo extends StatelessWidget {
       summa = app_kurs * info["price"].toDouble();
     }
 
+    for(int i = 0; i < info["routes"].length; i++) {
+      indexes.add(i);
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -48,37 +53,34 @@ class RouteInfo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            Padding(
               padding: EdgeInsets.only(top: 15),
-              height: info["routes"].length * 90.0,
-              child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: info["routes"].length,
-                  itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.only(left: 16, bottom: 15),
-                        child: RichText(
-                          text: TextSpan(
-                            style: TextStyle(
-                              height: 1.4,
-                              color: Colors.black,
-                              fontSize: 17
-                            ),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: '${info["routes"][index]['from']} - ${info["routes"][index]['to']}  ',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            TextSpan(text: '(${info["routes"][index]['date'].substring(0, 10)})\n'),
-                            TextSpan(
-                                text: '${LocaleKeys.Passengers.tr()}: ',
-                                style: TextStyle(fontWeight: FontWeight.bold,)),
-                            TextSpan(text: '${info["routes"][index]['passengers']}\n'),
-                            TextSpan(
-                                text: '${LocaleKeys.Where_to_pick_up.tr()}: ',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            TextSpan(text: '${info["routes"][index]['address']}'),
-                          ],),
-                        ),
+              child: Column(
+                children: indexes.map((index) => Padding(
+                  padding: EdgeInsets.only(left: 16, bottom: 15),
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                          height: 1.4,
+                          color: Colors.black,
+                          fontSize: 17
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: '${info["routes"][index]['from']} - ${info["routes"][index]['to']}  ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(text: '(${info["routes"][index]['date'].substring(0, 10)})\n'),
+                        TextSpan(
+                            text: '${LocaleKeys.Passengers.tr()}: ',
+                            style: TextStyle(fontWeight: FontWeight.bold,)),
+                        TextSpan(text: '${info["routes"][index]['passengers']}\n'),
+                        TextSpan(
+                            text: '${LocaleKeys.Where_to_pick_up.tr()}: ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(text: '${info["routes"][index]['address']}'),
+                      ],),
                   ),
+                )).toList(),
               ),
             ),
             Padding(

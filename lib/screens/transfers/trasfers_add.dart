@@ -676,7 +676,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                           "city_id": "$cityID",
                           "date": "${DateFormat('dd.MM.yyyy').format(element["day"])}",
                           "time": "${element["time"].format(context).substring(0, 5)}",
-                          "quantity": "${element["controllers4"][0].text}",
+                          "passengers": "${element["controllers4"][0].text}",
                           "additional": "${element["controllers4"][3].text}",
                         });
                       });

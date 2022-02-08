@@ -74,7 +74,7 @@ class _RouteAddState extends State<RouteAdd> {
   }
 
   void getCars() {
-    api_cars = HomeScreen.cars_list;
+    api_cars = HomeScreen.carModels_list;
     chosen_car = api_cars[0]["name"];
     car_type_id = api_cars[0]["id"];
     api_cars.forEach((element) {
@@ -620,13 +620,27 @@ class _RouteAddState extends State<RouteAdd> {
                       });
 
                       if(isValid) {
+                        int ind = 0;
+                        data.forEach((element_info) {
+                          api_cities.forEach((element_city) {
+                            setState(() {
+                              if(element_info["city1"] == element_city["city_id"]) {
+                                data[ind]["city1"] = element_city["name"];
+                              }
+                              if(element_info["city2"] == element_city["city_id"]) {
+                                data[ind]["city2"] = element_city["name"];
+                              }
+                            });
+                          });
+                          ind++;
+                        });
                         http.BaseRequest request;
                         String token = json.decode(prefs.getString('userData')!)["token"];
                         if(logo_check) {
                           request = http.MultipartRequest('POST', Uri.parse("${AppConfig.BASE_URL}/custom/booking/create"))
                             ..headers["Authorization"] = 'Bearer $token'
                             ..fields['data'] = "${json.encode(info)}"
-                            ..fields['car_type_id'] = "$car_type_id"
+                            ..fields['car_model_id'] = "$car_type_id"
                             ..fields['additional'] = '${additional_controller.text}'
                             ..fields['price'] = '${price_controller.text}'
                             ..fields['with_poster'] = '1'
@@ -644,7 +658,7 @@ class _RouteAddState extends State<RouteAdd> {
                           request = http.MultipartRequest('POST', Uri.parse("${AppConfig.BASE_URL}/custom/booking/create"))
                             ..headers["Authorization"] = 'Bearer $token'
                             ..fields['data'] = "${json.encode(info)}"
-                            ..fields['car_type_id'] = "$car_type_id"
+                            ..fields['car_model_id'] = "$car_type_id"
                             ..fields['additional'] = '${additional_controller.text}'
                             ..fields['price'] = '${price_controller.text}'
                             ..fields['with_poster'] = '0';
@@ -652,6 +666,7 @@ class _RouteAddState extends State<RouteAdd> {
                         try{
                           var response = await request.send();
                           print(response.reasonPhrase);
+                          print(response.statusCode);
                           if(response.statusCode == 200) {
                             List<Map<String, String>> routes = [];
                             data.forEach((element) {
