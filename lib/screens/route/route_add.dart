@@ -276,7 +276,7 @@ class _RouteAddState extends State<RouteAdd> {
                                 ),
                               ),
                             ),
-                            TFF("${LocaleKeys.Quantity_of_passengers.tr()}", data[index]["controllers2"][0], 48),
+                            TFF("${LocaleKeys.Quantity_of_passengers.tr()}", data[index]["controllers2"][0], 48, isNumber: true),
                             TFF("${LocaleKeys.The_address_of_the_place_to_pick_up_from.tr()}", data[index]["controllers2"][1], 110),
                           ]
                       ),
@@ -722,7 +722,7 @@ class _RouteAddState extends State<RouteAdd> {
     );
   }
 
-  Widget TFF (String? hint_text, TextEditingController controller, double height) {
+  Widget TFF (String? hint_text, TextEditingController controller, double height, {bool isNumber = false}) {
     return Container(
       width: double.infinity,
       height: height,
@@ -744,7 +744,7 @@ class _RouteAddState extends State<RouteAdd> {
           disabledBorder: InputBorder.none,
         ),
         controller: controller,
-        keyboardType: TextInputType.text,
+        keyboardType: isNumber ? TextInputType.number : TextInputType.text,
         cursorColor: Colors.black,
         style: TextStyle(
             fontSize: 18

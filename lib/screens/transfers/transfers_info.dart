@@ -55,81 +55,15 @@ class TransfersInfo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-                padding: EdgeInsets.only(top: 16),
-                height: info["places"].length * 170.0,
-                child: ListView.builder(
-                    itemCount: info["places"].length,
-                    itemBuilder: (context, index) => Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 16, top: 8),
-                          child: Text(
-                            '${info["places"][index]['type'] == "meeting" ? LocaleKeys.meeting.tr() : LocaleKeys.Drop_of.tr()}',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.orange
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 16, top: 6),
-                          child: RichText(
-                            text: TextSpan(
-                              style: TextStyle(
-                                  height: 1.5,
-                                  color: Colors.black,
-                                  fontSize: 17
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: '${info["places"][index]['city']} ',
-                                    style: TextStyle(fontWeight: FontWeight.bold)
-                                ),
-                                TextSpan(text: '(${info["places"][index]['date'].substring(0, 10)}, '),
-                                TextSpan(text: '${info["places"][index]['time']})\n'),
-                                TextSpan(
-                                    text: '${LocaleKeys.Passengers.tr()}: ',
-                                    style: TextStyle(fontWeight: FontWeight.bold,)
-                                ),
-                                TextSpan(text: '${info["places"][index]['passengers']}\n'),
-                                TextSpan(
-                                    text: '${LocaleKeys.Where_to_pick_up.tr()}: ',
-                                    style: TextStyle(fontWeight: FontWeight.bold)
-                                ),
-                                TextSpan(text: '${info["places"][index]['from']}\n'),
-                                TextSpan(
-                                    text: '${LocaleKeys.where.tr()}: ',
-                                    style: TextStyle(fontWeight: FontWeight.bold)
-                                ),
-                                TextSpan(
-                                    text: '${info["places"][index]['to']}\n'
-                                ),
-                                TextSpan(
-                                    text: '${LocaleKeys.note.tr()}: ',
-                                    style: TextStyle(fontWeight: FontWeight.bold)
-                                ),
-                                TextSpan(
-                                    text: '${info["places"][index]['additional']}'
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                )
-            ),
-            /*Container(
+            Padding(
               padding: EdgeInsets.only(top: 12),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: indexes.map((index) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 16, top: 6),
+                      padding: EdgeInsets.only(left: 16),
                       child: RichText(
                         textAlign: TextAlign.left,
                         text: TextSpan(
@@ -148,30 +82,30 @@ class TransfersInfo extends StatelessWidget {
                               ),
                             ),
                             TextSpan(
-                                text: '\t\t${info["places"][index]['city']} ',
+                                text: '${info["places"][index]['city']} ',
                                 style: TextStyle(fontWeight: FontWeight.bold)
                             ),
                             TextSpan(text: '(${info["places"][index]['date'].substring(0, 10)}, '),
                             TextSpan(text: '${info["places"][index]['time']})\n'),
                             TextSpan(
-                                text: '\t\t${LocaleKeys.Passengers.tr()}: ',
+                                text: '${LocaleKeys.Passengers.tr()}: ',
                                 style: TextStyle(fontWeight: FontWeight.bold,)
                             ),
                             TextSpan(text: '${info["places"][index]['passengers']}\n'),
                             TextSpan(
-                                text: '\t\t${LocaleKeys.Where_to_pick_up.tr()}: ',
+                                text: '${LocaleKeys.Where_to_pick_up.tr()}: ',
                                 style: TextStyle(fontWeight: FontWeight.bold)
                             ),
                             TextSpan(text: '${info["places"][index]['from']}\n'),
                             TextSpan(
-                                text: '\t\t${LocaleKeys.where.tr()}: ',
+                                text: '${LocaleKeys.where.tr()}: ',
                                 style: TextStyle(fontWeight: FontWeight.bold)
                             ),
                             TextSpan(
                                 text: '${info["places"][index]['to']}\n'
                             ),
                             TextSpan(
-                                text: '\t\t${LocaleKeys.note.tr()}: ',
+                                text: '${LocaleKeys.note.tr()}: ',
                                 style: TextStyle(fontWeight: FontWeight.bold)
                             ),
                             TextSpan(
@@ -184,15 +118,15 @@ class TransfersInfo extends StatelessWidget {
                   ],
                 )).toList(),
               ),
-            ),*/
+            ),
             Padding(
-              padding: EdgeInsets.only(left: 16, top: 10),
+              padding: EdgeInsets.only(left: 16, top: 5),
               child: RichText(
                 text: TextSpan(
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 17,
-                        height: 1.5
+                        height: 1.4
                     ),
                     children: [
                       TextSpan(
@@ -215,24 +149,19 @@ class TransfersInfo extends StatelessWidget {
               ),
             ),
             Padding(
-                padding: EdgeInsets.only(left: 16, top: 15),
-                child: Text(
-                  "${LocaleKeys.contact.tr()}:",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500
-                  ),
-                )
-            ),
-            Padding(
               padding: EdgeInsets.only(left: 16, top: 5),
               child: RichText(
                 text: TextSpan(
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 17
+                        fontSize: 17,
+                        height: 1.4
                     ),
                     children: [
+                      TextSpan(
+                          text: "${LocaleKeys.contact.tr()}:\n",
+                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)
+                      ),
                       TextSpan(
                           text: '${LocaleKeys.name.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w600)

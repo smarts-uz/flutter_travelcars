@@ -8,6 +8,7 @@ import 'package:travelcars/screens/home/home_screen.dart';
 import 'package:travelcars/screens/route/route_info.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 class RouteScreen extends StatefulWidget {
@@ -36,7 +37,7 @@ class _RouteScreenState extends State<RouteScreen> {
   void getRoutes() async {
     final prefs = await SharedPreferences.getInstance();
     String token = json.decode(prefs.getString('userData')!)["token"];
-    String uri = "${AppConfig.BASE_URL}/routes";
+    String uri = "${AppConfig.BASE_URL}/routes?lang=${SplashScreen.til}";
     final response = await http.get(
       Uri.parse(uri),
       headers: {

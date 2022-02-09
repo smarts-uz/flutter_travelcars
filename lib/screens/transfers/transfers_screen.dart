@@ -4,6 +4,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelcars/screens/home/home_screen.dart';
+import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/screens/transfers/transfers_info.dart';
 import 'package:travelcars/screens/transfers/trasfers_add.dart';
 import 'package:http/http.dart' as http;
@@ -37,7 +38,7 @@ class _TransfersScreenState extends State<TransfersScreen> {
   }
 
   void getTransfers() async {
-    String url = "${AppConfig.BASE_URL}/transfers";
+    String url = "${AppConfig.BASE_URL}/transfers?lang=${SplashScreen.til}";
     final prefs = await SharedPreferences.getInstance();
     String token = json.decode(prefs.getString('userData')!)["token"];
     final response = await http.get(

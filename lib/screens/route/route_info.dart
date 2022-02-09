@@ -56,8 +56,9 @@ class RouteInfo extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 15),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: indexes.map((index) => Padding(
-                  padding: EdgeInsets.only(left: 16, bottom: 15),
+                  padding: EdgeInsets.only(left: 16, bottom: 3),
                   child: RichText(
                     text: TextSpan(
                       style: TextStyle(
@@ -118,16 +119,6 @@ class RouteInfo extends StatelessWidget {
               ),
             ),
             Padding(
-                padding: EdgeInsets.only(left: 16),
-                child: Text(
-                  "${LocaleKeys.contact.tr()}: ",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500
-                  ),
-                )
-            ),
-            Padding(
               padding: EdgeInsets.only(left: 16),
               child: RichText(
                 text: TextSpan(
@@ -137,6 +128,10 @@ class RouteInfo extends StatelessWidget {
                       height: 1.6,
                     ),
                     children: [
+                      TextSpan(
+                          text: "${LocaleKeys.contact.tr()}: \n",
+                          style: TextStyle(fontWeight: FontWeight.w600)
+                      ),
                       TextSpan(
                           text: '${LocaleKeys.name.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w600)

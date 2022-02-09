@@ -167,6 +167,44 @@ class _TripItemState extends State<TripItem> {
               ),
             ),
             Container(
+              width: double.infinity,
+              margin: const EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              color: Color.fromRGBO(239, 127, 26, 1),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.email,
+                    color: Colors.white,
+                    size: 70,
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    LocaleKeys.book_now.tr(),
+                    style: TextStyle(
+                        fontSize: 25.0,
+                        color: Colors.white
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "${LocaleKeys.We_will_be_glad_to_receive_your_order.tr()}!",
+                    textAlign: TextAlign.justify,
+                    maxLines: 3,
+                    style: TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.white
+                    ),
+                  )
+                ],
+              ),
+            ),
+            /*Container(
               height: 180,
               width: double.infinity,
               padding: EdgeInsets.only(top: 15, left: 17, right: 17, bottom: 5),
@@ -210,7 +248,7 @@ class _TripItemState extends State<TripItem> {
                   )
                 ],
               ),
-            ),
+            ),*/
             Column(
               children: [0, 1, 2, 3].map((e) => Container(
                 width: double.infinity,

@@ -54,7 +54,7 @@ class _DetailScreenState extends State<DetailScreen> {
   List<int> route_options = [];
   List<dynamic> narxlar = [];
   List<dynamic> costlar = [];
-  List<dynamic> pricelar = [];
+  String selectedVal = LocaleKeys.Cash_driver.tr();
   List<dynamic> payment_types = [
     {
       "text":  LocaleKeys.Cash_driver.tr(),
@@ -73,7 +73,6 @@ class _DetailScreenState extends State<DetailScreen> {
       "type": "pay_bank",
     }
   ];
-  String? selectedVal;
   final List<DropdownMenuItem<String>> payments = [];
 
 
@@ -105,6 +104,7 @@ class _DetailScreenState extends State<DetailScreen> {
     });
 
     double day = 1.0;
+    print(jsonDecode(widget.route_item["price_data"]));
     jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
       if(key != "overtime" && value != null) {
         double cost;
@@ -145,19 +145,29 @@ class _DetailScreenState extends State<DetailScreen> {
     dropdown = narxlar[0]["day"];
 
 
+    print(jsonDecode(widget.route_item["cost_data"]));
     jsonDecode(widget.route_item["cost_data"]).forEach((key, value) {
-      costlar.add({
-        "day": day == 0.5 ? day : day.toInt(),
-        "cost": value != null ? value : 0
-      });
+      if(value != null && value != 0) {
+        switch(key) {
+          case "one":
+            day = 1.0;
+            break;
+          case "two":
+            day = 2.0;
+            break;
+          case "three":
+            day = 3.0;
+            break;
+          case "half":
+            day = 0.5;
+        }
+        costlar.add({
+          "day": day == 0.5 ? day : day.toInt(),
+          "cost": value != null ? value : 0
+        });
+      }
     });
 
-    jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
-      pricelar.add({
-        "day": day == 0.5 ? day : day.toInt(),
-        "cost": value != null ? value : 0
-      });
-    });
     for(int i = 0; i < widget.route_item["car"]['car_options'].length; i++) {
       car_options.add(i);
     }
@@ -352,7 +362,6 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> results = widget.route_item;
-    selectedVal = payment_types[0]["text"];
     return Scaffold(
       body: isLoading ? Center(
         child: CircularProgressIndicator(),
@@ -706,6 +715,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   isExpanded: true,
                   underline: SizedBox(),
                   onChanged: (String? newValue) {
+                    print(newValue);
                     setState(() {
                       selectedVal = newValue!;
                     });
@@ -906,13 +916,16 @@ class _DetailScreenState extends State<DetailScreen> {
 
                   String price = "0";
                   String cost = "0";
-                  pricelar.forEach((element) {
-                    if(element["day"] + " ${LocaleKeys.day.tr()}" == dropdown) {
-                      price = element["cost"];
+                  print(narxlar);
+                  print(costlar);
+                  narxlar.forEach((element) {
+                    if(element["day"] == dropdown) {
+                      price = element["cost"].toInt().toString();
                     }
                   });
+
                   costlar.forEach((element) {
-                    if(element["day"] + " ${LocaleKeys.day.tr()}" == dropdown) {
+                    if("${element["day"]} ${LocaleKeys.day.tr()}" == dropdown) {
                       if(element["cost"] is String) {
                         cost = element["cost"];
                       } else {
