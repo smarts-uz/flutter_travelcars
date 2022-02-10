@@ -47,8 +47,6 @@ class _AddScreenState extends State<AddScreen> {
                       onTap: () async {
                         final pickedImageFile = await _picker.pickImage(
                           source: ImageSource.gallery,
-                          imageQuality: 100,
-                          maxWidth: 150,
                         );
                         File file = File(pickedImageFile!.path);
                         setState(() {
@@ -62,8 +60,6 @@ class _AddScreenState extends State<AddScreen> {
                     onTap: () async {
                       final pickedImageFile = await _picker.pickImage(
                         source: ImageSource.camera,
-                        imageQuality: 100,
-                        maxWidth: 150,
                       );
                       File file = File(pickedImageFile!.path);
                       setState(() {
