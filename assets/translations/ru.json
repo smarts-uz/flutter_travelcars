@@ -107,7 +107,7 @@
   "choose_the_payment_type": "Как вам удобнее оплачивать",
   "Payment": "Оплатить",
   "book": "Бронировать",
-  "Setting_the_language_and_course": "Настройка языка и курса",
+  "Setting_the_language_and_course": "Настройки",
   "save": "Сохранить",
   "booking": "Бронирование",
   "select_payment_method": "Выберите способ оплаты",
@@ -257,5 +257,6 @@
   "guestName": "Имя гостя",
   "expectedPrice": "Ожидаемая цена",
   "additional_info": "Дополнительные сведения. Например, адрес куда приехать, авто, пожелания и т.д.",
-  "choose_pay": "Выберите тип оплаты"
+  "choose_pay": "Выберите тип оплаты",
+  "enRoute_note": "Комментарии"
 }

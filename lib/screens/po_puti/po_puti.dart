@@ -65,7 +65,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
           LocaleKeys.Along_the_way.tr(),
           maxLines: 2,
           style: TextStyle(
-            fontSize: 23,
+            fontSize: 20,
             color: Colors.white,
           ),
         ),
@@ -76,7 +76,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
-            size: 25,
+            size: 23,
           ),
         ),
         actions: [
@@ -88,14 +88,14 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
             icon: Icon(
               Icons.info_outline_rounded,
               color: Colors.white,
-              size: 26,
+              size: 23,
             ),
           ),
           IconButton(
             icon: Icon(
               Icons.add,
               color: Colors.white,
-              size: 26,
+              size: 23,
             ),
             onPressed: () {
               Navigator.push(
@@ -114,7 +114,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                    icon: Icon(
                      Icons.search,
                      color: Colors.white,
-                     size: 26,
+                     size: 23,
                    ),
                );
              }
@@ -265,7 +265,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                       child: RichText(
                           text: TextSpan(
                               style: TextStyle(
-                                  fontSize: 19,
+                                  fontSize: 17,
                                   height: 1.7,
                                   color: Colors.black
                               ),
@@ -329,8 +329,8 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                               );
                             },
                             child: Container(
-                              height: 45,
-                              width: 45,
+                              height: 40,
+                              width: 40,
                               decoration: BoxDecoration(
                                   color: Colors.blue,
                                   borderRadius: BorderRadius.circular(10)
@@ -338,7 +338,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                               child: Icon(
                                 Icons.remove_red_eye,
                                 color: Colors.white,
-                                size: 25,
+                                size: 23,
                               ),
                             ),
                           ),
@@ -353,8 +353,8 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                               );
                             },
                             child: Container(
-                              height: 45,
-                              width: 45,
+                              height: 40,
+                              width: 40,
                               decoration: BoxDecoration(
                                   color: Colors.orange,
                                   borderRadius: BorderRadius.circular(10)
@@ -362,7 +362,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                               child: Icon(
                                 Icons.edit,
                                 color: Colors.white,
-                                size: 25,
+                                size: 23,
                               ),
                             ),
                           ),
@@ -387,8 +387,8 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                               getways();
                             },
                             child: Container(
-                              height: 45,
-                              width: 45,
+                              height: 40,
+                              width: 40,
                               decoration: BoxDecoration(
                                   color: Colors.red,
                                   borderRadius: BorderRadius.circular(10)
@@ -396,7 +396,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                               child: Icon(
                                 Icons.clear,
                                 color: Colors.white,
-                                size: 25,
+                                size: 23,
                               ),
                             ),
                           )

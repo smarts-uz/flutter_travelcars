@@ -186,15 +186,39 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void getweather() async {
     for(int i =0; i<HomeScreen.city.length; i++) {
+      String city;
+      if(SplashScreen.til == "uz") {
+        switch(HomeScreen.city[i]) {
+          case "Тошкент":
+            city = "Ташкент";
+            break;
+          case "Бухоро":
+            city = "Бухара";
+            break;
+          case "Самарқанд":
+            city = "Самарканд";
+            break;
+          case "Термиз":
+            city = "Термез";
+            break;
+          case "Андижон":
+            city = "Андижан";
+            break;
+          case "Фарғона":
+            city = "Фергана";
+            break;
+          case "Қарши":
+            city = "Карши";
+            break;
+          default:
+            city = HomeScreen.city[i];
+        }
+      } else {
+        city = HomeScreen.city[i];
+      }
       Uri url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=${HomeScreen.city[i]}&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
       var response = await http.get(url);
-      if(jsonDecode(response.body)["cod"] == "404") {
-        Uri another_url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=Qarshi&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
-        final another_response = await http.get(another_url);
-        weather["${HomeScreen.city[i]}"] = json.decode(another_response.body)["main"]["temp"].round();
-      } else {
-        weather["${HomeScreen.city[i]}"] = json.decode(response.body)["main"]["temp"].round();
-      }
+      weather["${HomeScreen.city[i]}"] = json.decode(response.body)["main"]["temp"].round();
     }
     setState(() {
 

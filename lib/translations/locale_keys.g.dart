@@ -260,5 +260,6 @@ abstract class  LocaleKeys {
   static const expectedPrice = 'expectedPrice';
   static const additional_info = 'additional_info';
   static const choose_pay = 'choose_pay';
+  static const enRoute_note = 'enRoute_note';
 
 }

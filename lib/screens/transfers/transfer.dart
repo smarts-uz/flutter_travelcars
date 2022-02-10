@@ -27,7 +27,7 @@ class Transfer extends StatelessWidget {
             },
             icon: Icon(
               Icons.info_outline_rounded,
-              size: 25,
+              size: 30,
             ),
           )
         ],
@@ -107,13 +107,15 @@ void _startAddNewTransaction(BuildContext ctx) {
       context: ctx,
       builder: (_) {
         return  Container(
-          height: 130,
+          height: 105,
           margin: EdgeInsets.all(16),
-          child: Text(
-            LocaleKeys.about_transfer.tr(),
-            style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500
+          child: SingleChildScrollView(
+            child: Text(
+              LocaleKeys.about_transfer.tr(),
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500
+              ),
             ),
           ),
         );

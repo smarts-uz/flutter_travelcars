@@ -141,6 +141,7 @@ class _SearchScreenState extends State<SearchScreen> {
               'assets/icons/globus.svg',
               color: Colors.white,
             ),
+            iconSize: 30,
             onPressed: () {
               Navigator.push(
                   context,

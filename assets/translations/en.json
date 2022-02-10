@@ -257,5 +257,6 @@
   "guestName": "Guest name",
   "expectedPrice": "Expected price",
   "additional_info": "Additional information. For example, pick-up address, other wishes, etc.",
-  "choose_pay": "Choose payment type"
+  "choose_pay": "Choose payment type",
+  "enRoute_note": "Comments"
 }

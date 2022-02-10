@@ -91,6 +91,7 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
+    print("Refund: == ${widget.refund}");
     payment_types.forEach((element) {
       payments.add( DropdownMenuItem<String>(
         value: element["text"],
@@ -316,8 +317,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 Divider(),
                 Text(
-                  overtime_cost != null ? "${LocaleKeys.important1.tr()} – $overtime_cost\n" : ""
-                      "${LocaleKeys.important2.tr()} - ${widget.refund}",
+                  overtime_cost != null ? "${LocaleKeys.important1.tr()} – $overtime_cost\n${LocaleKeys.important2.tr()} - ${widget.refund}"
+                      : "${LocaleKeys.important2.tr()} - ${widget.refund}",
                   textAlign: TextAlign.justify,
                   maxLines: 10,
                   style: TextStyle(
