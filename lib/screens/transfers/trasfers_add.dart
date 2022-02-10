@@ -24,6 +24,7 @@ class TransfersAdd extends StatefulWidget {
 }
 
 class _TransfersAddState extends State<TransfersAdd> {
+  bool buttonIsLoading = false;
   final ScrollController _controller = ScrollController();
 
   final TextEditingController name_controller = TextEditingController();
@@ -639,6 +640,9 @@ class _TransfersAddState extends State<TransfersAdd> {
               width: MediaQuery.of(context).size.width*.70,
               child:  RaisedButton(
                   onPressed: () async {
+                    setState(() {
+                      buttonIsLoading = true;
+                    });
                     FocusScope.of(context).unfocus();
                     final prefs = await SharedPreferences.getInstance();
                     if(prefs.containsKey("userData")) {
@@ -740,8 +744,15 @@ class _TransfersAddState extends State<TransfersAdd> {
                     } else {
                       Dialogs.LoginDialog(context);
                     }
+                    setState(() {
+                      buttonIsLoading = false;
+                    });
                   },
-                  child: Text(
+                  child: buttonIsLoading ? Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  ) : Text(
                     LocaleKeys.submit_your_application.tr(),
                     style: TextStyle(
                         fontSize: 20,
@@ -762,7 +773,7 @@ class _TransfersAddState extends State<TransfersAdd> {
       width: double.infinity,
       height: height,
       alignment: Alignment.center,
-      padding: EdgeInsets.only(left: 12),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),

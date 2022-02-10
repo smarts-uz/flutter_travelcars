@@ -66,6 +66,7 @@ class CarTypes extends StatelessWidget {
                           fit: BoxFit.contain,
                         ) : Image.network(
                           "${AppConfig.image_url}/car-types/${carslist[index]["image"]}",
+                          fit: BoxFit.contain,
                           errorBuilder: (context, error, stackTrace) {
                             print(error);
                             return Image.asset(
@@ -100,11 +101,10 @@ class CarTypes extends StatelessWidget {
                         bottom: 10,
                         left: 5,
                         child: Container(
-                          height: 25,
                           width: MediaQuery.of(context).size.width * .4,
                           alignment: Alignment.bottomCenter,
                           child: Text(
-                            "${carslist[index]["name"]}",
+                            "\n${carslist[index]["name"]}",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 15

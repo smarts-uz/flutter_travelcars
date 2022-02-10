@@ -24,6 +24,7 @@ class RouteAdd extends StatefulWidget {
 }
 
 class _RouteAddState extends State<RouteAdd> {
+  bool buttonIsLoading = false;
   final ScrollController _controller = ScrollController();
 
   final TextEditingController name_controller = TextEditingController();
@@ -561,6 +562,9 @@ class _RouteAddState extends State<RouteAdd> {
                 width: MediaQuery.of(context).size.width * .70,
                 child: RaisedButton(
                   onPressed: () async {
+                    setState(() {
+                      buttonIsLoading = true;
+                    });
                     FocusScope.of(context).unfocus();
                     final prefs = await SharedPreferences.getInstance();
                     if(prefs.containsKey("userData")) {
@@ -701,8 +705,15 @@ class _RouteAddState extends State<RouteAdd> {
                     } else {
                       Dialogs.LoginDialog(context);
                     }
+                    setState(() {
+                      buttonIsLoading = false;
+                    });
                   },
-                  child: Text(
+                  child: buttonIsLoading ? Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  ) : Text(
                     LocaleKeys.submit_your_application.tr(),
                     style: TextStyle(
                       fontSize: 20,
@@ -723,7 +734,7 @@ class _RouteAddState extends State<RouteAdd> {
     return Container(
       width: double.infinity,
       height: height,
-      padding: EdgeInsets.only(left: 8),
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),

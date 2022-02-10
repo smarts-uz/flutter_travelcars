@@ -210,13 +210,16 @@ class _HomeScreenState extends State<HomeScreen> {
           case "Қарши":
             city = "Карши";
             break;
+          case "Жиззах":
+            city = "Jizzax";
+            break;
           default:
             city = HomeScreen.city[i];
         }
       } else {
         city = HomeScreen.city[i];
       }
-      Uri url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=${HomeScreen.city[i]}&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
+      Uri url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=$city&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
       var response = await http.get(url);
       weather["${HomeScreen.city[i]}"] = json.decode(response.body)["main"]["temp"].round();
     }

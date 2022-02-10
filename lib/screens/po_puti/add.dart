@@ -24,6 +24,7 @@ class AddScreen extends StatefulWidget {
 }
 
 class _AddScreenState extends State<AddScreen> {
+  bool buttonIsLoading = false;
   DateTime day = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
   List text_controllers =  [];
@@ -252,7 +253,7 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                     Container(
                       height: 120,
-                      width: MediaQuery.of(context).size.width * .4,
+                      width: MediaQuery.of(context).size.width * .6,
                       padding: EdgeInsets.symmetric(vertical: 10.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -262,22 +263,21 @@ class _AddScreenState extends State<AddScreen> {
                               _showPicker(context);
                             },
                             child: Container(
-                              height: 40,
-                              width: MediaQuery.of(context).size.width * .35,
-                              decoration: BoxDecoration(
-                                  color: Colors.orange,
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                      color: Colors.grey
-                                  )
-                              ),
-                              child: FittedBox(
+                                height: 40,
+                                width: MediaQuery.of(context).size.width * .5,
+                                decoration: BoxDecoration(
+                                    color: Colors.orange,
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                        color: Colors.grey
+                                    )
+                                ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(
                                       Icons.upload,
-                                      size: 20,
+                                      size: 25,
                                       color: Colors.white,
                                     ),
                                     SizedBox(width: 5),
@@ -285,49 +285,45 @@ class _AddScreenState extends State<AddScreen> {
                                       LocaleKeys.upload.tr(),
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 18
+                                          fontSize: 20
                                       ),
                                     ),
                                   ],
-                                ),
-                              )
+                                )
                             ),
                           ),
                           GestureDetector(
                             onTap: () {
                               setState(() {
                                 _pickedImage = null;
-                                image = null;
                               });
                             },
                             child: Container(
                               height: 40,
-                              width: MediaQuery.of(context).size.width * .35,
+                              width: MediaQuery.of(context).size.width * .5,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: Colors.grey
-                                )
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                      color: Colors.grey
+                                  )
                               ),
-                              child: FittedBox(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.delete,
-                                      size: 20,
-                                      color: Colors.orange,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.delete,
+                                    size: 25,
+                                    color: Colors.orange,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    LocaleKeys.delete.tr(),
+                                    style: TextStyle(
+                                        color: Colors.orange,
+                                        fontSize: 20
                                     ),
-                                    SizedBox(width: 5),
-                                    Text(
-                                      LocaleKeys.delete.tr(),
-                                      style: TextStyle(
-                                          color: Colors.orange,
-                                          fontSize: 18
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -345,6 +341,9 @@ class _AddScreenState extends State<AddScreen> {
                   width: MediaQuery.of(context).size.width * .8,
                   child:  RaisedButton(
                     onPressed: () async {
+                      setState(() {
+                        buttonIsLoading = true;
+                      });
                       FocusScope.of(context).unfocus();
                       for(int i = 0; i< text_controllers.length; i++) {
                         if(text_controllers[i].text == null || text_controllers[i].text == "") {
@@ -422,8 +421,15 @@ class _AddScreenState extends State<AddScreen> {
                         print(e);
                         Dialogs.ErrorDialog(context);
                       }
+                      setState(() {
+                        buttonIsLoading = false;
+                      });
                     },
-                    child: Text(
+                    child: buttonIsLoading ? Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                      ),
+                    ) : Text(
                       widget.way_item.isNotEmpty ? LocaleKeys.save.tr() : LocaleKeys.send.tr(),
                       style: TextStyle(
                         fontSize: 20,
@@ -440,6 +446,7 @@ class _AddScreenState extends State<AddScreen> {
       ),
     );
   }
+
   Widget TFF (String? hintText, TextEditingController controller, double height, bool isNumber) {
     return Container(
       width: double.infinity,

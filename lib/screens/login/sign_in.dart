@@ -146,16 +146,17 @@ class _SignInState extends State<SignIn> {
                     ToastComponent.showDialog(LocaleKeys.TextField_is_empty.tr());
                     return;
                   }
-
-                  if(_emailController.text.substring(0, 1) == "+") {
-                    _emailController.text = _emailController.text.substring(1, _emailController.text.length -1);
+                  String numberText = _emailController.text;
+                  print(numberText);
+                  if(numberText.substring(0, 1) == "+") {
+                    numberText = numberText.substring(1, _emailController.text.length);
                   }
-
+                  print(numberText);
                   String url = "${AppConfig.BASE_URL}/login";
                   final result = await http.post(
                       Uri.parse(url),
                       body: {
-                        'username': "${_emailController.text}",
+                        'username': "${numberText}",
                         'password': "${_passwordController.text}",
                       }
                   );

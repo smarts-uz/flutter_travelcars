@@ -304,7 +304,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                                 width: 1.5
                             )
                         ),
-                        height: MediaQuery.of(context).size.height * .05,
+                        height: 40,
                         width: MediaQuery.of(context).size.width * .9,
                         child:  Text(
                           LocaleKeys.details.tr(),
@@ -369,7 +369,6 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                           SizedBox(width: 15),
                           GestureDetector(
                             onTap: () async {
-                              print("hello");
                               Uri url = Uri.parse("${AppConfig.BASE_URL}/onway/delete");
                               final response = await http.delete(
                                   url,
@@ -416,7 +415,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
     return Container(
       width: double.infinity,
       height: 48,
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),

@@ -40,6 +40,7 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   bool isLoading = true;
+  bool buttonIsLoading = false;
   final CarouselController _controller = CarouselController();
   final TextEditingController name_controller = TextEditingController();
   final TextEditingController additional_controller = TextEditingController();
@@ -923,6 +924,9 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
             GestureDetector(
               onTap: () async {
+                setState(() {
+                  buttonIsLoading = true;
+                });
                 final prefs = await SharedPreferences.getInstance();
                 if(prefs.containsKey("userData")) {
                   if(logo_check) {
@@ -1021,6 +1025,9 @@ class _DetailScreenState extends State<DetailScreen> {
                 } else {
                   Dialogs.LoginDialog(context);
                 }
+                setState(() {
+                  buttonIsLoading = false;
+                });
               },
               child: Container(
                 margin: EdgeInsets.only(bottom: 16, left: 16, right: 16),
@@ -1032,7 +1039,9 @@ class _DetailScreenState extends State<DetailScreen> {
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Center(
-                  child: Text(
+                  child: buttonIsLoading ? CircularProgressIndicator(
+                    color: Colors.white,
+                  ) : Text(
                     LocaleKeys.book.tr(),
                     style: TextStyle(
                       fontSize: 20,
@@ -1071,7 +1080,7 @@ class _DetailScreenState extends State<DetailScreen> {
     return Container(
       height: height,
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 12),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
       margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
