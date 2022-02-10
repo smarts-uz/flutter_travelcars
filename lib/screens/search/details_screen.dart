@@ -926,7 +926,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 final prefs = await SharedPreferences.getInstance();
                 if(prefs.containsKey("userData")) {
                   if(logo_check) {
-                    if(name_controller.text.isEmpty || additional_controller.text.isEmpty) {
+                    if(name_controller.text.isEmpty) {
                       ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}");
                       return;
                     }
@@ -973,17 +973,6 @@ class _DetailScreenState extends State<DetailScreen> {
                     "price": "$price",
                     "pay_key": "$pay_key",
                   });
-
-                  if(logo_check) {
-                    if(name_controller.text.isEmpty) {
-                      ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()}");
-                      return;
-                    }
-                    if(_pickedImage == null) {
-                      ToastComponent.showDialog("${LocaleKeys.no_image.tr()}");
-                      return;
-                    }
-                  }
 
                   http.BaseRequest request;
                   String token = json.decode(prefs.getString('userData')!)["token"];

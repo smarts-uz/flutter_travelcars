@@ -17,7 +17,7 @@ class Dialogs {
             borderRadius: BorderRadius.circular(18),
           ),
           content: Container(
-            height: 150,
+            height: 170,
             width: 240,
             child: Column(
               children: [
@@ -181,7 +181,7 @@ class Dialogs {
             borderRadius: BorderRadius.circular(18),
           ),
           content: Container(
-            height: 240,
+            height: 250,
             width: 250,
             child: Column(
               children: [

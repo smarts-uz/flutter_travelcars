@@ -724,12 +724,14 @@ class _TransfersAddState extends State<TransfersAdd> {
                         try{
                           var response = await request.send();
                           print(response.reasonPhrase);
+                          print(response.statusCode);
                           if(response.statusCode == 200) {
                             Dialogs.ZayavkaDialog(context);
                           } else {
                             Dialogs.ErrorDialog(context);
                           }
                         } catch (error) {
+                          print("Error: === $error");
                           Dialogs.ErrorDialog(context);
                         }
                       } else {
@@ -759,7 +761,7 @@ class _TransfersAddState extends State<TransfersAdd> {
     return Container(
       width: double.infinity,
       height: height,
-      alignment: Alignment.topCenter,
+      alignment: Alignment.center,
       padding: EdgeInsets.only(left: 12),
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(

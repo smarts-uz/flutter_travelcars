@@ -677,6 +677,7 @@ class _RouteAddState extends State<RouteAdd> {
                             Dialogs.ErrorDialog(context);
                           }
                         } catch (error) {
+                          print("Error: === $error");
                           Dialogs.ErrorDialog(context);
                         }
 
