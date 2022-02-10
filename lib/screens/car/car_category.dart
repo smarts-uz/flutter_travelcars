@@ -160,13 +160,20 @@ class _CarCategoryState extends State<CarCategory> {
                         height: MediaQuery.of(context).size.height * .17,
                         width: MediaQuery.of(context).size.width * .32,
                         margin: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 8.0),
-                        child: categories[index]["image"] != null  ? Image.network(
+                        child: categories[index]["image"] == null ? Image.asset(
+                          "assets/images/no_car.jpg",
+                          fit: BoxFit.contain,
+                        ) : Image.network(
                           "${AppConfig.image_url}/car-models/${categories[index]["image"]}",
                           fit: BoxFit.contain,
-                        ) : Image.asset(
-                          "assets/images/no_image.png",
-                          fit: BoxFit.contain,
-                        ),
+                          errorBuilder: (context, error, stackTrace) {
+                            print(error);
+                            return Image.asset(
+                              "assets/images/no_car.jpg",
+                              fit: BoxFit.contain,
+                            );
+                          },
+                        )
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width * .5,

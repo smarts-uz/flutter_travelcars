@@ -226,9 +226,19 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    child: Image.network(
-                        "${AppConfig.image_url}/cars/${results[index]["images"][0]["original"]}",
-                        fit: BoxFit.contain
+                    child: results[index]["images"][0]["original"] == null ? Image.asset(
+                      "assets/images/no_car.jpg",
+                      fit: BoxFit.contain,
+                    ) : Image.network(
+                      "${AppConfig.image_url}/cars/${results[index]["images"][0]["original"]}",
+                      fit: BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) {
+                        print(error);
+                        return Image.asset(
+                          "assets/images/no_car.jpg",
+                          fit: BoxFit.contain,
+                        );
+                      },
                     ),
                   ),
                   Container(

@@ -61,7 +61,19 @@ class CarTypes extends StatelessWidget {
                       Container(
                         height: 140,
                         width: MediaQuery.of(context).size.width * .43,
-                        child: Image.network("${AppConfig.image_url}/car-types/${carslist[index]["image"]}"),
+                        child: carslist[index]["image"] == null ? Image.asset(
+                          "assets/images/no_car.jpg",
+                          fit: BoxFit.contain,
+                        ) : Image.network(
+                          "${AppConfig.image_url}/car-types/${carslist[index]["image"]}",
+                          errorBuilder: (context, error, stackTrace) {
+                            print(error);
+                            return Image.asset(
+                              "assets/images/no_car.jpg",
+                              fit: BoxFit.contain,
+                            );
+                          },
+                        ),
                       ),
                       Positioned(
                         top: 10,

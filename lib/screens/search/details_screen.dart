@@ -54,6 +54,7 @@ class _DetailScreenState extends State<DetailScreen> {
   List<int> route_options = [];
   List<dynamic> narxlar = [];
   List<dynamic> costlar = [];
+  List<dynamic> pricelar = [];
   String selectedVal = LocaleKeys.Cash_driver.tr();
   List<dynamic> payment_types = [
     {
@@ -104,7 +105,6 @@ class _DetailScreenState extends State<DetailScreen> {
     });
 
     double day = 1.0;
-    print(jsonDecode(widget.route_item["price_data"]));
     jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
       if(key != "overtime" && value != null) {
         double cost;
@@ -145,7 +145,6 @@ class _DetailScreenState extends State<DetailScreen> {
     dropdown = narxlar[0]["day"];
 
 
-    print(jsonDecode(widget.route_item["cost_data"]));
     jsonDecode(widget.route_item["cost_data"]).forEach((key, value) {
       if(value != null && value != 0) {
         switch(key) {
@@ -162,6 +161,28 @@ class _DetailScreenState extends State<DetailScreen> {
             day = 0.5;
         }
         costlar.add({
+          "day": day == 0.5 ? day : day.toInt(),
+          "cost": value != null ? value : 0
+        });
+      }
+    });
+
+    jsonDecode(widget.route_item["price_data"]).forEach((key, value) {
+      if(value != null && value != 0 && key != "overtime") {
+        switch(key) {
+          case "one":
+            day = 1.0;
+            break;
+          case "two":
+            day = 2.0;
+            break;
+          case "three":
+            day = 3.0;
+            break;
+          case "half":
+            day = 0.5;
+        }
+        pricelar.add({
           "day": day == 0.5 ? day : day.toInt(),
           "cost": value != null ? value : 0
         });
@@ -392,10 +413,16 @@ class _DetailScreenState extends State<DetailScreen> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(
-                              "${AppConfig.image_url}/cars/${item["original"]}",
-                            ),
-                            fit: BoxFit.cover,
+                              image: NetworkImage(
+                                "${AppConfig.image_url}/cars/${item["original"]}",
+                              ),
+                              fit: BoxFit.cover,
+                              onError: (error, stackTrace) {
+                                Image.asset(
+                                  "assets/images/no_car.jpg",
+                                  fit: BoxFit.cover,
+                                );
+                              }
                           ),
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(15),
@@ -518,10 +545,20 @@ class _DetailScreenState extends State<DetailScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Row(
                     children: [
-                      Image.network(
+                      results["car"]['car_options'][e]["image"] == null ? Image.asset(
+                        "assets/images/no_car.jpg",
+                        fit: BoxFit.contain,
+                      ) : Image.network(
                         "${AppConfig.image_url}/car-options/${results["car"]['car_options'][e]["image"]}",
                         width: 25,
                         height: 25,
+                        errorBuilder: (context, error, stackTrace) {
+                          print(error);
+                          return Image.asset(
+                            "assets/images/no_car.jpg",
+                            fit: BoxFit.contain,
+                          );
+                        },
                       ),
                       SizedBox(width: 10),
                       Expanded(
@@ -916,11 +953,9 @@ class _DetailScreenState extends State<DetailScreen> {
 
                   String price = "0";
                   String cost = "0";
-                  print(narxlar);
-                  print(costlar);
-                  narxlar.forEach((element) {
-                    if(element["day"] == dropdown) {
-                      price = element["cost"].toInt().toString();
+                  pricelar.forEach((element) {
+                    if("${element["day"]} ${LocaleKeys.day.tr()}" == dropdown) {
+                      price = element["cost"].toString();
                     }
                   });
 
@@ -987,8 +1022,9 @@ class _DetailScreenState extends State<DetailScreen> {
                   try{
                     var response = await request.send();
                     print(response.reasonPhrase);
+                    print(response.statusCode);
                     if(response.statusCode == 200) {
-                      Navigator.pop(context);
+                      Dialogs.ZayavkaDialog(context);
                     } else {
                       Dialogs.ErrorDialog(context);
                     }

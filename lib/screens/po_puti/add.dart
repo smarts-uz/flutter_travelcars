@@ -243,8 +243,15 @@ class _AddScreenState extends State<AddScreen> {
                           image: NetworkImage(
                               "${AppConfig.image_url}/Onways/${widget.way_item["image"]}"
                           ),
+                            onError: (error, stackTrace) {
+                              Image.asset(
+                                "assets/images/no_car.jpg",
+                                fit: BoxFit.cover,
+                              );
+                            }
                         ) : DecorationImage(
-                            image: AssetImage("assets/images/no_image.png"))
+                            image: AssetImage("assets/images/no_car.jpg")
+                        )
                       ),
                     ),
                     Container(

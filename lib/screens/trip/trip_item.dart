@@ -98,7 +98,13 @@ class _TripItemState extends State<TripItem> {
                     image: NetworkImage(
                       "${AppConfig.image_url}/tours/${widget.trip_item["image"]}",
                     ),
-                    fit: BoxFit.cover,
+                      fit: BoxFit.cover,
+                      onError: (error, stackTrace) {
+                        Image.asset(
+                          "assets/images/no_image.png",
+                          fit: BoxFit.cover,
+                        );
+                      }
                   ),
                   //borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),

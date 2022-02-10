@@ -147,6 +147,12 @@ class _BookingScreenState extends State<BookingScreen> {
                               "${AppConfig.image_url}/cars/${item["original"]}",
                             ),
                             fit: BoxFit.cover,
+                              onError: (error, stackTrace) {
+                                Image.asset(
+                                  "assets/images/no_image.png",
+                                  fit: BoxFit.cover,
+                                );
+                              }
                           ),
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(15),
@@ -273,10 +279,20 @@ class _BookingScreenState extends State<BookingScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Row(
                     children: [
-                      Image.network(
+                      results['carOption'][e]["image"] == null ? Image.asset(
+                        "assets/images/no_car.jpg",
+                        fit: BoxFit.contain,
+                      ) : Image.network(
                         "${AppConfig.image_url}/car-options/${results['carOption'][e]["image"]}",
                         width: 25,
                         height: 25,
+                        errorBuilder: (context, error, stackTrace) {
+                          print(error);
+                          return Image.asset(
+                            "assets/images/no_car.jpg",
+                            fit: BoxFit.contain,
+                          );
+                        },
                       ),
                       SizedBox(width: 10),
                       Expanded(

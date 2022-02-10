@@ -54,10 +54,16 @@ class TripsScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(
-                            "${AppConfig.image_url}/tours/${trips_list[index]["image"]}",
-                          ),
-                          fit: BoxFit.cover,
+                            image: NetworkImage(
+                              "${AppConfig.image_url}/tours/${trips_list[index]["image"]}",
+                            ),
+                            fit: BoxFit.cover,
+                            onError: (error, stackTrace) {
+                              Image.asset(
+                                "assets/images/no_image.png",
+                                fit: BoxFit.cover,
+                              );
+                            }
                         ),
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                       ),

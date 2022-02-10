@@ -356,13 +356,20 @@ class _SearchResultState extends State<SearchResult> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    child: car["images"] == null ?
+                    child: car["images"].isEmpty || car["images"] == null?
                     Image.asset(
-                      "assets/images/no_image.png",
-                      fit: BoxFit.cover,)
-                        : Image.network(
+                      "assets/images/no_car.jpg",
+                      fit: BoxFit.contain,
+                    ) : Image.network(
                         "${AppConfig.image_url}/cars/${car["images"][0]["original"]}",
-                        fit: BoxFit.contain
+                        fit: BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) {
+                        print(error);
+                        return Image.asset(
+                          "assets/images/no_car.jpg",
+                          fit: BoxFit.contain,
+                        );
+                      },
                     ),
                   ),
                   Container(

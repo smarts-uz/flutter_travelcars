@@ -410,11 +410,21 @@ class _ReviewsState extends State<Reviews> {
                                       SizedBox(height: 5),
                                       Row(
                                         children: [
-                                          Image.network(
+                                          reviews['reviews'][index1]['country_code'] == null ? Image.asset(
+                                            "assets/images/no_image.png",
+                                            fit: BoxFit.contain,
+                                          ) : Image.network(
                                             "https://flagcdn.com/w320/${reviews['reviews'][index1]['country_code'].toLowerCase()}.png",
                                             width: 23,
                                             height: 18,
                                             fit: BoxFit.cover,
+                                            errorBuilder: (context, error, stackTrace) {
+                                              print(error);
+                                              return Image.asset(
+                                                "assets/images/no_image.png",
+                                                fit: BoxFit.contain,
+                                              );
+                                            },
                                           ),
                                           SizedBox(width: 5),
                                           Text(

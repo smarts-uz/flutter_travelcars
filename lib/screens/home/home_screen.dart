@@ -480,6 +480,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               "${AppConfig.image_url}/tours/${item["image"]}",
                             ),
                             fit: BoxFit.cover,
+                            onError: (error, stackTrace) {
+                              Image.asset(
+                                "assets/images/no_image.png",
+                                fit: BoxFit.cover,
+                              );
+                            }
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                         ),
@@ -696,7 +702,16 @@ class CarsCard extends StatelessWidget {
               Container(
                 height: 140,
                 width: MediaQuery.of(context).size.width * .43,
-                child: Image.network("${AppConfig.image_url}/car-types/$image"),
+                child: Image.network(
+                  "${AppConfig.image_url}/car-types/$image",
+                  errorBuilder: (context, error, stackTrace) {
+                    print(error);
+                    return Image.asset(
+                      "assets/images/no_image.png",
+                      fit: BoxFit.contain,
+                    );
+                  },
+                ),
               ),
               Positioned(
                 top: 10,
