@@ -450,7 +450,7 @@ class _RouteAddState extends State<RouteAdd> {
             ),
             if(logo_check) Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
-              child: TFF(LocaleKeys.guestName.tr(), name_controller, 45),
+              child: TFF(LocaleKeys.guestName.tr(), name_controller, 48),
             ),
             if(logo_check) Padding(
               padding: const EdgeInsets.only(bottom: 8.0),

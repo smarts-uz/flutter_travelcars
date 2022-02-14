@@ -534,7 +534,7 @@ class _TransfersAddState extends State<TransfersAdd> {
           ),
           if(logo_check) Padding(
             padding: const EdgeInsets.symmetric(horizontal: 13.0),
-            child: TFF(name_controller, LocaleKeys.guestName.tr(), 45),
+            child: TFF(name_controller, LocaleKeys.guestName.tr(), 48),
           ),
           if(logo_check) Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
