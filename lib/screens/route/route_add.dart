@@ -144,6 +144,7 @@ class _RouteAddState extends State<RouteAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         title: Text(
           LocaleKeys.add_route.tr(),
           maxLines: 2,

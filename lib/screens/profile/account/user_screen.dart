@@ -82,6 +82,7 @@ class _FirstSceenState extends State<FirstSceen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         title: Text(
           LocaleKeys.Change_profile.tr(),

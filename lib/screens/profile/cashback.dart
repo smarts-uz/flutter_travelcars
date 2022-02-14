@@ -56,6 +56,7 @@ class _CashbackScreenState extends State<CashbackScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         leading: IconButton(
           onPressed: () {

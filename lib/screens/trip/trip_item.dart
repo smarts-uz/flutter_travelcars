@@ -67,6 +67,7 @@ class _TripItemState extends State<TripItem> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         title: Text(
           widget.trip_item["name"],
           maxLines: 2,

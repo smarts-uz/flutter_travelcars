@@ -61,6 +61,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         title: Text(
           LocaleKeys.Along_the_way.tr(),
           maxLines: 2,
@@ -80,9 +81,47 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
           ),
         ),
         actions: [
+          /* InkWell(
+            onTap: () {
+              _startAddNewTransaction(context);
+            },
+            child: Icon(
+              Icons.info_outline_rounded,
+              color: Colors.white,
+              size: 23,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => AddScreen()
+                  )
+              );
+            },
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 23,
+            ),
+          ),
+          Builder(
+              builder: (ctx) {
+                return InkWell(
+                  onTap: () {
+                    Scaffold.of(ctx).openEndDrawer();
+                  },
+                  child: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                    size: 23,
+                  ),
+                );
+              }
+          ),*/
           IconButton(
             color: Colors.white,
-            onPressed: (){
+            onPressed: () {
               _startAddNewTransaction(context);
             },
             icon: Icon(
@@ -105,20 +144,20 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
               );
             },
           ),
-         Builder(
-             builder: (ctx) {
-               return IconButton(
-                   onPressed: () {
-                     Scaffold.of(ctx).openEndDrawer();
-                   },
-                   icon: Icon(
-                     Icons.search,
-                     color: Colors.white,
-                     size: 23,
-                   ),
-               );
-             }
-         )
+          Builder(
+              builder: (ctx) {
+                return IconButton(
+                    onPressed: () {
+                      Scaffold.of(ctx).openEndDrawer();
+                    },
+                    icon: Icon(
+                      Icons.search,
+                      color: Colors.white,
+                      size: 23,
+                    ),
+                );
+              }
+          )
         ],
       ),
       endDrawer: Drawer(
@@ -247,7 +286,6 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
           padding: const EdgeInsets.only(top: 10.0),
           child: Column(
             children: indexes.map((index) {
-              print("Way item: ${ways[index]["user_id"]}");
               return Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),

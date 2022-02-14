@@ -149,6 +149,7 @@ class _TransfersAddState extends State<TransfersAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         title: Text(
           LocaleKeys.add_transfer.tr(),
           maxLines: 2,

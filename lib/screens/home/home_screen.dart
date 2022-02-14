@@ -93,8 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
         LocaleKeys.andijon.tr(),
         LocaleKeys.fargona.tr(),
         LocaleKeys.namangan.tr(),
-        LocaleKeys.karshi.tr(),
         LocaleKeys.jizzax.tr(),
+        LocaleKeys.karshi.tr(),
       ];
       weather = {
         "${LocaleKeys.tashkent.tr()}": 0,
@@ -175,10 +175,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/news?lang=${SplashScreen.til}");
     final response = await http.get(url);
     newslist = json.decode(response.body);
-    print(newslist.length);
-    print(newslist[0]["name"]);
-    print(newslist[1]["name"]);
-    print(newslist[2]["name"]);
   }
 
   void getvalyuta() async {
@@ -226,6 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Uri url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=$city&appid=4d8fb5b93d4af21d66a2948710284366&units=metric");
       var response = await http.get(url);
       weather["${HomeScreen.city[i]}"] = json.decode(response.body)["main"]["temp"].round();
+      print(city);
     }
     setState(() {
 
@@ -288,10 +285,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: HomeScreen.isLoading ? Center(
           child: CircularProgressIndicator()
-      ) : SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      ) : Container(
+        height: MediaQuery.of(context).size.height,
+        child: ListView(
+          physics: BouncingScrollPhysics(),
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -378,78 +375,78 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: MediaQuery.of(context).size.width * .45,
                   margin: EdgeInsets.symmetric(horizontal: 5, vertical: 14),
                   child: Stack(
-                    children: [
-                      Container(
-                      decoration: BoxDecoration(
-                        color: Color.fromRGBO(255, 250, 241, 1),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      ),
-                      Positioned(
-                        top: 15,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * .45,
-                          alignment: Alignment.center,
-                          child: Text(
-                           LocaleKeys.Rate_change.tr(),
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15
-                            ),
-                          )
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(255, 250, 241, 1),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                         ),
-                      ),
-                      Positioned(
-                          bottom: 50,
+                        Positioned(
+                          top: 15,
+                          child: Container(
+                              width: MediaQuery.of(context).size.width * .45,
+                              alignment: Alignment.center,
+                              child: Text(
+                                LocaleKeys.Rate_change.tr(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
+                              )
+                          ),
+                        ),
+                        Positioned(
+                            bottom: 50,
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * .45,
+                              alignment: Alignment.center,
+                              child: Text(
+                                pul == 0 ? "1\$ = " : "1\$ = $pul",
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                    fontSize: 17
+                                ),
+                              ),
+                            )
+                        ),
+                        Positioned(
+                          bottom: 0,
                           child: Container(
                             width: MediaQuery.of(context).size.width * .45,
                             alignment: Alignment.center,
-                            child: Text(
-                              pul == 0 ? "1\$ = " : "1\$ = $pul",
-                              textAlign: TextAlign.justify,
-                              style: TextStyle(
-                                fontSize: 17
+                            child: DropdownButton(
+                              menuMaxHeight: MediaQuery.of(context).size.height * .4,
+                              hint: Text(
+                                  LocaleKeys.Currency.tr(),
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black
+                                  )
                               ),
-                            ),
-                          )
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * .45,
-                          alignment: Alignment.center,
-                          child: DropdownButton(
-                            menuMaxHeight: MediaQuery.of(context).size.height * .4,
-                            hint: Text(
-                                LocaleKeys.Currency.tr(),
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black
-                                )
-                            ),
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black,
-                            ),
-                            focusColor: Colors.white,
-                            dropdownColor: Colors.grey[300],
-                            value: SelectedVal2,
-                            onChanged: (String? newValue) {
-                              if (newValue != null) {
-                                setState(() {
-                                  SelectedVal2 = newValue;
-                                  valyuta.forEach((element) {
-                                    if(element["code"] == newValue) {
-                                      pul = element["rate"].toDouble();
-                                    }
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                              ),
+                              focusColor: Colors.white,
+                              dropdownColor: Colors.grey[300],
+                              value: SelectedVal2,
+                              onChanged: (String? newValue) {
+                                if (newValue != null) {
+                                  setState(() {
+                                    SelectedVal2 = newValue;
+                                    valyuta.forEach((element) {
+                                      if(element["code"] == newValue) {
+                                        pul = element["rate"].toDouble();
+                                      }
+                                    });
                                   });
-                                });
-                              }},
-                            items: pullar,
+                                }},
+                              items: pullar,
+                            ),
                           ),
                         ),
-                      ),
-                    ]
+                      ]
                   ),
                 ),
               ],
@@ -463,8 +460,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 maxLines: 10,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
                 ),
               ),
             ),
@@ -489,7 +486,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                     );
                   }
-                  ),
+              ),
               items: imglist.map((item) => GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -507,16 +504,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(
-                              "${AppConfig.image_url}/tours/${item["image"]}",
-                            ),
-                            fit: BoxFit.cover,
-                            onError: (error, stackTrace) {
-                              Image.asset(
-                                "assets/images/no_image.png",
-                                fit: BoxFit.cover,
-                              );
-                            }
+                              image: NetworkImage(
+                                "${AppConfig.image_url}/tours/${item["image"]}",
+                              ),
+                              fit: BoxFit.cover,
+                              onError: (error, stackTrace) {
+                                Image.asset(
+                                  "assets/images/no_image.png",
+                                  fit: BoxFit.cover,
+                                );
+                              }
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                         ),
@@ -542,7 +539,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ]
                 ),
               )
-             ).toList(),
+              ).toList(),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -550,13 +547,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 return GestureDetector(
                   onTap: () => _controller.animateToPage(entry.key),
                   child: Container(
-                    width: 8.0,
-                    height: 8.0,
-                    margin: EdgeInsets.symmetric(horizontal: 4.0),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color.fromRGBO(239, 127, 26, 1).withOpacity(_current == entry.key ? 0.9 : 0.4)
-                    )
+                      width: 8.0,
+                      height: 8.0,
+                      margin: EdgeInsets.symmetric(horizontal: 4.0),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color.fromRGBO(239, 127, 26, 1).withOpacity(_current == entry.key ? 0.9 : 0.4)
+                      )
                   ),
                 );
               }).toList(),
@@ -565,7 +562,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               padding: EdgeInsets.only(left: 8, top: 20, right: 8),
               child: Text(
-               LocaleKeys.Most_popular_cars_book.tr(),
+                LocaleKeys.Most_popular_cars_book.tr(),
                 textAlign: TextAlign.center,
                 maxLines: 10,
                 style: TextStyle(
@@ -610,16 +607,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.symmetric(vertical: 7.0),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.circular(10.0)
+                    color: Colors.orange,
+                    borderRadius: BorderRadius.circular(10.0)
                 ),
                 child: Text(
                   LocaleKeys.see_all.tr(),
                   maxLines: 3,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0
+                      color: Colors.white,
+                      fontSize: 20.0
                   ),
                 ),
               ),
@@ -628,7 +625,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               padding: EdgeInsets.only(left: 15, bottom: 5, right: 15),
               child: Text(
-               LocaleKeys.News_and_special_offers.tr(),
+                LocaleKeys.News_and_special_offers.tr(),
                 maxLines: 10,
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -636,75 +633,78 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            CarouselSlider(
-              options: CarouselOptions(
-                height: 400,
-                autoPlay: false,
-                disableCenter: true,
-              ),
-              items: newslist.map((item) =>
-                  InkWell(
-                    onTap: () {
-                      launch("https://travelcars.uz/${SplashScreen.til}/news/${item["meta_url"]}");
-                      },
-                    child: Container(
-                      margin: EdgeInsets.all(6),
-                      child: Card(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                        elevation: 4,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                  width: MediaQuery.of(context).size.width * 0.9,
-                                  child:Image.network(
-                                    "${AppConfig.image_url}/pages/${item["thumb"]}",
-                                  ),
-                              ),
-                              Expanded(
-                                child: Text(
-                                  item["name"],
-                                  maxLines: 2,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      height: 1.3,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Text(
-                                  item["short"],
-                                  maxLines: 10,
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      height: 1.3,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                        item["created_at"].substring(0,10)
+            Expanded(
+              child: Container(
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    height: 355,
+                    autoPlay: false,
+                    disableCenter: true,
+                  ),
+                  items: newslist.map((item) =>
+                      InkWell(
+                        onTap: () {
+                          launch("https://travelcars.uz/${SplashScreen.til}/news/${item["meta_url"]}");
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(6),
+                          child: Card(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                            elevation: 4,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: MediaQuery.of(context).size.width * 0.9,
+                                    child:Image.network(
+                                      "${AppConfig.image_url}/pages/${item["thumb"]}",
                                     ),
-                                    Text(
-                                        item["created_at"].substring(11,16)
+                                  ),
+                                  Text(
+                                    item["name"],
+                                    maxLines: 2,
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontSize: 17,
+                                        height: 1.3,
+                                        fontWeight: FontWeight.bold
                                     ),
-                                  ],
-                                ),
-                              )
-                            ],
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      item["short"],
+                                      maxLines: 10,
+                                      textAlign: TextAlign.justify,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        height: 1.3,
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                          item["created_at"].substring(0,10)
+                                      ),
+                                      Text(
+                                          item["created_at"].substring(11,16)
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  )
-              ).toList(),
+                      )
+                  ).toList(),
+                ),
+              ),
             )
           ],
         ),
@@ -745,7 +745,6 @@ class CarsCard extends StatelessWidget {
                 child: Image.network(
                   "${AppConfig.image_url}/car-types/$image",
                   errorBuilder: (context, error, stackTrace) {
-                    print(error);
                     return Image.asset(
                       "assets/images/no_image.png",
                       fit: BoxFit.contain,

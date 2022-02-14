@@ -22,6 +22,7 @@ class TransfersInfo extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         title: Text(
           "${LocaleKeys.application.tr()} #${info['id']}",
           maxLines: 2,

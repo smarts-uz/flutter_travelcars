@@ -25,6 +25,7 @@ class _SecondScreenState extends State<SecondScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         title: Text(
           LocaleKeys.change_password.tr(),

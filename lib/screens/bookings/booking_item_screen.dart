@@ -94,6 +94,7 @@ class _BookingScreenState extends State<BookingScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         backgroundColor: Colors.orange,
         title: Text(
           "${LocaleKeys.booking.tr()} #${results["id"]}",

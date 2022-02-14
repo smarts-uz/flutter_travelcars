@@ -61,6 +61,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
     });
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);

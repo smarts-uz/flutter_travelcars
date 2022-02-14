@@ -135,6 +135,7 @@ class _ReviewsState extends State<Reviews> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);

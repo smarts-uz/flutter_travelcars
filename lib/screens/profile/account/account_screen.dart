@@ -37,6 +37,7 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         title: Text(
           LocaleKeys.profile_settings.tr(),
