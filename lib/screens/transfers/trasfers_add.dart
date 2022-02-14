@@ -187,22 +187,27 @@ class _TransfersAddState extends State<TransfersAdd> {
                       ),
                       margin:EdgeInsets.all(12),
                       child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.lightBlue,
-                              maxRadius: 18,
-                              child: Text(
-                                "${index + 1}",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 23
+                            Container(
+                              width: MediaQuery.of(context).size.width * .9,
+                              alignment: Alignment.center,
+                              child: CircleAvatar(
+                                backgroundColor: Colors.lightBlue,
+                                maxRadius: 18,
+                                child: Text(
+                                  "${index + 1}",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 23
+                                  ),
                                 ),
                               ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [0, 1].map((int indexr) => Container(
                                 height: 40,
                                 width: MediaQuery.of(context).size.width*.4,
@@ -500,7 +505,7 @@ class _TransfersAddState extends State<TransfersAdd> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 13.0),
-            child: TFF(price_controller, "${LocaleKeys.expectedPrice.tr()}(USD)", 45),
+            child: TFF(price_controller, "${LocaleKeys.expectedPrice.tr()}", 45),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),

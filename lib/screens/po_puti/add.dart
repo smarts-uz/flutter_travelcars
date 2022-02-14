@@ -226,6 +226,7 @@ class _AddScreenState extends State<AddScreen> {
                 TFF("${LocaleKeys.phone.tr()}", text_controllers[6], 48, true),
                 TFF("${LocaleKeys.enRoute_note.tr()}", text_controllers[7], 110, false),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
                       height: 120,
@@ -253,7 +254,7 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                     Container(
                       height: 120,
-                      width: MediaQuery.of(context).size.width * .6,
+                      width: MediaQuery.of(context).size.width * .4,
                       padding: EdgeInsets.symmetric(vertical: 10.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -264,7 +265,6 @@ class _AddScreenState extends State<AddScreen> {
                             },
                             child: Container(
                                 height: 40,
-                                width: MediaQuery.of(context).size.width * .5,
                                 decoration: BoxDecoration(
                                     color: Colors.orange,
                                     borderRadius: BorderRadius.circular(8),
@@ -300,7 +300,6 @@ class _AddScreenState extends State<AddScreen> {
                             },
                             child: Container(
                               height: 40,
-                              width: MediaQuery.of(context).size.width * .5,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(

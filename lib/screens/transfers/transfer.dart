@@ -112,6 +112,7 @@ void _startAddNewTransaction(BuildContext ctx) {
           child: SingleChildScrollView(
             child: Text(
               LocaleKeys.about_transfer.tr(),
+              textAlign: TextAlign.justify,
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500

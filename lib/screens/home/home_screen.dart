@@ -175,6 +175,10 @@ class _HomeScreenState extends State<HomeScreen> {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/news?lang=${SplashScreen.til}");
     final response = await http.get(url);
     newslist = json.decode(response.body);
+    print(newslist.length);
+    print(newslist[0]["name"]);
+    print(newslist[1]["name"]);
+    print(newslist[2]["name"]);
   }
 
   void getvalyuta() async {
@@ -632,48 +636,57 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            Container(
-              height: 350,
-              child: CarouselSlider(
-                options: CarouselOptions(
-                    autoPlay: false,
-                    //autoPlayInterval: Duration(seconds: 2),
-                    disableCenter: true,
-                ),
-                items: newslist.map((item) =>
-                    InkWell(
-                      onTap: () {
-                        launch("https://travelcars.uz/${SplashScreen.til}/news/${item["meta_url"]}");
-                       // Navigator.push(context,MaterialPageRoute(builder: (_)=>DetailScreen()));
-                        },
-                      child: Container(
-                        margin: EdgeInsets.all(6),
-                        child: Card(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                          elevation: 4,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Container(
-                                    height: 150,
-                                    width: MediaQuery.of(context).size.width * 0.9,
-                                    child:Image.network(
-                                      "${AppConfig.image_url}/pages/${item["thumb"]}",
-                                    ),
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 400,
+                autoPlay: false,
+                disableCenter: true,
+              ),
+              items: newslist.map((item) =>
+                  InkWell(
+                    onTap: () {
+                      launch("https://travelcars.uz/${SplashScreen.til}/news/${item["meta_url"]}");
+                      },
+                    child: Container(
+                      margin: EdgeInsets.all(6),
+                      child: Card(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                        elevation: 4,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            children: [
+                              Container(
+                                  width: MediaQuery.of(context).size.width * 0.9,
+                                  child:Image.network(
+                                    "${AppConfig.image_url}/pages/${item["thumb"]}",
+                                  ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  item["name"],
+                                  maxLines: 2,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      height: 1.3,
+                                      fontWeight: FontWeight.bold
+                                  ),
                                 ),
-                                Text(
+                              ),
+                              Expanded(
+                                child: Text(
                                   item["short"],
                                   maxLines: 10,
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
                                       fontSize: 15,
                                       height: 1.3,
-                                      fontWeight: FontWeight.bold
                                   ),
                                 ),
-                                Row(
+                              ),
+                              Expanded(
+                                child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
@@ -683,15 +696,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                         item["created_at"].substring(11,16)
                                     ),
                                   ],
-                                )
-                              ],
-                            ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ),
-                    )
-                ).toList(),
-              ),
+                    ),
+                  )
+              ).toList(),
             )
           ],
         ),

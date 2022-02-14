@@ -166,7 +166,7 @@ class List_R extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 25),
+                  padding: EdgeInsets.only(left: 16),
                   height: info[index]["routes"].length * 23.0,
                   child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
@@ -216,7 +216,7 @@ class List_R extends StatelessWidget {
                   ),
                 ),
                 if(info[index]['created_at'] != null) Container(
-                  padding: EdgeInsets.only(left: 23 ,bottom:20 ),
+                  padding: EdgeInsets.only(left: 16 ,bottom:20 ),
                   alignment: Alignment.centerLeft,
                   child: Text(
                     '${info[index]['created_at'].substring(0, 10)}',

@@ -173,7 +173,6 @@ class List_T extends StatelessWidget {
                     ),),
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 10),
                   height: info[index]["places"].length * 85.0,
                   child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),

@@ -11,17 +11,7 @@ class RouteInfo extends StatelessWidget {
 
   Widget build(BuildContext context) {
     double app_kurs = 1;
-    double summa = 0;
     List<int> indexes = [];
-
-    HomeScreen.kurs.forEach((element) {
-      if(SplashScreen.kurs == element["code"]) {
-        app_kurs = element["rate"].toDouble();
-      }
-    });
-    if(info["price"] != null) {
-      summa = app_kurs * info["price"].toDouble();
-    }
 
     for(int i = 0; i < info["routes"].length; i++) {
       indexes.add(i);
@@ -108,7 +98,7 @@ class RouteInfo extends StatelessWidget {
                           text: '${LocaleKeys.pricing.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)
                       ),
-                      if(info['price'] != null && info['price'] != 0) TextSpan(text: '${summa.toStringAsFixed(2)} ${SplashScreen.kurs}\n'),
+                      if(info['price'] != null && info['price'] != 0) TextSpan(text: '${info['price']}\n'),
                       TextSpan(
                           text: '${LocaleKeys.status.tr()}: ',
                           style: TextStyle(fontWeight: FontWeight.w500)

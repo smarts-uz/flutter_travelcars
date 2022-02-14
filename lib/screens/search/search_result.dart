@@ -71,7 +71,7 @@ class _SearchResultState extends State<SearchResult> {
         }
       }
 
-      final result_nonreverse = await http.post(
+      final resultNonreverse = await http.post(
           url,
           body: {
             "reverse": "0",
@@ -82,13 +82,13 @@ class _SearchResultState extends State<SearchResult> {
           }
       );
 
-      print("Non-reverse: ${jsonDecode(result_nonreverse.body)["routes"].toString()}");
+      print("Non-reverse: ${jsonDecode(resultNonreverse.body)["routes"].toString()}");
 
-      if(jsonDecode(result_nonreverse.body)["routes"].isNotEmpty) {
-        routes.addAll(jsonDecode(result_nonreverse.body)["routes"]);
-        refund = jsonDecode(result_nonreverse.body)["commission"] + " %";
-        min_price = jsonDecode(result_nonreverse.body)["min_price"].toDouble();
-        max_price = jsonDecode(result_nonreverse.body)["max_price"].toDouble();
+      if(jsonDecode(resultNonreverse.body)["routes"].isNotEmpty) {
+        routes.addAll(jsonDecode(resultNonreverse.body)["routes"]);
+        refund = jsonDecode(resultNonreverse.body)["commission"] + " %";
+        min_price = jsonDecode(resultNonreverse.body)["min_price"].toDouble();
+        max_price = jsonDecode(resultNonreverse.body)["max_price"].toDouble();
       }
 
     } else {
@@ -148,10 +148,10 @@ class _SearchResultState extends State<SearchResult> {
 
   @override
   Widget build(BuildContext context) {
-    double app_kurs = 1;
+    double appKurs = 1;
     HomeScreen.kurs.forEach((element) {
       if(SplashScreen.kurs == element["code"]) {
-        app_kurs = element["rate"].toDouble();
+        appKurs = element["rate"].toDouble();
       }
     });
     return Scaffold(
@@ -274,24 +274,25 @@ class _SearchResultState extends State<SearchResult> {
           itemBuilder: (context, index) {
             Map<String, dynamic> car = routes[index]["car"];
             List<dynamic> options = routes[index]["route_options"];
-            List<int> icon_numbers = [];
-            icon_numbers.add(car["places"]);
-            icon_numbers.add(car["big_bags"]);
-            icon_numbers.add(car["small_bags"]);
-            icon_numbers.add(car["doors"]);
-            List<int> indexes_options = [];
+            List<int> iconNumbers = [];
+            iconNumbers.add(car["places"]);
+            iconNumbers.add(car["big_bags"]);
+            iconNumbers.add(car["small_bags"]);
+            iconNumbers.add(car["doors"]);
+            List<int> indexesOptions = [];
             for(int i = 0; i < options.length; i++) {
-              indexes_options.add(i);
+              indexesOptions.add(i);
             }
-            String route_name = routes[index]["city"]["name"] + " - ${routes[index]["cities"][0]["name"]}";
+            String routeName = routes[index]["city"]["name"] + " - ${routes[index]["cities"][0]["name"]}";
             if(routes[index]["reverse"] == 1) {
-              route_name = route_name + " - ${routes[index]["city"]["name"]}";
+              routeName = routeName + " - ${routes[index]["city"]["name"]}";
             }
             return Card(
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               elevation: 6,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
@@ -386,7 +387,7 @@ class _SearchResultState extends State<SearchResult> {
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Image.asset(icons[e], fit: BoxFit.cover,),
-                                  Text("${icon_numbers[e]}"),
+                                  Text("${iconNumbers[e]}"),
                                 ]
                             ),
                           )
@@ -409,7 +410,7 @@ class _SearchResultState extends State<SearchResult> {
                     width: double.infinity,
                     padding: EdgeInsets.only(top: 5, left: 15, right: 5),
                     child: Column(
-                      children: indexes_options.map((i) => Row(
+                      children: indexesOptions.map((i) => Row(
                         children: [
                           Icon(Icons.check, color: Colors.green, size: 20,),
                           Expanded(
@@ -427,34 +428,40 @@ class _SearchResultState extends State<SearchResult> {
                       ),).toList(),
                     ),
                   ),
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.only(left: 3),
-                    child: ListTile(
-                      title: Text(
-                        route_name,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
+                  Divider(
+                    color: Colors.grey,
+                    thickness: 1.5,
+                    indent: 10,
+                    endIndent: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: Text(
+                      routeName,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(Icons.watch_later_outlined, color: Colors.orange,),
+                        SizedBox(width: 8),
+                        Text(
+                          "${routes[index]["date"]}",
+                          style: TextStyle(
                             fontSize: 18,
-                            fontWeight: FontWeight.w600
-                        ),
-                      ),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.only(top: 4.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(Icons.watch_later_outlined, color: Colors.orange,),
-                            SizedBox(width: 8),
-                            Text(
-                              "${routes[index]["date"]}",
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   Container(
@@ -478,7 +485,7 @@ class _SearchResultState extends State<SearchResult> {
                     padding: EdgeInsets.only(top: 5, left: 18, bottom: 4.0),
                     alignment: Alignment.center,
                     child: Text(
-                      "${(routes[index]["price"] * app_kurs).toStringAsFixed(2)} ${SplashScreen.kurs}",
+                      "${(routes[index]["price"] * appKurs).toStringAsFixed(2)} ${SplashScreen.kurs}",
                       style: TextStyle(
                           fontSize: 21,
                           color: Colors.black,

@@ -118,18 +118,23 @@ class _BookingsScreenState extends State<BookingsScreen> {
               });
             }
             String? status = "Unknown";
+            Color? color = Colors.grey;
             switch(results[index]['status']) {
               case "moderating":
                 status = LocaleKeys.route_one_on_consideration.tr();
+                color = Colors.amber;
                 break;
               case "proceed":
                 status = LocaleKeys.pending.tr();
+                color =Colors.blue;
                 break;
               case "rejected":
+                color = Colors.red;
                 status = LocaleKeys.rejected.tr();
                 break;
               case "accepted":
                 status = LocaleKeys.approved.tr();
+                color = Colors.green;
                 break;
             }
 
@@ -187,34 +192,68 @@ class _BookingsScreenState extends State<BookingsScreen> {
                   Container(
                     padding: EdgeInsets.only(left: 15, bottom: 8, top: 4),
                     alignment: Alignment.topLeft,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "${LocaleKeys.status.tr()}: $status",
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              "${LocaleKeys.status.tr()}:  ",
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
+                            ),
+                            Container(
+                              height: 25,
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.only(right: 15),
+                              decoration: BoxDecoration(
+                                color: color,
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: 1,
+                                ),
+                              ),
+                              child: Text(
+                                "$status",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.white
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        Container(
-                          height: 25,
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.only(right: 15),
-                          decoration: BoxDecoration(
-                            color: results[index]["paid"] != null ? Colors.green : Colors.red,
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                              color: Colors.grey,
-                              width: 1,
+                        Row(
+                          children: [
+                            Text(
+                              "Тўлов ҳолати:  ",
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
                             ),
-                          ),
-                          child: Text(
-                            results[index]["paid"] != null ? "$payment_status" : "${LocaleKeys.unpaid.tr()}",
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white
+                            Container(
+                              height: 25,
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.only(right: 15),
+                              decoration: BoxDecoration(
+                                color: results[index]["paid"] != null ? Colors.green : Colors.red,
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: 1,
+                                ),
+                              ),
+                              child: Text(
+                                results[index]["paid"] != null ? "$payment_status" : "${LocaleKeys.unpaid.tr()}",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.white
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         )
                       ],
                     ),

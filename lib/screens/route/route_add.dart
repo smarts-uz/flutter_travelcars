@@ -417,7 +417,7 @@ class _RouteAddState extends State<RouteAdd> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
-              child: TFF("${LocaleKeys.expectedPrice.tr()}(USD)", price_controller, 45),
+              child: TFF("${LocaleKeys.expectedPrice.tr()}", price_controller, 45),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
