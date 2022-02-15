@@ -260,8 +260,15 @@ class _AddScreenState extends State<AddScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GestureDetector(
-                            onTap: () {
-                              _showPicker(context);
+                            onTap: () async {
+                              //_showPicker(context);
+                              final pickedImageFile = await _picker.pickImage(
+                                source: ImageSource.gallery,
+                              );
+                              File file = File(pickedImageFile!.path);
+                              setState(() {
+                                _pickedImage = file;
+                              });
                             },
                             child: Container(
                                 height: 40,

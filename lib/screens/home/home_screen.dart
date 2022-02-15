@@ -285,10 +285,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: HomeScreen.isLoading ? Center(
           child: CircularProgressIndicator()
-      ) : Container(
-        height: MediaQuery.of(context).size.height,
-        child: ListView(
-          physics: BouncingScrollPhysics(),
+      ) : SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -633,81 +632,80 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            Expanded(
-              child: Container(
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    height: 355,
-                    autoPlay: false,
-                    disableCenter: true,
-                  ),
-                  items: newslist.map((item) =>
-                      InkWell(
-                        onTap: () {
-                          launch("https://travelcars.uz/${SplashScreen.til}/news/${item["meta_url"]}");
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(6),
-                          child: Card(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                            elevation: 4,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: MediaQuery.of(context).size.width * 0.9,
-                                    child:Image.network(
-                                      "${AppConfig.image_url}/pages/${item["thumb"]}",
-                                    ),
+            Container(
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  height: 355,
+                  autoPlay: false,
+                  disableCenter: true,
+                ),
+                items: newslist.map((item) =>
+                    InkWell(
+                      onTap: () {
+                        launch("https://travelcars.uz/${SplashScreen.til}/news/${item["meta_url"]}");
+                      },
+                      child: Container(
+                        margin: EdgeInsets.all(6),
+                        child: Card(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                          elevation: 4,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width * 0.9,
+                                  child:Image.network(
+                                    "${AppConfig.image_url}/pages/${item["thumb"]}",
                                   ),
-                                  Text(
-                                    item["name"],
-                                    maxLines: 2,
-                                    textAlign: TextAlign.start,
+                                ),
+                                Text(
+                                  item["name"],
+                                  maxLines: 2,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      height: 1.3,
+                                      fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    item["short"],
+                                    maxLines: 10,
+                                    textAlign: TextAlign.justify,
                                     style: TextStyle(
-                                        fontSize: 17,
-                                        height: 1.3,
-                                        fontWeight: FontWeight.bold
+                                      fontSize: 15,
+                                      height: 1.3,
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      item["short"],
-                                      maxLines: 10,
-                                      textAlign: TextAlign.justify,
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        height: 1.3,
-                                      ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                        item["created_at"].substring(0,10)
                                     ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                          item["created_at"].substring(0,10)
-                                      ),
-                                      Text(
-                                          item["created_at"].substring(11,16)
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
+                                    Text(
+                                        item["created_at"].substring(11,16)
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
                           ),
                         ),
-                      )
-                  ).toList(),
-                ),
+                      ),
+                    )
+                ).toList(),
               ),
             )
           ],
         ),
+
       )
     );
   }
