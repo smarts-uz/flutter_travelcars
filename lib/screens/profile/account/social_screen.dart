@@ -59,7 +59,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         title: Text(
-          LocaleKeys.Social_networks_for_communication.tr(),
+          LocaleKeys.my_socials.tr(),
           maxLines: 2,
           style: TextStyle(
             color: Colors.white,

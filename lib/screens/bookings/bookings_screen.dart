@@ -229,7 +229,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                         Row(
                           children: [
                             Text(
-                              "Тўлов ҳолати:  ",
+                              "${LocaleKeys.price_condition.tr()}:  ",
                               style: TextStyle(
                                 fontSize: 18,
                               ),

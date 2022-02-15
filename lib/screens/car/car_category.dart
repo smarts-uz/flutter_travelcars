@@ -187,7 +187,7 @@ class _CarCategoryState extends State<CarCategory> {
                                   "${names[index_in]["name"]}: ${
                                       index_in == 3 ?
                                       categories[index][names[index_in]["data"]] == 1 ?
-                                      "${LocaleKeys.yes.tr()}" : "${LocaleKeys.no.tr()}" :
+                                      "${LocaleKeys.bor.tr()}" : "${LocaleKeys.no.tr()}" :
                                       categories[index][names[index_in]["data"]] ?? "--"
                                   }",
                                   style: TextStyle(
@@ -216,7 +216,7 @@ class _CarCategoryState extends State<CarCategory> {
                         backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
                       ),
                       child: Text(
-                        "Нархи ва мавжудлигини текшириш",
+                        LocaleKeys.Price_Available.tr(),
                         style: TextStyle(
                           fontSize: 17,
                           color: Colors.black,

@@ -261,5 +261,9 @@ abstract class  LocaleKeys {
   static const additional_info = 'additional_info';
   static const choose_pay = 'choose_pay';
   static const enRoute_note = 'enRoute_note';
+  static const price_condition = 'price_condition';
+  static const Price_Available = 'Price_Available';
+  static const bor = 'bor';
+  static const my_socials = 'my_socials';
 
 }
