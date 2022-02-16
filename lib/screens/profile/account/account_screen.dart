@@ -141,7 +141,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 );
               },
               title: Text(
-                LocaleKeys.Social_networks_for_communication.tr(),
+                LocaleKeys.my_socials.tr(),
                 style: TextStyle(
                   fontSize: 20,
                 ),

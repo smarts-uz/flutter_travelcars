@@ -266,7 +266,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    child: results[index]["images"][0]["original"] == null ? Image.asset(
+                    child: results[index]["images"] == null ||  results[index]["images"].isEmpty ? Image.asset(
                       "assets/images/no_car.jpg",
                       fit: BoxFit.contain,
                     ) : Image.network(
