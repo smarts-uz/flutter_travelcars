@@ -178,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
     newslist = json.decode(response.body);
     newslist.forEach((element) {
       if(element["short"].length > carouselHeight) {
-        carouselHeight = element["short"].length.toDouble();
+        carouselHeight = element["short"].length.toDouble() + 20.0;
       }
       print(carouselHeight);
     });
@@ -664,7 +664,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Text(
                               item["name"],
-                              maxLines: 2,
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                   fontSize: 17,
@@ -678,7 +677,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             Expanded(
                               child: Text(
                                 item["short"],
-                                maxLines: 10,
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
                                   fontSize: 15,
