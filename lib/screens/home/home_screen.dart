@@ -638,7 +638,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           CarouselSlider(
             options: CarouselOptions(
-              height: 260 + (carouselHeight / 1.3),
+              height: 250 + (carouselHeight / 1.2),
               autoPlay: false,
               disableCenter: true,
             ),
