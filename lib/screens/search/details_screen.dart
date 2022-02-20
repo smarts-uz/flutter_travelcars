@@ -130,7 +130,7 @@ class _DetailScreenState extends State<DetailScreen> {
             day = 0.5;
         }
         narxlar.add({
-          "day": "${day == 0.5 ? day : day.toInt()} ${SplashScreen.til == "ru" ? day == 1.0 ? LocaleKeys.day.tr() : "дня" : LocaleKeys.day.tr()}",
+          "day": "${day == 0.5 ? day : day.toInt()} ${(SplashScreen.til == "ru" && day == 1.0) ? "день" : LocaleKeys.day.tr()}",
           "cost": cost
         });
       } else if(key == "overtime") {

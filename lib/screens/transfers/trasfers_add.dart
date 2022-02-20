@@ -361,7 +361,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                             TFF(data[index]["controllers4"][0], "${LocaleKeys.Quantity_of_passengers.tr()}", 48, isNumber: true),
                             TFF(data[index]["controllers4"][1], "${LocaleKeys.From.tr()}", 48),
                             TFF(data[index]["controllers4"][2], "${LocaleKeys.To.tr()}", 48),
-                            TFF(data[index]["controllers4"][3], "${LocaleKeys.note.tr()}", 110),
+                            TFF(data[index]["controllers4"][3], "${LocaleKeys.note.tr()}", 70),
                           ]
                       ),
                     ),

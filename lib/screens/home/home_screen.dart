@@ -176,12 +176,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Uri url = Uri.parse("${AppConfig.BASE_URL}/news?lang=${SplashScreen.til}");
     final response = await http.get(url);
     newslist = json.decode(response.body);
-    newslist.forEach((element) {
-      if(element["short"].length > carouselHeight) {
-        carouselHeight = element["short"].length.toDouble() + 20.0;
-      }
-      print(carouselHeight);
-    });
   }
 
   void getvalyuta() async {
@@ -249,6 +243,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    newslist.forEach((element) {
+      if(element["short"].length > carouselHeight) {
+        carouselHeight = element["short"].length.toDouble();
+      }
+    });
+    print(carouselHeight);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -638,7 +638,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           CarouselSlider(
             options: CarouselOptions(
-              height: 260 + (carouselHeight / 1.7),
+              height: 260 + (carouselHeight / 1.3),
               autoPlay: false,
               disableCenter: true,
             ),

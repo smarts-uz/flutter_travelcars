@@ -377,7 +377,8 @@ class _BookingsScreenState extends State<BookingsScreen> {
                           ),
                           children: <TextSpan>[
                             TextSpan(text: '${LocaleKeys.The_cost_of_the_trip.tr()} '),
-                            TextSpan(text: '${LocaleKeys.for_atp.tr()} ${day.toInt()} ${LocaleKeys.day.tr()}', style: TextStyle(color: Colors.orange)),
+                            if(SplashScreen.til == "uz") TextSpan(text: '${day == 0.5 ? day : day.toInt()} ${LocaleKeys.day.tr()} ${LocaleKeys.for_atp.tr()}', style: TextStyle(color: Colors.orange)),
+                            if(SplashScreen.til != "uz") TextSpan(text: '${LocaleKeys.for_atp.tr()} ${day == 0.5 ? day : day.toInt()} ${(SplashScreen.til == "ru" && day == 1.0) ? "день" : LocaleKeys.day.tr()}', style: TextStyle(color: Colors.orange)),
                           ],
                         ),
                       )
