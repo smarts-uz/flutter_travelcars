@@ -498,10 +498,10 @@ class _BookingScreenState extends State<BookingScreen> {
                         launch("https://checkout.paycom.uz/$base64");
                         break;
                       case "mastercard":
-                        launch("https://travelcars.uz/octo/$id/mCard");
+                        launch("https://travelcars.uz/octo/pay/$id/mCard");
                         break;
                       case "visa":
-                        launch("https://travelcars.uz/octo/$id/Visa");
+                        launch("https://travelcars.uz/octo/pay/$id/Visa");
                         break;
                     }
                   },
