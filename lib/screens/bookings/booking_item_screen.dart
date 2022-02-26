@@ -82,14 +82,14 @@ class _BookingScreenState extends State<BookingScreen> {
         break;
     }
 
-    List<int> car_options = [];
+    List<int> carOptions = [];
     for(int i = 0; i < results['carOption'].length; i++) {
-      car_options.add(i);
+      carOptions.add(i);
     }
 
-    List<int> route_options = [];
+    List<int> routeOptions = [];
     for(int i = 0; i < results["routeOption"].length; i++) {
-      route_options.add(i);
+      routeOptions.add(i);
     }
 
     return Scaffold(
@@ -173,7 +173,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) => Reviews(route_price_id: results["route_price_id"] ?? -2,)
+                              builder: (_) => Reviews(route_price_id: results["route_price_id"],)
                           )
                       );
                     },
@@ -276,13 +276,15 @@ class _BookingScreenState extends State<BookingScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
               child: Column(
-                children: car_options.map((e) => Padding(
+                children: carOptions.map((e) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Row(
                     children: [
                       results['carOption'][e]["image"] == null ? Image.asset(
-                        "assets/images/no_car.jpg",
-                        fit: BoxFit.contain,
+                        "assets/images/no_image.jpg",
+                        width: 25,
+                        height: 25,
+                        fit: BoxFit.cover,
                       ) : Image.network(
                         "${AppConfig.image_url}/car-options/${results['carOption'][e]["image"]}",
                         width: 25,
@@ -290,8 +292,10 @@ class _BookingScreenState extends State<BookingScreen> {
                         errorBuilder: (context, error, stackTrace) {
                           print(error);
                           return Image.asset(
-                            "assets/images/no_car.jpg",
-                            fit: BoxFit.contain,
+                            "assets/images/no_image.png",
+                            width: 25,
+                            height: 25,
+                            fit: BoxFit.cover,
                           );
                         },
                       ),
@@ -337,7 +341,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     decoration: BoxDecoration(color: HexColor("#F5F5F6")),
                     padding: EdgeInsets.only(left: 16),
                     child: Column(
-                      children: route_options.map((e) => Padding(
+                      children: routeOptions.map((e) => Padding(
                         padding: EdgeInsets.symmetric(vertical: 2.0),
                         child: Row(
                           children: [
@@ -365,8 +369,9 @@ class _BookingScreenState extends State<BookingScreen> {
               children: [
                 _text(text: "${LocaleKeys.select_payment_method.tr()}:", top: 0),
                 SizedBox(
-                  height: 270,
+                  height: 260,
                   child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: payments.length,
                     itemExtent: 65,
                     itemBuilder: (context, index) => GestureDetector(

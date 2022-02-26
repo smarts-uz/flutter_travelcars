@@ -31,7 +31,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
   }
 
   void getsocials() async {
-    int i = 0;
+    int i = 2;
     final prefs = await SharedPreferences.getInstance();
     String token = json.decode(prefs.getString('userData')!)["token"];
     String url = "${AppConfig.BASE_URL}/social";
@@ -47,6 +47,9 @@ class _ThirdScreenState extends State<ThirdScreen> {
         socials.forEach((key, value) {
           data[i]["check_box"] = value == 0 ? false : true;
           i++;
+          if(i==4) {
+            i = 0;
+          }
         });
       });
     }

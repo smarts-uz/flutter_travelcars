@@ -93,11 +93,11 @@ class _BookingsScreenState extends State<BookingsScreen> {
       ) : ListView.builder(
           itemCount: results.length,
           itemBuilder: (context, index) {
-            List<int> icon_numbers = [];
-            icon_numbers.add(results[index]["car"]["places"]);
-            icon_numbers.add(results[index]["car"]["big_bags"]);
-            icon_numbers.add(results[index]["car"]["small_bags"]);
-            icon_numbers.add(results[index]["car"]["doors"]);
+            List<int> iconNumbers = [];
+            iconNumbers.add(results[index]["car"]["places"]);
+            iconNumbers.add(results[index]["car"]["big_bags"]);
+            iconNumbers.add(results[index]["car"]["small_bags"]);
+            iconNumbers.add(results[index]["car"]["doors"]);
             double day = 1.0;
             if(results[index]["price_data"] != null) {
               results[index]["price_data"].forEach((key, value) {
@@ -295,7 +295,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Image.asset(icons[e], fit: BoxFit.cover,),
-                                  Text("${icon_numbers[e]}"),
+                                  Text("${iconNumbers[e]}"),
                                 ]
                             ),
                           )

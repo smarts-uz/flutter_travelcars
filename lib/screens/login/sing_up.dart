@@ -303,14 +303,19 @@ class _SignUpState extends State<SignUp> {
                           }
                       );
                       print(result.body);
-                      int id = json.decode(result.body)["user_id"];
-                      int code = json.decode(result.body)['code'];
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => Confirm(true, id, code, password: _passwordController.text,)
-                          )
-                      );
+                      print(result.statusCode);
+                      if(result.statusCode == 200) {
+                        int id = json.decode(result.body)["user_id"];
+                        int code = json.decode(result.body)['code'];
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => Confirm(true, id, code, password: _passwordController.text,)
+                            )
+                        );
+                      } else {
+                        ToastComponent.showDialog("${jsonDecode(result.body)["errors"]}");
+                      }
                     },
                     child: Container(
                       decoration: BoxDecoration(

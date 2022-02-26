@@ -398,7 +398,9 @@ class _ReviewsState extends State<Reviews> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Column(
+                                  Expanded(
+                                    flex: 4,
+                                    child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -438,34 +440,38 @@ class _ReviewsState extends State<Reviews> {
                                       ),
                                     ],
                                   ),
-                                  Column(
-                                    children: [
-                                      Container(
-                                        height: 27,
-                                        width: 27,
-                                        decoration: BoxDecoration(
-                                          color: Colors.orange,
-                                          borderRadius: BorderRadius.circular(4.0),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            sumper.round().toInt().toString(),
-                                            style: TextStyle(
-                                                color: Colors.white
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          height: 27,
+                                          width: 27,
+                                          decoration: BoxDecoration(
+                                            color: Colors.orange,
+                                            borderRadius: BorderRadius.circular(4.0),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              sumper.round().toInt().toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(height: 3),
-                                      Text(
-                                        sumper_word,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 15
+                                        SizedBox(height: 3),
+                                        Text(
+                                          sumper_word,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 15
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
