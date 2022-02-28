@@ -177,6 +177,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               elevation: 6,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
@@ -337,37 +338,45 @@ class _BookingsScreenState extends State<BookingsScreen> {
                       ),).toList(),
                     ),
                   ),
-                  Container(
-                    width: double.infinity,
-                    child: ListTile(
-                      title: Text(
-                        route_name,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontSize: 19,
-                            fontWeight: FontWeight.w600
-                        ),
-                      ),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.only(top: 4.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(Icons.watch_later_outlined, color: Colors.orange,),
-                            SizedBox(width: 8),
-                            Text(
-                              "${results[index]["date"].substring(0, 10)}",
-                              style: TextStyle(
-                                fontSize: 19,
-                              ),
-                            )
-                          ],
-                        ),
+                  Divider(
+                    color: Colors.grey,
+                    thickness: 1.5,
+                    indent: 10,
+                    endIndent: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: Text(
+                      route_name,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(Icons.watch_later_outlined, color: Colors.orange,),
+                        SizedBox(width: 8),
+                        Text(
+                          "${results[index]["date"].substring(0, 10)}",
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      padding: EdgeInsets.only(top: 4),
+                      alignment: Alignment.center,
                       child:  RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
@@ -383,8 +392,8 @@ class _BookingsScreenState extends State<BookingsScreen> {
                         ),
                       )
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
+                  Align(
+                    alignment: Alignment.center,
                     child: Text(
                       "${(double.parse(results[index]["price"]) * app_kurs).toStringAsFixed(2)} ${SplashScreen.kurs}",
                       style: TextStyle(
@@ -402,25 +411,27 @@ class _BookingsScreenState extends State<BookingsScreen> {
                           )
                       );
                     },
-                    child: Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 1,
+                    child: Center(
+                      child: Container(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: Colors.grey,
+                              width: 1,
+                            ),
                           ),
-                        ),
-                        child: Text(
-                         LocaleKeys.details.tr(),
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.orange,
-                          ),
-                        )
+                          child: Text(
+                           LocaleKeys.details.tr(),
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.orange,
+                            ),
+                          )
+                      ),
                     ),
                   ),
                 ],

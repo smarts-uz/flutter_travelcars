@@ -228,7 +228,7 @@ class CodegenLoader extends AssetLoader{
   "no_image": "Pick a image",
   "phone": "Phone number",
   "code": "Code",
-  "important1": "Overtime pay in 1 hour",
+  "important1": "Overtime pay for 1 hour",
   "important2": "Bank transfer fee",
   "edit_advert": "Edit trip",
   "route_name": "Travel itinerary",
@@ -278,7 +278,7 @@ class CodegenLoader extends AssetLoader{
   "price_condition": "Payment status",
   "Price_Available": "Check price and availability",
   "bor": "Yes",
-  "my_socials": "Social networks"
+  "my_socials": "My social networks"
 };
 static const Map<String,dynamic> ru = {
   "home_screen_Transport_services": "Транспортные услуги по всем городам Узбекистана: экскурсионные и бизнес-поездки",
@@ -810,7 +810,7 @@ static const Map<String,dynamic> uz = {
   "price_condition": "Тўлов ҳолати",
   "Price_Available": "Нархи ва мавжудлигини текшириш",
   "bor": "Бор",
-  "my_socials": "Менинг ижтимоий тармокларим"
+  "my_socials": "Менинг ижтимоий тармоқларим"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru, "uz": uz};
 }

@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
 import 'package:http/http.dart' as http;
+import 'package:travelcars/screens/splash/splash_screen.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
 
 class ThirdScreen extends StatefulWidget {
@@ -62,7 +63,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(239, 127, 26, 1),
         title: Text(
-          LocaleKeys.my_socials.tr(),
+          SplashScreen.til == "uz" ? "Ижтимоий тармоқлар" : LocaleKeys.my_socials.tr(),
           maxLines: 2,
           style: TextStyle(
             color: Colors.white,
@@ -70,6 +71,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
             fontStyle: FontStyle.normal,
           ),
         ),
+        titleSpacing: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);

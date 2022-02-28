@@ -166,12 +166,13 @@ class _SearchResultState extends State<SearchResult> {
             size: 25,
           ),
         ),
+        titleSpacing: 0,
         title: Text(
           LocaleKeys.Results_of_searching.tr(),
           maxLines: 3,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 21
+            fontSize: 20
           ),
         ),
         actions: [

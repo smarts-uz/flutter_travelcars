@@ -60,7 +60,7 @@ class CarTypes extends StatelessWidget {
                   child: Stack(
                     children: [
                       Container(
-                        height: 140,
+                        height: MediaQuery.of(context).size.height * .18,
                         width: MediaQuery.of(context).size.width * .43,
                         child: carslist[index]["image"] == null ? Image.asset(
                           "assets/images/no_car.jpg",
@@ -105,7 +105,7 @@ class CarTypes extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * .4,
                           alignment: Alignment.bottomCenter,
                           child: Text(
-                            "\n${carslist[index]["name"]}",
+                            "${carslist[index]["name"]}",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 15

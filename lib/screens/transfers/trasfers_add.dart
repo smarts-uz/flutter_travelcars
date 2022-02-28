@@ -210,29 +210,25 @@ class _TransfersAddState extends State<TransfersAdd> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [0, 1].map((int indexr) => Container(
-                                height: 40,
-                                width: MediaQuery.of(context).size.width*.4,
+                                height: 35,
+                                width: double.infinity,
                                 padding: EdgeInsets.symmetric(vertical: 5),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: Radio<int>(
-                                        value: indexr,
-                                        groupValue: data[index]["direction"],
-                                        onChanged: (int? value) {
-                                          if (value != null) {
-                                            setState(() => data[index]["direction"] = value);
-                                            print(value);
-                                          }
-                                        },
-                                      ),
+                                    Radio<int>(
+                                      value: indexr,
+                                      groupValue: data[index]["direction"],
+                                      onChanged: (int? value) {
+                                        if (value != null) {
+                                          setState(() => data[index]["direction"] = value);
+                                          print(value);
+                                        }
+                                      },
                                     ),
                                     Expanded(
-                                      flex: 3,
                                       child: Text(
-                                        directions[indexr],
+                                        "${directions[indexr]}",
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
                                           fontSize: 20,

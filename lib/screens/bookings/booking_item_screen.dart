@@ -369,7 +369,7 @@ class _BookingScreenState extends State<BookingScreen> {
               children: [
                 _text(text: "${LocaleKeys.select_payment_method.tr()}:", top: 0),
                 SizedBox(
-                  height: 260,
+                  height: 265,
                   child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: payments.length,

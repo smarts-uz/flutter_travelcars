@@ -218,7 +218,7 @@ class _CarCategoryState extends State<CarCategory> {
                       child: Text(
                         LocaleKeys.Price_Available.tr(),
                         style: TextStyle(
-                          fontSize: 17,
+                          fontSize: 14,
                           color: Colors.black,
                         ),
                       )
