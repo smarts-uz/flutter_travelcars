@@ -399,7 +399,7 @@ class _ReviewsState extends State<Reviews> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    flex: 4,
+                                    flex: 5,
                                     child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -407,10 +407,10 @@ class _ReviewsState extends State<Reviews> {
                                       Text(
                                         "${reviews["reviews"][index1]["name"]}",
                                         style: TextStyle(
-                                            fontSize: 20
+                                            fontSize: 18
                                         ),
                                       ),
-                                      SizedBox(height: 5),
+                                      SizedBox(height: 7),
                                       Row(
                                         children: [
                                           reviews['reviews'][index1]['country_code'] == null ? Image.asset(
@@ -442,34 +442,37 @@ class _ReviewsState extends State<Reviews> {
                                   ),
                                   ),
                                   Expanded(
-                                    flex: 1,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 27,
-                                          width: 27,
-                                          decoration: BoxDecoration(
-                                            color: Colors.orange,
-                                            borderRadius: BorderRadius.circular(4.0),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              sumper.round().toInt().toString(),
-                                              style: TextStyle(
-                                                  color: Colors.white
+                                    flex: 2,
+                                    child: Container(
+                                      alignment: Alignment.centerRight,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 27,
+                                            width: 27,
+                                            decoration: BoxDecoration(
+                                              color: Colors.orange,
+                                              borderRadius: BorderRadius.circular(4.0),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                sumper.round().toInt().toString(),
+                                                style: TextStyle(
+                                                    color: Colors.white
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(height: 3),
-                                        Text(
-                                          sumper_word,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 15
+                                          SizedBox(height: 3),
+                                          Text(
+                                            sumper_word,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 15
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   )
                                 ],
