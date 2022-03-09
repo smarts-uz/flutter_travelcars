@@ -4,7 +4,7 @@
     "type": "PROCESSED_RES",
     "kind": "Directory"
   },
-  "applicationId": "com.example.travelcars",
+  "applicationId": "travelcars.uz",
   "variantName": "processDebugResources",
   "elements": [
     {
