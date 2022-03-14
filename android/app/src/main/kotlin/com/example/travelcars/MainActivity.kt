@@ -1,4 +1,4 @@
-package com.example.travelcars
+package travelcars.online
 
 import io.flutter.embedding.android.FlutterActivity
 

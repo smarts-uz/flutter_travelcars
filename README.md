@@ -1,33 +1,17 @@
-# travelcars
+key.properties file codes. You can find jsk file in assets/upload-keystore.jks
 
-A new Flutter project.
+storePassword=travelcars2022
+keyPassword=travelcars2022
+keyAlias=upload
+storeFile=assets/upload-keystore.jks
 
+Play Store:
+https://play.google.com/store/apps/details?id=travelcars.online
 
+This project is created in SmartTech Studio by three members:
+Flutter developers @telegram_usernames:
+Sobirov Ibrohim @MrSobirov2002
+Saydivaliyev Muhammadsaid @Sa_22_02
 
-
-
-
-
-   e en zori biza dise yawasin gowo jamoasi !!!!!!
-
-
-
-
-
-
-
-
-
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Backend developer:
+Fayzulloyev Asadbek @Asadbek_fayzulloev
