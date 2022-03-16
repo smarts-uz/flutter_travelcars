@@ -5,6 +5,9 @@ keyPassword=travelcars2022
 keyAlias=upload
 storeFile=assets/upload-keystore.jks
 
+Figma link:
+https://www.figma.com/file/bNB69lTKsdBgLnGGJViHEs/Travelcars-app-Update
+
 Play Store:
 https://play.google.com/store/apps/details?id=travelcars.online
 
