@@ -232,7 +232,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                   ),
                   height: MediaQuery.of(context).size.height * .045,
                   width: MediaQuery.of(context).size.width * .8,
-                  child:  RaisedButton(
+                  child:  ElevatedButton(
                     onPressed: ()  {
                       List<dynamic> new_ways = [];
                       main_ways.forEach((element) {
@@ -265,7 +265,7 @@ class _PoPutiScreenState extends State<PoPutiScreen> {
                           color: Colors.white
                       ),
                     ),
-                    color: Colors.blue,
+                    // color: Colors.blue,
                   ),
                 ),
               ],

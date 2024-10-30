@@ -96,7 +96,7 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                                 ),
                               ),
                               actions: [
-                                FlatButton(
+                                ElevatedButton(
                                   child: Text(
                                     LocaleKeys.yes.tr(),
                                     style: TextStyle(
@@ -111,7 +111,7 @@ class _AccountChoicePageState extends State<AccountChoicePage> {
                                     });
                                   },
                                 ),
-                                FlatButton(
+                                ElevatedButton(
                                   child: Text(
                                     LocaleKeys.no.tr(),
                                     style: TextStyle(

@@ -170,29 +170,28 @@ class _ReviewsState extends State<Reviews> {
             Container(
               height: 45,
               width: 200,
-              child: RaisedButton(
-                color: Colors.white,
-                child:Text(
+              child: ElevatedButton(
+                child: Text(
                   LocaleKeys.write_feedback.tr(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.orange
+                    fontSize: 18,
+                    color: Colors.orange,
                   ),
                 ),
                 onPressed: () async {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => FeedbackScreen(widget.route_price_id)
-                      )
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => FeedbackScreen(widget.route_price_id),
+                    ),
                   );
                 },
-                shape: RoundedRectangleBorder(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
-                    side: BorderSide(
-                        color: Colors.orange
-                    )
+                    side: BorderSide(color: Colors.orange),
+                  ),
                 ),
               ),
             ),

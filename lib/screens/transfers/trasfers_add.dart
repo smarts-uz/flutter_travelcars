@@ -373,8 +373,8 @@ class _TransfersAddState extends State<TransfersAdd> {
                 if(i < 10) Container(
                   height: 35,
                   width: 140,
-                  child: RaisedButton(
-                    color: Colors.white,
+                  child: ElevatedButton(
+                    // color: Colors.white,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -412,19 +412,19 @@ class _TransfersAddState extends State<TransfersAdd> {
                         _scrollDown();
                       });
                     },
-                    shape: RoundedRectangleBorder(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(
-                            color: Colors.orange
-                        )
+                        side: BorderSide(color: Colors.orange),
+                      ),
                     ),
                   ),
                 ),
                 if(i > 1) Container(
                   height: 35,
                   width: 140,
-                  child: RaisedButton(
-                    color: Colors.white,
+                  child: ElevatedButton(
+                    // color: Colors.white,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -456,11 +456,11 @@ class _TransfersAddState extends State<TransfersAdd> {
                         _scrollDown();
                       });
                     },
-                    shape: RoundedRectangleBorder(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(
-                            color: Colors.red
-                        )
+                        side: BorderSide(color: Colors.orange),
+                      ),
                     ),
                   ),
                 ),
@@ -647,7 +647,7 @@ class _TransfersAddState extends State<TransfersAdd> {
               ),
               height: 40,
               width: MediaQuery.of(context).size.width*.70,
-              child:  RaisedButton(
+              child:  ElevatedButton(
                   onPressed: () async {
                     setState(() {
                       buttonIsLoading = true;
@@ -768,7 +768,7 @@ class _TransfersAddState extends State<TransfersAdd> {
                         color: Colors.white
                     ),
                   ),
-                  color: Colors.blue,
+                  // color: Colors.blue,
                 ),
             ),
           ),

@@ -345,7 +345,7 @@ class _AddScreenState extends State<AddScreen> {
                   ),
                   height: MediaQuery.of(context).size.height * .045,
                   width: MediaQuery.of(context).size.width * .8,
-                  child:  RaisedButton(
+                  child: ElevatedButton(
                     onPressed: () async {
                       setState(() {
                         buttonIsLoading = true;
@@ -442,7 +442,7 @@ class _AddScreenState extends State<AddScreen> {
                         color: Colors.white
                       ),
                     ),
-                    color: Colors.blue,
+                    // colors: Colors.blue,
                   ),
                 ),
               ],

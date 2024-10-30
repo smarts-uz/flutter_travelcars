@@ -389,7 +389,7 @@ class _DetailScreenState extends State<DetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
-              overflow: Overflow.visible,
+              clipBehavior: Clip.none,
               children: [
                 Container(
                   padding: EdgeInsets.only(top: 24),
@@ -1115,5 +1115,9 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
     );
   }
+}
+
+extension on CarouselController {
+  animateToPage(key) {}
 }
 

@@ -364,3 +364,7 @@ class _FirstSceenState extends State<FirstSceen> {
     );
   }
 }
+
+extension on ScaffoldState {
+  void showSnackBar(SnackBar snackBar) {}
+}

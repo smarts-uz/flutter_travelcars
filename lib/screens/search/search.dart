@@ -595,12 +595,16 @@ class _SearchScreenState extends State<SearchScreen> {
               height: 65,
               width: double.infinity,
               padding: EdgeInsets.only(top: 5, bottom: 15, left: 15, right: 15),
-              child: RaisedButton(
-                  elevation: 3,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  color: Color.fromRGBO(0, 116, 201, 1),
-                  padding: EdgeInsets.all(8),
-                  textColor: Colors.white,
+              child:ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 3,
+                    backgroundColor: Color.fromRGBO(0, 116, 201, 1), // Заменяем 'color' на 'backgroundColor'
+                    padding: EdgeInsets.all(8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    foregroundColor: Colors.white, // Заменяем 'textColor' на 'foregroundColor'
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

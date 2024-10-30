@@ -151,11 +151,16 @@ class List_T extends StatelessWidget {
                       fontSize: 25,
                     ),
                   ),
-                  trailing: RaisedButton(
-                    padding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                  trailing: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      backgroundColor: color, // Используем 'backgroundColor' вместо 'color'
+                    ),
                     onPressed: () {},
-                    color: color,
+                    // color: color,
                     child: Text(
                       status,
                       style: TextStyle(
@@ -242,8 +247,8 @@ class List_T extends StatelessWidget {
                   margin: EdgeInsets.only(bottom: 16, top: 20),
                   height: 45,
                   width: MediaQuery.of(context).size.width*.9,
-                  child: RaisedButton(
-                    color: Colors.white,
+                  child: ElevatedButton(
+                    // color: Colors.white,
                     child:  Text(
                       LocaleKeys.look.tr(),
                       style: TextStyle(
@@ -259,15 +264,15 @@ class List_T extends StatelessWidget {
                           )
                       );
                     },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(
-                            color: Colors.grey
-                        )
-                    ),
+          style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(color: Colors.orange),
+          ),
                   ),
                 ),
-              ],
+              ),
+             ],
             ),
           );
         }
@@ -307,8 +312,8 @@ class Empty extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height*.045,
             width: MediaQuery.of(context).size.width*.45,
-            child: RaisedButton(
-              color: Colors.white,
+            child: ElevatedButton(
+              // color: Colors.white,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -329,14 +334,14 @@ class Empty extends StatelessWidget {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => TransfersAdd()));
               },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  side: BorderSide(
-                      color: Colors.orange
-                  )
-              ),
+    style: ElevatedButton.styleFrom(
+    shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(8),
+    side: BorderSide(color: Colors.orange),
+    ),
             ),
-          )
+          ),
+          ),
         ],
       ),
     );

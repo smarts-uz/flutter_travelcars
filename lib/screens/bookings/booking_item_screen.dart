@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/gestures.dart';
@@ -123,8 +122,7 @@ class _BookingScreenState extends State<BookingScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
-              overflow: Overflow.visible,
-              children: [
+              clipBehavior: Clip.none, children: [
                 Container(
                   height: 270,
                   width: double.infinity,
@@ -556,4 +554,8 @@ class _BookingScreenState extends State<BookingScreen> {
     );
   }
 
+}
+
+extension on CarouselController {
+  animateToPage(key) {}
 }

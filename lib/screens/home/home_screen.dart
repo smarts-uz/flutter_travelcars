@@ -709,6 +709,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+extension on CarouselController {
+  animateToPage(int key) {}
+}
+
 class CarsCard extends StatelessWidget {
   final String image;
   final int number;

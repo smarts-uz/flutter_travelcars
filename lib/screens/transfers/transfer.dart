@@ -58,8 +58,8 @@ class Transfer extends StatelessWidget {
             Container(
               height: MediaQuery.of(context).size.height*.045,
               width: MediaQuery.of(context).size.width*.45,
-              child: RaisedButton(
-                color: Colors.white,
+              child: ElevatedButton(
+                // color: Colors.white,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -87,11 +87,11 @@ class Transfer extends StatelessWidget {
                       )
                   );
                 },
-                shape: RoundedRectangleBorder(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
-                    side: BorderSide(
-                        color: Colors.orange
-                    )
+                    side: BorderSide(color: Colors.orange),
+                  ),
                 ),
               ),
             )

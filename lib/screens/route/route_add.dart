@@ -291,8 +291,8 @@ class _RouteAddState extends State<RouteAdd> {
                   if(count < 10) Container(
                     height: 35,
                     width: 140,
-                    child: RaisedButton(
-                      color: Colors.white,
+                    child: ElevatedButton(
+                      // color: Colors.white,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -329,19 +329,19 @@ class _RouteAddState extends State<RouteAdd> {
                           _scrollDown();
                         });
                       },
-                      shape: RoundedRectangleBorder(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
-                          side: BorderSide(
-                              color: Colors.orange
-                          )
+                          side: BorderSide(color: Colors.orange),
+                        ),
                       ),
                     ),
                   ),
                   if(count > 1) Container(
                     height: 35,
                     width: 140,
-                    child: RaisedButton(
-                      color: Colors.white,
+                    child: ElevatedButton(
+                      // color: Colors.white,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -372,11 +372,11 @@ class _RouteAddState extends State<RouteAdd> {
                           _scrollDown();
                         });
                       },
-                      shape: RoundedRectangleBorder(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
-                          side: BorderSide(
-                              color: Colors.red
-                          )
+                          side: BorderSide(color: Colors.orange),
+                        ),
                       ),
                     ),
                   ),
@@ -568,7 +568,7 @@ class _RouteAddState extends State<RouteAdd> {
                 ),
                 height: 40,
                 width: MediaQuery.of(context).size.width * .70,
-                child: RaisedButton(
+                child: ElevatedButton(
                   onPressed: () async {
                     setState(() {
                       buttonIsLoading = true;
@@ -728,7 +728,7 @@ class _RouteAddState extends State<RouteAdd> {
                       color: Colors.white
                     ),
                   ),
-                  color: Colors.blue,
+                  // color: Colors.blue,
                 ),
               ),
             ),

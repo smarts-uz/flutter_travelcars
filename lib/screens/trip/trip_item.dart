@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelcars/app_config.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:travelcars/dialogs.dart';
 import 'package:travelcars/screens/login/components/toast.dart';
 import 'package:travelcars/translations/locale_keys.g.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class TripItem extends StatefulWidget {
   final Map<String, dynamic> trip_item;
@@ -153,23 +153,14 @@ class _TripItemState extends State<TripItem> {
                     border: Border(bottom: BorderSide(color: Colors.grey)),
                   ),
                   "th": Style(
-                    padding: EdgeInsets.all(6),
+                    padding: HtmlPaddings.all(6),
                     backgroundColor: Colors.grey,
                   ),
                   "td": Style(
-                    padding: EdgeInsets.all(6),
+                    padding: HtmlPaddings.all(6),
                     alignment: Alignment.topLeft,
                   ),
                   'h5': Style(maxLines: 2, textOverflow: TextOverflow.ellipsis),
-                },
-                customRender: {
-                  "table": (context, child) {
-                    return SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child:
-                      (context.tree as TableLayoutElement).toWidget(context),
-                    );
-                  },
                 },
               ),
             ),
@@ -293,68 +284,75 @@ class _TripItemState extends State<TripItem> {
               width: double.infinity,
               padding: EdgeInsets.only(top: 5, bottom: 5, left: 15, right: 15),
               margin: EdgeInsets.symmetric(vertical: 10),
-              child: RaisedButton(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
                   elevation: 3,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  color: Color.fromRGBO(0, 116, 201, 1),
+                  backgroundColor: Color.fromRGBO(0, 116, 201, 1), // Заменил color на backgroundColor
                   padding: EdgeInsets.all(8),
-                  textColor: Colors.white,
-                  child: Text(
-                   LocaleKeys.send.tr(),
-                    style: TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                child: Text(
+                  LocaleKeys.send.tr(),
+                  style: TextStyle(
+                    fontSize: 23,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white, // Убедитесь, что цвет текста здесь
                   ),
-                  onPressed: () async {
-                    FocusScope.of(context).unfocus();
-                    bool isValid = true;
-                    Map<String, dynamic> info = {};
-                    if(token.isEmpty) {
-                      info = {
-                        "name": "${controllers[0].text}",
-                        "email": "${controllers[1].text}",
-                        "phone": "${controllers[2].text}",
-                        "comment": "${controllers[3].text}",
-                        "tour_id": "${widget.trip_item["id"]}"
-                      };
-                    } else {
-                      info = {
-                        "name": name,
-                        "email": email,
-                        "phone": phone,
-                        "comment": comment_controller.text,
-                        "tour_id": "${widget.trip_item["id"]}"
-                      };
-                    }
+                ),
+                onPressed: () async {
+                  FocusScope.of(context).unfocus();
+                  bool isValid = true;
+                  Map<String, dynamic> info = {};
 
-                    info.forEach((key, value) {
-                      if(value == null || value == "") {
-                        isValid = false;
-                        ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()} $key");
-                      }
-                    });
-                    print(info);
-                    if(isValid) {
-                      String url = "${AppConfig.BASE_URL}/tours/create";
-                      try {
-                        final result = await http.post(
-                            Uri.parse(url),
-                            body: info
-                        );
-                        if(json.decode(result.body)["message"] == "Not found.") {
-                          Dialogs.ErrorDialog(context);
-                        } else {
-                          print(result.body);
-                          Dialogs.ZayavkaDialog(context);
-                        }
-                      } catch (error) {
-                        print(error);
+                  // Обработка информации
+                  if (token.isEmpty) {
+                    info = {
+                      "name": controllers[0].text,
+                      "email": controllers[1].text,
+                      "phone": controllers[2].text,
+                      "comment": controllers[3].text,
+                      "tour_id": "${widget.trip_item["id"]}",
+                    };
+                  } else {
+                    info = {
+                      "name": name,
+                      "email": email,
+                      "phone": phone,
+                      "comment": comment_controller.text,
+                      "tour_id": "${widget.trip_item["id"]}",
+                    };
+                  }
+
+                  // Проверка валидности
+                  info.forEach((key, value) {
+                    if (value == null || value.isEmpty) {
+                      isValid = false;
+                      ToastComponent.showDialog("${LocaleKeys.TextField_is_empty.tr()} $key");
+                    }
+                  });
+
+                  print(info);
+                  if (isValid) {
+                    String url = "${AppConfig.BASE_URL}/tours/create";
+                    try {
+                      final result = await http.post(
+                        Uri.parse(url),
+                        body: info,
+                      );
+                      if (json.decode(result.body)["message"] == "Not found.") {
                         Dialogs.ErrorDialog(context);
+                      } else {
+                        print(result.body);
+                        Dialogs.ZayavkaDialog(context);
                       }
+                    } catch (error) {
+                      print(error);
+                      Dialogs.ErrorDialog(context);
                     }
                   }
+                },
               ),
+
             )
           ],
         ),

@@ -143,16 +143,18 @@ class List_R extends StatelessWidget {
                         fontWeight: FontWeight.bold
                     ),
                   ),
-                  trailing: RaisedButton(
-                    padding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                    onPressed: (){},
-                    color: color,
+                  trailing:ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      backgroundColor: color, // Заменяем 'color' на 'backgroundColor'
+                    ),
+                    onPressed: () {},
                     child: Text(
                       status,
-                      style: TextStyle(
-                          color: Colors.white
-                      ),
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
@@ -230,8 +232,8 @@ class List_R extends StatelessWidget {
                   margin: EdgeInsets.only(bottom: 16),
                   height: 45,
                   width: MediaQuery.of(context).size.width*.90,
-                  child: RaisedButton(
-                    color: Colors.white,
+                  child: ElevatedButton(
+                    // color: Colors.white,
                     child:  Text(
                      LocaleKeys.look.tr(),
                       style: TextStyle(
@@ -247,11 +249,11 @@ class List_R extends StatelessWidget {
                           )
                       );
                     },
-                    shape: RoundedRectangleBorder(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(
-                            color: Colors.grey
-                        )
+                        side: BorderSide(color: Colors.orange),
+                      ),
                     ),
                   ),
                 ),
