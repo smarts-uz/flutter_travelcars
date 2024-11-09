@@ -9,7 +9,7 @@ Figma link:
 https://www.figma.com/file/bNB69lTKsdBgLnGGJViHEs/Travelcars-app-Update
 
 Play Store:
-https://play.google.com/store/apps/details?id=travelcars.online
+https://play.google.com/store/apps/details?id=travelcars.uz
 
 This project is created in SmartTech Studio by three members:
 Flutter developers @telegram_usernames:
